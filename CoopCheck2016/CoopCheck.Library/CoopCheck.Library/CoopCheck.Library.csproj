@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csla">
+    <Reference Include="Csla, Version=4.5.701.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\CSLA-Core.4.5.701\lib\net45\Csla.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -88,13 +89,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\jradatacleaner\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CoopCheck.DAL\CoopCheck.DAL.csproj">
       <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
       <Name>CoopCheck.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\JRADataCleaner\DataCleaner\DataClean.csproj">
-      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
-      <Name>DataClean</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

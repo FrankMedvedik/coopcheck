@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Reckner.Work\CoopCheck2016\muiCoopCheck\obj\Debug\
+C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\
 muiCoopCheck
 none
 false
 DEBUG;TRACE
-D:\Reckner.Work\CoopCheck2016\muiCoopCheck\App.xaml
+C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\muiCoopCheck\App.xaml
 131100471829
 
 32-846153578
-782041914791
+78-1684630633
 MainWindow.xaml;Pages\Accounts\AccountsPage.xaml;Pages\Checks\ChecksPage.xaml;Pages\ListPage1.xaml;Pages\PositivePay\PositivePayPage.xaml;Pages\Vouchers\ValidateView.xaml;Pages\Vouchers\BatchEditView.xaml;Pages\Vouchers\VouchersPage.xaml;Pages\Vouchers\ImportView.xaml;Pages\Settings\About.xaml;Pages\Settings\Appearance.xaml;Pages\Home.xaml;Pages\SettingsPage.xaml;
 
 False

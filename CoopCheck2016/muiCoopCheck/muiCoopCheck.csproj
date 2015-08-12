@@ -31,11 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csla">
-      <HintPath>..\packages\CSLA-Core.4.5.701\lib\net45\Csla.dll</HintPath>
+    <Reference Include="Csla, Version=4.5.701.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-Core.4.5.701\lib\net45\Csla.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Csla.Xaml">
-      <HintPath>..\packages\CSLA-WPF.4.5.701\lib\net45\Csla.Xaml.dll</HintPath>
+    <Reference Include="Csla.Xaml, Version=4.5.701.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-WPF.4.5.701\lib\net45\Csla.Xaml.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
@@ -213,7 +215,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
+    <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
       <Project>{823874A2-D57C-4BB2-B71E-7076D9309589}</Project>
       <Name>CoopCheck.Library</Name>
     </ProjectReference>
