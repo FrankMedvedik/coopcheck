@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\
 muiCoopCheck
 none
 false
 DEBUG;TRACE
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\muiCoopCheck\App.xaml
-131100471829
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\App.xaml
+35200785846
 
-32-846153578
-78-1684630633
-MainWindow.xaml;Pages\Accounts\AccountsPage.xaml;Pages\Checks\ChecksPage.xaml;Pages\ListPage1.xaml;Pages\PositivePay\PositivePayPage.xaml;Pages\Vouchers\ValidateView.xaml;Pages\Vouchers\BatchEditView.xaml;Pages\Vouchers\VouchersPage.xaml;Pages\Vouchers\ImportView.xaml;Pages\Settings\About.xaml;Pages\Settings\Appearance.xaml;Pages\Home.xaml;Pages\SettingsPage.xaml;
+54-330080360
+781629998712
+MainWindow.xaml;Pages\Accounts\BatchReportPage.xaml;Pages\Accounts\ClearedCheckReportPage.xaml;Pages\Accounts\EditAccountPage.xaml;Pages\Accounts\NewAccountPage.xaml;Pages\Accounts\OutstandingCheckReportPage.xaml;Pages\Accounts\ReconcileAccountPage.xaml;Pages\BatchPage.xaml;Pages\Batch\EditBatchPage.xaml;Pages\Batch\ImportPage.xaml;Pages\Batch\NewBatchPage.xaml;Pages\Batch\PrintChecksPage.xaml;Pages\Batch\SwiftPayPage.xaml;Pages\Checks\BatchPage.xaml;Pages\Checks\CheckPage.xaml;Pages\Checks\JobNumberPage.xaml;Pages\Checks\NamePage.xaml;Pages\PositivePayPage.xaml;Pages\AccountsPage.xaml;Pages\Checks\DatePage.xaml;Pages\ListPage1.xaml;Pages\PositivePay\OpenPositivePayPage.xaml;Pages\PositivePay\NewPositivePayPage.xaml;Pages\ChecksPage.xaml;Pages\PositivePay\SubmitPositivePayPage.xaml;Pages\Vouchers\EditBatchPage.xaml;Pages\VouchersPage.xaml;Pages\Vouchers\ValidateView.xaml;Pages\Vouchers\BatchEditView.xaml;Pages\Vouchers\AddVouchersPage.xaml;Pages\Vouchers\ImportView.xaml;Pages\Settings\About.xaml;Pages\Settings\Appearance.xaml;Pages\Home.xaml;Pages\SettingsPage.xaml;
 
 False
 

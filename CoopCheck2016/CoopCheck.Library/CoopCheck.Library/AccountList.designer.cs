@@ -30,8 +30,8 @@ namespace CoopCheck.Library
         /// <returns>A reference to the fetched <see cref="AccountList"/> object.</returns>
         public static AccountList GetAccountList()
         {
-            if (!CanGetObject())
-                throw new System.Security.SecurityException("User not authorized to load a AccountList.");
+                //        if (!CanGetObject())
+                //throw new System.Security.SecurityException("User not authorized to load a AccountList.");
 
             return DataPortal.Fetch<AccountList>();
         }
@@ -83,10 +83,11 @@ namespace CoopCheck.Library
 #else
         protected static void AddObjectAuthorizationRules()
 #endif
-        {
+        {/*
             BusinessRules.AddRule(typeof (AccountList), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
 
             AddObjectAuthorizationRulesExtend();
+          */
         }
 
         /// <summary>
@@ -100,6 +101,9 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can read the object; otherwise, <c>false</c>.</returns>
         public static bool CanGetObject()
         {
+#if DEBUG
+            return true;
+#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.GetObject, typeof(AccountList));
         }
 

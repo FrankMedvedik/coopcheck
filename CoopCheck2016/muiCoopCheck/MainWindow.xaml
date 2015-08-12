@@ -12,6 +12,11 @@
                 <mui:Link DisplayName="home" Source="/Pages/Home.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Vouchers" GroupKey="vouchers">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Options" Source="/Pages/VouchersPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupKey="settings">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="software" Source="/Pages/SettingsPage.xaml" />
@@ -20,12 +25,11 @@
     </mui:ModernWindow.MenuLinkGroups>
     
     <mui:ModernWindow.TitleLinks>
-        <mui:Link DisplayName="vouchers" Source="/Pages/Vouchers/VouchersPage.xaml" />
-        <mui:Link DisplayName="batches" Source="/Pages/Vouchers/BatchEditPage.xaml" />
-        <mui:Link DisplayName="checks" Source="/Pages/Checks/ChecksPage.xaml" />
-        <mui:Link DisplayName="accounts" Source="/Pages/Accounts/AccountsPage.xaml" />
-        <mui:Link DisplayName="positive pay" Source="/Pages/PositivePay/PositivePayPage.xaml" />
+        <mui:Link DisplayName="vouchers" Source="/Pages/BatchPage.xaml" />
+        <!--<mui:Link DisplayName="batches" Source="/Pages/Vouchers/BatchEditPage.xaml" />-->
+        <mui:Link DisplayName="checks" Source="/Pages/ChecksPage.xaml" />
+        <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayPage.xaml" />
+        <mui:Link DisplayName="accounts" Source="/Pages/AccountsPage.xaml" />
         <mui:Link DisplayName="settings" Source="/Pages/SettingsPage.xaml" />
-        <mui:Link DisplayName="help" Source="http://mui.codeplex.com" />
     </mui:ModernWindow.TitleLinks>
 </mui:ModernWindow>

@@ -12,8 +12,6 @@ namespace CoopCheck.Library.Tests
         [TestMethod]
         public void BatchVoucherListGetTest()
         {
-
-            
             var x = BatchEdit.GetBatchEdit(tBatchNum);
             Assert.IsTrue(x.Vouchers.Any()); 
         }
