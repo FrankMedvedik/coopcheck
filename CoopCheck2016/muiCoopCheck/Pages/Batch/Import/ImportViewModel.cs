@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using LinqToExcel;
-using Microsoft.Office.Interop.Excel;
 using muiCoopCheck.Models;
 
-namespace muiCoopCheck.Pages.Vouchers
+namespace muiCoopCheck.Pages.Batch.Import
 {
 
     internal class ImportViewModel : ViewModelBase

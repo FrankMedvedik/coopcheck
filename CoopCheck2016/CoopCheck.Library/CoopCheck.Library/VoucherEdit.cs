@@ -7,7 +7,7 @@ using DataClean;
 
 namespace CoopCheck.Library
 {
-    public partial class VoucherEdit : IVoucherEdit
+    public partial class VoucherEdit
     {
         public string FullName
         {

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using muiCoopCheck.Models;
 
-namespace muiCoopCheck.Pages.Vouchers
+namespace muiCoopCheck.Pages.Batch.Import
 {
     /// <summary>
     /// Interaction logic for importing the spreadsheet

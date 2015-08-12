@@ -159,18 +159,15 @@
     <Compile Include="Pages\PositivePay\SubmitPositivePayPage.xaml.cs">
       <DependentUpon>SubmitPositivePayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Vouchers\EditBatchPage.xaml.cs">
+    <Compile Include="Pages\Batch\Import\EditBatchPage.xaml.cs">
       <DependentUpon>EditBatchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\VouchersPage.xaml.cs">
       <DependentUpon>VouchersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Vouchers\ValidateViewModel.cs" />
-    <Compile Include="Pages\Vouchers\ValidateView.xaml.cs">
+    <Compile Include="Pages\Batch\Import\ValidateViewModel.cs" />
+    <Compile Include="Pages\Batch\Import\ValidateView.xaml.cs">
       <DependentUpon>ValidateView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Vouchers\AddVouchersPage.xaml.cs">
-      <DependentUpon>AddVouchersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -285,7 +282,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Vouchers\EditBatchPage.xaml">
+    <Page Include="Pages\Batch\Import\EditBatchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -293,19 +290,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Vouchers\ValidateView.xaml">
+    <Page Include="Pages\Batch\Import\ValidateView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Vouchers\BatchEditView.xaml">
+    <Page Include="Pages\Batch\Import\BatchEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Vouchers\AddVouchersPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Vouchers\ImportView.xaml">
+    <Page Include="Pages\Batch\Import\ImportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -327,14 +320,14 @@
       <DependentUpon>NewPositivePayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ViewModelBase.cs" />
-    <Compile Include="Pages\Vouchers\BatchEditView.xaml.cs">
+    <Compile Include="Pages\Batch\Import\BatchEditView.xaml.cs">
       <DependentUpon>BatchEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\VoucherImport.cs" />
     <Compile Include="Models\ColumnPropertyMap.cs" />
-    <Compile Include="Pages\Vouchers\BatchEditViewModel.cs" />
-    <Compile Include="Pages\Vouchers\ImportViewModel.cs" />
-    <Compile Include="Pages\Vouchers\ImportView.xaml.cs">
+    <Compile Include="Pages\Batch\Import\BatchEditViewModel.cs" />
+    <Compile Include="Pages\Batch\Import\ImportViewModel.cs" />
+    <Compile Include="Pages\Batch\Import\ImportView.xaml.cs">
       <DependentUpon>ImportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\About.xaml.cs">

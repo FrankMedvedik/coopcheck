@@ -44,6 +44,7 @@ C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016
 C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\obj\Debug\CoopCheck.Library.Tests.csprojResolveAssemblyReference.cache
 C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\obj\Debug\CoopCheck.Library.Tests.dll
 C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\obj\Debug\CoopCheck.Library.Tests.pdb
+D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\bin\Debug\MelissaCodes.json
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\bin\Debug\CoopCheck.Library.Tests.dll.config
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\bin\Debug\CoopCheck.Library.Tests.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\bin\Debug\CoopCheck.Library.Tests.pdb
@@ -91,4 +92,3 @@ D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\bin\Debug\zh-TW\C
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\obj\Debug\CoopCheck.Library.Tests.csprojResolveAssemblyReference.cache
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\obj\Debug\CoopCheck.Library.Tests.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\obj\Debug\CoopCheck.Library.Tests.pdb
-D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library.Tests\bin\Debug\MelissaCodes.json

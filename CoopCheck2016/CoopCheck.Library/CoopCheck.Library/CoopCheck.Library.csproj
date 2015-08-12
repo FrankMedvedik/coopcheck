@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="DataPortalHookArgs.cs" />
     <Compile Include="data\PersonatorErrorCodes.cs" />
-    <Compile Include="IVoucherEdit.cs" />
     <Compile Include="OpenBatchList.cs" />
     <Compile Include="OpenBatchList.designer.cs">
       <DependentUpon>OpenBatchList.cs</DependentUpon>

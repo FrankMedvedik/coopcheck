@@ -8,7 +8,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
-                <TextBlock Text="CoopCheck: 2016" />
+                <TextBlock Text="CoopCheck: 2016" FontSize="32" FontWeight="Bold"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
