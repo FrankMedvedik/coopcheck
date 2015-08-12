@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3537F5FC-D9F5-4FD4-9BF2-30738877DCBF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoopCheck.DAL</RootNamespace>
+    <AssemblyName>CoopCheck.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Csla, Version=4.5.701.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CSLA-Core.4.5.701\lib\net45\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountDto.cs" />
+    <Compile Include="AccountDto.designer.cs">
+      <DependentUpon>AccountDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountListItemDto.cs" />
+    <Compile Include="AccountListItemDto.designer.cs">
+      <DependentUpon>AccountListItemDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BatchEditDto.cs" />
+    <Compile Include="BatchEditDto.designer.cs">
+      <DependentUpon>BatchEditDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInfoDto.cs" />
+    <Compile Include="CheckInfoDto.designer.cs">
+      <DependentUpon>CheckInfoDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DalFactory.cs" />
+    <Compile Include="DataNotFoundException.cs" />
+    <Compile Include="IAccountDal.cs" />
+    <Compile Include="IAccountDal.designer.cs">
+      <DependentUpon>IAccountDal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IAccountListDal.cs" />
+    <Compile Include="IAccountListDal.designer.cs">
+      <DependentUpon>IAccountListDal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IBatchEditDal.cs" />
+    <Compile Include="IBatchEditDal.designer.cs">
+      <DependentUpon>IBatchEditDal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ICheckInfoListDal.cs" />
+    <Compile Include="ICheckInfoListDal.designer.cs">
+      <DependentUpon>ICheckInfoListDal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IDalManager.cs" />
+    <Compile Include="IOpenBatchListDal.cs" />
+    <Compile Include="IOpenBatchListDal.designer.cs">
+      <DependentUpon>IOpenBatchListDal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IVoucherEditDal.cs" />
+    <Compile Include="IVoucherEditDal.designer.cs">
+      <DependentUpon>IVoucherEditDal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OpenBatchListItemDto.cs" />
+    <Compile Include="OpenBatchListItemDto.designer.cs">
+      <DependentUpon>OpenBatchListItemDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VoucherEditDto.cs" />
+    <Compile Include="VoucherEditDto.designer.cs">
+      <DependentUpon>VoucherEditDto.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Csla-Templates Read Me.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

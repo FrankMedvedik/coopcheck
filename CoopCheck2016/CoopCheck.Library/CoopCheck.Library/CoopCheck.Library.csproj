@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{823874A2-D57C-4BB2-B71E-7076D9309589}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoopCheck.Library</RootNamespace>
+    <AssemblyName>CoopCheck.Library</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Csla">
+      <HintPath>..\..\..\packages\CSLA-Core.4.5.701\lib\net45\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs" />
+    <Compile Include="Account.designer.cs">
+      <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountList.cs" />
+    <Compile Include="AccountList.designer.cs">
+      <DependentUpon>AccountList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BatchEdit.cs" />
+    <Compile Include="BatchEdit.designer.cs">
+      <DependentUpon>BatchEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInfo.cs" />
+    <Compile Include="CheckInfo.designer.cs">
+      <DependentUpon>CheckInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckInfoList.cs" />
+    <Compile Include="CheckInfoList.designer.cs">
+      <DependentUpon>CheckInfoList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataPortalHookArgs.cs" />
+    <Compile Include="data\PersonatorErrorCodes.cs" />
+    <Compile Include="IVoucherEdit.cs" />
+    <Compile Include="OpenBatchList.cs" />
+    <Compile Include="OpenBatchList.designer.cs">
+      <DependentUpon>OpenBatchList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VoucherEdit.cs" />
+    <Compile Include="VoucherEdit.designer.cs">
+      <DependentUpon>VoucherEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherList.cs" />
+    <Compile Include="VoucherList.designer.cs">
+      <DependentUpon>VoucherList.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoopCheck.DAL\CoopCheck.DAL.csproj">
+      <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
+      <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\JRADataCleaner\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
