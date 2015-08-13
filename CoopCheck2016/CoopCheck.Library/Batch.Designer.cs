@@ -329,9 +329,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can create a new object; otherwise, <c>false</c>.</returns>
         public static bool CanAddObject()
         {
-        #if DEBUG
-            return true;
-	#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.CreateObject, typeof(Batch));
         }
 
@@ -341,9 +338,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can read the object; otherwise, <c>false</c>.</returns>
         public static bool CanGetObject()
         {
-        #if DEBUG
-	            return true;
-	#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.GetObject, typeof(Batch));
         }
 
@@ -353,9 +347,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can update the object; otherwise, <c>false</c>.</returns>
         public static bool CanEditObject()
         {
-        #if DEBUG
-	            return true;
-	#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.EditObject, typeof(Batch));
         }
 
@@ -365,10 +356,7 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can delete the object; otherwise, <c>false</c>.</returns>
         public static bool CanDeleteObject()
         {
-	#if DEBUG
-		    return true;
-	#endif
-	return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.DeleteObject, typeof(Batch));
+            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.DeleteObject, typeof(Batch));
         }
 
         #endregion

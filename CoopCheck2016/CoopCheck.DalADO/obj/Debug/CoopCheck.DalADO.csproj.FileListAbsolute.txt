@@ -1,79 +1,44 @@
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.pdb
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\Csla.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.pdb
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\Csla.xml
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ar\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\bs\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ca-ES\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\da\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\de\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\el\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\es\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\es-ES\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\fr\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\he-IL\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\hr\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\hu\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\it\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\km-KH\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\nl\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\no\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\pt\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\pt-br\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ro\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ru\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\sr\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\sv\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\tr\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\uk-ua\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\vi\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\zh-Hans\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\bin\Debug\zh-TW\Csla.resources.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.csprojResolveAssemblyReference.cache
-D:\dave\CoopCheck2014\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.dll
-D:\dave\CoopCheck2014\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.pdb
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.pdb
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\Csla.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.pdb
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\Csla.xml
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ar\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\bs\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ca-ES\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\da\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\de\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\el\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\es\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\es-ES\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\fr\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\he-IL\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\hr\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\hu\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\it\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\km-KH\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\nl\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\no\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\pt\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\pt-br\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ro\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ru\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\sr\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\sv\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\tr\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\uk-ua\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\vi\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\zh-Hans\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\zh-TW\Csla.resources.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.dll
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.pdb
-C:\Users\fmedvedik\Documents\Visual Studio 2013\Projects\coopcheck\CoopCheck2016\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.csprojResolveAssemblyReference.cache
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.csprojResolveAssemblyReference.cache
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll.config
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.pdb
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\Csla.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.pdb
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\Csla.xml
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ar\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\bs\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ca-ES\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\da\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\de\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\el\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\es\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\es-ES\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\fr\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\he-IL\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\hr\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\hu\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\it\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\km-KH\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\nl\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\no\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\pt\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\pt-br\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ro\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\ru\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\sr\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\sv\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\tr\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\uk-ua\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\vi\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\zh-Hans\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\bin\Debug\zh-TW\Csla.resources.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.dll
+D:\Reckner.Work\CoopCheck2014\CoopCheck.DalADO\obj\Debug\CoopCheck.DalADO.pdb
+D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll.config
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.pdb
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.dll
-D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\Csla.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.pdb
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\Csla.xml
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ar\Csla.resources.dll

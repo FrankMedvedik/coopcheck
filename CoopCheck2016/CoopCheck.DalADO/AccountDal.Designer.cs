@@ -63,13 +63,18 @@ namespace CoopCheck.DalADO
                 using (var cmd = new SqlCommand("dbo.dsa_AddAccount", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@account_id", account.Id).Direction = ParameterDirection.Output;
+                    
                     cmd.Parameters.AddWithValue("@account_name", account.Name).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@account_dscr", account.Description == null ? (object)DBNull.Value : account.Description).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@account_number", account.Number == null ? (object)DBNull.Value : account.Number).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@balance", account.Balance == null ? (object)DBNull.Value : account.Balance.Value).DbType = DbType.Decimal;
+                    var prm = new SqlParameter();
+                    prm.Direction = ParameterDirection.ReturnValue;
+                    prm.ParameterName = "@retVal";
+                    prm.DbType = DbType.Int32;
+                    cmd.Parameters.Add(prm);
                     cmd.ExecuteNonQuery();
-                    account.Id = (int)cmd.Parameters["@account_id"].Value;
+                    account.Id = (int)cmd.Parameters["@retVal"].Value;
                 }
             }
             return account;

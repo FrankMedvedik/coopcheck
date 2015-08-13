@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" />
+  <xs:complexType name="SubmitClaimRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q1:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
+          <xs:element minOccurs="0" name="ExpectedRebateAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LocationId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PromotionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PurchaseDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Sku" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SubmitClaimRequest" nillable="true" type="tns:SubmitClaimRequest" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobileNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="SubmitClaimResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q2:ResponseObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ClaimId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RebateAmount" type="xs:double" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SubmitClaimResponse" nillable="true" type="tns:SubmitClaimResponse" />
+  <xs:complexType name="GetPromocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q3:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CarrierMessage1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CarrierMessage2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CarrierMessage3" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EmailMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParticipantId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentReferenceId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionMessage" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetPromocodeRequest" nillable="true" type="tns:GetPromocodeRequest" />
+  <xs:complexType name="GetPromocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q4:ResponseObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetPromocodeResponse" nillable="true" type="tns:GetPromocodeResponse" />
+  <xs:complexType name="UpdatePromocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q5:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CarrierMessage1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CarrierMessage2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CarrierMessage3" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NewStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NewStatusComment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NewStatusReasonCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParticipantId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionMessage" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UpdatePromocodeRequest" nillable="true" type="tns:UpdatePromocodeRequest" />
+  <xs:complexType name="UpdatePromocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q6:ResponseObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PromocodeStatus" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UpdatePromocodeResponse" nillable="true" type="tns:UpdatePromocodeResponse" />
+  <xs:complexType name="IssuePromocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q7:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CarrierMessage1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CarrierMessage2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CarrierMessage3" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EmailMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParticipantId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentReferenceId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionMessage" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="IssuePromocodeRequest" nillable="true" type="tns:IssuePromocodeRequest" />
+  <xs:complexType name="IssuePromocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q8:ResponseObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="IssuePromocodeResponse" nillable="true" type="tns:IssuePromocodeResponse" />
+  <xs:complexType name="RedeemPromocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q9:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedeemByIPAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedeemByUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionProductID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionURL" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RedeemPromocodeRequest" nillable="true" type="tns:RedeemPromocodeRequest" />
+  <xs:complexType name="RedeemPromocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q10:ResponseObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RedemptionTransactionID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RedeemPromocodeResponse" nillable="true" type="tns:RedeemPromocodeResponse" />
+  <xs:complexType name="BankPromocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q11:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BankedForUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankedURL" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PromocodeBankID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserIdentifier" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserIdentifierType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankPromocodeRequest" nillable="true" type="tns:BankPromocodeRequest" />
+  <xs:complexType name="BankPromocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q12:ResponseObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankPromocodeResponse" nillable="true" type="tns:BankPromocodeResponse" />
+  <xs:complexType name="ValidatePromocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q13:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionURL" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidatePromocodeRequest" nillable="true" type="tns:ValidatePromocodeRequest" />
+  <xs:complexType name="ValidatePromocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q14:ResponseObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidatePromocodeResponse" nillable="true" type="tns:ValidatePromocodeResponse" />
+  <xs:complexType name="ValidateCodeForCardRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q15:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardProxy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionURL" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidateCodeForCardRequest" nillable="true" type="tns:ValidateCodeForCardRequest" />
+  <xs:complexType name="ValidateCodeForCardResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q16="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q16:ResponseObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidateCodeForCardResponse" nillable="true" type="tns:ValidateCodeForCardResponse" />
+  <xs:complexType name="RedeemBankedPromocodesRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q17:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CSVPromocodes" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PromocodeBankID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedeemByIPAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedeemByUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionProductID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionURL" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RedeemBankedPromocodesRequest" nillable="true" type="tns:RedeemBankedPromocodesRequest" />
+  <xs:complexType name="RedeemBankedPromocodesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q18="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q18:ResponseObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RedemptionTransactionID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RedeemBankedPromocodesResponse" nillable="true" type="tns:RedeemBankedPromocodesResponse" />
+  <xs:complexType name="RedeemCodeForCardRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q19="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q19:RequestObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardProxy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedeemByIPAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedeemByUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionURL" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RedeemCodeForCardRequest" nillable="true" type="tns:RedeemCodeForCardRequest" />
+  <xs:complexType name="RedeemCodeForCardResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q20="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" base="q20:ResponseObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PostRedemptionCardBalance" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PostRedemptionCardStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RedemptionTransactionID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RedeemCodeForCardResponse" nillable="true" type="tns:RedeemCodeForCardResponse" />
+  <xs:complexType name="RetrieveClaim_OutPut">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClaimedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClaimedDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OutPutMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Promocode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PromocodeExpiration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PromocodeValue" type="xs:double" />
+      <xs:element minOccurs="0" name="Redeemed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RedeemedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedeemedDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SKU" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RetrieveClaim_OutPut" nillable="true" type="tns:RetrieveClaim_OutPut" />
+</xs:schema>

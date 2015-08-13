@@ -9,6 +9,7 @@ namespace CoopCheck.Library
 {
     public partial class VoucherEdit
     {
+        
         public string FullName
         {
             get
@@ -21,6 +22,7 @@ namespace CoopCheck.Library
         private string AddSpace(string value)
         {
             var retVal = string.Empty;
+            if (string.IsNullOrEmpty(value)) value = string.Empty;
             if (value.Length > 0)
             {
                 retVal = value + " ";
@@ -105,9 +107,11 @@ namespace CoopCheck.Library
             base.AddBusinessRules();
 
             // TODO: add business rules
-            var props = FieldManager.GetRegisteredProperties();
-            BusinessRules.AddRule(new ValidAddressRule(props));
-           
+            BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = FirstProperty, AffectedProperties= {LastProperty, CountryProperty}, Priority = 1 });
+            BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = LastProperty, AffectedProperties = { FirstProperty, CountryProperty }, Priority = 1 });
+            BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = CountryProperty, AffectedProperties = { FirstProperty, LastProperty }, Priority = 1 });
+
+            BusinessRules.AddRule(new VerifyAddressRule() { PrimaryProperty = PostalCodeProperty, AffectedProperties = { AddressLine1Property, MunicipalityProperty } });
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -117,14 +121,9 @@ namespace CoopCheck.Library
         }
 
 
-        public class ValidAddressRule : Csla.Rules.ObjectRule
+        public class ValidAddressRule : Csla.Rules.BusinessRule
         {
-
-            public ValidAddressRule(IEnumerable<Csla.Core.IPropertyInfo> fields)
-            {
-                AffectedProperties.AddRange(fields);
-            }
-
+            
             protected override void Execute(Csla.Rules.RuleContext context)
             {
                 var target = (VoucherEdit)context.Target;
@@ -133,43 +132,69 @@ namespace CoopCheck.Library
                 string companyName = (string)ReadProperty(target, CompanyProperty);
 
 
-                if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(companyName))
+                if ((string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName)) && string.IsNullOrEmpty(companyName))
                 {
-                    context.AddErrorResult(FirstProperty, "First Name and Last Name Or Company Name Required");
-                    context.AddErrorResult(LastProperty, "First Name and Last Name Or Company Name Required");
-                    context.AddErrorResult(CompanyProperty, "First Name and Last Name Or Company Name Required");
+                    context.AddErrorResult("First Name and Last Name Or Company Name Required");
                 }
-                else // if the voucher is otherwise valid check Melissa Data Service
-                {
-                    var config = ConfigurationManager.AppSettings;
-                    var chk = new DataCleaner(config);
-                    var inputAddress = new InputStreetAddress()
-                    {
-                        AddressLine1 = target.AddressLine1,
-                        AddressLine2 = target.AddressLine2,
-                        City = target.Municipality,
-                        CompanyName = target.Company,
-                        Country = target.Country,
-                        PostalCode = target.PostalCode,
-                        FullName = target.FullName,
-                        State = target.Region
-                    };
-
-                    OutputStreetAddress outputAddress;
-
-                    var isValid = chk.VerifyAndCleanAddress(inputAddress, out outputAddress);
-
-                    if (!isValid)
-                    {
-                        foreach (var e in outputAddress.Errors)
-                        {
-                            context.AddErrorResult(e.LongDescription);
-                        }
-                    }
-                 
-                }
+             
             }
         }
+        public class VerifyAddressRule : Csla.Rules.BusinessRule 
+        {
+            
+            protected override void Execute(Csla.Rules.RuleContext context)
+            {
+                
+                var target = (VoucherEdit)context.Target;
+                string firstName = (string)ReadProperty(target, FirstProperty);
+                string lastName = (string)ReadProperty(target, LastProperty);
+                string companyName = (string)ReadProperty(target, CompanyProperty);
+                string address1 = (string)ReadProperty(target, AddressLine1Property);
+                string municipality = (string)ReadProperty(target, MunicipalityProperty);
+                string postalCode = (string)ReadProperty(target, PostalCodeProperty);
+
+                
+                if (!string.IsNullOrEmpty(firstName + lastName + companyName) && !string.IsNullOrEmpty(address1) && !string.IsNullOrEmpty(municipality) && !string.IsNullOrEmpty(postalCode) && target.IsDirty )
+                
+                {
+                        //if a complete address then verify against web service
+                        var config = ConfigurationManager.AppSettings;
+                        var chk = new DataCleaner(config);
+                        var inputAddress = new InputStreetAddress()
+                        {
+                            AddressLine1 = target.AddressLine1,
+                            AddressLine2 = target.AddressLine2,
+                            City = target.Municipality,
+                            CompanyName = target.Company,
+                            Country = target.Country,
+                            FirstName = target.First,
+                            FullName = target.FullName,
+                            LastName = target.Last,
+                            PostalCode = target.PostalCode,
+                            State = target.Region
+                        };
+
+                        OutputStreetAddress outputAddress;
+
+                        var isValid = chk.VerifyAndCleanAddress(inputAddress, out outputAddress);
+
+                        if (!isValid)
+                        {
+                            var errStr = string.Empty;
+                            foreach (var err in outputAddress.Errors)
+                            {
+                                context.AddErrorResult(err.LongDescription);
+                            }
+                            
+                        }
+            
+                        
+                }
+
+            }
+        }
+        
+    
         
         
 
@@ -202,5 +227,6 @@ namespace CoopCheck.Library
 
             return voc;
         }
+        
     }
 }

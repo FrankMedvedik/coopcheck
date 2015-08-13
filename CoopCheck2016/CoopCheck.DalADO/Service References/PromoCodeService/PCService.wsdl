@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PCService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_PCService_Def_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary" />
+      <xsd:import schemaLocation="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PromcodeServiceLibrary.Classes" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="PCService_Def_SubmitClaim_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitClaim" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_SubmitClaim_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitClaimResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_GetPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_GetPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_IssuePromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:IssuePromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_IssuePromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IssuePromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RedeemPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RedeemPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_BankPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:BankPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_BankPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BankPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_ValidatePromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidatePromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_ValidatePromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidatePromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_ValidateCodeForCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateCodeForCard" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_ValidateCodeForCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateCodeForCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RedeemBankedPromocodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemBankedPromocodes" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RedeemBankedPromocodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemBankedPromocodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RedeemCodeForCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemCodeForCard" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RedeemCodeForCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemCodeForCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RetrieveClaimByPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetrieveClaimByPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RetrieveClaimByPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetrieveClaimByPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RetrieveClaimBySKU_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetrieveClaimBySKU" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_RetrieveClaimBySKU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetrieveClaimBySKUResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_PromocodeExpirationBySKU_InputMessage">
+    <wsdl:part name="parameters" element="tns:PromocodeExpirationBySKU" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_PromocodeExpirationBySKU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PromocodeExpirationBySKUResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_PromocodeExpirationByPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:PromocodeExpirationByPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_PromocodeExpirationByPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PromocodeExpirationByPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeExpirationByPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeExpirationByPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeExpirationByPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeExpirationByPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeExpirationBySKU_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeExpirationBySKU" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeExpirationBySKU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeExpirationBySKUResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeValueByPromocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeValueByPromocode" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeValueByPromocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeValueByPromocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeValueBySKU_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeValueBySKU" />
+  </wsdl:message>
+  <wsdl:message name="PCService_Def_UpdatePromocodeValueBySKU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePromocodeValueBySKUResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PCService_Def">
+    <wsdl:operation name="SubmitClaim">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/SubmitClaim" message="tns:PCService_Def_SubmitClaim_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/SubmitClaimResponse" message="tns:PCService_Def_SubmitClaim_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/GetPromocode" message="tns:PCService_Def_GetPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/GetPromocodeResponse" message="tns:PCService_Def_GetPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocode" message="tns:PCService_Def_UpdatePromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeResponse" message="tns:PCService_Def_UpdatePromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IssuePromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/IssuePromocode" message="tns:PCService_Def_IssuePromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/IssuePromocodeResponse" message="tns:PCService_Def_IssuePromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/RedeemPromocode" message="tns:PCService_Def_RedeemPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/RedeemPromocodeResponse" message="tns:PCService_Def_RedeemPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BankPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/BankPromocode" message="tns:PCService_Def_BankPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/BankPromocodeResponse" message="tns:PCService_Def_BankPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/ValidatePromocode" message="tns:PCService_Def_ValidatePromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/ValidatePromocodeResponse" message="tns:PCService_Def_ValidatePromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateCodeForCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/ValidateCodeForCard" message="tns:PCService_Def_ValidateCodeForCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/ValidateCodeForCardResponse" message="tns:PCService_Def_ValidateCodeForCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemBankedPromocodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/RedeemBankedPromocodes" message="tns:PCService_Def_RedeemBankedPromocodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/RedeemBankedPromocodesResponse" message="tns:PCService_Def_RedeemBankedPromocodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCodeForCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/RedeemCodeForCard" message="tns:PCService_Def_RedeemCodeForCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/RedeemCodeForCardResponse" message="tns:PCService_Def_RedeemCodeForCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveClaimByPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/RetrieveClaimByPromocode" message="tns:PCService_Def_RetrieveClaimByPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/RetrieveClaimByPromocodeResponse" message="tns:PCService_Def_RetrieveClaimByPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveClaimBySKU">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/RetrieveClaimBySKU" message="tns:PCService_Def_RetrieveClaimBySKU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/RetrieveClaimBySKUResponse" message="tns:PCService_Def_RetrieveClaimBySKU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PromocodeExpirationBySKU">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/PromocodeExpirationBySKU" message="tns:PCService_Def_PromocodeExpirationBySKU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/PromocodeExpirationBySKUResponse" message="tns:PCService_Def_PromocodeExpirationBySKU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PromocodeExpirationByPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/PromocodeExpirationByPromocode" message="tns:PCService_Def_PromocodeExpirationByPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/PromocodeExpirationByPromocodeResponse" message="tns:PCService_Def_PromocodeExpirationByPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeExpirationByPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationByPromocode" message="tns:PCService_Def_UpdatePromocodeExpirationByPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationByPromocodeResponse" message="tns:PCService_Def_UpdatePromocodeExpirationByPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeExpirationBySKU">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationBySKU" message="tns:PCService_Def_UpdatePromocodeExpirationBySKU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationBySKUResponse" message="tns:PCService_Def_UpdatePromocodeExpirationBySKU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeValueByPromocode">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeValueByPromocode" message="tns:PCService_Def_UpdatePromocodeValueByPromocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeValueByPromocodeResponse" message="tns:PCService_Def_UpdatePromocodeValueByPromocode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeValueBySKU">
+      <wsdl:input wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeValueBySKU" message="tns:PCService_Def_UpdatePromocodeValueBySKU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/PCService_Def/UpdatePromocodeValueBySKUResponse" message="tns:PCService_Def_UpdatePromocodeValueBySKU_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="basic" type="tns:PCService_Def">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitClaim">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/SubmitClaim" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/GetPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IssuePromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/IssuePromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/RedeemPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BankPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/BankPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/ValidatePromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateCodeForCard">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/ValidateCodeForCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemBankedPromocodes">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/RedeemBankedPromocodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCodeForCard">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/RedeemCodeForCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveClaimByPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/RetrieveClaimByPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveClaimBySKU">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/RetrieveClaimBySKU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PromocodeExpirationBySKU">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/PromocodeExpirationBySKU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PromocodeExpirationByPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/PromocodeExpirationByPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeExpirationByPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationByPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeExpirationBySKU">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationBySKU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeValueByPromocode">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeValueByPromocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeValueBySKU">
+      <soap:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeValueBySKU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSHttpBinding_PCService_Def" type="tns:PCService_Def">
+    <wsp:PolicyReference URI="#WSHttpBinding_PCService_Def_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitClaim">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/SubmitClaim" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/GetPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IssuePromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/IssuePromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/RedeemPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BankPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/BankPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/ValidatePromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateCodeForCard">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/ValidateCodeForCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemBankedPromocodes">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/RedeemBankedPromocodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemCodeForCard">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/RedeemCodeForCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveClaimByPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/RetrieveClaimByPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveClaimBySKU">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/RetrieveClaimBySKU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PromocodeExpirationBySKU">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/PromocodeExpirationBySKU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PromocodeExpirationByPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/PromocodeExpirationByPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeExpirationByPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationByPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeExpirationBySKU">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeExpirationBySKU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeValueByPromocode">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeValueByPromocode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePromocodeValueBySKU">
+      <soap12:operation soapAction="http://tempuri.org/PCService_Def/UpdatePromocodeValueBySKU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PCService">
+    <wsdl:port name="basic" binding="tns:basic">
+      <soap:address location="http://omsitest.swiftprepaid.com/API/PromocodeService.svc/basic1" />
+    </wsdl:port>
+    <wsdl:port name="WSHttpBinding_PCService_Def" binding="tns:WSHttpBinding_PCService_Def">
+      <soap12:address location="https://omsitest.swiftprepaid.com/API/PromocodeService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://omsitest.swiftprepaid.com/API/PromocodeService.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

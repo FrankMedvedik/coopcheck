@@ -262,9 +262,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can read the object; otherwise, <c>false</c>.</returns>
         public static bool CanGetObject()
         {
-        #if DEBUG
-            return true;
-	#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.GetObject, typeof(Account));
         }
 

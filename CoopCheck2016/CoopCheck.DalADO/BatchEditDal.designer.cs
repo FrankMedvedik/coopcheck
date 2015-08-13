@@ -112,7 +112,7 @@ namespace CoopCheck.DalADO
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
             {
-                using (var cmd = new SqlCommand("dbo.dsa_AddBatch", ctx.Connection))
+                using (var cmd = new SqlCommand("dbo.dal_AddBatch", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@batch_num", batchEdit.Num).Direction = ParameterDirection.Output;
@@ -125,7 +125,7 @@ namespace CoopCheck.DalADO
                     cmd.Parameters.AddWithValue("@study_topic", batchEdit.StudyTopic == null ? (object)DBNull.Value : batchEdit.StudyTopic).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@thank_you_2", batchEdit.ThankYou2 == null ? (object)DBNull.Value : batchEdit.ThankYou2).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@marketing_research_message", batchEdit.MarketingResearchMessage == null ? (object)DBNull.Value : batchEdit.MarketingResearchMessage).DbType = DbType.String;
-                   
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
                     cmd.ExecuteNonQuery();
                     batchEdit.Num = (int)cmd.Parameters["@batch_num"].Value;
                 }
@@ -142,7 +142,7 @@ namespace CoopCheck.DalADO
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
             {
-                using (var cmd = new SqlCommand("dbo.dsa_UpdateBatch", ctx.Connection))
+                using (var cmd = new SqlCommand("dbo.dal_UpdateBatch", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@batch_num", batchEdit.Num).DbType = DbType.Int32;
@@ -155,6 +155,8 @@ namespace CoopCheck.DalADO
                     cmd.Parameters.AddWithValue("@study_topic", batchEdit.StudyTopic == null ? (object)DBNull.Value : batchEdit.StudyTopic).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@thank_you_2", batchEdit.ThankYou2 == null ? (object)DBNull.Value : batchEdit.ThankYou2).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@marketing_research_message", batchEdit.MarketingResearchMessage == null ? (object)DBNull.Value : batchEdit.MarketingResearchMessage).DbType = DbType.String;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
+                    cmd.Parameters.AddWithValue("@updated", batchEdit.Updated.DBValue).DbType = DbType.DateTime;
                     var rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected == 0)
                         throw new DataNotFoundException("BatchEdit");
@@ -171,7 +173,7 @@ namespace CoopCheck.DalADO
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
             {
-                using (var cmd = new SqlCommand("dbo.dsa_DeleteBatchEdit", ctx.Connection))
+                using (var cmd = new SqlCommand("dbo.dal_DeleteBatch", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@batch_num", batch_num).DbType = DbType.Int32;

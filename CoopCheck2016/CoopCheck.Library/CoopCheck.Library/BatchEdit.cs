@@ -1,7 +1,7 @@
 
 namespace CoopCheck.Library
 {
-    public partial class BatchEdit 
+    public partial class BatchEdit
     {
 
         #region OnDeserialized actions
@@ -19,23 +19,24 @@ namespace CoopCheck.Library
 
         #endregion
 
-        #region ChildChanged Event Handler
+        //#region ChildChanged Event Handler
 
-        /// <summary>
-        /// Raises the ChildChanged event, indicating that a child object has been changed.
-        /// </summary>
-        /// <param name="e">ChildChangedEventArgs object.</param>
-        protected override void OnChildChanged(Csla.Core.ChildChangedEventArgs e)
-        {
-            base.OnChildChanged(e);
-
+        ///// <summary>
+        ///// Raises the ChildChanged event, indicating that a child object has been changed.
+        ///// </summary>
+        ///// <param name="e">ChildChangedEventArgs object.</param>
+        //protected override void OnChildChanged(Csla.Core.ChildChangedEventArgs e)
+        //{
+        //    base.OnChildChanged(e);
             
-            PropertyHasChanged(VouchersProperty);
-            
-            CheckObjectRules();
-        }
 
-        #endregion
+        //    PropertyHasChanged(VouchersProperty);
+            
+        //    CheckObjectRules();
+        //}
+        
+
+        //#endregion
 
         #region Pseudo Event Handlers
 
@@ -95,6 +96,7 @@ namespace CoopCheck.Library
 
         #endregion
 
+        
 
 
     }

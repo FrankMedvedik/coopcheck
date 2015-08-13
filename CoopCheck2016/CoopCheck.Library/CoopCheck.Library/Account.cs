@@ -1,7 +1,7 @@
 
 namespace CoopCheck.Library
 {
-    public partial class Account 
+    public partial class Account
     {
 
         #region OnDeserialized actions

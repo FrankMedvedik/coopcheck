@@ -1,7 +1,7 @@
 
 namespace CoopCheck.Library
 {
-    public partial class CheckInfo 
+    public partial class CheckInfo
     {
 
         #region OnDeserialized actions

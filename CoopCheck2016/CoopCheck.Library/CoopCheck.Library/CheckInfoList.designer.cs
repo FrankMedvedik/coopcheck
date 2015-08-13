@@ -1,5 +1,7 @@
 using System;
 using Csla;
+using Csla.Rules;
+using Csla.Rules.CommonRules;
 #if SILVERLIGHT
 using Csla.Serialization;
 #else
@@ -99,7 +101,68 @@ namespace CoopCheck.Library
         }
 
         #endregion
+        #region Object Authorization
 
+        /// <summary>
+        /// Adds the object authorization rules.
+        /// </summary>
+#if SILVERLIGHT
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public static void AddObjectAuthorizationRules()
+#else
+        protected static void AddObjectAuthorizationRules()
+#endif
+        {
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
+
+            AddObjectAuthorizationRulesExtend();
+        }
+
+        /// <summary>
+        /// Allows the set up of custom object authorization rules.
+        /// </summary>
+        static partial void AddObjectAuthorizationRulesExtend();
+
+        /// <summary>
+        /// Checks if the current user can create a new Account object.
+        /// </summary>
+        /// <returns><c>true</c> if the user can create a new object; otherwise, <c>false</c>.</returns>
+        public static bool CanAddObject()
+        {
+            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.CreateObject, typeof(Account));
+        }
+
+        /// <summary>
+        /// Checks if the current user can retrieve Account's properties.
+        /// </summary>
+        /// <returns><c>true</c> if the user can read the object; otherwise, <c>false</c>.</returns>
+        public static bool CanGetObject()
+        {
+            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.GetObject, typeof(Account));
+        }
+
+        /// <summary>
+        /// Checks if the current user can change Account's properties.
+        /// </summary>
+        /// <returns><c>true</c> if the user can update the object; otherwise, <c>false</c>.</returns>
+        public static bool CanEditObject()
+        {
+            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.EditObject, typeof(Account));
+        }
+
+        /// <summary>
+        /// Checks if the current user can delete a Account object.
+        /// </summary>
+        /// <returns><c>true</c> if the user can delete the object; otherwise, <c>false</c>.</returns>
+        public static bool CanDeleteObject()
+        {
+            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.DeleteObject, typeof(Account));
+        }
+
+        #endregion
         #region Data Access
 
 #if !SILVERLIGHT

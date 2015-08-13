@@ -35,7 +35,7 @@ namespace CoopCheck.Library
         /// Maintains metadata about <see cref="Id"/> property.
         /// </summary>
         [NotUndoable]
-        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(p => p.Id, "Id");
+        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(p => p.Id, "Id" );
         /// <summary>
         /// Gets the Id.
         /// </summary>
@@ -363,6 +363,7 @@ namespace CoopCheck.Library
         {
             DataPortal.BeginCreate<VoucherEdit>(callback);
         }
+        
 
 #else
 
@@ -411,26 +412,25 @@ namespace CoopCheck.Library
         protected override void Child_Create()
         {
             LoadProperty(IdProperty, System.Threading.Interlocked.Decrement(ref _lastID));
-            LoadProperty(PersonIdProperty, null);
-            LoadProperty(NamePrefixProperty, null);
-            LoadProperty(FirstProperty, null);
-            LoadProperty(MiddleProperty, null);
-            LoadProperty(LastProperty, null);
-            LoadProperty(SuffixProperty, null);
-            LoadProperty(TitleProperty, null);
-            LoadProperty(CompanyProperty, null);
-            LoadProperty(AddressLine1Property, null);
-            LoadProperty(AddressLine2Property, null);
-            LoadProperty(MunicipalityProperty, null);
-            LoadProperty(RegionProperty, null);
-            LoadProperty(PostalCodeProperty, null);
+            LoadProperty(PersonIdProperty, string.Empty);
+            LoadProperty(NamePrefixProperty, string.Empty);
+            LoadProperty(FirstProperty, string.Empty);
+            LoadProperty(MiddleProperty, string.Empty);
+            LoadProperty(LastProperty, string.Empty);
+            LoadProperty(SuffixProperty, string.Empty);
+            LoadProperty(TitleProperty, string.Empty);
+            LoadProperty(CompanyProperty, string.Empty);
+            LoadProperty(AddressLine1Property, string.Empty);
+            LoadProperty(AddressLine2Property, string.Empty);
+            LoadProperty(MunicipalityProperty, string.Empty);
+            LoadProperty(RegionProperty, string.Empty);
+            LoadProperty(PostalCodeProperty, string.Empty);
             LoadProperty(CountryProperty, ConfigurationManager.AppSettings["DefaultCountry"]);
-            LoadProperty(PhoneNumberProperty, null);
-            LoadProperty(EmailAddressProperty, null);
-            LoadProperty(UpdatedProperty, null);
-            var args = new DataPortalHookArgs();
-            OnCreate(args);
-            base.Child_Create();
+            LoadProperty(PhoneNumberProperty, string.Empty);
+            LoadProperty(EmailAddressProperty, string.Empty);
+            LoadProperty(UpdatedProperty, DateTime.Now);
+            MarkClean();
+            
         }
 
         /// <summary>
@@ -514,6 +514,7 @@ namespace CoopCheck.Library
                 return;
 
             var dto = new VoucherEditDto();
+            dto.Id = Id;
             dto.Amount = Amount;
             dto.PersonId = PersonId;
             dto.NamePrefix = NamePrefix;

@@ -22,7 +22,7 @@ namespace CoopCheck.DalADO
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
             {
-                using (var cmd = new SqlCommand("dbo.dsa_AddVoucherEdit", ctx.Connection))
+                using (var cmd = new SqlCommand("dbo.dal_AddVoucher", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@batch_num", voucherEdit.Parent_Num).DbType = DbType.Int32;
@@ -44,6 +44,7 @@ namespace CoopCheck.DalADO
                     cmd.Parameters.AddWithValue("@country", voucherEdit.Country).DbType = DbType.StringFixedLength;
                     cmd.Parameters.AddWithValue("@phone_number", voucherEdit.PhoneNumber).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@email", voucherEdit.EmailAddress).DbType = DbType.String;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
                     cmd.Parameters.Add("@updated", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     cmd.ExecuteNonQuery();
                     voucherEdit.Id = (int)cmd.Parameters["@tran_id"].Value;
@@ -62,7 +63,7 @@ namespace CoopCheck.DalADO
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
             {
-                using (var cmd = new SqlCommand("dbo.dsa_UpdateVoucherEdit", ctx.Connection))
+                using (var cmd = new SqlCommand("dbo.dal_UpdateVoucher", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@tran_id", voucherEdit.Id).DbType = DbType.Int32;
@@ -84,6 +85,7 @@ namespace CoopCheck.DalADO
                     cmd.Parameters.AddWithValue("@phone_number", voucherEdit.PhoneNumber == null ? (object)DBNull.Value : voucherEdit.PhoneNumber).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@email", voucherEdit.EmailAddress == null ? (object)DBNull.Value : voucherEdit.EmailAddress).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@updated", voucherEdit.Updated.DBValue).DbType = DbType.DateTime;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
                     var rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected == 0)
                         throw new DataNotFoundException("VoucherEdit");
@@ -108,5 +110,7 @@ namespace CoopCheck.DalADO
                 }
             }
         }
+
+      
     }
 }

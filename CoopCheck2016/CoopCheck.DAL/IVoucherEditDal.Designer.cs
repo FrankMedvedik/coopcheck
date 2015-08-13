@@ -28,5 +28,7 @@ namespace CoopCheck.DAL
         /// </summary>
         /// <param name="id">The Id.</param>
         void Delete(int id);
+
+        VoucherEditDto Fetch(int id);
     }
 }

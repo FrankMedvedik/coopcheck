@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="722a537c-b693-4b9e-957a-03cb9e25ee5f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://omsitest.swiftprepaid.com/API/PromocodeService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PromocodeService.disco" MetadataType="Disco" ID="2823efbe-1941-4fce-867b-fe0fd211fa9e" SourceId="1" SourceUrl="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?disco" />
+    <MetadataFile FileName="PromocodeService.xsd" MetadataType="Schema" ID="827b64bc-e6e0-4ced-bdc9-706dae3965d6" SourceId="1" SourceUrl="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PromocodeService1.xsd" MetadataType="Schema" ID="dd4bfbed-0f9e-4f5a-9b5f-d67cb547628c" SourceId="1" SourceUrl="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PromocodeService2.xsd" MetadataType="Schema" ID="b1a4a17f-1e60-4929-8821-5e17964d7196" SourceId="1" SourceUrl="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd3" />
+    <MetadataFile FileName="PCService.wsdl" MetadataType="Wsdl" ID="661065b5-8a16-4b29-bac5-ec635ca8a074" SourceId="1" SourceUrl="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?wsdl" />
+    <MetadataFile FileName="PromocodeService3.xsd" MetadataType="Schema" ID="7ac6b2c8-2a68-4c07-a4c4-a4dd87d4826e" SourceId="1" SourceUrl="https://omsitest.swiftprepaid.com/API/PromocodeService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

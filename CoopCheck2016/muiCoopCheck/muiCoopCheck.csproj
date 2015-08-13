@@ -120,6 +120,7 @@
     <Compile Include="Pages\BatchPage.xaml.cs">
       <DependentUpon>BatchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Batch\BatchEditViewModel.cs" />
     <Compile Include="Pages\Batch\EditBatchPage.xaml.cs">
       <DependentUpon>EditBatchPage.xaml</DependentUpon>
     </Compile>
@@ -141,6 +142,13 @@
     <Compile Include="Pages\Checks\CheckPage.xaml.cs">
       <DependentUpon>CheckPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Checks\CheckReportCriteriaView.xaml.cs">
+      <DependentUpon>CheckReportCriteriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Checks\CheckReportPage.xaml.cs">
+      <DependentUpon>CheckReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Checks\CheckReportViewModel.cs" />
     <Compile Include="Pages\Checks\JobNumberPage.xaml.cs">
       <DependentUpon>JobNumberPage.xaml</DependentUpon>
     </Compile>
@@ -239,6 +247,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Checks\CheckPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Checks\CheckReportCriteriaView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Checks\CheckReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -360,12 +376,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
-      <Project>{823874A2-D57C-4BB2-B71E-7076D9309589}</Project>
-      <Name>CoopCheck.Library</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

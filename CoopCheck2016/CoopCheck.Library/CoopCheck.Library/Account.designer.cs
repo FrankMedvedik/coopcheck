@@ -233,6 +233,10 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
+            BusinessRules.AddRule(typeof (Account), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof (Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+            BusinessRules.AddRule(typeof (Account), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof (Account), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
 
             AddObjectAuthorizationRulesExtend();
         }
@@ -248,7 +252,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can create a new object; otherwise, <c>false</c>.</returns>
         public static bool CanAddObject()
         {
-            return true;
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.CreateObject, typeof(Account));
         }
 
@@ -258,9 +261,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can read the object; otherwise, <c>false</c>.</returns>
         public static bool CanGetObject()
         {
-#if DEBUG
-            return true;
-#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.GetObject, typeof(Account));
         }
 
@@ -270,10 +270,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can update the object; otherwise, <c>false</c>.</returns>
         public static bool CanEditObject()
         {
-
-#if DEBUG
-            return true;
-#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.EditObject, typeof(Account));
         }
 
@@ -283,9 +279,6 @@ namespace CoopCheck.Library
         /// <returns><c>true</c> if the user can delete the object; otherwise, <c>false</c>.</returns>
         public static bool CanDeleteObject()
         {
-#if DEBUG
-            return true;
-#endif
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.DeleteObject, typeof(Account));
         }
 

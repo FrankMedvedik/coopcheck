@@ -49,5 +49,7 @@ namespace CoopCheck.DAL
         /// </summary>
         /// <value>The Last Reconciliation Balance.</value>
         public Decimal? LastReconciliationBalance { get; set; }
+
+        
     }
 }

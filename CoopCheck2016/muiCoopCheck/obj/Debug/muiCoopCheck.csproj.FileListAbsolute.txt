@@ -324,3 +324,7 @@ D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\Batch\Import
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\muiCoopCheck.g.resources
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\muiCoopCheck.exe
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\muiCoopCheck.pdb
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\Checks\CheckReportCriteriaView.baml
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\Checks\CheckReportPage.baml
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\Checks\CheckReportCriteriaView.g.cs
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\Checks\CheckReportPage.g.cs
