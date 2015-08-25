@@ -7,40 +7,36 @@
              xmlns:csla="http://schemas.lhotka.net/4.2.0/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="742.537">
+
     <Control.Resources>
-            <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="true">
-                        <Setter Property="ToolTip"
-                        Value="{Binding RelativeSource={RelativeSource Self},
-                        Path=(Validation.Errors)[0].ErrorContent}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
+        <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self},
+                                    Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Control.Resources>
-    <Grid Style="{StaticResource ContentRoot}" MaxHeight="750" >
+    <Grid Style="{StaticResource ContentRoot}" MaxHeight="750"  HorizontalAlignment="Left" VerticalAlignment="Top">
         <ScrollViewer>
             <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVoucherImports" VerticalAlignment="Top"  MaxHeight="800"
-                MaxWidth="800"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto" >
+                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" 
+                      Height="Auto" VerticalScrollBarVisibility="Auto" >
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn  Header="Zip" MinWidth="15">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Style="{StaticResource ResourceKey=TextBlockStyle}" Text="{Binding Path=PostalCode,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Last" />
-                    <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" />
-                    <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" />
-                    <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" />
-                    <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" />
-                    <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" />
-                    <!--<mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" />-->
-                    <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" />
-                    <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone"/>
-                    <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" />
+                    <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
+                    <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

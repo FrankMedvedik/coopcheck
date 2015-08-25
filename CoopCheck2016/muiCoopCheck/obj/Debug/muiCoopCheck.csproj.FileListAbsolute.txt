@@ -334,3 +334,4 @@ D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\PaymentsPage
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\PaymentsPage.baml
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\bin\Debug\CoopCheck.DalADO.dll
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\bin\Debug\CoopCheck.DalADO.pdb
+D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\bin\Debug\MelissaCodes.json
