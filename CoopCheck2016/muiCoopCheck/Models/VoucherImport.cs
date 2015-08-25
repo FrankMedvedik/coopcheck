@@ -1,3 +1,4 @@
+using CoopCheck.Library;
 using muiCoopCheck.Interfaces;
 
 namespace muiCoopCheck.Models
@@ -24,7 +25,29 @@ namespace muiCoopCheck.Models
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public string Updated { get; set; }
-        public string JobNumber  { get; set; }
-    
+        public string JobNumber { get; set; }
+
+        public VoucherEdit ToVoucherEdit()
+        {
+            var n = VoucherEdit.NewVoucherEdit();
+            n.AddressLine1 = AddressLine1;
+            n.AddressLine2 = AddressLine2;
+            n.Amount = Amount;
+            n.Company = Company;
+            n.Country = Country;
+            n.EmailAddress = EmailAddress;
+            n.First = First;
+            n.Last = Last;
+            n.Middle = Middle;
+            n.Municipality = Municipality;
+            n.NamePrefix = NamePrefix;
+            n.PersonId = PersonId;
+            n.PhoneNumber = PhoneNumber;
+            n.PostalCode = PostalCode;
+            n.Region = Region;
+            n.Suffix = Suffix;
+            n.Title = Title;
+            return n;
+        }
     }
 }

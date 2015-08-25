@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using GalaSoft.MvvmLight.Messaging;
 using LinqToExcel;
 using muiCoopCheck.Models;
 
@@ -20,35 +21,46 @@ namespace muiCoopCheck.Pages.Batch.Import
             }
         }
 
+        public StatusInfo Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
+            }
+        }
+
         public ImportViewModel()
         {
             ResetState();
-            StatusMsg = "Select an Study Honoraria Excel Workbook";
+            var s = new StatusInfo()
+            {
+                StatusMessage = "Select an Study Honoraria Excel Workbook",
+                ErrorMessage = ""
+            };
+            
+            Status = s;
+
             _selectedWorkSheet = DefaultSelected;
         }
 
         #region DisplayState
-        private string _statusMsg;
-        private string _errorMsg;
         private bool _canProceed;
 
         private void ResetState()
         {
             SrcColumnNames = new ObservableCollection<string>();
             ColumnMap = new ObservableCollection<ColumnPropertyMap>();
-            StatusMsg = "";
-            ErrorMsg = "";
+            var s = new StatusInfo()
+            {
+                StatusMessage = "",
+                ErrorMessage = ""
+            };
+            Status = s;
             CanProceed = false;
             ShowGridData = false;
-        }
-        public string StatusMsg
-        {
-            get { return _statusMsg; }
-            set
-            {
-                _statusMsg = value;
-                NotifyPropertyChanged();
-            }
         }
         public bool CanProceed
         {
@@ -57,19 +69,12 @@ namespace muiCoopCheck.Pages.Batch.Import
             {
                 _canProceed = value;
                 NotifyPropertyChanged();
-
+                if (CanProceed)
+                    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
+                else
+                    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCannotProceed));
             }
 
-        }
-
-        public string ErrorMsg
-        {
-            get { return _errorMsg; }
-            set
-            {
-                _errorMsg = value;
-                NotifyPropertyChanged();
-            }
         }
 
         private Boolean _showGridData;
@@ -102,12 +107,12 @@ namespace muiCoopCheck.Pages.Batch.Import
             {
                 _excelFilePath = value;
                 NotifyPropertyChanged();
-                loadWorksheetMetaData();
+                LoadWorksheetMetaData();
             }
         }
 
 
-        public void loadWorksheetMetaData()
+        public void LoadWorksheetMetaData()
         {
             ExcelBook = new ExcelQueryFactory(ExcelFilePath);
             WorkSheets = new ObservableCollection<string>(ExcelBook.GetWorksheetNames());
@@ -121,7 +126,15 @@ namespace muiCoopCheck.Pages.Batch.Import
             {
                 _workSheets = value;
                 NotifyPropertyChanged();
-                StatusMsg = "Select a worksheet";
+                var s = new StatusInfo()
+            {
+                StatusMessage = "Select a worksheet",
+                ErrorMessage = ""
+            };
+            
+            Status = s;
+
+                
             }
         }
         private ObservableCollection<string> _srcColumnNames = new ObservableCollection<string>();
@@ -187,7 +200,14 @@ namespace muiCoopCheck.Pages.Batch.Import
 
         public void LoadWorkSheetStats()
         {
-            StatusMsg = "Loading columns...";
+            var s = new StatusInfo()
+            {
+                StatusMessage = "Loading columns...",
+                ErrorMessage = ""
+            };
+
+            Status = s;
+
             try
             {
                 if (SelectedWorkSheet == DefaultSelected) return;
@@ -196,21 +216,28 @@ namespace muiCoopCheck.Pages.Batch.Import
             }
             catch (Exception ex)
             {
-                ErrorMsg = ex.Message;
-                StatusMsg = "Error reading column names does selected worksheet contain vouchers?";
+                s = new StatusInfo()
+                {
+                    StatusMessage = "Error reading column names does selected worksheet contain vouchers?",
+                    ErrorMessage = ex.Message
+                };
+                Status = s;
                 VoucherCnt = 0;
             }
         }
+
 
         private string DefaultSelected = "< Choose Worksheet >";
 
         public void ColumnNameValidator()
         {
+            var s = new StatusInfo();
 
             if (SrcColumnNames == null)
             {
-                ErrorMsg = "No valid Columns found";
-                StatusMsg = "Cannot Import";
+                s.ErrorMessage= "No valid Columns found";
+                s.StatusMessage = "Cannot Import";
+                Status = s;
                 VoucherCnt = 0;
                 SrcColumnNames = new ObservableCollection<string>();
                 return;
@@ -244,25 +271,29 @@ namespace muiCoopCheck.Pages.Batch.Import
 
             if (!ColumnMap.Any(x => x.Available))
             {
-                ErrorMsg = "No valid Columns found";
-                StatusMsg = "Cannot Import";
+
+                s.ErrorMessage = "No valid Columns found";
+                s.StatusMessage = "Cannot Import";
                 VoucherCnt = 0;
                 ShowGridData = true;
             }
             else if (ColumnMap.Any(x => x.Available == false))
             {
-                StatusMsg = "Cannot Import";
-                ErrorMsg = "Some required columns were not found ";
+                s.StatusMessage = "Cannot Import";
+                s.ErrorMessage = "Some required columns were not found ";
                 VoucherCnt = 0;
                 ShowGridData = true;
             }
             else
             {
-                StatusMsg = "Click Next to continue";
-                ErrorMsg = "";
+                s.StatusMessage = "Click Next to continue";
+                s.ErrorMessage = "";
                 ShowGridData = false;
                 CanProceed = true;
+                Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
+                
             }
+            Status = s;
         }
 
         
@@ -295,7 +326,7 @@ namespace muiCoopCheck.Pages.Batch.Import
             ExcelBook.AddMapping("JobNumber", "JOB #");
             var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorkSheet) select a;
 
-            foreach (var a in vouchers)
+            foreach (var a in vouchers.Where(x=> x.Last != ""))
             {
                 VoucherImports.Add(a);
             }
@@ -304,6 +335,8 @@ namespace muiCoopCheck.Pages.Batch.Import
             VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
         }
         private decimal _voucherTotalDollars;
+        private StatusInfo _status;
+
         public decimal VoucherTotalDollars
         {
             get { return _voucherTotalDollars; }

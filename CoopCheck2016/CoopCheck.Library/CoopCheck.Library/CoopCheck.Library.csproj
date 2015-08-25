@@ -35,9 +35,6 @@
     <Reference Include="Csla">
       <HintPath>..\..\packages\CSLA-Core.4.5.701\lib\net45\Csla.dll</HintPath>
     </Reference>
-    <Reference Include="DataClean">
-      <HintPath>..\..\..\..\Reckner_projects\RecknerDataCleaner\DataCleaner\bin\Debug\DataClean.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -107,6 +104,10 @@
     <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\jradatacleaner\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
       <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
       <Name>CoopCheck.DalADO</Name>

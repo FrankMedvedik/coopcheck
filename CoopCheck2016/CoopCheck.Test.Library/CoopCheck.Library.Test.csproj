@@ -79,6 +79,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
+      <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
+      <Name>CoopCheck.DalADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DAL\CoopCheck.DAL.csproj">
+      <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
+      <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
       <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
       <Name>CoopCheck.Library</Name>

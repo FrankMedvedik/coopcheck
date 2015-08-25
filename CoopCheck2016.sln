@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.Library", "CoopCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.Library.Test", "CoopCheck2016\CoopCheck.Test.Library\CoopCheck.Library.Test.csproj", "{ED569113-84C3-4207-9DCF-F447F7F46DCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.Repository", "CoopCheck.Repository\CoopCheck.Repository.csproj", "{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,16 @@ Global
 		{ED569113-84C3-4207-9DCF-F447F7F46DCD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ED569113-84C3-4207-9DCF-F447F7F46DCD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ED569113-84C3-4207-9DCF-F447F7F46DCD}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

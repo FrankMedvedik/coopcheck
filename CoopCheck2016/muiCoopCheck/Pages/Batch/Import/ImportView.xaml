@@ -12,17 +12,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Vertical" Name="spSettings" >
+                <StackPanel Orientation="Vertical" Name="spSettings" Grid.Row="0">
                     <StackPanel Orientation="Horizontal" Name="spFile">
-                        <Button Content="Select File" Name="btnOpen" Width="150"  Height="30" Margin="6" HorizontalAlignment="Left" FontWeight="Bold" Click="btnOpen_Click" />
+                        <Button Content="Select File" Name="btnOpen" Width="150"  Height="30" Margin="6" HorizontalAlignment="Left"  Click="btnOpen_Click" />
                         <TextBox Height="30" Name="txtFilePath" Width="350" Text="{Binding ExcelFilePath}" Margin="6" HorizontalAlignment="Left"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="spWorksheet">
-                        <TextBlock Text="Voucher Worksheet" FontWeight="Bold"  Width="150"   HorizontalAlignment="Right" Margin="6"/>
+                        <TextBlock Text="Voucher Worksheet" Width="150"   HorizontalAlignment="Right" Margin="6"/>
                         <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedWorkSheet, Mode=TwoWay}"  
                             IsEnabled="False" Name="cbSheets" Width="200" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}" />
                     </StackPanel>
@@ -40,39 +38,30 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock FontSize="14" FontWeight="Bold"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Column Errors</TextBlock>
-                    <TextBlock FontSize="14" FontWeight="Bold"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Missing Columns</TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Column Errors</TextBlock>
+                    <TextBlock  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Missing Columns</TextBlock>
                     <DataGrid Grid.Row="2" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center" Name="dtColumns" VerticalAlignment="Top" 
                       ItemsSource="{Binding FilteredColumnMap}" HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ColumnName }"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBlock FontSize="14" FontWeight="Bold"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Columns Found</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Columns Found</TextBlock>
                     <ListBox Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Center" Name="dtFoundColumns" VerticalAlignment="Top" 
                       ItemsSource="{Binding SrcColumnNames}" />
                 </Grid>
-                <Grid Grid.Row="1" Grid.Column="0"  Visibility="{Binding CanImport, Converter={StaticResource BoolToVisConverter}}" Name="GridVouchers">
+                <Grid Grid.Row="2" Visibility="{Binding CanImport, Converter={StaticResource BoolToVisConverter}}" Name="GridVouchers">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Name="spVoucherTotals" >
-                        <TextBlock FontWeight="Bold"  HorizontalAlignment="Right" Margin="6">Voucher Count</TextBlock>
-                        <TextBlock Margin="6" Width="50" FontWeight="Bold"  HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
-                        <TextBlock VerticalAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Right" Margin="6">Total $</TextBlock>
-                        <TextBlock   FontWeight="Bold"  Margin="6" Width="50" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars}"/>
+                        <TextBlock HorizontalAlignment="Right" Margin="6">Voucher Count</TextBlock>
+                        <TextBlock Margin="6" Width="50" HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Margin="6">Total $</TextBlock>
+                        <TextBlock  Margin="6" Width="50" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars}"/>
                     </StackPanel>
-                    <!--<DataGrid Grid.Row="1" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Name="dgVoucherImports" VerticalAlignment="Top" 
-                      ItemsSource="{Binding VoucherImports}" HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto" >
-                    </DataGrid>-->
                 </Grid>
-                <DockPanel  Grid.Row="2" >
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom"> 
-                <TextBlock FontSize="14" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6" Text="{Binding ErrorMsg}" Foreground="Red"/>
-                <TextBlock FontSize="14" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6" Text="{Binding StatusMsg}" Foreground="Black"/>
-                </StackPanel>
-                </DockPanel>
             </Grid>
         </ScrollViewer>
     </Grid>

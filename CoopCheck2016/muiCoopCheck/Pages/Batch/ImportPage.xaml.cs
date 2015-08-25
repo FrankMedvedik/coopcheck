@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
+using muiCoopCheck.Models;
+using muiCoopCheck.Pages.Batch.Import;
 
 namespace muiCoopCheck.Pages.Batch
 {
@@ -8,67 +11,68 @@ namespace muiCoopCheck.Pages.Batch
     /// </summary>
     public partial class ImportPage : UserControl
     {
+        private ImportPageViewModel _vm;
+
         public ImportPage()
         {
             InitializeComponent();
-            SetVisibilityState();
-
+            _vm = new ImportPageViewModel();
+            DataContext = _vm;
+            SetControlVisibility();
+            btnNext.IsEnabled = true;
         }
 
-        private ProcessStep _currentState = ProcessStep.Import;
-        private ProcessStep _nextState = ProcessStep.Import;
 
-        enum ProcessStep
+        private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            Import, BatchEdit, Validate, Done
-
+            if (_vm.CurrentProcessingStep == ImportProcessStep.BatchEdit) ;
+                bev.SelectedBatch.Save();
+            _vm.GoToNextStep();
+            SetControlVisibility();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
-            SetVisibilityState();
-
+            _vm.GoBackAStep();
+            SetControlVisibility();
         }
 
-        private void SetVisibilityState()
+        private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            switch (_currentState)
+            _vm.StartOver();
+            SetControlVisibility();
+        }
+
+
+        private void SetControlVisibility()
+        {
+            switch (_vm.CurrentProcessingStep)
             {
-                case ProcessStep.Import:
+                case ImportProcessStep.Import:
                     bev.Visibility = Visibility.Collapsed;
-
                     iv.Visibility = Visibility.Visible;
                     vv.Visibility = Visibility.Collapsed;
-                    _nextState = ProcessStep.BatchEdit;
-                    btnDOIT.Content = "Edit Batch Details";
+                    btnBack.Visibility = Visibility.Collapsed;
                     break;
-                case ProcessStep.BatchEdit:
+                case ImportProcessStep.BatchEdit:
                     bev.Visibility = Visibility.Visible;
                     iv.Visibility = Visibility.Collapsed;
                     vv.Visibility = Visibility.Collapsed;
-                    _nextState = ProcessStep.Validate;
-                    btnDOIT.Content = "Review Addresses";
+                    btnBack.Visibility = Visibility.Visible;
                     bev.Vouchers = iv.Vouchers;
                     break;
-                case ProcessStep.Validate:
+                case ImportProcessStep.Validate:
                     vv.Visibility = Visibility.Visible;
                     bev.Visibility = Visibility.Collapsed;
                     iv.Visibility = Visibility.Collapsed;
                     vv.Vouchers = bev.Vouchers;
-                    btnDOIT.Content = "Close Batch";
-                    _nextState = ProcessStep.Done;
+                    btnBack.Visibility = Visibility.Visible;
                     break;
-                case ProcessStep.Done:
+                case ImportProcessStep.Done:
                     iv.Visibility = Visibility.Collapsed;
                     bev.Visibility = Visibility.Collapsed;
                     vv.Visibility = Visibility.Collapsed;
-                    btnDOIT.Content = "BYE!";
-                    break;
-
-                default:
                     break;
             }
-            _currentState = _nextState;
         }
 
     }

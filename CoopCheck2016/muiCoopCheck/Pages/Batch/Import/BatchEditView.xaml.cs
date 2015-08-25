@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Library;
 using muiCoopCheck.Models;
 using muiCoopCheck.Pages.Vouchers;
 
@@ -32,6 +33,19 @@ namespace muiCoopCheck.Pages.Batch.Import
         public static readonly DependencyProperty VouchersProperty =
     DependencyProperty.Register("Vouchers", typeof(List<VoucherImport>), typeof(BatchEditView),
         new PropertyMetadata(new List<VoucherImport>()));
+
+        public BatchEdit SelectedBatch
+        {
+            get { return _vm.SelectedBatch; }
+            set
+            {
+                _vm.SelectedBatch = value;
+            }
+        }
+
+        public static readonly DependencyProperty SelectedBatchProperty =
+    DependencyProperty.Register("SelectedBatch", typeof(BatchEdit), typeof(BatchEditView),
+        new PropertyMetadata(BatchEdit.NewBatchEdit()));
 
 
     }

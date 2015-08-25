@@ -30,7 +30,6 @@ namespace muiCoopCheck.Pages.Batch.Import
             var browsefile = openfile.ShowDialog();
             if (browsefile == true)
             {
-                _vm.StatusMsg = "Loading Workbooks";
                 _vm.ExcelFilePath = openfile.FileName;
                 cbSheets.IsEnabled = true;
             }

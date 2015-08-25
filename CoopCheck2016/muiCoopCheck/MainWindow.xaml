@@ -27,7 +27,7 @@
     <mui:ModernWindow.TitleLinks>
         <mui:Link DisplayName="batch" Source="/Pages/BatchPage.xaml" />
         <!--<mui:Link DisplayName="batches" Source="/Pages/Vouchers/BatchEditPage.xaml" />-->
-        <mui:Link DisplayName="checks" Source="/Pages/ChecksPage.xaml" />
+        <mui:Link DisplayName="payments" Source="/Pages/PaymentsPage.xaml" />
         <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayPage.xaml" />
         <mui:Link DisplayName="accounts" Source="/Pages/AccountsPage.xaml" />
         <mui:Link DisplayName="settings" Source="/Pages/SettingsPage.xaml" />

@@ -24,9 +24,10 @@ namespace CoopCheck.Library
         protected override void AddBusinessRules()
         {
             base.AddBusinessRules();
-
+#if RELEASE
             // TODO: add business rules
             BusinessRules.AddRule(typeof(WriteCheckCommand), new  IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
+#endif
         }
         public static bool CanExecuteObject()
         {

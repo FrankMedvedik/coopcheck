@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Library;
+using GalaSoft.MvvmLight.Messaging;
 using muiCoopCheck.DesignData;
 using muiCoopCheck.Models;
 
@@ -9,7 +11,6 @@ namespace muiCoopCheck.Pages.Batch.Import
 
     public class BatchEditViewModel : ViewModelBase
     {
-
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
         public ObservableCollection<VoucherImport> VoucherImports  {             
             get { return _voucherImports ; }
@@ -17,11 +18,11 @@ namespace muiCoopCheck.Pages.Batch.Import
             {
                 _voucherImports = value;
                 NotifyPropertyChanged();
-                if ((_voucherImports.Count > 0) && (SelectedBatch != null))
+                if ((_voucherImports.Count > 0) )
                 {
                     try
                     {
-                        var n = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
+                        SelectedBatch.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
                     }
                     catch (Exception e)
                     {
@@ -30,37 +31,41 @@ namespace muiCoopCheck.Pages.Batch.Import
 
                     SelectedBatch.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
                     SelectedBatch.Date = DateTime.Today.ToShortDateString();
+                    SelectedBatch.Save();
                 }
+            }
+        }
+
+        public StatusInfo Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
 
         public BatchEditViewModel()
         {
             ResetState();
-            StatusMsg = "fill and verify the details about the voucher batch ";
-            SelectedBatch = BatchEditDesign.LoadTestData();
+            SelectedBatch = BatchEdit.NewBatchEdit();
+            HeaderText = String.Format("Batch {0}", SelectedBatch.Num);
         }
 
-        #region DisplayState
         private bool _canProceed;
-        private string _errorMsg;
-        private string _statusMsg;
 
         private void ResetState()
         {
-            StatusMsg = "";
-            ErrorMsg = "";
-            CanProceed = false;
-            ShowGridData = false;
-        }
-        public string StatusMsg
-        {
-            get { return _statusMsg; }
-            set
+            var s = new StatusInfo()
             {
-                _statusMsg = value;
-                NotifyPropertyChanged();
-            }
+                StatusMessage = "fill and verify the details about the voucher batch ",
+                ErrorMessage = ""
+            };
+            Status = s;
+            CanProceed = false;
+            //ShowErrorData = false;
         }
         public bool CanProceed
         {
@@ -72,35 +77,22 @@ namespace muiCoopCheck.Pages.Batch.Import
 
         }
 
-        public string ErrorMsg
-        {
-            get { return _errorMsg; }
-            set
-            {
-                _errorMsg = value;
-                NotifyPropertyChanged();
-            }
-        }
+        //private Boolean _showErrorData;
 
-        private Boolean _showGridData;
+        //public Boolean ShowErrorData
+        //{
+        //    get { return _showErrorData; }
+        //    set
+        //    {
+        //        _showErrorData = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
 
-        public Boolean ShowGridData
-        {
-            get { return _showGridData; }
-            set
-            {
-                _showGridData = value;
-                NotifyPropertyChanged();
-            }
-        }
+        private BatchEdit _selectedBatch;
+        private StatusInfo _status;
 
-
-        #endregion
-
-        #region BatchEdit
-
-        private BatchEditImport _selectedBatch;
-        public BatchEditImport SelectedBatch
+        public BatchEdit  SelectedBatch
         {
             get { return _selectedBatch; }
             set
@@ -110,7 +102,17 @@ namespace muiCoopCheck.Pages.Batch.Import
             }
         }
 
-        #endregion
+        private string _headerText;
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set
+            {
+                _headerText = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
     }
 }

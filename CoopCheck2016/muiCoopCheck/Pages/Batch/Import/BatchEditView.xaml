@@ -6,46 +6,45 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="742.537">
-    <Grid Style="{StaticResource ContentRoot}" >
-        <ScrollViewer>
+    <ScrollViewer>
+        <Grid Style="{StaticResource ContentRoot}" >
             <StackPanel Orientation="Vertical" Name="spSettings" >
-                <TextBlock Text="Batch Details" Style="{StaticResource Heading2}" Margin="6"/>
+                <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6"/>
                     <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Job" FontWeight="Bold" VerticalAlignment="Top" Width="100"  Margin="6"/>
+                        <TextBlock Text="Job" VerticalAlignment="Top" Width="100"  Margin="6"/>
                         <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay}" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="File">
-                        <TextBlock Text="Date" FontWeight="Bold"  Width="100"   Margin="6"/>
+                        <TextBlock Text="Date" Width="100"   Margin="6"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.Date, Mode=TwoWay}" Margin="6"  />
-
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Payment Date" FontWeight="Bold" Width="100"   HorizontalAlignment="Right" Margin="6"/>
+                        <TextBlock Text="Payment Date" Width="100"   HorizontalAlignment="Right" Margin="6"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay}" Margin="6"  />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Total $" FontWeight="Bold"  Width="100"   Margin="6"/>
+                        <TextBlock Text="Total $" Width="100"   Margin="6"/>
                         <TextBox Width="110" Text="{Binding SelectedBatch.Amount, StringFormat='{}{0:C}', Mode=TwoWay}" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="s">
-                        <TextBlock Text="Study Topic" FontWeight="Bold"  Width="100"   Margin="6"/>
+                        <TextBlock Text="Study Topic" Width="100"   Margin="6"/>
                         <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.StudyTopic, Mode=TwoWay}" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Description" FontWeight="Bold"  Width="100" Margin="6"/>
+                        <TextBlock Text="Description" Width="100" Margin="6"/>
                         <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay}" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="pFile">
-                        <TextBlock Text="Thank You 1" FontWeight="Bold"  Width="100" Margin="6"/>
+                        <TextBlock Text="Thank You 1" Width="100" Margin="6"/>
                         <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay}" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="spFile">
-                        <TextBlock Text="Thank You 2" FontWeight="Bold"  Width="100"  Margin="6"/>
+                        <TextBlock Text="Thank You 2" Width="100"  Margin="6"/>
                         <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay}" Margin="6" />
                     </StackPanel>
             </StackPanel>
             </StackPanel>
-        </ScrollViewer>
     </Grid>
+    </ScrollViewer>
 </UserControl>

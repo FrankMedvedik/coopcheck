@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Library;
+using GalaSoft.MvvmLight.Messaging;
 using LinqToExcel;
 using Microsoft.Office.Interop.Excel;
 using muiCoopCheck.DesignData;
@@ -26,38 +28,49 @@ namespace muiCoopCheck.Pages.Vouchers
                     SelectedBatch.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First()); 
                     SelectedBatch.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
                     SelectedBatch.Date = DateTime.Today.ToShortDateString();
+                    foreach (var v in VoucherImports.ToList())
+                    {
+                        
+                        SelectedBatch.Vouchers.Add(v.ToVoucherEdit());
+                    }
+                    //SelectedBatch.Save();
                 }
-
+            }
+        }
+ 
+        public StatusInfo Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
 
         public ValidateViewModel()
         {
             ResetState();
-            StatusMsg = "fill and verify the details about the voucher batch ";
+            
         }
 
         #region DisplayState
         private bool _canProceed;
-        private string _errorMsg;
-        private string _statusMsg;
 
         private void ResetState()
         {
-            StatusMsg = "";
-            ErrorMsg = "";
             CanProceed = false;
             ShowGridData = false;
-        }
-        public string StatusMsg
-        {
-            get { return _statusMsg; }
-            set
+            Status = new StatusInfo()
             {
-                _statusMsg = value;
-                NotifyPropertyChanged();
-            }
+                StatusMessage = "verify vouchers",
+                ErrorMessage = ""
+            };
+
+            SelectedBatch = BatchEdit.NewBatchEdit();
         }
+
         public bool CanProceed
         {
             get { return _canProceed; }
@@ -68,16 +81,7 @@ namespace muiCoopCheck.Pages.Vouchers
 
         }
 
-        public string ErrorMsg
-        {
-            get { return _errorMsg; }
-            set
-            {
-                _errorMsg = value;
-                NotifyPropertyChanged();
-            }
-        }
-
+        
         private Boolean _showGridData;
 
         public Boolean ShowGridData
@@ -95,8 +99,10 @@ namespace muiCoopCheck.Pages.Vouchers
 
         #region BatchEdit
 
-        private BatchEditImport _selectedBatch;
-        public BatchEditImport SelectedBatch
+        private BatchEdit _selectedBatch;
+        private StatusInfo _status;
+
+        public BatchEdit  SelectedBatch
         {
             get { return _selectedBatch; }
             set

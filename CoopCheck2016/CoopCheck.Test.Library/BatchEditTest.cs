@@ -37,7 +37,8 @@ namespace CoopCheck.Test.Library
         [TestMethod]
         public void AddBatchVoucher()
         {
-            var obj = BatchEdit.NewBatchEdit();
+            var obj = BatchEdit.NewBatchEdit(  );
+
             obj.Amount = 100;
             obj.Date = DateTime.Now.ToShortDateString();
             obj.Description = "Please delete me!";
@@ -47,8 +48,9 @@ namespace CoopCheck.Test.Library
             obj.StudyTopic = "Survey";
             obj.ThankYou1 = "Thank You";
             obj.ThankYou2 = "Thank You Thank You";
+            obj.Save();
 
-             var voc = VoucherEdit.NewVoucherEdit();
+            var voc = VoucherEdit.NewVoucherEdit();
             voc.First = "John";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
@@ -56,7 +58,7 @@ namespace CoopCheck.Test.Library
             voc.Region = "PA";
             voc.PostalCode = "18914";
             voc.Amount = 100;
-
+            
             obj.Vouchers.Add(voc);
 
             

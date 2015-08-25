@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\App.xaml
-361066858266
+351594745328
 
-611505939126
-27-688303944
-MainWindow.xaml;Pages\Accounts\BatchReportPage.xaml;Pages\Accounts\ClearedCheckReportPage.xaml;Pages\Accounts\EditAccountPage.xaml;Pages\Accounts\NewAccountPage.xaml;Pages\Accounts\OutstandingCheckReportPage.xaml;Pages\Accounts\ReconcileAccountPage.xaml;Pages\BatchPage.xaml;Pages\Batch\EditBatchPage.xaml;Pages\Batch\ImportPage.xaml;Pages\Batch\NewBatchPage.xaml;Pages\Batch\PrintChecksPage.xaml;Pages\Batch\SwiftPayPage.xaml;Pages\Checks\BatchPage.xaml;Pages\Checks\CheckPage.xaml;Pages\Checks\CheckReportCriteriaView.xaml;Pages\Checks\CheckReportPage.xaml;Pages\Checks\JobNumberPage.xaml;Pages\Checks\NamePage.xaml;Pages\PositivePayPage.xaml;Pages\AccountsPage.xaml;Pages\Checks\DatePage.xaml;Pages\ListPage1.xaml;Pages\PositivePay\OpenPositivePayPage.xaml;Pages\PositivePay\NewPositivePayPage.xaml;Pages\ChecksPage.xaml;Pages\PositivePay\SubmitPositivePayPage.xaml;Pages\Batch\Import\EditBatchPage.xaml;Pages\VouchersPage.xaml;Pages\Batch\Import\ValidateView.xaml;Pages\Batch\Import\BatchEditView.xaml;Pages\Batch\Import\ImportView.xaml;Pages\Settings\About.xaml;Pages\Settings\Appearance.xaml;Pages\Home.xaml;Pages\SettingsPage.xaml;
+681422082664
+35896866890
+MainWindow.xaml;Pages\Accounts\BatchReportPage.xaml;Pages\Accounts\ClearedCheckReportPage.xaml;Pages\Accounts\EditAccountPage.xaml;Pages\Accounts\NewAccountPage.xaml;Pages\Accounts\OutstandingCheckReportPage.xaml;Pages\Accounts\ReconcileAccountPage.xaml;Pages\BatchPage.xaml;Pages\Batch\EditBatchPage.xaml;Pages\Batch\ImportPage.xaml;Pages\Batch\NewBatchPage.xaml;Pages\Batch\PrintChecksPage.xaml;Pages\Batch\SwiftPayPage.xaml;Pages\Payments\BatchPage.xaml;Pages\Payments\PaymentPage.xaml;Pages\Payments\PaymentReportView.xaml;Pages\Payments\PaymentReportPage.xaml;Pages\Payments\JobNumberPage.xaml;Pages\Payments\NamePage.xaml;Pages\PositivePayPage.xaml;Pages\AccountsPage.xaml;Pages\Payments\DatePage.xaml;Pages\ListPage1.xaml;Pages\PositivePay\OpenPositivePayPage.xaml;Pages\PositivePay\NewPositivePayPage.xaml;Pages\PaymentsPage.xaml;Pages\PositivePay\SubmitPositivePayPage.xaml;Pages\VouchersPage.xaml;Pages\Batch\Import\ValidateView.xaml;Pages\Batch\Import\BatchEditView.xaml;Pages\Batch\Import\ImportView.xaml;Pages\Settings\About.xaml;Pages\Settings\Appearance.xaml;Pages\Home.xaml;Pages\SettingsPage.xaml;
 
-True
+False
 

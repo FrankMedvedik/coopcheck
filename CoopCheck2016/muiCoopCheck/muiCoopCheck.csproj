@@ -39,6 +39,14 @@
       <HintPath>..\..\packages\CSLA-WPF.4.5.701\lib\net45\Csla.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
@@ -75,6 +83,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -99,6 +109,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\StatusInfo.cs" />
+    <Compile Include="Notifications.cs" />
     <Compile Include="Pages\Accounts\BatchReportPage.xaml.cs">
       <DependentUpon>BatchReportPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +139,8 @@
     <Compile Include="Pages\Batch\ImportPage.xaml.cs">
       <DependentUpon>ImportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Batch\ImportPageViewModel.cs" />
+    <Compile Include="Pages\Batch\Import\ImportProcessStep.cs" />
     <Compile Include="Pages\Batch\NewBatchPage.xaml.cs">
       <DependentUpon>NewBatchPage.xaml</DependentUpon>
     </Compile>
@@ -136,39 +150,37 @@
     <Compile Include="Pages\Batch\SwiftPayPage.xaml.cs">
       <DependentUpon>SwiftPayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\BatchPage.xaml.cs">
+    <Compile Include="Pages\Payments\BatchPage.xaml.cs">
       <DependentUpon>BatchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\CheckPage.xaml.cs">
-      <DependentUpon>CheckPage.xaml</DependentUpon>
+    <Compile Include="Pages\Payments\PaymentPage.xaml.cs">
+      <DependentUpon>PaymentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\CheckReportCriteriaView.xaml.cs">
-      <DependentUpon>CheckReportCriteriaView.xaml</DependentUpon>
+    <Compile Include="Models\PaymentReportCriteria.cs" />
+    <Compile Include="Pages\Payments\PaymentReportView.xaml.cs">
+      <DependentUpon>PaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\CheckReportPage.xaml.cs">
-      <DependentUpon>CheckReportPage.xaml</DependentUpon>
+    <Compile Include="Pages\Payments\PaymentReportPage.xaml.cs">
+      <DependentUpon>PaymentReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\CheckReportViewModel.cs" />
-    <Compile Include="Pages\Checks\JobNumberPage.xaml.cs">
+    <Compile Include="Pages\Payments\PaymentReportViewModel.cs" />
+    <Compile Include="Pages\Payments\JobNumberPage.xaml.cs">
       <DependentUpon>JobNumberPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\NamePage.xaml.cs">
+    <Compile Include="Pages\Payments\NamePage.xaml.cs">
       <DependentUpon>NamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PositivePayPage.xaml.cs">
       <DependentUpon>PositivePayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ChecksPage.xaml.cs">
-      <DependentUpon>ChecksPage.xaml</DependentUpon>
+    <Compile Include="Pages\PaymentsPage.xaml.cs">
+      <DependentUpon>PaymentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PositivePay\OpenPositivePayPage.xaml.cs">
       <DependentUpon>OpenPositivePayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PositivePay\SubmitPositivePayPage.xaml.cs">
       <DependentUpon>SubmitPositivePayPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Batch\Import\EditBatchPage.xaml.cs">
-      <DependentUpon>EditBatchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\VouchersPage.xaml.cs">
       <DependentUpon>VouchersPage.xaml</DependentUpon>
@@ -177,6 +189,13 @@
     <Compile Include="Pages\Batch\Import\ValidateView.xaml.cs">
       <DependentUpon>ValidateView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Services\PaymentSvc.cs" />
+    <Compile Include="Services\CheckSvc.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -242,27 +261,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Checks\BatchPage.xaml">
+    <Page Include="Pages\Payments\BatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Checks\CheckPage.xaml">
+    <Page Include="Pages\Payments\PaymentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Checks\CheckReportCriteriaView.xaml">
-      <SubType>Form</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Checks\CheckReportPage.xaml">
+    <Page Include="Pages\Payments\PaymentReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Checks\JobNumberPage.xaml">
+    <Page Include="Pages\Payments\PaymentReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Checks\NamePage.xaml">
+    <Page Include="Pages\Payments\JobNumberPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Payments\NamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,7 +293,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Checks\DatePage.xaml">
+    <Page Include="Pages\Payments\DatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -290,17 +309,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ChecksPage.xaml">
+    <Page Include="Pages\PaymentsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PositivePay\SubmitPositivePayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Batch\Import\EditBatchPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\VouchersPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -326,7 +341,7 @@
     <Compile Include="Pages\AccountsPage.xaml.cs">
       <DependentUpon>AccountsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Checks\DatePage.xaml.cs">
+    <Compile Include="Pages\Payments\DatePage.xaml.cs">
       <DependentUpon>DatePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ListPage1.xaml.cs">
@@ -376,8 +391,33 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoopCheck.Repository\CoopCheck.Repository.csproj">
+      <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
+      <Name>CoopCheck.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
+      <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
+      <Name>CoopCheck.DalADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DAL\CoopCheck.DAL.csproj">
+      <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
+      <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
+      <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
+      <Name>CoopCheck.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

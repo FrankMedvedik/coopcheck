@@ -38,7 +38,9 @@ namespace CoopCheck.Library
 
         public static int Execute(int accountId)
         {
+#if Release
             if (!CanExecuteCommand()) throw new System.Security.SecurityException("Not authorized to execute command.");
+#endif
             var cmd = new NextCheckNumCommand(accountId);
             var retVal = DataPortal.Execute<NextCheckNumCommand>(cmd).NextCheckNum;
             return retVal;
