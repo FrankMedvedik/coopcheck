@@ -9,8 +9,18 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
-                <TextBlock Text="BASIC PAGE" Style="{StaticResource Heading2}" />
-                <TextBlock Text="Content goes here" />
+                
+                <TextBlock Text="print checks page" Style="{StaticResource Heading2}" />
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Width="140">Batch</TextBlock> 
+                    <TextBox Text="{Binding SelectedBatchNum}" Width="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Width="140">Starting Check Number</TextBlock>
+                    <TextBox Text="{Binding StartingCheckNum}" Width="100"/>
+                </StackPanel>
+                
+                <Button Name="btnPrint" Click="btnPrint_Click">Print</Button>
             </StackPanel>
         </ScrollViewer>
     </Grid>

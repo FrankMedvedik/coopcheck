@@ -68,6 +68,9 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -109,8 +112,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\NumberConverter.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Notifications.cs" />
+    <Compile Include="Pages\Accounts\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Accounts\AccountViewModel.cs" />
     <Compile Include="Pages\Accounts\BatchReportPage.xaml.cs">
       <DependentUpon>BatchReportPage.xaml</DependentUpon>
     </Compile>
@@ -139,8 +147,13 @@
     <Compile Include="Pages\Batch\ImportPage.xaml.cs">
       <DependentUpon>ImportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Batch\PrintChecksViewModel.cs" />
     <Compile Include="Pages\Batch\ImportPageViewModel.cs" />
     <Compile Include="Pages\Batch\Import\ImportProcessStep.cs" />
+    <Compile Include="Pages\Batch\Import\BatchListView.xaml.cs">
+      <DependentUpon>BatchListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Batch\Import\BatchListViewModel.cs" />
     <Compile Include="Pages\Batch\NewBatchPage.xaml.cs">
       <DependentUpon>NewBatchPage.xaml</DependentUpon>
     </Compile>
@@ -182,6 +195,23 @@
     <Compile Include="Pages\PositivePay\SubmitPositivePayPage.xaml.cs">
       <DependentUpon>SubmitPositivePayPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Rpt\GlobalReportCriteria.cs" />
+    <Compile Include="Pages\Rpt\GlobalReportCriteriaView.xaml.cs">
+      <DependentUpon>GlobalReportCriteriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rpt\PaymentRptView.xaml.cs">
+      <DependentUpon>PaymentRptView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rpt\PaymentRptViewModel.cs" />
+    <Compile Include="Pages\Rpt\BatchRptView.xaml.cs">
+      <DependentUpon>BatchRptView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rpt\BatchRptViewModel.cs" />
+    <Compile Include="Pages\Rpt\ReportDateRange.cs" />
+    <Compile Include="Pages\Rpt\ReportDateRangeView.xaml.cs">
+      <DependentUpon>ReportDateRangeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Rpt\ReportDateRangeViewModel.cs" />
     <Compile Include="Pages\VouchersPage.xaml.cs">
       <DependentUpon>VouchersPage.xaml</DependentUpon>
     </Compile>
@@ -213,6 +243,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Accounts\AccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Accounts\BatchReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +282,10 @@
     <Page Include="Pages\Batch\ImportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Batch\Import\BatchListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Batch\NewBatchPage.xaml">
       <SubType>Designer</SubType>
@@ -316,6 +354,22 @@
     <Page Include="Pages\PositivePay\SubmitPositivePayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Rpt\GlobalReportCriteriaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Rpt\BatchRptView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Rpt\PaymentRptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Rpt\ReportDateRangeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\VouchersPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -420,6 +474,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

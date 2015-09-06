@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace muiCoopCheck.Pages
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged 
     {
         [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
         public sealed class CallerMemberNameAttribute : Attribute { }
@@ -15,4 +15,6 @@ namespace muiCoopCheck.Pages
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
+  
+  
 }

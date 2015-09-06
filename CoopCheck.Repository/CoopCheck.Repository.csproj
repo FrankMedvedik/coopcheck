@@ -111,6 +111,9 @@
     <Compile Include="vwPayment.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwRptBatchPayment.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CoopCheckModel.edmx">

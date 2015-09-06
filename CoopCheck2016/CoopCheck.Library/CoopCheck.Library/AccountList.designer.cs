@@ -84,9 +84,9 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
-            BusinessRules.AddRule(typeof (AccountList), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+            //BusinessRules.AddRule(typeof (AccountList), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
 
-            AddObjectAuthorizationRulesExtend();
+            //AddObjectAuthorizationRulesExtend();
         }
 
         /// <summary>

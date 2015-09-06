@@ -15,6 +15,11 @@ namespace muiCoopCheck.Pages.Vouchers
     public class ValidateViewModel : ViewModelBase
     {
 
+        private void FilterVouchers()
+        {
+            
+        }
+
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
         public ObservableCollection<VoucherImport> VoucherImports  {             
             get { return _voucherImports ; }

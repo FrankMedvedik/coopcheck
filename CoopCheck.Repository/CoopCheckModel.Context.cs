@@ -27,12 +27,13 @@ namespace CoopCheck.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<bank_account> bank_account { get; set; }
+        public virtual DbSet<bank_account> bank_accounts { get; set; }
         public virtual DbSet<batch> batches { get; set; }
-        public virtual DbSet<check_tran> check_tran { get; set; }
+        public virtual DbSet<check_tran> check_trans { get; set; }
         public virtual DbSet<OpenBatch> OpenBatches { get; set; }
         public virtual DbSet<voucher> vouchers { get; set; }
         public virtual DbSet<vwCheck> vwChecks { get; set; }
+        public virtual DbSet<vwRptBatchPayment> vwRptBatchPayments { get; set; }
         public virtual DbSet<vwPayment> vwPayments { get; set; }
     
         public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()

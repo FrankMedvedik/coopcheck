@@ -41,6 +41,5 @@ namespace CoopCheck.Repository
         public string phone_number { get; set; }
         public string email { get; set; }
         public Nullable<System.DateTime> updated { get; set; }
-        public string usr { get; set; }
     }
 }

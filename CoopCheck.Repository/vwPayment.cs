@@ -14,7 +14,6 @@ namespace CoopCheck.Repository
     
     public partial class vwPayment
     {
-        public int tran_id { get; set; }
         public int batch_num { get; set; }
         public Nullable<System.DateTime> pay_date { get; set; }
         public Nullable<int> job_num { get; set; }
@@ -40,7 +39,5 @@ namespace CoopCheck.Repository
         public string postal_code { get; set; }
         public string country { get; set; }
         public bool print_flag { get; set; }
-        public string email { get; set; }
-        public string phone_number { get; set; }
     }
 }

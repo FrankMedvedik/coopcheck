@@ -12,7 +12,8 @@ namespace muiCoopCheck.Services
         public static IQueryable<vwCheck> GetChecks(PaymentReportCriteria crc)
         {
             var ctx = new CoopCheckEntities();
-            IQueryable<vwCheck> query = ctx.vwChecks.Where(x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate && x.tran_amount > 0) ;
+            IQueryable<vwCheck> query = 
+                ctx.vwChecks.Where(x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate && x.tran_amount > 0) ;
             if (!String.IsNullOrEmpty(crc.CheckNumber))
             {
                query =  query.Where(x => x.check_num == crc.CheckNumber);

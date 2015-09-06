@@ -34,6 +34,6 @@ D:\Reckner.Work\CoopCheck2014\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.pdb
 D:\Reckner.Work\CoopCheck2014\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.csprojResolveAssemblyReference.cache
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\CoopCheck.DAL.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\CoopCheck.DAL.pdb
-D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.csprojResolveAssemblyReference.cache
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.pdb
+D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.csprojResolveAssemblyReference.cache

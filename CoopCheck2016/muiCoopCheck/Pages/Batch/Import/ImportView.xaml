@@ -50,7 +50,7 @@
                     <ListBox Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Center" Name="dtFoundColumns" VerticalAlignment="Top" 
                       ItemsSource="{Binding SrcColumnNames}" />
                 </Grid>
-                <Grid Grid.Row="2" Visibility="{Binding CanImport, Converter={StaticResource BoolToVisConverter}}" Name="GridVouchers">
+                <Grid Grid.Row="2" Visibility="{Binding CanProceed, Converter={StaticResource BoolToVisConverter}}" Name="GridVouchers">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>

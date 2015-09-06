@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CoopCheckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CoopCheckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bank_account">
           <Key>
             <PropertyRef Name="account_id" />
@@ -16,7 +16,6 @@
           <Property Name="balance" Type="money" />
           <Property Name="last_rec_date" Type="smalldatetime" />
           <Property Name="last_rec_balance" Type="money" />
-          <Property Name="account_type" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="batch">
           <Key>
@@ -34,7 +33,6 @@
           <Property Name="thank_you_2" Type="varchar" MaxLength="150" />
           <Property Name="marketing_research_message" Type="varchar" MaxLength="500" />
           <Property Name="respondent_batch_id" Type="int" />
-          <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="check_tran">
           <Key>
@@ -44,7 +42,7 @@
           <Property Name="check_date" Type="smalldatetime" />
           <Property Name="batch_num" Type="int" />
           <Property Name="account_id" Type="int" />
-          <Property Name="check_num" Type="nvarchar" MaxLength="50" />
+          <Property Name="check_num" Type="nvarchar" MaxLength="10" />
           <Property Name="tran_amount" Type="money" />
           <Property Name="cleared_amount" Type="money" />
           <Property Name="cleared_date" Type="smalldatetime" />
@@ -67,7 +65,6 @@
           <Property Name="phone_number" Type="nvarchar" MaxLength="22" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="updated" Type="smalldatetime" />
-          <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.OpenBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -142,12 +139,10 @@ warning 6002: The table/view 'CoopCheck.dbo.vwCheck' does not have a primary key
 warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwPayment">
           <Key>
-            <PropertyRef Name="tran_id" />
             <PropertyRef Name="batch_num" />
             <PropertyRef Name="print_flag" />
           </Key>
-          <Property Name="tran_id" Type="int" Nullable="false" />
-          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="batch_num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pay_date" Type="smalldatetime" />
           <Property Name="job_num" Type="int" />
           <Property Name="thank_you_1" Type="varchar" MaxLength="100" />
@@ -155,7 +150,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="thank_you_2" Type="varchar" MaxLength="150" />
           <Property Name="marketing_research_message" Type="varchar" MaxLength="500" />
           <Property Name="check_date" Type="smalldatetime" />
-          <Property Name="check_num" Type="nvarchar" MaxLength="50" />
+          <Property Name="check_num" Type="nvarchar" MaxLength="10" />
           <Property Name="tran_amount" Type="money" />
           <Property Name="person_id" Type="nvarchar" MaxLength="50" />
           <Property Name="name_prefix" Type="nvarchar" MaxLength="5" />
@@ -172,10 +167,29 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="postal_code" Type="nvarchar" MaxLength="15" />
           <Property Name="country" Type="nchar" MaxLength="2" />
           <Property Name="print_flag" Type="bit" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" />
-          <Property Name="phone_number" Type="nvarchar" MaxLength="22" />
         </EntityType>
-        <Function Name="dsa_GetCheckingAccounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwRptBatchPayment">
+          <Key>
+            <PropertyRef Name="payment_type" />
+          </Key>
+          <Property Name="account_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="job_num" Type="int" />
+          <Property Name="batch_date" Type="smalldatetime" />
+          <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="batch_amount" Type="money" />
+          <Property Name="batch_num" Type="int" />
+          <Property Name="payment_type" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="payment_cnt" Type="int" />
+          <Property Name="first_check_num" Type="nvarchar" MaxLength="10" />
+          <Property Name="last_check_num" Type="nvarchar" MaxLength="10" />
+          <Property Name="open_cnt" Type="int" />
+          <Property Name="cleared_cnt" Type="int" />
+          <Property Name="cleared_amount" Type="money" />
+          <Property Name="open_amount" Type="money" />
+          <Property Name="total_amount" Type="money" />
+        </EntityType>
         <Function Name="dsa_GetCheckList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="person_id" Type="nvarchar" Mode="In" />
         </Function>
@@ -196,9 +210,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
         <Function Name="dsa_GetReconcilationReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="account_id" Type="int" Mode="In" />
           <Parameter Name="rec_date" Type="smalldatetime" Mode="In" />
-        </Function>
-        <Function Name="dsa_GetSwiftBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="batch_num" Type="int" Mode="In" />
         </Function>
         <Function Name="dsa_GetVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tran_id" Type="int" Mode="In" />
@@ -268,7 +279,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           </EntitySet>
           <EntitySet Name="vwPayment" EntityType="Self.vwPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vwPayment].[tran_id] AS [tran_id], 
     [vwPayment].[batch_num] AS [batch_num], 
     [vwPayment].[pay_date] AS [pay_date], 
     [vwPayment].[job_num] AS [job_num], 
@@ -293,14 +303,30 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
     [vwPayment].[region] AS [region], 
     [vwPayment].[postal_code] AS [postal_code], 
     [vwPayment].[country] AS [country], 
-    [vwPayment].[print_flag] AS [print_flag], 
-    [vwPayment].[email] AS [email], 
-    [vwPayment].[phone_number] AS [phone_number]
+    [vwPayment].[print_flag] AS [print_flag]
     FROM [dbo].[vwPayment] AS [vwPayment]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwRptBatchPayment" EntityType="Self.vwRptBatchPayment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwRptBatchPayment].[account_name] AS [account_name], 
+    [vwRptBatchPayment].[job_num] AS [job_num], 
+    [vwRptBatchPayment].[batch_date] AS [batch_date], 
+    [vwRptBatchPayment].[pay_date] AS [pay_date], 
+    [vwRptBatchPayment].[batch_amount] AS [batch_amount], 
+    [vwRptBatchPayment].[batch_num] AS [batch_num], 
+    [vwRptBatchPayment].[payment_type] AS [payment_type], 
+    [vwRptBatchPayment].[payment_cnt] AS [payment_cnt], 
+    [vwRptBatchPayment].[first_check_num] AS [first_check_num], 
+    [vwRptBatchPayment].[last_check_num] AS [last_check_num], 
+    [vwRptBatchPayment].[open_cnt] AS [open_cnt], 
+    [vwRptBatchPayment].[cleared_cnt] AS [cleared_cnt], 
+    [vwRptBatchPayment].[cleared_amount] AS [cleared_amount], 
+    [vwRptBatchPayment].[open_amount] AS [open_amount], 
+    [vwRptBatchPayment].[total_amount] AS [total_amount]
+    FROM [dbo].[vwRptBatchPayment] AS [vwRptBatchPayment]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CoopCheckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -315,7 +341,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="balance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="last_rec_date" Type="DateTime" Precision="0" />
           <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="batch">
           <Key>
@@ -333,7 +358,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="thank_you_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="marketing_research_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="respondent_batch_id" Type="Int32" />
-          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="check_tran">
           <Key>
@@ -343,7 +367,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="check_date" Type="DateTime" Precision="0" />
           <Property Name="batch_num" Type="Int32" />
           <Property Name="account_id" Type="Int32" />
-          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="cleared_date" Type="DateTime" Precision="0" />
@@ -366,7 +390,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="updated" Type="DateTime" Precision="0" />
-          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OpenBatch">
           <Key>
@@ -431,41 +454,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="print_flag" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="vwPayment">
-          <Key>
-            <PropertyRef Name="tran_id" />
-            <PropertyRef Name="batch_num" />
-            <PropertyRef Name="print_flag" />
-          </Key>
-          <Property Name="tran_id" Type="Int32" Nullable="false" />
-          <Property Name="batch_num" Type="Int32" Nullable="false" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="thank_you_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="study_topic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="thank_you_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="marketing_research_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="check_date" Type="DateTime" Precision="0" />
-          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="print_flag" Type="Boolean" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="CoopCheckEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bank_account" EntityType="Self.bank_account" />
           <EntitySet Name="batches" EntityType="Self.batch" />
@@ -473,10 +461,9 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <EntitySet Name="OpenBatches" EntityType="Self.OpenBatch" />
           <EntitySet Name="vouchers" EntityType="Self.voucher" />
           <EntitySet Name="vwChecks" EntityType="Self.vwCheck" />
-          <EntitySet Name="vwPayments" EntityType="Self.vwPayment" />
           <FunctionImport Name="dsa_GetCheckingAccounts" ReturnType="Collection(CoopCheckModel.dsa_GetCheckingAccounts_Result)" />
           <FunctionImport Name="dsa_GetCheckList" ReturnType="Collection(CoopCheckModel.dsa_GetCheckList_Result)">
-            <Parameter Name="person_id" Mode="In" Type="String" />
+          <Parameter Name="person_id" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="dsa_GetChecks" ReturnType="Collection(CoopCheckModel.dsa_GetChecks_Result)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
@@ -490,7 +477,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           </FunctionImport>
           <FunctionImport Name="dsa_GetOpenBatch" ReturnType="Collection(CoopCheckModel.dsa_GetOpenBatch_Result)" />
           <FunctionImport Name="dsa_GetOutstandingChecks" ReturnType="Collection(CoopCheckModel.dsa_GetOutstandingChecks_Result)">
-            <Parameter Name="account_id" Mode="In" Type="Int32" />
+          <Parameter Name="account_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="dsa_GetReconcilationReport" ReturnType="Collection(CoopCheckModel.dsa_GetReconcilationReport_Result)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
@@ -500,8 +487,10 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
             <Parameter Name="batch_num" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="dsa_GetVoucher" ReturnType="Collection(CoopCheckModel.dsa_GetVoucher_Result)">
-            <Parameter Name="tran_id" Mode="In" Type="Int32" />
+          <Parameter Name="tran_id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="vwRptBatchPayment" EntityType="CoopCheckModel.vwRptBatchPayment" />
+          <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -669,6 +658,57 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
         </ComplexType>
+        <EntityType Name="vwRptBatchPayment">
+          <Key>
+            <PropertyRef Name="payment_type" />
+          </Key>
+          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="batch_num" Type="Int32" />
+          <Property Name="payment_type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="payment_cnt" Type="Int32" />
+          <Property Name="first_check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="last_check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="open_cnt" Type="Int32" />
+          <Property Name="cleared_cnt" Type="Int32" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="vwPayment">
+          <Key>
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="print_flag" />
+          </Key>
+          <Property Name="batch_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="thank_you_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="study_topic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="thank_you_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="marketing_research_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="check_date" Type="DateTime" Precision="0" />
+          <Property Name="check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="print_flag" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -685,7 +725,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
                 <ScalarProperty Name="balance" ColumnName="balance" />
                 <ScalarProperty Name="last_rec_date" ColumnName="last_rec_date" />
                 <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />
-                <ScalarProperty Name="account_type" ColumnName="account_type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -704,7 +743,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
                 <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
                 <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
                 <ScalarProperty Name="respondent_batch_id" ColumnName="respondent_batch_id" />
-                <ScalarProperty Name="usr" ColumnName="usr" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -738,7 +776,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="usr" ColumnName="usr" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -807,49 +844,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwPayments">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
-              <MappingFragment StoreEntitySet="vwPayment">
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="thank_you_1" ColumnName="thank_you_1" />
-                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
-                <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
-                <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetCheckingAccounts" FunctionName="CoopCheckModel.Store.dsa_GetCheckingAccounts">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetCheckingAccounts_Result">
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="dsa_GetCheckList" FunctionName="CoopCheckModel.Store.dsa_GetCheckList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetCheckList_Result">
@@ -994,25 +988,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetSwiftBatch" FunctionName="CoopCheckModel.Store.dsa_GetSwiftBatch">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetSwiftBatch_Result">
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="batch_dscr" ColumnName="batch_dscr" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="thank_you_1" ColumnName="thank_you_1" />
-                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
-                <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
-                <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
-                <ScalarProperty Name="respondent_batch_id" ColumnName="respondent_batch_id" />
-                <ScalarProperty Name="usr" ColumnName="usr" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="dsa_GetVoucher" FunctionName="CoopCheckModel.Store.dsa_GetVoucher">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetVoucher_Result">
@@ -1039,6 +1014,58 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="vwRptBatchPayment">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwRptBatchPayment">
+              <MappingFragment StoreEntitySet="vwRptBatchPayment">
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
+                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
+                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
+                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
+                <ScalarProperty Name="payment_cnt" ColumnName="payment_cnt" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwPayment">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
+              <MappingFragment StoreEntitySet="vwPayment">
+                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="municipality" ColumnName="municipality" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
+                <ScalarProperty Name="check_num" ColumnName="check_num" />
+                <ScalarProperty Name="check_date" ColumnName="check_date" />
+                <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
+                <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
+                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
+                <ScalarProperty Name="thank_you_1" ColumnName="thank_you_1" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1053,7 +1080,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

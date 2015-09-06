@@ -10,13 +10,14 @@ namespace muiCoopCheck.Pages.Batch.Import
 {
     public partial class ValidateView : UserControl
     {
-        private ValidateViewModel _vm;
+        private BatchEditViewModel _vm;
 
         public ValidateView()
         {
             InitializeComponent();
-            _vm = new ValidateViewModel();
+            _vm = new BatchEditViewModel();
             DataContext = _vm;
+            
         }
 
         public List<VoucherImport> Vouchers
@@ -29,5 +30,7 @@ namespace muiCoopCheck.Pages.Batch.Import
         public static readonly DependencyProperty VouchersProperty =
             DependencyProperty.Register("Vouchers", typeof ( List<VoucherImport>), typeof (ValidateView),
                 new PropertyMetadata(new List<VoucherImport>()));
+
+        
     }
 }
