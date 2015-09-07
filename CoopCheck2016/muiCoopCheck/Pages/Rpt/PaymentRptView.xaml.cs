@@ -32,7 +32,7 @@ namespace muiCoopCheck.Pages.Rpt
             }
         }
 
-        public vwRptBatchPayment Batch
+        public vwBatchRpt Batch
         {
             get { return _vm.Batch; }
             set
@@ -42,8 +42,8 @@ namespace muiCoopCheck.Pages.Rpt
         }
 
         public static readonly DependencyProperty BatchProperty =
-            DependencyProperty.Register("Batch", typeof(string), typeof(vwRptBatchPayment),
-                new PropertyMetadata(new vwRptBatchPayment()));
+            DependencyProperty.Register("Batch", typeof(vwBatchRpt), typeof(PaymentRptView),
+                new PropertyMetadata(new vwBatchRpt()));
 
         public ReportDateRange ReportDateRange
         {

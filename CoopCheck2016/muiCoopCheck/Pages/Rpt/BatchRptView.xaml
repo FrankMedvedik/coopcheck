@@ -8,47 +8,41 @@
              mc:Ignorable="d" >
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid>
-        <Grid.RowDefinitions>
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
             <TextBlock Text="{Binding HeadingText}" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="6"/>
-            <DataGrid x:Name="BatchesDG" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" 
+            <DataGrid x:Name="BatchesDG" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  SelectionChanged="BatchesDG_SelectionChanged"
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   
-                      SelectionChanged="BatchesDG_SelectionChanged"
-                      ItemsSource="{Binding Batches}"  VerticalAlignment="Top" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}"  
+                      ItemsSource="{Binding Path=Batches, Mode=TwoWay}"  VerticalAlignment="Top" 
+                      SelectedItem="{Binding Path=SelectedBatch, Mode=TwoWay}" MaxHeight="300"
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
                 <DataGrid.Columns>
-                <mui:DataGridTextColumn Binding="{Binding account_name}"  Header="account"/>
-                <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job"/>
-                <mui:DataGridTextColumn Binding="{Binding batch_date}" Header="batch date" />
-                <mui:DataGridTextColumn Binding="{Binding pay_date}" Header="pay date"/>
+                    <mui:DataGridTextColumn Binding="{Binding account_name}"  Header="account"/>
+                    <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job"/>
+                    <mui:DataGridTextColumn Binding="{Binding batch_date}" Header="batch date" />
+                    <mui:DataGridTextColumn Binding="{Binding pay_date}" Header="pay date"/>
                     <mui:DataGridTextColumn Binding="{Binding batch_num}"  Header="batch #"/>
                     <mui:DataGridTextColumn Binding="{Binding batch_amount}"  Header="batch total amount"/>
-                  <mui:DataGridTextColumn Binding="{Binding total_amount}" Header="total amount"/>
-                <mui:DataGridTextColumn Binding="{Binding payment_type}" Header="type"/>
-                <mui:DataGridTextColumn Binding="{Binding payment_cnt}"  Header="total count"/>
-                <mui:DataGridTextColumn Binding="{Binding open_cnt }"  Header="open count"/>
-                <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared count"/>
+                    <mui:DataGridTextColumn Binding="{Binding total_amount}" Header="total amount"/>
+                    <mui:DataGridTextColumn Binding="{Binding payment_type}" Header="type"/>
+                    <mui:DataGridTextColumn Binding="{Binding payment_cnt}"  Header="total count"/>
+                    <mui:DataGridTextColumn Binding="{Binding open_cnt }"  Header="open count"/>
+                    <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared count"/>
                     <mui:DataGridTextColumn Binding="{Binding cleared_amount}" Header="cleared amount"/>
                     <mui:DataGridTextColumn Binding="{Binding open_amount}" Header="open amount"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  Width="100" Click="Button_Click" >Save To Excel</Button>
-    </Grid>
-        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Width="Auto" Height="3" BorderBrush="Black" BorderThickness="1,0" Opacity="0.715">
+                </DataGrid.Columns>
+            </DataGrid>
+        <Button  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  Click="Button_Click" >Save To Excel</Button>
+        <GridSplitter Grid.Row="3" HorizontalAlignment="Stretch" Width="Auto" Height="3" BorderBrush="Black" BorderThickness="1,0" Opacity="0.715">
             <GridSplitter.Background>
                 <SolidColorBrush Opacity="1" Color="Gray" />
             </GridSplitter.Background>
         </GridSplitter>
-        <!--<rpt:PaymentRptView Grid.Row="2"  x:Name="pv"/>-->
-        <!--<CallsRpts:CallsView Grid.Row="2"  Name="cv"/>-->
+        <rpt:PaymentRptView Grid.Row="4"  x:Name="pv"/>
     </Grid>
 </UserControl>

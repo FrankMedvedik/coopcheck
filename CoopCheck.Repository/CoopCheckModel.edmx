@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CoopCheckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CoopCheckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bank_account">
           <Key>
             <PropertyRef Name="account_id" />
@@ -103,6 +103,29 @@ warning 6002: The table/view 'CoopCheck.dbo.voucher' does not have a primary key
           <Property Name="updated" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CoopCheck.dbo.vwBatchRpt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwBatchRpt">
+          <Key>
+            <PropertyRef Name="payment_type" />
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="account_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="job_num" Type="int" />
+          <Property Name="batch_date" Type="smalldatetime" />
+          <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="batch_amount" Type="money" />
+          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="payment_type" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="total_cnt" Type="int" />
+          <Property Name="open_cnt" Type="int" />
+          <Property Name="cleared_cnt" Type="int" />
+          <Property Name="open_amount" Type="money" />
+          <Property Name="cleared_amount" Type="money" />
+          <Property Name="total_amount" Type="money" />
+          <Property Name="first_check_num" Type="nvarchar" MaxLength="10" />
+          <Property Name="last_check_num" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwCheck' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwCheck">
           <Key>
@@ -139,10 +162,12 @@ warning 6002: The table/view 'CoopCheck.dbo.vwCheck' does not have a primary key
 warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwPayment">
           <Key>
+            <PropertyRef Name="tran_id" />
             <PropertyRef Name="batch_num" />
             <PropertyRef Name="print_flag" />
           </Key>
-          <Property Name="batch_num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tran_id" Type="int" Nullable="false" />
+          <Property Name="batch_num" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="pay_date" Type="smalldatetime" />
           <Property Name="job_num" Type="int" />
           <Property Name="thank_you_1" Type="varchar" MaxLength="100" />
@@ -168,28 +193,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="country" Type="nchar" MaxLength="2" />
           <Property Name="print_flag" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vwRptBatchPayment">
-          <Key>
-            <PropertyRef Name="payment_type" />
-          </Key>
-          <Property Name="account_name" Type="nvarchar" MaxLength="50" />
-          <Property Name="job_num" Type="int" />
-          <Property Name="batch_date" Type="smalldatetime" />
-          <Property Name="pay_date" Type="smalldatetime" />
-          <Property Name="batch_amount" Type="money" />
-          <Property Name="batch_num" Type="int" />
-          <Property Name="payment_type" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="payment_cnt" Type="int" />
-          <Property Name="first_check_num" Type="nvarchar" MaxLength="10" />
-          <Property Name="last_check_num" Type="nvarchar" MaxLength="10" />
-          <Property Name="open_cnt" Type="int" />
-          <Property Name="cleared_cnt" Type="int" />
-          <Property Name="cleared_amount" Type="money" />
-          <Property Name="open_amount" Type="money" />
-          <Property Name="total_amount" Type="money" />
-        </EntityType>
         <Function Name="dsa_GetCheckList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="person_id" Type="nvarchar" Mode="In" />
         </Function>
@@ -213,6 +216,10 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
         </Function>
         <Function Name="dsa_GetVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tran_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getbatchRpt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="CoopCheckModelStoreContainer">
           <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
@@ -248,6 +255,25 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
     [voucher].[updated] AS [updated]
     FROM [dbo].[voucher] AS [voucher]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwBatchRpt" EntityType="Self.vwBatchRpt" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwBatchRpt].[account_name] AS [account_name], 
+    [vwBatchRpt].[job_num] AS [job_num], 
+    [vwBatchRpt].[batch_date] AS [batch_date], 
+    [vwBatchRpt].[pay_date] AS [pay_date], 
+    [vwBatchRpt].[batch_amount] AS [batch_amount], 
+    [vwBatchRpt].[batch_num] AS [batch_num], 
+    [vwBatchRpt].[payment_type] AS [payment_type], 
+    [vwBatchRpt].[total_cnt] AS [total_cnt], 
+    [vwBatchRpt].[open_cnt] AS [open_cnt], 
+    [vwBatchRpt].[cleared_cnt] AS [cleared_cnt], 
+    [vwBatchRpt].[open_amount] AS [open_amount], 
+    [vwBatchRpt].[cleared_amount] AS [cleared_amount], 
+    [vwBatchRpt].[total_amount] AS [total_amount], 
+    [vwBatchRpt].[first_check_num] AS [first_check_num], 
+    [vwBatchRpt].[last_check_num] AS [last_check_num]
+    FROM [dbo].[vwBatchRpt] AS [vwBatchRpt]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwCheck" EntityType="Self.vwCheck" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwCheck].[batch_num] AS [batch_num], 
@@ -279,6 +305,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
           </EntitySet>
           <EntitySet Name="vwPayment" EntityType="Self.vwPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [vwPayment].[tran_id] AS [tran_id], 
     [vwPayment].[batch_num] AS [batch_num], 
     [vwPayment].[pay_date] AS [pay_date], 
     [vwPayment].[job_num] AS [job_num], 
@@ -306,42 +333,11 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
     [vwPayment].[print_flag] AS [print_flag]
     FROM [dbo].[vwPayment] AS [vwPayment]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwRptBatchPayment" EntityType="Self.vwRptBatchPayment" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwRptBatchPayment].[account_name] AS [account_name], 
-    [vwRptBatchPayment].[job_num] AS [job_num], 
-    [vwRptBatchPayment].[batch_date] AS [batch_date], 
-    [vwRptBatchPayment].[pay_date] AS [pay_date], 
-    [vwRptBatchPayment].[batch_amount] AS [batch_amount], 
-    [vwRptBatchPayment].[batch_num] AS [batch_num], 
-    [vwRptBatchPayment].[payment_type] AS [payment_type], 
-    [vwRptBatchPayment].[payment_cnt] AS [payment_cnt], 
-    [vwRptBatchPayment].[first_check_num] AS [first_check_num], 
-    [vwRptBatchPayment].[last_check_num] AS [last_check_num], 
-    [vwRptBatchPayment].[open_cnt] AS [open_cnt], 
-    [vwRptBatchPayment].[cleared_cnt] AS [cleared_cnt], 
-    [vwRptBatchPayment].[cleared_amount] AS [cleared_amount], 
-    [vwRptBatchPayment].[open_amount] AS [open_amount], 
-    [vwRptBatchPayment].[total_amount] AS [total_amount]
-    FROM [dbo].[vwRptBatchPayment] AS [vwRptBatchPayment]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CoopCheckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="bank_account">
-          <Key>
-            <PropertyRef Name="account_id" />
-          </Key>
-          <Property Name="account_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="account_dscr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="balance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="last_rec_date" Type="DateTime" Precision="0" />
-          <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
         <EntityType Name="batch">
           <Key>
             <PropertyRef Name="batch_num" />
@@ -455,7 +451,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
           <Property Name="print_flag" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CoopCheckEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="bank_account" EntityType="Self.bank_account" />
           <EntitySet Name="batches" EntityType="Self.batch" />
           <EntitySet Name="check_tran" EntityType="Self.check_tran" />
           <EntitySet Name="OpenBatches" EntityType="Self.OpenBatch" />
@@ -489,8 +484,13 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
           <FunctionImport Name="dsa_GetVoucher" ReturnType="Collection(CoopCheckModel.dsa_GetVoucher_Result)">
           <Parameter Name="tran_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="vwRptBatchPayment" EntityType="CoopCheckModel.vwRptBatchPayment" />
-          <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
+          <EntitySet Name="bank_accounts" EntityType="CoopCheckModel.bank_account" />
+          <EntitySet Name="vwPayments" EntityType="CoopCheckModel.vwPayment" />
+          <EntitySet Name="vwBatchRpts" EntityType="CoopCheckModel.vwBatchRpt" />
+          <FunctionImport Name="getbatchRpt" ReturnType="Collection(CoopCheckModel.getbatchRpt_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -658,30 +658,23 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
           <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
         </ComplexType>
-        <EntityType Name="vwRptBatchPayment">
+        <EntityType Name="bank_account">
           <Key>
-            <PropertyRef Name="payment_type" />
+            <PropertyRef Name="account_id" />
           </Key>
-          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="batch_date" Type="DateTime" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="batch_num" Type="Int32" />
-          <Property Name="payment_type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="payment_cnt" Type="Int32" />
-          <Property Name="first_check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="last_check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="open_cnt" Type="Int32" />
-          <Property Name="cleared_cnt" Type="Int32" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="account_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="account_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_dscr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="last_rec_date" Type="DateTime" Precision="0" />
+          <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="vwPayment">
           <Key>
             <PropertyRef Name="batch_num" />
             <PropertyRef Name="print_flag" />
+            <PropertyRef Name="tran_id" />
           </Key>
           <Property Name="batch_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pay_date" Type="DateTime" Precision="0" />
@@ -708,26 +701,52 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
           <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="print_flag" Type="Boolean" Nullable="false" />
+          <Property Name="tran_id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwBatchRpt">
+          <Key>
+            <PropertyRef Name="payment_type" />
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="payment_type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="total_cnt" Type="Int32" />
+          <Property Name="open_cnt" Type="Int32" />
+          <Property Name="cleared_cnt" Type="Int32" />
+          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="first_check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="last_check_num" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="getbatchRpt_Result">
+          <Property Type="String" Name="account_name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="job_num" Nullable="true" />
+          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
+          <Property Type="Decimal" Name="batch_amount" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="batch_num" Nullable="true" />
+          <Property Type="String" Name="payment_type" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="total_cnt" Nullable="true" />
+          <Property Type="Int32" Name="open_cnt" Nullable="true" />
+          <Property Type="Int32" Name="cleared_cnt" Nullable="true" />
+          <Property Type="Decimal" Name="open_amount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CoopCheckModelStoreContainer" CdmEntityContainer="CoopCheckEntities">
-          <EntitySetMapping Name="bank_account">
-            <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
-              <MappingFragment StoreEntitySet="bank_account">
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-                <ScalarProperty Name="account_dscr" ColumnName="account_dscr" />
-                <ScalarProperty Name="account_number" ColumnName="account_number" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="last_rec_date" ColumnName="last_rec_date" />
-                <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="batches">
             <EntityTypeMapping TypeName="CoopCheckModel.batch">
               <MappingFragment StoreEntitySet="batch">
@@ -1014,30 +1033,23 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="vwRptBatchPayment">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwRptBatchPayment">
-              <MappingFragment StoreEntitySet="vwRptBatchPayment">
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
-                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
-                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
-                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
-                <ScalarProperty Name="payment_cnt" ColumnName="payment_cnt" />
-                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
+          <EntitySetMapping Name="bank_accounts">
+            <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
+              <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />
+                <ScalarProperty Name="last_rec_date" ColumnName="last_rec_date" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="account_dscr" ColumnName="account_dscr" />
                 <ScalarProperty Name="account_name" ColumnName="account_name" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwPayment">
+          <EntitySetMapping Name="vwPayments">
             <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
               <MappingFragment StoreEntitySet="vwPayment">
+                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
                 <ScalarProperty Name="print_flag" ColumnName="print_flag" />
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="postal_code" ColumnName="postal_code" />
@@ -1066,7 +1078,49 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="vwBatchRpts">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwBatchRpt">
+              <MappingFragment StoreEntitySet="vwBatchRpt">
+                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
+                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
+                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
+                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
+                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getbatchRpt" FunctionName="CoopCheckModel.Store.getbatchRpt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoopCheckModel.getbatchRpt_Result">
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
+                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
+                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
+                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
+                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -1080,7 +1134,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwRptBatchPayment' does not have a p
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

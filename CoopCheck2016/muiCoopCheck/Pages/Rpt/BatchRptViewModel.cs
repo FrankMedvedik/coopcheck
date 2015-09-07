@@ -32,8 +32,8 @@ namespace muiCoopCheck.Pages.Rpt
             });
         }
 
-        private vwRptBatchPayment _selectedBatch = new vwRptBatchPayment();
-        public vwRptBatchPayment SelectedBatch
+        private vwBatchRpt _selectedBatch = new vwBatchRpt();
+        public vwBatchRpt SelectedBatch
         {
             get { return _selectedBatch; }
             set
@@ -54,8 +54,8 @@ namespace muiCoopCheck.Pages.Rpt
         public  ReportDateRange ReportDateRange = new ReportDateRange();
         #endregion
 
-        private ObservableCollection<vwRptBatchPayment> _batches = new ObservableCollection<vwRptBatchPayment>();
-        public ObservableCollection<vwRptBatchPayment> Batches
+        private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
+        public ObservableCollection<vwBatchRpt> Batches
         {
             get { return _batches; }
             set
@@ -131,12 +131,15 @@ namespace muiCoopCheck.Pages.Rpt
               HeadingText = "Loading...";
             try
             {
-                CoopCheckEntities ctx = new CoopCheckEntities();
-                var a = ctx.vwRptBatchPayments.Where(x => x.total_amount > 35000);
-                        //x => x.batch_date >= ReportDateRange.StartRptDate && x.batch_date <= ReportDateRange.EndRptDate).OrderBy(x => x.batch_date).ToList();
-                Batches = new ObservableCollection<vwRptBatchPayment>(a);
+                var ctx = new CoopCheckEntities();
+                var query = from l in ctx.vwBatchRpts
+                            where ((l.batch_date >= ReportDateRange.StartRptDate) && (l.batch_date <= ReportDateRange.EndRptDate))
+                            orderby l.batch_date
+                            select l;
+                var a = new ObservableCollection<vwBatchRpt>(query.ToList());
+                Batches = a;
                 ShowGridData = true;
-                HeadingText = String.Format("{0} Batches Dated between {1} and {2} ",
+                HeadingText = String.Format("{0} Batches Dated between {1:ddd, MMM d, yyyy}  and {2:ddd, MMM d, yyyy}  ",
                 Batches.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
         
             }

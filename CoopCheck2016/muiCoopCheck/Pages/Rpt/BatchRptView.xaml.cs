@@ -34,14 +34,14 @@ namespace muiCoopCheck.Pages.Rpt
 
         private void BatchesDG_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (_vm.SelectedBatch != null)
-            //{
-            //    pv.Batch = _vm.SelectedBatch;
-            //    pv.ReportDateRange = _vm.ReportDateRange;
-            //    pv.Refresh();
-            //}
-            //else
-            //    pv.ShowData = false;
+            if (_vm.SelectedBatch != null)
+            {
+                pv.Batch = _vm.SelectedBatch;
+                pv.ReportDateRange = _vm.ReportDateRange;
+                pv.Refresh();
+            }
+            else
+                pv.ShowData = false;
         }
 
     }

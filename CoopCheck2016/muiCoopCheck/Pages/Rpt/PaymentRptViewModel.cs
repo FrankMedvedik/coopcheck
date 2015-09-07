@@ -20,7 +20,7 @@ namespace muiCoopCheck.Pages.Rpt
 
         #region reporting variables
         public ReportDateRange ReportDateRange = new ReportDateRange();
-        public vwRptBatchPayment Batch;
+        public vwBatchRpt Batch;
         #endregion
 
         private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
@@ -84,12 +84,10 @@ namespace muiCoopCheck.Pages.Rpt
                 HeadingText = "Loading...";
                 try
                 {
-
                     var ctx = new CoopCheckEntities();
-                    Payments = new ObservableCollection<vwPayment>(
-                        ctx.vwPayments.Where(x => x.batch_num == Batch.batch_num.GetValueOrDefault(-1)));
-
-                    HeadingText = String.Format("Batch {0} Dated {1} ", Batch.batch_num, Batch.batch_date);
+                    Payments = new ObservableCollection<vwPayment>(ctx.vwPayments.Where(x => x.batch_num == Batch.batch_num));
+                    HeadingText = String.Format("batch {0} dated {1:ddd, MMM d, yyyy} has {2} payments", Batch.batch_num, Batch.batch_date, Payments.Count());
+                    ShowGridData = true;
                 }
                 catch (Exception e)
                 {

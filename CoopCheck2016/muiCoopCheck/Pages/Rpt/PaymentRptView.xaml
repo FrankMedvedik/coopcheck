@@ -6,13 +6,7 @@
         xmlns:ignore="http://www.ignore.com"
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         mc:Ignorable="d ignore">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="5"/>
-            <RowDefinition  Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid  MaxHeight="450">
             <Grid.RowDefinitions>
                 <RowDefinition  Height="Auto"/>
                 <RowDefinition  Height="Auto"/>
@@ -21,28 +15,27 @@
             <StackPanel Orientation="Vertical" Grid.Column="0"  Grid.Row="0" HorizontalAlignment="Stretch" >
                 <TextBlock Text="{Binding HeadingText}" HorizontalAlignment="Stretch" Margin="6"/>
             </StackPanel>
-            <!--Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}"-->
-            <DataGrid Grid.Row="1"  Grid.Column="0" x:Name="PaymentsDG" AutoGenerateColumns="False" MaxHeight="600"  
-             Width="Auto"   FrozenColumnCount="2" Visibility="Visible"
-            VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   SelectionChanged="PaymentDG_SelectionChanged" 
+            <DataGrid Grid.Row="1"  Grid.Column="0" x:Name="PaymentsDG" AutoGenerateColumns="False" 
+             Width="Auto" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
+             MaxHeight="400" VerticalScrollBarVisibility="Auto"  
+             HorizontalScrollBarVisibility="Auto"   SelectionChanged="PaymentDG_SelectionChanged" 
             ItemsSource="{Binding Payments}"  VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment, Mode=TwoWay}"  
             ToolTipService.ToolTip="Payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Single"   >
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Binding="{Binding check_num}" />
-                    <mui:DataGridTextColumn Binding="{Binding check_date}" />
-                    <mui:DataGridTextColumn Binding="{Binding tran_amount}" />
-                    <mui:DataGridTextColumn Binding="{Binding first_name}" />
-                    <mui:DataGridTextColumn Binding="{Binding last_name}" />
-                    <mui:DataGridTextColumn Binding="{Binding company }" />
-                    <mui:DataGridTextColumn Binding="{Binding region}" />
-                    <mui:DataGridTextColumn Binding="{Binding municipality }" />
-                    <mui:DataGridTextColumn Binding="{Binding postal_code }" />
-                    <mui:DataGridTextColumn Binding="{Binding address_1 }" />
-                    <mui:DataGridTextColumn Binding="{Binding address_2 }" />
-                    <mui:DataGridCheckBoxColumn Binding="{Binding print_flag}" />
+                    <mui:DataGridTextColumn Binding="{Binding check_num}" Header="check #"/>
+                    <mui:DataGridTextColumn Binding="{Binding check_date}" Header="check date"/>
+                    <mui:DataGridTextColumn Binding="{Binding tran_amount}"  Header="amount"/>
+                    <mui:DataGridTextColumn Binding="{Binding first_name}"  Header="first"/>
+                    <mui:DataGridTextColumn Binding="{Binding last_name}"  Header="last"/>
+                    <mui:DataGridTextColumn Binding="{Binding company }"  Header="company"/>
+                    <mui:DataGridTextColumn Binding="{Binding region}"  Header="state"/>
+                    <mui:DataGridTextColumn Binding="{Binding municipality }"  Header="city"/>
+                    <mui:DataGridTextColumn Binding="{Binding postal_code }" Header="zip"/>
+                    <mui:DataGridTextColumn Binding="{Binding address_1 }"  Header="address 1"/>
+                    <mui:DataGridTextColumn Binding="{Binding address_2 }" Header="address 2"/>
+                    <mui:DataGridCheckBoxColumn Binding="{Binding print_flag}" Header="printed?"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  Width="100" Click="Button_Click" >Save To Excel</Button>
+            <Button  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"   Click="Button_Click" >Save To Excel</Button>
         </Grid>
-    </Grid>
 </UserControl>

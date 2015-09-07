@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.Repository", "Coo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.WPFTest", "coopCheck.UITest\CoopCheck.WPFTest.csproj", "{3B4BB607-88B3-4AA6-909E-1297378F48A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.ConsoleApp", "CoopCheck.Console\CoopCheck.ConsoleApp.csproj", "{C0122F30-205A-4C06-8F10-491C3452B352}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,16 @@ Global
 		{3B4BB607-88B3-4AA6-909E-1297378F48A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3B4BB607-88B3-4AA6-909E-1297378F48A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3B4BB607-88B3-4AA6-909E-1297378F48A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C0122F30-205A-4C06-8F10-491C3452B352}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

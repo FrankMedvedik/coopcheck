@@ -27,14 +27,14 @@ namespace CoopCheck.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<bank_account> bank_accounts { get; set; }
         public virtual DbSet<batch> batches { get; set; }
-        public virtual DbSet<check_tran> check_trans { get; set; }
+        public virtual DbSet<check_tran> check_tran { get; set; }
         public virtual DbSet<OpenBatch> OpenBatches { get; set; }
         public virtual DbSet<voucher> vouchers { get; set; }
         public virtual DbSet<vwCheck> vwChecks { get; set; }
-        public virtual DbSet<vwRptBatchPayment> vwRptBatchPayments { get; set; }
+        public virtual DbSet<bank_account> bank_accounts { get; set; }
         public virtual DbSet<vwPayment> vwPayments { get; set; }
+        public virtual DbSet<vwBatchRpt> vwBatchRpts { get; set; }
     
         public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()
         {
@@ -130,6 +130,19 @@ namespace CoopCheck.Repository
                 new ObjectParameter("tran_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<dsa_GetVoucher_Result>("dsa_GetVoucher", tran_idParameter);
+        }
+    
+        public virtual ObjectResult<getbatchRpt_Result> getbatchRpt(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getbatchRpt_Result>("getbatchRpt", startDateParameter, endDateParameter);
         }
     }
 }

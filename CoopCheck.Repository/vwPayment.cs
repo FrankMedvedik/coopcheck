@@ -39,5 +39,6 @@ namespace CoopCheck.Repository
         public string postal_code { get; set; }
         public string country { get; set; }
         public bool print_flag { get; set; }
+        public int tran_id { get; set; }
     }
 }
