@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using CoopCheck.Library;
 
-namespace muiCoopCheck.Interfaces
+namespace CoopCheck.WPF.Interfaces
 {
     public interface IBatchEdit
     {

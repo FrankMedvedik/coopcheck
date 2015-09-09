@@ -11,7 +11,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace muiCoopCheck.Converters
+namespace CoopCheck.WPF.Converters
 {
     /// <summary>
     /// BooleanToVisibility Converter. Checks a boolean property and changes it to

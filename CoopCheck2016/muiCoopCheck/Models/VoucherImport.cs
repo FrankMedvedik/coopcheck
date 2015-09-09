@@ -1,7 +1,7 @@
 using CoopCheck.Library;
-using muiCoopCheck.Interfaces;
+using CoopCheck.WPF.Interfaces;
 
-namespace muiCoopCheck.Models
+namespace CoopCheck.WPF.Models
 {
     public class VoucherImport : IVoucherEdit
 

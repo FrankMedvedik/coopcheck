@@ -6,7 +6,7 @@
 
 using System.Windows;
 
-namespace muiCoopCheck.Converters
+namespace CoopCheck.WPF.Converters
 {
     /// <summary>
     /// NotBooleanToVisibility Converter. Implements the BooleanToVisibility Converter and 
@@ -14,7 +14,7 @@ namespace muiCoopCheck.Converters
     /// base class.
     /// </summary>
     public class NotBooleanToVisibility :
-        muiCoopCheck.Converters.BooleanToVisibility
+        CoopCheck.WPF.Converters.BooleanToVisibility
     {
         /// <summary>
         /// Method that overrides the ConvertValue method of the base class. 

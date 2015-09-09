@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace muiCoopCheck.Pages
+namespace CoopCheck.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for SettingsPage.xaml

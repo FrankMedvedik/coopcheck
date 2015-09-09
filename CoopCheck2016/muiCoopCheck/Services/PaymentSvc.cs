@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using CoopCheck.Repository;
-using muiCoopCheck.Models;
-using muiCoopCheck.Pages.Checks;
+using CoopCheck.WPF.Models;
 
-namespace muiCoopCheck.Services
+namespace CoopCheck.WPF.Services
 {
     public static class PaymentSvc 
     {

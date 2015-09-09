@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace muiCoopCheck.Pages
+namespace CoopCheck.WPF.Pages
 {
     public abstract class ViewModelBase : INotifyPropertyChanged 
     {

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace muiCoopCheck.Interfaces
+namespace CoopCheck.WPF.Interfaces
 {
     public interface IVoucherEdit
     {

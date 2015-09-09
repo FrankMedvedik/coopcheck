@@ -1,7 +1,7 @@
 ﻿using System;
-using muiCoopCheck.Pages;
+using CoopCheck.WPF.Pages;
 
-namespace muiCoopCheck.Models
+namespace CoopCheck.WPF.Models
 {
     public class PaymentReportCriteria : ViewModelBase
     {

@@ -1,4 +1,4 @@
-﻿namespace muiCoopCheck.Models
+﻿namespace CoopCheck.WPF.Models
 {
     public class ColumnPropertyMap
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using muiCoopCheck.Models;
+using CoopCheck.WPF.Models;
 
-namespace muiCoopCheck.DesignData
+namespace CoopCheck.WPF.DesignData
 {
     public static class BatchEditDesign
     {

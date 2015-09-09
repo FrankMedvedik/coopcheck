@@ -1,9 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="muiCoopCheck.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CoopCheck.WPF.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Setting" Type="System.String" Scope="Application">
       <Value Profile="(Default)">dasa</Value>
+    </Setting>
+    <Setting Name="ClientID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">98867798</Value>
+    </Setting>
+    <Setting Name="PersonatorActions" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Check,Verify</Value>
+    </Setting>
+    <Setting Name="PersonatorOptions" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
