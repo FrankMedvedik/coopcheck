@@ -1,5 +1,6 @@
 ﻿using System;
 using CoopCheck.WPF.Pages;
+using CoopCheck.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Models
 {

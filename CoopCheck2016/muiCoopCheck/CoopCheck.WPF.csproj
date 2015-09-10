@@ -128,95 +128,111 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\ModernFrame\CancelNavigateSample.xaml.cs">
+      <DependentUpon>CancelNavigateSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ModernFrame\ErrorSample.xaml.cs">
+      <DependentUpon>ErrorSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ModernFrame\Sample.xaml.cs">
+      <DependentUpon>Sample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Status\StatusView.xaml.cs">
+      <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Status\StatusViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\VoucherImportPage.xaml.cs">
+      <DependentUpon>VoucherImportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\VoucherImportEditView.xaml.cs">
+      <DependentUpon>VoucherImportEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\NewVoucherView.xaml.cs">
+      <DependentUpon>NewVoucherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\VoucherImportEditViewModel.cs" />
+    <Compile Include="Content\Voucher\NewVoucherViewModel.cs" />
     <Compile Include="Converters\NumberConverter.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Notifications.cs" />
-    <Compile Include="Pages\BankAccount\AccountView.xaml.cs">
+    <Compile Include="Content\BankAccount\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BankAccount\AccountViewModel.cs" />
-    <Compile Include="Pages\Report\BatchReportPage.xaml.cs">
+    <Compile Include="Content\BankAccount\AccountViewModel.cs" />
+    <Compile Include="Pages\BatchReportPage.xaml.cs">
       <DependentUpon>BatchReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\ClearedCheckReportPage.xaml.cs">
-      <DependentUpon>ClearedCheckReportPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BankAccount\EditAccountPage.xaml.cs">
+    <Compile Include="Pages\EditAccountPage.xaml.cs">
       <DependentUpon>EditAccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BankAccount\NewAccountPage.xaml.cs">
-      <DependentUpon>NewAccountPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Report\OutstandingCheckReportPage.xaml.cs">
-      <DependentUpon>OutstandingCheckReportPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Report\ReconcileAccountPage.xaml.cs">
+    <Compile Include="Pages\ReconcileAccountPage.xaml.cs">
       <DependentUpon>ReconcileAccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\VoucherPage.xaml.cs">
-      <DependentUpon>VoucherPage.xaml</DependentUpon>
+    <Compile Include="Content\Settings\SettingsAppearance.xaml.cs">
+      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Voucher\BatchEditViewModel.cs" />
-    <Compile Include="Pages\Voucher\EditBatchPage.xaml.cs">
+    <Compile Include="Content\Settings\SettingsAppearanceViewModel.cs" />
+    <Compile Include="Pages\NewVoucherPage.xaml.cs">
+      <DependentUpon>NewVoucherPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\BatchEditViewModel.cs" />
+    <Compile Include="Pages\EditBatchPage.xaml.cs">
       <DependentUpon>EditBatchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Voucher\ImportPage.xaml.cs">
-      <DependentUpon>ImportPage.xaml</DependentUpon>
+    <Compile Include="Pages\VoucherImportPage.xaml.cs">
+      <DependentUpon>VoucherImportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Voucher\PrintChecksViewModel.cs" />
-    <Compile Include="Pages\Voucher\ImportPageViewModel.cs" />
-    <Compile Include="Pages\Voucher\Import\ImportProcessStep.cs" />
-    <Compile Include="Pages\Voucher\Import\BatchListView.xaml.cs">
+    <Compile Include="Content\Voucher\PrintChecksViewModel.cs" />
+    <Compile Include="Content\Voucher\ImportPageViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ImportProcessStep.cs" />
+    <Compile Include="Content\Voucher\Import\BatchListView.xaml.cs">
       <DependentUpon>BatchListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Voucher\NewBatchPage.xaml.cs">
+    <Compile Include="Pages\NewBatchPage.xaml.cs">
       <DependentUpon>NewBatchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Voucher\PrintChecksPage.xaml.cs">
-      <DependentUpon>PrintChecksPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Voucher\SwiftPayPage.xaml.cs">
-      <DependentUpon>SwiftPayPage.xaml</DependentUpon>
+    <Compile Include="Content\Voucher\PayVoucherView.xaml.cs">
+      <DependentUpon>PayVoucherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentReportCriteria.cs" />
-    <Compile Include="Pages\Report\PaymentFinderView.xaml.cs">
+    <Compile Include="Content\Report\PaymentFinderView.xaml.cs">
       <DependentUpon>PaymentFinderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\PaymentFinderReportPage.xaml.cs">
+    <Compile Include="Pages\PaymentFinderReportPage.xaml.cs">
       <DependentUpon>PaymentFinderReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\PaymentReportViewModel.cs" />
+    <Compile Include="Content\Report\PaymentReportViewModel.cs" />
     <Compile Include="Pages\PositivePayPage.xaml.cs">
       <DependentUpon>PositivePayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PositivePay\OpenPositivePayPage.xaml.cs">
+    <Compile Include="Content\Payment\OpenPositivePayPage.xaml.cs">
       <DependentUpon>OpenPositivePayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PositivePay\SubmitPositivePayPage.xaml.cs">
+    <Compile Include="Content\Payment\SubmitPositivePayPage.xaml.cs">
       <DependentUpon>SubmitPositivePayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\GlobalReportCriteria.cs" />
-    <Compile Include="Pages\Report\GlobalReportCriteriaView.xaml.cs">
+    <Compile Include="Content\Report\GlobalReportCriteria.cs" />
+    <Compile Include="Content\Report\GlobalReportCriteriaView.xaml.cs">
       <DependentUpon>GlobalReportCriteriaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\PaymentRptView.xaml.cs">
+    <Compile Include="Content\Report\PaymentRptView.xaml.cs">
       <DependentUpon>PaymentRptView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\PaymentRptViewModel.cs" />
-    <Compile Include="Pages\Report\BatchRptView.xaml.cs">
+    <Compile Include="Content\Report\PaymentRptViewModel.cs" />
+    <Compile Include="Content\Report\BatchRptView.xaml.cs">
       <DependentUpon>BatchRptView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\BatchRptViewModel.cs" />
-    <Compile Include="Pages\Report\ReportDateRange.cs" />
-    <Compile Include="Pages\Report\ReportDateRangeView.xaml.cs">
+    <Compile Include="Content\Report\BatchRptViewModel.cs" />
+    <Compile Include="Content\Report\ReportDateRange.cs" />
+    <Compile Include="Content\Report\ReportDateRangeView.xaml.cs">
       <DependentUpon>ReportDateRangeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Report\ReportDateRangeViewModel.cs" />
-    <Compile Include="Pages\Voucher\Import\ValidateViewModel.cs" />
-    <Compile Include="Pages\Voucher\Import\ValidateView.xaml.cs">
+    <Compile Include="Content\Report\ReportDateRangeViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ValidateViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ValidateView.xaml.cs">
       <DependentUpon>ValidateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -228,6 +244,34 @@
     <Compile Include="Services\CheckSvc.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Content\ModernFrame\CancelNavigateSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\ModernFrame\ErrorSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\ModernFrame\Sample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Status\StatusView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Voucher\Import\VoucherImportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\VoucherImportEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\NewVoucherView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -243,67 +287,55 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BankAccount\AccountView.xaml">
+    <Page Include="Content\BankAccount\AccountView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Report\BatchReportPage.xaml">
+    <Page Include="Pages\BatchReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Report\ClearedCheckReportPage.xaml">
+    <Page Include="Pages\EditAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BankAccount\EditAccountPage.xaml">
+    <Page Include="Pages\ReconcileAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BankAccount\NewAccountPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Report\OutstandingCheckReportPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Report\ReconcileAccountPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\VoucherPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Voucher\EditBatchPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Voucher\ImportPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Voucher\Import\BatchListView.xaml">
+    <Page Include="Content\Settings\SettingsAppearance.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Voucher\NewBatchPage.xaml">
+    <Page Include="Pages\NewVoucherPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Voucher\PrintChecksPage.xaml">
+    <Page Include="Pages\EditBatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Voucher\SwiftPayPage.xaml">
+    <Page Include="Pages\VoucherImportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Report\PaymentFinderView.xaml">
+    <Page Include="Content\Voucher\Import\BatchListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\NewBatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Report\PaymentFinderReportPage.xaml">
+    <Page Include="Content\Voucher\PayVoucherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Report\PaymentFinderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PaymentFinderReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,11 +347,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PositivePay\OpenPositivePayPage.xaml">
+    <Page Include="Content\Payment\OpenPositivePayPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\PositivePay\NewPositivePayPage.xaml">
+    <Page Include="Content\Payment\NewPositivePayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -327,39 +359,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\PositivePay\SubmitPositivePayPage.xaml">
+    <Page Include="Content\Payment\SubmitPositivePayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Report\GlobalReportCriteriaView.xaml">
+    <Page Include="Content\Report\GlobalReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Report\BatchRptView.xaml">
+    <Page Include="Content\Report\BatchRptView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Report\PaymentRptView.xaml">
+    <Page Include="Content\Report\PaymentRptView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Report\ReportDateRangeView.xaml">
+    <Page Include="Content\Report\ReportDateRangeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Voucher\Import\ValidateView.xaml">
+    <Page Include="Content\Voucher\Import\ValidateView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Voucher\Import\BatchEditView.xaml">
+    <Page Include="Content\Voucher\Import\BatchEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Voucher\Import\ImportView.xaml">
+    <Page Include="Content\Voucher\Import\ImportWorksheetView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Settings\About.xaml">
+    <Page Include="Content\Settings\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -367,31 +399,31 @@
     <Compile Include="Pages\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PositivePay\NewPositivePayPage.xaml.cs">
+    <Compile Include="Content\Payment\NewPositivePayPage.xaml.cs">
       <DependentUpon>NewPositivePayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ViewModelBase.cs" />
-    <Compile Include="Pages\Voucher\Import\BatchEditView.xaml.cs">
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Content\Voucher\Import\BatchEditView.xaml.cs">
       <DependentUpon>BatchEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\VoucherImport.cs" />
     <Compile Include="Models\ColumnPropertyMap.cs" />
-    <Compile Include="Pages\Voucher\Import\BatchEditViewModel.cs" />
-    <Compile Include="Pages\Voucher\Import\ImportViewModel.cs" />
-    <Compile Include="Pages\Voucher\Import\ImportView.xaml.cs">
-      <DependentUpon>ImportView.xaml</DependentUpon>
+    <Compile Include="Content\Voucher\Import\BatchEditViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ImportWorksheetViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ImportWorksheetView.xaml.cs">
+      <DependentUpon>ImportWorksheetView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Settings\About.xaml.cs">
+    <Compile Include="Content\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Page Include="Pages\Settings\Appearance.xaml">
+    <Page Include="Content\Settings\Appearance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Pages\Settings\Appearance.xaml.cs">
+    <Compile Include="Content\Settings\Appearance.xaml.cs">
       <DependentUpon>Appearance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Settings\AppearanceViewModel.cs" />
+    <Compile Include="Content\Settings\AppearanceViewModel.cs" />
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -445,11 +477,11 @@
     <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Account\" />
     <Folder Include="Content\Payee\" />
-    <Folder Include="Content\Payment\" />
-    <Folder Include="Content\Settings\" />
-    <Folder Include="Content\Voucher\" />
+    <Folder Include="Pages\BankAccount\" />
+    <Folder Include="Pages\PositivePay\" />
+    <Folder Include="Pages\Settings\" />
+    <Folder Include="Pages\Voucher\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WPF.targets" Condition="'$(XamlSpyInstallPath)' != '' and ('$(Configuration)' == 'DEBUGPROD' or '$(Configuration)' == 'DEBUGLOCAL' or '$(Configuration)' == 'DEBUGTEST')" />

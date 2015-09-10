@@ -49,5 +49,38 @@ namespace CoopCheck.WPF.Models
             n.Title = Title;
             return n;
         }
+
+        public static VoucherImport GetTestData()
+        {
+            return new VoucherImport()
+            {
+                AddressLine1 = "Address 1",
+                AddressLine2 = "Address 2 ",
+                Amount = 1000,
+                Company = "company name",
+                Country = "USA",
+                EmailAddress = "ME@reckner.com",
+                First = "FirstName",
+                Last = "LastName",
+                Middle = "middlename",
+                Municipality = "cityname",
+                NamePrefix = "Dr",
+                PhoneNumber = "5551212",
+                PostalCode = "100000000",
+                Region = "PA",
+                Suffix = "jr",
+                Title = "title"
+            };
+        }
+
+        public VoucherImport GetNewWithDefaults()
+        {
+            return new VoucherImport()
+            {
+                Amount = 0,
+                Country = "US"
+            };
+        }
     }
-}
+    }
+

@@ -13,8 +13,8 @@
         </Grid.RowDefinitions>
         <mui:ModernTab Grid.Row="0" Layout="List" >
             <mui:ModernTab.Links>
-                <mui:Link DisplayName="Payment Finder" Source="/Pages/Report/PaymentFinderReportPage.xaml" />
-                <mui:Link DisplayName="Checks by Batch" Source="/Pages/Report/BatchReportPage.xaml" />
+                <mui:Link DisplayName="Payment Finder" Source="/Content/Report/PaymentFinderReportPage.xaml" />
+                <mui:Link DisplayName="Checks by Batch" Source="/Content/Report/BatchReportPage.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>
