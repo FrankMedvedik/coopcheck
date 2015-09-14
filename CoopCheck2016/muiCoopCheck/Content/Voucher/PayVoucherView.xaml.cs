@@ -8,17 +8,18 @@ namespace CoopCheck.WPF.Content.Voucher
     /// </summary>
     public partial class PayVoucherView : UserControl
     {
-        private PrintChecksViewModel _vm;
+        private PayVouchersViewModel _vm;
         public PayVoucherView()
         {
             InitializeComponent();
-            _vm = new PrintChecksViewModel();
+            _vm = new PayVouchersViewModel();
             DataContext = _vm;
         }
 
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        private void btnPay_Click(object sender, RoutedEventArgs e)
         {
-            _vm.PrintChecks();
+            _vm.Pay();
         }
     }
+ 
 }

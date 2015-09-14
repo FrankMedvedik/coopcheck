@@ -1,10 +1,10 @@
 ﻿using System;
-using CoopCheck.WPF.Pages;
+using CoopCheck.WPF.Content;
 using CoopCheck.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Models
 {
-    public class PaymentReportCriteria : ViewModelBase
+    public class PaymentFinderCriteria : ViewModelBase
     {
         private string _jobNumber;
         public string JobNumber
@@ -36,17 +36,27 @@ namespace CoopCheck.WPF.Models
                 NotifyPropertyChanged(); 
             }
         }
-        private int _batchNumber;
-        public int BatchNumber
+        private string _phoneNumber;
+        public string PhoneNumber
         {
-            get { return _batchNumber; }
+            get { return _phoneNumber; }
             set
             {
-                _batchNumber = value;
+                _phoneNumber = value;
                 NotifyPropertyChanged();
             }
         }
 
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                NotifyPropertyChanged();
+            }
+        }
         private string _lastName;
         public string LastName
         {

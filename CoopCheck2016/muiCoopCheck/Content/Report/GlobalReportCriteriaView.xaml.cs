@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     /// <summary>
     /// Description for GlobalReportCriteriaView.
@@ -22,11 +22,8 @@ namespace CoopCheck.WPF.Pages.Report
             grc = new GlobalReportCriteria();
             Messenger.Default.Register<NotificationMessage<GlobalReportCriteria>>(this, message =>
             {
-                if (message.Notification == Notifications.PhoneroomChanged)
-                {
                     grc = message.Content;
                     grc.ReportDateRange = DR.DateRange;
-                }
             });
         }
 

@@ -26,5 +26,6 @@ namespace CoopCheck.Repository
         public string thank_you_2 { get; set; }
         public string marketing_research_message { get; set; }
         public Nullable<int> respondent_batch_id { get; set; }
+        public string usr { get; set; }
     }
 }

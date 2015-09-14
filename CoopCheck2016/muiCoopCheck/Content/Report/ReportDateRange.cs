@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     public class ReportDateRange 
     {

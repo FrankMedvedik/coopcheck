@@ -3,12 +3,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Repository;
 using GalaSoft.MvvmLight.Messaging;
-using CoopCheck.WPF.Pages.Report;
+using CoopCheck.WPF.Content.Report;
 using CoopCheck.WPF.ViewModel;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
-    public class BatchRptViewModel : ViewModelBase
+    public class JobRptViewModel : ViewModelBase
     {
         public bool ShowGridData
         {
@@ -20,7 +20,7 @@ namespace CoopCheck.WPF.Pages.Report
             }
         }
 
-        public BatchRptViewModel()
+        public JobRptViewModel()
         {
             ShowGridData = false;
             Messenger.Default.Register<NotificationMessage<GlobalReportCriteria>>(this, message =>
@@ -33,13 +33,13 @@ namespace CoopCheck.WPF.Pages.Report
             });
         }
 
-        private vwBatchRpt _selectedBatch = new vwBatchRpt();
-        public vwBatchRpt SelectedBatch
+        private vwJobRpt _selectedJob = new vwJobRpt();
+        public vwJobRpt SelectedJob
         {
-            get { return _selectedBatch; }
+            get { return _selectedJob; }
             set
             {
-                _selectedBatch = value;
+                _selectedJob = value;
                 NotifyPropertyChanged();
             }
         }
@@ -55,19 +55,19 @@ namespace CoopCheck.WPF.Pages.Report
         public  ReportDateRange ReportDateRange = new ReportDateRange();
         #endregion
 
-        private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
-        public ObservableCollection<vwBatchRpt> Batches
+        private ObservableCollection<vwJobRpt> _jobs = new ObservableCollection<vwJobRpt>();
+        public ObservableCollection<vwJobRpt> Jobs
         {
-            get { return _batches; }
+            get { return _jobs; }
             set
             {
                 //var s = SelectedBatch;
 
-                _batches = value;
+                _jobs = value;
                 NotifyPropertyChanged();
                 //if (s != null)
                 //{
-                //    SelectedBatch = Batches.FirstOrDefault(x => x.batch_num == s.batch_num);
+                //    SelectedBatch = Jobs.FirstOrDefault(x => x.batch_num == s.batch_num);
                 //}
 
             }
@@ -109,7 +109,7 @@ namespace CoopCheck.WPF.Pages.Report
 
         public  void RefreshAll()
         {
-                GetBatches();
+                GetJobs();
                 //FilterByPhoneRoom();
         }
         
@@ -126,22 +126,22 @@ namespace CoopCheck.WPF.Pages.Report
                 NotifyPropertyChanged();
             }
         }
-        public async void GetBatches()
+        public async void GetJobs()
         {
               ShowGridData = false;
               HeadingText = "Loading...";
             try
             {
                 var ctx = new CoopCheckEntities();
-                var query = from l in ctx.vwBatchRpts
-                            where ((l.batch_date >= ReportDateRange.StartRptDate) && (l.batch_date <= ReportDateRange.EndRptDate))
-                            orderby l.batch_date
+                var query = from l in ctx.vwJobRpt
+                            where ((l.first_pay_date >= ReportDateRange.StartRptDate) && (l.last_pay_date <= ReportDateRange.EndRptDate))
+                            orderby l.first_pay_date
                             select l;
-                var a = new ObservableCollection<vwBatchRpt>(query.ToList());
-                Batches = a;
+                var a = new ObservableCollection<vwJobRpt>(query.ToList());
+                Jobs = a;
                 ShowGridData = true;
-                HeadingText = String.Format("{0} Batches Dated between {1:ddd, MMM d, yyyy}  and {2:ddd, MMM d, yyyy}  ",
-                Batches.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
+                HeadingText = String.Format("{0} Jobs paid between {1:ddd, MMM d, yyyy}  and {2:ddd, MMM d, yyyy}  ",
+                Jobs.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
         
             }
             catch (Exception e)

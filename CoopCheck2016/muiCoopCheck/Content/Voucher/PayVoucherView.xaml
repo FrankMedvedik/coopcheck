@@ -4,23 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="700">
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
-                
-                <TextBlock Text="print checks page" Style="{StaticResource Heading2}" />
+                <TextBlock Text="pay vouchers" Style="{StaticResource Heading2}" />
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Width="140">Batch</TextBlock> 
-                    <TextBox Text="{Binding SelectedBatchNum}" Width="100"/>
+                    <TextBlock Text="Method" Width="150"   HorizontalAlignment="Right" Margin="6"/>
+                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedPaymentMethod, Mode=TwoWay}"  
+                            Name="cbPaymentMethods" Width="150" ItemsSource="{Binding Path=PaymentMethods, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Value}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Width="140">Starting Check Number</TextBlock>
-                    <TextBox Text="{Binding StartingCheckNum}" Width="100"/>
+                    <TextBlock Text="Account" Width="150"   HorizontalAlignment="Right" Margin="6"/>
+                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}"  
+                            Name="cbAccounts" Width="150" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AccountChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding account_name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
-                
-                <Button Name="btnPrint" Click="btnPrint_Click">Print</Button>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Batch" Width="150"   HorizontalAlignment="Right" Margin="6"  />
+                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedBatch, Mode=TwoWay}"  
+                            Name="cbOpenBatches" Width="150" ItemsSource="{Binding Path=OpenBatches, Mode=TwoWay}" >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding batch_num}" Margin="0,0,3,0"/>
+                                    <TextBlock Text="{Binding batch_label}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Visibility="{Binding ShowCheckInfo, Converter={StaticResource BoolToVisConverter}}"> 
+                <StackPanel Orientation="Horizontal"  >
+                    <TextBlock Margin="6"   Width="150">Starting Check #</TextBlock>
+                    <TextBox Margin="6"  Text="{Binding StartingCheckNum, Mode=TwoWay}" Width="150"/>
+                        <Button  >Print Checks</Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Visibility="{Binding ShowSwiftPayInfo, Converter={StaticResource BoolToVisConverter}}">
+                    <StackPanel Orientation="Horizontal" >
+                        <Button>Swiftpay batch</Button>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

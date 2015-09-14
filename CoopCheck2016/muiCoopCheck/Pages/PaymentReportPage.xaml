@@ -1,17 +1,18 @@
-﻿<UserControl xmlns:Rpt="clr-namespace:CoopCheck.WPF.Pages.Report" x:Class="CoopCheck.WPF.Pages.Report.BatchReportPage"
+﻿<UserControl xmlns:Rpt="clr-namespace:CoopCheck.WPF.Content.Report" x:Class="CoopCheck.WPF.Pages.PaymentReportPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:report="clr-namespace:CoopCheck.WPF.Pages.Report"
+             xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
+             xmlns:rpt="clr-namespace:CoopCheck.WPF.Content.Rpt"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel  Orientation="Vertical">
                 <Rpt:GlobalReportCriteriaView />
-                <report:BatchRptView />
+                <Rpt:JobRptView />
             </StackPanel>
         </ScrollViewer>
     </Grid>

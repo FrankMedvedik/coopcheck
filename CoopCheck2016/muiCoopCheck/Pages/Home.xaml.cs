@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoopCheck.WPF.Pages
+namespace CoopCheck.WPF.Content
 {
     /// <summary>
     /// Interaction logic for Home.xaml

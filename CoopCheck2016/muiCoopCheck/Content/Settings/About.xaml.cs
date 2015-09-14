@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoopCheck.WPF.Pages.Settings
+namespace CoopCheck.WPF.Content.Settings
 {
     /// <summary>
     /// Interaction logic for About.xaml

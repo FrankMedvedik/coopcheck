@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace CoopCheck.WPF.Pages.BankAccount
+namespace CoopCheck.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for EditAccountPage.xaml
     /// </summary>
-    public partial class EditAccountPage : UserControl
+    public partial class ImportVouchersPage : UserControl
     {
-        public EditAccountPage()
+        public ImportVouchersPage()
         {
             InitializeComponent();
         }

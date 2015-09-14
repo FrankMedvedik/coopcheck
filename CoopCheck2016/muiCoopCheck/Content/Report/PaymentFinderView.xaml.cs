@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.WPF.Pages.Payments;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     /// <summary>
     /// Description for PaymentReportCriteriaView.
@@ -15,15 +14,21 @@ namespace CoopCheck.WPF.Pages.Report
         public PaymentReportView()
         {
             InitializeComponent();
-            _vm = new PaymentReportViewModel();
+            _vm = new PaymentFinderViewModel();
             DataContext = _vm;
         }
 
-        private PaymentReportViewModel _vm;
+        private PaymentFinderViewModel _vm;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             _vm.GetPayments();
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.ResetState();
+
         }
     }
 }

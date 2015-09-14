@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoopCheck.WPF.Pages.Accounts
+namespace CoopCheck.WPF.Content.Accounts
 {
     /// <summary>
     /// Interaction logic for ReconcileAccountPage.xaml

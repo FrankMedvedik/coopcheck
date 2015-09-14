@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace CoopCheck.WPF.Pages.Voucher
+namespace CoopCheck.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for EditBatchPage.xaml
     /// </summary>
-    public partial class EditBatchPage : UserControl
+    public partial class OpenBatchPage : UserControl
     {
-        public EditBatchPage()
+        public OpenBatchPage()
         {
             InitializeComponent();
         }

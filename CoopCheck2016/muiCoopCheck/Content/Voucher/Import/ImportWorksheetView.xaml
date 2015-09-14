@@ -14,18 +14,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Vertical" Name="spSettings" Grid.Row="0">
-                    <StackPanel Orientation="Horizontal" Name="spFile">
+                <StackPanel Orientation="Vertical"  Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" >
                         <Button Content="Select File" Name="btnOpen" Width="150"  Height="30" Margin="6" HorizontalAlignment="Left"  Click="btnOpen_Click" />
                         <TextBox Height="30" Name="txtFilePath" Width="350" Text="{Binding ExcelFilePath, Mode=TwoWay, ValidatesOnDataErrors=True}"  Margin="6" HorizontalAlignment="Left"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Name="spWorksheet">
+                    <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Voucher Worksheet" Width="150"   HorizontalAlignment="Right" Margin="6"/>
                         <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedWorkSheet, Mode=TwoWay, ValidatesOnDataErrors=True}"  
                             IsEnabled="False" Name="cbSheets" Width="200" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}" />
                     </StackPanel>
                 </StackPanel>
-                <Grid Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors">
+                <Grid Grid.Row="1" Visibility="{Binding ShowColumnErrorData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>

@@ -21,5 +21,6 @@ namespace CoopCheck.Repository
         public Nullable<decimal> balance { get; set; }
         public Nullable<System.DateTime> last_rec_date { get; set; }
         public Nullable<decimal> last_rec_balance { get; set; }
+        public string account_type { get; set; }
     }
 }

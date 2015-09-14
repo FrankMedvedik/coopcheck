@@ -6,7 +6,20 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="742.537">
-    <ScrollViewer>
+    <Control.Resources>
+        <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self},
+                                    Path=(Validation.Errors)[0].ErrorContent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    </Control.Resources>
+        <ScrollViewer>
         <Grid Style="{StaticResource ContentRoot}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -16,8 +29,6 @@
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding account_name}" Header="Name" />
                     <mui:DataGridTextColumn Binding="{Binding account_dscr}" Header="Description" />
-                    <mui:DataGridTextColumn Binding="{Binding account_type}" Header="Type" />
-                    <mui:DataGridTextColumn Binding="{Binding account_number}" Header="Number" />
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Vertical" Grid.Row="1" >
@@ -25,11 +36,11 @@
                     <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Number" Width="100"   HorizontalAlignment="Right" Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Number}" Margin="6"  IsReadOnly="True"/>
+                        <TextBox Width="110" Text="{Binding SelectedAccount.Number,  Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Name" VerticalAlignment="Top" Width="100"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Name}" Margin="6"  IsReadOnly="True"/>
+                        <TextBox Width="110" Text="{Binding SelectedAccount.Name,  Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Balance" VerticalAlignment="Top" Width="100"  Margin="6"/>
@@ -38,9 +49,9 @@
 
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Description" VerticalAlignment="Top" Width="100"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Description}" Margin="6"  IsReadOnly="True"/>
+                        <TextBox Width="110" Text="{Binding SelectedAccount.Description,  Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
                     </StackPanel>
-                    <Border BorderThickness="1" BorderBrush="Black">
+                    <!--<Border BorderThickness="1" BorderBrush="Black">
                         <StackPanel Orientation="Horizontal" >
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Reconciliation Date" VerticalAlignment="Top" Width="100"  Margin="6"/>
@@ -49,9 +60,9 @@
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Reconciliation Balance" VerticalAlignment="Top" Width="120"  Margin="6"/>
                         <TextBox Width="110" Text="{Binding SelectedAccount.LastReconciliationBalance}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>
-                        </StackPanel>
-                    </Border>
+                    </StackPanel>-->
+                        <!--</StackPanel>
+                    </Border>-->
             </StackPanel>
             </StackPanel>
     </Grid>

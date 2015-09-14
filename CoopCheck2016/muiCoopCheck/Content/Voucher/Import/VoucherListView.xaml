@@ -1,13 +1,12 @@
-﻿<UserControl x:Class="CoopCheck.WPF.Pages.Voucher.Import.ValidateView"
+﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Import.VoucherListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:csla="http://schemas.lhotka.net/4.2.0/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="742.537">
-
+             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
+             mc:Ignorable="d" >
     <Control.Resources>
         <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
             <Setter Property="BorderThickness" Value="0"/>
@@ -21,16 +20,19 @@
             </Style.Triggers>
         </Style>
     </Control.Resources>
-    <Grid Style="{StaticResource ContentRoot}" MaxHeight="750"  HorizontalAlignment="Left" VerticalAlignment="Top">
-        <ScrollViewer>
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVoucherImports" VerticalAlignment="Top"  MaxHeight="800"
-                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" 
-                      Height="Auto" VerticalScrollBarVisibility="Auto" >
+    <Grid>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
+                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher}"
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" SelectionChanged="dgVouchers_SelectionChanged">
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
+                <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                      <!--<mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>-->
                     <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" EditingElementStyle="{StaticResource CellEditStyle}"/>
@@ -39,6 +41,6 @@
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
-        </ScrollViewer>
+        <voucher:VoucherEditView x:Name="vev" Grid.Column="1"/>
     </Grid>
 </UserControl>

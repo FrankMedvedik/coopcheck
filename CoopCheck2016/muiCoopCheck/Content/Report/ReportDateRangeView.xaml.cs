@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
 
     public partial class ReportDateRangeView : UserControl

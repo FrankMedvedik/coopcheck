@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
@@ -9,8 +8,55 @@ using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Content.Voucher
 {
 
-    public class VoucherImportEditViewModel : ViewModelBase, IDataErrorInfo
+    public class VoucherEditViewModel : ViewModelBase, IDataErrorInfo
     {
+        private BatchEdit _selectedBatch;
+
+        public BatchEdit SelectedBatch
+        {
+            get { return _selectedBatch; }
+            set
+            {
+                _selectedBatch = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int BatchNum
+        {
+            get { return _selectedBatch.Num; }
+            set
+            {
+                SelectedBatch = BatchEdit.GetBatchEdit(value);
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private VoucherEdit _selectedVoucher;
+        public VoucherEdit SelectedVoucher
+        {
+            get { return _selectedVoucher; }
+            set
+            {
+                _selectedVoucher = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public int SelectedVoucherId
+        {
+            get
+            {
+                if (SelectedVoucher != null)
+                    return SelectedVoucher.Id;
+                return 0;
+            }
+            set
+            {
+                SelectedVoucher = SelectedBatch.Vouchers.Find(value);
+            }
+        }
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -22,7 +68,7 @@ namespace CoopCheck.WPF.Content.Voucher
             }
         }
 
-        public VoucherImportEditViewModel()
+        public VoucherEditViewModel()
         {
             ResetState();
             

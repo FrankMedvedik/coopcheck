@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.WPF.Pages.Report;
+using CoopCheck.WPF.Content.Report;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     /// <summary>
     /// </summary>
-    public partial class BatchRptView : UserControl
+    public partial class JobRptView : UserControl
     {
-        private BatchRptViewModel _vm = null;
-        /// <summary>
-        /// Initializes a new instance of the RecruiterView class.
-        /// </summary>
+        private JobRptViewModel _vm = null;
         
-        public BatchRptView()
+        public JobRptView()
         {
             InitializeComponent();
-            _vm = new BatchRptViewModel();
+            _vm = new JobRptViewModel();
             DataContext = _vm;
         }
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -33,12 +30,12 @@ namespace CoopCheck.WPF.Pages.Report
             
         }
 
-        private void BatchesDG_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void JobsDG_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_vm.SelectedBatch != null)
+            if (_vm.SelectedJob != null)
             {
-                pv.Batch = _vm.SelectedBatch;
-                pv.ReportDateRange = _vm.ReportDateRange;
+                pv.Job = _vm.SelectedJob;
+                //pv.ReportDateRange = _vm.ReportDateRange;
                 pv.Refresh();
             }
             else

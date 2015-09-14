@@ -1,6 +1,6 @@
-﻿using CoopCheck.WPF.Pages.Report;
+﻿using CoopCheck.WPF.Content.Report;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     public class GlobalReportCriteria
     {

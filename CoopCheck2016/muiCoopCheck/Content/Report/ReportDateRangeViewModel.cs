@@ -2,13 +2,13 @@
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     public class ReportDateRangeViewModel : ViewModelBase
     {
         public ReportDateRangeViewModel()
         {
-            _startRptDate = DateTime.Today.AddDays(-60);
+            _startRptDate = DateTime.Today.AddDays(-360);
             _endRptDate = DateTime.Today.AddDays(1);
             Messenger.Default.Send(new NotificationMessage(this, _notificationMessage));
         }

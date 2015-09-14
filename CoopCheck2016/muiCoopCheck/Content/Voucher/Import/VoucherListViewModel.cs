@@ -6,12 +6,11 @@ using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.ViewModel;
 
-namespace CoopCheck.WPF.Pages.Voucher.Import
+namespace CoopCheck.WPF.Content.Voucher.Import
 {
 
-    public class ValidateViewModel : ViewModelBase
+    public class VoucherListViewModel : ViewModelBase
     {
-
         private void FilterVouchers()
         {
             
@@ -50,7 +49,7 @@ namespace CoopCheck.WPF.Pages.Voucher.Import
             }
         }
 
-        public ValidateViewModel()
+        public VoucherListViewModel()
         {
             ResetState();
             
@@ -110,10 +109,42 @@ namespace CoopCheck.WPF.Pages.Voucher.Import
             {
                 _selectedBatch = value;
                 NotifyPropertyChanged();
+                ShowGridData = true;
             }
         }
 
-        #endregion
+        public int  BatchNum
+        {
+            get { return SelectedBatch.Num; }
+            set
+            {
+                SelectedBatch = BatchEdit.GetBatchEdit(value);
+                NotifyPropertyChanged();
+            }
+        }
 
+
+        private VoucherEdit _selectedVoucher;
+
+        public VoucherEdit SelectedVoucher
+        {
+            get { return _selectedVoucher; }
+            set
+            {
+                _selectedVoucher = value;
+                NotifyPropertyChanged();
+                ShowGridData = true;
+            }
+        }
+        public int SelectedVoucherId
+        {
+            get
+            {
+                if (SelectedVoucher != null)
+                    return SelectedVoucher.Id;
+                return 0;
+            }
+        }
+        #endregion
     }
 }

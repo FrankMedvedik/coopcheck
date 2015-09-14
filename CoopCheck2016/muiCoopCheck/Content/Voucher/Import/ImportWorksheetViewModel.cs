@@ -41,18 +41,18 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         }
 
         #region DisplayState
-        private bool _canProceed;
+        private bool _canProceed = false;
 
         private void ResetState()
         {
             SrcColumnNames = new ObservableCollection<string>();
             ColumnMap = new ObservableCollection<ColumnPropertyMap>();
             CanProceed = false;
-            ShowGridData = false;
+            ShowColumnErrorData = false;
 
             var s = new StatusInfo()
             {
-                StatusMessage = "Select an Study Honoraria Excel Workbook",
+                StatusMessage = "Please select an study honoraria excel workbook",
                 ErrorMessage = ""
             };
 
@@ -75,14 +75,14 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         }
 
-        private Boolean _showGridData;
+        private Boolean _showColumnErrorData;
 
-        public Boolean ShowGridData
+        public Boolean ShowColumnErrorData
         {
-            get { return _showGridData; }
+            get { return _showColumnErrorData; }
             set
             {
-                _showGridData = value;
+                _showColumnErrorData = value;
                 NotifyPropertyChanged();
             }
         }
@@ -282,20 +282,20 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 s.ErrorMessage = "No valid Columns found";
                 s.StatusMessage = "Cannot Import";
                 VoucherCnt = 0;
-                ShowGridData = true;
+                ShowColumnErrorData = true;
             }
             else if (ColumnMap.Any(x => x.Available == false))
             {
                 s.StatusMessage = "Cannot Import";
                 s.ErrorMessage = "Some required columns were not found ";
                 VoucherCnt = 0;
-                ShowGridData = true;
+                ShowColumnErrorData = true;
             }
             else
             {
                 s.StatusMessage = "Click Next to continue";
                 s.ErrorMessage = "";
-                ShowGridData = false;
+                ShowColumnErrorData = false;
                 CanProceed = true;
                 Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
             }
@@ -374,10 +374,17 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         }
         public string Error
         {
-            get { return null; }
+            get { return Status.ErrorMessage; }
+            set
+            {
+                StatusInfo s = new StatusInfo()
+                {
+                    ErrorMessage = value,
+                    StatusMessage = "Error"
+                };
+                Status = s;
+            }
         }
-
-
      
     }
 }

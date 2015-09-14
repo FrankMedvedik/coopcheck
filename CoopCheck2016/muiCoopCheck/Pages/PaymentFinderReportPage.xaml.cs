@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Content.Report
 {
     /// <summary>
     /// Interaction logic for CheckReportPage.xaml

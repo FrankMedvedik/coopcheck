@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Pages.Voucher.Import;
 
 namespace CoopCheck.WPF.Content.Voucher
 {

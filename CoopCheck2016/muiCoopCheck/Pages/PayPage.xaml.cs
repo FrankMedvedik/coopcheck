@@ -3,11 +3,11 @@
 namespace CoopCheck.WPF.Pages
 {
     /// <summary>
-    /// Interaction logic for BatchPage.xaml
+    /// Interaction logic for NewBatchPage.xaml
     /// </summary>
-    public partial class NewVoucherPage : UserControl
+    public partial class PayPage : UserControl
     {
-        public NewVoucherPage()
+        public PayPage()
         {
             InitializeComponent();
         }

@@ -1,4 +1,4 @@
-namespace CoopCheck.WPF.Pages.Voucher.Import
+namespace CoopCheck.WPF.Content.Voucher.Import
 {
     public enum ImportProcessStep
     {

@@ -1,5 +1,5 @@
-﻿using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Pages.Voucher.Import;
+﻿using CoopCheck.WPF.Content.Voucher.Import;
+using CoopCheck.WPF.Models;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 

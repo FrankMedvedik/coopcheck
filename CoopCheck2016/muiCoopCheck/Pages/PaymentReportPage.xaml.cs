@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace CoopCheck.WPF.Pages.Report
+namespace CoopCheck.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for BatchReportPage.xaml
     /// </summary>
-    public partial class BatchReportPage : UserControl
+    public partial class PaymentReportPage : UserControl
     {
-        public BatchReportPage()
+        public PaymentReportPage()
         {
             InitializeComponent();
         }

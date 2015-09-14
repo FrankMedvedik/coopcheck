@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoopCheck.WPF.Pages.PositivePay
+namespace CoopCheck.WPF.Content.PositivePay
 {
     /// <summary>
     /// Interaction logic for SubbitPositivePayPage.xaml

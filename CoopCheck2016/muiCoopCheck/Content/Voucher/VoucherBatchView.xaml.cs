@@ -5,19 +5,21 @@ using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF.Pages.Voucher.Import
+namespace CoopCheck.WPF.Content.Voucher
 {
-    public partial class ValidateView : UserControl
+    /// <summary>
+    /// Interaction logic for PrintChecksPage.xaml
+    /// </summary>
+    public partial class VoucherBatchView : UserControl
     {
-        private BatchEditViewModel _vm;
-
-        public ValidateView()
+        private VoucherBatchViewModel _vm;
+        public VoucherBatchView()
         {
             InitializeComponent();
-            _vm = new BatchEditViewModel();
+            _vm = new VoucherBatchViewModel();
             DataContext = _vm;
-            
         }
+
 
         public List<VoucherImport> Vouchers
         {
@@ -27,9 +29,12 @@ namespace CoopCheck.WPF.Pages.Voucher.Import
 
         // Using a DependencyProperty as the backing store for NotificationMessage.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty VouchersProperty =
-            DependencyProperty.Register("Vouchers", typeof ( List<VoucherImport>), typeof (ValidateView),
+            DependencyProperty.Register("Vouchers", typeof(List<VoucherImport>), typeof(VoucherBatchView),
                 new PropertyMetadata(new List<VoucherImport>()));
 
-        
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.Load();
+        }
     }
 }

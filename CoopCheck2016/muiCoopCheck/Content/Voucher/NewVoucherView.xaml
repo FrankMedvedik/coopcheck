@@ -27,7 +27,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <voucher:VoucherImportEditView x:Name="EditView"  Grid.Row="0"/>
+                <!--<voucher:VoucherImportEditView x:Name="EditView"  Grid.Row="0"/>-->
 
                 <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Name="dgVoucherImports" 
                       VerticalAlignment="Top" ItemsSource="{Binding VoucherImports}" HorizontalScrollBarVisibility="Auto" 

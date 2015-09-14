@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Pages;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.BankAccount
 {
+    public class AccountViewModel : WPF.ViewModel.ViewModelBase {
+    
 
-    public class AccountViewModel : ViewModelBase
-    {
         private ObservableCollection<bank_account>  _accounts;
         public ObservableCollection<bank_account> Accounts
         {
@@ -20,7 +22,8 @@ namespace CoopCheck.WPF.Content.BankAccount
             set
             {
                 _accounts = value;
-                NotifyPropertyChanged();
+                 
+                NotifyPropertyChanged("");
             }
         }
         public StatusInfo Status
@@ -34,17 +37,15 @@ namespace CoopCheck.WPF.Content.BankAccount
             }
         }
 
-        public AccountViewModel()
+        public  AccountViewModel()
         {
             ResetState();
-            Accounts = new ObservableCollection<bank_account>(BankAccountSvc.GetAccounts());
-            HeaderText = String.Format("New Account");
+            HeaderText = String.Format("Account");
         }
 
 
-
         private StatusInfo _status;
-        private void ResetState()
+        private async void ResetState()
         {
             var s = new StatusInfo()
             {
@@ -53,7 +54,7 @@ namespace CoopCheck.WPF.Content.BankAccount
             };
             Status = s;
             CanProceed = false;
-            //ShowErrorData = false;
+            Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
         }
 
         private bool _canProceed;
@@ -106,15 +107,4 @@ namespace CoopCheck.WPF.Content.BankAccount
 
     }
 
-    public static class BankAccountSvc
-    {
-        
-        public static List<bank_account> GetAccounts()
-        {
-            CoopCheckEntities ctx = new CoopCheckEntities();
-            return new List<bank_account>(ctx.bank_accounts);
-        }
-
- 
-    }
 }

@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Repository;
-using CoopCheck.WPF.Pages.Report;
+using CoopCheck.WPF.Content.Report;
 
-namespace CoopCheck.WPF.Pages.Rpt
+namespace CoopCheck.WPF.Content.Rpt
 {
     public partial class PaymentRptView : UserControl
     {
@@ -32,27 +32,40 @@ namespace CoopCheck.WPF.Pages.Rpt
                 MessageBox.Show("Error Saving file - " + ex.Message);
             }
         }
-
-        public vwBatchRpt Batch
+        public vwJobRpt Job
         {
-            get { return _vm.Batch; }
+            get { return _vm.Job; }
             set
             {
-                _vm.Batch = value;
+                _vm.Job = value;
             }
         }
 
-        public static readonly DependencyProperty BatchProperty =
-            DependencyProperty.Register("Batch", typeof(vwBatchRpt), typeof(PaymentRptView),
-                new PropertyMetadata(new vwBatchRpt()));
+        public static readonly DependencyProperty JobProperty =
+            DependencyProperty.Register("Job", typeof(vwJobRpt), typeof(PaymentRptView),
+                new PropertyMetadata(new vwJobRpt()));
+
+
+        //public vwBatchRpt Batch
+        //{
+        //    get { return _vm.Batch; }
+        //    set
+        //    {
+        //        _vm.Batch = value;
+        //    }
+        //}
+
+        //public static readonly DependencyProperty BatchProperty =
+        //    DependencyProperty.Register("Batch", typeof(vwBatchRpt), typeof(PaymentRptView),
+        //        new PropertyMetadata(new vwBatchRpt()));
 
         public ReportDateRange ReportDateRange
         {
-            get { return _vm.ReportDateRange; }
+            get { return _vm.ReportDates; }
             set
             {
                 //SetValue(ReportDateRangeProperty, value);
-                _vm.ReportDateRange = value;
+                _vm.ReportDates = value;
             }
         }
 

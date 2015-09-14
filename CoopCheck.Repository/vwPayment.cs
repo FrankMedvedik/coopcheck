@@ -40,5 +40,7 @@ namespace CoopCheck.Repository
         public string country { get; set; }
         public bool print_flag { get; set; }
         public int tran_id { get; set; }
+        public string email { get; set; }
+        public string phone_number { get; set; }
     }
 }
