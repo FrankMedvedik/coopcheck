@@ -11,19 +11,6 @@
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="pay vouchers" Style="{StaticResource Heading2}" Margin="6,10,6,10"/>
-                <!--<StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Method" Width="150"   HorizontalAlignment="Right" Margin="6"/>
-                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedPaymentMethod, Mode=TwoWay}"  
-                            Name="cbPaymentMethods" Width="150" ItemsSource="{Binding Path=PaymentMethods, Mode=TwoWay}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Value}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>-->
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Account" Width="150"   HorizontalAlignment="Right" Margin="6"/>
                     <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}"  TabIndex="1"

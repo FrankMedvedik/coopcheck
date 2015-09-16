@@ -6,6 +6,7 @@ using CoopCheck.WPF.Content.Report;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Rpt
 {
@@ -53,6 +54,7 @@ namespace CoopCheck.WPF.Content.Rpt
 
         private string _headingText;
         private bool _showGridData;
+        private StatusInfo _status;
 
         public string HeadingText
         {
@@ -67,7 +69,16 @@ namespace CoopCheck.WPF.Content.Rpt
             }
         }
 
-
+        public StatusInfo Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
+            }
+        }
         public ObservableCollection<vwPayment> Payments
         {
             get
@@ -78,8 +89,13 @@ namespace CoopCheck.WPF.Content.Rpt
             {
                 _payments = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged("HeadingText");
-
+                HeadingText = String.Format("job {0} first check dated {1:ddd, MMM d, yyyy} has {2} payments", Job.job_num, Job.last_check_date, Payments.Count());
+                ShowGridData = true;
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = "",
+                    StatusMessage = HeadingText
+                };
             }
         }
 
@@ -91,48 +107,31 @@ namespace CoopCheck.WPF.Content.Rpt
             }
         }
 
-        //public async void GetJobPayments()
-        //{
-        //    ShowGridData = false;
-        //    HeadingText = "";
-        //    if ((ReportDates != null) && (Job != null))
-        //    {
-        //        HeadingText = "Loading...";
-        //        try
-        //        {
-        //            var ctx = new CoopCheckEntities();
-        //            Payments = new ObservableCollection<vwPayment>(ctx.vwPayments.Where(x => x.batch_num == Batch.batch_num));
-        //            HeadingText = String.Format("batch {0} dated {1:ddd, MMM d, yyyy} has {2} payments", Batch.batch_num, Batch.batch_date, Payments.Count());
-        //            ShowGridData = true;
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            HeadingText = e.Message;
-        //        }
-        //    }
-        //}
-
         public async void GetJobPayments()
         {
             ShowGridData = false;
             HeadingText = "";
             if ((Job!= null))
             {
-                HeadingText = "Loading...";
+                HeadingText = "loading payments for job . ..";
+                Status = new StatusInfo()
+                {
+                    StatusMessage = HeadingText,
+                    IsBusy = true
+                };
                 try
                 {
-                    using (var ctx = new CoopCheckEntities())
-                    {
-                        var p = await PaymentSvc.GetPayments(Job.job_num);
-                        Payments = new ObservableCollection<vwPayment>(p);
-                    }
-                    
-                    HeadingText = String.Format("job {0} first check dated {1:ddd, MMM d, yyyy} has {2} payments", Job.job_num, Job.last_check_date, Payments.Count());
-                    ShowGridData = true;
+                   Payments = new ObservableCollection<vwPayment>(await PaymentSvc.GetPayments(Job.job_num));
                 }
                 catch (Exception e)
                 {
                     HeadingText = e.Message;
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "Error loading payments",
+                        ErrorMessage = e.Message
+                    };
+
                 }
             }
         }

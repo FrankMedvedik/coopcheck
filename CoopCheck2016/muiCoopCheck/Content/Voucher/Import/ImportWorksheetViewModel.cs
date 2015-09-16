@@ -39,13 +39,12 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             ResetState();
             SelectedWorksheet = DefaultSelectedWorksheet;
-            var s = new StatusInfo()
+            Status = new StatusInfo()
             {
                 StatusMessage = "Please select an study honoraria excel workbook",
                 ErrorMessage = ""
             };
 
-            Status = s;
 
         }
 
@@ -254,12 +253,11 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
             catch (Exception ex)
             {
-                s = new StatusInfo()
+                Status = new StatusInfo()
                 {
                     StatusMessage = "Error reading column names does selected worksheet contain vouchers?",
                     ErrorMessage = ex.Message
                 };
-                Status = s;
                 VoucherCnt = 0;
             }
         }

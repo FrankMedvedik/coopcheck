@@ -33,12 +33,6 @@
                     <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared "/>
                 </DataGrid.Columns>
             </DataGrid>
-        <!--<Button  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  Click="Button_Click" >Save To Excel</Button>
-        <GridSplitter Grid.Row="3" HorizontalAlignment="Stretch" Width="Auto" Height="3" BorderBrush="Black" BorderThickness="1,0" Opacity="0.715">
-            <GridSplitter.Background>
-                <SolidColorBrush Opacity="1" Color="Gray" />
-            </GridSplitter.Background>
-        </GridSplitter>-->
-        <rpt:PaymentRptView Grid.Row="4"  x:Name="pv"/>
+            <rpt:PaymentRptView Grid.Row="2"  x:Name="pv"/>
     </Grid>
 </UserControl>

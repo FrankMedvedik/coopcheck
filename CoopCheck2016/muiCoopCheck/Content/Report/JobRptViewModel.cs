@@ -4,6 +4,8 @@ using System.Linq;
 using CoopCheck.Repository;
 using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Content.Report;
+using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Report
@@ -40,6 +42,7 @@ namespace CoopCheck.WPF.Content.Report
             set
             {
                 _selectedJob = value;
+
                 NotifyPropertyChanged();
             }
         }
@@ -61,61 +64,28 @@ namespace CoopCheck.WPF.Content.Report
             get { return _jobs; }
             set
             {
-                //var s = SelectedBatch;
-
                 _jobs = value;
                 NotifyPropertyChanged();
-                //if (s != null)
-                //{
-                //    SelectedBatch = Jobs.FirstOrDefault(x => x.batch_num == s.batch_num);
-                //}
-
+                ShowGridData = true;
+                HeadingText = String.Format("{0} Jobs paid between {1:ddd, MMM d, yyyy}  and {2:ddd, MMM d, yyyy}  ",
+                                        Jobs.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = "",
+                    StatusMessage = "select a job"
+                };
             }
         }
-
-        #region Filters
-        //private ObservableCollection<LyncCallByRecruiter > _filteredRecruiters = new ObservableCollection<LyncCallByRecruiter >();
-        //public ObservableCollection<LyncCallByRecruiter > FilteredRecruiters
-        //{
-        //    get { return _filteredRecruiters; }
-        //    set
-        //    {
-        //        _filteredRecruiters = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
-        //private void FilterByPhoneRoom()
-        //{
-        //    var fr = new List<LyncCallByRecruiter>();
-        //    if ((SelectedPhoneRoomName == null) || (SelectedPhoneRoomName == "All"))
-        //        FilteredRecruiters = Recruiters;
-        //    else
-        //    {
-        //        fr = (from fobjs in Recruiters
-        //            where fobjs.PhoneRoom == SelectedPhoneRoomName
-        //            select fobjs).ToList();
-        //        FilteredRecruiters = new ObservableCollection<LyncCallByRecruiter>(fr);
-        //    }
-
-        //            HeadingText = String.Format("{0} Phone Room Activity between {1} and {2} - for {3} Recruiters",
-        //                SelectedPhoneRoomName, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate, FilteredRecruiters.Count);
-        //            ShowGridData = true;
-        //}
-        //#endregion
-
-
-        #endregion
 
         public  void RefreshAll()
         {
                 GetJobs();
-                //FilterByPhoneRoom();
         }
         
 
         private string _headingText;
         private bool _showGridData;
+        private StatusInfo _status;
 
         public string HeadingText
         {
@@ -126,29 +96,39 @@ namespace CoopCheck.WPF.Content.Report
                 NotifyPropertyChanged();
             }
         }
+        public StatusInfo Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
+            }
+        }
         public async void GetJobs()
         {
               ShowGridData = false;
-              HeadingText = "Loading...";
             try
             {
-                var ctx = new CoopCheckEntities();
-                var query = from l in ctx.vwJobRpt
-                            where ((l.first_pay_date >= ReportDateRange.StartRptDate) && (l.last_pay_date <= ReportDateRange.EndRptDate))
-                            orderby l.first_pay_date
-                            select l;
-                var a = new ObservableCollection<vwJobRpt>(query.ToList());
-                Jobs = a;
-                ShowGridData = true;
-                HeadingText = String.Format("{0} Jobs paid between {1:ddd, MMM d, yyyy}  and {2:ddd, MMM d, yyyy}  ",
-                Jobs.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
-        
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = "",
+                    IsBusy = true,
+                    StatusMessage = "refreshing job list..."
+                };
+                Jobs = new ObservableCollection<vwJobRpt>(await RptSvc.GetJobRpt(ReportDateRange));
             }
             catch (Exception e)
             {
-                HeadingText = e.Message;
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "Error loading job list",
+                    ErrorMessage = e.Message
+                };
+
             }
+        }
 
         }
     }
-}

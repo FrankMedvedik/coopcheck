@@ -231,12 +231,26 @@ namespace CoopCheck.WPF.Content.Voucher
 
         public async void PrintChecks()
         {
+            Status = new StatusInfo()
+            {
+                ErrorMessage = "",
+                IsBusy = true,
+                StatusMessage = "printing checks"
+            };
+
             Status = await PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num, StartingCheckNum);
         }
 
 
         public async void SwiftPay()
         {
+            Status = new StatusInfo()
+            {
+                ErrorMessage = "",
+                IsBusy = true,
+                StatusMessage = "executing swiftpay"
+            };
+
             Status = await PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);
         }
     }

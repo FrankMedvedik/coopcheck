@@ -43,6 +43,7 @@ D:\Reckner.Work\CoopCheck2014\CoopCheck.Library\CoopCheck.Library\obj\Debug\Coop
 D:\Reckner.Work\CoopCheck2014\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.pdb
 D:\Reckner.Work\CoopCheck2014\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.DalADO.dll
 D:\Reckner.Work\CoopCheck2014\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.DalADO.pdb
+D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.csprojResolveAssemblyReference.cache
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\MelissaCodes.json
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.Library.dll.config
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.Library.dll
@@ -86,6 +87,5 @@ D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\D
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\vi\Csla.resources.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\zh-Hans\Csla.resources.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\zh-TW\Csla.resources.dll
-D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.csprojResolveAssemblyReference.cache
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.pdb

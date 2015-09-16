@@ -6,14 +6,25 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
              xmlns:rpt="clr-namespace:CoopCheck.WPF.Content.Rpt"
+             xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
-    <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <StackPanel  Orientation="Vertical">
-                <Rpt:GlobalReportCriteriaView />
-                <Rpt:JobRptView />
-            </StackPanel>
-        </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
+            <ScrollViewer>
+                <StackPanel  Orientation="Vertical">
+                    <Rpt:GlobalReportCriteriaView />
+                    <Rpt:JobRptView />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid  Grid.Row="1">
+            <status:StatusView />
+        </Grid>
     </Grid>
+    
 </UserControl>

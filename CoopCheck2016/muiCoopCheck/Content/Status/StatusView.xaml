@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         mc:Ignorable="d ignore">
-    <Grid Margin="{StaticResource StatusMargin}">
-        <StackPanel Orientation="Vertical">
+    <!--Margin="{StaticResource StatusMargin}"-->
+    <Grid >
+        <StackPanel Orientation="Horizontal">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6" Text="{Binding Status.ErrorMessage}" Foreground="Red"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6" Text="{Binding Status.StatusMessage}" Foreground="Black"/>
+            <mui:ModernProgressRing IsActive="{Binding Status.IsBusy}" Width="10" Height="10" Style="{StaticResource ChasingDotsProgressRingStyle}" />
         </StackPanel>
     </Grid>
 </UserControl>

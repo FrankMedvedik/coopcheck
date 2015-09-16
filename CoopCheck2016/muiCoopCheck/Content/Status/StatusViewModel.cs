@@ -19,7 +19,7 @@ namespace CoopCheck.WPF.Content.Status
         {
             var s = new StatusInfo()
             {
-                StatusMessage = "welcome to coopcheck",
+                StatusMessage = "",
                 ErrorMessage = ""
             };
 

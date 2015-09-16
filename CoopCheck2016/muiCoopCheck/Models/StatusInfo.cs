@@ -5,6 +5,13 @@ namespace CoopCheck.WPF.Models
     {
         private string _errorMessage;
         private string _statusMessage;
+        private bool _isBusy = false; // set to false by default to cancel previous busy...
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { _isBusy = value; }
+        }
 
         public string ErrorMessage
         {

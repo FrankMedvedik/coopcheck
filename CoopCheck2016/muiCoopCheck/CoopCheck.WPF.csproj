@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Content\Status\StatusViewModel.cs" />
     <Compile Include="Content\Voucher\BatchListViewModel.cs" />
+    <Compile Include="Services\RptSvc.cs" />
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Services\PaymentMethodSvc.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
@@ -179,10 +180,6 @@
     <Compile Include="Services\BankAccountSvc.cs" />
     <Compile Include="Services\OpenBatchSvc.cs" />
     <Compile Include="Content\Voucher\PayVouchersViewModel.cs" />
-    <Compile Include="Content\Voucher\VoucherBatchViewModel.cs" />
-    <Compile Include="Content\Voucher\VoucherBatchView.xaml.cs">
-      <DependentUpon>VoucherBatchView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\Voucher\VoucherEditView.xaml.cs">
       <DependentUpon>VoucherEditView.xaml</DependentUpon>
     </Compile>
@@ -211,13 +208,9 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Settings\SettingsAppearanceViewModel.cs" />
-    <Compile Include="Pages\VoucherBatchPage -HOLD.xaml.cs">
-      <DependentUpon>VoucherBatchPage -HOLD.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\OpenBatchPage.xaml.cs">
       <DependentUpon>OpenBatchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\PrintChecksViewModel.cs" />
     <Compile Include="Content\Voucher\ImportPageViewModel.cs" />
     <Compile Include="Content\Voucher\Import\ImportProcessStep.cs" />
     <Compile Include="Content\Voucher\BatchListView.xaml.cs">
@@ -239,9 +232,6 @@
     <Compile Include="Content\Report\PaymentFinderViewModel.cs" />
     <Compile Include="Pages\PositivePayPage.xaml.cs">
       <DependentUpon>PositivePayPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ReportPage.xaml.cs">
-      <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\OpenPositivePayPage.xaml.cs">
       <DependentUpon>OpenPositivePayPage.xaml</DependentUpon>
@@ -294,10 +284,6 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\VoucherBatchView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Content\Voucher\VoucherEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -345,10 +331,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\VoucherBatchPage -HOLD.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\OpenBatchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -388,10 +370,6 @@
     <Page Include="Content\Payment\NewPositivePayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ReportPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Payment\SubmitPositivePayPage.xaml">
       <SubType>Designer</SubType>
@@ -471,7 +449,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MelissaCodes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -504,6 +484,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\RecknerLogoLeft.jpg" />
+    <Content Include="Content\Images\RecknerLogoRight.jpg" />
     <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>

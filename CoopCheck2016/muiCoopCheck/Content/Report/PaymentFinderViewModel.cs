@@ -5,6 +5,7 @@ using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Report
 {
@@ -33,12 +34,12 @@ namespace CoopCheck.WPF.Content.Report
             get { return _paymentFinderCriteria; }
             set
             {
-                _paymentFinderCriteria = value; 
-                NotifyPropertyChanged(); 
-                
+                _paymentFinderCriteria = value;
+                NotifyPropertyChanged();
+
             }
         }
-        
+
 
         private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
         public ObservableCollection<vwPayment> Payments
@@ -48,12 +49,17 @@ namespace CoopCheck.WPF.Content.Report
             {
                 _payments = value;
                 NotifyPropertyChanged();
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = "",
+                    StatusMessage = String.Format("{0} Payments found", Payments.Count)
+                };
             }
         }
 
 
         #region DisplayState
-        private StatusInfo _status; 
+        private StatusInfo _status;
 
         public void ResetState()
         {
@@ -64,6 +70,7 @@ namespace CoopCheck.WPF.Content.Report
             ShowGridData = false;
 
         }
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -71,9 +78,10 @@ namespace CoopCheck.WPF.Content.Report
             {
                 _status = value;
                 NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
-     
+
         private Boolean _showGridData;
 
         public Boolean ShowGridData
@@ -103,10 +111,29 @@ namespace CoopCheck.WPF.Content.Report
 
         #endregion
 
-        public  async void GetPayments()
+        public async void GetPayments()
         {
-            var c =  new ObservableCollection<vwPayment>(await PaymentSvc.GetPayments(PaymentFinderCriteria));
-            Payments = c;
+            Status = new StatusInfo()
+            {
+                ErrorMessage = "",
+                IsBusy = true,
+                StatusMessage = "getting payments..."
+            };
+            try
+            {
+                var c = new ObservableCollection<vwPayment>(await PaymentSvc.GetPayments(PaymentFinderCriteria));
+                Payments = c;
+
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "Error loading payments",
+                    ErrorMessage = e.Message
+                };
+
+            }
         }
     }
 }

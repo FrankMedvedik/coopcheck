@@ -5,11 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
+             xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <report:PaymentReportView />
-        </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
+            <ScrollViewer>
+                <StackPanel  Orientation="Vertical">
+                    <report:PaymentReportView />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid  Grid.Row="1">
+            <status:StatusView />
+        </Grid>
     </Grid>
 </UserControl>

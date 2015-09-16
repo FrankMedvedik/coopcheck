@@ -122,6 +122,7 @@ namespace CoopCheck.WPF.Content.Voucher
         private StatusInfo _status;
         private bool _isBusy;
         private bool _isDirty;
+        private VoucherEdit _selectedVoucher;
 
         public BatchEdit  SelectedBatch
         {
@@ -134,7 +135,17 @@ namespace CoopCheck.WPF.Content.Voucher
                 IsBusy = false;
             }
         }
-
+        public VoucherEdit SelectedVoucher
+        {
+            get { return _selectedVoucher; }
+            set
+            {
+                _selectedVoucher = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(HeaderText);
+                IsBusy = false;
+            }
+        }
         public int BatchNum
         {
             get { return SelectedBatch != null ? SelectedBatch.Num : 0; }

@@ -2,30 +2,29 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid >
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
+             mc:Ignorable="d" >
+    <Grid Width="352" >
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
         <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="CoopCheck: 2016" FontSize="32" FontWeight="Bold"/>
-            </StackPanel>
+            <Grid Style="{StaticResource ContentRoot}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                  <Image Source="D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\Content\Images\RecknerLogoLeft.jpg"/>
+                    <Image Source="D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\Content\Images\RecknerLogoRight.jpg"/>
+                </StackPanel>
+                <TextBlock Text="CoopCheck" FontSize="32" Grid.Row="1" FontWeight="Bold"  Margin="10"/>
+            </Grid>
         </ScrollViewer>
-    </Grid>
     <Grid  Grid.Row="1">
-            <TextBlock x:Name="StatusText"  Text="TEST"/>
-        <TextBlock x:Name="ErrorText" Text="TES2T" Foreground="Red"/>
+            <status:StatusView />
         </Grid>
-        <!--
-        <StatusBar DockPanel.Dock="Bottom" Style="{StaticResource StatusMargin}"  >
-            <StatusBarItem>
-                <TextBlock Name="lblCursorPosition"  Text="1873939"/>
-            </StatusBarItem>
-        </StatusBar>-->
     </Grid>
 </UserControl>

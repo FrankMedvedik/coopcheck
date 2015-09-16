@@ -34,7 +34,7 @@ namespace CoopCheck.WPF.Models
             n.AddressLine2 = AddressLine2;
             n.Amount = Amount;
             n.Company = Company;
-            n.Country = Country;
+            //n.Country = Country;
             n.EmailAddress = EmailAddress;
             n.First = First;
             n.Last = Last;
@@ -58,7 +58,7 @@ namespace CoopCheck.WPF.Models
                 AddressLine2 = "Address 2 ",
                 Amount = 1000,
                 Company = "company name",
-                Country = "USA",
+               // Country = "US",
                 EmailAddress = "ME@reckner.com",
                 First = "FirstName",
                 Last = "LastName",
@@ -77,8 +77,8 @@ namespace CoopCheck.WPF.Models
         {
             return new VoucherImport()
             {
-                Amount = 0,
-                Country = "US"
+                Amount = 0
+                //Country = "US"
             };
         }
     }
