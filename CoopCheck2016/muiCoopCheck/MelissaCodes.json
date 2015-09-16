@@ -536,7 +536,7 @@
 {
 "Code":"GE05",
 "ShortDescription":"License Not Enabled For Country",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Geocoding for the country of input record is disabled for your license. Please contact your sales representative to enable"
 },
 {

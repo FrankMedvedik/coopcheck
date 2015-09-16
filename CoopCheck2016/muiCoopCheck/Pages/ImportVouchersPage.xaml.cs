@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.WPF.Models;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Pages
 {

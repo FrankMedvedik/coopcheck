@@ -27,11 +27,13 @@
             </Grid.RowDefinitions>
             <DataGrid Grid.Row="0" ItemsSource="{Binding Accounts}"  SelectedItem="{Binding SelectedBankAccount}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Binding="{Binding account_name}" Header="Name" />
-                    <mui:DataGridTextColumn Binding="{Binding account_dscr}" Header="Description" />
+                    <mui:DataGridTextColumn Binding="{Binding account_name}" Header="name" />
+                    <mui:DataGridTextColumn Binding="{Binding account_dscr}" Header="description" />
+                    <mui:DataGridTextColumn Binding="{Binding account_number}" Header="number" />
+                    <mui:DataGridTextColumn Binding="{Binding account_type}" Header="type" />
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel Orientation="Vertical" Grid.Row="1" >
+            <!--<StackPanel Orientation="Vertical" Grid.Row="1" >
                 <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6"/>
                     <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
@@ -51,7 +53,7 @@
                         <TextBlock Text="Description" VerticalAlignment="Top" Width="100"  Margin="6"/>
                         <TextBox Width="110" Text="{Binding SelectedAccount.Description,  Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
                     </StackPanel>
-                    <!--<Border BorderThickness="1" BorderBrush="Black">
+                    --><!--<Border BorderThickness="1" BorderBrush="Black">
                         <StackPanel Orientation="Horizontal" >
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Reconciliation Date" VerticalAlignment="Top" Width="100"  Margin="6"/>
@@ -62,9 +64,9 @@
                         <TextBox Width="110" Text="{Binding SelectedAccount.LastReconciliationBalance}" Margin="6"  IsReadOnly="True"/>
                     </StackPanel>-->
                         <!--</StackPanel>
-                    </Border>-->
+                    </Border>--><!--
             </StackPanel>
-            </StackPanel>
+            </StackPanel>-->
     </Grid>
     </ScrollViewer>
 </UserControl>

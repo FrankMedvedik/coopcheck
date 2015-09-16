@@ -16,9 +16,15 @@ namespace CoopCheck.WPF.Content.Voucher
             DataContext = _vm;
         }
 
-        private void btnPay_Click(object sender, RoutedEventArgs e)
+        private void SwiftPay(object sender, RoutedEventArgs e)
         {
-            _vm.Pay();
+            _vm.SwiftPay();
+
+        }
+
+        private void PrintChecks(object sender, RoutedEventArgs e)
+        {
+            _vm.PrintChecks();
         }
     }
  

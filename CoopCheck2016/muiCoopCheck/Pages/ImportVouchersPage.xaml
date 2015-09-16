@@ -1,17 +1,23 @@
-﻿<UserControl x:Class="CoopCheck.WPF.Pages.ImportVouchersPage"
+﻿<UserControl xmlns:Status="clr-namespace:CoopCheck.WPF.Content.Status"  x:Class="CoopCheck.WPF.Pages.ImportVouchersPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:bankAccount="clr-namespace:CoopCheck.WPF.Content.BankAccount"
-             xmlns:bankAccount1="clr-namespace:CoopCheck.WPF.Content.BankAccount"
              xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <import:ImportWorksheetView />
-        </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
+            <ScrollViewer>
+                <import:ImportWorksheetView />
+            </ScrollViewer>
+        </Grid>
+        <Grid  Grid.Row="1">
+     <Status:StatusView />
+        </Grid>
     </Grid>
 </UserControl>

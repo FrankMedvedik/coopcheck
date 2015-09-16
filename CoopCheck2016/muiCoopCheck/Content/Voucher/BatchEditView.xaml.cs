@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Content.Voucher
 {
@@ -21,8 +24,25 @@ namespace CoopCheck.WPF.Content.Voucher
             get { return _vm.SelectedBatch.Num; }
             set { _vm.BatchNum = value; }
         }
+        public void ResetState()
+        {
+            _vm.ResetState(); 
+        }
+        public bool IsDirty
+        {
+            get { return _vm.IsDirty; }
+        }
+        public ObservableCollection<VoucherImport> VoucherImports
+        {
+            get { return _vm.VoucherImports; }
+            set { _vm.VoucherImports = value; }
+        }
+        public static readonly DependencyProperty VoucherImportsProperty =
+        DependencyProperty.Register("VoucherImports", typeof(ObservableCollection<VoucherImport>), typeof(BatchEditView), new PropertyMetadata(new ObservableCollection<VoucherImport>()));
 
-        public static readonly DependencyProperty BatchNumProperty =
-        DependencyProperty.Register("BatchNum", typeof(int), typeof(BatchEditView),new PropertyMetadata(0));
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.Save();
+        }
     }
 }

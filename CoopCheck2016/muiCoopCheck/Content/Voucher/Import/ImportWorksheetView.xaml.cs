@@ -53,5 +53,13 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         public static readonly DependencyProperty VouchersProperty =
            DependencyProperty.Register("Vouchers", typeof(List<VoucherImport>), typeof(ImportWorksheetView),
                new PropertyMetadata(new List<VoucherImport>()));
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.CreateVoucherBatch();
+            bev.VoucherImports = _vm.VoucherImports;
+            bev.Visibility = Visibility.Visible;
+
+        }
     }
 }

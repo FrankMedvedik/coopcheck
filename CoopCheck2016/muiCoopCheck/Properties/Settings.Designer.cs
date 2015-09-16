@@ -58,5 +58,26 @@ namespace CoopCheck.WPF.Properties {
                 return ((string)(this["PersonatorOptions"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\githublocal\\coopcheck\\CoopCheck2016\\muiCoopCheck\\RecknerCheck.dotx")]
+        public string CheckTemplate {
+            get {
+                return ((string)(this["CheckTemplate"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\temp\\")]
+        public string CheckDirectory {
+            get {
+                return ((string)(this["CheckDirectory"]));
+            }
+            set {
+                this["CheckDirectory"] = value;
+            }
+        }
     }
 }

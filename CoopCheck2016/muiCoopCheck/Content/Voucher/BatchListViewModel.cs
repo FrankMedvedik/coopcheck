@@ -22,10 +22,20 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _batchList = value;
                 NotifyPropertyChanged();
+                IsBusy = false;
             }
         }
 
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                NotifyPropertyChanged();
+            }
 
+        }
         public BatchListViewModel()
         {
             ResetState();
@@ -33,6 +43,7 @@ namespace CoopCheck.WPF.Content.Voucher
 
         private async void ResetState()
         {
+            IsBusy = true;
             BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc.GetOpenBatches());
         }
 
@@ -49,6 +60,7 @@ namespace CoopCheck.WPF.Content.Voucher
         }
 
         private OpenBatch _selectedBatch = new OpenBatch();
+        private bool _isBusy;
 
         public OpenBatch SelectedBatch
         {

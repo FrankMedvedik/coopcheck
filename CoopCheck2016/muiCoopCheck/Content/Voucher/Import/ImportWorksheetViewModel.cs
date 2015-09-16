@@ -38,18 +38,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         public ImportWorksheetViewModel()
         {
             ResetState();
-        }
-
-        #region DisplayState
-        private bool _canProceed = false;
-
-        private void ResetState()
-        {
-            SrcColumnNames = new ObservableCollection<string>();
-            ColumnMap = new ObservableCollection<ColumnPropertyMap>();
-            CanProceed = false;
-            ShowColumnErrorData = false;
-
+            SelectedWorksheet = DefaultSelectedWorksheet;
             var s = new StatusInfo()
             {
                 StatusMessage = "Please select an study honoraria excel workbook",
@@ -57,8 +46,27 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             };
 
             Status = s;
-            _selectedWorksheet = DefaultSelected;
 
+        }
+
+        #region DisplayState
+        private bool _canProceed = false;
+
+        private void ResetState()
+        {
+            SelectedWorksheet = null;
+            SrcColumnNames = new ObservableCollection<string>();
+            ColumnMap = new ObservableCollection<ColumnPropertyMap>();
+            CanProceed = false;
+            ShowColumnErrorData = false;
+            CanImport = true;
+            var s = new StatusInfo()
+            {
+                StatusMessage = "",
+                ErrorMessage = ""
+            };
+
+            Status = s;
         }
         public bool CanProceed
         {
@@ -67,14 +75,33 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             {
                 _canProceed = value;
                 NotifyPropertyChanged();
-                if (CanProceed)
-                    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
-                else
-                    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCannotProceed));
+                //if (CanProceed)
+                //    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
+                //else
+                //    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCannotProceed));
             }
 
         }
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                NotifyPropertyChanged();
+            }
 
+        }
+        public bool CanImport
+        {
+            get { return _canImport; }
+            set
+            {
+                _canImport = value;
+                NotifyPropertyChanged();
+            }
+
+        }
         private Boolean _showColumnErrorData;
 
         public Boolean ShowColumnErrorData
@@ -105,6 +132,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             {
                 _excelFilePath = value;
                 NotifyPropertyChanged();
+                ResetState();
                 LoadWorksheetMetaData();
             }
         }
@@ -119,6 +147,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 {
                     ExcelBook = new ExcelQueryFactory(ExcelFilePath);
                     WorkSheets = new ObservableCollection<string>(ExcelBook.GetWorksheetNames());
+                    SelectedWorksheet = WorkSheets.First();
                 }
                 catch (Exception e)
                 {
@@ -193,14 +222,17 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             {
                 _selectedWorksheet = value;
                 NotifyPropertyChanged();
+                if (SelectedWorksheet == null || SelectedWorksheet == DefaultSelectedWorksheet) return;
+                IsBusy = true;
                 LoadWorkSheetData();
+                IsBusy = false;
             }
         }
 
 
         public void LoadWorkSheetData()
         {
-            ResetState();
+            if (SelectedWorksheet == DefaultSelectedWorksheet) return;
             LoadWorksheetStats();
             ImportVouchers();
         }
@@ -217,7 +249,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
             try
             {
-                if (SelectedWorksheet == DefaultSelected) return;
                 SrcColumnNames = new ObservableCollection<string>(ExcelBook.GetColumnNames(SelectedWorksheet));
                 ColumnNameValidator();
             }
@@ -234,7 +265,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         }
 
 
-        private string DefaultSelected = "< Choose Worksheet >";
+        private string DefaultSelectedWorksheet = "< Choose Worksheet >";
 
         public void ColumnNameValidator()
         {
@@ -332,16 +363,19 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             ExcelBook.AddMapping("JobNumber", "JOB #");
             var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
 
-            foreach (var a in vouchers.Where(x=> x.Last != ""))
+            foreach (var a in vouchers.Where(x=> x.Last !="" ))
             {
                 VoucherImports.Add(a);
             }
 
             VoucherCnt = VoucherImports.Count();
             VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
+            CanProceed = true;
         }
         private decimal _voucherTotalDollars;
         private StatusInfo _status;
+        private bool _canImport;
+        private bool _isBusy;
 
         public decimal VoucherTotalDollars
         {
@@ -361,12 +395,12 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             {
                 if (columnName == "ExcelFilePath")
                 {
-                    if(string.IsNullOrEmpty(ExcelFilePath)) return "Required value";
+                    if(string.IsNullOrEmpty(ExcelFilePath)) return "Select an excel workbook with vouchers";
                     if(!File.Exists(ExcelFilePath)) return "Invalid file name";
                 }
                 if (columnName == "SelectedWorksheet")
                 {
-                    return string.IsNullOrEmpty(SelectedWorksheet) ? "Required value" : null;
+                    return string.IsNullOrEmpty(SelectedWorksheet)  ? "Select a worksheet" : null;
                 }
                 return null;
             }
@@ -385,6 +419,10 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 Status = s;
             }
         }
-     
+
+        public void CreateVoucherBatch()
+        {
+            CanImport = false;
+        }
     }
 }

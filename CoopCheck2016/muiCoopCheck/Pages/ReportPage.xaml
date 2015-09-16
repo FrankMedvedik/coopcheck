@@ -9,7 +9,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <mui:ModernTab Grid.Row="0" Layout="List" >
             <mui:ModernTab.Links>

@@ -1,4 +1,6 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF
 {
@@ -10,11 +12,7 @@ namespace CoopCheck.WPF
         public MainWindow()
         {
             InitializeComponent();
-
-            //Messenger.Default.Register<List<VoucherImport>>(this, message =>
-            //{
-
-            //});
+            
         }
 
 
