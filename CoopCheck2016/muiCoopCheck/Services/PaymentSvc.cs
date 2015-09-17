@@ -21,10 +21,14 @@ namespace CoopCheck.WPF.Services
         public static async Task<StatusInfo> SwiftFulfillAsync(int accountId, int batchNum)
         {
             StatusInfo i = new StatusInfo();
-            i.StatusMessage = "Batch sumbitted to Swift Pay";
+            //i.StatusMessage = "            StatusInfo i = new StatusInfo();
+            i.StatusMessage = "LETS PRETEND THE BATCH IS GONE TO BE PAID NOW... ";
+            System.Threading.Thread.Sleep(5000);
+            return i;
             try
             {
-               // await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+             
+                // await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
             }
             catch (Exception e)
             {
@@ -36,21 +40,21 @@ namespace CoopCheck.WPF.Services
 
        public static async Task<StatusInfo> PrintChecksAsync(int accountId, int batchNum, int startingCheckNum)
         {
-            StatusInfo i = new StatusInfo();
-            i.StatusMessage = "Batch sumbitted to Swift Pay";
-            return i;
-            //  return await Task<string>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum));
+            //StatusInfo i = new StatusInfo();
+            //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
+            //System.Threading.Thread.Sleep(5000);
+            //return i;
+             return await Task<StatusInfo>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum));
         }
 
-        private static string PrintChecks(int accountId, int batchNum, int startingCheckNum)
+        private static StatusInfo PrintChecks(int accountId, int batchNum, int startingCheckNum)
         {
-            string retVal = string.Empty; 
             var app = new Microsoft.Office.Interop.Word.Application();
             var doc = new Microsoft.Office.Interop.Word.Document();
             doc = app.Documents.Add(Template: @Properties.Settings.Default.CheckTemplate);
-            app.Visible = true;
             int checkNum = startingCheckNum;
             var b = BatchEdit.GetBatchEdit(batchNum);
+
             foreach (var c in b.Vouchers)
             {
                 try
@@ -137,46 +141,35 @@ namespace CoopCheck.WPF.Services
                             if (c.AddressLine2.Length != 0)
                                 app.Selection.TypeText(c.AddressLine2 ?? "");
 
-
                         }
                         else if (f.Code.Text.Contains("address_3"))
                         {
                             f.Select();
                             app.Selection.TypeText(String.Join(" ", c.Municipality, c.Region, c.PostalCode, c.Country));
                         }
-
-                        var list = WriteCheckCommand.Execute(batchNum, accountId, checkNum);
-
-                        retVal = string.Empty;
-                        CommitCheckCommand.Execute(batchNum, checkNum);
                     }
                 }
                 catch (Exception e)
                 {
-                    try
+                    new StatusInfo()
                     {
-                        doc.Close();
-                        app.Quit();
-                    }
-                    catch (Exception x)
-                    {
-
-                    }
-                        return String.Format("Error {0}, printing checks failed : Batch {1} Payee {2} Transaction Id {3}",
-                                e.Message, batchNum, Payee(c.Company, c.FullName), c.Id);
+                        StatusMessage = String.Format("Error {0}, printing checks failed : Batch {1} Payee {2} Transaction Id {3}",
+                                  e.Message, batchNum, Payee(c.Company, c.FullName), c.Id),
+                        ErrorMessage = e.Message
+                    };
                 }
+                var list = WriteCheckCommand.Execute(batchNum, accountId, checkNum);
+                CommitCheckCommand.Execute(batchNum, checkNum);
                 checkNum++;
-                }
-
- //               doc.PrintOut();
-                doc.SaveAs2(FileName: Properties.Settings.Default.CheckDirectory + "checks." + accountId + "." + batchNum.ToString() + ".doc");
-                doc.Close();
-                app.Quit();
-                retVal = String.Format("{0} checks printed: First check # {1} Last Check #: {2)", b.Vouchers.Count, startingCheckNum, checkNum);
-
-            return retVal;
-        }
-
+            }
+            app.Visible = true;
+            return new StatusInfo() 
+                    {
+                         StatusMessage =
+                            String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
+                                startingCheckNum, --checkNum)
+                    };
+      }
         public static Task<int> NextCheckNum(int accountId)
         {
             return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));

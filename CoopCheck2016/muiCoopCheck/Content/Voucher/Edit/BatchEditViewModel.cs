@@ -5,46 +5,48 @@ using System.Linq;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
 
     public class BatchEditViewModel : ViewModelBase , IDataErrorInfo
     {
-        public bool IsBusy
+
+        private Boolean _showSelectedBatch;
+
+        public Boolean ShowSelectedBatch
         {
-            get { return _isBusy; }
+            get { return _showSelectedBatch; }
             set
             {
-                _isBusy = value;
+                _showSelectedBatch = value;
                 NotifyPropertyChanged();
             }
+        }
 
+        public bool IsBusy
+        {
+            get { return Status.IsBusy; }
         }
         public bool IsDirty
         {
-            get { return _isDirty; }
-            set
-            {
-                _isDirty = value;
-                NotifyPropertyChanged();
-            }
-
+            get { return (SelectedBatch != null) ? SelectedBatch.IsDirty : false; }
         }
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
         public ObservableCollection<VoucherImport> VoucherImports  {             
             get { return _voucherImports ; }
             set
             {
-                IsBusy = true;
                 _voucherImports = value;
                 NotifyPropertyChanged();
                 StatusInfo s = new StatusInfo()
                 {
                     StatusMessage = "Importing",
-                    ErrorMessage =""
+                    ErrorMessage ="",
+                    IsBusy=true
                 };
 
                 Status = s;
@@ -77,10 +79,7 @@ namespace CoopCheck.WPF.Content.Voucher
                         s.StatusMessage = "Error Importing Vouchers";
                         Status = s;
                     }
-                    
                 }
-                IsBusy = false;
-                IsDirty = true;
             }
         }
 
@@ -91,6 +90,9 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _status = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("HeaderText");
+                NotifyPropertyChanged("IsBusy");
+                NotifyPropertyChanged("IsDirty");
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
@@ -98,43 +100,48 @@ namespace CoopCheck.WPF.Content.Voucher
         public BatchEditViewModel()
         {
             ResetState();
-            //SelectedBatch = BatchEdit.NewBatchEdit();
-            
             Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, message =>
             {
                 BatchNum = message.Content.batch_num;
-                IsBusy = true;
             });
         }
 
         public void ResetState()
         {
-            var s = new StatusInfo()
+            ShowSelectedBatch = false;
+            Status = new StatusInfo()
             {
                 StatusMessage = "fill and verify the details about the voucher batch ",
                 ErrorMessage = ""
             };
-            Status = s;
-            IsDirty = false;
         }
 
-        private BatchEdit _selectedBatch;/* = BatchEdit.NewBatchEdit();*/
         private StatusInfo _status;
-        private bool _isBusy;
-        private bool _isDirty;
+        private BatchEdit _selectedBatch;
         private VoucherEdit _selectedVoucher;
 
-        public BatchEdit  SelectedBatch
+        public BatchEdit SelectedBatch
         {
             get { return _selectedBatch; }
             set
             {
                 _selectedBatch = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(HeaderText);
-                IsBusy = false;
+                if (SelectedBatch != null)
+                {
+                    ShowSelectedBatch = true;
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage =
+                            string.Format("Batch Number {0} Job Number {1}  Total Amount {2:C}", SelectedBatch.Num,
+                                SelectedBatch.JobNum, SelectedBatch.Amount.GetValueOrDefault(0))
+                    };
+                }
+                else
+                    ShowSelectedBatch = false;
             }
         }
+
         public VoucherEdit SelectedVoucher
         {
             get { return _selectedVoucher; }
@@ -142,28 +149,37 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _selectedVoucher = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(HeaderText);
-                IsBusy = false;
+                Status = new StatusInfo()
+                {
+                    StatusMessage = ""
+                };
             }
+
         }
         public int BatchNum
         {
             get { return SelectedBatch != null ? SelectedBatch.Num : 0; }
             set
             {
-                SelectedBatch  =  (BatchNum == -1) ? SelectedBatch = BatchEdit.NewBatchEdit(): BatchEdit.GetBatchEdit(value);
-                IsDirty = true;
+                Status = new StatusInfo()
+                { StatusMessage = "loading.." , IsBusy=true };
+                if (BatchNum == -1) // shorthand for make a  new one ! 
+                    SelectedBatch = BatchEdit.NewBatchEdit();
+                else
+                    GetBatch(value);
                 NotifyPropertyChanged();
             }
+        }
+
+        private async void GetBatch(int batchNum)
+        {
+            SelectedBatch =  await BatchSvc.GetBatchEditAsync(batchNum);
         }
         public string HeaderText
         {
             get
             {
-                if (SelectedBatch != null)
-                    return string.Format("Batch Number {0} Job Number {1}  Total Amount {2}",
-                        SelectedBatch.Num, SelectedBatch.JobNum, SelectedBatch.Amount);
-                return "";
+                return Status.StatusMessage;
             }
         }
 
@@ -194,7 +210,20 @@ namespace CoopCheck.WPF.Content.Voucher
 
         public async void  Save()
         {
-            await SelectedBatch.SaveAsync();
+            if (SelectedBatch.IsSavable)
+            {
+                Status = new StatusInfo()
+                { StatusMessage = "saving...", IsBusy = true };
+                await SelectedBatch.SaveAsync();
+                Status = new StatusInfo() { StatusMessage = "saved" };
+            }
+
+            else
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "Batch cannot be saved until all vouchers are valid",
+                    ErrorMessage = "cannot save"
+                };
         }
     }
 }

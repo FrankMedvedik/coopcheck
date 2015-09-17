@@ -33,9 +33,9 @@ namespace CoopCheck.WPF.Pages
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (be.IsDirty)
-                be.ResetState();
-            MessageBox.Show("tesing reset State");
+            //if (be.IsDirty)
+
+            //    be.ResetState();
         }
     }
 }

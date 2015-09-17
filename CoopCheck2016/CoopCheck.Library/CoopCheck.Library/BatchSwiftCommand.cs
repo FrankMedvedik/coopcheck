@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +23,9 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
+#if !DEBUG        
             BusinessRules.AddRule(typeof(BatchSwiftFulfillCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
+#endif            
         }
 
         public static bool CanExecuteObject()

@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     /// <summary>
     /// Interaction logic for BatchEditView.xaml

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public partial class VoucherEditView : UserControl
     {

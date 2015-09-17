@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
@@ -86,9 +86,9 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
-            
+#if !DEBUG        
             BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
-            
+#endif            
            
         }
 

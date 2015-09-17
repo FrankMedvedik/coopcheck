@@ -6,6 +6,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:csla="http://schemas.lhotka.net/4.2.0/xaml"
              xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
+             xmlns:edit="clr-namespace:CoopCheck.WPF.Content.Voucher.Edit"
              mc:Ignorable="d" >
     <Control.Resources>
         <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
@@ -41,6 +42,6 @@
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
-        <voucher:VoucherEditView x:Name="vev" Grid.Column="1"/>
+        <edit:VoucherEditView x:Name="vev" Grid.Column="1"/>
     </Grid>
 </UserControl>

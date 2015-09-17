@@ -53,12 +53,15 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         private void ResetState()
         {
-            SelectedWorksheet = null;
             SrcColumnNames = new ObservableCollection<string>();
             ColumnMap = new ObservableCollection<ColumnPropertyMap>();
             CanProceed = false;
             ShowColumnErrorData = false;
             CanImport = true;
+            VoucherImports = new ObservableCollection<VoucherImport>();
+            VoucherCnt = 0;
+            VoucherTotalDollars = 0;
+
             var s = new StatusInfo()
             {
                 StatusMessage = "",
@@ -219,7 +222,9 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             get { return _selectedWorksheet; }
             set
             {
+                ResetState();
                 _selectedWorksheet = value;
+
                 NotifyPropertyChanged();
                 if (SelectedWorksheet == null || SelectedWorksheet == DefaultSelectedWorksheet) return;
                 IsBusy = true;
@@ -238,18 +243,21 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public void LoadWorksheetStats()
         {
-            var s = new StatusInfo()
+            Status = new StatusInfo()
             {
                 StatusMessage = "Loading columns...",
+                IsBusy=true,
                 ErrorMessage = ""
             };
-
-            Status = s;
-
             try
             {
                 SrcColumnNames = new ObservableCollection<string>(ExcelBook.GetColumnNames(SelectedWorksheet));
                 ColumnNameValidator();
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "",
+                    ErrorMessage = ""
+                };
             }
             catch (Exception ex)
             {
@@ -258,8 +266,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     StatusMessage = "Error reading column names does selected worksheet contain vouchers?",
                     ErrorMessage = ex.Message
                 };
-                VoucherCnt = 0;
             }
+
         }
 
 
@@ -275,9 +283,9 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 s.StatusMessage = "Cannot Import";
                 Status = s;
                 VoucherCnt = 0;
-                SrcColumnNames = new ObservableCollection<string>();
                 return;
             }
+
             bool found = false;
             foreach (string t in ValidColumnNames)
             {
@@ -347,28 +355,30 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public void ImportVouchers()
         {
-            ExcelBook.AddMapping("NamePrefix", "FIRST NAME");
-            ExcelBook.AddMapping("First", "FIRST NAME");
-            ExcelBook.AddMapping("Last", "LAST NAME");
-            ExcelBook.AddMapping("AddressLine1", "ADDRESS 1");
-            ExcelBook.AddMapping("AddressLine2", "ADDRESS 2");
-            ExcelBook.AddMapping("Municipality", "CITY");
-            ExcelBook.AddMapping("Region", "STATE");
-            ExcelBook.AddMapping("PostalCode", "ZIPCODE");
-            ExcelBook.AddMapping("PhoneNumber", "PHONE");
-            ExcelBook.AddMapping("Amount", "AMOUNT");
-            ExcelBook.AddMapping("EmailAddress", "E-MAIL");
-            ExcelBook.AddMapping("JobNumber", "JOB #");
-            var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
-
-            foreach (var a in vouchers.Where(x=> x.Last !="" ))
+            if (!ShowColumnErrorData)
             {
-                VoucherImports.Add(a);
-            }
+                ExcelBook.AddMapping("NamePrefix", "FIRST NAME");
+                ExcelBook.AddMapping("First", "FIRST NAME");
+                ExcelBook.AddMapping("Last", "LAST NAME");
+                ExcelBook.AddMapping("AddressLine1", "ADDRESS 1");
+                ExcelBook.AddMapping("AddressLine2", "ADDRESS 2");
+                ExcelBook.AddMapping("Municipality", "CITY");
+                ExcelBook.AddMapping("Region", "STATE");
+                ExcelBook.AddMapping("PostalCode", "ZIPCODE");
+                ExcelBook.AddMapping("PhoneNumber", "PHONE");
+                ExcelBook.AddMapping("Amount", "AMOUNT");
+                ExcelBook.AddMapping("EmailAddress", "E-MAIL");
+                ExcelBook.AddMapping("JobNumber", "JOB #");
+                var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
+                foreach (var a in vouchers.Where(x => x.Last != ""))
+                {
+                    VoucherImports.Add(a);
+                }
 
-            VoucherCnt = VoucherImports.Count();
-            VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-            CanProceed = true;
+                VoucherCnt = VoucherImports.Count();
+                VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
+                CanProceed = true;
+            }
         }
         private decimal _voucherTotalDollars;
         private StatusInfo _status;
@@ -402,7 +412,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 }
                 return null;
             }
-
         }
         public string Error
         {

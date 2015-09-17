@@ -99,30 +99,6 @@ namespace CoopCheck.WPF.Content.Voucher
 
         }
 
-
-        //private ObservableCollection<PaymentMethod> _paymentMethods;
-        //public ObservableCollection<PaymentMethod> PaymentMethods
-        //{
-        //    get { return _paymentMethods; }
-        //    set
-        //    {
-        //        _paymentMethods = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
-        //private PaymentMethod _selectedPaymentMethod = new PaymentMethod();
-        //public PaymentMethod SelectedPaymentMethod
-        //{
-        //    get { return _selectedPaymentMethod; }
-        //    set
-        //    {
-        //        _selectedPaymentMethod = value;
-        //        ShowCheckInfo = (SelectedPaymentMethod.Key == _check); 
-        //        NotifyPropertyChanged();
-
-        //    }
-        //}
         private async void SetStartingCheckNum()
         {
             StartingCheckNum = await BatchSvc.NextCheckNum(SelectedAccount.account_id);
@@ -132,16 +108,6 @@ namespace CoopCheck.WPF.Content.Voucher
         {
             SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
         }
-
-        //public ICommand PayCommand
-        //{
-        //    get
-        //    {
-        //        if (_cmdPay == null)
-        //            _cmdPay = new 
-        //    return _cmdPay;
-        //    }
-        //}
 
         public PayVouchersViewModel()
         {
@@ -235,7 +201,7 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 ErrorMessage = "",
                 IsBusy = true,
-                StatusMessage = "printing checks"
+                StatusMessage = "printing checks..."
             };
 
             Status = await PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num, StartingCheckNum);
@@ -248,7 +214,7 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 ErrorMessage = "",
                 IsBusy = true,
-                StatusMessage = "executing swiftpay"
+                StatusMessage = "executing swiftpay..."
             };
 
             Status = await PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);

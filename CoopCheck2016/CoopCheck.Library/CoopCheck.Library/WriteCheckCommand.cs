@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
@@ -24,7 +24,7 @@ namespace CoopCheck.Library
         protected override void AddBusinessRules()
         {
             base.AddBusinessRules();
-#if RELEASE
+#if !DEBUG
             // TODO: add business rules
             BusinessRules.AddRule(typeof(WriteCheckCommand), new  IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
 #endif

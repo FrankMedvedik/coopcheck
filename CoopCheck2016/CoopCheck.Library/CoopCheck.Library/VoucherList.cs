@@ -95,12 +95,14 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
-            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
-            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
-            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
-            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
+#if !DEBUG            
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
 
-            //AddObjectAuthorizationRulesExtend();
+            AddObjectAuthorizationRulesExtend();
+#endif
         }
 
         /// <summary>

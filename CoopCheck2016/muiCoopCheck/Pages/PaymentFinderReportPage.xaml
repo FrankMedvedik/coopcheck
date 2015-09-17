@@ -16,7 +16,7 @@
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
                 <StackPanel  Orientation="Vertical">
-                    <report:PaymentReportView />
+                    <report:PaymentFinderView />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

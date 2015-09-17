@@ -1,11 +1,10 @@
-﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.BatchEditView"
+﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Edit.BatchEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000">
+             mc:Ignorable="d" >
     <Control.Resources>
         <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
             <Setter Property="BorderThickness" Value="0"/>
@@ -19,7 +18,14 @@
             </Style.Triggers>
         </Style>
     </Control.Resources>
-    <Grid >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <mui:ModernProgressRing IsActive="{Binding IsBusy}" Grid.Row="0" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" 
+                                Visibility="{Binding ShowSelectedBatch, Converter={StaticResource NotBoolToVisConverter}}"/>
+        <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -69,7 +75,7 @@
         </StackPanel>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  MaxHeight="600" Grid.Row="2"
                 MaxWidth="1200" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher}"
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single"  >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
@@ -84,4 +90,5 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+    </Grid>
 </UserControl>

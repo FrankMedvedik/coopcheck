@@ -25,7 +25,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <DataGrid Grid.Row="0" ItemsSource="{Binding Accounts}"  SelectedItem="{Binding SelectedBankAccount}" AutoGenerateColumns="False">
+            <DataGrid Grid.Row="0" ItemsSource="{Binding Accounts}"   AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding account_name}" Header="name" />
                     <mui:DataGridTextColumn Binding="{Binding account_dscr}" Header="description" />

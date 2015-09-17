@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     /// <summary>
     /// Interaction logic for importing the spreadsheet

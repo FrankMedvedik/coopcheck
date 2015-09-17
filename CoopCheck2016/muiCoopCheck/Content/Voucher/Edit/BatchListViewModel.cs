@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using CoopCheck.Library;
+﻿using System.Collections.ObjectModel;
 using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Voucher.Import;
-using CoopCheck.WPF.Converters;
-using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public class BatchListViewModel : ViewModelBase
     {

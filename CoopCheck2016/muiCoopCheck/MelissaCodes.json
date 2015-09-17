@@ -20,7 +20,7 @@
 {
 "Code":"AS09",
 "ShortDescription":"Foreign Address",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The address is in a non-supported country."
 },
 {
@@ -92,31 +92,31 @@
 {
 "Code":"AE01",
 "ShortDescription":"Postal Code Error",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The Postal Code does not exist and could not be determined by the city/municipality and state/province."
 },
 {
 "Code":"AE02",
 "ShortDescription":"Unknown Street",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Could not match the input street to a unique street name. Either no matches or too many matches found."
 },
 {
 "Code":"AE03",
 "ShortDescription":"Component Mismatch Error",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The combination of directionals (N, E, SW, etc) and the suffix (AVE, ST, BLVD) is not correct and produced multiple possible matches."
 },
 {
 "Code":"AE04",
 "ShortDescription":"Non-Deliverable Address",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"US Only. A physical plot exists but is not a deliverable addresses. One example might be a railroad track or river running alongside this street, as they would prevent construction of homes in that location."
 },
 {
 "Code":"AE05",
 "ShortDescription":"Multiple Match",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The address was matched to multiple records. There is not enough information available in the address to break the tie between multiple records."
 },
 {
@@ -128,7 +128,7 @@
 {
 "Code":"AE07",
 "ShortDescription":"Missing Minimum Address",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Minimum requirements for the address to be verified is not met. Address must have at least one address line and also the postal code or the locality/administrative area."
 },
 {
@@ -146,25 +146,25 @@
 {
 "Code":"AE10",
 "ShortDescription":"Premise Number Invalid",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The premise (house or building) number for the address is not valid."
 },
 {
 "Code":"AE11",
 "ShortDescription":"Premise Number Missing",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The premise (house or building) number for the address is missing."
 },
 {
 "Code":"AE12",
 "ShortDescription":"Box Number Invalid",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The PO (Post Office Box), RR (Rural Route), or HC (Highway Contract) Box number is invalid."
 },
 {
 "Code":"AE13",
 "ShortDescription":"Box Number Missing",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The PO (Post Office Box), RR (Rural Route), or HC (Highway Contract) Box number is missing."
 },
 {
@@ -332,7 +332,7 @@
 {
 "Code":"ES02",
 "ShortDescription":"Invalid Email",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"This email was confirmed to be a invalid email."
 },
 {
@@ -356,7 +356,7 @@
 {
 "Code":"ES06",
 "ShortDescription":"Spamtrap Domain",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The domain name of the submitted email was identified as a spamtrap. Mailing to this domain could result in the sender being blacklisted."
 },
 {
@@ -422,19 +422,19 @@
 {
 "Code":"EE01",
 "ShortDescription":"Syntax Error",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"There is a syntax error in the submitted email address."
 },
 {
 "Code":"EE02",
 "ShortDescription":"Top Level Domain Not Found",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The top level domain of the submitted email address was not found."
 },
 {
 "Code":"EE03",
 "ShortDescription":"Mail Server Not Found",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The mail server (domain) of the submitted email address was not found."
 },
 {
@@ -446,7 +446,7 @@
 {
 "Code":"EE05",
 "ShortDescription":"Email Object not Initialized",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Email Object was not initialized properly. Please review your code and data files."
 },
 {
@@ -608,13 +608,13 @@
 {
 "Code":"IS02",
 "ShortDescription":"IP Address Not Found",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The IP Address not found in the database"
 },
 {
 "Code":"IE01",
 "ShortDescription":"Empty or Malformed",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The IP Address was empty or not well formed."
 },
 {
@@ -632,7 +632,7 @@
 {
 "Code":"NS02",
 "ShortDescription":"Error Parsing",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"An error was detected. Please check for a name error code."
 },
 {
@@ -818,7 +818,7 @@
 {
 "Code":"VS00",
 "ShortDescription":"Address Not Found",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"An address was not found in the reference data."
 },
 {
@@ -962,67 +962,67 @@
 {
 "Code":"PE01",
 "ShortDescription":"Bad Area Code",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The area code does not exist in our database or contains non-numbers."
 },
 {
 "Code":"PE02",
 "ShortDescription":"Blank Phone Number",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The phone number is blank."
 },
 {
 "Code":"PE03",
 "ShortDescription":"Bad Phone Number",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The phone number has too many or too few digits."
 },
 {
 "Code":"PE04",
 "ShortDescription":"Multiple Match",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Two or more possible area codes are available as a fix and their distance is too close to choose one over the other."
 },
 {
 "Code":"PE05",
 "ShortDescription":"Bad Prefix/Prefix +1",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The phone prefix or first 7-digits do not exist in our database."
 },
 {
 "Code":"PE06",
 "ShortDescription":"Bad Postal Code",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The input postal code is invalid."
 },
 {
 "Code":"PE08",
 "ShortDescription":"No Country Input",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Global Phone Object Only. The input country is blank and the phone number has no '+' sign."
 },
 {
 "Code":"PE09",
 "ShortDescription":"Out of Range Suffix",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Global Phone Object Only. The subscriber's phone number suffix is out of range."
 },
 {
 "Code":"PE10",
 "ShortDescription":"Invalid Input Country",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"Global Phone Object Only. The input country in not valid."
 },
 {
 "Code":"QS01",
 "ShortDescription":"Empty Value",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value is empty or contains only spaces."
 },
 {
 "Code":"QS02",
 "ShortDescription":"NULL Value",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value is NULL."
 },
 {
@@ -1160,7 +1160,7 @@
 {
 "Code":"QS50",
 "ShortDescription":"Unrecognized Country ISO",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The country value does not match any standard ISO country representation."
 },
 {
@@ -1172,7 +1172,7 @@
 {
 "Code":"QS61",
 "ShortDescription":"Spam Trap Domain",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The e-mail value contains a known spam trap domain."
 },
 {
@@ -1220,61 +1220,61 @@
 {
 "Code":"QE03",
 "ShortDescription":"Invalid Integer",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's integer value is invalid."
 },
 {
 "Code":"QE04",
 "ShortDescription":"Invalid Decimal",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's decimal value is invalid."
 },
 {
 "Code":"QE05",
 "ShortDescription":"Invalid Floating Point",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's floating point value is invalid."
 },
 {
 "Code":"QE06",
 "ShortDescription":"Invalid Date/Time",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's date/time value is invalid."
 },
 {
 "Code":"QE07",
 "ShortDescription":"Invalid Boolean Value",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's boolean value is invalid."
 },
 {
 "Code":"QE08",
 "ShortDescription":"Over Range",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value is above the user-specified range."
 },
 {
 "Code":"QE09",
 "ShortDescription":"Under Range",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value is below the user-specified range."
 },
 {
 "Code":"QE10",
 "ShortDescription":"Length Size Exceeded",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's length exceeds the user-specified size."
 },
 {
 "Code":"QE11",
 "ShortDescription":"Precision Exceeded",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's precision exceeds the user-specified precision."
 },
 {
 "Code":"QE12",
 "ShortDescription":"Precision Scale Exceeded",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's precision exceeds the user-specified scale."
 },
 {
@@ -1292,55 +1292,55 @@
 {
 "Code":"QE30",
 "ShortDescription":"Unrecognized State/Province",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains an unrecognized state or province."
 },
 {
 "Code":"QE40",
 "ShortDescription":"Invalid ZIP Code",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains a US ZIP code that is not valid (only the 5 digit zip is validated in this way.)"
 },
 {
 "Code":"QE41",
 "ShortDescription":"Invalid Postal Code",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains a Canadian Postal Code that is not valid."
 },
 {
 "Code":"QE42",
 "ShortDescription":"ZIP Code Mismatch",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's Zip Code does not correctly correspond to the specified US State."
 },
 {
 "Code":"QE43",
 "ShortDescription":"Postal Code Mismatch",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value's Postal Code does not correctly correspond to the specified Canadian Province."
 },
 {
 "Code":"QE50",
 "ShortDescription":"Unrecognized Country",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains an unrecognized country name."
 },
 {
 "Code":"QE60",
 "ShortDescription":"Incorrect E-mail Syntax",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains an e-mail address with an incorrect syntax."
 },
 {
 "Code":"QE61",
 "ShortDescription":"Misspelled Domain",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains an e-mail with a misspelled domain."
 },
 {
 "Code":"QE70",
 "ShortDescription":"Unrecognizable Phone",
-"FatalAddressError":"true",
+"FatalAddressError":"false",
 "LongDescription":"The value contains an unrecognizable phone number."
 },
 {

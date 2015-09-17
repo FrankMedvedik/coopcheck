@@ -3,10 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
-             xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
+             xmlns:edit="clr-namespace:CoopCheck.WPF.Content.Voucher.Edit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -16,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
-                <voucher:BatchEditView x:Name="be" BatchNum="-1" />
+                <edit:BatchEditView x:Name="be" BatchNum="-1" />
             </ScrollViewer>
         </Grid>
         <Grid  Grid.Row="1">

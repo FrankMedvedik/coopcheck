@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public partial class NewVoucherView : UserControl
     {

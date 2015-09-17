@@ -5,7 +5,7 @@ using CoopCheck.WPF.Models;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
 
     public class NewVoucherViewModel : ViewModelBase
