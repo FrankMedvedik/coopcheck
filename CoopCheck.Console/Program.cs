@@ -12,7 +12,7 @@ namespace CoopCheck.ConsoleApp
             Console.WriteLine("Batches");
             foreach (var v in ctx.vwBatchRpts.Take(100).ToList())
             {
-                Console.WriteLine("{0} {1} {2}", v.job_num, v.batch_num, v.total_amount);
+                Console.WriteLine("{0} {1} {2}", NumberConverter.NumberToCurrencyText(v.job_num.GetValueOrDefault(0)), NumberConverter.NumberToCurrencyText(v.batch_num), NumberConverter.NumberToCurrencyText(v.total_amount.GetValueOrDefault(0)));
 
             };
             Console.ReadKey();

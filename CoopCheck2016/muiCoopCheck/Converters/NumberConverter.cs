@@ -8,7 +8,7 @@ namespace CoopCheck.WPF.Converters
 {
     public static class NumberConverter
     {
-        public static string NumberToCurrencyText(decimal number, MidpointRounding midpointRounding)
+        public static string NumberToCurrencyText(decimal number, MidpointRounding midpointRounding = MidpointRounding.ToEven)
         {
             // Round the value just in case the decimal value is longer than two digits
             number = Decimal.Round(number, 2, midpointRounding);

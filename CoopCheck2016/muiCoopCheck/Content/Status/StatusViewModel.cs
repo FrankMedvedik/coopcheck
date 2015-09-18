@@ -19,9 +19,10 @@ namespace CoopCheck.WPF.Content.Status
         {
             var s = new StatusInfo()
             {
-                StatusMessage = "HELLO WORLD",
-                ErrorMessage = "THIS IS AN ERROR",
-                IsBusy =true
+                StatusMessage = "Welcome to Coopcheck",
+                ErrorMessage = "",
+                IsBusy =false
+
             };
 
             Status = s;

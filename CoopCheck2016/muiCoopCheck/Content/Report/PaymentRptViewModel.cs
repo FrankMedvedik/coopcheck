@@ -121,7 +121,7 @@ namespace CoopCheck.WPF.Content.Rpt
                 };
                 try
                 {
-                   Payments = new ObservableCollection<vwPayment>(await PaymentSvc.GetPayments(Job.job_num));
+                   Payments = new ObservableCollection<vwPayment>(await RptSvc.GetPayments(Job.job_num));
                 }
                 catch (Exception e)
                 {

@@ -7,28 +7,30 @@ using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Models;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Services
 {
     public static class PaymentSvc 
     {
-        public static string Payee(string company, string fulllName)
-        {
-            if (company.Length != 0) return company;
-            return fulllName;
-        }
+        public static int MAX_PAYMENT_COUNT = 100;
 
+   
         public static async Task<StatusInfo> SwiftFulfillAsync(int accountId, int batchNum)
         {
-            StatusInfo i = new StatusInfo();
+            StatusInfo i = new StatusInfo()
+            {
+                StatusMessage = String.Format("Batch {0} Submitted for swiftpay ", batchNum)
+            };
+            // test code 
             //i.StatusMessage = "            StatusInfo i = new StatusInfo();
-            i.StatusMessage = "LETS PRETEND THE BATCH IS GONE TO BE PAID NOW... ";
-            System.Threading.Thread.Sleep(5000);
-            return i;
+            //i.StatusMessage = "LETS PRETEND THE BATCH IS GONE TO BE PAID NOW... ";
+            //System.Threading.Thread.Sleep(5000);
+            //return i;
             try
             {
              
-                // await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+                await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
             }
             catch (Exception e)
             {
@@ -49,194 +51,30 @@ namespace CoopCheck.WPF.Services
 
         private static StatusInfo PrintChecks(int accountId, int batchNum, int startingCheckNum)
         {
-            var app = new Microsoft.Office.Interop.Word.Application();
-            var doc = new Microsoft.Office.Interop.Word.Document();
-            doc = app.Documents.Add(Template: @Properties.Settings.Default.CheckTemplate);
             int checkNum = startingCheckNum;
             var b = BatchEdit.GetBatchEdit(batchNum);
 
             foreach (var c in b.Vouchers)
             {
-                try
+                var status = PaymentPrintSvc.PrintCheck(b, c, checkNum);
+                if (status.ErrorMessage == null)
                 {
-                    foreach (Microsoft.Office.Interop.Word.Field f in doc.Fields)
-                    {
-                        if (f.Code.Text.Contains("thank_you_1"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(b.ThankYou1 ?? "");
-
-                        }
-                        else if (f.Code.Text.Contains("thank_you_2"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(b.ThankYou2 ?? "");
-                        }
-
-                        else if (f.Code.Text.Contains("marketing_research_message"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(b.MarketingResearchMessage ?? "");
-                        }
-
-
-                        else if (f.Code.Text.Contains("job_num"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(b.JobNum.ToString());
-
-                        }
-
-                        else if (f.Code.Text.Contains("batch_num"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(b.Num.ToString());
-                        }
-
-                        else if (f.Code.Text.Contains("check_date"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(DateTime.Now.ToString("MMMM dd, yyyy"));
-                        }
-
-                        else if (f.Code.Text.Contains("check_num"))
-                        {
-                            f.Select();
-
-                            app.Selection.TypeText(checkNum.ToString());
-                        }
-                        else if (f.Code.Text.Contains("tran_amount"))
-                        {
-                            f.Select();
-
-                            app.Selection.TypeText(c.Amount.GetValueOrDefault().ToString());
-                        }
-
-                        else if (f.Code.Text.Contains("tran_amount"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(c.Amount.GetValueOrDefault().ToString());
-                        }
-
-                        else if (f.Code.Text.Contains("tran_amount_text"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(NumberConverter.NumberToCurrencyText(c.Amount.GetValueOrDefault(0),
-                                MidpointRounding.AwayFromZero));
-                        }
-
-                        else if (f.Code.Text.Contains("full_name"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(Payee(c.Company, c.FullName));
-                        }
-                        else if (f.Code.Text.Contains("address_1"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(c.AddressLine1);
-                        }
-                        else if (f.Code.Text.Contains("address_2"))
-                        {
-                            f.Select();
-                            if (c.AddressLine2.Length != 0)
-                                app.Selection.TypeText(c.AddressLine2 ?? "");
-
-                        }
-                        else if (f.Code.Text.Contains("address_3"))
-                        {
-                            f.Select();
-                            app.Selection.TypeText(String.Join(" ", c.Municipality, c.Region, c.PostalCode, c.Country));
-                        }
-                    }
+                    WriteCheckCommand.Execute(batchNum, accountId, checkNum);
+                    CommitCheckCommand.Execute(batchNum, checkNum);
+                    checkNum++;
+                    status.IsBusy = true;
+                    Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
                 }
-                catch (Exception e)
-                {
-                    new StatusInfo()
-                    {
-                        StatusMessage = String.Format("Error {0}, printing checks failed : Batch {1} Payee {2} Transaction Id {3}",
-                                  e.Message, batchNum, Payee(c.Company, c.FullName), c.Id),
-                        ErrorMessage = e.Message
-                    };
-                }
-                var list = WriteCheckCommand.Execute(batchNum, accountId, checkNum);
-                CommitCheckCommand.Execute(batchNum, checkNum);
-                checkNum++;
+                else
+                    return status;
             }
-            app.Visible = true;
             return new StatusInfo() 
-                    {
-                         StatusMessage =
-                            String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
-                                startingCheckNum, --checkNum)
-                    };
+            {
+                    StatusMessage =
+                    String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
+                        startingCheckNum, --checkNum)
+            };
       }
-        public static Task<int> NextCheckNum(int accountId)
-        {
-            return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));
-        }
 
-
-        public static async Task<List<vwPayment>> GetPayments(PaymentFinderCriteria crc)
-        {
-            IQueryable<vwPayment> query;
-            List<vwPayment> v;
-            using (var ctx = new CoopCheckEntities())
-            {
-                query =
-                    ctx.vwPayments.Where(
-                        x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate);
-                if (!String.IsNullOrEmpty(crc.CheckNumber))
-                {
-                    query = query.Where(x => x.check_num == crc.CheckNumber);
-
-                }
-                if (!String.IsNullOrWhiteSpace(crc.Email))
-                {
-                    query = query.Where(x => x.email.Contains(crc.Email));
-
-                }
-
-                if (!String.IsNullOrWhiteSpace(crc.PhoneNumber))
-                {
-                    query = query.Where(x => x.phone_number.Contains(crc.PhoneNumber));
-
-                }
-
-                if (!String.IsNullOrEmpty(crc.LastName))
-                {
-                    query = query.Where(x => x.last_name.Contains(crc.LastName));
-                }
-
-                if (!String.IsNullOrEmpty(crc.FirstName))
-                {
-                    query = query.Where(x => x.first_name.Contains(crc.FirstName));
-                }
-
-                if (!String.IsNullOrEmpty(crc.JobNumber))
-                {
-                    int n;
-                    if (int.TryParse(crc.JobNumber, out n))
-                        query = query.Where(x => x.job_num == n);
-                }
-
-                //string ob = String.IsNullOrEmpty(b.last_name) ? b.company : b.last_name;
-
-                v = await (from b in query
-                    select b).ToListAsync();
-            }
-            return v;
-        }
-
-        public static async Task<List<vwPayment>> GetPayments(int jobNum)
-        {
-            List<vwPayment> v; 
-            using (var ctx = new CoopCheckEntities())
-            {
-                v = await (from b in ctx.vwPayments
-                               where b.job_num == jobNum
-                               select b).ToListAsync();
-            }
-            return v;
-        }
-    }
+   }
 }

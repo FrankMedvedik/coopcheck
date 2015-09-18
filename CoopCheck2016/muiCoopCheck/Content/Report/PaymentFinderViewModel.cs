@@ -49,9 +49,13 @@ namespace CoopCheck.WPF.Content.Report
             {
                 _payments = value;
                 NotifyPropertyChanged();
-                Status = new StatusInfo()
+                string em = null;
+                if (Payments.Count == PaymentSvc.MAX_PAYMENT_COUNT)
+                        em = String.Format("Showing only the first {0} payments add additional criteria to limit your search",
+                            PaymentSvc.MAX_PAYMENT_COUNT);
+                 Status = new StatusInfo()
                 {
-                    ErrorMessage = "",
+                    ErrorMessage = em,
                     StatusMessage = String.Format("{0} Payments found", Payments.Count)
                 };
             }
@@ -65,8 +69,9 @@ namespace CoopCheck.WPF.Content.Report
         {
 
             PaymentFinderCriteria = new PaymentFinderCriteria();
-            PaymentFinderCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-365, 0, 0, 0));
+            PaymentFinderCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-30, 0, 0, 0));
             PaymentFinderCriteria.EndDate = DateTime.Today;
+            Payments = new ObservableCollection<vwPayment>();
             ShowGridData = false;
 
         }
@@ -121,7 +126,7 @@ namespace CoopCheck.WPF.Content.Report
             };
             try
             {
-                var c = new ObservableCollection<vwPayment>(await PaymentSvc.GetPayments(PaymentFinderCriteria));
+                var c = new ObservableCollection<vwPayment>(await RptSvc.GetPayments(PaymentFinderCriteria));
                 Payments = c;
 
             }

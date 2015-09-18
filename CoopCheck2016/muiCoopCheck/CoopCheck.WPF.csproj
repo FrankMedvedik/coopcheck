@@ -16,15 +16,16 @@
     <PublishUrl>C:\coopcheckpub\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>\\cc-prod.reckner.com\c%24\coopcheckpub\</UpdateUrl>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -199,6 +200,7 @@
     </Compile>
     <Compile Include="Content\Status\StatusViewModel.cs" />
     <Compile Include="Content\Voucher\Edit\BatchListViewModel.cs" />
+    <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Models\PaymentMethod.cs" />

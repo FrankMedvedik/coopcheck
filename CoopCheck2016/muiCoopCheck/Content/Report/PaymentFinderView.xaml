@@ -7,11 +7,13 @@
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         mc:Ignorable="d ignore">
     <Grid >
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" >
+        <Expander Header="payment search criteria" >
+            <StackPanel Orientation="Vertical" >
             <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Start Date" Width="100"   Margin="6"/>
                 <DatePicker SelectedDate="{Binding PaymentFinderCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6"  />
@@ -49,6 +51,7 @@
                 <Button Width="Auto" Margin="120,6,6,6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
             </StackPanel>
         </StackPanel>
+        </Expander>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
                       VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}"

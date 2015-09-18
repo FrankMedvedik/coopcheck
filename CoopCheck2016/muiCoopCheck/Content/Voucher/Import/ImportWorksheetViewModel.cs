@@ -357,7 +357,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             if (!ShowColumnErrorData)
             {
-                ExcelBook.AddMapping("NamePrefix", "FIRST NAME");
                 ExcelBook.AddMapping("First", "FIRST NAME");
                 ExcelBook.AddMapping("Last", "LAST NAME");
                 ExcelBook.AddMapping("AddressLine1", "ADDRESS 1");
