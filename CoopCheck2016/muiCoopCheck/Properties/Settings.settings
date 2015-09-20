@@ -15,10 +15,16 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CheckTemplate" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\RecknerCheck.dotx</Value>
+      <Value Profile="(Default)">RecknerCheck.dotx</Value>
     </Setting>
     <Setting Name="CheckDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:\temp\</Value>
+    </Setting>
+    <Setting Name="ReadAuth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">RECKNER\\CoopCheckReader</Value>
+    </Setting>
+    <Setting Name="WriteAuth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">RECKNER\\CoopCheckAdmin</Value>
     </Setting>
   </Settings>
 </SettingsFile>

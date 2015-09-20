@@ -130,6 +130,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
@@ -200,7 +202,9 @@
     </Compile>
     <Compile Include="Content\Status\StatusViewModel.cs" />
     <Compile Include="Content\Voucher\Edit\BatchListViewModel.cs" />
+    <Compile Include="Models\UserSecurityProfile.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
+    <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
@@ -562,6 +566,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Assets\RecknerCheck.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CoopCheck.Repository\CoopCheck.Repository.csproj">
@@ -588,8 +595,12 @@
     <Content Include="Assets\background.kitty.png" />
     <Content Include="Assets\background.love.jpg" />
     <Content Include="Assets\background.snowflakes.jpg" />
-    <Content Include="Content\Images\RecknerLogoLeft.jpg" />
-    <Content Include="Content\Images\RecknerLogoRight.jpg" />
+    <Resource Include="Assets\RecknerLogoLeft.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\RecknerLogoRight.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>

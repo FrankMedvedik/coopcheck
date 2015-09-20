@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace CoopCheck.WPF.Models
 {
     public class StatusInfo
@@ -23,6 +25,11 @@ namespace CoopCheck.WPF.Models
         {
             get { return _statusMessage; }
             set { _statusMessage = value; }
+        }
+
+        public string whoami
+        {
+            get { return Environment.UserName; }
         }
     }
 }

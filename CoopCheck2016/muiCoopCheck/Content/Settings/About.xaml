@@ -9,6 +9,10 @@
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="ABOUT" Style="{StaticResource Heading2}" />
+                <TextBlock Text="{Binding UserName}" Style="{StaticResource Heading2}" />
+                <TextBlock Text="{Binding CanRead}" />
+                <TextBlock Text="{Binding CanWrite}" />
+                
                 <TextBlock Text="TODO: provide information about the software" Margin="0,0,0,8" TextWrapping="Wrap" />
             </StackPanel>
         </ScrollViewer>

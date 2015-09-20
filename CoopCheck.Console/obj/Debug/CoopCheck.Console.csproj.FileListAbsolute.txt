@@ -1,0 +1,2 @@
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Debug\CoopCheck.Console.exe.config
+D:\githublocal\coopcheck\CoopCheck.Console\obj\Debug\CoopCheck.Console.csprojResolveAssemblyReference.cache

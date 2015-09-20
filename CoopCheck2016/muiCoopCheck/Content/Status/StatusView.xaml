@@ -12,6 +12,7 @@
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6" Text="{Binding Status.ErrorMessage}" Foreground="Red"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6" Text="{Binding Status.StatusMessage}" Foreground="Black"/>
             <mui:ModernProgressRing IsActive="{Binding Status.IsBusy}" Width="10" Height="10" Style="{StaticResource ChasingDotsProgressRingStyle}" />
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Margin="6" Text="{Binding Status.whoami}" Foreground="Black"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -13,6 +13,13 @@ namespace CoopCheck.WPF.Services
             return Task<BatchEdit>.Factory.StartNew(() => BatchEdit.GetBatchEdit(batchNum));
 
         }
+        public static Task<BatchEdit> GetNewBatchEditAsync()
+        {
+
+            return Task<BatchEdit>.Factory.StartNew(() => BatchEdit.NewBatchEdit());
+
+        }
+
 
         public static Task<int> NextCheckNum(int accountId)
         {

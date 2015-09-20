@@ -1,0 +1,12 @@
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\CoopCheck.ConsoleApp.exe.config
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\CoopCheck.ConsoleApp.exe
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\CoopCheck.ConsoleApp.pdb
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\CoopCheck.Repository.dll
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\EntityFramework.dll
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\EntityFramework.SqlServer.dll
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\CoopCheck.Repository.pdb
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\EntityFramework.xml
+D:\githublocal\coopcheck\CoopCheck.Console\bin\Release\EntityFramework.SqlServer.xml
+D:\githublocal\coopcheck\CoopCheck.Console\obj\Release\CoopCheck.ConsoleApp.csprojResolveAssemblyReference.cache
+D:\githublocal\coopcheck\CoopCheck.Console\obj\Release\CoopCheck.ConsoleApp.exe
+D:\githublocal\coopcheck\CoopCheck.Console\obj\Release\CoopCheck.ConsoleApp.pdb

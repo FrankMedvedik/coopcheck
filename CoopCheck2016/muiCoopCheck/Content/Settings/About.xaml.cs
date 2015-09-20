@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CoopCheck.WPF.Services;
 
 namespace CoopCheck.WPF.Content.Settings
 {
@@ -23,6 +24,13 @@ namespace CoopCheck.WPF.Content.Settings
         public About()
         {
             InitializeComponent();
-        }
+            UserName = Environment.UserDomainName + @"\\" + Environment.UserName;
+            CanRead = UserAuthSvc.CanRead(UserName) ? "Can Read" : "No Read";
+            CanWrite = UserAuthSvc.CanWrite(UserName) ? "Can Write" : "No write";
+
+    }
+        private string UserName;
+        private string CanRead;
+        private string CanWrite;
     }
 }

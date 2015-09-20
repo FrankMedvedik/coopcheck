@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
@@ -36,51 +37,65 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             get { return (SelectedBatch != null) ? SelectedBatch.IsDirty : false; }
         }
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
-        public ObservableCollection<VoucherImport> VoucherImports  {             
-            get { return _voucherImports ; }
+
+        public ObservableCollection<VoucherImport> VoucherImports
+        {
+            get { return _voucherImports; }
             set
             {
                 _voucherImports = value;
                 NotifyPropertyChanged();
-                StatusInfo s = new StatusInfo()
+                Status = new StatusInfo()
                 {
-                    StatusMessage = "Importing",
-                    ErrorMessage ="",
-                    IsBusy=true
+                    StatusMessage = "Importing vouchers please wait",
+                    IsBusy = true
                 };
 
-                Status = s;
-
-                if ((_voucherImports.Count > 0) )
+                if ((_voucherImports.Count > 0))
                 {
-                    SelectedBatch = BatchEdit.NewBatchEdit();
-                    try
-                    {
-                        SelectedBatch.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
-                    }
-                    catch (Exception e)
-                    {
-                        SelectedBatch.JobNum = -1;    
-                    }
-                    SelectedBatch.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-                    SelectedBatch.Date = DateTime.Today.ToShortDateString();
-                    SelectedBatch.Save();
-                    try
-                    {
-                        foreach (var v in VoucherImports)
-                            SelectedBatch.Vouchers.Add(v.ToVoucherEdit());
-                        s.ErrorMessage = "";
-                        s.StatusMessage = string.Format("Imported {0} Vouchers", SelectedBatch.Vouchers.Count);
-                        Status = s;
-                    }
-                    catch (Exception e)
-                    {
-                        s.ErrorMessage = e.Message;
-                        s.StatusMessage = "Error Importing Vouchers";
-                        Status = s;
-                    }
+                    ImportVouchers();
                 }
             }
+        }
+
+        private async void ImportVouchers()
+        {
+            var z =  Task.Factory.StartNew(async () =>
+            {
+                var sb  = await BatchSvc.GetNewBatchEditAsync();
+                try
+                {
+                    sb.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
+                }
+                catch (Exception e)
+                {
+                    sb.JobNum = -1;
+                }
+                sb.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
+                sb.Date = DateTime.Today.ToShortDateString();
+                sb.Save();
+
+                try
+                {
+                    foreach (var v in VoucherImports)
+                        sb.Vouchers.Add(v.ToVoucherEdit());
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = string.Format("Imported {0} Vouchers",
+                            SelectedBatch.Vouchers.Count)
+                    };
+
+                }
+                catch (Exception e)
+                {
+                    Status = new StatusInfo()
+                    {
+                        ErrorMessage = e.Message,
+                        StatusMessage = "Error Importing Vouchers"
+                    };
+                }
+                SelectedBatch = sb;
+            });
         }
 
         public StatusInfo Status

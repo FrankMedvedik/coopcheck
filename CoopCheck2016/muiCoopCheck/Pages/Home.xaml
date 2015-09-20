@@ -17,8 +17,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                  <Image Source="D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\Content\Images\RecknerLogoLeft.jpg"/>
-                    <Image Source="D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\Content\Images\RecknerLogoRight.jpg"/>
+                    <Image Source="D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\Assets\RecknerLogoLeft.jpg"/>
+                    <Image Source="D:\githublocal\coopcheck\CoopCheck2016\muiCoopCheck\Assets\RecknerLogoRight.jpg"/>
                 </StackPanel>
                 <TextBlock Text="CoopCheck" FontSize="32" Grid.Row="1" FontWeight="Bold"  Margin="10"/>
             </Grid>

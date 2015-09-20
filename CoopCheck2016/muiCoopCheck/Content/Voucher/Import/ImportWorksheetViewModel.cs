@@ -429,6 +429,12 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         public void CreateVoucherBatch()
         {
             CanImport = false;
+            Status = new StatusInfo()
+            {
+                StatusMessage = "Importing vouchers please wait",
+                IsBusy = true,
+                ErrorMessage = ""
+            };
         }
     }
 }
