@@ -87,5 +87,17 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
+        public static async Task<List<vwPositivePay>> GetPositivePayRpt(ReportDateRange reportDateRange)
+        {
+            using (var ctx = new CoopCheckEntities())
+            {
+                var x = await(
+                    from l in ctx.vwPositivePay
+                    where ((l.check_date >= reportDateRange.StartRptDate) && (l.check_date <= reportDateRange.EndRptDate))
+                    orderby l.check_date
+                    select l).ToListAsync();
+                return x;
+            }
+        }
     }
 }

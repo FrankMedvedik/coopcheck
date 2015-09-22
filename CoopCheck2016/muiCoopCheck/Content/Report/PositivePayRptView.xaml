@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="CoopCheck.WPF.Content.Report.PositivePayRptView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:rpt="clr-namespace:CoopCheck.WPF.Content.Rpt"
+             mc:Ignorable="d" >
+    <Grid x:Name="LayoutRoot" >
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition  Height="Auto"/>
+        </Grid.RowDefinitions>
+            <TextBlock Text="{Binding HeadingText}" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="6"/>
+        <Button Grid.Row="1" Content="Save" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="btnSaveFile_Click"/>
+        <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="2"  Width="Auto" VerticalScrollBarVisibility="Auto"  
+                  HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding Path=PositivePays, Mode=TwoWay}"  VerticalAlignment="Top" 
+                      SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay}" MaxHeight="800"
+                    ToolTipService.ToolTip="Positive Payment Report" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
+                <DataGrid.Columns>
+                <mui:DataGridTextColumn Binding="{Binding rpt}"  Header="bank data"/>
+                <mui:DataGridTextColumn Binding="{Binding account_number}" Header="Account Number" />
+                <mui:DataGridTextColumn Binding="{Binding check_num}" Header="Check Number" />
+                <mui:DataGridTextColumn Binding="{Binding tran_amount,  StringFormat=c}"  Header="Check Amount"/>
+                <mui:DataGridTextColumn Binding="{Binding check_date, StringFormat=d}" Header="Check Date"/>
+                <mui:DataGridTextColumn Binding="{Binding payee}" Header="Payee"/>
+                </DataGrid.Columns>
+            </DataGrid>
+    </Grid>
+</UserControl>

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
@@ -34,7 +35,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         }
         public bool IsDirty
         {
-            get { return (SelectedBatch != null) ? SelectedBatch.IsDirty : false; }
+            get { return SelectedBatch != null && UserCanWrite && SelectedBatch.IsDirty; }
         }
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
 
@@ -117,23 +118,29 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             ResetState();
             Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, message =>
             {
-                BatchNum = message.Content.batch_num;
+                if(message.Content != null)
+                    BatchNum = message.Content.batch_num;
             });
         }
 
         public void ResetState()
         {
             ShowSelectedBatch = false;
-            Status = new StatusInfo()
-            {
-                StatusMessage = "fill and verify the details about the voucher batch ",
-                ErrorMessage = ""
-            };
+            Status = new StatusInfo();
+            //{
+            //    StatusMessage = "fill and verify the details about the voucher batch ",
+            //    ErrorMessage = ""
+            //};
+
+            UserCanRead = UserAuth.Instance.CanRead;
+            UserCanWrite = UserAuth.Instance.CanWrite;
         }
 
         private StatusInfo _status;
         private BatchEdit _selectedBatch;
         private VoucherEdit _selectedVoucher;
+        private bool _userCanWrite;
+        private bool _userCanRead;
 
         public BatchEdit SelectedBatch
         {
@@ -145,11 +152,11 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 if (SelectedBatch != null)
                 {
                     ShowSelectedBatch = true;
+                    HeaderText = string.Format("Batch Number {0} Job Number {1}  Voucher Cnt {2} Total Amount {3:C}",
+                        SelectedBatch.Num, SelectedBatch.JobNum, SelectedBatch.Vouchers.Count, SelectedBatch.Amount.GetValueOrDefault(0));
                     Status = new StatusInfo()
                     {
-                        StatusMessage =
-                            string.Format("Batch Number {0} Job Number {1}  Total Amount {2:C}", SelectedBatch.Num,
-                                SelectedBatch.JobNum, SelectedBatch.Amount.GetValueOrDefault(0))
+                        StatusMessage = HeaderText
                     };
                 }
                 else
@@ -190,11 +197,17 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             SelectedBatch =  await BatchSvc.GetBatchEditAsync(batchNum);
         }
+
+        private string _headerText;
         public string HeaderText
         {
             get
             {
-                return Status.StatusMessage;
+                return _headerText;
+            }
+            set
+            {
+                _headerText = value;
             }
         }
 
@@ -225,20 +238,75 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public async void  Save()
         {
-            if (SelectedBatch.IsSavable)
+            if ((SelectedBatch.IsSavable) && UserCanWrite)
             {
                 Status = new StatusInfo()
                 { StatusMessage = "saving...", IsBusy = true };
                 await SelectedBatch.SaveAsync();
                 Status = new StatusInfo() { StatusMessage = "saved" };
             }
-
             else
-                Status = new StatusInfo()
+                if(UserCanWrite)
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "Batch cannot be saved until all vouchers are valid",
+                        ErrorMessage = "cannot save"
+                    };
+        }
+        public bool UserCanWrite
+        {
+            get { return _userCanWrite; }
+            set
+            {
+                _userCanWrite = value;
+            }
+        }
+
+        public bool UserCanRead
+        {
+            get { return _userCanRead; }
+            set
+            {
+                _userCanRead = value;
+            }
+        }
+
+        public void DeleteSelectedVoucher()
+        {
+            if (SelectedBatch != null && UserCanWrite)
+            {
+                SelectedBatch.Vouchers.Remove(SelectedVoucher.Id);
+            }
+        }
+        public void AddVoucher()
+        {
+            if (SelectedBatch != null)
+            {
+                VoucherEditChildWindow cw = new VoucherEditChildWindow();
+                cw.ShowInTaskbar = false;
+                cw.Owner = Application.Current.MainWindow;
+                cw.Show();
+                // need to display form with elements and 
+                // 
+                //SelectedBatch.Vouchers.Add(  );
+            }
+        }
+
+        public async void Delete()
+        {
+            if (SelectedBatch != null)
+            {
+                if (UserCanWrite)
                 {
-                    StatusMessage = "Batch cannot be saved until all vouchers are valid",
-                    ErrorMessage = "cannot save"
-                };
+                    await BatchSvc.DeleteBatchEditAsync(SelectedBatch.Num);
+                    Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "Batch has been deleted",
+                    };
+                    ResetState();
+                }
+            };
         }
     }
 }

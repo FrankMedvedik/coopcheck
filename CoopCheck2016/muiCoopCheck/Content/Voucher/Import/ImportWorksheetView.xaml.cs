@@ -54,12 +54,20 @@ namespace CoopCheck.WPF.Content.Voucher.Import
            DependencyProperty.Register("Vouchers", typeof(List<VoucherImport>), typeof(ImportWorksheetView),
                new PropertyMetadata(new List<VoucherImport>()));
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Next_Click(object sender, RoutedEventArgs e)
         {
             _vm.CreateVoucherBatch();
             bev.VoucherImports = _vm.VoucherImports;
             bev.Visibility = Visibility.Visible;
-
+            btnClose.Visibility = Visibility.Visible;
         }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.ResetState();
+            bev.Visibility = Visibility.Collapsed;
+            btnClose.Visibility = Visibility.Collapsed;
+        }
+
     }
+
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
              mc:Ignorable="d" >
     <Control.Resources>
         <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
@@ -28,12 +29,30 @@
         <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Expander Header="Batch Details" Grid.Row="0">
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                 <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6" />
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Batch Date" Width="100"   Margin="6"/>
+                    <TextBlock  Text="{Binding SelectedBatch.Date }"  Margin="6"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Payment Date" Width="100"  HorizontalAlignment="Right" Margin="6"/>
+                    <TextBlock  Text="{Binding SelectedBatch.PayDate}"  Margin="6"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="Save" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding IsDirty}"  Margin="6" Click="Save_Click" IsDefault="True"/>
+                    <Button Content="Pay" Margin="10" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
+                    <Button Content="Delete " HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="Delete_Click" />
+                    <!--<voucher:PayVoucherView Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+                </StackPanel>
+            </StackPanel>
+            <Expander Header="Batch Details" Grid.Row="1">
             <StackPanel Orientation="Vertical" >
-                <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6"/>
                     <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="Job" VerticalAlignment="Top" Width="100"  Margin="6"/>
@@ -42,8 +61,8 @@
                     <StackPanel Orientation="Horizontal" Name="File">
                         <TextBlock Text="Date" Width="100"   Margin="6"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.Date, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Margin="6" TabIndex="2" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
+                    <!--</StackPanel>
+                    <StackPanel Orientation="Horizontal" >-->
                         <TextBlock Text="Payment Date" Width="100"   HorizontalAlignment="Right" Margin="6"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" TabIndex="3" />
                     </StackPanel>
@@ -70,28 +89,39 @@
                 </StackPanel>
             </StackPanel>
         </Expander>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Content="Save" IsEnabled="{Binding IsDirty}" Click="Button_Click"/>
-        </StackPanel>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  MaxHeight="600" Grid.Row="2"
-                MaxWidth="1200" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher}"
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  MaxHeight="600" Grid.Row="2"
+                MaxWidth="1200" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}"
                       Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single"  >
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                     <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
+                    <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding NamePrefix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Prefix" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <!--<mui:DataGridTextColumn Binding="{Binding NamePrefix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Prefix" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Suffix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Suffix" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding Title, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Title" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <mui:DataGridTextColumn Binding="{Binding Title, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Title" EditingElementStyle="{StaticResource CellEditStyle}"/>-->
                 </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <!--<TextBlock Text="Caller's current time" Margin="6"/>
+                        <TextBlock Text="{Binding caller_current_time, StringFormat=t}" Margin="6"/>
+                        <Button Name="Call"  Width="80" Margin="3,6,3,6" Click="Call_Click" IsEnabled="{Binding DataContext.CanCall, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}">Call</Button>
+                        <TextBlock Text="{Binding DataContext.ActionMsg, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" Foreground="Red"  Margin="6"/>-->
+                        <Button Margin="6,6,6,6"  HorizontalAlignment="Right" Click="DeleteVoucher_Click" Width="80" >Delete</Button>
+                    </WrapPanel>
+                </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
             </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button Content="Add Voucher" IsEnabled="{Binding UserCanWrite}"  Margin="6" Width="100"  Click="AddVoucher_Click"/>
+       </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

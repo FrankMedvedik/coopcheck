@@ -22,11 +22,12 @@ namespace CoopCheck.WPF.Services
 
         private static Boolean IsGroupMember(string userName, string Group)
         {
-            #if DEBUG
-            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
-            #else
+#if DEBUG
+             PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
+           //PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+#else
             PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
-            #endif
+#endif
 
             var findByIdentity = UserPrincipal.FindByIdentity(ctx, userName);
             bool retVal = false;

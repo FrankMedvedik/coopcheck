@@ -1,5 +1,6 @@
 ﻿
 using System;
+using CoopCheck.WPF.Content;
 
 namespace CoopCheck.WPF.Models
 {
@@ -29,7 +30,7 @@ namespace CoopCheck.WPF.Models
 
         public string whoami
         {
-            get { return Environment.UserName; }
+            get { return UserAuth.Instance.UserName; }
         }
     }
 }

@@ -34,6 +34,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public BatchListViewModel()
         {
             ResetState();
+
+            Messenger.Default.Register<NotificationMessage>(this, message =>
+            {
+                if(message.Notification == Notifications.RefreshOpenBatchList)
+                    ResetState();
+            });
+
         }
 
         private async void ResetState()

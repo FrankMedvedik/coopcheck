@@ -6,6 +6,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
+             xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              mc:Ignorable="d" >
     <Grid>
                 <Grid.RowDefinitions>
@@ -13,8 +14,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
-                    <ScrollViewer>
-                        <voucher:PayVoucherView/>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <voucher:PayVoucherView x:Name="pfv"/>
+                        <content:NoAccessView x:Name="nov" />
+                    </StackPanel>
                     </ScrollViewer>
                 </Grid>
                 <Grid  Grid.Row="1">

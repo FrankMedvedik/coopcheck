@@ -20,7 +20,12 @@ namespace CoopCheck.WPF.Services
 
         }
 
+        public static Task DeleteBatchEditAsync(int batchNum)
+        {
 
+            return Task.Factory.StartNew(() => BatchEdit.DeleteBatchEdit(batchNum));
+
+        }
         public static Task<int> NextCheckNum(int accountId)
         {
             return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));

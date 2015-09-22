@@ -6,15 +6,21 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:bankAccount="clr-namespace:CoopCheck.WPF.Content.BankAccount"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:content="clr-namespace:CoopCheck.WPF.Content"
+             mc:Ignorable="d" >
     <Grid>
     <Grid.RowDefinitions>
         <RowDefinition Height="9*"/>
         <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Grid Style="{StaticResource ContentRoot}" >
-            <bankAccount:AccountView />
+            <ScrollViewer >
+                <StackPanel Orientation="Vertical">
+                    <bankAccount:AccountView x:Name="av"/>
+                    <content:NoAccessView x:Name="nov" />
+                </StackPanel>
+            </ScrollViewer>
+            
     </Grid>
     <Grid  Grid.Row="1" >
             <status:StatusView />

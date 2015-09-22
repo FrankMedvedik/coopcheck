@@ -16,9 +16,9 @@ namespace CoopCheck.Repository
     {
         public int job_num { get; set; }
         public Nullable<int> batch_cnt { get; set; }
-        public DateTime? first_batch_date { get; set; }
-        public DateTime? last_batch_date { get; set; }
-        public DateTime? first_pay_date { get; set; }
+        public Nullable<System.DateTime> first_batch_date { get; set; }
+        public Nullable<System.DateTime> last_batch_date { get; set; }
+        public Nullable<System.DateTime> first_pay_date { get; set; }
         public Nullable<System.DateTime> last_pay_date { get; set; }
         public Nullable<int> total_cnt { get; set; }
         public Nullable<int> open_cnt { get; set; }

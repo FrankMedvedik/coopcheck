@@ -97,5 +97,29 @@ namespace CoopCheck.WPF.Properties {
                 return ((string)(this["WriteAuth"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AppearanceManager.LightThemeSource")]
+        public string SelectedAccentColor {
+            get {
+                return ((string)(this["SelectedAccentColor"]));
+            }
+            set {
+                this["SelectedAccentColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedTheme {
+            get {
+                return ((string)(this["SelectedTheme"]));
+            }
+            set {
+                this["SelectedTheme"] = value;
+            }
+        }
     }
 }

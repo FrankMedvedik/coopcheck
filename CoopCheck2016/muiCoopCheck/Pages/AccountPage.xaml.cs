@@ -10,6 +10,20 @@ namespace CoopCheck.WPF.Content
         public AccountsPage()
         {
             InitializeComponent();
+            DataContext = this;
+            if (UserAuth.Instance.CanRead)
+            {
+                av.Visibility = System.Windows.Visibility.Visible;
+                nov.Visibility = System.Windows.Visibility.Collapsed;
+
+            }
+            else
+            {
+                av.Visibility = System.Windows.Visibility.Collapsed;
+                nov.Visibility = System.Windows.Visibility.Visible;
+            }
+
         }
     }
-}
+    }
+

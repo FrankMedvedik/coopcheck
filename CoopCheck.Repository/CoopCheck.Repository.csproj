@@ -111,10 +111,16 @@
     <Compile Include="vwBatchRpt.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwCheck.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwJobRpt.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vwPayment.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwPositivePay.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

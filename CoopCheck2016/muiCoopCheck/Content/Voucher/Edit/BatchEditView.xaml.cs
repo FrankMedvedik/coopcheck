@@ -39,9 +39,36 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public static readonly DependencyProperty VoucherImportsProperty =
         DependencyProperty.Register("VoucherImports", typeof(ObservableCollection<VoucherImport>), typeof(BatchEditView), new PropertyMetadata(new ObservableCollection<VoucherImport>()));
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
             _vm.Save();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (_vm.SelectedBatch == null) return;
+            MessageBoxResult result = MessageBox.Show("Delete this entire batch of vouchers?", "Confirm", MessageBoxButton.OKCancel);
+
+            if (result == MessageBoxResult.OK)
+            {
+                _vm.Delete(); ;
+            }
+        }
+
+        private void DeleteVoucher_Click(object sender, RoutedEventArgs e)
+        {
+                // set the status of the callback to closed
+                if (_vm.SelectedVoucher == null) return;
+                MessageBoxResult result = MessageBox.Show("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    _vm.DeleteSelectedVoucher();
+                }
+            }
+
+        private void AddVoucher_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.AddVoucher();
         }
     }
 }

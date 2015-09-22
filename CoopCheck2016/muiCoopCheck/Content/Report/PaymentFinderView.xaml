@@ -23,32 +23,32 @@
                 <DatePicker SelectedDate="{Binding PaymentFinderCriteria.EndDate, StringFormat=d, Mode=TwoWay}" Margin="6"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Job" Width="100"  Margin="6"  />
+                    <TextBlock Text="Job" Width="100"  Margin="6" ToolTip="enter all or part of the job number you are looking for" />
                 <TextBox Width="110" Text="{Binding PaymentFinderCriteria.JobNumber, Mode=TwoWay}" Margin="6" />
                 </StackPanel>
             <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Email" Width="100"  Margin="6"  />
+                    <TextBlock Text="Email" Width="100"  Margin="6" ToolTip="enter all or part of the email address you are looking for" />
                 <TextBox Width="300" Text="{Binding PaymentFinderCriteria.Email, Mode=TwoWay}" Margin="6" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Phone" Width="100"  Margin="6"  />
-                <TextBox Width="300" Text="{Binding PaymentFinderCriteria.PhoneNumber, Mode=TwoWay}" Margin="6" />
+                    <TextBox Width="300" Text="{Binding PaymentFinderCriteria.PhoneNumber, Mode=TwoWay}" Margin="6" ToolTip="enter all or part of the phone number you are looking for"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Check Number" Width="100"   Margin="6"/>
-                <TextBox Width="300" Text="{Binding PaymentFinderCriteria.CheckNumber, Mode=TwoWay}" Margin="6" />
+                    <TextBox Width="300" Text="{Binding PaymentFinderCriteria.CheckNumber, Mode=TwoWay}" Margin="6" ToolTip="the check or (swift) payment code you are looking for"/>
             </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Last Name" Margin="6" Width="100" />
+                    <TextBlock Text="Last Name" Margin="6" Width="100"  ToolTip="enter all or part of the last name you are looking for"/>
                 <TextBox Width="300" Text="{Binding PaymentFinderCriteria.LastName, Mode=TwoWay}" Margin="6" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="First Name" Margin="6" Width="100" />
+                    <TextBlock Text="First Name" Margin="6" Width="100" ToolTip="enter all or part of the first name you are looking for"/>
                 <TextBox Width="300" Text="{Binding PaymentFinderCriteria.FirstName, Mode=TwoWay}" Margin="6" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
                 <Button Width="Auto" Margin="120,6,6,6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
-                <Button Width="Auto" Margin="120,6,6,6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
+                <Button Width="Auto" Margin="115,6,6,6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
             </StackPanel>
         </StackPanel>
         </Expander>

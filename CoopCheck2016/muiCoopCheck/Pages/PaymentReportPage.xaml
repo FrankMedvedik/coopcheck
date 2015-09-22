@@ -7,6 +7,7 @@
              xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
              xmlns:rpt="clr-namespace:CoopCheck.WPF.Content.Rpt"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
+             xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid>
@@ -16,10 +17,15 @@
         </Grid.RowDefinitions>
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
-                <StackPanel  Orientation="Vertical">
-                    <Rpt:GlobalReportCriteriaView />
-                    <Rpt:JobRptView />
-                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                        <StackPanel  Orientation="Vertical" x:Name="prv">
+                            <Rpt:GlobalReportCriteriaView />
+                            <Rpt:JobRptView />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" x:Name="nov">
+                        <content:NoAccessView />
+                    </StackPanel>
+                    </StackPanel>
             </ScrollViewer>
         </Grid>
         <Grid  Grid.Row="1">

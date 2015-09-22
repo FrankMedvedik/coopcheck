@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.WPF.Content;
 
 namespace CoopCheck.WPF.Pages
 {
@@ -9,7 +10,18 @@ namespace CoopCheck.WPF.Pages
     {
         public OpenBatchPage()
         {
-            InitializeComponent();
+            InitializeComponent(); DataContext = this;
+            if (UserAuth.Instance.CanRead)
+            {
+                cv.Visibility = System.Windows.Visibility.Visible;
+                nov.Visibility = System.Windows.Visibility.Collapsed;
+
+            }
+            else
+            {
+                cv.Visibility = System.Windows.Visibility.Collapsed;
+                nov.Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }

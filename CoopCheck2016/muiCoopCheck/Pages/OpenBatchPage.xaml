@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CoopCheck.WPF.Pages.OpenBatchPage"
+﻿<UserControl xmlns:Content="clr-namespace:CoopCheck.WPF.Content"  x:Class="CoopCheck.WPF.Pages.OpenBatchPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,11 +14,16 @@
         </Grid.RowDefinitions>
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" x:Name="cv">
                     <Expander  Header="Open Batches" >
                         <edit:BatchListView HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Expander>
                     <edit:BatchEditView HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" x:Name="nov">
+                    <Content:NoAccessView />
+                </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

@@ -21,16 +21,14 @@ namespace CoopCheck.WPF.Content.Settings
     /// </summary>
     public partial class About : UserControl
     {
+        private AboutViewModel _vm;
         public About()
         {
             InitializeComponent();
-            UserName = Environment.UserDomainName + @"\\" + Environment.UserName;
-            CanRead = UserAuthSvc.CanRead(UserName) ? "Can Read" : "No Read";
-            CanWrite = UserAuthSvc.CanWrite(UserName) ? "Can Write" : "No write";
+            _vm = new AboutViewModel();
+            DataContext = _vm;
 
-    }
-        private string UserName;
-        private string CanRead;
-        private string CanWrite;
+        }
+        
     }
 }

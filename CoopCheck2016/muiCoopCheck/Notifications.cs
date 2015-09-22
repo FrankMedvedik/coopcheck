@@ -1,4 +1,6 @@
-﻿namespace CoopCheck.WPF
+﻿using GalaSoft.MvvmLight.Messaging;
+
+namespace CoopCheck.WPF
 {
     public static class Notifications
     {
@@ -31,6 +33,11 @@
         public static string OpenBatchChanged
         {
             get { return "OpenBatchChanged"; }
+        }
+
+        public static string RefreshOpenBatchList
+        {
+            get { return "RefreshOpenBatchList"; }
         }
     }
 }

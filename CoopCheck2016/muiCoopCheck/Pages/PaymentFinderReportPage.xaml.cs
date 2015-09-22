@@ -9,7 +9,18 @@ namespace CoopCheck.WPF.Content.Report
     {
         public PaymentFinderReportPage()
         {
-            InitializeComponent();
+            InitializeComponent(); DataContext = this;
+            if (UserAuth.Instance.CanRead)
+            {
+                pfv.Visibility = System.Windows.Visibility.Visible;
+                nov.Visibility = System.Windows.Visibility.Collapsed;
+
+            }
+            else
+            {
+                pfv.Visibility = System.Windows.Visibility.Collapsed;
+                nov.Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }
