@@ -96,6 +96,8 @@ namespace CoopCheck.WPF.Models
         private string _firstName;
 
         private bank_account _account;
+        private int? _batchNumber;
+
         public bank_account Account
         {
             get { return _account; }
@@ -118,6 +120,17 @@ namespace CoopCheck.WPF.Models
             }
         }
 
+        public int? BatchNumber
+        {
+            get { return _batchNumber; }
+            set
+            {
+                _batchNumber = value;
+                NotifyPropertyChanged(); 
+                
+            }
+        }
+
         public string ToFormattedString(char token)
         {
             var v = new List<KeyValuePair<string, string>>();
@@ -125,6 +138,8 @@ namespace CoopCheck.WPF.Models
 
             if (Account != null)
                 v.Add(new KeyValuePair<string, string>("Account", Account.account_name));
+            if (BatchNumber != null)
+                v.Add(new KeyValuePair<string, string>("Batch", BatchNumber.ToString()));
             if (JobNumber != null)
                 v.Add(new KeyValuePair<string, string>("JobNum", JobNumber.ToString()));
             v.Add(new KeyValuePair<string, string>("StartDate", StartDate.ToString("yyyyMMdd")));

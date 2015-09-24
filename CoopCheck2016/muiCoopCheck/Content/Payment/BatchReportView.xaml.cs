@@ -1,10 +1,7 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using CoopCheck.WPF.Content.Report;
+﻿using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF.Content.Report
+namespace CoopCheck.WPF.Content.Payment
 {
     /// <summary>
     /// </summary>

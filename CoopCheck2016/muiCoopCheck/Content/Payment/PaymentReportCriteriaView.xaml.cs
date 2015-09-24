@@ -1,11 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Payment;
+﻿using System.Windows.Controls;
 using CoopCheck.WPF.Models;
-using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Report
+namespace CoopCheck.WPF.Content.Payment
 {
     public partial class PaymentReportCriteriaView : UserControl
     {

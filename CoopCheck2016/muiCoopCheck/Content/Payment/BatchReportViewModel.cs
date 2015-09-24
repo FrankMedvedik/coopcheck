@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using CoopCheck.Repository;
-using GalaSoft.MvvmLight.Messaging;
-using CoopCheck.WPF.Content.Report;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Report
+namespace CoopCheck.WPF.Content.Payment
 {
     public class BatchReportViewModel : ViewModelBase
     {
@@ -47,17 +45,17 @@ namespace CoopCheck.WPF.Content.Report
         }
 
 
-        private ObservableCollection<vwBatchRpt> _Batchs = new ObservableCollection<vwBatchRpt>();
-        public ObservableCollection<vwBatchRpt> Batchs
+        private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
+        public ObservableCollection<vwBatchRpt> Batches
         {
-            get { return _Batchs; }
+            get { return _batches; }
             set
             {
-                _Batchs = value;
+                _batches = value;
                 NotifyPropertyChanged();
                 ShowGridData = true;
                 HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}",
-                                        Batchs.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
+                                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -103,6 +101,7 @@ namespace CoopCheck.WPF.Content.Report
             set
             {
                 _paymentReportCriteria = value;
+                GetBatchs();
             }
         }
 
@@ -117,7 +116,7 @@ namespace CoopCheck.WPF.Content.Report
                     IsBusy = true,
                     StatusMessage = "refreshing Batch list..."
                 };
-                Batchs = new ObservableCollection<vwBatchRpt>(await RptSvc.GetBatchRpt(PaymentReportCriteria));
+                Batches = new ObservableCollection<vwBatchRpt>(await RptSvc.GetBatchRpt(PaymentReportCriteria));
             }
             catch (Exception e)
             {

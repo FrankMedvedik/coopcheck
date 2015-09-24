@@ -2,13 +2,10 @@
 using CoopCheck.WPF.Content;
 
 namespace CoopCheck.WPF.Pages
-{
-    /// <summary>
-    /// Interaction logic for AccountsPage.xaml
-    /// </summary>
-    public partial class PositivePayPage : UserControl
+{ 
+    public partial class JobSummaryReportPage : UserControl
     {
-        public PositivePayPage()
+        public JobSummaryReportPage()
         {
             InitializeComponent();
             DataContext = this;

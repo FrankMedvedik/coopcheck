@@ -56,11 +56,7 @@ namespace CoopCheck.WPF.Services
 
                 }
 
-                if (crc.Account.account_id !=null)
-                {
-                    query = query.Where(x => x.account_id == crc.Account.account_id);
-
-                }
+                query = query.Where(x => x.account_id == crc.Account.account_id);
 
                 if (!String.IsNullOrWhiteSpace(crc.Email))
                 {
@@ -92,6 +88,13 @@ namespace CoopCheck.WPF.Services
                 if (crc.IsPrinted)
                 {
                     query = query.Where(x => x.print_flag == true);
+                }
+
+                if (crc.BatchNumber != null)
+                {
+                    query =
+                        query.Where(
+                            x => x.batch_num == crc.BatchNumber);
                 }
 
                 if (!String.IsNullOrEmpty(crc.JobNumber))
@@ -126,15 +129,15 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwPositivePay>> GetPositivePayRpt(GlobalReportCriteria grc)
+        public static async Task<List<vwPositivePay>> GetPositivePayRpt(PaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
                 var x = await(
                     from l in ctx.vwPositivePay
-                    where ((l.check_date >= grc.ReportDateRange.StartRptDate) 
-                        && (l.check_date <= grc.ReportDateRange.EndRptDate) 
-                        && l.account_number == grc.SelectedAccount.account_number)
+                    where ((l.check_date >= grc.StartDate) 
+                        && (l.check_date <= grc.EndDate) 
+                        && l.account_number == grc.Account.account_number)
                     orderby l.check_date
                     select l).ToListAsync();
                 return x;

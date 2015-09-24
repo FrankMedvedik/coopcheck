@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CoopCheck.WPF.Content.Report.PositivePayRptView"
+﻿<UserControl xmlns:Payment="clr-namespace:CoopCheck.WPF.Content.Payment"  x:Class="CoopCheck.WPF.Content.Payment.PositivePayReportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,9 +13,11 @@
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
-            <TextBlock Text="{Binding HeadingText}" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="6"/>
-        <Button Grid.Row="1" Content="Save" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="btnSaveFile_Click"/>
-        <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="2"  Width="Auto" VerticalScrollBarVisibility="Auto"  
+        <Payment:PaymentReportCriteriaView Grid.Row="0"  x:Name="prcv" />
+        <Button Grid.Row="1" Content="Refresh" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="Button_Click"/>
+            <TextBlock Text="{Binding HeadingText}" Grid.Row="2" HorizontalAlignment="Stretch" Margin="6"/>
+        <Button Grid.Row="3" Content="Save" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="btnSaveFile_Click"/>
+        <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="4"  Width="Auto" VerticalScrollBarVisibility="Auto"  
                   HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding Path=PositivePays, Mode=TwoWay}"  VerticalAlignment="Top" 
                       SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay}" MaxHeight="800"
                     ToolTipService.ToolTip="Positive Payment Report" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >

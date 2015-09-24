@@ -214,10 +214,22 @@
     <Compile Include="Content\ModernFrame\Sample.xaml.cs">
       <DependentUpon>Sample.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\BatchReportView.xaml.cs">
+    <Compile Include="Content\Payment\BatchReportView.xaml.cs">
       <DependentUpon>BatchReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\BatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\BatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\JobSummaryPaymentReportView.xaml.cs">
+      <DependentUpon>JobSummaryPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\BatchSummaryPaymentReportView.xaml.cs">
+      <DependentUpon>BatchSummaryPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\JobSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\BatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\JobReportView.xaml.cs">
+      <DependentUpon>JobReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\JobReportViewModel.cs" />
     <Compile Include="Content\Report\PaymentReportView.xaml.cs">
       <DependentUpon>PaymentReportView.xaml</DependentUpon>
     </Compile>
@@ -229,9 +241,9 @@
       <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\PaymentReportCriteriaViewModel.cs" />
-    <Compile Include="Content\Report\PositivePayRptViewModel.cs" />
-    <Compile Include="Content\Report\PositivePayRptView.xaml.cs">
-      <DependentUpon>PositivePayRptView.xaml</DependentUpon>
+    <Compile Include="Content\Payment\PositivePayReportViewModel.cs" />
+    <Compile Include="Content\Payment\PositivePayReportView.xaml.cs">
+      <DependentUpon>PositivePayReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Report\JobRptView.xaml.cs">
       <DependentUpon>JobRptView.xaml</DependentUpon>
@@ -251,6 +263,9 @@
     <Compile Include="Models\UserSecurityProfile.cs" />
     <Compile Include="Pages\AccountReconcilePage.xaml.cs">
       <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\JobSummaryReportPage.xaml.cs">
+      <DependentUpon>JobSummaryReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BatchSummaryReportPage.xaml.cs">
       <DependentUpon>BatchSummaryReportPage.xaml</DependentUpon>
@@ -311,12 +326,8 @@
       <DependentUpon>PaymentFinderReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\PaymentFinderViewModel.cs" />
-    <Compile Include="Pages\PositivePayPage.xaml.cs">
-      <DependentUpon>PositivePayPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Report\GlobalReportCriteria.cs" />
-    <Compile Include="Content\Report\GlobalReportCriteriaView.xaml.cs">
-      <DependentUpon>GlobalReportCriteriaView.xaml</DependentUpon>
+    <Compile Include="Pages\PositivePayReportPage.xaml.cs">
+      <DependentUpon>PositivePayReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Report\PaymentRptView.xaml.cs">
       <DependentUpon>PaymentRptView.xaml</DependentUpon>
@@ -462,7 +473,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Report\BatchReportView.xaml">
+    <Page Include="Content\Payment\BatchReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\JobSummaryPaymentReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\BatchSummaryPaymentReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\JobReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -478,7 +501,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Report\PositivePayRptView.xaml">
+    <Page Include="Content\Payment\PositivePayReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -529,6 +552,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\JobSummaryReportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\BatchSummaryReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -573,17 +600,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PositivePayPage.xaml">
+    <Page Include="Pages\PositivePayReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\Report\GlobalReportCriteriaView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Report\PaymentRptView.xaml">
       <SubType>Designer</SubType>

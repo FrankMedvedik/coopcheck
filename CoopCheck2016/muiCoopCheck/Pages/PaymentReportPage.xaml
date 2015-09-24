@@ -17,13 +17,8 @@
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                        <StackPanel  Orientation="Vertical" x:Name="prv">
-                            <Rpt:GlobalReportCriteriaView />
-                            <Rpt:JobRptView />
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" x:Name="nov">
-                        <content:NoAccessView />
-                    </StackPanel>
+                        <Rpt:JobRptView  x:Name="prv"/>
+                        <content:NoAccessView x:Name="nov"/>
                     </StackPanel>
             </ScrollViewer>
         </Grid>

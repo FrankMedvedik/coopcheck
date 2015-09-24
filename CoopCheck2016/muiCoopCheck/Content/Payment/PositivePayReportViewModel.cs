@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Repository;
-using GalaSoft.MvvmLight.Messaging;
-using CoopCheck.WPF.Content.Report;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Report
+namespace CoopCheck.WPF.Content.Payment
 {
-    public class PositiveRptViewModel : ViewModelBase
+    public class PositivePayReportViewModel : ViewModelBase
     {
         public bool ShowGridData
         {
@@ -23,18 +22,9 @@ namespace CoopCheck.WPF.Content.Report
             }
         }
 
-        public PositiveRptViewModel()
+        public PositivePayReportViewModel()
         {
             ShowGridData = false;
-            Messenger.Default.Register<NotificationMessage<GlobalReportCriteria>>(this, message =>
-            {
-                if (message.Notification == Notifications.GlobalReportCriteriaChanged)
-                {
-                        GlobalReportCriteria.ReportDateRange = message.Content.ReportDateRange;
-                        GlobalReportCriteria.SelectedAccount = message.Content.SelectedAccount;
-                        RefreshAll();
-                }
-            });
         }
 
         private vwPositivePay _selectedPositivePay = new vwPositivePay();
@@ -44,22 +34,11 @@ namespace CoopCheck.WPF.Content.Report
             set
             {
                 _selectedPositivePay = value;
-
                 NotifyPropertyChanged();
             }
         }
 
-        private bool _canRefresh = true;
-        public Boolean CanRefresh       
-        {
-            get { return _canRefresh; }
-            set { _canRefresh = value; }
-        }
-
-        #region reporting variables
-        public  GlobalReportCriteria GlobalReportCriteria = new GlobalReportCriteria();
-        #endregion
-
+        public PaymentReportCriteria PaymentReportCriteria { get; set; }
         private ObservableCollection<vwPositivePay> _positivePays = new ObservableCollection<vwPositivePay>();
         public ObservableCollection<vwPositivePay> PositivePays
         {
@@ -70,8 +49,8 @@ namespace CoopCheck.WPF.Content.Report
                 NotifyPropertyChanged();
                 ShowGridData = true;
                 HeadingText = String.Format("{0} Account Positive Payment Report for {1} checks from  {2:ddd, MMM d, yyyy} through {3:ddd, MMM d, yyyy}  ",
-                                        GlobalReportCriteria.SelectedAccount.account_name, 
-                                        PositivePays.Count, GlobalReportCriteria.ReportDateRange.StartRptDate, GlobalReportCriteria.ReportDateRange.EndRptDate);
+                                        PaymentReportCriteria.Account.account_name, 
+                                        PositivePays.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -79,12 +58,6 @@ namespace CoopCheck.WPF.Content.Report
                 };
             }
         }
-
-        public  void RefreshAll()
-        {
-                GetPositivePays();
-        }
-        
 
         private string _headingText;
         private bool _showGridData;
@@ -131,7 +104,7 @@ namespace CoopCheck.WPF.Content.Report
                     IsBusy = true,
                     StatusMessage = "refreshing Positive Pay report"
                 };
-                PositivePays = new ObservableCollection<vwPositivePay>(await RptSvc.GetPositivePayRpt(GlobalReportCriteria));
+                PositivePays = new ObservableCollection<vwPositivePay>(await RptSvc.GetPositivePayRpt(PaymentReportCriteria));
             }
             catch (Exception e)
             {
@@ -144,5 +117,9 @@ namespace CoopCheck.WPF.Content.Report
             }
         }
 
+        public  void RefreshAll()
+        {
+            GetPositivePays();
         }
+    }
     }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
              mc:Ignorable="d" >
     <Grid >
         <Grid.RowDefinitions>
@@ -16,7 +17,7 @@
         </Grid.RowDefinitions>
             <TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Stretch" Margin="6"/>
         <Expander Grid.Row="1">
-        <report:PaymentReportCriteriaView x:Name="prcv" Grid.Row="1"/>
+        <payment:PaymentReportCriteriaView x:Name="prcv" Grid.Row="1"/>
         </Expander>
         <Button x:Name="RefreshJobs" Grid.Row="2"  HorizontalAlignment="Left" IsDefault="True" VerticalAlignment="Center" Click="RefreshJobs_Click">Get Jobs</Button>
         <Expander Grid.Row="3">

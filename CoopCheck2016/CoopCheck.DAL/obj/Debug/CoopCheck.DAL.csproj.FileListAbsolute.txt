@@ -63,5 +63,6 @@ D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\uk-ua\Csla.resour
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\vi\Csla.resources.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\zh-Hans\Csla.resources.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\zh-TW\Csla.resources.dll
+D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.csprojResolveAssemblyReference.cache
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.dll
 D:\githublocal\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.pdb
