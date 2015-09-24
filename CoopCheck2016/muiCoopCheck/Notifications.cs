@@ -49,5 +49,15 @@ namespace CoopCheck.WPF
         {
             get { return "SelectedJobChanged"; }
         }
+
+        public static string SelectedBatchChanged
+        {
+            get { return "SelectedBatchChanged"; }
+        }
+
+        public static string SelectedAccountChanged
+        {
+            get { return "SelectedAccountChanged"; }
+        }
     }
 }

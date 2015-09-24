@@ -19,7 +19,7 @@ namespace CoopCheck.WPF.Services
                     from l in ctx.vwJobRpt
                     where ((l.first_pay_date >= grc.StartDate) 
                         && (l.last_pay_date <= grc.EndDate) 
-                        && l.account_id == grc.AccountId) 
+                        && l.account_id == grc.Account.account_id) 
                     orderby l.first_pay_date
                     select l).ToListAsync();
                 return x;
@@ -34,7 +34,7 @@ namespace CoopCheck.WPF.Services
                     from l in ctx.vwBatchRpts
                     where ((l.batch_date >= grc.StartDate)
                         && (l.batch_date <= grc.EndDate)
-                        && l.account_id == grc.AccountId)
+                        && l.account_id == grc.Account.account_id)
                     orderby l.batch_num
                     select l).ToListAsync();
                 return x;
@@ -56,9 +56,9 @@ namespace CoopCheck.WPF.Services
 
                 }
 
-                if (crc.AccountId !=null)
+                if (crc.Account.account_id !=null)
                 {
-                    query = query.Where(x => x.account_id == crc.AccountId);
+                    query = query.Where(x => x.account_id == crc.Account.account_id);
 
                 }
 
@@ -109,7 +109,7 @@ namespace CoopCheck.WPF.Services
                 //string ob = String.IsNullOrEmpty(b.last_name) ? b.company : b.last_name;
 
                 v = await (from b in query
-                           select b).ToListAsync();
+                           select b).Take(PaymentSvc.MAX_PAYMENT_COUNT).ToListAsync();
             }
             return v;
         }

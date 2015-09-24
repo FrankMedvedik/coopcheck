@@ -19,15 +19,16 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="payments">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="batches" Source="/Pages/BatchSummaryReportPage.xaml" />
                 <mui:Link DisplayName="find" Source="/Pages/PaymentFinderReportPage.xaml" />
+                <mui:Link DisplayName="batches" Source="/Pages/BatchSummaryReportPage.xaml" />
                <mui:Link DisplayName="jobs" Source="/Pages/PaymentReportPage.xaml" />
                 <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="account">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="edit" Source="/Pages/AccountPage.xaml" />
+                <mui:Link DisplayName="list" Source="/Pages/AccountPage.xaml" />
+                <mui:Link DisplayName="reconcile" Source="/Pages/AccountReconcilePage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Settings" GroupKey="settings">

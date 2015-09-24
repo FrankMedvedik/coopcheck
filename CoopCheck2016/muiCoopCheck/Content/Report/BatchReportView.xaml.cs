@@ -8,14 +8,14 @@ namespace CoopCheck.WPF.Content.Report
 {
     /// <summary>
     /// </summary>
-    public partial class JobRptView : UserControl
+    public partial class BatchReportView : UserControl
     {
-        private JobRptViewModel _vm = null;
+        private BatchReportViewModel _vm = null;
         
-        public JobRptView()
+        public BatchReportView()
         {
             InitializeComponent();
-            _vm = new JobRptViewModel();
+            _vm = new BatchReportViewModel();
             DataContext = _vm;
         }
 
@@ -28,5 +28,19 @@ namespace CoopCheck.WPF.Content.Report
             }
         }
 
+        //private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //BatchesDG.Export();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error Saving file - " + ex.Message);
+        //    }
+            
+        //}
+
+      
     }
 }

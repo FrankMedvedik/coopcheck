@@ -2,6 +2,7 @@
 using System.Linq;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Services;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.BankAccount
 {
@@ -36,6 +37,8 @@ namespace CoopCheck.WPF.Content.BankAccount
             {
                 _selectedAccount = value;
                 NotifyPropertyChanged();
+                if( SelectedAccount != null)
+                    Messenger.Default.Send(new NotificationMessage<bank_account>(SelectedAccount, Notifications.SelectedAccountChanged));
             }
         }
 

@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Repository;
+using CoopCheck.WPF.Content.Payment;
 using CoopCheck.WPF.Models;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Report
 {
@@ -15,21 +18,7 @@ namespace CoopCheck.WPF.Content.Report
             _vm = new PaymentReportCriteriaViewModel();
             DataContext = _vm;
         }
-
         private PaymentReportCriteriaViewModel _vm;
-
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            if (asv.SelectedAccount != null)
-                _vm.PaymentReportCriteria.AccountId = asv.SelectedAccount.account_id;
-//            _vm.GetPayments();
-        }
-
-        private void Clear_Click(object sender, RoutedEventArgs e)
-        {
-            _vm.ResetState();
-
-        }
         public PaymentReportCriteria PaymentReportCriteria
         {
             get { return _vm.PaymentReportCriteria; }
@@ -37,6 +26,7 @@ namespace CoopCheck.WPF.Content.Report
             {
                 _vm.PaymentReportCriteria = value;
             }
+
         }
     }
 }

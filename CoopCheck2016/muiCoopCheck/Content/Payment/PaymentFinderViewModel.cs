@@ -1,43 +1,21 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading.Tasks;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Report
+namespace CoopCheck.WPF.Content.Payment
 {
     /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public class PaymentFinderViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the CheckReportViewModel class.
-        /// </summary>
-        /// 
         public PaymentFinderViewModel()
         {
             ResetState();
 
-        }
-
-        private PaymentReportCriteria _PaymentReportCriteria;
-
-        public PaymentReportCriteria PaymentReportCriteria
-        {
-            get { return _PaymentReportCriteria; }
-            set
-            {
-                _PaymentReportCriteria = value;
-                NotifyPropertyChanged();
-
-            }
         }
 
 
@@ -50,14 +28,15 @@ namespace CoopCheck.WPF.Content.Report
                 _payments = value;
                 NotifyPropertyChanged();
                 string em = null;
+
                 if (Payments.Count == PaymentSvc.MAX_PAYMENT_COUNT)
-                        em = String.Format("Showing only the first {0} payments add additional criteria to limit your search",
-                            PaymentSvc.MAX_PAYMENT_COUNT);
+                        em = String.Format("Showing only the first {0} payments add additional criteria to limit your search", PaymentSvc.MAX_PAYMENT_COUNT);
                  Status = new StatusInfo()
                 {
                     ErrorMessage = em,
                     StatusMessage = String.Format("{0} Payments found", Payments.Count)
                 };
+                ShowGridData = true;
             }
         }
 
@@ -68,10 +47,7 @@ namespace CoopCheck.WPF.Content.Report
         public void ResetState()
         {
 
-            PaymentReportCriteria = new PaymentReportCriteria();
-            PaymentReportCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-30, 0, 0, 0));
-            PaymentReportCriteria.EndDate = DateTime.Today;
-            Payments = new ObservableCollection<vwPayment>();
+            _payments = new ObservableCollection<vwPayment>();
             ShowGridData = false;
 
         }
@@ -116,7 +92,7 @@ namespace CoopCheck.WPF.Content.Report
 
         #endregion
 
-        public async void GetPayments()
+        public async void GetPayments(PaymentReportCriteria p)
         {
             Status = new StatusInfo()
             {
@@ -126,8 +102,11 @@ namespace CoopCheck.WPF.Content.Report
             };
             try
             {
-                var c = new ObservableCollection<vwPayment>(await RptSvc.GetPayments(PaymentReportCriteria));
-                Payments = c;
+                Payments = await Task<ObservableCollection<vwPayment>>.Factory.StartNew(() =>
+                {
+                    var task =  RptSvc.GetPayments(p);
+                    return new ObservableCollection<vwPayment>(task.Result);
+                });
 
             }
             catch (Exception e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CoopCheck.Repository;
 using CoopCheck.WPF.Content;
 using CoopCheck.WPF.ViewModel;
 
@@ -94,13 +95,13 @@ namespace CoopCheck.WPF.Models
 
         private string _firstName;
 
-        private int? _accountId;
-        public int? AccountId
+        private bank_account _account;
+        public bank_account Account
         {
-            get { return _accountId; }
+            get { return _account; }
             set
             {
-                _accountId = value;
+                _account = value;
                 NotifyPropertyChanged();
             }
         }
@@ -122,8 +123,8 @@ namespace CoopCheck.WPF.Models
             var v = new List<KeyValuePair<string, string>>();
             string s = string.Empty;
 
-            if (AccountId != null)
-                v.Add(new KeyValuePair<string, string>("AccountId", AccountId.ToString()));
+            if (Account != null)
+                v.Add(new KeyValuePair<string, string>("Account", Account.account_name));
             if (JobNumber != null)
                 v.Add(new KeyValuePair<string, string>("JobNum", JobNumber.ToString()));
             v.Add(new KeyValuePair<string, string>("StartDate", StartDate.ToString("yyyyMMdd")));

@@ -80,6 +80,10 @@
       <HintPath>..\..\packages\CSLA-WPF.4.6.100\lib\net45\Csla.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CsvHelper.2.13.2.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -133,9 +137,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -188,6 +194,14 @@
     <Compile Include="Content\BankAccount\AccountSelectView.xaml.cs">
       <DependentUpon>AccountSelectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileBankView.xaml.cs">
+      <DependentUpon>ReconcileBankView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileBankViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionView.xaml.cs">
+      <DependentUpon>BankClearTransactionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionViewModel.cs" />
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
@@ -200,14 +214,21 @@
     <Compile Include="Content\ModernFrame\Sample.xaml.cs">
       <DependentUpon>Sample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Report\BatchReportView.xaml.cs">
+      <DependentUpon>BatchReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Report\BatchReportViewModel.cs" />
+    <Compile Include="Content\Report\PaymentReportView.xaml.cs">
+      <DependentUpon>PaymentReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Report\SummaryPaymentReportViewModel.cs" />
     <Compile Include="Content\Report\SummaryPaymentReportView.xaml.cs">
       <DependentUpon>SummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\PaymentReportCriteriaView.xaml.cs">
+    <Compile Include="Content\Payment\PaymentReportCriteriaView.xaml.cs">
       <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\PaymentReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Payment\PaymentReportCriteriaViewModel.cs" />
     <Compile Include="Content\Report\PositivePayRptViewModel.cs" />
     <Compile Include="Content\Report\PositivePayRptView.xaml.cs">
       <DependentUpon>PositivePayRptView.xaml</DependentUpon>
@@ -226,7 +247,11 @@
     <Compile Include="Content\Voucher\VoucherEditChildWindow.xaml.cs">
       <DependentUpon>VoucherEditChildWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\BankClearTransaction.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
+    <Compile Include="Pages\AccountReconcilePage.xaml.cs">
+      <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BatchSummaryReportPage.xaml.cs">
       <DependentUpon>BatchSummaryReportPage.xaml</DependentUpon>
     </Compile>
@@ -262,9 +287,6 @@
     <Compile Include="Pages\NewBatchPage.xaml.cs">
       <DependentUpon>NewBatchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ReconcileAccountPage.xaml.cs">
-      <DependentUpon>ReconcileAccountPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\Settings\SettingsAppearance.xaml.cs">
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
@@ -282,13 +304,13 @@
       <DependentUpon>PayVoucherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentReportCriteria.cs" />
-    <Compile Include="Content\Report\PaymentFinderView.xaml.cs">
+    <Compile Include="Content\Payment\PaymentFinderView.xaml.cs">
       <DependentUpon>PaymentFinderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PaymentFinderReportPage.xaml.cs">
       <DependentUpon>PaymentFinderReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\PaymentFinderViewModel.cs" />
+    <Compile Include="Content\Payment\PaymentFinderViewModel.cs" />
     <Compile Include="Pages\PositivePayPage.xaml.cs">
       <DependentUpon>PositivePayPage.xaml</DependentUpon>
     </Compile>
@@ -416,6 +438,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\BankAccount\Reconcile\ReconcileBankView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\BankAccount\Reconcile\BankClearTransactionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\NoAccessView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -432,11 +462,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\Report\BatchReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Report\PaymentReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Report\SummaryPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Report\PaymentReportCriteriaView.xaml">
+    <Page Include="Content\Payment\PaymentReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -464,6 +502,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DataGridsResourceDictionary1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -483,6 +525,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\AccountReconcilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\BatchSummaryReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -498,10 +544,6 @@
     <Page Include="Pages\NewBatchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\ReconcileAccountPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Settings\SettingsAppearance.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -523,7 +565,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Report\PaymentFinderView.xaml">
+    <Page Include="Content\Payment\PaymentFinderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -668,7 +710,6 @@
     <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Payment\" />
     <Folder Include="DesignData\Converters\" />
   </ItemGroup>
   <ItemGroup>

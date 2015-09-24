@@ -46,8 +46,10 @@ namespace CoopCheck.WPF.Content.Report
         }
         private bool _showGridData;
         private StatusInfo _status;
-        private ObservableCollection<vwPayment> _allPayments;
+        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
         private List<vwPayment> _workPayments;
+        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
+        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
 
         public List<vwPayment> WorkPayments
         {
@@ -56,6 +58,18 @@ namespace CoopCheck.WPF.Content.Report
             {
                 _workPayments = value;
                 AllPayments = new ObservableCollection<vwPayment>(WorkPayments);
+                ClosedPayments = new ObservableCollection<vwPayment>((
+                                    from l in _workPayments
+                                    where l.cleared_flag
+                                    orderby l.check_date
+                                    select l).ToList());
+                OpenPayments = new ObservableCollection<vwPayment>((
+                    from l in _workPayments
+                    where !l.cleared_flag
+                    orderby l.check_date
+                    select l).ToList());
+
+
             }
         }
 
@@ -80,26 +94,29 @@ namespace CoopCheck.WPF.Content.Report
             {
                 _allPayments = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged("ClosedPayments");
-                NotifyPropertyChanged("OpenPayments");
                 ShowGridData = true;
             }
             
         }
 
-        public ObservableCollection<vwPayment> ClosedPayments => 
-            new ObservableCollection<vwPayment>((
-                        from l in _workPayments
-                        where l.cleared_flag 
-                        orderby l.check_date
-                        select l).ToList());
+        public ObservableCollection<vwPayment> ClosedPayments
+        {
+            get { return _closedPayments; }
+            set
+            {
+                _closedPayments = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        public ObservableCollection<vwPayment> OpenPayments =>
-            new ObservableCollection<vwPayment>((
-                        from l in _workPayments
-                        where !l.cleared_flag
-                        orderby l.check_date
-                        select l).ToList());
-
+        public ObservableCollection<vwPayment> OpenPayments
+        {
+            get { return _openPayments; }
+            set
+            {
+                _openPayments = value;
+                NotifyPropertyChanged();
+            }
+        }
     }
-    }
+}

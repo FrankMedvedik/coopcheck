@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" >
     <Grid >
         <Grid.RowDefinitions>
@@ -14,22 +15,83 @@
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
             <TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Stretch" Margin="6"/>
-        <!--<Expander Grid.Row="1">-->
+        <Expander Grid.Row="1">
         <report:PaymentReportCriteriaView x:Name="prcv" Grid.Row="1"/>
-        <!--</Expander>-->
-        <Button x:Name="RefreshJobs" Grid.Row="2"  HorizontalAlignment="Left"  VerticalAlignment="Center" Click="RefreshJobs_Click">Get Jobs</Button>
+        </Expander>
+        <Button x:Name="RefreshJobs" Grid.Row="2"  HorizontalAlignment="Left" IsDefault="True" VerticalAlignment="Center" Click="RefreshJobs_Click">Get Jobs</Button>
         <Expander Grid.Row="3">
           <report:JobRptView  x:Name="jrv"/>
         </Expander>
         <TabControl  Grid.Row="4">
             <TabItem Header="All" >
-                <report:PaymentRptView x:Name="aprv" />
+                <DataGrid Grid.Column="0" ItemsSource="{Binding AllPayments}" AutoGenerateColumns="False" 
+             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
+            VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left" Style="{DynamicResource DataGridStyle1}"  >
+                    <DataGrid.Columns>
+                        <mui:DataGridTextColumn Binding="{Binding job_num }"  Header="job"/>
+                        <mui:DataGridTextColumn Binding="{Binding email }" Header="email" />
+                        <mui:DataGridTextColumn Binding="{Binding last_name }"  Header="last" />
+                        <mui:DataGridTextColumn Binding="{Binding first_name }" Header="first" />
+                        <mui:DataGridTextColumn Binding="{Binding company }"  Header="company"/>
+                        <mui:DataGridTextColumn Binding="{Binding phone_number }" Header="phone"/>
+                        <mui:DataGridTextColumn Binding="{Binding municipality }" Header="city" />
+                        <mui:DataGridTextColumn Binding="{Binding region }"  Header="state" />
+                        <mui:DataGridTextColumn Binding="{Binding postal_code }" Header="zip" />
+                        <mui:DataGridTextColumn Binding="{Binding check_date,StringFormat=d}" Header="payment date" />
+                        <mui:DataGridTextColumn Binding="{Binding check_num }" Header="payment #" />
+                        <mui:DataGridTextColumn Binding="{Binding tran_amount,  StringFormat=c }" Header="amount" />
+                        <mui:DataGridTextColumn Binding="{Binding address_1 }" Header="address 1" />
+                        <mui:DataGridTextColumn Binding="{Binding address_2 }" Header="address 2" />
+                        <mui:DataGridCheckBoxColumn Binding="{Binding print_flag}" Header="printed?"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<report:PaymentReportView x:Name="aprv"  dgPayments.ItemsSource="{Binding AllPayments}"/>-->
             </TabItem>
             <TabItem Header="Cleared" >
-                <report:PaymentRptView x:Name="cprv" />
+                <DataGrid Grid.Column="0" ItemsSource="{Binding ClosedPayments}" AutoGenerateColumns="False" 
+             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
+            VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left"  >
+                    <DataGrid.Columns>
+                        <mui:DataGridTextColumn Binding="{Binding job_num }"  Header="job"/>
+                        <mui:DataGridTextColumn Binding="{Binding email }" Header="email" />
+                        <mui:DataGridTextColumn Binding="{Binding last_name }"  Header="last" />
+                        <mui:DataGridTextColumn Binding="{Binding first_name }" Header="first" />
+                        <mui:DataGridTextColumn Binding="{Binding company }"  Header="company"/>
+                        <mui:DataGridTextColumn Binding="{Binding phone_number }" Header="phone"/>
+                        <mui:DataGridTextColumn Binding="{Binding municipality }" Header="city" />
+                        <mui:DataGridTextColumn Binding="{Binding region }"  Header="state" />
+                        <mui:DataGridTextColumn Binding="{Binding postal_code }" Header="zip" />
+                        <mui:DataGridTextColumn Binding="{Binding check_date,StringFormat=d}" Header="payment date" />
+                        <mui:DataGridTextColumn Binding="{Binding check_num }" Header="payment #" />
+                        <mui:DataGridTextColumn Binding="{Binding tran_amount,  StringFormat=c }" Header="amount" />
+                        <mui:DataGridTextColumn Binding="{Binding address_1 }" Header="address 1" />
+                        <mui:DataGridTextColumn Binding="{Binding address_2 }" Header="address 2" />
+                        <mui:DataGridCheckBoxColumn Binding="{Binding print_flag}" Header="printed?"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Outstanding" >
-                <report:PaymentRptView x:Name="Oprv" />
+                <DataGrid Grid.Column="0" ItemsSource="{Binding OpenPayments}" AutoGenerateColumns="False" 
+             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
+            VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left"  >
+                    <DataGrid.Columns>
+                        <mui:DataGridTextColumn Binding="{Binding job_num }"  Header="job"/>
+                        <mui:DataGridTextColumn Binding="{Binding email }" Header="email" />
+                        <mui:DataGridTextColumn Binding="{Binding last_name }"  Header="last" />
+                        <mui:DataGridTextColumn Binding="{Binding first_name }" Header="first" />
+                        <mui:DataGridTextColumn Binding="{Binding company }"  Header="company"/>
+                        <mui:DataGridTextColumn Binding="{Binding phone_number }" Header="phone"/>
+                        <mui:DataGridTextColumn Binding="{Binding municipality }" Header="city" />
+                        <mui:DataGridTextColumn Binding="{Binding region }"  Header="state" />
+                        <mui:DataGridTextColumn Binding="{Binding postal_code }" Header="zip" />
+                        <mui:DataGridTextColumn Binding="{Binding check_date,StringFormat=d}" Header="payment date" />
+                        <mui:DataGridTextColumn Binding="{Binding check_num }" Header="payment #" />
+                        <mui:DataGridTextColumn Binding="{Binding tran_amount,  StringFormat=c }" Header="amount" />
+                        <mui:DataGridTextColumn Binding="{Binding address_1 }" Header="address 1" />
+                        <mui:DataGridTextColumn Binding="{Binding address_2 }" Header="address 2" />
+                        <mui:DataGridCheckBoxColumn Binding="{Binding print_flag}" Header="printed?"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
         </TabControl>
     </Grid>

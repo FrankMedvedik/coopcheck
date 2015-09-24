@@ -31,15 +31,14 @@ namespace CoopCheck.WPF.Content.Report
 
         private async Task RefreshChildren(vwJobRpt vwJobRpt)
         {
-            await Task.Factory.StartNew(() =>
+            if (vwJobRpt != null)
             {
-
-                _vm.PaymentReportCriteria.JobNumber = vwJobRpt.job_num.ToString();
-                _vm.RefreshAll();
-                aprv.Payments = AllPayments;
-                Oprv.Payments = OpenPayments;
-                cprv.Payments = ClosedPayments;
-            });
+                await Task.Factory.StartNew(() =>
+                {
+                    _vm.PaymentReportCriteria.JobNumber = vwJobRpt.job_num.ToString();
+                    _vm.RefreshAll();
+                });
+            }
         }
 
         private void RefreshJobs_Click(object sender, RoutedEventArgs e)

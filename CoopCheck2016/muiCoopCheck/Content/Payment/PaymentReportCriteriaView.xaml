@@ -10,22 +10,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-            <WrapPanel Orientation="Vertical" >
-                <StackPanel Orientation="Horizontal" x:Name="spAccount">
-                    <bankAccount:AccountSelectView x:Name="asv"/>
-                    <CheckBox Content="Printed" IsChecked="{Binding PaymentReportCriteria.IsPrinted}" Margin="6"/>
-                    <CheckBox Content="Cleared" IsChecked="{Binding PaymentReportCriteria.IsCleared}" Margin="6"/>
+            <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Width="100" Text="Account" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <ComboBox x:Name="ComboAccount" Width="150" Margin="6"  ItemsSource="{Binding Accounts}" VerticalAlignment="Center"
+                          DisplayMemberPath="account_name" 
+            SelectedValue="{Binding PaymentReportCriteria.Account}">
+                    </ComboBox>
                 </StackPanel>
-            <StackPanel Orientation="Horizontal" x:Name="spReportDates">
-                <TextBlock Text="Start Date" Width="100"   Margin="6"/>
+                <StackPanel Orientation="Horizontal" >
+                 <TextBlock Text="Start Date" Width="100"   Margin="6" VerticalAlignment="Center"/>
                 <DatePicker SelectedDate="{Binding PaymentReportCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6"  />
-                <TextBlock Text="End Date" Width="100"   HorizontalAlignment="Right" Margin="6"/>
-                <DatePicker SelectedDate="{Binding PaymentReportCriteria.EndDate, StringFormat=d, Mode=TwoWay}" Margin="6"  />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" x:Name="spCheckNumber">
-                    <TextBlock Text="Check Number" Width="100"   Margin="6"/>
-                    <TextBox Width="300" Text="{Binding PaymentReportCriteria.CheckNumber, Mode=TwoWay}" Margin="6" ToolTip="the check or (swift) payment code you are looking for"/>
+            <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="End Date" Width="100"  Margin="6" VerticalAlignment="Center"/>
+                <DatePicker SelectedDate="{Binding PaymentReportCriteria.EndDate, StringFormat=d, Mode=TwoWay}" Margin="6"  />
                 </StackPanel>
+            <StackPanel Orientation="Vertical" x:Name="DetailedCriteria" Visibility="Visible">
             <StackPanel Orientation="Horizontal"  x:Name="spJob">
                     <TextBlock Text="Job" Width="100"  Margin="6" ToolTip="enter all or part of the job number you are looking for" />
                 <TextBox Width="110" Text="{Binding PaymentReportCriteria.JobNumber, Mode=TwoWay}" Margin="6" />
@@ -43,11 +44,23 @@
                     <TextBlock Text="Last Name" Margin="6" Width="100"  ToolTip="enter all or part of the last name you are looking for"/>
                 <TextBox Width="300" Text="{Binding PaymentReportCriteria.LastName, Mode=TwoWay}" Margin="6" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="First Name" Margin="6" Width="100" ToolTip="enter all or part of the first name you are looking for"/>
-                <TextBox Width="300" Text="{Binding PaymentReportCriteria.FirstName, Mode=TwoWay}" Margin="6" />
+                    <TextBox Width="300" Text="{Binding PaymentReportCriteria.FirstName, Mode=TwoWay}" Margin="6" />
+                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="spCheckNumber">
+                        <TextBlock Text="Status" Width="100"  Margin="6"  />
+                        <CheckBox Content="Printed" IsChecked="{Binding PaymentReportCriteria.IsPrinted}" Margin="6"/>
+                            <CheckBox Content="Cleared" IsChecked="{Binding PaymentReportCriteria.IsCleared}" Margin="6"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="Check Number" Width="100"   Margin="6"/>
+                            <TextBox Width="300" Text="{Binding PaymentReportCriteria.CheckNumber, Mode=TwoWay}" Margin="6" ToolTip="the check or (swift) payment code you are looking for"/>
+                        </StackPanel>
+
+
+                </StackPanel>
             </StackPanel>
-            </StackPanel>
-        </WrapPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
