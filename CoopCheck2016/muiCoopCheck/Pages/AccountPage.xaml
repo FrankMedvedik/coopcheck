@@ -16,6 +16,7 @@
     <Grid Style="{StaticResource ContentRoot}" >
             <ScrollViewer >
                 <StackPanel Orientation="Vertical">
+                    <bankAccount:AccountSelectView x:Name="asv"/>
                     <bankAccount:AccountView x:Name="av"/>
                     <content:NoAccessView x:Name="nov" />
                 </StackPanel>

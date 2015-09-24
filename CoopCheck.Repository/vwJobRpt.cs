@@ -30,5 +30,6 @@ namespace CoopCheck.Repository
         public string last_check_num { get; set; }
         public Nullable<System.DateTime> first_check_date { get; set; }
         public Nullable<System.DateTime> last_check_date { get; set; }
+        public Nullable<int> account_id { get; set; }
     }
 }

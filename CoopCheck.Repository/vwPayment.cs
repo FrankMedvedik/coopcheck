@@ -42,5 +42,11 @@ namespace CoopCheck.Repository
         public int tran_id { get; set; }
         public string email { get; set; }
         public string phone_number { get; set; }
+        public Nullable<int> account_id { get; set; }
+        public Nullable<decimal> cleared_amount { get; set; }
+        public Nullable<System.DateTime> cleared_date { get; set; }
+        public bool cleared_flag { get; set; }
+        public Nullable<System.DateTime> updated { get; set; }
+        public string usr { get; set; }
     }
 }

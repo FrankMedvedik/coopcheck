@@ -1,14 +1,14 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Report;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Rpt
+namespace CoopCheck.WPF.Content.Report
 {
     public class PaymentRptViewModel : ViewModelBase
     {
@@ -19,10 +19,6 @@ namespace CoopCheck.WPF.Content.Rpt
 
          public void ResetState()
         {
-
-            ReportDates = new ReportDateRange();
-            ReportDates.StartRptDate = DateTime.Today.Add(new TimeSpan(-365, 0, 0, 0));
-            ReportDates.EndRptDate = DateTime.Today;
             ShowGridData = false;
 
         }
@@ -36,38 +32,25 @@ namespace CoopCheck.WPF.Content.Rpt
         }
 
         #region reporting variables
-        public ReportDateRange ReportDates;
-        public vwJobRpt Job;
+
+        public PaymentReportCriteria PaymentReportCriteria
+        {
+            get { return _paymentReportCriteria; }
+            set
+            {
+                _paymentReportCriteria = value;
+                NotifyPropertyChanged();
+                GetPayments();
+            }
+        }
+
         #endregion
 
         private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
 
-        private vwPayment _selectedPayment;
-        public vwPayment SelectedPayment
-        {
-            get { return _selectedPayment; }
-            set {
-                _selectedPayment = value; 
-                  NotifyPropertyChanged();
-            }
-        }
-
-        private string _headingText;
-        private bool _showGridData;
         private StatusInfo _status;
-
-        public string HeadingText
-        {
-            get
-            {
-                return _headingText;
-            }
-            set
-            {
-                _headingText = value;
-                NotifyPropertyChanged();
-            }
-        }
+        private bool _showGridData;
+        private PaymentReportCriteria _paymentReportCriteria;
 
         public StatusInfo Status
         {
@@ -89,13 +72,7 @@ namespace CoopCheck.WPF.Content.Rpt
             {
                 _payments = value;
                 NotifyPropertyChanged();
-                HeadingText = String.Format("job {0} first check dated {1:ddd, MMM d, yyyy} has {2} payments", Job.job_num, Job.last_check_date, Payments.Count());
                 ShowGridData = true;
-                Status = new StatusInfo()
-                {
-                    ErrorMessage = "",
-                    StatusMessage = HeadingText
-                };
             }
         }
 
@@ -103,35 +80,31 @@ namespace CoopCheck.WPF.Content.Rpt
         {
             if (CanRefresh)
             {
-                GetJobPayments();
+                GetPayments();
             }
         }
 
-        public async void GetJobPayments()
+        public async void GetPayments()
         {
             ShowGridData = false;
-            HeadingText = "";
-            if ((Job!= null))
+            if ((PaymentReportCriteria != null))
             {
-                HeadingText = "loading payments for job . ..";
-                Status = new StatusInfo()
-                {
-                    StatusMessage = HeadingText,
-                    IsBusy = true
-                };
                 try
                 {
-                   Payments = new ObservableCollection<vwPayment>(await RptSvc.GetPayments(Job.job_num));
+                   Payments = await Task<ObservableCollection<vwPayment>>.Factory.StartNew( () =>
+                    {
+                        var p = RptSvc.GetPayments(PaymentReportCriteria);
+                        return new ObservableCollection<vwPayment>(p.Result);
+                    });
+
                 }
                 catch (Exception e)
                 {
-                    HeadingText = e.Message;
                     Status = new StatusInfo()
                     {
                         StatusMessage = "Error loading payments",
                         ErrorMessage = e.Message
                     };
-
                 }
             }
         }

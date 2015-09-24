@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Report
@@ -35,7 +36,13 @@ namespace CoopCheck.WPF.Content.Report
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            if (asv.SelectedAccount == null)
+            {
+                ModernDialog.ShowMessage("Please select an account","Account Missing",MessageBoxButton.OK );
+                return;
+            }
             grc.ReportDateRange = DR.DateRange;
+            grc.SelectedAccount = asv.SelectedAccount;
             Messenger.Default.Send(new NotificationMessage<GlobalReportCriteria>(this, grc,
                 Notifications.GlobalReportCriteriaChanged));
         }

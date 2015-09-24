@@ -17,6 +17,7 @@
           <Property Name="last_rec_date" Type="smalldatetime" />
           <Property Name="last_rec_balance" Type="money" />
           <Property Name="account_type" Type="varchar" MaxLength="50" />
+          <Property Name="IsDefault" Type="bit" />
         </EntityType>
         <EntityType Name="batch">
           <Key>
@@ -112,6 +113,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwBatchRpt' does not have a primary 
             <PropertyRef Name="payment_type" />
             <PropertyRef Name="batch_num" />
           </Key>
+          <Property Name="account_id" Type="int" />
           <Property Name="account_name" Type="nvarchar" MaxLength="50" />
           <Property Name="job_num" Type="int" />
           <Property Name="batch_date" Type="smalldatetime" />
@@ -168,6 +170,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwJobRpt' does not have a primary ke
             <PropertyRef Name="job_num" />
           </Key>
           <Property Name="job_num" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" />
           <Property Name="batch_cnt" Type="int" />
           <Property Name="first_batch_date" Type="smalldatetime" />
           <Property Name="last_batch_date" Type="smalldatetime" />
@@ -191,6 +194,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
             <PropertyRef Name="tran_id" />
             <PropertyRef Name="batch_num" />
             <PropertyRef Name="print_flag" />
+            <PropertyRef Name="cleared_flag" />
           </Key>
           <Property Name="tran_id" Type="int" Nullable="false" />
           <Property Name="batch_num" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
@@ -220,6 +224,12 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
           <Property Name="print_flag" Type="bit" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="phone_number" Type="nvarchar" MaxLength="22" />
+          <Property Name="account_id" Type="int" />
+          <Property Name="cleared_amount" Type="money" />
+          <Property Name="cleared_date" Type="smalldatetime" />
+          <Property Name="cleared_flag" Type="bit" Nullable="false" />
+          <Property Name="updated" Type="smalldatetime" />
+          <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -298,6 +308,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           </EntitySet>
           <EntitySet Name="vwBatchRpt" EntityType="Self.vwBatchRpt" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [vwBatchRpt].[account_id] AS [account_id], 
     [vwBatchRpt].[account_name] AS [account_name], 
     [vwBatchRpt].[job_num] AS [job_num], 
     [vwBatchRpt].[batch_date] AS [batch_date], 
@@ -347,6 +358,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <EntitySet Name="vwJobRpt" EntityType="Self.vwJobRpt" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwJobRpt].[job_num] AS [job_num], 
+    [vwJobRpt].[account_id] AS [account_id], 
     [vwJobRpt].[batch_cnt] AS [batch_cnt], 
     [vwJobRpt].[first_batch_date] AS [first_batch_date], 
     [vwJobRpt].[last_batch_date] AS [last_batch_date], 
@@ -393,7 +405,13 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
     [vwPayment].[country] AS [country], 
     [vwPayment].[print_flag] AS [print_flag], 
     [vwPayment].[email] AS [email], 
-    [vwPayment].[phone_number] AS [phone_number]
+    [vwPayment].[phone_number] AS [phone_number], 
+    [vwPayment].[account_id] AS [account_id], 
+    [vwPayment].[cleared_amount] AS [cleared_amount], 
+    [vwPayment].[cleared_date] AS [cleared_date], 
+    [vwPayment].[cleared_flag] AS [cleared_flag], 
+    [vwPayment].[updated] AS [updated], 
+    [vwPayment].[usr] AS [usr]
     FROM [dbo].[vwPayment] AS [vwPayment]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwPositivePay" EntityType="Self.vwPositivePay" store:Type="Views" store:Schema="dbo">
@@ -716,12 +734,14 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="last_rec_date" Type="DateTime" Precision="0" />
           <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Boolean" />
         </EntityType>
         <EntityType Name="vwPayment">
           <Key>
             <PropertyRef Name="batch_num" />
             <PropertyRef Name="print_flag" />
             <PropertyRef Name="tran_id" />
+            <PropertyRef Name="cleared_flag" />
           </Key>
           <Property Name="batch_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pay_date" Type="DateTime" Precision="0" />
@@ -751,6 +771,12 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="tran_id" Type="Int32" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_date" Type="DateTime" Precision="0" />
+          <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
+          <Property Name="updated" Type="DateTime" Precision="0" />
+          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vwBatchRpt">
           <Key>
@@ -772,6 +798,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_id" Type="Int32" />
         </EntityType>
         <ComplexType Name="getbatchRpt_Result">
           <Property Type="String" Name="account_name" Nullable="true" MaxLength="50" />
@@ -810,6 +837,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="first_check_date" Type="DateTime" Precision="0" />
           <Property Name="last_check_date" Type="DateTime" Precision="0" />
+          <Property Name="account_id" Type="Int32" />
         </EntityType>
         <EntityType Name="vwCheck">
           <Key>
@@ -1119,6 +1147,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <EntitySetMapping Name="bank_accounts">
             <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
               <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />
                 <ScalarProperty Name="last_rec_date" ColumnName="last_rec_date" />
@@ -1133,6 +1162,12 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <EntitySetMapping Name="vwPayments">
             <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
               <MappingFragment StoreEntitySet="vwPayment">
+                <ScalarProperty Name="usr" ColumnName="usr" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
+                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="tran_id" ColumnName="tran_id" />
@@ -1167,6 +1202,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <EntitySetMapping Name="vwBatchRpts">
             <EntityTypeMapping TypeName="CoopCheckModel.vwBatchRpt">
               <MappingFragment StoreEntitySet="vwBatchRpt">
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
                 <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
                 <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
                 <ScalarProperty Name="total_amount" ColumnName="total_amount" />
@@ -1209,6 +1245,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <EntitySetMapping Name="vwJobRpt">
             <EntityTypeMapping TypeName="CoopCheckModel.vwJobRpt">
               <MappingFragment StoreEntitySet="vwJobRpt">
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
                 <ScalarProperty Name="last_check_date" ColumnName="last_check_date" />
                 <ScalarProperty Name="first_check_date" ColumnName="first_check_date" />
                 <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />

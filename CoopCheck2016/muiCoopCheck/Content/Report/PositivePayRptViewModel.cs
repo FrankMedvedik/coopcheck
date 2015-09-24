@@ -30,7 +30,8 @@ namespace CoopCheck.WPF.Content.Report
             {
                 if (message.Notification == Notifications.GlobalReportCriteriaChanged)
                 {
-                        ReportDateRange = message.Content.ReportDateRange;
+                        GlobalReportCriteria.ReportDateRange = message.Content.ReportDateRange;
+                        GlobalReportCriteria.SelectedAccount = message.Content.SelectedAccount;
                         RefreshAll();
                 }
             });
@@ -56,7 +57,7 @@ namespace CoopCheck.WPF.Content.Report
         }
 
         #region reporting variables
-        public  ReportDateRange ReportDateRange = new ReportDateRange();
+        public  GlobalReportCriteria GlobalReportCriteria = new GlobalReportCriteria();
         #endregion
 
         private ObservableCollection<vwPositivePay> _positivePays = new ObservableCollection<vwPositivePay>();
@@ -68,8 +69,9 @@ namespace CoopCheck.WPF.Content.Report
                 _positivePays = value;
                 NotifyPropertyChanged();
                 ShowGridData = true;
-                HeadingText = String.Format("Positive Payment Report for {0} checks from  {1:ddd, MMM d, yyyy} through {2:ddd, MMM d, yyyy}  ",
-                                        PositivePays.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
+                HeadingText = String.Format("{0} Account Positive Payment Report for {1} checks from  {2:ddd, MMM d, yyyy} through {3:ddd, MMM d, yyyy}  ",
+                                        GlobalReportCriteria.SelectedAccount.account_name, 
+                                        PositivePays.Count, GlobalReportCriteria.ReportDateRange.StartRptDate, GlobalReportCriteria.ReportDateRange.EndRptDate);
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -129,7 +131,7 @@ namespace CoopCheck.WPF.Content.Report
                     IsBusy = true,
                     StatusMessage = "refreshing Positive Pay report"
                 };
-                PositivePays = new ObservableCollection<vwPositivePay>(await RptSvc.GetPositivePayRpt(ReportDateRange));
+                PositivePays = new ObservableCollection<vwPositivePay>(await RptSvc.GetPositivePayRpt(GlobalReportCriteria));
             }
             catch (Exception e)
             {

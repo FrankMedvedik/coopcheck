@@ -4,27 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="742.537">
-    <Control.Resources>
-        <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
-        <Style.Triggers>
-            <Trigger Property="Validation.HasError" Value="true">
-                <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={RelativeSource Self},
-                                    Path=(Validation.Errors)[0].ErrorContent}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-    </Control.Resources>
-        <ScrollViewer>
-        <Grid Style="{StaticResource ContentRoot}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+             mc:Ignorable="d" >
+        <Grid>
             <DataGrid Grid.Row="0" ItemsSource="{Binding Accounts}"   AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding account_name}" Header="name" />
@@ -33,40 +14,5 @@
                     <mui:DataGridTextColumn Binding="{Binding account_type}" Header="type" />
                 </DataGrid.Columns>
             </DataGrid>
-            <!--<StackPanel Orientation="Vertical" Grid.Row="1" >
-                <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6"/>
-                    <StackPanel  Orientation="Vertical" >
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Number" Width="100"   HorizontalAlignment="Right" Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Number,  Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Name" VerticalAlignment="Top" Width="100"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Name,  Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Balance" VerticalAlignment="Top" Width="100"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Balance}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Description" VerticalAlignment="Top" Width="100"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.Description,  Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>
-                    --><!--<Border BorderThickness="1" BorderBrush="Black">
-                        <StackPanel Orientation="Horizontal" >
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Reconciliation Date" VerticalAlignment="Top" Width="100"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.LastReconciliationDate}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Reconciliation Balance" VerticalAlignment="Top" Width="120"  Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedAccount.LastReconciliationBalance}" Margin="6"  IsReadOnly="True"/>
-                    </StackPanel>-->
-                        <!--</StackPanel>
-                    </Border>--><!--
-            </StackPanel>
-            </StackPanel>-->
-    </Grid>
-    </ScrollViewer>
+     </Grid>
 </UserControl>

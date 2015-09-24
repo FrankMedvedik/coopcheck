@@ -39,5 +39,15 @@ namespace CoopCheck.WPF
         {
             get { return "RefreshOpenBatchList"; }
         }
+
+        public static string PaymentReportCriteriaChanged
+        {
+            get { return "PaymentReportCriteriaChanged"; }
+        }
+
+        public static string SelectedJobChanged
+        {
+            get { return "SelectedJobChanged"; }
+        }
     }
 }

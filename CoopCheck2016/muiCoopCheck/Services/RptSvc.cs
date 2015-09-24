@@ -11,20 +11,37 @@ namespace CoopCheck.WPF.Services
 {
     public static class RptSvc
     {
-        public static async Task<List<vwJobRpt>> GetJobRpt(ReportDateRange ReportDateRange)
+        public static async Task<List<vwJobRpt>> GetJobRpt(PaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
                 var x = await (
                     from l in ctx.vwJobRpt
-                    where ((l.first_pay_date >= ReportDateRange.StartRptDate) && (l.last_pay_date <= ReportDateRange.EndRptDate))
+                    where ((l.first_pay_date >= grc.StartDate) 
+                        && (l.last_pay_date <= grc.EndDate) 
+                        && l.account_id == grc.AccountId) 
                     orderby l.first_pay_date
                     select l).ToListAsync();
                 return x;
             }
         }
 
-        public static async Task<List<vwPayment>> GetPayments(PaymentFinderCriteria crc)
+        public static async Task<List<vwBatchRpt>> GetBatchRpt(PaymentReportCriteria grc)
+        {
+            using (var ctx = new CoopCheckEntities())
+            {
+                var x = await (
+                    from l in ctx.vwBatchRpts
+                    where ((l.batch_date >= grc.StartDate)
+                        && (l.batch_date <= grc.EndDate)
+                        && l.account_id == grc.AccountId)
+                    orderby l.batch_num
+                    select l).ToListAsync();
+                return x;
+            }
+        }
+
+        public static async Task<List<vwPayment>> GetPayments(PaymentReportCriteria crc)
         {
             IQueryable<vwPayment> query;
             List<vwPayment> v;
@@ -38,6 +55,13 @@ namespace CoopCheck.WPF.Services
                     query = query.Where(x => x.check_num == crc.CheckNumber);
 
                 }
+
+                if (crc.AccountId !=null)
+                {
+                    query = query.Where(x => x.account_id == crc.AccountId);
+
+                }
+
                 if (!String.IsNullOrWhiteSpace(crc.Email))
                 {
                     query = query.Where(x => x.email.Contains(crc.Email));
@@ -60,11 +84,26 @@ namespace CoopCheck.WPF.Services
                     query = query.Where(x => x.first_name.Contains(crc.FirstName));
                 }
 
+                if (crc.IsCleared)
+                {
+                   query = query.Where(x => x.cleared_flag == true);
+                }
+
+                if (crc.IsPrinted)
+                {
+                    query = query.Where(x => x.print_flag == true);
+                }
+
                 if (!String.IsNullOrEmpty(crc.JobNumber))
                 {
-                    int n;
-                    if (int.TryParse(crc.JobNumber, out n))
-                        query = query.Where(x => x.job_num == n);
+                    //int filter;
+                    //if (int.TryParse(crc.JobNumber, out filter))
+                        //query = query.Where(x => x.job_num == n);
+                    query =
+                        query.Where(
+                            x =>
+                                System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double) x.job_num)
+                                    .Contains(crc.JobNumber));
                 }
 
                 //string ob = String.IsNullOrEmpty(b.last_name) ? b.company : b.last_name;
@@ -87,13 +126,15 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwPositivePay>> GetPositivePayRpt(ReportDateRange reportDateRange)
+        public static async Task<List<vwPositivePay>> GetPositivePayRpt(GlobalReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
                 var x = await(
                     from l in ctx.vwPositivePay
-                    where ((l.check_date >= reportDateRange.StartRptDate) && (l.check_date <= reportDateRange.EndRptDate))
+                    where ((l.check_date >= grc.ReportDateRange.StartRptDate) 
+                        && (l.check_date <= grc.ReportDateRange.EndRptDate) 
+                        && l.account_number == grc.SelectedAccount.account_number)
                     orderby l.check_date
                     select l).ToListAsync();
                 return x;

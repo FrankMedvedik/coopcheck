@@ -25,14 +25,6 @@ namespace CoopCheck.WPF.Content.Report
         public JobRptViewModel()
         {
             ShowGridData = false;
-            Messenger.Default.Register<NotificationMessage<GlobalReportCriteria>>(this, message =>
-            {
-                if (message.Notification == Notifications.GlobalReportCriteriaChanged)
-                {
-                        ReportDateRange = message.Content.ReportDateRange;
-                        RefreshAll();
-                }
-            });
         }
 
         private vwJobRpt _selectedJob = new vwJobRpt();
@@ -42,8 +34,8 @@ namespace CoopCheck.WPF.Content.Report
             set
             {
                 _selectedJob = value;
-
                 NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<vwJobRpt>(SelectedJob, Notifications.SelectedJobChanged));
             }
         }
 
@@ -54,9 +46,6 @@ namespace CoopCheck.WPF.Content.Report
             set { _canRefresh = value; }
         }
 
-        #region reporting variables
-        public  ReportDateRange ReportDateRange = new ReportDateRange();
-        #endregion
 
         private ObservableCollection<vwJobRpt> _jobs = new ObservableCollection<vwJobRpt>();
         public ObservableCollection<vwJobRpt> Jobs
@@ -67,8 +56,8 @@ namespace CoopCheck.WPF.Content.Report
                 _jobs = value;
                 NotifyPropertyChanged();
                 ShowGridData = true;
-                HeadingText = String.Format("{0} Jobs paid between {1:ddd, MMM d, yyyy}  and {2:ddd, MMM d, yyyy}  ",
-                                        Jobs.Count, ReportDateRange.StartRptDate, ReportDateRange.EndRptDate);
+                HeadingText = String.Format("{0} Jobs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}",
+                                        Jobs.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -86,6 +75,7 @@ namespace CoopCheck.WPF.Content.Report
         private string _headingText;
         private bool _showGridData;
         private StatusInfo _status;
+        private PaymentReportCriteria _paymentReportCriteria;
 
         public string HeadingText
         {
@@ -106,6 +96,16 @@ namespace CoopCheck.WPF.Content.Report
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
+
+        public PaymentReportCriteria PaymentReportCriteria
+        {
+            get { return _paymentReportCriteria; }
+            set
+            {
+                _paymentReportCriteria = value;
+            }
+        }
+
         public async void GetJobs()
         {
               ShowGridData = false;
@@ -117,7 +117,7 @@ namespace CoopCheck.WPF.Content.Report
                     IsBusy = true,
                     StatusMessage = "refreshing job list..."
                 };
-                Jobs = new ObservableCollection<vwJobRpt>(await RptSvc.GetJobRpt(ReportDateRange));
+                Jobs = new ObservableCollection<vwJobRpt>(await RptSvc.GetJobRpt(PaymentReportCriteria));
             }
             catch (Exception e)
             {

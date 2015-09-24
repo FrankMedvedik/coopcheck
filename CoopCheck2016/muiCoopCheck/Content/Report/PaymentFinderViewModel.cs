@@ -27,14 +27,14 @@ namespace CoopCheck.WPF.Content.Report
 
         }
 
-        private PaymentFinderCriteria _paymentFinderCriteria;
+        private PaymentReportCriteria _PaymentReportCriteria;
 
-        public PaymentFinderCriteria PaymentFinderCriteria
+        public PaymentReportCriteria PaymentReportCriteria
         {
-            get { return _paymentFinderCriteria; }
+            get { return _PaymentReportCriteria; }
             set
             {
-                _paymentFinderCriteria = value;
+                _PaymentReportCriteria = value;
                 NotifyPropertyChanged();
 
             }
@@ -68,9 +68,9 @@ namespace CoopCheck.WPF.Content.Report
         public void ResetState()
         {
 
-            PaymentFinderCriteria = new PaymentFinderCriteria();
-            PaymentFinderCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-30, 0, 0, 0));
-            PaymentFinderCriteria.EndDate = DateTime.Today;
+            PaymentReportCriteria = new PaymentReportCriteria();
+            PaymentReportCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-30, 0, 0, 0));
+            PaymentReportCriteria.EndDate = DateTime.Today;
             Payments = new ObservableCollection<vwPayment>();
             ShowGridData = false;
 
@@ -126,7 +126,7 @@ namespace CoopCheck.WPF.Content.Report
             };
             try
             {
-                var c = new ObservableCollection<vwPayment>(await RptSvc.GetPayments(PaymentFinderCriteria));
+                var c = new ObservableCollection<vwPayment>(await RptSvc.GetPayments(PaymentReportCriteria));
                 Payments = c;
 
             }

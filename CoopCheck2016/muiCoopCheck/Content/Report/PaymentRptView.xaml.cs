@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Report;
+using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF.Content.Rpt
+namespace CoopCheck.WPF.Content.Report
 {
     public partial class PaymentRptView : UserControl
     {
@@ -32,59 +33,19 @@ namespace CoopCheck.WPF.Content.Rpt
                 MessageBox.Show("Error Saving file - " + ex.Message);
             }
         }
-        public vwJobRpt Job
+        
+        public PaymentReportCriteria PaymentReportCriteria
         {
-            get { return _vm.Job; }
+            get { return _vm.PaymentReportCriteria; }
             set
             {
-                _vm.Job = value;
+                _vm.PaymentReportCriteria = value;
             }
         }
 
-        public static readonly DependencyProperty JobProperty =
-            DependencyProperty.Register("Job", typeof(vwJobRpt), typeof(PaymentRptView),
-                new PropertyMetadata(new vwJobRpt()));
+        public static readonly DependencyProperty GlobalReportCriteriaProperty =
+            DependencyProperty.Register("PaymentReportCriteria", typeof(PaymentReportCriteria), typeof(PaymentRptView), new PropertyMetadata(new PaymentReportCriteria()));
 
-
-        //public vwBatchRpt Batch
-        //{
-        //    get { return _vm.Batch; }
-        //    set
-        //    {
-        //        _vm.Batch = value;
-        //    }
-        //}
-
-        //public static readonly DependencyProperty BatchProperty =
-        //    DependencyProperty.Register("Batch", typeof(vwBatchRpt), typeof(PaymentRptView),
-        //        new PropertyMetadata(new vwBatchRpt()));
-
-        public ReportDateRange ReportDateRange
-        {
-            get { return _vm.ReportDates; }
-            set
-            {
-                //SetValue(ReportDateRangeProperty, value);
-                _vm.ReportDates = value;
-            }
-        }
-
-
-        public static readonly DependencyProperty ReportDateRangeProperty =
-            DependencyProperty.Register("ReportDateRange", typeof(ReportDateRange), typeof(PaymentRptView), new PropertyMetadata(new ReportDateRange()));
-
-        private void PaymentDG_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (_vm.SelectedPayment != null)
-            //{
-            //    cv.RecruiterSIP = _vm.RecruiterSIP;
-            //    cv.SelectedJobNum = _vm.SelectedJob.JobNumber;
-            //    cv.ReportDateRange = _vm.ReportDateRange;
-            //    cv.Refresh();
-            //}
-            //else
-            //    cv.ShowData = false;
-        }
         public bool ShowData
         {
             get { return _vm.ShowGridData; }
@@ -98,6 +59,17 @@ namespace CoopCheck.WPF.Content.Rpt
         public static readonly DependencyProperty ShowDataProperty =
       DependencyProperty.Register("ShowData", typeof(bool), typeof(PaymentRptView), new PropertyMetadata(false));
 
+        public ObservableCollection<vwPayment> Payments
+        {
+            get { return _vm.Payments; }
+            set
+            {
+                _vm.Payments = value;
+            }
+        }
+
+        public static readonly DependencyProperty PaymentsProperty =
+            DependencyProperty.Register("Payments", typeof(ObservableCollection<vwPayment>), typeof(PaymentRptView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
 
     }
 

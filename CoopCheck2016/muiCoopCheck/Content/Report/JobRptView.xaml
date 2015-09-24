@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:rpt="clr-namespace:CoopCheck.WPF.Content.Rpt"
+             xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
              mc:Ignorable="d" >
     <Grid x:Name="LayoutRoot" >
         <Grid.RowDefinitions>
@@ -33,6 +33,6 @@
                     <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared "/>
                 </DataGrid.Columns>
             </DataGrid>
-            <rpt:PaymentRptView Grid.Row="2"  x:Name="pv"/>
+            <report:PaymentRptView Grid.Row="2"  x:Name="pv"/>
     </Grid>
 </UserControl>

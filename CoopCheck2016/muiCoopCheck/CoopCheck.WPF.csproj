@@ -185,6 +185,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\BankAccount\AccountSelectView.xaml.cs">
+      <DependentUpon>AccountSelectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,14 @@
     <Compile Include="Content\ModernFrame\Sample.xaml.cs">
       <DependentUpon>Sample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Report\SummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Report\SummaryPaymentReportView.xaml.cs">
+      <DependentUpon>SummaryPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Report\PaymentReportCriteriaView.xaml.cs">
+      <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Report\PaymentReportCriteriaViewModel.cs" />
     <Compile Include="Content\Report\PositivePayRptViewModel.cs" />
     <Compile Include="Content\Report\PositivePayRptView.xaml.cs">
       <DependentUpon>PositivePayRptView.xaml</DependentUpon>
@@ -216,6 +227,9 @@
       <DependentUpon>VoucherEditChildWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\UserSecurityProfile.cs" />
+    <Compile Include="Pages\BatchSummaryReportPage.xaml.cs">
+      <DependentUpon>BatchSummaryReportPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
@@ -277,12 +291,6 @@
     <Compile Include="Content\Report\PaymentFinderViewModel.cs" />
     <Compile Include="Pages\PositivePayPage.xaml.cs">
       <DependentUpon>PositivePayPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Payment\OpenPositivePayPage.xaml.cs">
-      <DependentUpon>OpenPositivePayPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Payment\SubmitPositivePayPage.xaml.cs">
-      <DependentUpon>SubmitPositivePayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Report\GlobalReportCriteria.cs" />
     <Compile Include="Content\Report\GlobalReportCriteriaView.xaml.cs">
@@ -404,6 +412,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
+    <Page Include="Content\BankAccount\AccountSelectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\NoAccessView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -417,6 +429,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\ModernFrame\Sample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Report\SummaryPaymentReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Report\PaymentReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -460,6 +480,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Content\BankAccount\AccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\BatchSummaryReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -515,18 +539,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Payment\OpenPositivePayPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Payment\NewPositivePayPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\Payment\SubmitPositivePayPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Content\Report\GlobalReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -558,9 +570,6 @@
     <Compile Include="Models\BatchEditImport.cs" />
     <Compile Include="Pages\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Payment\NewPositivePayPage.xaml.cs">
-      <DependentUpon>NewPositivePayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Content\Voucher\Edit\BatchEditView.xaml.cs">
@@ -659,6 +668,7 @@
     <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Payment\" />
     <Folder Include="DesignData\Converters\" />
   </ItemGroup>
   <ItemGroup>

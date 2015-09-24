@@ -29,5 +29,6 @@ namespace CoopCheck.Repository
         public Nullable<decimal> total_amount { get; set; }
         public string first_check_num { get; set; }
         public string last_check_num { get; set; }
+        public Nullable<int> account_id { get; set; }
     }
 }

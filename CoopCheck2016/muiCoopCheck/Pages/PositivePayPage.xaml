@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:report="clr-namespace:CoopCheck.WPF.Content.Report"
-             xmlns:rpt="clr-namespace:CoopCheck.WPF.Content.Rpt"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              mc:Ignorable="d"

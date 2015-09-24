@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using CoopCheck.WPF.Content;
 using CoopCheck.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Models
 {
-    public class PaymentFinderCriteria : ViewModelBase
+    public class PaymentReportCriteria : ViewModelBase
     {
         private string _jobNumber;
         public string JobNumber
@@ -68,7 +69,44 @@ namespace CoopCheck.WPF.Models
             }
         }
 
+
+        private bool _isPrinted;
+        public bool IsPrinted
+        {
+            get { return _isPrinted; }
+            set
+            {
+                _isPrinted = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _isCleared;
+        public bool IsCleared
+        {
+            get { return _isCleared; }
+            set
+            {
+                _isCleared = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private string _firstName;
+
+        private int? _accountId;
+        public int? AccountId
+        {
+            get { return _accountId; }
+            set
+            {
+                _accountId = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+
         public string FirstName
         {
             get { return _firstName; }
@@ -79,5 +117,36 @@ namespace CoopCheck.WPF.Models
             }
         }
 
+        public string ToFormattedString(char token)
+        {
+            var v = new List<KeyValuePair<string, string>>();
+            string s = string.Empty;
+
+            if (AccountId != null)
+                v.Add(new KeyValuePair<string, string>("AccountId", AccountId.ToString()));
+            if (JobNumber != null)
+                v.Add(new KeyValuePair<string, string>("JobNum", JobNumber.ToString()));
+            v.Add(new KeyValuePair<string, string>("StartDate", StartDate.ToString("yyyyMMdd")));
+            v.Add(new KeyValuePair<string, string>("EndDate", EndDate.ToString("yyyyMMdd")));
+            if (CheckNumber != null)
+                v.Add(new KeyValuePair<string, string>("CheckNumber", CheckNumber));
+            if (PhoneNumber != null)
+                v.Add(new KeyValuePair<string, string>("PhoneNumber", CheckNumber));
+            if (Email != null)
+                v.Add(new KeyValuePair<string, string>("Email", Email));
+            if (LastName != null)
+                v.Add(new KeyValuePair<string, string>("LastName", LastName));
+            if (FirstName != null)
+                v.Add(new KeyValuePair<string, string>("FirstName", FirstName));
+            if (IsCleared)
+                v.Add(new KeyValuePair<string, string>("IsCleared", "Cleared"));
+            if (IsPrinted)
+                v.Add(new KeyValuePair<string, string>("IsPrinted", "Printed"));
+            foreach (var a  in v)
+            {
+                s = string.Concat(s, token, a.Key, token, a.Value);
+            }
+            return s;
+        }
     }
 }

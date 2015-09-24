@@ -5,13 +5,10 @@ using CoopCheck.Repository;
 
 namespace CoopCheck.WPF.Content.BankAccount
 {
-    /// <summary>
-    /// Interaction logic for BatchEditView.xaml
-    /// </summary>
-    public partial class AccountView : UserControl
+    public partial class AccountSelectView : UserControl
     {
         private AccountViewModel _vm;
-        public AccountView()
+        public AccountSelectView()
         {
             InitializeComponent();
             _vm = new AccountViewModel();
@@ -26,9 +23,8 @@ namespace CoopCheck.WPF.Content.BankAccount
                 _vm.SelectedAccount = value;
             }
         }
-
         public static readonly DependencyProperty SelectedAccountProperty =
-                DependencyProperty.Register("SelectedAccount", typeof(bank_account), typeof(AccountView),
+                DependencyProperty.Register("SelectedAccount", typeof(bank_account), typeof(AccountSelectView),
                     new PropertyMetadata(new bank_account()));
 
 
