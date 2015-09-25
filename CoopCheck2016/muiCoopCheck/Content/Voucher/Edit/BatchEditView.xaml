@@ -4,21 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
              mc:Ignorable="d" >
-    <Control.Resources>
-        <Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={RelativeSource Self},
-                                    Path=(Validation.Errors)[0].ErrorContent}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Control.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -107,21 +93,11 @@
                     <mui:DataGridTextColumn Binding="{Binding Suffix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Suffix" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Title, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Title" EditingElementStyle="{StaticResource CellEditStyle}"/>-->
                 </DataGrid.Columns>
-                <DataGrid.RowDetailsTemplate>
-                    <DataTemplate>
-                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <!--<TextBlock Text="Caller's current time" Margin="6"/>
-                        <TextBlock Text="{Binding caller_current_time, StringFormat=t}" Margin="6"/>
-                        <Button Name="Call"  Width="80" Margin="3,6,3,6" Click="Call_Click" IsEnabled="{Binding DataContext.CanCall, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}">Call</Button>
-                        <TextBlock Text="{Binding DataContext.ActionMsg, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" Foreground="Red"  Margin="6"/>-->
-                        <Button Margin="6,6,6,6"  HorizontalAlignment="Right" Click="DeleteVoucher_Click" Width="80" >Delete</Button>
-                    </WrapPanel>
-                </DataTemplate>
-                </DataGrid.RowDetailsTemplate>
             </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="3">
             <Button Content="Add Voucher" IsEnabled="{Binding UserCanWrite}"  Margin="6" Width="100"  Click="AddVoucher_Click"/>
-       </StackPanel>
+                <Button Margin="6"  HorizontalAlignment="Right" Click="DeleteVoucher_Click" IsEnabled="{Binding CanDeleteVoucher}" Width="80" >Delete</Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

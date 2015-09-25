@@ -4,8 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Report;
-using CoopCheck.WPF.Models;
+ using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Services
 {

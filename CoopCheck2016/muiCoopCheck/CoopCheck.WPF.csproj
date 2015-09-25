@@ -230,13 +230,6 @@
       <DependentUpon>JobReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\JobReportViewModel.cs" />
-    <Compile Include="Content\Report\PaymentReportView.xaml.cs">
-      <DependentUpon>PaymentReportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Report\SummaryPaymentReportViewModel.cs" />
-    <Compile Include="Content\Report\SummaryPaymentReportView.xaml.cs">
-      <DependentUpon>SummaryPaymentReportView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\Payment\PaymentReportCriteriaView.xaml.cs">
       <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
     </Compile>
@@ -245,10 +238,6 @@
     <Compile Include="Content\Payment\PositivePayReportView.xaml.cs">
       <DependentUpon>PositivePayReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\JobRptView.xaml.cs">
-      <DependentUpon>JobRptView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Report\JobRptViewModel.cs" />
     <Compile Include="Content\Settings\AboutViewModel.cs" />
     <Compile Include="Content\Status\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
@@ -275,9 +264,6 @@
     <Compile Include="Services\RptSvc.cs" />
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
-    <Compile Include="Pages\PaymentReportPage.xaml.cs">
-      <DependentUpon>PaymentReportPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Services\BankAccountSvc.cs" />
     <Compile Include="Services\OpenBatchSvc.cs" />
     <Compile Include="Content\Voucher\PayVouchersViewModel.cs" />
@@ -329,15 +315,6 @@
     <Compile Include="Pages\PositivePayReportPage.xaml.cs">
       <DependentUpon>PositivePayReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Report\PaymentRptView.xaml.cs">
-      <DependentUpon>PaymentRptView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Report\PaymentRptViewModel.cs" />
-    <Compile Include="Content\Report\ReportDateRange.cs" />
-    <Compile Include="Content\Report\ReportDateRangeView.xaml.cs">
-      <DependentUpon>ReportDateRangeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Report\ReportDateRangeViewModel.cs" />
     <Compile Include="Content\Voucher\Import\VoucherListViewModel.cs" />
     <Compile Include="Content\Voucher\Import\VoucherListView.xaml.cs">
       <DependentUpon>VoucherListView.xaml</DependentUpon>
@@ -489,23 +466,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Report\PaymentReportView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Report\SummaryPaymentReportView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Content\Payment\PaymentReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Payment\PositivePayReportView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Report\JobRptView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -560,10 +525,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\PaymentReportPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\ImportVouchersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -607,14 +568,6 @@
     <Page Include="Pages\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\Report\PaymentRptView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\Report\ReportDateRangeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Voucher\Import\VoucherListView.xaml">
       <Generator>MSBuild:Compile</Generator>

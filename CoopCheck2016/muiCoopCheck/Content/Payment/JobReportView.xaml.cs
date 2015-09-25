@@ -1,21 +1,18 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using CoopCheck.WPF.Content.Report;
+﻿using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF.Content.Report
+namespace CoopCheck.WPF.Content.Payment
 {
     /// <summary>
     /// </summary>
-    public partial class JobRptView : UserControl
+    public partial class JobReportView : UserControl
     {
-        private JobRptViewModel _vm = null;
+        private JobReportViewModel _vm = null;
         
-        public JobRptView()
+        public JobReportView()
         {
             InitializeComponent();
-            _vm = new JobRptViewModel();
+            _vm = new JobReportViewModel();
             DataContext = _vm;
         }
 

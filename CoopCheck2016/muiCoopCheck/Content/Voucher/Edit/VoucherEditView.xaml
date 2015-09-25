@@ -25,7 +25,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <StackPanel MinWidth="200" Grid.Row="0">
-                    <TextBlock Text="voucher" Style="{StaticResource Heading2}" Margin="0,6,0,6" />
+                    <TextBlock Text="new voucher" Style="{StaticResource Heading2}" Margin="0,6,0,6" />
                     <StackPanel x:Name="Form" Orientation="Vertical">
                         <StackPanel.Resources>
                             <Style TargetType="StackPanel">
@@ -44,7 +44,11 @@
                                 <Setter Property="Padding" Value="0,3" />
                             </Style>
                         </StackPanel.Resources>
-                        <StackPanel>
+                    <StackPanel>
+                        <Label Content="Job number" Target="{Binding ElementName=TextJobNumber}"/>
+                        <TextBlock  x:Name="TextJobNumber" Width="150"  Text="{Binding JobNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                    </StackPanel>
+                    <StackPanel>
                             <Label Content="First name" Target="{Binding ElementName=TextFirstName}"/>
                             <TextBox x:Name="TextFirstName" Width="150" Text="{Binding First, Mode=TwoWay, ValidatesOnDataErrors=True}" />
                         </StackPanel>
@@ -80,15 +84,9 @@
                             <Label Content="Amount" Target="{Binding ElementName=TextAmount}"/>
                             <TextBox x:Name="TextAmount" Width="150"  Text="{Binding Amount, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                         </StackPanel>
-
-                        <StackPanel>
-                            <Label Content="Job number" Target="{Binding ElementName=TextJobNumber}"/>
-                            <TextBox x:Name="TextJobNumber" Width="150"  Text="{Binding JobNumber, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                        </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Button Content="save" Margin="100,16,0,0" HorizontalAlignment="Left"  Click="btnSave_Click"/>
-                            <Button Content="new" Margin="16,16,0,0" HorizontalAlignment="Left"  Click="btnNew_Click"/>
-                            <Button Content="delete" Margin="100,16,0,0" HorizontalAlignment="Left"  Click="btnDelete_Click"/>
+                            <Button Content="save" Margin="12" HorizontalAlignment="Center"  Click="btnSave_Click"/>
+                            <Button Content="cancel" Margin="12" HorizontalAlignment="Center"  Click="btnDelete_Click"/>
                         </StackPanel>
                 </StackPanel>
                 </StackPanel>

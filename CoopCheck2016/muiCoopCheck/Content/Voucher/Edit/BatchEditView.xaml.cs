@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
@@ -47,7 +48,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (_vm.SelectedBatch == null) return;
-            MessageBoxResult result = MessageBox.Show("Delete this entire batch of vouchers?", "Confirm", MessageBoxButton.OKCancel);
+            MessageBoxResult result = ModernDialog.ShowMessage("Delete this entire batch of vouchers?", "Confirm", MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
             {
@@ -59,7 +60,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
                 // set the status of the callback to closed
                 if (_vm.SelectedVoucher == null) return;
-                MessageBoxResult result = MessageBox.Show("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel);
+                MessageBoxResult result = ModernDialog.ShowMessage("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
                     _vm.DeleteSelectedVoucher();

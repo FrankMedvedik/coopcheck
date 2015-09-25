@@ -37,6 +37,12 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             get { return SelectedBatch != null && UserCanWrite && SelectedBatch.IsDirty; }
         }
+
+        public bool CanDeleteVoucher
+        {
+            get { return SelectedVoucher != null && UserCanWrite; }
+        }
+
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
 
         public ObservableCollection<VoucherImport> VoucherImports
