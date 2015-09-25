@@ -116,13 +116,30 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwPayment>> GetPayments(int jobNum)
+
+
+        public static async Task<List<vwPayment>> GetBatchPayments(PaymentReportCriteria grc)
         {
             List<vwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwPayments
-                           where b.job_num == jobNum
+                           where ((b.batch_num == grc.BatchNumber)
+                            && (b.account_id == grc.Account.account_id))
+                           select b).ToListAsync();
+            }
+            return v;
+        }
+
+
+        public static async Task<List<vwPayment>> GetJobPayments(PaymentReportCriteria grc)
+        {
+            List<vwPayment> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                v = await (from b in ctx.vwPayments
+                           where ((b.job_num.ToString() == grc.JobNumber) 
+                            && (b.account_id == grc.Account.account_id))
                            select b).ToListAsync();
             }
             return v;

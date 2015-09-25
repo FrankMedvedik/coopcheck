@@ -13,7 +13,6 @@
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="import" Source="/Pages/ImportVouchersPage.xaml" />
                 <mui:Link DisplayName="open" Source="/Pages/OpenBatchPage.xaml" />
-                <mui:Link DisplayName="new" Source="/Pages/NewBatchPage.xaml" />
                 <mui:Link DisplayName="pay" Source="/Pages/PayPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>

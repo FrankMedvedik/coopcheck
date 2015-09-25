@@ -80,7 +80,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 }
                 sb.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
                 sb.Date = DateTime.Today.ToShortDateString();
-                sb.Save();
+                sb = await sb.SaveAsync();
 
                 try
                 {
@@ -101,7 +101,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                         StatusMessage = "Error Importing Vouchers"
                     };
                 }
-                SelectedBatch = sb;
+                SelectedBatch = await sb.SaveAsync();
             });
         }
 
@@ -248,7 +248,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 Status = new StatusInfo()
                 { StatusMessage = "saving...", IsBusy = true };
-                await SelectedBatch.SaveAsync();
+                //await SelectedBatch.SaveAsync();
                 Status = new StatusInfo() { StatusMessage = "saved" };
             }
             else

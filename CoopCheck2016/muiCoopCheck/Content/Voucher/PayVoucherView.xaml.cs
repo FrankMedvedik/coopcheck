@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Deployment.Application;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher
 {
@@ -24,7 +28,15 @@ namespace CoopCheck.WPF.Content.Voucher
 
         private void PrintChecks(object sender, RoutedEventArgs e)
         {
-            _vm.PrintChecks();
+            var f = ApplicationDeployment.CurrentDeployment.DataDirectory + @"\" +
+                    @Properties.Settings.Default.CheckTemplate;
+                if (!File.Exists(f))
+                {
+                    ModernDialog.ShowMessage( f + " not found, cannot print checks. ",
+                        "check template missing", MessageBoxButton.OK);
+                    return;
+                }
+                   _vm.PrintChecks();
         }
     }
  

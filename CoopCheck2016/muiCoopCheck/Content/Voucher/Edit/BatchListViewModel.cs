@@ -43,7 +43,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         }
 
-        private async void ResetState()
+        public async void ResetState()
         {
             IsBusy = true;
             BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc.GetOpenBatches());
@@ -74,5 +74,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 Messenger.Default.Send(new NotificationMessage<OpenBatch>(SelectedBatch, Notifications.OpenBatchChanged));
             }
         }
+
     }
 }

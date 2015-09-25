@@ -70,7 +70,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Outstanding" >
+            <TabItem Header="Open" >
                 <DataGrid ItemsSource="{Binding OpenPayments}" AutoGenerateColumns="False" 
              Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
             VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left"  >

@@ -40,7 +40,7 @@ namespace CoopCheck.WPF.Content.Payment
 
         public  async void RefreshAll()
         {
-            WorkPayments = await RptSvc.GetPayments(PaymentReportCriteria);
+            WorkPayments = await RptSvc.GetBatchPayments(PaymentReportCriteria);
 
         }
         private bool _showGridData;

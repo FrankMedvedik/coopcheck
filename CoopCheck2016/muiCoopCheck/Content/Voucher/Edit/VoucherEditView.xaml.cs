@@ -18,12 +18,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
       private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             _vm.Save();
+          Application.Current.Windows[1].Close();
         }
 
   
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            _vm.Delete();
+            Application.Current.Windows[1].Close();
 
         }
         public int SelectedVoucherId

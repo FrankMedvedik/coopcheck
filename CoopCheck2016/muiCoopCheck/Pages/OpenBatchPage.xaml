@@ -16,7 +16,7 @@
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Vertical" x:Name="cv">
-                    <Expander  Header="Open Batches" >
+                    <Expander  Header="Open Batches" IsExpanded="True">
                         <edit:BatchListView HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Expander>
                     <edit:BatchEditView HorizontalAlignment="Left" VerticalAlignment="Top"/>

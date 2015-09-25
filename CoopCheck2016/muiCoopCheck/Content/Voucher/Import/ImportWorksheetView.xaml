@@ -12,8 +12,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="80" Height="80" Style="{StaticResource CircleProgressRingStyle}" Grid.Row="0"/>
                 <!--<xctk:BusyIndicator IsBusy="{Binding IsBusy}">-->
@@ -75,22 +74,8 @@
                     </Grid>
                 </Grid>
         <StackPanel Orientation="Vertical" Grid.Row="2">
-    <edit:BatchEditView x:Name="bev" />
-            <!--<TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6" />
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Batch Date" Width="100"   Margin="6"/>
-                <TextBlock  Text="{Binding SelectedBatch.Date }"  Margin="6"  />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Payment Date" Width="100"  HorizontalAlignment="Right" Margin="6"/>
-                <TextBlock  Text="{Binding SelectedBatch.PayDate}"  Margin="6"  />
-            </StackPanel>
-            --><!--<StackPanel Orientation="Horizontal" >
-                <Button Content="Save" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding IsDirty}"  Margin="6" Click="Save_Click" IsDefault="True"/>
-                <Button Content="Pay" Margin="10" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
-                <Button Content="Delete " HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="Delete_Click" />
-            </StackPanel>-->
+            <edit:BatchEditView x:Name="bev" />
+            <Button Content="Close" x:Name="btnClose" Visibility="Collapsed" HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" Margin="6" Click="Close_Click" />
         </StackPanel>
-        <Button Grid.Row="3" HorizontalAlignment="Left" Margin="172,6,6,6" Content="Close"  Width="100" x:Name="btnClose" Visibility="Collapsed" VerticalAlignment="Center" Click="Close_Click"/>      
     </Grid>
 </UserControl>

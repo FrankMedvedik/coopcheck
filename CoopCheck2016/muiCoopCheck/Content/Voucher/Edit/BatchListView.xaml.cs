@@ -16,5 +16,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             DataContext = _vm;
         }
 
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _vm.ResetState();
+        }
     }
 }
