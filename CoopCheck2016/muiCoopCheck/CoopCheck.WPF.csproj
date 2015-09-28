@@ -677,9 +677,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\oldbackground.kitty.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\background.love.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -693,7 +690,6 @@
     <Resource Include="Assets\RecknerLogoRight.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Csla-Templates Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DesignData\Converters\" />
