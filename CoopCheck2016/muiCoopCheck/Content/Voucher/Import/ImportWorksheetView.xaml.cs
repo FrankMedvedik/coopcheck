@@ -65,7 +65,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             bev.ResetState();
             _vm.ResetState();
-            btnClose.Visibility = Visibility.Visible;
+            btnClose.Visibility = Visibility.Collapsed;
         }
 
     }

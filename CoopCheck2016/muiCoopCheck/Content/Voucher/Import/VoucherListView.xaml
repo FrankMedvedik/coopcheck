@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
                 MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher}"
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" SelectionChanged="dgVouchers_SelectionChanged">
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
@@ -42,6 +42,6 @@
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
-        <edit:VoucherEditView x:Name="vev" Grid.Column="1"/>
+        <!--<edit:VoucherEditView x:Name="vev" Grid.Column="1" Margin="0,1,0,-1"/>-->
     </Grid>
 </UserControl>

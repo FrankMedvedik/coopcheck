@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" >
     <Grid >
         <Grid.RowDefinitions>
@@ -20,80 +21,12 @@
         <Button x:Name="Refresh" Grid.Row="2"  HorizontalAlignment="Left" IsDefault="True" 
                 VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
          <payment:JobReportView  x:Name="brv" Margin="12" Grid.Row="3"/>
-        <TabControl  Grid.Row="4" Margin="12">
-            <TabItem Header="All" >
-                <DataGrid ItemsSource="{Binding AllPayments}" AutoGenerateColumns="False" 
-             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
-            VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left" >
-                    <DataGrid.Columns>
-                        <StaticResource ResourceKey="dgPJob" />
-                        <StaticResource ResourceKey="dgPEmail"/>
-                        <StaticResource ResourceKey="dgPLast"  />
-                        <StaticResource ResourceKey="dgPFirst" />
-                        <StaticResource ResourceKey="dgPCleared"/>
-                        <StaticResource ResourceKey="dgPPhone" />
-                        <StaticResource ResourceKey="dgPCity" />
-                        <StaticResource ResourceKey="dgPState"  />
-                        <StaticResource ResourceKey="dgPZip" />
-                        <StaticResource ResourceKey="dgPDate" />
-                        <StaticResource ResourceKey="dgPCheckNum"  />
-                        <StaticResource ResourceKey="dgPAmount" />
-                        <StaticResource ResourceKey="dgPCompany" />
-                        <StaticResource ResourceKey="dgPAddress1"  />
-                        <StaticResource ResourceKey="dgPAddress2"  />
-                        <StaticResource ResourceKey="dgPPrintFlag"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <!--<report:PaymentReportView x:Name="aprv"  dgPayments.ItemsSource="{Binding AllPayments}"/>-->
-            </TabItem>
-            <TabItem Header="Cleared" >
-                <DataGrid ItemsSource="{Binding ClosedPayments}" AutoGenerateColumns="False" 
-             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
-            VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left"  >
-                    <DataGrid.Columns>
-                        <StaticResource ResourceKey="dgPJob" />
-                        <StaticResource ResourceKey="dgPEmail"/>
-                        <StaticResource ResourceKey="dgPLast"  />
-                        <StaticResource ResourceKey="dgPFirst" />
-                        <StaticResource ResourceKey="dgPCleared"/>
-                        <StaticResource ResourceKey="dgPPhone" />
-                        <StaticResource ResourceKey="dgPCity" />
-                        <StaticResource ResourceKey="dgPState"  />
-                        <StaticResource ResourceKey="dgPZip" />
-                        <StaticResource ResourceKey="dgPDate" />
-                        <StaticResource ResourceKey="dgPCheckNum"  />
-                        <StaticResource ResourceKey="dgPAmount" />
-                        <StaticResource ResourceKey="dgPCompany" />
-                        <StaticResource ResourceKey="dgPAddress1"  />
-                        <StaticResource ResourceKey="dgPAddress2"  />
-                        <StaticResource ResourceKey="dgPPrintFlag"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
-            <TabItem Header="Open" >
-                <DataGrid ItemsSource="{Binding OpenPayments}" AutoGenerateColumns="False" 
-             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
-            VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left"  >
-                    <DataGrid.Columns>
-                        <StaticResource ResourceKey="dgPJob" />
-                        <StaticResource ResourceKey="dgPEmail"/>
-                        <StaticResource ResourceKey="dgPLast"  />
-                        <StaticResource ResourceKey="dgPFirst" />
-                        <StaticResource ResourceKey="dgPCleared"/>
-                        <StaticResource ResourceKey="dgPPhone" />
-                        <StaticResource ResourceKey="dgPCity" />
-                        <StaticResource ResourceKey="dgPState"  />
-                        <StaticResource ResourceKey="dgPZip" />
-                        <StaticResource ResourceKey="dgPDate" />
-                        <StaticResource ResourceKey="dgPCheckNum"  />
-                        <StaticResource ResourceKey="dgPAmount" />
-                        <StaticResource ResourceKey="dgPCompany" />
-                        <StaticResource ResourceKey="dgPAddress1"  />
-                        <StaticResource ResourceKey="dgPAddress2"  />
-                        <StaticResource ResourceKey="dgPPrintFlag"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
-        </TabControl>
+        <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  Grid.Row="4"  Layout="Tab" Margin="12" >
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
+                <mui:Link DisplayName="Closed" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
+                <mui:Link DisplayName="Open" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
     </Grid>
 </UserControl>

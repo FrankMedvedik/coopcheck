@@ -29,6 +29,54 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
+        private Boolean _isNewVoucher;
+
+        public Boolean IsNewVoucher
+        {
+            get { return _isNewVoucher; }
+            set
+            {
+                _isNewVoucher = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Boolean _showImportedBatch;
+
+        public Boolean ShowImportedBatch
+        {
+            get { return _showImportedBatch; }
+            set
+            {
+                _showImportedBatch = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Boolean _showSelectedVoucher;
+
+        public Boolean ShowSelectedVoucher
+        {
+            get { return _showSelectedVoucher; }
+            set
+            {
+                _showSelectedVoucher = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        //private Boolean _showNewVoucher;
+
+        //public Boolean ShowNewVoucher
+        //{
+        //    get { return _showNewVoucher; }
+        //    set
+        //    {
+        //        _showNewVoucher = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
         public bool IsBusy
         {
             get { return Status.IsBusy; }
@@ -102,6 +150,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     };
                 }
                 SelectedBatch = await sb.SaveAsync();
+                ShowImportedBatch = true;
             });
         }
 
@@ -132,6 +181,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public void ResetState()
         {
             ShowSelectedBatch = false;
+            ShowSelectedVoucher = false;
             Status = new StatusInfo();
             //{
             //    StatusMessage = "fill and verify the details about the voucher batch ",
@@ -177,13 +227,30 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _selectedVoucher = value;
                 NotifyPropertyChanged();
-                Status = new StatusInfo()
+                if (SelectedVoucher != null)
                 {
-                    StatusMessage = ""
-                };
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage =
+                            String.Format("{0} amount {1}", SelectedVoucher.EmailAddress, SelectedVoucher.Amount)
+                    };
+                    ShowSelectedVoucher = true;
+                }
             }
 
         }
+        public VoucherImport WorkVoucherImport
+        {
+            get { return _workVoucherImport; }
+            set
+            {
+                _workVoucherImport = value;
+                NotifyPropertyChanged();
+            }
+
+        }
+
+
         public int BatchNum
         {
             get { return SelectedBatch != null ? SelectedBatch.Num : 0; }
@@ -205,6 +272,8 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         }
 
         private string _headerText;
+        private VoucherImport _workVoucherImport;
+
         public string HeaderText
         {
             get
@@ -242,7 +311,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        public async void  Save()
+        public async void  SaveSelectedBatch()
         {
             if ((SelectedBatch.IsSavable) && UserCanWrite)
             {
@@ -284,35 +353,50 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 SelectedBatch.Vouchers.Remove(SelectedVoucher.Id);
             }
         }
-        public void AddVoucher()
+
+        public async void SaveNewVoucher()
         {
-            if (SelectedBatch != null)
+            if ((SelectedBatch != null) && (WorkVoucherImport != null))
             {
-                VoucherEditChildWindow cw = new VoucherEditChildWindow();
-                cw.ShowInTaskbar = false;
-                cw.Owner = Application.Current.MainWindow;
-                cw.Show();
-                // need to display form with elements and 
-                // 
-                //SelectedBatch.Vouchers.Add(  );
+                SelectedBatch.Vouchers.Add(WorkVoucherImport.ToVoucherEdit());
+                if(SelectedBatch.IsValid)
+                    SelectedBatch = await SelectedBatch.SaveAsync();
             }
         }
 
-        public async void Delete()
+        public void CreateNewVoucher()
         {
             if (SelectedBatch != null)
             {
+                var v = new VoucherImport();
+                v.Amount = SelectedBatch.Amount;
+                v.JobNumber = SelectedBatch.JobNum.ToString();
+                WorkVoucherImport = v;
+            }
+        }
+
+        public async void DeleteSelectedBatch()
+        {
+            if (SelectedBatch != null)
+            {
+                var v = SelectedBatch.Num;
                 if (UserCanWrite)
                 {
-                    await BatchSvc.DeleteBatchEditAsync(SelectedBatch.Num);
+                    await BatchSvc.DeleteBatchEditAsync(v);
                     Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
                     Status = new StatusInfo()
                     {
-                        StatusMessage = "Batch has been deleted",
+                        StatusMessage = String.Format("{0} Batch has been deleted", v)
                     };
                     ResetState();
                 }
             };
+        }
+
+        public void CancelNewVoucher()
+        {
+                WorkVoucherImport = null; ;
+            
         }
     }
 }

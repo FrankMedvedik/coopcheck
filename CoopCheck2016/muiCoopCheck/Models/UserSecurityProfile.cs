@@ -41,8 +41,8 @@ namespace CoopCheck.WPF.Models
             {
 
         #if DEBUG
-               //return @"reckner\fmedvedik";
-                return @Environment.UserDomainName + @"\" + Environment.UserName;
+               return @"reckner\fmedvedik";
+               // return @Environment.UserDomainName + @"\" + Environment.UserName;
 #else
                 return Environment.UserDomainName  + @"\" + Environment.UserName;
 #endif

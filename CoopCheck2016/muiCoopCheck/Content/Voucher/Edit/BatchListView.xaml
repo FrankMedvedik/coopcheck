@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-            <mui:ModernProgressRing IsActive="{Binding IsBusy}" Grid.Row="0" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" />
+            <!--<mui:ModernProgressRing IsActive="{Binding IsBusy}" Grid.Row="0" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" />-->
         <DataGrid AutoGenerateColumns="False" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
                 IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12"
                 ItemsSource="{Binding BatchList, Mode=TwoWay}" HorizontalScrollBarVisibility="Auto" Height="Auto" 

@@ -49,10 +49,10 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         public static readonly DependencyProperty SelectedBatchNumProperty =
         DependencyProperty.Register("SelectedBatchNum", typeof(int), typeof(VoucherListView), new PropertyMetadata(0));
 
-        private void dgVouchers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            vev.SelectedBatchNum = SelectedBatchNum;
-            vev.SelectedVoucherId = SelectedVoucherId;
-        }
+        //private void dgVouchers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    vev.SelectedBatchNum = SelectedBatchNum;
+        //    vev.SelectedVoucherId = SelectedVoucherId;
+        //}
     }
 }

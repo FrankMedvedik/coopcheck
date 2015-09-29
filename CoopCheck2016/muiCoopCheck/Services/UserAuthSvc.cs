@@ -12,19 +12,22 @@ namespace CoopCheck.WPF.Services
            
         public static Boolean CanRead(string userName)
         {
-            return IsGroupMember(userName, Properties.Settings.Default.ReadAuth);
+            return true;
+            //return IsGroupMember(userName, Properties.Settings.Default.ReadAuth);
         }
 
         public static Boolean CanWrite(string userName)
         {
-            return IsGroupMember(userName, Properties.Settings.Default.WriteAuth);
+            return true;
+            //return IsGroupMember(userName, Properties.Settings.Default.WriteAuth);
         }
 
         private static Boolean IsGroupMember(string userName, string Group)
         {
 #if DEBUG
-             PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
-           //PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+             //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "10.0.0.2", "fmedvedik", "(manos)3k");
+            //PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
 #else
             PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
 #endif

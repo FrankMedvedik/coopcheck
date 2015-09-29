@@ -14,16 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     /// <summary>
-    /// Interaction logic for VoucherEditChildWindow.xaml
+    /// Interaction logic for VoucherImportAddDialog.xaml
     /// </summary>
-    public partial class VoucherEditChildWindow : ModernWindow
+    public partial class VoucherImportAddDialog : ModernDialog
     {
-        public VoucherEditChildWindow()
+        public VoucherImportAddDialog()
         {
             InitializeComponent();
+
+            // define the dialog buttons
+            this.Buttons = new Button[] { this.OkButton, this.CancelButton };
         }
     }
 }

@@ -40,19 +40,30 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public static readonly DependencyProperty VoucherImportsProperty =
         DependencyProperty.Register("VoucherImports", typeof(ObservableCollection<VoucherImport>), typeof(BatchEditView), new PropertyMetadata(new ObservableCollection<VoucherImport>()));
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void SaveSelectedBatch_Click(object sender, RoutedEventArgs e)
         {
-            _vm.Save();
+            _vm.SaveSelectedBatch();
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void SaveNewVoucher_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.SaveNewVoucher();
+        }
+
+
+        private void CancelVoucher_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.CancelNewVoucher();
+        }
+
+        private void DeleteSelectedBatch_Click(object sender, RoutedEventArgs e)
         {
             if (_vm.SelectedBatch == null) return;
             MessageBoxResult result = ModernDialog.ShowMessage("Delete this entire batch of vouchers?", "Confirm", MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
             {
-                _vm.Delete(); ;
+                _vm.DeleteSelectedBatch(); ;
             }
         }
 
@@ -69,7 +80,18 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         private void AddVoucher_Click(object sender, RoutedEventArgs e)
         {
-            _vm.AddVoucher();
+            _vm.CreateNewVoucher();
+            var cw = new VoucherImportAddDialog() {DataContext = _vm};
+            var result = cw.ShowDialog();
+
+            if (result == true)
+            {
+                _vm.SaveNewVoucher();
+            }
+            else
+                _vm.CancelNewVoucher();
         }
+
     }
-}
+    }
+

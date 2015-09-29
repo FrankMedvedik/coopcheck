@@ -225,6 +225,15 @@
       <DependentUpon>BatchReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\BatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml.cs">
+      <DependentUpon>ClosedPaymentsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\Grids\OpenPaymentsGrid.xaml.cs">
+      <DependentUpon>OpenPaymentsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\Grids\AllPaymentsGrid.xaml.cs">
+      <DependentUpon>AllPaymentsGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Payment\JobSummaryPaymentReportView.xaml.cs">
       <DependentUpon>JobSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
@@ -252,8 +261,8 @@
     <Compile Include="Content\Status\StatusViewModel.cs" />
     <Compile Include="Content\UserAuth.cs" />
     <Compile Include="Content\Voucher\Edit\BatchListViewModel.cs" />
-    <Compile Include="Content\Voucher\VoucherEditChildWindow.xaml.cs">
-      <DependentUpon>VoucherEditChildWindow.xaml</DependentUpon>
+    <Compile Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml.cs">
+      <DependentUpon>VoucherImportAddDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BankClearTransaction.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
@@ -274,14 +283,6 @@
     <Compile Include="Services\BankAccountSvc.cs" />
     <Compile Include="Services\OpenBatchSvc.cs" />
     <Compile Include="Content\Voucher\PayVouchersViewModel.cs" />
-    <Compile Include="Content\Voucher\Edit\VoucherEditView.xaml.cs">
-      <DependentUpon>VoucherEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Voucher\Edit\NewVoucherView.xaml.cs">
-      <DependentUpon>NewVoucherView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Voucher\Edit\VoucherEditViewModel.cs" />
-    <Compile Include="Content\Voucher\Edit\NewVoucherViewModel.cs" />
     <Compile Include="Converters\NumberConverter.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Notifications.cs" />
@@ -461,6 +462,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\Grids\OpenPaymentsGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\Grids\AllPaymentsGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Payment\JobSummaryPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -485,15 +498,7 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\Edit\VoucherEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Voucher\Edit\NewVoucherView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Voucher\VoucherEditChildWindow.xaml">
+    <Page Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
