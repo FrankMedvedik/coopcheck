@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Content.Voucher.Import;
 using CoopCheck.WPF.Models;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
@@ -20,38 +21,22 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             InitializeComponent();
             _vm = new ReconcileBankViewModel();
             DataContext = _vm;
-        }
-
-        private void btnOpen_Click(object sender, RoutedEventArgs e)
-        {
-            var openfile = new OpenFileDialog();
-            openfile.DefaultExt = ".csv";
-            openfile.Filter = "csv | *.csv";
-            var browsefile = openfile.ShowDialog();
-            if (browsefile == true)
+            Messenger.Default.Register<NotificationMessage<BankFileViewModel>>(this, message =>
             {
-                try {
-                    _vm.FilePath = openfile.FileName;
-                }
-                catch(Exception x)
-                {
-                    MessageBox.Show(String.Format("File Open Error: {0} ", x.Message));
-                }
-            }
+                _vm.BankFileViewModel = message.Content;
+                prcv.PaymentReportCriteria.StartDate = _vm.BankFileViewModel.FirstTransactionDate.GetValueOrDefault(DateTime.Now);
+                prcv.PaymentReportCriteria.EndDate = _vm.BankFileViewModel.LastTransactionDate.GetValueOrDefault(DateTime.Now);
+
+            });
+
         }
-        public List<BankClearTransaction> BankClearTransactions
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            get { return _vm.BankClearTransactions.ToList(); }
-            set
-            {
-                _vm.BankClearTransactions = new ObservableCollection<BankClearTransaction>(value);
-            }
+
+            _vm.FilePaymentReportCriteria = prcv.PaymentReportCriteria;
+
         }
-
-        public static readonly DependencyProperty VouchersProperty =
-           DependencyProperty.Register("BankClearTransactions", typeof(List<BankClearTransaction>), typeof(ReconcileBankView),
-               new PropertyMetadata(new List<BankClearTransaction>()));
-
         private void Next_Click(object sender, RoutedEventArgs e)
         {
             //_vm.CreateVoucherBatch();
@@ -59,12 +44,12 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             //bev.Visibility = Visibility.Visible;
             //btnClose.Visibility = Visibility.Visible;
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            _vm.ResetState();
-            //bev.Visibility = Visibility.Collapsed;
-            btnClose.Visibility = Visibility.Collapsed;
-        }
+        //private void Close_Click(object sender, RoutedEventArgs e)
+        //{
+        //    _vm.ResetState();
+        //    //bev.Visibility = Visibility.Collapsed;
+        //    btnClose.Visibility = Visibility.Collapsed;
+        //}
 
     }
 

@@ -11,22 +11,22 @@ namespace CoopCheck.Library
     public class WriteCheckCommand : ReadOnlyBase<WriteCheckCommand>
     {
         #region properties
-        public static readonly PropertyInfo<PaymentInfoList> PaymentInfoListProperty = RegisterProperty<PaymentInfoList>(c => c.PaymentInfoList);
-        public PaymentInfoList PaymentInfoList
+        public static readonly PropertyInfo<PaymentInfoList> PaymentInfoListProperty = RegisterProperty<PaymentInfoList>(c => c.List);
+        public PaymentInfoList List
         {
             get { return GetProperty(PaymentInfoListProperty); }
             private set { LoadProperty(PaymentInfoListProperty, value); }
         }
 
         #endregion
-     
+
         #region business rules
         protected override void AddBusinessRules()
         {
             base.AddBusinessRules();
-#if !DEBUG
+#if!Debug
             // TODO: add business rules
-            BusinessRules.AddRule(typeof(WriteCheckCommand), new  IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(WriteCheckCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
 #endif
         }
         public static bool CanExecuteObject()
@@ -34,12 +34,12 @@ namespace CoopCheck.Library
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.ExecuteMethod, typeof(WriteCheckCommand));
         }
 
-#endregion
+        #endregion
         #region Factory Methods
 #if !SILVERLIGHT
         public static WriteCheckCommand Execute(int batchNum, int accountId, int firstCheckNum)
         {
-            
+
             return DataPortal.Fetch<WriteCheckCommand>(new Criteria() { BatchNum = batchNum, AccountId = accountId, FirstCheckNum = firstCheckNum });
         }
 #endif
@@ -90,7 +90,7 @@ namespace CoopCheck.Library
                 set { LoadProperty(AccountIdProperty, value); }
             }
             public static readonly PropertyInfo<int> firstCheckNumProperty = RegisterProperty<int>(c => c.FirstCheckNum);
-            public int FirstCheckNum    
+            public int FirstCheckNum
             {
                 get { return ReadProperty(firstCheckNumProperty); }
                 set { LoadProperty(firstCheckNumProperty, value); }
@@ -104,7 +104,7 @@ namespace CoopCheck.Library
             {
                 var dal = dalManager.GetProvider<IPaymentInfoListDal>();
                 List<PaymentInfoDto> data = dal.WriteChecks(crit.BatchNum, crit.AccountId, crit.FirstCheckNum);
-                PaymentInfoList = PaymentInfoList.LoadPaymentInfoList(data);
+                List = PaymentInfoList.LoadPaymentInfoList(data);
             }
         }
 #endif

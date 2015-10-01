@@ -42,6 +42,6 @@
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
-        <!--<edit:VoucherEditView x:Name="vev" Grid.Column="1"/>-->
+        
     </Grid>
 </UserControl>

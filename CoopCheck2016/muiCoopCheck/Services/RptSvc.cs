@@ -159,5 +159,20 @@ namespace CoopCheck.WPF.Services
                 return x;
             }
         }
+
+        public static async Task<List<vwPayment>> GetPaymentReconcileReport(PaymentReportCriteria grc)
+        {
+            using (var ctx = new CoopCheckEntities())
+            {
+                var x = await (
+                    from l in ctx.vwPayments
+                    where ((l.check_date >= grc.StartDate)
+                        && (l.check_date <= grc.EndDate)
+                        && l.account_id == grc.Account.account_id)
+                    orderby l.check_date
+                    select l).ToListAsync();
+                return x;
+            }
+        }
     }
 }

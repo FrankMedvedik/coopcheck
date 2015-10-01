@@ -86,13 +86,14 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
-#if !DEBUG        
-            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
-#endif            
-           
+#if !DEBUG
+            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+            BusinessRules.AddRule(typeof(PaymentInfoList), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+#endif
+
         }
 
-        
+
         /// <summary>
         /// Checks if the current user can retrieve Account's properties.
         /// </summary>

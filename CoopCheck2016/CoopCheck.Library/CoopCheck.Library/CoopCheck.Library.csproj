@@ -70,6 +70,7 @@
     <Compile Include="CheckInfoList.designer.cs">
       <DependentUpon>CheckInfoList.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClearCheckCommand.cs" />
     <Compile Include="CommitCheckCommand.cs" />
     <Compile Include="DataPortalHookArgs.cs" />
     <Compile Include="data\PersonatorErrorCodes.cs" />

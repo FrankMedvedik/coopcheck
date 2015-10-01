@@ -59,5 +59,11 @@ namespace CoopCheck.WPF
         {
             get { return "SelectedAccountChanged"; }
         }
+
+        public static string ReconcileBankFileLoaded
+        {
+            get { return "ReconcileBankFileLoaded"; }
+        }
+
     }
 }

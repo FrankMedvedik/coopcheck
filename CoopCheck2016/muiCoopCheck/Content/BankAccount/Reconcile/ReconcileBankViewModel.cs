@@ -1,35 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
+using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using CsvHelper;
 using CsvHelper.Configuration;
-using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
-using LinqToExcel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    class ReconcileBankViewModel : ViewModelBase, IDataErrorInfo
+    internal class ReconcileBankViewModel : ViewModelBase  
     {
-        private ObservableCollection<BankClearTransaction> _bankClearTransactions = new ObservableCollection<BankClearTransaction>();
+        private BankFileViewModel _bankFileViewModel = new BankFileViewModel();
+        private bool _showGridData;
 
-        public ObservableCollection<BankClearTransaction> BankClearTransactions
+        public ObservableCollection<KeyValuePair<String, Decimal>> Stats = new ObservableCollection<KeyValuePair<string, decimal>>();
+
+        public void AddStat(String key, Decimal val)
         {
-            get { return _bankClearTransactions; }
+            Stats.Add(new KeyValuePair<string, decimal>(key, val));
+        }
+
+        public BankFileViewModel BankFileViewModel
+        {
+            get { return _bankFileViewModel; }
             set
             {
-                _bankClearTransactions = value;
+                _bankFileViewModel = value;
                 NotifyPropertyChanged();
             }
         }
-
+        
         public StatusInfo Status
         {
             get { return _status; }
@@ -38,20 +46,75 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 _status = value;
                 NotifyPropertyChanged();
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
+                
             }
         }
 
-        private string DefaultFilePath = "Select a bank file";
         public ReconcileBankViewModel()
         {
             ResetState();
-            FilePath = DefaultFilePath;
+
+        }
+        public async void GetPayments()
+        {
             Status = new StatusInfo()
             {
-                StatusMessage = "Please select the bank file",
+                ErrorMessage = "",
+                IsBusy = true,
+                StatusMessage = "getting payments..."
             };
+            try
+            {
+                WorkPayments = await Task<List<vwPayment>>.Factory.StartNew(() =>
+                {
+                    var task = RptSvc.GetPaymentReconcileReport(FilePaymentReportCriteria);
+                    AllPayments = new List<vwPayment>(task.Result);
+
+                    ClosedPayments =
+                        (from s in AllPayments
+                            where
+                                BankFileViewModel.BankClearTransactions.Any(
+                                    t => (t.SerialNumber == s.check_num) )
+                            select s).ToList();
+
+                    //ClosedPayments = new List<vwPayment>(v);
+
+                    OpenPayments = (from s in AllPayments
+                        where
+                            !BankFileViewModel.BankClearTransactions.Any(
+                                t => (t.SerialNumber == s.check_num.ToString()))
+                        select s).ToList();
+
+                    BankFileViewModel.UnmatchedBankClearTransactions = new ObservableCollection<BankClearTransaction>(
+                         (from s in BankFileViewModel.BankClearTransactions
+                          where
+                                 !AllPayments.Any(
+                                     t => (s.SerialNumber == t.check_num))
+                          select s).ToList());
+
+
+                    return new List<vwPayment>(task.Result);
+
+
+                });
+
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "Error loading payments",
+                    ErrorMessage = e.Message
+                };
+
+            }
         }
 
+
+        public async void RefreshAll()
+        {
+              GetPayments();
+        }
         #region DisplayState
 
         private bool _canReconcile = false;
@@ -59,10 +122,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         public void ResetState()
         {
             CanReconcile = false;
-            CanImport = true;
-            BankClearTransactions = new ObservableCollection<BankClearTransaction>();
-            TransactionCnt = 0;
-            TransactionTotalDollars = 0;
+            //BankClearTransactions = new ObservableCollection<BankClearTransaction>();
         }
 
         public bool CanReconcile
@@ -73,7 +133,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 _canReconcile = value;
                 NotifyPropertyChanged();
             }
-
         }
 
         public bool IsBusy
@@ -84,97 +143,11 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 _isBusy = value;
                 NotifyPropertyChanged();
             }
-
         }
 
-        public bool CanImport
-        {
-            get { return _canImport; }
-            set
-            {
-                _canImport = value;
-                NotifyPropertyChanged();
-            }
-
-        }
-
-        #endregion
-
-        #region Workbook
-
-
-        public string FilePath
-        {
-            get { return _filePath; }
-            set
-            {
-                _filePath = value;
-                NotifyPropertyChanged();
-                if (value != DefaultFilePath)
-                {
-                    LoadCsv();
-                }
-
-            }
-        }
-
-        public sealed class BankClearTransactionMap : CsvClassMap<BankClearTransaction>
-        {
-            public BankClearTransactionMap()
-            {
-                Map(m => m.AccountDesignator).Name("Account Designator");
-                Map(m => m.RawAmount).Name("Amount");
-                Map(m => m.CRDR).Name("CR/DR");
-                Map(m => m.Description).Name("Description");
-                Map(m => m.SerialNumber).Name("Serial Number");
-                Map(m => m.PostDate).Name("Posted Date");
-            }
-        }
-
-        private void LoadCsv()
-        {
-            using (TextReader readFile = new StreamReader(FilePath))
-            {
-                var csv = new CsvReader(readFile);
-                csv.Configuration.HasHeaderRecord = true;
-                csv.Configuration.RegisterClassMap(new BankClearTransactionMap());
-                                BankClearTransactions =
-                    new ObservableCollection<BankClearTransaction>(csv.GetRecords<BankClearTransaction>().ToList());
-                TransactionCnt = BankClearTransactions.Count();
-                TransactionTotalDollars = BankClearTransactions.Select(x => x.Amount).Sum();
-
-            }
-        }
-
-        private string _filePath;
-
-        private int _transactionCnt;
-        public int TransactionCnt
-        {
-            get { return _transactionCnt; }
-            set
-            {
-                _transactionCnt = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-
-        private decimal _transactionTotalDollars;
         private StatusInfo _status;
         private bool _canImport;
         private bool _isBusy;
-        private BatchEdit _selectedBatch;
-
-        public decimal TransactionTotalDollars
-        {
-            get { return _transactionTotalDollars; }
-            set
-            {
-                _transactionTotalDollars = value;
-                NotifyPropertyChanged();
-            }
-        }
 
         #endregion
 
@@ -182,11 +155,11 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         {
             get
             {
-                if (columnName == "FilePath")
-                {
-                    if (string.IsNullOrEmpty(FilePath)) return "Select a bank file";
-                    if (!File.Exists(FilePath)) return "Invalid file name";
-                }
+                //if (columnName == "FilePath")
+                //{
+                //    if (string.IsNullOrEmpty(FilePath)) return "Select a bank file";
+                //    if (!File.Exists(FilePath)) return "Invalid file name";
+                //}
                 return null;
             }
         }
@@ -214,39 +187,73 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             set { _headerText = value; }
         }
 
-        //public BatchEdit SelectedBatch
-        //{
-        //    get { return _selectedBatch; }
-        //    set
-        //    {
-        //        _selectedBatch = value;
-        //        NotifyPropertyChanged();
-        //        if (SelectedBatch != null)
-        //        {
+        private List<vwPayment> _allPayments = new List< vwPayment >();
+        private List<vwPayment> _workPayments;
+        private List<vwPayment> _closedPayments = new List<vwPayment>();
+        private List<vwPayment> _openPayments = new List< vwPayment >();
+        private PaymentReportCriteria _filePaymentReportCriteria;
 
-        //            HeaderText = string.Format("Batch Number {0} Job Number {1}  Transaction Cnt {2} Total Amount {3:C}",
-        //                SelectedBatch.Num, SelectedBatch.JobNum, SelectedBatch.Transactions.Count,
-        //                SelectedBatch.Amount.GetValueOrDefault(0));
-        //            Status = new StatusInfo()
-        //            {
-        //                StatusMessage = HeaderText
-        //            };
-        //        }
-        //        else
-        //            ShowSelectedBatch = false;
-        //    }
-        //}
+        public List<vwPayment> WorkPayments
+        {
+            get { return _workPayments; }
+            set
+            {
+                _workPayments = value;
+                //AllPayments = new ObservableCollection<vwPayment>(WorkPayments);
+            }
+        }
 
-        //private Boolean _showSelectedBatch;
+        public List<vwPayment> AllPayments
+        {
+            get { return _allPayments; }
+            set
+            {
+                _allPayments = value;
+                NotifyPropertyChanged();
+                ShowGridData = true;
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "payments loaded"
+                };
+            }
+        }
 
-        //public Boolean ShowSelectedBatch
-        //{
-        //    get { return _showSelectedBatch; }
-        //    set
-        //    {
-        //        _showSelectedBatch = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
+        public bool ShowGridData
+        {
+            get { return _showGridData; }
+            set
+            {
+                _showGridData = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<vwPayment> ClosedPayments
+        {
+            get { return _closedPayments; }
+            set
+            {
+                _closedPayments = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<vwPayment> OpenPayments
+        {
+            get { return _openPayments; }
+            set
+            {
+                _openPayments = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public PaymentReportCriteria FilePaymentReportCriteria
+        {
+            get { return _filePaymentReportCriteria; }
+            set { _filePaymentReportCriteria = value;
+                RefreshAll();
+                NotifyPropertyChanged(); }
+        }
     }
 }

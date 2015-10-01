@@ -1,4 +1,4 @@
-﻿    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" MaxHeight="1000">
         <DataGrid ItemsSource="{Binding OpenPayments}" AutoGenerateColumns="False" 
              Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
             VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left" >

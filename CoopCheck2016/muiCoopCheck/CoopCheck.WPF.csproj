@@ -201,9 +201,19 @@
     <Compile Include="Content\BankAccount\AccountSelectView.xaml.cs">
       <DependentUpon>AccountSelectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
+      <DependentUpon>UnmatchedBankTransactionsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\Grids\AllBankTransactionsGrid.xaml.cs">
+      <DependentUpon>AllBankTransactionsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\BankFileView.xaml.cs">
+      <DependentUpon>BankFileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\BankAccount\Reconcile\ReconcileBankView.xaml.cs">
       <DependentUpon>ReconcileBankView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\BankFileViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\ReconcileBankViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionView.xaml.cs">
       <DependentUpon>BankClearTransactionView.xaml</DependentUpon>
@@ -431,6 +441,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Content\BankAccount\AccountSelectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\BankAccount\Reconcile\Grids\AllBankTransactionsGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\BankAccount\Reconcile\BankFileView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

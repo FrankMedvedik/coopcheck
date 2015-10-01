@@ -155,6 +155,24 @@ namespace CoopCheck.DalADO
             
             }
         }
+
+        public void ClearCheck(int tranId, DateTime clearedDate, decimal clearedAmount)
+        {
+            using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
+            {
+                using (var cmd = new SqlCommand("dbo.dal_ClearCheck", ctx.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tran_id", tranId).DbType = DbType.Int32;
+                    cmd.Parameters.AddWithValue("@cleared_date", clearedDate).DbType = DbType.DateTime;
+                    cmd.Parameters.AddWithValue("@cleared_amount", clearedAmount).DbType = DbType.Decimal;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
+                        DbType.String;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void VoidSwiftBatch(int batch_num)
         {
             var b = FetchBatch(batch_num);
