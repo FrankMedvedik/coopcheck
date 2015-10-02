@@ -26,7 +26,7 @@
                 <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}" Header="last pay date" />
                 <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c}"  Header="total"/>
                 <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c}" Header="cleared"/>
-                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c}" Header="opent"/>
+                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c}" Header="open"/>
                     <mui:DataGridTextColumn Binding="{Binding total_cnt}"  Header="payment count"/>
                     <mui:DataGridTextColumn Binding="{Binding open_cnt }"  Header="open"/>
                     <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared "/>

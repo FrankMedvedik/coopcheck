@@ -30,11 +30,12 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             });
 
         }
+        
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
 
-            _vm.FilePaymentReportCriteria = prcv.PaymentReportCriteria;
+            _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
 
         }
         private void Next_Click(object sender, RoutedEventArgs e)
