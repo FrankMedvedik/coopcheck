@@ -40,7 +40,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
-        public ImportWorksheetViewModel()
+        private void ResetAll()
         {
             ResetState();
             ExcelFilePath = DefaultWorkbook;
@@ -50,6 +50,19 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 StatusMessage = "Please select an study honoraria excel workbook",
                 ErrorMessage = ""
             };
+
+        }
+        public ImportWorksheetViewModel()
+        {
+            ResetAll();
+            
+            Messenger.Default.Register<NotificationMessage>(this, message =>
+            {
+                if (message.Notification == Notifications.HonorariaWorksheetImportComplete)
+                    ResetAll();
+            });
+            
+
         }
 
         #region DisplayState
@@ -360,46 +373,45 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 NotifyPropertyChanged();
             }
         }
-        private async void CreateBatchAsync()
-        {
-            var z = await Task.Factory.StartNew(async () =>
-            {
-                var sb = await BatchSvc.GetNewBatchEditAsync();
-                try
-                {
-                    sb.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
-                }
-                catch (Exception e)
-                {
-                    sb.JobNum = -1;
-                }
-                sb.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-                sb.Date = DateTime.Today.ToShortDateString();
-                sb.Save();
+        //private async void CreateBatchAsync()
+        //{
+        //    var z = await Task.Factory.StartNew(async () =>
+        //    {
+        //        var sb = await BatchSvc.GetNewBatchEditAsync();
+        //        try
+        //        {
+        //            sb.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            sb.JobNum = -1;
+        //        }
+        //        sb.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
+        //        sb.Date = DateTime.Today.ToShortDateString();
+        //        sb.SaveAsync();
 
-                try
-                {
-                    foreach (var v in VoucherImports)
-                        sb.Vouchers.Add(v.ToVoucherEdit());
-                    Status = new StatusInfo()
-                    {
-                        StatusMessage = string.Format("Imported {0} Vouchers",
-                            SelectedBatch.Vouchers.Count)
-                    };
+        //        try
+        //        {
+        //            foreach (var v in VoucherImports)
+        //                sb.Vouchers.Add(v.ToVoucherEdit());
+        //            Status = new StatusInfo()
+        //            {
+        //                StatusMessage = string.Format("Imported {0} Vouchers", sb.Vouchers.Count)
+        //            };
 
-                }
-                catch (Exception e)
-                {
-                    Status = new StatusInfo()
-                    {
-                        ErrorMessage = e.Message,
-                        StatusMessage = "Error Importing Vouchers"
-                    };
-                }
-                await sb.SaveAsync();
-                SelectedBatch = sb;
-            });
-        }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Status = new StatusInfo()
+        //            {
+        //                ErrorMessage = e.Message,
+        //                StatusMessage = "Error Importing Vouchers"
+        //            };
+        //        }
+        //        await sb.SaveAsync();
+        //        SelectedBatch = sb;
+        //    });
+        //}
 
         public void ImportVouchers()
         {
@@ -419,6 +431,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
                 foreach (var a in vouchers.Where(x => x.Last != ""))
                 {
+                    if (a.PostalCode.Length < 5)
+                        a.PostalCode = a.PostalCode.PadLeft(5, '0');
                     VoucherImports.Add(a);
                 }
 

@@ -19,30 +19,44 @@
             <reconcile:BankFileView  Margin="6"  />
         </Expander>
         <Expander Grid.Row="1" IsExpanded="True" Header="Account" FontWeight="Bold">
-            <Payment:PaymentReportCriteriaView x:Name="prcv" />
-        </Expander>
-        <Expander Grid.Row="2" IsExpanded="True" Header="Reconciliation" FontWeight="Bold">
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
-                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding Stats}" HorizontalScrollBarVisibility="Auto"  
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
-            <DataGrid.Columns>
-                <mui:DataGridTextColumn Binding="{Binding Key}" Header="Metric" />
-                    <mui:DataGridTextColumn Binding="{Binding Value}" Header="Value" />
-            </DataGrid.Columns>
-            </DataGrid>
-        </Expander>
-        <Button x:Name="Refresh" Grid.Row="3"  HorizontalAlignment="Left" IsDefault="True" Margin="6"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+            <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0"/>
+                <Button x:Name="Refresh" Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1"
                 VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
-        <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  Grid.Row="4" Margin="10"  Layout="Tab" >
-            <mui:ModernTab.Links>
-                <mui:Link DisplayName="Bank Unmatched" Source="/Content/BankAccount/Reconcile/Grids/UnmatchedBankTransactionsGrid.xaml" />
-                <mui:Link DisplayName="Bank All"  Source="/Content/BankAccount/Reconcile/Grids/AllBankTransactionsGrid.xaml" />
-                <mui:Link DisplayName="All Payments"  Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
-                <mui:Link DisplayName="Matched Payments" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
-                <mui:Link DisplayName="UnMatched Payments" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
-        <!--<Button Grid.Row="4" HorizontalAlignment="Left" Margin="6" 
-                Content="Close"  Width="100" x:Name="btnClose" Visibility="Collapsed" VerticalAlignment="Center" Click="Close_Click"/>-->
+            </Grid>
+        </Expander>
+        <Expander Grid.Row="2" IsExpanded="False" Header="Reconciliation" FontWeight="Bold" x:Name="Recon">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
+                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding Stats}" HorizontalScrollBarVisibility="Auto"  Grid.Row="0"  FontWeight="Normal"
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
+                    <DataGrid.Columns>
+                        <mui:DataGridTextColumn Binding="{Binding Key}" Header="Metric" />
+                        <mui:DataGridTextColumn Binding="{Binding Value}" Header="Value" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="1"  HorizontalAlignment="Left" Margin="6" Grid.Column="0"
+                VerticalAlignment="Center" Click="Button_Click">Clear All Matched Payments</Button>
+            </Grid>
+        </Expander>
+        <Expander Grid.Row="3" IsExpanded="False" Header="Details" FontWeight="Bold">
+            <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  FontWeight="Normal" Margin="10"  Layout="Tab" >
+                <mui:ModernTab.Links>
+                    <mui:Link DisplayName="Bank Unmatched" Source="/Content/BankAccount/Reconcile/Grids/UnmatchedBankTransactionsGrid.xaml" />
+                    <mui:Link DisplayName="Bank All"  Source="/Content/BankAccount/Reconcile/Grids/AllBankTransactionsGrid.xaml" />
+                    <mui:Link DisplayName="All Payments"  Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="Matched Payments" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="UnMatched Payments" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
+                </mui:ModernTab.Links>
+            </mui:ModernTab>
+        </Expander>
     </Grid>
 </UserControl>

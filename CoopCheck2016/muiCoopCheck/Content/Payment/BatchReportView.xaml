@@ -22,15 +22,14 @@
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job"/>
                     <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="batch date" />
                     <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="pay date" />
-                    <mui:DataGridTextColumn Binding="{Binding batch_amount,  StringFormat=c}"  Header="batch $"/>
-                <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c}"  Header="total $"/>
-                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c}" Header="cleared $"/>
+                    <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c}"  Header="total $"/>
+                    <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c}" Header="cleared $"/>
                     <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c}" Header="open $"/>
                     <mui:DataGridTextColumn Binding="{Binding total_cnt}"  Header="payment count"/>
                     <mui:DataGridTextColumn Binding="{Binding open_cnt }"  Header="open"/>
                     <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared "/>
                 <mui:DataGridTextColumn Binding="{Binding first_check_num}"  Header="first check"/>
-                <mui:DataGridTextColumn Binding="{Binding first_check_num}" Header="last check "/>
+                <mui:DataGridTextColumn Binding="{Binding last_check_num}" Header="last check "/>
             </DataGrid.Columns>
             </DataGrid>
     </Grid>

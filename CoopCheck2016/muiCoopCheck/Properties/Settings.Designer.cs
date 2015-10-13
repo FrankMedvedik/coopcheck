@@ -61,7 +61,7 @@ namespace CoopCheck.WPF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RecknerCheck.dotx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("RecknerCheckTemplate.dotx")]
         public string CheckTemplate {
             get {
                 return ((string)(this["CheckTemplate"]));
@@ -82,7 +82,7 @@ namespace CoopCheck.WPF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RECKNER\\\\CoopCheckReader")]
+        [global::System.Configuration.DefaultSettingValueAttribute("CoopCheckReader")]
         public string ReadAuth {
             get {
                 return ((string)(this["ReadAuth"]));
@@ -91,7 +91,7 @@ namespace CoopCheck.WPF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RECKNER\\\\CoopCheckAdmin")]
+        [global::System.Configuration.DefaultSettingValueAttribute("CoopCheckAdmin")]
         public string WriteAuth {
             get {
                 return ((string)(this["WriteAuth"]));

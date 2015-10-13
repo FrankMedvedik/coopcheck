@@ -20,11 +20,14 @@ namespace CoopCheck.WPF.Services
 
         public static StatusInfo PrintCheck(BatchEdit b, VoucherEdit c,  int checkNum)
         {
-            var app = new Microsoft.Office.Interop.Word.Application();
-            var doc = new Microsoft.Office.Interop.Word.Document();
-            doc = app.Documents.Add(Template: @Properties.Settings.Default.CheckTemplate);
+            var template = System.AppDomain.CurrentDomain.BaseDirectory +  @Properties.Settings.Default.CheckTemplate;
             try
             {
+
+                var app = new Microsoft.Office.Interop.Word.Application();
+                var doc = new Microsoft.Office.Interop.Word.Document();
+                doc = app.Documents.Add(Template: template);
+                
                 #region mailmerge
                 foreach (Microsoft.Office.Interop.Word.Field f in doc.Fields)
                     {
@@ -111,6 +114,11 @@ namespace CoopCheck.WPF.Services
 
                 }
                 #endregion
+
+                doc.PrintOut();
+                doc.Close(false);
+                app.Quit();
+                
             }
             catch (Exception e)
                 {
@@ -121,13 +129,10 @@ namespace CoopCheck.WPF.Services
                        ErrorMessage = e.Message
                     };
                 
-                }
+        }
 
             // app.PrintOut(doc);
          //   doc.SaveAs(string.Format("check.{0}.{1}.doc", b.Num, c.Id));
-            doc.PrintOut();
-            doc.Close(false);
-            app.Quit();
            // doc = new Microsoft.Office.Interop.Word.Document();
            //doc = app.Documents.Add(Template: @Properties.Settings.Default.CheckTemplate);
             return new StatusInfo() 

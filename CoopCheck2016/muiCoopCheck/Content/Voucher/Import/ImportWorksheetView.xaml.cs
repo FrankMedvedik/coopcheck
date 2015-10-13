@@ -59,7 +59,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             _vm.CreateVoucherBatch();
             bev.VoucherImports = _vm.VoucherImports;
             bev.Visibility = Visibility.Visible;
-            btnClose.Visibility = Visibility.Visible;
+            
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {

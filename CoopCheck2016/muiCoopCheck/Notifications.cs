@@ -65,5 +65,9 @@ namespace CoopCheck.WPF
             get { return "ReconcileBankFileLoaded"; }
         }
 
+        public static string HonorariaWorksheetImportComplete
+        {
+            get { return "HonorariaWorksheetImportComplete"; }
+        }
     }
 }

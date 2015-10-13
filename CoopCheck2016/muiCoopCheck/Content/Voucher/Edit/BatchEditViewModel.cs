@@ -41,17 +41,17 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        private Boolean _showImportedBatch;
+        //private Boolean _showImportedBatch;
 
-        public Boolean ShowImportedBatch
-        {
-            get { return _showImportedBatch; }
-            set
-            {
-                _showImportedBatch = value;
-                NotifyPropertyChanged();
-            }
-        }
+        //public Boolean ShowImportedBatch
+        //{
+        //    get { return _showImportedBatch; }
+        //    set
+        //    {
+        //        _showImportedBatch = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
 
         private Boolean _showSelectedVoucher;
 
@@ -137,7 +137,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     Status = new StatusInfo()
                     {
                         StatusMessage = string.Format("Imported {0} Vouchers",
-                            SelectedBatch.Vouchers.Count)
+                            sb.Vouchers.Count)
                     };
 
                 }
@@ -150,7 +150,8 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     };
                 }
                 SelectedBatch = await sb.SaveAsync();
-                ShowImportedBatch = true;
+                ResetState();
+                Messenger.Default.Send(new NotificationMessage(Notifications.HonorariaWorksheetImportComplete));
             });
         }
 

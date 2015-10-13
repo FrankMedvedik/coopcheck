@@ -5,6 +5,7 @@ using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using System.Linq;
 
 namespace CoopCheck.WPF.Content.Payment
 {
@@ -38,12 +39,22 @@ namespace CoopCheck.WPF.Content.Payment
         }
 
         private bool _canRefresh = true;
-        public Boolean CanRefresh       
+        public Boolean CanRefresh
         {
             get { return _canRefresh; }
-            set { _canRefresh = value; }
+            set { _canRefresh = value; NotifyPropertyChanged(); }
         }
 
+
+        private decimal _batchTotalDollars = 0;
+        public decimal BatchTotalDollars
+        {
+            get { return _batchTotalDollars; }
+            set
+            {
+                _batchTotalDollars = value; NotifyPropertyChanged();
+            }
+        }
 
         private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
         public ObservableCollection<vwBatchRpt> Batches
@@ -54,8 +65,9 @@ namespace CoopCheck.WPF.Content.Payment
                 _batches = value;
                 NotifyPropertyChanged();
                 ShowGridData = true;
-                HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}",
-                                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
+
+                HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}  Total = {3:c}",
+                                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate, BatchTotalDollars);
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -64,11 +76,11 @@ namespace CoopCheck.WPF.Content.Payment
             }
         }
 
-        public  void RefreshAll()
+        public void RefreshAll()
         {
-                GetBatchs();
+            GetBatchs();
         }
-        
+
 
         private string _headingText;
         private bool _showGridData;
@@ -77,8 +89,8 @@ namespace CoopCheck.WPF.Content.Payment
 
         public string HeadingText
         {
-            get {return _headingText;}
-            set 
+            get { return _headingText; }
+            set
             {
                 _headingText = value;
                 NotifyPropertyChanged();
@@ -107,7 +119,7 @@ namespace CoopCheck.WPF.Content.Payment
 
         public async void GetBatchs()
         {
-              ShowGridData = false;
+            ShowGridData = false;
             try
             {
                 Status = new StatusInfo()
@@ -116,7 +128,9 @@ namespace CoopCheck.WPF.Content.Payment
                     IsBusy = true,
                     StatusMessage = "refreshing Batch list..."
                 };
-                Batches = new ObservableCollection<vwBatchRpt>(await RptSvc.GetBatchRpt(PaymentReportCriteria));
+                var v = await RptSvc.GetBatchRpt(PaymentReportCriteria);
+                BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
+                Batches = new ObservableCollection<vwBatchRpt>(v);
             }
             catch (Exception e)
             {
@@ -129,5 +143,5 @@ namespace CoopCheck.WPF.Content.Payment
             }
         }
 
-        }
     }
+}

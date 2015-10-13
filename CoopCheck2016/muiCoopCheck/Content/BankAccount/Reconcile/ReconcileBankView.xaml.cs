@@ -36,6 +36,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         {
 
             _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
+            Recon.IsExpanded = true;
 
         }
         private void Next_Click(object sender, RoutedEventArgs e)
@@ -44,6 +45,11 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             //bev.VoucherImports = _vm.VoucherImports;
             //bev.Visibility = Visibility.Visible;
             //btnClose.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
         //private void Close_Click(object sender, RoutedEventArgs e)
         //{
