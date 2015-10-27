@@ -4,8 +4,19 @@
         <ColumnDefinition/>
         <ColumnDefinition/>
     </Grid.ColumnDefinitions>
-    <DataGrid AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left"   VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
-                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding BankFileViewModel.BankClearTransactions}" HorizontalScrollBarVisibility="Auto"   
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
-   </DataGrid>
+    <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left"   VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
+                MaxWidth="700" MinHeight="200"  ItemsSource="{Binding BankFileViewModel.BankClearTransactions, IsAsync=True}" HorizontalScrollBarVisibility="Auto"   
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single"
+                ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True">
+
+        <DataGrid.Columns>
+            <StaticResource ResourceKey="dgBFAccountDesignator" />
+            <StaticResource ResourceKey="dgBFPostDate"/>
+            <StaticResource ResourceKey="dgBFSerialNumber"  />
+            <StaticResource ResourceKey="dgBFDescription"  />
+            <StaticResource ResourceKey="dgBFSerialNumber"  />
+            <StaticResource ResourceKey="dgBFAmount" />
+        </DataGrid.Columns>
+    </DataGrid>
+    
 </Grid>

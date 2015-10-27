@@ -28,16 +28,19 @@ namespace CoopCheck.WPF.Content.Payment
             });
         }
 
+        private vwBatchRpt SelectedvwBatchRpt = null;
+
         private async Task RefreshChildren(vwBatchRpt vwBatchRpt)
         {
-            if (vwBatchRpt != null)
-            {
-                await Task.Factory.StartNew(() =>
+            if (vwBatchRpt == null) return;
+               if((SelectedvwBatchRpt == null) 
+                || (vwBatchRpt != SelectedvwBatchRpt))
+                 await Task.Factory.StartNew(() =>
                 {
                     _vm.PaymentReportCriteria.BatchNumber = vwBatchRpt.batch_num;
                     _vm.RefreshAll();
                 });
-            }
+            SelectedvwBatchRpt = vwBatchRpt;
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)

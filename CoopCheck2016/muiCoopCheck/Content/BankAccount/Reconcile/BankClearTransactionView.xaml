@@ -27,8 +27,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
-                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher}"
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
+                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding SelectedBatch.Vouchers, IsAsync=True}" HorizontalScrollBarVisibility="Auto"  SelectedItem="{Binding SelectedVoucher}"
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single"   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />

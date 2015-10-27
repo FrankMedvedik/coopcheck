@@ -107,6 +107,46 @@ warning 6002: The table/view 'CoopCheck.dbo.voucher' does not have a primary key
           <Property Name="updated" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CoopCheck.dbo.vwBasicPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwBasicPayment">
+          <Key>
+            <PropertyRef Name="tran_id" />
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="print_flag" />
+            <PropertyRef Name="cleared_flag" />
+          </Key>
+          <Property Name="tran_id" Type="int" Nullable="false" />
+          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="job_num" Type="int" />
+          <Property Name="check_date" Type="smalldatetime" />
+          <Property Name="check_num" Type="nvarchar" MaxLength="50" />
+          <Property Name="tran_amount" Type="money" />
+          <Property Name="person_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="name_prefix" Type="nvarchar" MaxLength="5" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="name_suffix" Type="nvarchar" MaxLength="15" />
+          <Property Name="title" Type="nvarchar" MaxLength="35" />
+          <Property Name="company" Type="nvarchar" MaxLength="35" />
+          <Property Name="address_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="address_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="municipality" Type="nvarchar" MaxLength="35" />
+          <Property Name="region" Type="nvarchar" MaxLength="35" />
+          <Property Name="postal_code" Type="nvarchar" MaxLength="15" />
+          <Property Name="country" Type="nchar" MaxLength="2" />
+          <Property Name="print_flag" Type="bit" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="22" />
+          <Property Name="account_id" Type="int" />
+          <Property Name="cleared_amount" Type="money" />
+          <Property Name="cleared_date" Type="smalldatetime" />
+          <Property Name="cleared_flag" Type="bit" Nullable="false" />
+          <Property Name="updated" Type="smalldatetime" />
+          <Property Name="usr" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwBatchRpt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwBatchRpt">
           <Key>
@@ -305,6 +345,40 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
     [voucher].[email] AS [email], 
     [voucher].[updated] AS [updated]
     FROM [dbo].[voucher] AS [voucher]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwBasicPayment" EntityType="Self.vwBasicPayment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwBasicPayment].[tran_id] AS [tran_id], 
+    [vwBasicPayment].[batch_num] AS [batch_num], 
+    [vwBasicPayment].[pay_date] AS [pay_date], 
+    [vwBasicPayment].[job_num] AS [job_num], 
+    [vwBasicPayment].[check_date] AS [check_date], 
+    [vwBasicPayment].[check_num] AS [check_num], 
+    [vwBasicPayment].[tran_amount] AS [tran_amount], 
+    [vwBasicPayment].[person_id] AS [person_id], 
+    [vwBasicPayment].[name_prefix] AS [name_prefix], 
+    [vwBasicPayment].[first_name] AS [first_name], 
+    [vwBasicPayment].[middle_name] AS [middle_name], 
+    [vwBasicPayment].[last_name] AS [last_name], 
+    [vwBasicPayment].[name_suffix] AS [name_suffix], 
+    [vwBasicPayment].[title] AS [title], 
+    [vwBasicPayment].[company] AS [company], 
+    [vwBasicPayment].[address_1] AS [address_1], 
+    [vwBasicPayment].[address_2] AS [address_2], 
+    [vwBasicPayment].[municipality] AS [municipality], 
+    [vwBasicPayment].[region] AS [region], 
+    [vwBasicPayment].[postal_code] AS [postal_code], 
+    [vwBasicPayment].[country] AS [country], 
+    [vwBasicPayment].[print_flag] AS [print_flag], 
+    [vwBasicPayment].[email] AS [email], 
+    [vwBasicPayment].[phone_number] AS [phone_number], 
+    [vwBasicPayment].[account_id] AS [account_id], 
+    [vwBasicPayment].[cleared_amount] AS [cleared_amount], 
+    [vwBasicPayment].[cleared_date] AS [cleared_date], 
+    [vwBasicPayment].[cleared_flag] AS [cleared_flag], 
+    [vwBasicPayment].[updated] AS [updated], 
+    [vwBasicPayment].[usr] AS [usr]
+    FROM [dbo].[vwBasicPayment] AS [vwBasicPayment]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwBatchRpt" EntityType="Self.vwBatchRpt" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -555,6 +629,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
           <EntitySet Name="vwCheck" EntityType="CoopCheckModel.vwCheck" />
           <EntitySet Name="vwPositivePay" EntityType="CoopCheckModel.vwPositivePay" />
+          <EntitySet Name="vwBasicPayments" EntityType="CoopCheckModel.vwBasicPayment" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -880,6 +955,44 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="check_date" Type="DateTime" Precision="0" />
           <Property Name="payee" Type="String" MaxLength="38" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwBasicPayment">
+          <Key>
+            <PropertyRef Name="tran_id" />
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="print_flag" />
+            <PropertyRef Name="cleared_flag" />
+          </Key>
+          <Property Name="tran_id" Type="Int32" Nullable="false" />
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="check_date" Type="DateTime" Precision="0" />
+          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="print_flag" Type="Boolean" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_date" Type="DateTime" Precision="0" />
+          <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
+          <Property Name="updated" Type="DateTime" Precision="0" />
+          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1308,6 +1421,42 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwBasicPayments">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwBasicPayment">
+              <MappingFragment StoreEntitySet="vwBasicPayment">
+                <ScalarProperty Name="usr" ColumnName="usr" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
+                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="municipality" ColumnName="municipality" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
+                <ScalarProperty Name="check_num" ColumnName="check_num" />
+                <ScalarProperty Name="check_date" ColumnName="check_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1322,7 +1471,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

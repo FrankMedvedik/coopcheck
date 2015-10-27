@@ -29,4 +29,10 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAccountDesignator" Binding="{Binding AccountDesignator }"  Header="AccountDesignator " />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFPostDate" Binding="{Binding PostDate}" Header="PostDate" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFSerialNumber" Binding="{Binding SerialNumber}"  Header="SerialNumber" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFDescription" Binding="{Binding Description}" Header="Description" />
+    <mui:DataGridCheckBoxColumn x:Shared="False" x:Key="dgBFAmount"  Binding="{Binding RawAmount}" Header="Amount"/>
+    
 </ResourceDictionary>

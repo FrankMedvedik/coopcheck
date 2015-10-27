@@ -36,8 +36,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
-                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding Stats}" HorizontalScrollBarVisibility="Auto"  Grid.Row="0"  FontWeight="Normal"
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" >
+                MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding Stats, IsAsync=True}" HorizontalScrollBarVisibility="Auto"  Grid.Row="0"  FontWeight="Normal"
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single"
+                            ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True">
                     <DataGrid.Columns>
                         <mui:DataGridTextColumn Binding="{Binding Key}" Header="Metric" />
                         <mui:DataGridTextColumn Binding="{Binding Value}" Header="Value" />

@@ -1,0 +1,63 @@
+﻿<UserControl   x:Class="CoopCheck.WPF.Content.Payment.OpenPaymentReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.ignore.com"
+        xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
+        mc:Ignorable="d ignore">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <payment:PaymentReportCriteriaView x:Name="prcv" />
+                <StackPanel Orientation="Horizontal" >
+                    <Button Width="Auto" Margin="12" HorizontalAlignment="Left" Click="Refresh_Click">Refresh</Button>
+                    <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Margin="12">
+                    <TextBlock Margin="6">Payment Count</TextBlock>
+                    <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat=n}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="12">
+                    <TextBlock Margin="6">Total Dollars</TextBlock>
+                    <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Payments, IsAsync=True}"  AutoGenerateColumns="False"  Width="Auto"   SelectionMode="Extended"
+                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    x:Name="dgPayments"
+                  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}"  MaxHeight="800"
+                  ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top"   EnableColumnVirtualization="True"
+                    EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" >
+            <DataGrid.Columns>
+                <StaticResource ResourceKey="dgPJob" />
+                <StaticResource ResourceKey="dgPEmail"/>
+                <StaticResource ResourceKey="dgPLast"  />
+                <StaticResource ResourceKey="dgPFirst" />
+                <StaticResource ResourceKey="dgPCleared"/>
+                <StaticResource ResourceKey="dgPPhone" />
+                <StaticResource ResourceKey="dgPCity" />
+                <StaticResource ResourceKey="dgPState"  />
+                <StaticResource ResourceKey="dgPZip" />
+                <StaticResource ResourceKey="dgPDate" />
+                <StaticResource ResourceKey="dgPCheckNum"  />
+                <StaticResource ResourceKey="dgPAmount" />
+                <StaticResource ResourceKey="dgPCompany" />
+                <StaticResource ResourceKey="dgPAddress1"  />
+                <StaticResource ResourceKey="dgPAddress2"  />
+                <StaticResource ResourceKey="dgPPrintFlag"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

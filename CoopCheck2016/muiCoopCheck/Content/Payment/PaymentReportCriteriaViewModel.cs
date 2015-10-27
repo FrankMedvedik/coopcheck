@@ -63,7 +63,6 @@ namespace CoopCheck.WPF.Content.Payment
                 NotifyPropertyChanged();
             }
         }
-        
         private ObservableCollection<bank_account> _accounts;
         public ObservableCollection<bank_account> Accounts
         {

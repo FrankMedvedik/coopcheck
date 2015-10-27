@@ -25,7 +25,9 @@
         <DataGrid Grid.Row="1" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
-                      VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}"
+                      VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment, IsAsync=True}"
+                   MaxHeight="800" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"
+                    EnableRowVirtualization="True"
                     ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />

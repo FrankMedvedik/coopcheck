@@ -175,5 +175,20 @@ namespace CoopCheck.WPF.Services
                 return x;
             }
         }
+
+        public static async Task<List<vwBasicPayment>> GetOpenPayments(PaymentReportCriteria prc)
+        {
+            IQueryable<vwBasicPayment> query;
+            List<vwBasicPayment> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                query =
+                    ctx.vwBasicPayments.Where(
+                        x => x.check_date >= prc.StartDate && x.account_id == prc.Account.account_id && x.cleared_flag == false);
+                v = await(from b in query
+                          select b).ToListAsync();
+            }
+            return v;
+        }
     }
 }

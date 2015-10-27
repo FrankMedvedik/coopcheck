@@ -1,6 +1,7 @@
 ﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" MaxHeight="1000">
-        <DataGrid ItemsSource="{Binding OpenPayments}" AutoGenerateColumns="False" 
-             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    
+        <DataGrid ItemsSource="{Binding OpenPayments, IsAsync=True}" AutoGenerateColumns="False" 
+                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+             Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    SelectionMode="Extended"
             VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />

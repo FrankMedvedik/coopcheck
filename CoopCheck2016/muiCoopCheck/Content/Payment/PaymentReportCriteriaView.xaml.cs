@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Presentation;
 
 namespace CoopCheck.WPF.Content.Payment
 {
@@ -24,5 +26,6 @@ namespace CoopCheck.WPF.Content.Payment
             }
 
         }
+     
     }
 }

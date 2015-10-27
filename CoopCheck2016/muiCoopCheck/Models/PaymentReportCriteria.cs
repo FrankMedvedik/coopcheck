@@ -162,7 +162,7 @@ namespace CoopCheck.WPF.Models
             {
                 s = string.Concat(s, token, a.Key, token, a.Value);
             }
-            return s;
+            return s.Replace("..",".");
         }
     }
 }

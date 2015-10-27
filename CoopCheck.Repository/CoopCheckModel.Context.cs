@@ -37,6 +37,7 @@ namespace CoopCheck.Repository
         public virtual DbSet<vwJobRpt> vwJobRpt { get; set; }
         public virtual DbSet<vwCheck> vwCheck { get; set; }
         public virtual DbSet<vwPositivePay> vwPositivePay { get; set; }
+        public virtual DbSet<vwBasicPayment> vwBasicPayments { get; set; }
     
         public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()
         {

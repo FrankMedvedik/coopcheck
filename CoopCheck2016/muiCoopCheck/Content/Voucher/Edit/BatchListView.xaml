@@ -15,7 +15,8 @@
             <!--<mui:ModernProgressRing IsActive="{Binding IsBusy}" Grid.Row="0" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" />-->
         <DataGrid AutoGenerateColumns="False" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
                 IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12"
-                ItemsSource="{Binding BatchList, Mode=TwoWay}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
+                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+                ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
                 VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding batch_num }" Header="Batch Number"/>

@@ -19,7 +19,8 @@
         <Button Grid.Row="3" Content="Save" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="btnSaveFile_Click"/>
         <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="4"  Width="Auto" VerticalScrollBarVisibility="Auto"  
                   HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding Path=PositivePays, Mode=TwoWay}"  VerticalAlignment="Top" 
-                      SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay}" MaxHeight="800"
+                      SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay,IsAsync=True}" MaxHeight="800"  
+                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                     ToolTipService.ToolTip="Positive Payment Report" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
                 <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding account_number}" Header="Account Number" />

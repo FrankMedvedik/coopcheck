@@ -30,7 +30,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -44,6 +44,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -114,8 +115,9 @@
       <HintPath>..\..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LinqToExcel">
-      <HintPath>..\packages\LinqToExcel.1.10.1\lib\LinqToExcel.dll</HintPath>
+    <Reference Include="LinqToExcel, Version=1.10.1.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LinqToExcel_x64.1.10.1\lib\LinqToExcel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -129,14 +131,17 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Remotion">
-      <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.dll</HintPath>
+    <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LinqToExcel_x64.1.10.1\lib\Remotion.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Remotion.Data.Linq">
-      <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.Data.Linq.dll</HintPath>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LinqToExcel_x64.1.10.1\lib\Remotion.Data.Linq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Remotion.Interfaces">
-      <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.Interfaces.dll</HintPath>
+    <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LinqToExcel_x64.1.10.1\lib\Remotion.Interfaces.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -257,6 +262,10 @@
       <DependentUpon>JobReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\JobReportViewModel.cs" />
+    <Compile Include="Content\Payment\OpenPaymentReportView.xaml.cs">
+      <DependentUpon>OpenPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\OpenPaymentReportViewModel.cs" />
     <Compile Include="Content\Payment\PaymentReportCriteriaView.xaml.cs">
       <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
     </Compile>
@@ -286,6 +295,10 @@
     <Compile Include="Pages\BatchSummaryReportPage.xaml.cs">
       <DependentUpon>BatchSummaryReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\OpenPaymentReportPage.xaml.cs">
+      <DependentUpon>OpenPaymentReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ExportSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
@@ -509,6 +522,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\Payment\OpenPaymentReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Payment\PaymentReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -577,6 +594,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Voucher\Edit\BatchListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OpenPaymentReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

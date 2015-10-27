@@ -22,7 +22,7 @@ namespace CoopCheck.WPF.Content.Payment
         {
             if (_vm.PositivePays.Count == 0) return;
             SaveFileDialog saveFileDialog = new SaveFileDialog( );
-            saveFileDialog.FileName = string.Format("PositivePay.{0}.txt", _vm.PaymentReportCriteria.ToFormattedString('.'));
+            saveFileDialog.FileName = string.Format("PositivePay{0}.txt", _vm.PaymentReportCriteria.ToFormattedString('.'));
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllLines(saveFileDialog.FileName, _vm.PositivePayData);
         }
