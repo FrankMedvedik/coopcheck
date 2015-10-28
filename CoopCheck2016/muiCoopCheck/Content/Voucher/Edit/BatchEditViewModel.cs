@@ -109,8 +109,24 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 if ((_voucherImports.Count > 0))
                 {
                     ImportVouchers();
+                    NotifyPropertyChanged("VouchersWithErrors");
                 }
             }
+        }
+
+        private ObservableCollection<VoucherEdit> _vouchersWithErrors = new ObservableCollection<VoucherEdit>();
+        public ObservableCollection<VoucherEdit> VouchersWithErrors
+        {
+            get
+            {
+                return _vouchersWithErrors;  
+            }
+            set
+            {
+                _vouchersWithErrors = value;
+                NotifyPropertyChanged();
+            }
+
         }
 
         private async void ImportVouchers()
@@ -134,12 +150,14 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 {
                     foreach (var v in VoucherImports)
                         sb.Vouchers.Add(v.ToVoucherEdit());
+                    if((sb.IsValid) && (sb.Vouchers.IsValid))
+                        SelectedBatch = await sb.SaveAsync();
+
                     Status = new StatusInfo()
                     {
                         StatusMessage = string.Format("Imported {0} Vouchers",
                             sb.Vouchers.Count)
                     };
-
                 }
                 catch (Exception e)
                 {
@@ -149,7 +167,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                         StatusMessage = "Error Importing Vouchers"
                     };
                 }
-                SelectedBatch = await sb.SaveAsync();
                 ResetState();
                 Messenger.Default.Send(new NotificationMessage(Notifications.HonorariaWorksheetImportComplete));
             });
@@ -347,11 +364,12 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        public void DeleteSelectedVoucher()
+        public async void DeleteSelectedVoucher()
         {
             if (SelectedBatch != null && UserCanWrite)
             {
                 SelectedBatch.Vouchers.Remove(SelectedVoucher.Id);
+                SelectedBatch = await SelectedBatch.SaveAsync();
             }
         }
 

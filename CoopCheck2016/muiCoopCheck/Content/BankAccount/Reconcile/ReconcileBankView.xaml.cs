@@ -28,6 +28,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 prcv.PaymentReportCriteria.EndDate = _vm.BankFileViewModel.LastTransactionDate.GetValueOrDefault(DateTime.Now);
 
             });
+            prcv.StartDate.Visibility = Visibility.Collapsed;
+            prcv.EndDate.Visibility = Visibility.Collapsed;
 
         }
         

@@ -166,11 +166,7 @@ namespace CoopCheck.WPF.Services
             {
                 var x = await (
                     from l in ctx.vwPayments
-                    where ((l.check_date >= grc.StartDate)
-                        && (l.check_date <= grc.EndDate)
-                        && l.account_id == grc.Account.account_id)
-                        && !l.cleared_flag
-                    orderby l.check_date
+                    where ( l.account_id == grc.Account.account_id && !l.cleared_flag) orderby l.check_date
                     select l).ToListAsync();
                 return x;
             }
