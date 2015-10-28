@@ -47,10 +47,12 @@ namespace CoopCheck.WPF.Content.Payment
             {
                 _positivePays = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("PaymentsCnt");
+                NotifyPropertyChanged("PaymentsTotalDollars");
                 ShowGridData = true;
-                HeadingText = String.Format("{0} Account Positive Payment Report for {1} checks from  {2:ddd, MMM d, yyyy} through {3:ddd, MMM d, yyyy}  ",
+                HeadingText = String.Format("{0} Account Positive Payment Report for Payments from  {1:ddd, MMM d, yyyy} through {2:ddd, MMM d, yyyy} ",
                                         PaymentReportCriteria.Account.account_name, 
-                                        PositivePays.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
+                                        PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -58,7 +60,15 @@ namespace CoopCheck.WPF.Content.Payment
                 };
             }
         }
+        public int PaymentsCnt
+        {
+            get { return PositivePays.Count(); }
+        }
 
+        public decimal? PaymentsTotalDollars
+        {
+            get { return PositivePays.Sum(x => x.tran_amount); }
+        }
         private string _headingText;
         private bool _showGridData;
         private StatusInfo _status;

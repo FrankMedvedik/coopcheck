@@ -17,11 +17,11 @@
             SelectedValue="{Binding PaymentReportCriteria.Account}">
                     </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" >
+            <StackPanel Orientation="Horizontal"  x:Name="StartDate">
                  <TextBlock Text="Start Date" Width="100"   Margin="6" VerticalAlignment="Center"/>
                 <DatePicker SelectedDate="{Binding PaymentReportCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6"  />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" x:Name="EndDate">
+            <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="End Date" Width="100"  Margin="6" VerticalAlignment="Center"/>
                 <DatePicker SelectedDate="{Binding PaymentReportCriteria.EndDate, StringFormat=d, Mode=TwoWay}" Margin="6"  />
                 </StackPanel>

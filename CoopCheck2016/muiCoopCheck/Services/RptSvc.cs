@@ -184,7 +184,9 @@ namespace CoopCheck.WPF.Services
             {
                 query =
                     ctx.vwBasicPayments.Where(
-                        x => x.check_date >= prc.StartDate && x.account_id == prc.Account.account_id && x.cleared_flag == false);
+                        x => x.check_date <= prc.EndDate 
+                        && x.account_id == prc.Account.account_id 
+                        && x.cleared_flag == false);
                 v = await(from b in query
                           select b).ToListAsync();
             }

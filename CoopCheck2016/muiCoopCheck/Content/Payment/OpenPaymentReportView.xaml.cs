@@ -20,7 +20,7 @@ namespace CoopCheck.WPF.Content.Payment
             InitializeComponent();
             _vm = new OpenPaymentReportViewModel();
             DataContext = _vm;
-            prcv.EndDate.Visibility = Visibility.Collapsed;
+            prcv.StartDate.Visibility = Visibility.Collapsed;
 
         }
 

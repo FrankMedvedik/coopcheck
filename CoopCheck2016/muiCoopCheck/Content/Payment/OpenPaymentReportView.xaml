@@ -27,7 +27,7 @@
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <StackPanel Orientation="Horizontal" Margin="12">
                     <TextBlock Margin="6">Payment Count</TextBlock>
-                    <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat=n}" />
+                    <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="12">
                     <TextBlock Margin="6">Total Dollars</TextBlock>
