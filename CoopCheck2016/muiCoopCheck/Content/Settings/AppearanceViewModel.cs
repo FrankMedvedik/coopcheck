@@ -15,8 +15,8 @@ namespace CoopCheck.WPF.Content.Settings
     public class AppearanceViewModel
         : NotifyPropertyChanged
     {
-        private const string FontSmall = "small";
-        private const string FontLarge = "large";
+        public const string FontSmall = "small";
+        public  const string FontLarge = "large";
 
         // 9 accent colors from metro design principles
         /*private Color[] accentColors = new Color[]{
@@ -81,6 +81,15 @@ namespace CoopCheck.WPF.Content.Settings
             this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
         }
 
+        private void LoadThemeAndColor()
+        {
+            // synchronizes the selected viewmodel theme with the actual theme used by the appearance manager.
+            this.SelectedTheme = this.themes.FirstOrDefault(l => l.Source.Equals(AppearanceManager.Current.ThemeSource));
+
+            // and make sure accent color is up-to-date
+            this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
+        }
+
         private void OnAppearanceManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor")
@@ -116,6 +125,7 @@ namespace CoopCheck.WPF.Content.Settings
 
                     // and update the actual theme
                     AppearanceManager.Current.ThemeSource = value.Source;
+                    Properties.Settings.Default.Theme = value.ToString();
                 }
             }
         }
@@ -129,8 +139,8 @@ namespace CoopCheck.WPF.Content.Settings
                 {
                     this.selectedFontSize = value;
                     OnPropertyChanged("SelectedFontSize");
-
                     AppearanceManager.Current.FontSize = value == FontLarge ? FontSize.Large : FontSize.Small;
+                    Properties.Settings.Default.FontSize = value;
                 }
             }
         }
@@ -144,10 +154,15 @@ namespace CoopCheck.WPF.Content.Settings
                 {
                     this.selectedAccentColor = value;
                     OnPropertyChanged("SelectedAccentColor");
-
                     AppearanceManager.Current.AccentColor = value;
+                    Properties.Settings.Default.AccentColor = AppearanceManager.Current.AccentColor.ToString();
                 }
             }
+        }
+
+        public void SaveSettings()
+        {
+            Properties.Settings.Default.Save();
         }
     }
 }

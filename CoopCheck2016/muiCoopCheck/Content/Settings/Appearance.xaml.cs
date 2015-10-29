@@ -20,12 +20,19 @@ namespace CoopCheck.WPF.Content.Settings
     /// </summary>
     public partial class Appearance : UserControl
     {
+        private AppearanceViewModel _vm; 
         public Appearance()
         {
             InitializeComponent();
 
             // create and assign the appearance view model
-            this.DataContext = new AppearanceViewModel();
+            _vm = new AppearanceViewModel();
+            DataContext = _vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.SaveSettings();
         }
     }
 }

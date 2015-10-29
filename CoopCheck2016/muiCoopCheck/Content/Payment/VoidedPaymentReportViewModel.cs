@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Data;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -14,46 +10,31 @@ using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Content.Payment
 {
     /// <summary>
-    public class OpenPaymentReportViewModel : ViewModelBase
+    public class VoidedPaymentReportViewModel : ViewModelBase
     {
-        public OpenPaymentReportViewModel()
+        public VoidedPaymentReportViewModel()
         {
             ResetState();
 
         }
-        private string _headingText;
-        public string HeadingText
-        {
-            get { return _headingText; }
-            set
-            {
-                _headingText = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public int PaymentsCnt
-        {
-            get { return Payments.Count(); }
-        }
 
-        public decimal? PaymentsTotalDollars
-        {
-            get { return Payments.Sum(x => x.tran_amount ); }
-        }
 
-        private ObservableCollection<vwBasicPayment> _payments = new ObservableCollection<vwBasicPayment>();
-        public ObservableCollection<vwBasicPayment> Payments
+        private ObservableCollection<vwVoidedPayment> _payments = new ObservableCollection<vwVoidedPayment>();
+        public ObservableCollection<vwVoidedPayment> Payments
         {
             get { return _payments; }
             set
             {
                 _payments = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged("PaymentsTotalDollars");
-                NotifyPropertyChanged("PaymentsCnt");
+                string em = null;
+
+                if (Payments.Count == PaymentSvc.MAX_PAYMENT_COUNT)
+                    em = String.Format("Showing only the first {0} payments add additional criteria to limit your search", PaymentSvc.MAX_PAYMENT_COUNT);
                 Status = new StatusInfo()
                 {
-                    StatusMessage = $"{PaymentsCnt} Payments found, Total Dollars {PaymentsTotalDollars:c}"
+                    ErrorMessage = em,
+                    StatusMessage = String.Format("{0} Payments found", Payments.Count)
                 };
                 ShowGridData = true;
             }
@@ -66,7 +47,7 @@ namespace CoopCheck.WPF.Content.Payment
         public void ResetState()
         {
 
-            _payments = new ObservableCollection<vwBasicPayment>();
+            _payments = new ObservableCollection<vwVoidedPayment>();
             ShowGridData = false;
 
         }
@@ -98,8 +79,8 @@ namespace CoopCheck.WPF.Content.Payment
 
         #region collection and selected
 
-        private vwBasicPayment _selectedPayment;
-        public vwBasicPayment SelectedPayment
+        private vwVoidedPayment _selectedPayment;
+        public vwVoidedPayment SelectedPayment
         {
             get { return _selectedPayment; }
             set
@@ -121,15 +102,11 @@ namespace CoopCheck.WPF.Content.Payment
             };
             try
             {
-                ShowGridData = false;
-                Payments = await Task<ObservableCollection<vwBasicPayment>>.Factory.StartNew(() =>
+                Payments = await Task<ObservableCollection<vwVoidedPayment>>.Factory.StartNew(() =>
                 {
-                    var task =  RptSvc.GetOpenPayments(p);
-                    var v = new ObservableCollection<vwBasicPayment>(task.Result);
-                    return v;
+                    var task = RptSvc.GetVoidedPayments(p);
+                    return new ObservableCollection<vwVoidedPayment>(task.Result);
                 });
-                HeadingText = String.Format("{0} Account Open Payment Report for Payments as of {1:ddd, MMM d, yyyy}",
-                 p.Account.account_name, p.EndDate);
 
             }
             catch (Exception e)
@@ -142,8 +119,5 @@ namespace CoopCheck.WPF.Content.Payment
 
             }
         }
-
-        private List<vwBasicPayment> p;
-
     }
 }

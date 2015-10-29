@@ -28,7 +28,6 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
                 <Grid HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -37,13 +36,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-
                     <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="0,0,16,4" />
                     <ComboBox Grid.Column="1" ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
-
                     <TextBlock Grid.Row="1" Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
+                    <Button Grid.Row="2" Grid.Column="1" Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Button_Click">Save</Button>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

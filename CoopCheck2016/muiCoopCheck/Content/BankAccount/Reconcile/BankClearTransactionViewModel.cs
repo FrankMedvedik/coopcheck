@@ -11,33 +11,19 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
     public class BankClearTransactionViewModel : ViewModelBase
     {
-        private void FilterVouchers()
-        {
-            
-        }
-
-        private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
-        public ObservableCollection<VoucherImport> VoucherImports  {             
-            get { return _voucherImports ; }
+        private ObservableCollection<BankClearTransaction> _bankClearTransaction = new ObservableCollection<BankClearTransaction>();
+        public ObservableCollection<BankClearTransaction> BankClearTransactions
+        {             
+            get { return _bankClearTransaction; }
             set
             {
-                _voucherImports = value;
+                _bankClearTransaction = value;
                 NotifyPropertyChanged();
-
-                if (SelectedBatch != null)
-                {
-                    SelectedBatch.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First()); 
-                    SelectedBatch.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-                    SelectedBatch.Date = DateTime.Today.ToShortDateString();
-                    foreach (var v in VoucherImports)
-                    {
-                        SelectedBatch.Vouchers.Add(v.ToVoucherEdit());
-                    }
-                    //SelectedBatch.Save();
-                }
+                ShowGridData = true;
             }
         }
- 
+
+        private StatusInfo _status;
         public StatusInfo Status
         {
             get { return _status; }
@@ -55,33 +41,18 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             
         }
 
-        #region DisplayState
-        private bool _canProceed;
 
         private void ResetState()
         {
-            CanProceed = false;
             ShowGridData = false;
             Status = new StatusInfo()
             {
-                StatusMessage = "verify vouchers",
+                StatusMessage = "",
                 ErrorMessage = ""
             };
 
-            SelectedBatch = BatchEdit.NewBatchEdit();
         }
 
-        public bool CanProceed
-        {
-            get { return _canProceed; }
-            set{
-                _canProceed = value;
-                NotifyPropertyChanged();
-            }
-
-        }
-
-        
         private Boolean _showGridData;
 
         public Boolean ShowGridData
@@ -94,57 +65,22 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
-
-        #endregion
-
-        #region BatchEdit
-
-        private BatchEdit _selectedBatch;
-        private StatusInfo _status;
-
-        public BatchEdit  SelectedBatch
+        public Boolean ShowSelectedBankClearTransaction
         {
-            get { return _selectedBatch; }
+            get { return SelectedBankClearTransaction != null; }
+        }
+
+        private BankClearTransaction _selectedBankClearTransaction;
+
+        public BankClearTransaction SelectedBankClearTransaction
+        {
+            get { return _selectedBankClearTransaction; }
             set
             {
-                _selectedBatch = value;
+                _selectedBankClearTransaction = value;
                 NotifyPropertyChanged();
-                ShowGridData = true;
+                NotifyPropertyChanged("ShowSelectedBankClearTransaction");
             }
         }
-
-        public int  BatchNum
-        {
-            get { return SelectedBatch.Num; }
-            set
-            {
-                SelectedBatch = BatchEdit.GetBatchEdit(value);
-                NotifyPropertyChanged();
-            }
-        }
-
-
-        private VoucherEdit _selectedVoucher;
-
-        public VoucherEdit SelectedVoucher
-        {
-            get { return _selectedVoucher; }
-            set
-            {
-                _selectedVoucher = value;
-                NotifyPropertyChanged();
-                ShowGridData = true;
-            }
-        }
-        public int SelectedVoucherId
-        {
-            get
-            {
-                if (SelectedVoucher != null)
-                    return SelectedVoucher.Id;
-                return 0;
-            }
-        }
-        #endregion
     }
 }

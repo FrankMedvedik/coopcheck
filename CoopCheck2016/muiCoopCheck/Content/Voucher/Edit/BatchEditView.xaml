@@ -17,20 +17,20 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="StackPanel">
+        <Style TargetType="StackPanel" x:Key="StackPanelStyle" >
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
-        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-            <Setter Property="Width" Value="100" />
+        <Style x:Key="LableStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Setter Property="Width" Value="110" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
-        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-            <Setter Property="Padding" Value="0,3" />
-        </Style>
-        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
-            <Setter Property="Padding" Value="0,3" />
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Width" Value="110" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Control.Resources>
     <Grid >
@@ -49,17 +49,17 @@
                 <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
-                 <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6" />
+                 <TextBlock Text="{Binding HeaderText}" Style="{StaticResource TextBlockStyle}"/>
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Batch Date" Width="100"   Margin="6"/>
+                    <TextBlock Text="Batch Date" Style="{StaticResource TextBlockStyle}"/>
                     <TextBlock  Text="{Binding SelectedBatch.Date }"  Margin="6"  />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Payment Date" Width="100"  HorizontalAlignment="Right" Margin="6"/>
+                    <TextBlock Text="Payment Date" Style="{StaticResource TextBlockStyle}"/>
                     <TextBlock  Text="{Binding SelectedBatch.PayDate}"  Margin="6"  />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <Button Content="Save" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding IsDirty}"  Margin="6" Click="SaveSelectedBatch_Click"  IsDefault="True"/>
+                    <Button Content="Save" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  IsDefault="True"/>
                     <Button Content="Delete " HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="DeleteSelectedBatch_Click" />
                     <!--<voucher:PayVoucherView Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
                 </StackPanel>
@@ -68,35 +68,31 @@
             <StackPanel Orientation="Vertical" >
                     <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Job" VerticalAlignment="Top" Width="100"  Margin="6"/>
+                            <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
                     <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="File">
-                        <TextBlock Text="Date" Width="100"   Margin="6"/>
+                            <TextBlock Text="Date" Style="{StaticResource TextBlockStyle}"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.Date, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Margin="6" TabIndex="2" />
                     <!--</StackPanel>
                     <StackPanel Orientation="Horizontal" >-->
-                        <TextBlock Text="Payment Date" Width="100"   HorizontalAlignment="Right" Margin="6"/>
+                            <TextBlock Text="Payment Date" Style="{StaticResource TextBlockStyle}"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" TabIndex="3" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Total $" Width="100"   Margin="6"/>
-                        <TextBox Width="110" Text="{Binding SelectedBatch., StringFormat='{}{0:C}', Mode=TwoWay}" Margin="6" TabIndex="4"/>
-                    </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="s">
-                        <TextBlock Text="Study Topic" Width="100"   Margin="6"/>
+                            <TextBlock Text="Study Topic"  Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                         <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.StudyTopic, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="5" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Description" Width="100" Margin="6"/>
+                            <TextBlock Text="Description" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                         <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Thank You 1" Width="100" Margin="6"/>
+                            <TextBlock Text="Thank You 1" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                         <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Thank You 2" Width="100"  Margin="6"/>
+                            <TextBlock Text="Thank You 2" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                         <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
                     </StackPanel>
                 </StackPanel>
@@ -112,8 +108,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="1"
-                ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="600" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800"
-                      ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+                ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800"
+                      ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                           VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
                     <DataGrid.Columns>
                         <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />

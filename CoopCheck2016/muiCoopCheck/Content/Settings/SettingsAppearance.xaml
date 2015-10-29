@@ -49,7 +49,9 @@
 
                     <TextBlock Grid.Row="2" Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
+                    
                 </Grid>
+                <Button  Width="Auto" Margin="12" HorizontalAlignment="Center" IsDefault="True" Click="Button_Click">Save</Button>
             </StackPanel>
         </ScrollViewer>
     </Grid>

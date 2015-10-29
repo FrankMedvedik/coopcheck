@@ -9,28 +9,28 @@
         <Grid.RowDefinitions>
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
-            <TextBlock Text="{Binding HeadingText}" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="6"/>
-            <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding HeadingText}"  HorizontalAlignment="Left" Margin="6" FontWeight="Bold"/>
+            <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
+        </StackPanel>
+        <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   
                       ItemsSource="{Binding Path=Jobs, Mode=TwoWay}"  VerticalAlignment="Top" 
                       SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
-                    ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
+                    ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job"/>
-                <mui:DataGridTextColumn Binding="{Binding first_pay_date ,StringFormat=d}" Header="first pay date" />
-                <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}" Header="last pay date" />
-                <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c}"  Header="total"/>
-                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c}" Header="cleared"/>
-                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c}" Header="open"/>
+                <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c}"  Header="total $"/>
+                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c}" Header="cleared $"/>
+                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c}" Header="open $"/>
                     <mui:DataGridTextColumn Binding="{Binding total_cnt}"  Header="payment count"/>
                     <mui:DataGridTextColumn Binding="{Binding open_cnt }"  Header="open"/>
                     <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared "/>
-                </DataGrid.Columns>
+                <mui:DataGridTextColumn Binding="{Binding first_pay_date ,StringFormat=d}" Header="first payment date" />
+                <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}" Header="last payment  date" />
+            </DataGrid.Columns>
             </DataGrid>
     </Grid>
 </UserControl>

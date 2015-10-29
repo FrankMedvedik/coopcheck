@@ -47,11 +47,6 @@
                     <TextBlock Text="First Name" Margin="6" Width="100" ToolTip="enter all or part of the first name you are looking for"/>
                     <TextBox Width="300" Text="{Binding PaymentReportCriteria.FirstName, Mode=TwoWay}" Margin="6" />
                     </StackPanel>
-                        <StackPanel Orientation="Horizontal" x:Name="spCheckNumber">
-                        <TextBlock Text="Status" Width="100"  Margin="6"  />
-                        <CheckBox Content="Printed" IsChecked="{Binding PaymentReportCriteria.IsPrinted}" Margin="6"/>
-                            <CheckBox Content="Cleared" IsChecked="{Binding PaymentReportCriteria.IsCleared}" Margin="6"/>
-                        </StackPanel>
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock Text="Check Number" Width="100"   Margin="6"/>
                             <TextBox Width="300" Text="{Binding PaymentReportCriteria.CheckNumber, Mode=TwoWay}" Margin="6" ToolTip="the check or (swift) payment code you are looking for"/>

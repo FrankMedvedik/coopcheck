@@ -4,22 +4,23 @@
              Width="Auto" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"     SelectionMode="Extended" 
             VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>
-                <StaticResource ResourceKey="dgPJob" />
-                <StaticResource ResourceKey="dgPEmail"/>
-                <StaticResource ResourceKey="dgPLast"  />
-                <StaticResource ResourceKey="dgPFirst" />
-                <StaticResource ResourceKey="dgPCleared"/>
-                <StaticResource ResourceKey="dgPPhone" />
-                <StaticResource ResourceKey="dgPCity" />
-                <StaticResource ResourceKey="dgPState"  />
-                <StaticResource ResourceKey="dgPZip" />
-                <StaticResource ResourceKey="dgPDate" />
-                <StaticResource ResourceKey="dgPCheckNum"  />
-                <StaticResource ResourceKey="dgPAmount" />
-                <StaticResource ResourceKey="dgPCompany" />
-                <StaticResource ResourceKey="dgPAddress1"  />
-                <StaticResource ResourceKey="dgPAddress2"  />
-                <StaticResource ResourceKey="dgPPrintFlag"/>
-            </DataGrid.Columns>
+            <StaticResource ResourceKey="dgPJob" />
+            <StaticResource ResourceKey="dgPCheckNum"  />
+            <StaticResource ResourceKey="dgPEmail"/>
+            <StaticResource ResourceKey="dgPLast"  />
+            <StaticResource ResourceKey="dgPFirst" />
+            <StaticResource ResourceKey="dgPPhone" />
+            <StaticResource ResourceKey="dgPCity" />
+            <StaticResource ResourceKey="dgPState"  />
+            <StaticResource ResourceKey="dgPZip" />
+            <StaticResource ResourceKey="dgPDate" />
+            <StaticResource ResourceKey="dgPAmount" />
+            <StaticResource ResourceKey="dgPCompany" />
+            <StaticResource ResourceKey="dgPAddress1"  />
+            <StaticResource ResourceKey="dgPAddress2"  />
+            <StaticResource ResourceKey="dgPCleared"/>
+            <StaticResource ResourceKey="dgPPrintFlag"/>
+
+        </DataGrid.Columns>
         </DataGrid>
 </Grid>

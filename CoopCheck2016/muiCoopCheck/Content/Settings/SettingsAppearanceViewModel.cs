@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Remotion.Reflection;
 
 namespace FirstFloor.ModernUI.App.Content
 {
@@ -76,7 +77,6 @@ namespace FirstFloor.ModernUI.App.Content
             this.themes.Add(new Link { DisplayName = "snowflakes", Source = new Uri("/CoopCheck.WPF;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative) });
             this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;
             SyncThemeAndColor();
-
             AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
         }
 
@@ -89,6 +89,7 @@ namespace FirstFloor.ModernUI.App.Content
             this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
         }
 
+    
         private void OnAppearanceManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor") {
@@ -141,6 +142,7 @@ namespace FirstFloor.ModernUI.App.Content
 
                     // and update the actual theme
                     AppearanceManager.Current.ThemeSource = value.Source;
+                    CoopCheck.WPF.Properties.Settings.Default.Theme = value.Source.ToString();
                 }
             }
         }
@@ -153,8 +155,8 @@ namespace FirstFloor.ModernUI.App.Content
                 if (this.selectedFontSize != value) {
                     this.selectedFontSize = value;
                     OnPropertyChanged("SelectedFontSize");
-
                     AppearanceManager.Current.FontSize = value == FontLarge ? FontSize.Large : FontSize.Small;
+                    CoopCheck.WPF.Properties.Settings.Default.FontSize = value;
                 }
             }
         }
@@ -169,8 +171,14 @@ namespace FirstFloor.ModernUI.App.Content
                     OnPropertyChanged("SelectedAccentColor");
 
                     AppearanceManager.Current.AccentColor = value;
+                    CoopCheck.WPF.Properties.Settings.Default.AccentColor = value.ToString();
                 }
             }
+        }
+
+        public void SaveSettings()
+        {
+            CoopCheck.WPF.Properties.Settings.Default.Save();
         }
     }
 }

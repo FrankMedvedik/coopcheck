@@ -135,7 +135,6 @@ namespace CoopCheck.WPF.Models
         {
             var v = new List<KeyValuePair<string, string>>();
             string s = string.Empty;
-
             if (Account != null)
                 v.Add(new KeyValuePair<string, string>("Account", Account.account_name));
             if (BatchNumber != null)
@@ -154,15 +153,27 @@ namespace CoopCheck.WPF.Models
                 v.Add(new KeyValuePair<string, string>("LastName", LastName));
             if (FirstName != null)
                 v.Add(new KeyValuePair<string, string>("FirstName", FirstName));
-            if (IsCleared)
-                v.Add(new KeyValuePair<string, string>("IsCleared", "Cleared"));
-            if (IsPrinted)
-                v.Add(new KeyValuePair<string, string>("IsPrinted", "Printed"));
             foreach (var a  in v)
             {
                 s = string.Concat(s, token, a.Key, token, a.Value);
             }
-            return s.Replace("..",".");
+            return s;
+        }
+
+        public string ToSummaryFormattedString(char token)
+        {
+            var v = new List<KeyValuePair<string, string>>();
+            string s = string.Empty;
+
+            if (Account != null)
+                v.Add(new KeyValuePair<string, string>("Account", Account.account_name));
+                v.Add(new KeyValuePair<string, string>("StartDate", StartDate.ToString("yyyyMMdd")));
+                v.Add(new KeyValuePair<string, string>("EndDate", EndDate.ToString("yyyyMMdd")));
+            foreach (var a in v)
+            {
+                s = string.Concat(s, token, a.Key, token, a.Value);
+            }
+            return s;
         }
     }
 }

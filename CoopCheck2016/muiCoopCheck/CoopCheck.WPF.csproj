@@ -122,6 +122,9 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Lync.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Lync.Controls.Framework, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Lync.Utilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -167,6 +170,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -204,9 +209,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Content\BankAccount\AccountSelectView.xaml.cs">
-      <DependentUpon>AccountSelectView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
       <DependentUpon>UnmatchedBankTransactionsGrid.xaml</DependentUpon>
     </Compile>
@@ -221,8 +223,8 @@
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\BankFileViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\ReconcileBankViewModel.cs" />
-    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionView.xaml.cs">
-      <DependentUpon>BankClearTransactionView.xaml</DependentUpon>
+    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionsView.xaml.cs">
+      <DependentUpon>BankClearTransactionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionViewModel.cs" />
     <Compile Include="Content\NoAccessView.xaml.cs">
@@ -262,9 +264,13 @@
       <DependentUpon>JobReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\JobReportViewModel.cs" />
+    <Compile Include="Content\Payment\VoidedPaymentReportView.xaml.cs">
+      <DependentUpon>VoidedPaymentReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Payment\OpenPaymentReportView.xaml.cs">
       <DependentUpon>OpenPaymentReportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Payment\VoidedPaymentReportViewModel.cs" />
     <Compile Include="Content\Payment\OpenPaymentReportViewModel.cs" />
     <Compile Include="Content\Payment\PaymentReportCriteriaView.xaml.cs">
       <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
@@ -297,6 +303,9 @@
     </Compile>
     <Compile Include="Pages\OpenPaymentReportPage.xaml.cs">
       <DependentUpon>OpenPaymentReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\VoidedPaymentReportPage.xaml.cs">
+      <DependentUpon>VoidedPaymentReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\ExportSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
@@ -454,10 +463,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
-    <Page Include="Content\BankAccount\AccountSelectView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -474,7 +479,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\BankAccount\Reconcile\BankClearTransactionView.xaml">
+    <Page Include="Content\BankAccount\Reconcile\BankClearTransactionsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -519,6 +524,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Payment\JobReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\VoidedPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -598,6 +607,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\OpenPaymentReportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\VoidedPaymentReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

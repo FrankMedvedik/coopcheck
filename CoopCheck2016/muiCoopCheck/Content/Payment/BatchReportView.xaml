@@ -10,14 +10,17 @@
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
-            <TextBlock Text="{Binding HeadingText}" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" Margin="6"/>
-            <DataGrid x:Name="dg" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"   
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="{Binding HeadingText}"  HorizontalAlignment="Left" Margin="6"/>
+            <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
+        </StackPanel>
+            <DataGrid x:Name="dgBatches" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"   
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   
                       ItemsSource="{Binding Batches}"  VerticalAlignment="Top"   
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                       SelectedItem="{Binding SelectedBatch}" MaxHeight="300"
-                    ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
+                    ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding batch_num}"  Header="batch"/>
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job"/>

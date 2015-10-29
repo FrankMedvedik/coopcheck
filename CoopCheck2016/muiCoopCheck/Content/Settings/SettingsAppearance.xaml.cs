@@ -1,18 +1,5 @@
-﻿using FirstFloor.ModernUI.Presentation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FirstFloor.ModernUI.App.Content
 {
@@ -21,12 +8,20 @@ namespace FirstFloor.ModernUI.App.Content
     /// </summary>
     public partial class SettingsAppearance : UserControl
     {
+        private SettingsAppearanceViewModel _vm;
+
         public SettingsAppearance()
         {
             InitializeComponent();
 
-            // a simple view model for appearance configuration
-            this.DataContext = new SettingsAppearanceViewModel();
+            // create and assign the appearance view model
+            _vm = new SettingsAppearanceViewModel();
+            DataContext = _vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.SaveSettings();
         }
     }
 }

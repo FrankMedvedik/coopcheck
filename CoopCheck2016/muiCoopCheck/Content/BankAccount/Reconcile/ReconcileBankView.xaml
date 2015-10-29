@@ -25,8 +25,8 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
             <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0"/>
-                <Button x:Name="Refresh" Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1"
-                VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
+                <Button x:Name="Payments" Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1"
+                VerticalAlignment="Center" Click="Refresh_Click">Payments</Button>
             </Grid>
         </Expander>
         <Expander Grid.Row="2" IsExpanded="False" Header="Reconciliation" FontWeight="Bold" x:Name="Recon">
@@ -48,7 +48,8 @@
                 VerticalAlignment="Center" Click="Button_Click">Clear All Matched Payments</Button>
             </Grid>
         </Expander>
-        <Expander Grid.Row="3" IsExpanded="False" Header="Details" FontWeight="Bold">
+            <reconcile:BankClearTransactionsView x:Name="bctv" Grid.Row="3" />
+        <!--<Expander Grid.Row="3" IsExpanded="False" Header="Details" FontWeight="Bold">
             <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  FontWeight="Normal" Margin="10"  Layout="Tab" >
                 <mui:ModernTab.Links>
                     <mui:Link DisplayName="Bank Unmatched" Source="/Content/BankAccount/Reconcile/Grids/UnmatchedBankTransactionsGrid.xaml" />
@@ -58,6 +59,6 @@
                     <mui:Link DisplayName="UnMatched Payments" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
                 </mui:ModernTab.Links>
             </mui:ModernTab>
-        </Expander>
+        </Expander>-->
     </Grid>
 </UserControl>

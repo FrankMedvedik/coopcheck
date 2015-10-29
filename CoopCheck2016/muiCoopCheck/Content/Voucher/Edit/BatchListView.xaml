@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
              mc:Ignorable="d" >
         <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
@@ -14,7 +11,7 @@
         </Grid.RowDefinitions>
             <!--<mui:ModernProgressRing IsActive="{Binding IsBusy}" Grid.Row="0" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" />-->
         <DataGrid AutoGenerateColumns="False" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
-                IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12"
+                IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12" MaxHeight="250"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                 ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
                 VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}">

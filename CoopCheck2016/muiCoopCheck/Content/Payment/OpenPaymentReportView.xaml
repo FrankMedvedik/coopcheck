@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
@@ -24,39 +24,43 @@
                     <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Column="1">
-                <StackPanel Orientation="Horizontal" Margin="12">
-                    <TextBlock Margin="6">Payment Count</TextBlock>
-                    <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" />
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
+                <TextBlock Text="{Binding HeadingText}"  FontWeight="Bold" HorizontalAlignment="Stretch" Margin="6"/>
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right" >Payment Count</TextBlock>
+                    <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal"  Margin="12">
-                    <TextBlock Margin="6">Total Dollars</TextBlock>
-                    <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" />
+                <StackPanel Orientation="Horizontal"  Margin="6">
+                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right">Total Dollars</TextBlock>
+                    <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold"  />
                 </StackPanel>
             </StackPanel>
+
         </Grid>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Payments, IsAsync=True}"  AutoGenerateColumns="False"  Width="Auto"   SelectionMode="Extended"
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Payments, IsAsync=True}"  AutoGenerateColumns="False"  Width="Auto"  
+                  SelectionMode="Extended"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}"  MaxHeight="800"
                   ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top"   EnableColumnVirtualization="True"
                     EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />
+                <StaticResource ResourceKey="dgPCheckNum"  />
                 <StaticResource ResourceKey="dgPEmail"/>
                 <StaticResource ResourceKey="dgPLast"  />
                 <StaticResource ResourceKey="dgPFirst" />
-                <StaticResource ResourceKey="dgPCleared"/>
                 <StaticResource ResourceKey="dgPPhone" />
                 <StaticResource ResourceKey="dgPCity" />
                 <StaticResource ResourceKey="dgPState"  />
                 <StaticResource ResourceKey="dgPZip" />
                 <StaticResource ResourceKey="dgPDate" />
-                <StaticResource ResourceKey="dgPCheckNum"  />
                 <StaticResource ResourceKey="dgPAmount" />
                 <StaticResource ResourceKey="dgPCompany" />
                 <StaticResource ResourceKey="dgPAddress1"  />
                 <StaticResource ResourceKey="dgPAddress2"  />
+                <StaticResource ResourceKey="dgPCleared"/>
                 <StaticResource ResourceKey="dgPPrintFlag"/>
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

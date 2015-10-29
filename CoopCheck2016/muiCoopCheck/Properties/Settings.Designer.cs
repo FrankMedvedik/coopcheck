@@ -101,24 +101,36 @@ namespace CoopCheck.WPF.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("AppearanceManager.LightThemeSource")]
-        public string SelectedAccentColor {
+        public string AccentColor {
             get {
-                return ((string)(this["SelectedAccentColor"]));
+                return ((string)(this["AccentColor"]));
             }
             set {
-                this["SelectedAccentColor"] = value;
+                this["AccentColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SelectedTheme {
+        public string Theme {
             get {
-                return ((string)(this["SelectedTheme"]));
+                return ((string)(this["Theme"]));
             }
             set {
-                this["SelectedTheme"] = value;
+                this["Theme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FontSize {
+            get {
+                return ((string)(this["FontSize"]));
+            }
+            set {
+                this["FontSize"] = value;
             }
         }
     }

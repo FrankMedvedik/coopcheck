@@ -9,25 +9,32 @@
         <Grid.RowDefinitions>
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
-        <Payment:PaymentReportCriteriaView Grid.Row="0"  x:Name="prcv" />
-        <Button Grid.Row="1" Content="Refresh" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="Button_Click"/>
-        <StackPanel Orientation="Vertical" Grid.Row="2">
-         <TextBlock Text="{Binding HeadingText}" HorizontalAlignment="Stretch" Margin="6"/>
-         <StackPanel Orientation="Horizontal" Margin="12">
-                <TextBlock Margin="6">Payment Count</TextBlock>
-                <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" />
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0">
+                <Payment:PaymentReportCriteriaView   x:Name="prcv" Margin="6"/>
+                <StackPanel Orientation="Horizontal">
+                <Button Content="Refresh" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" IsDefault="True" Click="Button_Click"/>
+                <Button Content="Save" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnSaveFile_Click"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal"  Margin="12">
-                <TextBlock Margin="6">Total Dollars</TextBlock>
-                <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" />
-            </StackPanel>
-        </StackPanel>
-        <Button Grid.Row="3" Content="Save" Margin="6" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="btnSaveFile_Click"/>
-        <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="4"  Width="Auto" VerticalScrollBarVisibility="Auto"  
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
+                 <TextBlock Text="{Binding HeadingText}"  FontWeight="Bold" HorizontalAlignment="Stretch" Margin="6"/>
+                 <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right" >Payment Count</TextBlock>
+                    <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"  Margin="6">
+                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right">Total Dollars</TextBlock>
+                    <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold"  />
+                    </StackPanel>
+                </StackPanel>
+        </Grid>
+        <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="1"  Width="Auto" VerticalScrollBarVisibility="Auto"  
                   HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding Path=PositivePays, Mode=TwoWay}"  VerticalAlignment="Top" 
                       SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay,IsAsync=True}" MaxHeight="800"  
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"

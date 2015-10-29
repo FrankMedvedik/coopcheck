@@ -30,9 +30,9 @@
         </Style.Triggers>
     </Style>
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAccountDesignator" Binding="{Binding AccountDesignator }"  Header="AccountDesignator " />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFPostDate" Binding="{Binding PostDate}" Header="PostDate" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFSerialNumber" Binding="{Binding SerialNumber}"  Header="SerialNumber" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFDescription" Binding="{Binding Description}" Header="Description" />
-    <mui:DataGridCheckBoxColumn x:Shared="False" x:Key="dgBFAmount"  Binding="{Binding RawAmount}" Header="Amount"/>
-    
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFPostDate" Binding="{Binding PostDate, StringFormat=d}" Header="Post Date" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFSerialNumber" Binding="{Binding SerialNumber}"  Header="Serial Number" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFDescription" Binding="{Binding Description}" Header="Description" Width="250"/>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAmount"  Binding="{Binding RawAmount}" Header="Amount"/>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFCRDR" Binding="{Binding CRDR}"  Header="Cr/Dr " />
 </ResourceDictionary>

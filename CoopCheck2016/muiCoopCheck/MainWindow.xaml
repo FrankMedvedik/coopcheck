@@ -20,6 +20,7 @@
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="find" Source="/Pages/PaymentFinderReportPage.xaml" />
                 <mui:Link DisplayName="open" Source="/Pages/OpenPaymentReportPage.xaml" />
+                <mui:Link DisplayName="voids" Source="/Pages/VoidedPaymentReportPage.xaml" />
                 <mui:Link DisplayName="batches" Source="/Pages/BatchSummaryReportPage.xaml" />
                 <mui:Link DisplayName="jobs" Source="/Pages/JobSummaryReportPage.xaml" />
                 <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayReportPage.xaml" />

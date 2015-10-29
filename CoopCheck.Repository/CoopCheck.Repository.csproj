@@ -127,6 +127,9 @@
     <Compile Include="vwPositivePay.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwVoidedPayment.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CoopCheckModel.edmx">
