@@ -24,5 +24,6 @@ namespace CoopCheck.WPF.Content
         {
             InitializeComponent();
         }
+
     }
 }

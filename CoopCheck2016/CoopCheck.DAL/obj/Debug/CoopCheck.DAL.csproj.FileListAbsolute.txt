@@ -130,6 +130,5 @@ C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\bin
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\vi\Csla.resources.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\zh-Hans\Csla.resources.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\zh-TW\Csla.resources.dll
-C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.csprojResolveAssemblyReference.cache
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\obj\Debug\CoopCheck.DAL.pdb

@@ -26,7 +26,7 @@
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
                       VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment, IsAsync=True}"
-                   MaxHeight="800" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"
+                   MaxHeight="500" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"
                     EnableRowVirtualization="True"
                     ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
             <DataGrid.Columns>

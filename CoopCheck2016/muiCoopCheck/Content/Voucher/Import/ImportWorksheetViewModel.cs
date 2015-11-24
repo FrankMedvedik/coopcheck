@@ -8,6 +8,7 @@ using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using CoopCheck.WPF.Wrappers;
 using GalaSoft.MvvmLight.Messaging;
 using LinqToExcel;
 
@@ -193,7 +194,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     StatusMessage = "Select a worksheet",
                     ErrorMessage = ""
                 };
-
                 Status = s;
 
 
@@ -415,32 +415,42 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public void ImportVouchers()
         {
-            if (!ShowColumnErrorData)
+            try
             {
-                ExcelBook.AddMapping("First", "FIRST NAME");
-                ExcelBook.AddMapping("Last", "LAST NAME");
-                ExcelBook.AddMapping("AddressLine1", "ADDRESS 1");
-                ExcelBook.AddMapping("AddressLine2", "ADDRESS 2");
-                ExcelBook.AddMapping("Municipality", "CITY");
-                ExcelBook.AddMapping("Region", "STATE");
-                ExcelBook.AddMapping("PostalCode", "ZIPCODE");
-                ExcelBook.AddMapping("PhoneNumber", "PHONE");
-                ExcelBook.AddMapping("Amount", "AMOUNT");
-                ExcelBook.AddMapping("EmailAddress", "E-MAIL");
-                ExcelBook.AddMapping("JobNumber", "JOB #");
-                var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
-                foreach (var a in vouchers.Where(x => x.Last != ""))
+                if (!ShowColumnErrorData)
                 {
-                    if (a.PostalCode.Length < 5)
-                        a.PostalCode = a.PostalCode.PadLeft(5, '0');
-                    VoucherImports.Add(a);
-                }
+                    ExcelBook.AddMapping("First", "FIRST NAME");
+                    ExcelBook.AddMapping("Last", "LAST NAME");
+                    ExcelBook.AddMapping("AddressLine1", "ADDRESS 1");
+                    ExcelBook.AddMapping("AddressLine2", "ADDRESS 2");
+                    ExcelBook.AddMapping("Municipality", "CITY");
+                    ExcelBook.AddMapping("Region", "STATE");
+                    ExcelBook.AddMapping("PostalCode", "ZIPCODE");
+                    ExcelBook.AddMapping("PhoneNumber", "PHONE");
+                    ExcelBook.AddMapping("Amount", "AMOUNT");
+                    ExcelBook.AddMapping("EmailAddress", "E-MAIL");
+                    ExcelBook.AddMapping("JobNumber", "JOB #");
+                    var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
+                    foreach (var a in vouchers.Where(x => x.Last != ""))
+                    {
+                        if (a.PostalCode != null && a.PostalCode.Length < 5)
+                            a.PostalCode = a.PostalCode.PadLeft(5, '0');
+                        VoucherImports.Add(a);
+                    }
 
-                VoucherCnt = VoucherImports.Count();
-                VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-                CanProceed = true;
+                    VoucherCnt = VoucherImports.Count();
+                    VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
+                    CanProceed = true;
+                }
             }
-        }
+            catch (Exception e)
+                {
+                    var s = new StatusInfo();
+                    s.ErrorMessage = e.Message;
+                    s.StatusMessage = "import failed";
+                    Status = s;
+                }
+            }
 
         private decimal _voucherTotalDollars;
         private StatusInfo _status;

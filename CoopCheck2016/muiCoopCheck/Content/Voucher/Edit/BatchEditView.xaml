@@ -107,7 +107,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="1"
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="0"
                 ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800"
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                           VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
@@ -127,7 +127,7 @@
                     <mui:DataGridTextColumn Binding="{Binding Title, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Title" EditingElementStyle="{StaticResource CellEditStyle}"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0"  Margin="12" >
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1"  Margin="12" >
                 <StackPanel Orientation="Vertical" Margin="12"
                             Visibility="{Binding ShowSelectedVoucher, Converter={StaticResource BoolToVisConverter}}">
                         <TextBlock Text="edit voucher" Style="{StaticResource Heading2}" Margin="6" />

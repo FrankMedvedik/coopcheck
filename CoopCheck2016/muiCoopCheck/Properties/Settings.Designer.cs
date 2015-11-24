@@ -35,9 +35,9 @@ namespace CoopCheck.WPF.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("98867798")]
-        public string ClientID {
+        public string PersonatorClientID {
             get {
-                return ((string)(this["ClientID"]));
+                return ((string)(this["PersonatorClientID"]));
             }
         }
         
@@ -100,7 +100,7 @@ namespace CoopCheck.WPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("AppearanceManager.LightThemeSource")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string AccentColor {
             get {
                 return ((string)(this["AccentColor"]));

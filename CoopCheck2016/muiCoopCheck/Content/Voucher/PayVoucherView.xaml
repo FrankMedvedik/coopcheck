@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:tb="http://www.hardcodet.net/taskbar"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="700">
     <Grid Style="{StaticResource ContentRoot}">
@@ -48,15 +49,21 @@
                 <StackPanel Orientation="Vertical" Visibility="{Binding CanPrintChecks, Converter={StaticResource BoolToVisConverter}}"> 
                 <StackPanel Orientation="Horizontal"  >
                     <TextBlock Margin="6"   Width="150">Starting Check #</TextBlock>
-                        <TextBox Margin="6"  Text="{Binding StartingCheckNum, Mode=TwoWay}" Width="150" TabIndex="2"/>
+                        <TextBox Margin="6"  Text="{Binding StartingCheckNum}" Width="150"/>
                     </StackPanel>
-                    <Button Margin="172,6,6,6" Width="150" Content="Print Checks"  HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="PrintChecks"  IsEnabled="{Binding CanPrintChecks}"/>
+                    <StackPanel Orientation="Horizontal"  >
+                        <TextBlock Margin="6"   Width="150">Ending Check #</TextBlock>
+                        <TextBlock Margin="6"  Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150" />
+                    </StackPanel>
+                <Button Margin="172,6,6,6" Width="150" Content="Print Checks"  HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="PrintChecks"  IsEnabled="{Binding CanPrintChecks}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Visibility="{Binding CanSwiftPay, Converter={StaticResource BoolToVisConverter}}">
                     <StackPanel Orientation="Horizontal" >
                         <Button Margin="172,6,6,6" Width="150" Content="Swift Pay" HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="SwiftPay" IsEnabled="{Binding CanSwiftPay}"/>
                     </StackPanel>
                 </StackPanel>
+                <!--<tb:TaskbarIcon x:Name="MyNotifyIcon"  IconSource="pack://application:,,,/Icons/MakePayment.ico" ToolTipText="Co-op Check Alert" />-->
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

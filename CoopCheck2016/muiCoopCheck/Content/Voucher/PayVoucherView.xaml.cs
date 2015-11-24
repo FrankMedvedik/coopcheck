@@ -3,7 +3,9 @@ using System.Deployment.Application;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Models;
 using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Voucher
 {
@@ -18,6 +20,10 @@ namespace CoopCheck.WPF.Content.Voucher
             InitializeComponent();
             _vm = new PayVouchersViewModel();
             DataContext = _vm;
+            //Messenger.Default.Register<NotificationMessage<StatusInfo>>(this, message =>
+            //{
+            //    Status = message.Content;
+            //});
         }
 
         private void SwiftPay(object sender, RoutedEventArgs e)
@@ -37,8 +43,16 @@ namespace CoopCheck.WPF.Content.Voucher
                 return;
             }
             _vm.PrintChecks();
- 
+        }
+
+        //private void ShowPopUP()
+        //{
+        //    string title = "Co-op Check";
+        //    string text = "Checks are printed";
+
+        //    MyNotifyIcon.ShowBalloonTip(title, text, MyNotifyIcon.Icon);
+        //}
+
     }
 }
  
-}

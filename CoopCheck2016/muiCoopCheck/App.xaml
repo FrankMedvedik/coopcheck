@@ -6,7 +6,8 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml">
         </ResourceDictionary>
-        <ResourceDictionary Source="/Assets/ModernUI.Reckner.xaml">
+                <ResourceDictionary Source="NotifyIconResources.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Assets/ModernUI.Reckner.xaml">
           <!--<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:CoopCheck.WPF.ViewModel" />-->
         </ResourceDictionary>
         <ResourceDictionary Source="DataGridsResourceDictionary1.xaml"/>

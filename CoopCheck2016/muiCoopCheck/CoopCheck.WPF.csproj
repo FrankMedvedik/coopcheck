@@ -30,7 +30,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>34</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -78,6 +78,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>CoopCheck.WPF.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons\coop.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Csla, Version=4.6.100.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
@@ -290,8 +293,22 @@
     <Compile Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml.cs">
       <DependentUpon>VoucherImportAddDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Voucher\Import\ReplacerView.xaml.cs">
+      <DependentUpon>ReplacerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Import\AltAddressView.xaml.cs">
+      <DependentUpon>AltAddressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Import\VoucherImportEditView.xaml.cs">
+      <DependentUpon>VoucherImportEditView.xaml</DependentUpon>
+    </Compile>
+    <None Include="Content\Voucher\Import\VoucherImportEditViewModel.cs.xxx" />
+    <Compile Include="Converters\VoucherImportConverter.cs" />
+    <Compile Include="Converters\VoucherImportToVoucherEdit.cs" />
     <Compile Include="Models\BankClearTransaction.cs" />
+    <Compile Include="Models\ObjectCopier.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
+    <Compile Include="NotifyIconViewModel.cs" />
     <Compile Include="Pages\AccountReconcilePage.xaml.cs">
       <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
     </Compile>
@@ -308,6 +325,7 @@
       <DependentUpon>VoidedPaymentReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\ExportSvc.cs" />
+    <Compile Include="Services\DataCleanSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
@@ -367,7 +385,10 @@
     </Compile>
     <Compile Include="Services\PaymentSvc.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Wrappers\ModelWrappper.cs" />
+    <Compile Include="Wrappers\NotifyDataErrorInfoBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Wrappers\VoucherImportWrapper.cs" />
     <Page Include="Assets\appbar.add.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -551,6 +572,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Voucher\Import\ReplacerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Voucher\Import\AltAddressView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\Import\VoucherImportEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DataGridsResourceDictionary1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -571,6 +604,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Content\BankAccount\AccountView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NotifyIconResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -701,9 +738,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="CoopCheck.WPF_TemporaryKey.pfx" />
-    <None Include="MelissaCodes.json">
+    <Content Include="MelissaCodes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -713,11 +750,21 @@
     <Content Include="Assets\RecknerCheck.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icons\MakePayment.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\coop.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="RecknerCheckTemplate.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\jradatacleaner\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
@@ -733,6 +780,10 @@
     <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
       <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
       <Name>CoopCheck.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Reckner.Work\wpf-notifyicon\NotifyIconWpf\NotifyIconWpf.csproj">
+      <Project>{7ac63864-7638-41c4-969c-d3197ef2bed9}</Project>
+      <Name>NotifyIconWpf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

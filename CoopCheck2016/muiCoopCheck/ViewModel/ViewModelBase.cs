@@ -10,7 +10,13 @@ namespace CoopCheck.WPF.ViewModel
         protected void NotifyPropertyChanged([CallerMemberName] string name = null)
         {
             var e = PropertyChanged;
-            if (e != null) e(this, new PropertyChangedEventArgs(name));
+
+            if (e != null)
+            {
+                e(this, new PropertyChangedEventArgs(name));
+                Console.WriteLine(name);
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

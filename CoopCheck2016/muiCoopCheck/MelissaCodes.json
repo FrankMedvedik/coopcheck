@@ -2,1885 +2,1907 @@
 {
 "Code":"AS01",
 "ShortDescription":"Address Fully Verified",
-"FatalAddressError":"false",
+"Type":"Informational",
 "LongDescription":"The address is valid and deliverable according to official postal agencies."
 },
 {
 "Code":"AS02",
 "ShortDescription":"Street Only Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The street address was verified but the suite number is missing or invalid."
 },
 {
 "Code":"AS03",
 "ShortDescription":"Non USPS Address Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"US Only. This US address is not serviced by the USPS but does exist and may receive mail through third party carriers like UPS."
 },
 {
 "Code":"AS09",
 "ShortDescription":"Foreign Address",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The address is in a non-supported country."
 },
 {
 "Code":"AS10",
 "ShortDescription":"CMRA Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"US Only. The address is a Commercial Mail Receiving Agency (CMRA) like a Mailboxes Etc. These addresses include a Private Mail Box (PMB or #) number."
 },
 {
 "Code":"AS12",
-"ShortDescription":"Record Move",
-"FatalAddressError":"false",
+  "ShortDescription": "Record Move",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"The record moved to a new address."
 },
 {
 "Code":"AS13",
-"ShortDescription":"Address Updated By LACS",
-"FatalAddressError":"false",
+  "ShortDescription": "Address Updated By LACS",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"US Only. The address has been converted by LACSLink? from a rural-style address to a city-style address."
 },
 {
 "Code":"AS14",
-"ShortDescription":"Suite Appended",
-"FatalAddressError":"false",
+  "ShortDescription": "Suite Appended",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"US Only. A suite was appended by SuiteLink? using the address and company name."
 },
 {
 "Code":"AS15",
 "ShortDescription":"Apartment Appended",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An apartment number was appended by AddressPlus using the address and last name."
 },
 {
 "Code":"AS16",
 "ShortDescription":"Vacant Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"US Only. The address has been unoccupied for more than 90 days."
 },
 {
 "Code":"AS17",
 "ShortDescription":"No Mail Delivery",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"US Only. The address does not currently receive mail but will likely in the near future."
 },
 {
 "Code":"AS18",
 "ShortDescription":"DPV Locked Out",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"US Only. DPV processing was terminated due to the detection of what is determined to be an artificially created address."
 },
 {
 "Code":"AS20",
 "ShortDescription":"Deliverable only by USPS",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"US Only. This address can only receive mail delivered through the USPS (ie. PO Box or a military address)."
 },
 {
 "Code":"AS22",
 "ShortDescription":"No Alternate Address Suggestion Found",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"No alternate address suggestion was found for this address."
 },
 {
 "Code":"AS23",
 "ShortDescription":"Extraneous Information",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Extraneous information not used in verifying the address was found. This includes unnecessary sub premises and other unrecognized data. The unrecognized data has been placed in the ParsedGarbage field."
 },
 {
 "Code":"AE01",
 "ShortDescription":"Postal Code Error",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The Postal Code does not exist and could not be determined by the city/municipality and state/province."
 },
 {
 "Code":"AE02",
 "ShortDescription":"Unknown Street",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"Could not match the input street to a unique street name. Either no matches or too many matches found."
 },
 {
 "Code":"AE03",
 "ShortDescription":"Component Mismatch Error",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The combination of directionals (N, E, SW, etc) and the suffix (AVE, ST, BLVD) is not correct and produced multiple possible matches."
 },
 {
 "Code":"AE04",
 "ShortDescription":"Non-Deliverable Address",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"US Only. A physical plot exists but is not a deliverable addresses. One example might be a railroad track or river running alongside this street, as they would prevent construction of homes in that location."
 },
 {
 "Code":"AE05",
 "ShortDescription":"Multiple Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address was matched to multiple records. There is not enough information available in the address to break the tie between multiple records."
 },
 {
 "Code":"AE06",
 "ShortDescription":"Early Warning System",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"US Only. This address currently cannot be verified but was identified by the Early Warning System (EWS) as belonging to a upcoming area and will likely be included in a future update."
 },
 {
 "Code":"AE07",
 "ShortDescription":"Missing Minimum Address",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"Minimum requirements for the address to be verified is not met. Address must have at least one address line and also the postal code or the locality/administrative area."
 },
 {
 "Code":"AE08",
 "ShortDescription":"Sub Premise Number Invalid",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The thoroughfare (street address) was found but the sub premise (suite) was not valid."
 },
 {
 "Code":"AE09",
 "ShortDescription":"Sub Premise Number Missing",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The thoroughfare (street address) was found but the sub premise (suite) was missing."
 },
 {
 "Code":"AE10",
 "ShortDescription":"Premise Number Invalid",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The premise (house or building) number for the address is not valid."
 },
 {
 "Code":"AE11",
 "ShortDescription":"Premise Number Missing",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The premise (house or building) number for the address is missing."
 },
 {
 "Code":"AE12",
 "ShortDescription":"Box Number Invalid",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The PO (Post Office Box), RR (Rural Route), or HC (Highway Contract) Box number is invalid."
 },
 {
 "Code":"AE13",
 "ShortDescription":"Box Number Missing",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The PO (Post Office Box), RR (Rural Route), or HC (Highway Contract) Box number is missing."
 },
 {
 "Code":"AE14",
 "ShortDescription":"PMB Number Missing",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"US Only. The address is a Commercial Mail Receiving Agency (CMRA) and the Private Mail Box (PMB or #) number is missing."
 },
 {
 "Code":"AE15",
 "ShortDescription":"Demo Mode",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"Limited to Demo Mode operation. Please contact a Melissa Data CSR at 1-800-800-6245 x4."
 },
 {
 "Code":"AE16",
 "ShortDescription":"Expired Database",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The Database has expired. Please contact a Melissa Data CSR at 1-800-800-6245 x4."
 },
 {
 "Code":"AE17",
 "ShortDescription":"Sub Premise Not Required",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A sub premise (suite) number was entered but the address does not have secondaries."
 },
 {
 "Code":"AE19",
 "ShortDescription":"Find Suggestion Timeout",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The FindSuggestion function has exceeded the time limit."
 },
 {
 "Code":"AE20",
 "ShortDescription":"Find Suggestion Disabled",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The FindSuggestion function is disabled. See the manual for further details."
 },
 {
 "Code":"AC01",
-"ShortDescription":"Postal Code Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Postal Code Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The postal code was changed or added."
 },
 {
 "Code":"AC02",
-"ShortDescription":"Administrative Area Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Administrative Area Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The administrative area (state, province) was added or changed."
 },
 {
 "Code":"AC03",
-"ShortDescription":"Locality Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Locality Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The locality (city, municipality) name was added or changed."
 },
 {
 "Code":"AC04",
-"ShortDescription":"Alternate to Base Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Alternate to Base Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"US Only. The address was found to be an alternate record and changed to the base (preferred) version."
 },
 {
 "Code":"AC05",
-"ShortDescription":"Alias Name Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Alias Name Change",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"US Only. An alias is a common abbreviation for a long street name, such as ?MLK Blvd? for ?Martin Luther King Blvd.? This change code indicates that the full street name (preferred) has been substituted for the alias."
 },
 {
 "Code":"AC06",
-"ShortDescription":"Address1/Address2 Swap",
-"FatalAddressError":"false",
+  "ShortDescription": "Address1/Address2 Swap",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"Address1 was swapped with Address2 because Address1 could not be verified and Address2 could be verified."
 },
 {
 "Code":"AC07",
-"ShortDescription":"Address1 & Company Swapped",
-"FatalAddressError":"false",
+  "ShortDescription": "Address1 & Company Swapped",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"Address1 was swapped with Company because only Company had a valid address."
 },
 {
 "Code":"AC08",
-"ShortDescription":"Plus4 Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Plus4 Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"US Only. A non-empty plus4 was changed."
 },
 {
 "Code":"AC09",
-"ShortDescription":"Dependent Locality Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Dependent Locality Change",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"The dependent locality (urbanization) was changed."
 },
 {
 "Code":"AC10",
-"ShortDescription":"Thoroughfare Name Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Thoroughfare Name Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The thoroughfare (street) name was changed due to a spelling correction."
 },
 {
 "Code":"AC11",
-"ShortDescription":"Thoroughfare Suffix Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Thoroughfare Suffix Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The thoroughfare (street) suffix was added or changed, such as from \"St\" to \"Rd.\""
 },
 {
 "Code":"AC12",
-"ShortDescription":"Thoroughfare Directional Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Thoroughfare Directional Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The thoroughfare (street) pre-directional or post-directional was added or changed, such as from \"N\" to \"NW.\""
 },
 {
 "Code":"AC13",
-"ShortDescription":"Sub Premise Type Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Sub Premise Type Change",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"The sub premise (suite) type was added or changed, such as from ?STE? to ?APT.?"
 },
 {
 "Code":"AC14",
-"ShortDescription":"Sub Premise Number Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Sub Premise Number Change",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"The sub premise (suite) unit number was added or changed."
 },
 {
 "Code":"AC15",
 "ShortDescription":"Double Dependent Locality Change",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The double dependent locality was added or changed."
 },
 {
 "Code":"AC16",
-"ShortDescription":"SubAdministrative Area Change",
-"FatalAddressError":"false",
+  "ShortDescription": "SubAdministrative Area Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The subadministrative area was added or changed."
 },
 {
 "Code":"AC17",
-"ShortDescription":"SubNational Area Change",
-"FatalAddressError":"false",
+  "ShortDescription": "SubNational Area Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The subnational area was added or changed."
 },
 {
 "Code":"AC18",
-"ShortDescription":"PO Box Change",
-"FatalAddressError":"false",
+  "ShortDescription": "PO Box Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The PO Box was added or changed."
 },
 {
 "Code":"AC19",
-"ShortDescription":"Premise Type Change",
-"FatalAddressError":"false",
+  "ShortDescription": "Premise Type Change",
+ "AlternateAddressExists":"true",
+"Type":"Warning",
 "LongDescription":"The premise type was added or changed."
 },
 {
 "Code":"AC20",
-"ShortDescription":"House Number Change",
-"FatalAddressError":"false",
+  "ShortDescription": "House Number Change",
+ "AlternateAddressExists":"true",
+"Type":"Error",
 "LongDescription":"The house number was changed."
 },
 {
 "Code":"ES01",
 "ShortDescription":"Valid Email",
-"FatalAddressError":"false",
+"Type":"Informational",
 "LongDescription":"This email was confirmed to be a valid email."
 },
 {
 "Code":"ES02",
 "ShortDescription":"Invalid Email",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"This email was confirmed to be a invalid email."
 },
 {
 "Code":"ES03",
 "ShortDescription":"Unknown Email",
-"FatalAddressError":"false",
+"Type":"Informational",
 "LongDescription":"This email's status is unknown due to outside factors."
 },
 {
 "Code":"ES04",
 "ShortDescription":"Mobile Email Address",
-"FatalAddressError":"false",
+"Type":"Informational",
 "LongDescription":"The domain name was identified as a mobile email address and classified as not deliverable by the FCC."
 },
 {
 "Code":"ES05",
 "ShortDescription":"Disposable Domain",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The domain name of the submitted email was identified as a disposable domain."
 },
 {
 "Code":"ES06",
 "ShortDescription":"Spamtrap Domain",
-"FatalAddressError":"false",
+"Type":"Error",
 "LongDescription":"The domain name of the submitted email was identified as a spamtrap. Mailing to this domain could result in the sender being blacklisted."
 },
 {
 "Code":"ES07",
 "ShortDescription":"Accept All Server",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The mail server is an accept all server. Accept-All domains is set in a way that makes all emails seem valid."
 },
 {
 "Code":"ES08",
 "ShortDescription":"Role Address",
-"FatalAddressError":"false",
+"Type":"Informational",
 "LongDescription":"This Email address was created as a group, ex: sales@, support@, or postmaster@."
 },
 {
 "Code":"ES10",
-"ShortDescription":"Syntax Changed",
-"FatalAddressError":"false",
+  "ShortDescription": "Syntax Changed",
+"Type":"Warning",
 "LongDescription":"The syntax of the submitted email address was changed."
 },
 {
 "Code":"ES11",
 "ShortDescription":"Top Level Domain Changed",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The top level domain of the submitted email address was changed."
 },
 {
 "Code":"ES12",
 "ShortDescription":"Domain Changed (Spelling)",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The domain of the submitted email address was corrected for spelling."
 },
 {
 "Code":"ES13",
 "ShortDescription":"Domain Changed (Update)",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The domain of the submitted email address was updated due to a domain name change."
 },
 {
 "Code":"ES20",
 "ShortDescription":"Verify Domain",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The email returned an ES01, but did not have the mailbox verified and not found in our mailbox database."
 },
 {
 "Code":"ES21",
 "ShortDescription":"Verify Mailbox (Confidence: Medium)",
-"FatalAddressError":"false",
+"Type":"Informational",
 "LongDescription":"The mailbox was found to be already validated in our mailbox database."
 },
 {
 "Code":"ES22",
 "ShortDescription":"Verify Mailbox (Confidence: High)",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The mailbox validation was performed in real-time."
 },
 {
 "Code":"ES23",
 "ShortDescription":"Unexpected error: our realtime mailbox validation has failed. Domain and database check only. / Unicoded Email",
-"FatalAddressError":"true",
+"Type":"Informational",
 "LongDescription":"A notification has been sent to our web service team. / We do not support Unicode at this time."
 },
 {
 "Code":"EE01",
 "ShortDescription":"Syntax Error",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"There is a syntax error in the submitted email address."
 },
 {
 "Code":"EE02",
 "ShortDescription":"Top Level Domain Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The top level domain of the submitted email address was not found."
 },
 {
 "Code":"EE03",
 "ShortDescription":"Mail Server Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The mail server (domain) of the submitted email address was not found."
 },
 {
 "Code":"EE04",
 "ShortDescription":"Invalid Mailbox",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An invalid mailbox was detected (IE: noreply)."
 },
 {
 "Code":"EE05",
 "ShortDescription":"Email Object not Initialized",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Email Object was not initialized properly. Please review your code and data files."
 },
 {
 "Code":"XS01",
 "ShortDescription":"Complete Result Set Returned",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The search was completed and the complete result set was returned."
 },
 {
 "Code":"XS02",
 "ShortDescription":"Partial Result Set Returned",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The search was completed and a partial result set was returned."
 },
 {
 "Code":"XS03",
 "ShortDescription":"No Results Returned",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The search was completed and no results were found."
 },
 {
 "Code":"GS01",
 "ShortDescription":"Geocoded to Street Level",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record was coded to the street level (Zip+4 for US, full postal code for CA)."
 },
 {
 "Code":"GS02",
 "ShortDescription":"Geocoded to the Neighborhood Level",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record was geocoded down to neighborhood level (Zip+2 for US)."
 },
 {
 "Code":"GS03",
 "ShortDescription":"Geocoded to Community Level",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record was coded to the community level (ZIP centroid for US, 3-digit postal code for CA)."
 },
 {
 "Code":"GS04",
 "ShortDescription":"Geocoded to State Level",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record was geocoded to the state (administrative area) level."
 },
 {
 "Code":"GS05",
 "ShortDescription":"Geocoded to Rooftop Level",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record was geocoded down to the rooftop level."
 },
 {
 "Code":"GS06",
 "ShortDescription":"Geocoded to Interpolated Rooftop Level",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record was geocoded down to the rooftop level using interpolation (educated estimations using street coordinates)."
 },
 {
 "Code":"GS10",
 "ShortDescription":"Wire Center Lat/Long",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The latitude and longitude are based off of the wire center of the phone number."
 },
 {
 "Code":"GE01",
 "ShortDescription":"Invalid Postal Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The submitted postal code is not in a valid format."
 },
 {
 "Code":"GE02",
 "ShortDescription":"Postal Code Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The submitted postal code was not found in the database."
 },
 {
 "Code":"GE03",
 "ShortDescription":"Demo Mode",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Geocoder is in Demo mode and a zip code outside the Demo range was detected."
 },
 {
 "Code":"GE04",
 "ShortDescription":"Data Files Expired",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Geocoder data files are expired. Please update with the latest data files."
 },
 {
 "Code":"GE05",
 "ShortDescription":"License Not Enabled For Country",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Geocoding for the country of input record is disabled for your license. Please contact your sales representative to enable"
 },
 {
 "Code":"AV11",
 "ShortDescription":"Administrative Area Partial",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been partially verified to the Administrative Area (State) Level, which is NOT the highest level possible with the reference data."
 },
 {
 "Code":"AV12",
 "ShortDescription":"Locality Partial",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been partially verified to the Locality (City) Level, which is NOT the highest level possible with the reference data."
 },
 {
 "Code":"AV13",
 "ShortDescription":"Thoroughfare Partial",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been partially verified to the Thoroughfare (Street) Level, which is NOT the highest level possible with the reference data."
 },
 {
 "Code":"AV14",
 "ShortDescription":"Premise Partial",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been partially verified to the Premise (House or Building) Level, which is NOT the highest level possible with the reference data."
 },
 {
 "Code":"AV15",
 "ShortDescription":"SubPremises Partial",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been partially verified to the SubPremises (Suite) or PO Box Level, which is NOT the highest level possible with the reference data."
 },
 {
 "Code":"AV21",
 "ShortDescription":"Administrative Area Full",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been verified to the Administrative Area (State) Level, which is the highest level possible with the reference data."
 },
 {
 "Code":"AV22",
 "ShortDescription":"Locality Full",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been verified to the Locality (City) Level, which is the highest level possible with the reference data."
 },
 {
 "Code":"AV23",
 "ShortDescription":"Thoroughfare Full",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been verified to the Thoroughfare (Street) Level, which is the highest level possible with the reference data."
 },
 {
 "Code":"AV24",
 "ShortDescription":"Premises Full",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been verified to the Premise (House or Building) Level, which is the highest level possible with the reference data."
 },
 {
 "Code":"AV25",
 "ShortDescription":"SubPremises Full",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address has been verified to the SubPremise (Suite) or PO Box Level, which is the highest level possible with the reference data."
 },
 {
 "Code":"IS01",
 "ShortDescription":"IP Address Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The IP Address was found in the database."
 },
 {
 "Code":"IS02",
 "ShortDescription":"IP Address Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The IP Address not found in the database"
 },
 {
 "Code":"IE01",
 "ShortDescription":"Empty or Malformed",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The IP Address was empty or not well formed."
 },
 {
 "Code":"IE02",
 "ShortDescription":"Not Initialized (Demo/Expired)",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The Object could not be Initialized. This is possibly due to: demo mode, expired data, or an expired license."
 },
 {
 "Code":"NS01",
 "ShortDescription":"Parsing Successful",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Name parsing was successful."
 },
 {
 "Code":"NS02",
 "ShortDescription":"Error Parsing",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An error was detected. Please check for a name error code."
 },
 {
 "Code":"NS03",
 "ShortDescription":"First Name Spelling Corrected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The spelling in the first name field was corrected."
 },
 {
 "Code":"NS04",
 "ShortDescription":"First Name 2 Spelling Corrected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The spelling in the second first name field was corrected."
 },
 {
 "Code":"NS05",
 "ShortDescription":"First Name 1 Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"FirstName1 was found in our census table of names. Very likely to be a real first name."
 },
 {
 "Code":"NS06",
 "ShortDescription":"Last Name 1 Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"LastName1 was found in our census table of names. Very likely to be a real last name."
 },
 {
 "Code":"NS07",
 "ShortDescription":"First Name 2 Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"FirstName2 was found in our census table of names. Very likely to be a real first name."
 },
 {
 "Code":"NS08",
 "ShortDescription":"Last Name 2 Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"LastName2 was found in our census table of names. Very likely to be a real last name."
 },
 {
 "Code":"NS99",
 "ShortDescription":"Company Name Standardized",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The company name was standardized."
 },
 {
 "Code":"NE01",
 "ShortDescription":"Unrecognized Format",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Two names were detected but the FullName string was not in a recognized format."
 },
 {
 "Code":"NE02",
 "ShortDescription":"Multiple First Names Detected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Multiple first names were detected and could not be accurately genderized."
 },
 {
 "Code":"NE03",
 "ShortDescription":"Vulgarity Detected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A vulgarity was detected in the name."
 },
 {
 "Code":"NE04",
 "ShortDescription":"Suspicious Word Detected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The name contained words found on the list of nuisance names, such as \"Mickey Mouse.\""
 },
 {
 "Code":"NE05",
 "ShortDescription":"Company Name Detected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The name contained words normally found in a company name."
 },
 {
 "Code":"NE06",
 "ShortDescription":"Non-Alphabetic Character Detected",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The name contained a non-alphabetic character."
 },
 {
 "Code":"NE99",
 "ShortDescription":"Company Standardization Not Needed",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Company name standardization was attempted, but did not produce a different result."
 },
 {
 "Code":"DA00",
 "ShortDescription":"Address Appended",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An address was changed or appended."
 },
 {
 "Code":"DA01",
 "ShortDescription":"City/State Append from Phone",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A city or state was appended from a phone number wire center."
 },
 {
 "Code":"DA10",
 "ShortDescription":"Name Appended",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A full name was changed or appended."
 },
 {
 "Code":"DA20",
 "ShortDescription":"Company Appended",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A company name was changed or appended."
 },
 {
 "Code":"DA30",
 "ShortDescription":"Phone Appended",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A phone number was changed or appended."
 },
 {
 "Code":"DA40",
 "ShortDescription":"Email Appended",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An email address was changed or appended."
 },
 {
 "Code":"VR01",
 "ShortDescription":"Individual and Address Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The individual name and address match."
 },
 {
 "Code":"VR02",
 "ShortDescription":"Individual and Phone Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The individual name and phone match."
 },
 {
 "Code":"VR03",
 "ShortDescription":"Individual and Email Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The individual name and email match."
 },
 {
 "Code":"VR04",
 "ShortDescription":"Address and Phone Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address and phone match."
 },
 {
 "Code":"VR05",
 "ShortDescription":"Address and Email Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The address and email match."
 },
 {
 "Code":"VR06",
 "ShortDescription":"Phone and Email Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone and email match."
 },
 {
 "Code":"VR07",
 "ShortDescription":"Organization and Address Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The organization name and address match."
 },
 {
 "Code":"VR08",
 "ShortDescription":"Organization and Phone Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The organization name and phone match."
 },
 {
 "Code":"VR09",
 "ShortDescription":"Organization and Email Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The organization name and email match."
 },
 {
 "Code":"VR10",
 "ShortDescription":"Organization and Individual Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The organization name and individual name match."
 },
 {
 "Code":"VS00",
 "ShortDescription":"Address Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An address was not found in the reference data."
 },
 {
 "Code":"VS01",
 "ShortDescription":"Historical Address Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The current address is outdated and a newer address match was found. Use the \"Move\" action to get the latest address."
 },
 {
 "Code":"VS02",
 "ShortDescription":"Partial Address Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A match was made to a partial address. This could be due to matching the street address but not to the suite."
 },
 {
 "Code":"VS12",
 "ShortDescription":"Partial Name Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A match was made to the last name only."
 },
 {
 "Code":"VS13",
 "ShortDescription":"Partial First Name Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A match was made to the first name only."
 },
 {
 "Code":"VS22",
 "ShortDescription":"Partial Company Name Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A match was made to a partial company name."
 },
 {
 "Code":"VS30",
 "ShortDescription":"Phone Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A phone number was not found in the reference data."
 },
 {
 "Code":"VS31",
 "ShortDescription":"Historical Phone Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The current phone number is outdated and a newer phone number match was found. Use the \"Append\" action to get the latest phone number."
 },
 {
 "Code":"VS40",
 "ShortDescription":"Email Not Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An email address was not found in the reference data."
 },
 {
 "Code":"VS41",
 "ShortDescription":"Historical Email Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The current email address is outdated and a newer email address match was found. Use the \"Append\" action to get the latest email address."
 },
 {
 "Code":"PS01",
 "ShortDescription":"10-Digit Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The first 10-digits of the phone number have been verified as valid."
 },
 {
 "Code":"PS02",
 "ShortDescription":"7-Digit Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The first 7-digits of the phone number have been verified, but activity cannot be confirmed."
 },
 {
 "Code":"PS03",
 "ShortDescription":"Corrected Area Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"NewAreaCode contains corrected area code that was changed according to the postal code it falls into."
 },
 {
 "Code":"PS04",
 "ShortDescription":"Demo Mode",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Demo mode is active and the phone number is outside the range of phone numbers allowed by the Demo."
 },
 {
 "Code":"PS05",
 "ShortDescription":"Database Expired",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The phone database is expired. Please update your data."
 },
 {
 "Code":"PS06",
 "ShortDescription":"Updated Area Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The area code was changed due to an area code split. The updated code is located within NewAreaCode."
 },
 {
 "Code":"PS07",
 "ShortDescription":"Cellular Line",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The exchange type of the phone number indicates the number is a cellular number."
 },
 {
 "Code":"PS08",
 "ShortDescription":"Land Line",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The exchange type of the phone number indicates the number is a land line number."
 },
 {
 "Code":"PS09",
 "ShortDescription":"VOIP Line",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The exchange type of the phone number indicates the number is a VOIP number."
 },
 {
 "Code":"PS10",
 "ShortDescription":"Residential Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone number belongs to a residence."
 },
 {
 "Code":"PS11",
 "ShortDescription":"Business Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone number belongs to a business."
 },
 {
 "Code":"PS12",
 "ShortDescription":"SOHO Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone number belongs to a small office or home office."
 },
 {
 "Code":"PS13",
 "ShortDescription":"Toll Free Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Global Phone Object Only. The phone number is a toll free number."
 },
 {
 "Code":"PS14",
 "ShortDescription":"Special Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Global Phone Object Only. This is a phone number with premium service, data, internet access, etc. which all incur a higher charge rate"
 },
 {
 "Code":"PE01",
 "ShortDescription":"Bad Area Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The area code does not exist in our database or contains non-numbers."
 },
 {
 "Code":"PE02",
 "ShortDescription":"Blank Phone Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone number is blank."
 },
 {
 "Code":"PE03",
 "ShortDescription":"Bad Phone Number",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone number has too many or too few digits."
 },
 {
 "Code":"PE04",
 "ShortDescription":"Multiple Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Two or more possible area codes are available as a fix and their distance is too close to choose one over the other."
 },
 {
 "Code":"PE05",
 "ShortDescription":"Bad Prefix/Prefix +1",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The phone prefix or first 7-digits do not exist in our database."
 },
 {
 "Code":"PE06",
 "ShortDescription":"Bad Postal Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The input postal code is invalid."
 },
 {
 "Code":"PE08",
 "ShortDescription":"No Country Input",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Global Phone Object Only. The input country is blank and the phone number has no '+' sign."
 },
 {
 "Code":"PE09",
 "ShortDescription":"Out of Range Suffix",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Global Phone Object Only. The subscriber's phone number suffix is out of range."
 },
 {
 "Code":"PE10",
 "ShortDescription":"Invalid Input Country",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Global Phone Object Only. The input country in not valid."
 },
 {
 "Code":"QS01",
 "ShortDescription":"Empty Value",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value is empty or contains only spaces."
 },
 {
 "Code":"QS02",
 "ShortDescription":"NULL Value",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value is NULL."
 },
 {
 "Code":"QS03",
 "ShortDescription":"Default Value",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value is equal to the user-specified default."
 },
 {
 "Code":"QS04",
 "ShortDescription":"Non-Printing Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains non-printing characters (e.g., printer control characters, etc.)"
 },
 {
 "Code":"QS05",
 "ShortDescription":"Diacritic Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains diacritic characters (e.g., accented characters.)"
 },
 {
 "Code":"QS06",
 "ShortDescription":"Non-English Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains non-English characters."
 },
 {
 "Code":"QS07",
 "ShortDescription":"Decorative Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains decorative characters. Decorative characters are tabs, commas, quotes, or double quotes, found in the beginning or ending of the value."
 },
 {
 "Code":"QS08",
 "ShortDescription":"Alphabetic Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains only alphabetic characters."
 },
 {
 "Code":"QS09",
 "ShortDescription":"Numeric Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains only numeric characters."
 },
 {
 "Code":"QS10",
 "ShortDescription":"Alphabetic and Numeric Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains both alphabetic and numeric characters."
 },
 {
 "Code":"QS11",
 "ShortDescription":"Upper-Case Alphabetic Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains only upper-case alphabetic characters, and may contain non-alphabetic characters."
 },
 {
 "Code":"QS12",
 "ShortDescription":"Lower-Case Alphabetic Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains only lower-case alphabetic characters, and may contain non-alphabetic characters."
 },
 {
 "Code":"QS13",
 "ShortDescription":"Upper and Lower Alphabetic Characters",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains both upper and lower-case alphabetic characters, and may contain non-alphabetic characters."
 },
 {
 "Code":"QS14",
 "ShortDescription":"Singe Space",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Only a single space separates the words in value."
 },
 {
 "Code":"QS15",
 "ShortDescription":"Multiple Spaces",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Multiple spaces separate the words in value."
 },
 {
 "Code":"QS16",
 "ShortDescription":"Leading Spaces",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains leading spaces."
 },
 {
 "Code":"QS17",
 "ShortDescription":"Trailing Spaces",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains trailing spaces."
 },
 {
 "Code":"QS18",
 "ShortDescription":"Profanity",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains profanity."
 },
 {
 "Code":"QS19",
 "ShortDescription":"2-digit Year",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The date/time value lacks the year's century."
 },
 {
 "Code":"QS20",
 "ShortDescription":"Inconsistent Name",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The name value contains a name where the order is inconsistent with the user-specified data type."
 },
 {
 "Code":"QS21",
 "ShortDescription":"Multiple Names",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The name value contains more than one contact name."
 },
 {
 "Code":"QS22",
 "ShortDescription":"Suspicious Name",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The name value contains a suspicious name."
 },
 {
 "Code":"QS30",
 "ShortDescription":"Non-Standard State/Province",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The State/Province value contains a non-standard US state or Canadian province (ie, not the official postal abbreviation)."
 },
 {
 "Code":"QS40",
 "ShortDescription":"5-digit ZIP/Postal Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The ZIP/Postal Code Code value has a 5-digit Zip Code with no Plus 4."
 },
 {
 "Code":"QS50",
 "ShortDescription":"Unrecognized Country ISO",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The country value does not match any standard ISO country representation."
 },
 {
 "Code":"QS60",
 "ShortDescription":"Mobile Domain",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The e-mail value contains a mobile (cell phone) domain."
 },
 {
 "Code":"QS61",
 "ShortDescription":"Spam Trap Domain",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The e-mail value contains a known spam trap domain."
 },
 {
 "Code":"QS62",
 "ShortDescription":"Disposable Domain",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The e-mail value contains a known 'disposable' domain."
 },
 {
 "Code":"YS01",
 "ShortDescription":"FIPS/APN Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A FIPS or APN match was found."
 },
 {
 "Code":"YS02",
 "ShortDescription":"AddressKey Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"An AddressKey match was found."
 },
 {
 "Code":"YS03",
 "ShortDescription":"Basic Information Returned",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The basic information was returned."
 },
 {
 "Code":"YS04",
 "ShortDescription":"Detailed Information Returned",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The detailed information was returned."
 },
 {
 "Code":"YS05",
 "ShortDescription":"Multiple Matches",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"More than one matching record was found during lookup."
 },
 {
 "Code":"QE01",
 "ShortDescription":"Illegal UTF-8 Byte Sequence",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains an illegal UTF-8 byte sequence."
 },
 {
 "Code":"QE03",
 "ShortDescription":"Invalid Integer",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's integer value is invalid."
 },
 {
 "Code":"QE04",
 "ShortDescription":"Invalid Decimal",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's decimal value is invalid."
 },
 {
 "Code":"QE05",
 "ShortDescription":"Invalid Floating Point",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's floating point value is invalid."
 },
 {
 "Code":"QE06",
 "ShortDescription":"Invalid Date/Time",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's date/time value is invalid."
 },
 {
 "Code":"QE07",
 "ShortDescription":"Invalid Boolean Value",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's boolean value is invalid."
 },
 {
 "Code":"QE08",
 "ShortDescription":"Over Range",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value is above the user-specified range."
 },
 {
 "Code":"QE09",
 "ShortDescription":"Under Range",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value is below the user-specified range."
 },
 {
 "Code":"QE10",
 "ShortDescription":"Length Size Exceeded",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's length exceeds the user-specified size."
 },
 {
 "Code":"QE11",
 "ShortDescription":"Precision Exceeded",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's precision exceeds the user-specified precision."
 },
 {
 "Code":"QE12",
 "ShortDescription":"Precision Scale Exceeded",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's precision exceeds the user-specified scale."
 },
 {
 "Code":"QE13",
 "ShortDescription":"No Regular Expression Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value does not match any of the user-specified regular expressions."
 },
 {
 "Code":"QE14",
 "ShortDescription":"Data Type Mismatch",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value is inconsistent with the user-specified DataType (e.g., an address field containing a phone number.)"
 },
 {
 "Code":"QE30",
 "ShortDescription":"Unrecognized State/Province",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains an unrecognized state or province."
 },
 {
 "Code":"QE40",
 "ShortDescription":"Invalid ZIP Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains a US ZIP code that is not valid (only the 5 digit zip is validated in this way.)"
 },
 {
 "Code":"QE41",
 "ShortDescription":"Invalid Postal Code",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains a Canadian Postal Code that is not valid."
 },
 {
 "Code":"QE42",
 "ShortDescription":"ZIP Code Mismatch",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's Zip Code does not correctly correspond to the specified US State."
 },
 {
 "Code":"QE43",
 "ShortDescription":"Postal Code Mismatch",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value's Postal Code does not correctly correspond to the specified Canadian Province."
 },
 {
 "Code":"QE50",
 "ShortDescription":"Unrecognized Country",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains an unrecognized country name."
 },
 {
 "Code":"QE60",
 "ShortDescription":"Incorrect E-mail Syntax",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains an e-mail address with an incorrect syntax."
 },
 {
 "Code":"QE61",
 "ShortDescription":"Misspelled Domain",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains an e-mail with a misspelled domain."
 },
 {
 "Code":"QE70",
 "ShortDescription":"Unrecognizable Phone",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The value contains an unrecognizable phone number."
 },
 {
 "Code":"YE01",
 "ShortDescription":"No FIPS/APN or AddressKey",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"No FIPS, APN, or AddressKey was provided."
 },
 {
 "Code":"YE02",
 "ShortDescription":"No Match Found",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"No match was found."
 },
 {
 "Code":"YE03",
 "ShortDescription":"Invalid FIPS/APN or AddressKey",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The FIPS, APN, or AddressKey provided was invalid"
 },
 {
 "Code":"CS01",
 "ShortDescription":"Move with New Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is a 'move' and a new 'moved to' address was provided."
 },
 {
 "Code":"CS02",
 "ShortDescription":"Standardized Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is not a 'move' but was standardized."
 },
 {
 "Code":"CS03",
 "ShortDescription":"Move Input Requirements not Satisfied",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is matched to change of address file but did not satisfy all requirements to produce a 'moved to' address."
 },
 {
 "Code":"CS04",
 "ShortDescription":"Move but No New Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"he record is a 'move' but could not provide a 'moved to' address."
 },
 {
 "Code":"CS10",
 "ShortDescription":"Individual Move",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is classified as an individual."
 },
 {
 "Code":"CS11",
 "ShortDescription":"Family Move",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is classified as a family."
 },
 {
 "Code":"CS12",
 "ShortDescription":"Business Move",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is classified as a business."
 },
 {
 "Code":"CS13",
 "ShortDescription":"Daily Delete",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The record is a Daily Delete address. COA with this address is pending deletion from the master file and no mail may be forwarded from this address."
 },
 {
 "Code":"CM01",
 "ShortDescription":"COA Match",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A COA was found for an Individual, Business, or Family."
 },
 {
 "Code":"CM02",
 "ShortDescription":"Foreign Move",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A COA was found for a Foreign Move. No forwarding address was provided."
 },
 {
 "Code":"CM03",
 "ShortDescription":"Moved no Forwarding",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A COA was found. The customer moved and left no forwarding address (MLNA)."
 },
 {
 "Code":"CM04",
 "ShortDescription":"Box Closed",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"A COA was found. The Post Box was closed with no order filed by the customer (BCNO)."
 },
 {
 "Code":"CM05",
 "ShortDescription":"Cannot Match Secondary",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the street address does not match with the secondary number."
 },
 {
 "Code":"CM06",
 "ShortDescription":"DPBC Ambiguous",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be converted to a deliverable address because the 11-digit zip code represents more than one delivery point."
 },
 {
 "Code":"CM07",
 "ShortDescription":"Conflicting Middle Name",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because there is more than one COA record for the match and the middle names or initials on the COAs are different."
 },
 {
 "Code":"CM08",
 "ShortDescription":"Conflicting Gender",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because there is more than one COA record for the match and the genders of the names on the COAs are different."
 },
 {
 "Code":"CM09",
 "ShortDescription":"Conflicting Instructions",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because two potential matches were compared and had differences in the new addresses."
 },
 {
 "Code":"CM10",
 "ShortDescription":"Cannot Match High-rise Default",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the input record is a potential match to a family COA record from a multi-unit building, but the address zip + 4 coded to the building default. This requires individual name matching logic to obtain a match and the individual names did not match."
 },
 {
 "Code":"CM11",
 "ShortDescription":"Cannot Match Rural Default",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the input record is a potential match to a family COA record from a Rural Route or Highway Contract Route address. This requires individual name matching logic to obtain a match and the individual names did not match."
 },
 {
 "Code":"CM12",
 "ShortDescription":"Insufficient Name",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because there is a COA record with the same surname and address but there is insufficient first/middle name information on the COA record to product a match using individual matching logic."
 },
 {
 "Code":"CM13",
 "ShortDescription":"Middle Name Test Failed",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the input name contains a conflict with the middle name or initials on the COA record."
 },
 {
 "Code":"CM14",
 "ShortDescription":"Gender Conflict",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the gender of the name on the input record conflicts with the gender of the name on the COA record."
 },
 {
 "Code":"CM15",
 "ShortDescription":"Cannot Convert Address",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA was found but the new address would not convert at run time."
 },
 {
 "Code":"CM16",
 "ShortDescription":"Individual Name Insufficient",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the input middle initial/name is missing or does not equal the middle initial/name on the potential COA match."
 },
 {
 "Code":"CM17",
 "ShortDescription":"Secondary Descrepancy",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because there is conflicting secondary information on the input and COA record or the input record contained secondary information and matched to a family record that does not contain secondary information."
 },
 {
 "Code":"CM18",
 "ShortDescription":"Other Insufficient Name",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched because the input middle initial/name is missing or different from the middle name on the COA. A match cannot be made because the first name on the COA was truncated and the middle names must be equal in order to make this match."
 },
 {
 "Code":"CM19",
 "ShortDescription":"Cannot Match General Delivery",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched for general delivery."
 },
 {
 "Code":"CM20",
 "ShortDescription":"No ZIP + 4, Not Confirmable, or Temporary",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA was found but the new address either: does not have a ZIP+4 coded and therefore there is no 11-digit DPBC, the primary number cannot be confirmed on DPV, or is temporary."
 },
 {
 "Code":"CM21",
 "ShortDescription":"Conflicting Directions",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The COA could not be matched due to conflicting directions after rechaining."
 },
 {
 "Code":"CM22",
 "ShortDescription":"Secondary Dropped from COA",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The secondary number was dropped from COA."
 },
 {
 "Code":"CM23",
 "ShortDescription":"Secondary Dropped from Input",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The secondary number was dropped from the input address."
 },
 {
 "Code":"SE00",
 "ShortDescription":"Unexpected Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Your request could not be processed due to an unexpected error. Please retry your request."
 },
 {
 "Code":"SE10",
 "ShortDescription":"Record Number Mismatch",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Total Records numbers do not match with the records array."
 },
 {
 "Code":"SE11",
 "ShortDescription":"Month Range Exceeded",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"Months to allow for NCOALink products ranges from 6 to 48."
 },
 {
 "Code":"SE12",
 "ShortDescription":"Records Array Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Records array is empty, un-allocated, or out of bounds."
 },
 {
 "Code":"SE13",
 "ShortDescription":"Requesting Record Range Exceeded",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Requesting records must in the range of 1 to 100."
 },
 {
 "Code":"SE14",
 "ShortDescription":"No Summary Reports",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Summary reports do not exist."
 },
 {
 "Code":"SE15",
 "ShortDescription":"ProcessingType Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"ProcessingType is empty or incorrect type."
 },
 {
 "Code":"SE16",
 "ShortDescription":"FreqProcessing Range Exceeded",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"ListOwnerFreqProcessing ranges from 1 to 52."
 },
 {
 "Code":"SE17",
 "ShortDescription":"ListName Character Limit",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"OptSmartMoverListName cannot contain over 30 characters."
 },
 {
 "Code":"SE18",
 "ShortDescription":"ListName Invalid Character",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"OptSmartMoverListName cannot contain any of the following characters \\/*:???<>| or non-printing characters."
 },
 {
 "Code":"SE19",
 "ShortDescription":"Invalid Link",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Invalid link."
 },
 {
 "Code":"SE20",
 "ShortDescription":"CustomerID Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"CustomerID is not valid or customer?s Paf is not on file."
 },
 {
 "Code":"SE21",
 "ShortDescription":"SmartMover Service Disabled",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Smart Mover Service package(s) is/are not enabled. Please contact your sales representative!"
 },
 {
 "Code":"SE22",
 "ShortDescription":"Long JobID",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"JobID cannot contain over 50 characters."
 },
 {
 "Code":"SE23",
 "ShortDescription":"JobID Invalid Character",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"JobID cannot contain any of the following characters \\/*:???<> |, non-printing characters or spaces."
 },
 {
 "Code":"SE24",
 "ShortDescription":"No JobID",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"JobID required to open summary reports."
 },
 {
 "Code":"SE25",
 "ShortDescription":"Customer PAF Expired",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The Customer PAF is expired."
 },
 {
 "Code":"SE26",
 "ShortDescription":"Broker PAF Expired",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The Broker PAF is expired."
 },
 {
 "Code":"SE27",
 "ShortDescription":"NO PAFID Match",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The PAFID does not match."
 },
 {
 "Code":"SE28",
 "ShortDescription":"No PAFID",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The under broker customer required a PAFID."
 },
 {
 "Code":"SE29",
 "ShortDescription":"Unconfirmed PAFID",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The PAFID is unconfirmed."
 },
 {
 "Code":"SE30",
 "ShortDescription":"Empty XML",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Incorrect or empty XML/JSON structure."
 },
 {
 "Code":"SE31",
 "ShortDescription":"Empty Record Structure",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Incorrect or empty record structure."
 },
 {
 "Code":"SE32",
 "ShortDescription":"Incorrect Action",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The attempted action(s) was incorrect."
 },
 {
 "Code":"WSE00",
 "ShortDescription":"Unexpected Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Your request could not be processed due to an unexpected error. Please retry your request."
 },
 {
 "Code":"WSC00",
 "ShortDescription":"Internal Configuration Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Your request could not be processed due to an unexpected internal configuration error. Please contact your sales representative."
 },
 {
 "Code":"WSE03",
 "ShortDescription":"Month Range Exceeded",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Months to allow for NCOALink products ranges from 6 to 48."
 },
 {
 "Code":"WSE05",
 "ShortDescription":"Records Array Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Records array is empty, un-allocated, or out of bounds."
 },
 {
 "Code":"WSE13",
 "ShortDescription":"Requesting Record Range Exceeded",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Requesting records must in the range of 1 and 500."
 },
 {
 "Code":"WSE14",
 "ShortDescription":"Field Does Not Exist",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Ticket or field does not exist in the summary report table."
 },
 {
 "Code":"WSE15",
 "ShortDescription":"ProcessingType Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"OptSmartMoverProcessingType is empty or incorrect type."
 },
 {
 "Code":"WSE16",
 "ShortDescription":"FreqProcessing Range Exceeded",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"OptSmartMoverListOwnerFreqProcessing ranges from 1 to 52."
 },
 {
 "Code":"WSE17",
 "ShortDescription":"ListName Character Limit",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"OptSmartMoverListName cannot contain over 30 characters."
 },
 {
 "Code":"WSE18",
 "ShortDescription":"ListName Invalid Character",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"OptSmartMoverListName contains invalid special characters."
 },
 {
 "Code":"WSE24",
 "ShortDescription":"Invalid Link",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Invalid link."
 },
 {
 "Code":"WSE26",
 "ShortDescription":"CustomerID Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"CustomerID is not valid, customerID is not enabled, or customer's Paf is not on file."
 },
 {
 "Code":"WSE27",
 "ShortDescription":"CustomerID Inactive",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Smart Mover Service is not enabled for this CustomerID. Please contact your sales representative."
 },
 {
 "Code":"WSE28",
 "ShortDescription":"Long JobID",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"JobID is too long. It cannot contain over 50 characters."
 },
 {
 "Code":"WSE29",
 "ShortDescription":"JobID Invalid Character",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"JobID cannot contain some special characters."
 },
 {
 "Code":"WSE31",
 "ShortDescription":"No JobID",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"JobId is required to open summary reports."
 },
 {
 "Code":"WSE32",
 "ShortDescription":"Customer PAF Expired",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Customer PAF expired. Please contact your sales representative."
 },
 {
 "Code":"WSE33",
 "ShortDescription":"Broker PAF Expired",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Broker PAF expired. Please contact your sales representative."
 },
 {
 "Code":"WSE34",
 "ShortDescription":"No PAFID Match",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"PAFID does not match. Please contact your sales representative."
 },
 {
 "Code":"WSE35",
 "ShortDescription":"No PAFID",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"Under broker customer required PAFID. Please contact your sales representative."
 },
 {
 "Code":"WSE36",
 "ShortDescription":"Unconfirmed PAFID",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"PAFID has unconfirmed. Please contact your sales representative."
 },
 {
 "Code":"SS01",
 "ShortDescription":"Records Within Range Returned",
-"FatalAddressError":"false",
-"LongDescription":"The street search returned one or more results within the designated range (OptInRangeOnly set to true)."
+"Type":"Warning",
+"LongDescription":"The street search returned one or more results within the designated range (OptInRangeOnly set to Error)."
 },
 {
 "Code":"SS02",
 "ShortDescription":"Records With Street Name Returned",
-"FatalAddressError":"false",
-"LongDescription":"The street search returned one or more results with the street name only (OptInRangeOnly set to false)."
+"Type":"Warning",
+"LongDescription":"The street search returned one or more results with the street name only (OptInRangeOnly set to Warning)."
 },
 {
 "Code":"SS03",
 "ShortDescription":"First 1000 Streets Returned",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"1,000 street records were returned, but more than 1,000 were found. Please narrow your search."
 },
 {
 "Code":"DE02",
 "ShortDescription":"No Records Found",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"There was a search error: No records were found."
 },
 {
 "Code":"DE",
 "ShortDescription":"Data Field Error",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The data field was empty."
 },
 {
 "Code":"DE01",
 "ShortDescription":"Missing or Invalid Input",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The required input for the service was not met or was in an invalid format."
 },
 {
 "Code":"ZS01",
 "ShortDescription":"Successful Cities in Zip Code Search",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The search for Cities in Zip Code was successful."
 },
 {
 "Code":"ZS02",
 "ShortDescription":"Successful Zip Code in City Search",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The search for Zip Code in City was successful."
 },
 {
 "Code":"ZS03",
 "ShortDescription":"Successful Cities in State Search",
-"FatalAddressError":"false",
+"Type":"Warning",
 "LongDescription":"The search for Cities in State was successful."
 },
 {
 "Code":"ZE01",
 "ShortDescription":"Required Input Missing",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The search returned an error: the required input is missing."
 },
 {
 "Code":"ZE02",
 "ShortDescription":"No Records Found",
-"FatalAddressError":"true",
+"Type":"Error",
 "LongDescription":"The search returned an error: no records were found."
 }
 ]

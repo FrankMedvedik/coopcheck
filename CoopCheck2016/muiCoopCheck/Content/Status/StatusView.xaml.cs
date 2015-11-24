@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Status
 {
@@ -18,6 +21,13 @@ namespace CoopCheck.WPF.Content.Status
             InitializeComponent();
             _vm = new StatusViewModel();
             DataContext = _vm;
+            Messenger.Default.Register<NotificationMessage>(this, message =>
+            {
+
+                if (message.Notification == Notifications.ShowPopupStatus)
+                    ModernDialog.ShowMessage(string.Format("{0} {1} {2}", _vm.Status.ErrorMessage, Environment.NewLine, _vm.Status.StatusMessage), "Co-op Check", MessageBoxButton.OK);
+
+            });
         }
 
         private StatusViewModel _vm;

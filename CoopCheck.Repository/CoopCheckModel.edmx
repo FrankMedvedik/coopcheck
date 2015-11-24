@@ -70,6 +70,17 @@
           <Property Name="updated" Type="smalldatetime" />
           <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="MelissaResultReference">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" />
+          <Property Name="LongDescription" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ShortDescription" Type="varchar" MaxLength="255" />
+          <Property Name="AlternateAddressExists" Type="bit" />
+          <Property Name="updated" Type="datetime" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.OpenBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OpenBatch">
@@ -151,7 +162,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwBatchRpt' does not have a primary 
         <EntityType Name="vwBatchRpt">
           <Key>
             <PropertyRef Name="payment_type" />
-            <PropertyRef Name="batch_num" />
           </Key>
           <Property Name="account_id" Type="int" />
           <Property Name="account_name" Type="nvarchar" MaxLength="50" />
@@ -159,7 +169,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwBatchRpt' does not have a primary 
           <Property Name="batch_date" Type="smalldatetime" />
           <Property Name="pay_date" Type="smalldatetime" />
           <Property Name="batch_amount" Type="money" />
-          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="batch_num" Type="int" />
           <Property Name="payment_type" Type="varchar" MaxLength="14" Nullable="false" />
           <Property Name="total_cnt" Type="int" />
           <Property Name="open_cnt" Type="int" />
@@ -237,7 +247,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary k
             <PropertyRef Name="cleared_flag" />
           </Key>
           <Property Name="tran_id" Type="int" Nullable="false" />
-          <Property Name="batch_num" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="batch_num" Type="int" Nullable="false" />
           <Property Name="pay_date" Type="smalldatetime" />
           <Property Name="job_num" Type="int" />
           <Property Name="thank_you_1" Type="varchar" MaxLength="100" />
@@ -360,6 +370,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="batch" EntityType="Self.batch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="check_tran" EntityType="Self.check_tran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MelissaResultReference" EntityType="Self.MelissaResultReference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OpenBatch" EntityType="Self.OpenBatch" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [OpenBatch].[batch_num] AS [batch_num], 
@@ -701,18 +712,19 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <FunctionImport Name="dsa_GetVoucher" ReturnType="Collection(CoopCheckModel.dsa_GetVoucher_Result)">
           <Parameter Name="tran_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="bank_accounts" EntityType="CoopCheckModel.bank_account" />
-          <EntitySet Name="vwPayments" EntityType="CoopCheckModel.vwPayment" />
-          <EntitySet Name="vwBatchRpts" EntityType="CoopCheckModel.vwBatchRpt" />
           <FunctionImport Name="getbatchRpt" ReturnType="Collection(CoopCheckModel.getbatchRpt_Result)">
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
           <EntitySet Name="vwCheck" EntityType="CoopCheckModel.vwCheck" />
-          <EntitySet Name="vwPositivePay" EntityType="CoopCheckModel.vwPositivePay" />
-          <EntitySet Name="vwBasicPayments" EntityType="CoopCheckModel.vwBasicPayment" />
-          <EntitySet Name="vwVoidedPayments" EntityType="CoopCheckModel.vwVoidedPayment" />
+          <EntitySet Name="vwPositivePay1" EntityType="CoopCheckModel.vwPositivePay" />
+          <EntitySet Name="vwVoidedPayment" EntityType="CoopCheckModel.vwVoidedPayment" />
+          <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
+          <EntitySet Name="vwBasicPayment" EntityType="CoopCheckModel.vwBasicPayment" />
+          <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
+          <EntitySet Name="vwBatchRpt" EntityType="CoopCheckModel.vwBatchRpt" />
+          <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
+          <EntitySet Name="MelissaResultReference" EntityType="CoopCheckModel.MelissaResultReference" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -880,84 +892,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
         </ComplexType>
-        <EntityType Name="bank_account">
-          <Key>
-            <PropertyRef Name="account_id" />
-          </Key>
-          <Property Name="account_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="account_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="account_dscr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="balance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="last_rec_date" Type="DateTime" Precision="0" />
-          <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsDefault" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="vwPayment">
-          <Key>
-            <PropertyRef Name="batch_num" />
-            <PropertyRef Name="print_flag" />
-            <PropertyRef Name="tran_id" />
-            <PropertyRef Name="cleared_flag" />
-          </Key>
-          <Property Name="batch_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="thank_you_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="study_topic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="thank_you_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="marketing_research_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="check_date" Type="DateTime" Precision="0" />
-          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="print_flag" Type="Boolean" Nullable="false" />
-          <Property Name="tran_id" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
-          <Property Name="account_id" Type="Int32" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="cleared_date" Type="DateTime" Precision="0" />
-          <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
-          <Property Name="updated" Type="DateTime" Precision="0" />
-          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="vwBatchRpt">
-          <Key>
-            <PropertyRef Name="payment_type" />
-            <PropertyRef Name="batch_num" />
-          </Key>
-          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="batch_date" Type="DateTime" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="batch_num" Type="Int32" Nullable="false" />
-          <Property Name="payment_type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="total_cnt" Type="Int32" />
-          <Property Name="open_cnt" Type="Int32" />
-          <Property Name="cleared_cnt" Type="Int32" />
-          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="account_id" Type="Int32" />
-        </EntityType>
         <ComplexType Name="getbatchRpt_Result">
           <Property Type="String" Name="account_name" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="job_num" Nullable="true" />
@@ -975,28 +909,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <EntityType Name="vwJobRpt">
-          <Key>
-            <PropertyRef Name="job_num" />
-          </Key>
-          <Property Name="job_num" Type="Int32" Nullable="false" />
-          <Property Name="batch_cnt" Type="Int32" />
-          <Property Name="first_batch_date" Type="DateTime" Precision="0" />
-          <Property Name="last_batch_date" Type="DateTime" Precision="0" />
-          <Property Name="first_pay_date" Type="DateTime" Precision="0" />
-          <Property Name="last_pay_date" Type="DateTime" Precision="0" />
-          <Property Name="total_cnt" Type="Int32" />
-          <Property Name="open_cnt" Type="Int32" />
-          <Property Name="cleared_cnt" Type="Int32" />
-          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="first_check_date" Type="DateTime" Precision="0" />
-          <Property Name="last_check_date" Type="DateTime" Precision="0" />
-          <Property Name="account_id" Type="Int32" />
-        </EntityType>
         <EntityType Name="vwCheck">
           <Key>
             <PropertyRef Name="batch_num" />
@@ -1039,44 +951,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="check_date" Type="DateTime" Precision="0" />
           <Property Name="payee" Type="String" MaxLength="38" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="vwBasicPayment">
-          <Key>
-            <PropertyRef Name="tran_id" />
-            <PropertyRef Name="batch_num" />
-            <PropertyRef Name="print_flag" />
-            <PropertyRef Name="cleared_flag" />
-          </Key>
-          <Property Name="tran_id" Type="Int32" Nullable="false" />
-          <Property Name="batch_num" Type="Int32" Nullable="false" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="check_date" Type="DateTime" Precision="0" />
-          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="print_flag" Type="Boolean" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
-          <Property Name="account_id" Type="Int32" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="cleared_date" Type="DateTime" Precision="0" />
-          <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
-          <Property Name="updated" Type="DateTime" Precision="0" />
-          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vwVoidedPayment">
           <Key>
             <PropertyRef Name="tran_id" />
@@ -1118,6 +992,154 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
           <Property Name="updated" Type="DateTime" Precision="0" />
           <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwPayment">
+          <Key>
+            <PropertyRef Name="tran_id" />
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="print_flag" />
+            <PropertyRef Name="cleared_flag" />
+          </Key>
+          <Property Name="tran_id" Type="Int32" Nullable="false" />
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="thank_you_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="study_topic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="thank_you_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="marketing_research_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="check_date" Type="DateTime" Precision="0" />
+          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="print_flag" Type="Boolean" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_date" Type="DateTime" Precision="0" />
+          <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
+          <Property Name="updated" Type="DateTime" Precision="0" />
+          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwBasicPayment">
+          <Key>
+            <PropertyRef Name="tran_id" />
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="print_flag" />
+            <PropertyRef Name="cleared_flag" />
+          </Key>
+          <Property Name="tran_id" Type="Int32" Nullable="false" />
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="check_date" Type="DateTime" Precision="0" />
+          <Property Name="check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tran_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="person_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_prefix" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name_suffix" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="address_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="municipality" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="print_flag" Type="Boolean" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_date" Type="DateTime" Precision="0" />
+          <Property Name="cleared_flag" Type="Boolean" Nullable="false" />
+          <Property Name="updated" Type="DateTime" Precision="0" />
+          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="account_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_dscr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="last_rec_date" Type="DateTime" Precision="0" />
+          <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="vwBatchRpt">
+          <Key>
+            <PropertyRef Name="payment_type" />
+          </Key>
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="batch_num" Type="Int32" />
+          <Property Name="payment_type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="total_cnt" Type="Int32" />
+          <Property Name="open_cnt" Type="Int32" />
+          <Property Name="cleared_cnt" Type="Int32" />
+          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwJobRpt">
+          <Key>
+            <PropertyRef Name="job_num" />
+          </Key>
+          <Property Name="job_num" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="batch_cnt" Type="Int32" />
+          <Property Name="first_batch_date" Type="DateTime" Precision="0" />
+          <Property Name="last_batch_date" Type="DateTime" Precision="0" />
+          <Property Name="first_pay_date" Type="DateTime" Precision="0" />
+          <Property Name="last_pay_date" Type="DateTime" Precision="0" />
+          <Property Name="total_cnt" Type="Int32" />
+          <Property Name="open_cnt" Type="Int32" />
+          <Property Name="cleared_cnt" Type="Int32" />
+          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="first_check_date" Type="DateTime" Precision="0" />
+          <Property Name="last_check_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="MelissaResultReference">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LongDescription" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateAddressExists" Type="Boolean" />
+          <Property Name="updated" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1382,83 +1404,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="bank_accounts">
-            <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
-              <MappingFragment StoreEntitySet="bank_account">
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
-                <ScalarProperty Name="account_type" ColumnName="account_type" />
-                <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />
-                <ScalarProperty Name="last_rec_date" ColumnName="last_rec_date" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="account_number" ColumnName="account_number" />
-                <ScalarProperty Name="account_dscr" ColumnName="account_dscr" />
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwPayments">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
-              <MappingFragment StoreEntitySet="vwPayment">
-                <ScalarProperty Name="usr" ColumnName="usr" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
-                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
-                <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
-                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
-                <ScalarProperty Name="thank_you_1" ColumnName="thank_you_1" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwBatchRpts">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwBatchRpt">
-              <MappingFragment StoreEntitySet="vwBatchRpt">
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
-                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
-                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
-                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
-                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
-                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="getbatchRpt" FunctionName="CoopCheckModel.Store.getbatchRpt">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CoopCheckModel.getbatchRpt_Result">
@@ -1480,29 +1425,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="vwJobRpt">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwJobRpt">
-              <MappingFragment StoreEntitySet="vwJobRpt">
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="last_check_date" ColumnName="last_check_date" />
-                <ScalarProperty Name="first_check_date" ColumnName="first_check_date" />
-                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
-                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
-                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
-                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
-                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
-                <ScalarProperty Name="last_pay_date" ColumnName="last_pay_date" />
-                <ScalarProperty Name="first_pay_date" ColumnName="first_pay_date" />
-                <ScalarProperty Name="last_batch_date" ColumnName="last_batch_date" />
-                <ScalarProperty Name="first_batch_date" ColumnName="first_batch_date" />
-                <ScalarProperty Name="batch_cnt" ColumnName="batch_cnt" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwCheck">
             <EntityTypeMapping TypeName="CoopCheckModel.vwCheck">
               <MappingFragment StoreEntitySet="vwCheck">
@@ -1534,7 +1456,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwPositivePay">
+          <EntitySetMapping Name="vwPositivePay1">
             <EntityTypeMapping TypeName="CoopCheckModel.vwPositivePay">
               <MappingFragment StoreEntitySet="vwPositivePay">
                 <ScalarProperty Name="payee" ColumnName="payee" />
@@ -1546,43 +1468,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwBasicPayments">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwBasicPayment">
-              <MappingFragment StoreEntitySet="vwBasicPayment">
-                <ScalarProperty Name="usr" ColumnName="usr" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
-                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwVoidedPayments">
+          <EntitySetMapping Name="vwVoidedPayment">
             <EntityTypeMapping TypeName="CoopCheckModel.vwVoidedPayment">
               <MappingFragment StoreEntitySet="vwVoidedPayment">
                 <ScalarProperty Name="usr" ColumnName="usr" />
@@ -1622,6 +1508,154 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwPayment">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
+              <MappingFragment StoreEntitySet="vwPayment">
+                <ScalarProperty Name="usr" ColumnName="usr" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
+                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="municipality" ColumnName="municipality" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
+                <ScalarProperty Name="check_num" ColumnName="check_num" />
+                <ScalarProperty Name="check_date" ColumnName="check_date" />
+                <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
+                <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
+                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
+                <ScalarProperty Name="thank_you_1" ColumnName="thank_you_1" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwBasicPayment">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwBasicPayment">
+              <MappingFragment StoreEntitySet="vwBasicPayment">
+                <ScalarProperty Name="usr" ColumnName="usr" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
+                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="municipality" ColumnName="municipality" />
+                <ScalarProperty Name="address_2" ColumnName="address_2" />
+                <ScalarProperty Name="address_1" ColumnName="address_1" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
+                <ScalarProperty Name="check_num" ColumnName="check_num" />
+                <ScalarProperty Name="check_date" ColumnName="check_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bank_account">
+            <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
+              <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="account_type" ColumnName="account_type" />
+                <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />
+                <ScalarProperty Name="last_rec_date" ColumnName="last_rec_date" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="account_dscr" ColumnName="account_dscr" />
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwBatchRpt">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwBatchRpt">
+              <MappingFragment StoreEntitySet="vwBatchRpt">
+                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
+                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
+                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
+                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
+                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwJobRpt">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwJobRpt">
+              <MappingFragment StoreEntitySet="vwJobRpt">
+                <ScalarProperty Name="last_check_date" ColumnName="last_check_date" />
+                <ScalarProperty Name="first_check_date" ColumnName="first_check_date" />
+                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
+                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
+                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
+                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
+                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
+                <ScalarProperty Name="last_pay_date" ColumnName="last_pay_date" />
+                <ScalarProperty Name="first_pay_date" ColumnName="first_pay_date" />
+                <ScalarProperty Name="last_batch_date" ColumnName="last_batch_date" />
+                <ScalarProperty Name="first_batch_date" ColumnName="first_batch_date" />
+                <ScalarProperty Name="batch_cnt" ColumnName="batch_cnt" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MelissaResultReference">
+            <EntityTypeMapping TypeName="CoopCheckModel.MelissaResultReference">
+              <MappingFragment StoreEntitySet="MelissaResultReference">
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="AlternateAddressExists" ColumnName="AlternateAddressExists" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1636,7 +1670,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

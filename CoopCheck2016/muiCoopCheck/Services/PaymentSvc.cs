@@ -20,8 +20,9 @@ namespace CoopCheck.WPF.Services
         {
             StatusInfo i = new StatusInfo()
             {
-                StatusMessage = String.Format("Batch {0} Submitted for swiftpay ", batchNum)
-            };
+                StatusMessage = String.Format("Batch {0} Submitted for swiftpay ", batchNum),
+                ShowMessageBox = true
+        };
             // test code 
             //i.StatusMessage = "            StatusInfo i = new StatusInfo();
             //i.StatusMessage = "LETS PRETEND THE BATCH IS GONE TO BE PAID NOW... ";
@@ -31,6 +32,7 @@ namespace CoopCheck.WPF.Services
             {
              
                 await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+                
             }
             catch (Exception e)
             {
@@ -51,6 +53,14 @@ namespace CoopCheck.WPF.Services
 
         private static StatusInfo PrintChecks(int accountId, int batchNum, int startingCheckNum)
         {
+            //return new StatusInfo()
+            //{
+            //    ErrorMessage = "Error",
+            //    IsBusy = false,
+            //    ShowMessageBox = true,
+            //    StatusMessage="Status"
+            //};
+
             int checkNum = startingCheckNum;
             var b = BatchEdit.GetBatchEdit(batchNum);
 
@@ -60,19 +70,28 @@ namespace CoopCheck.WPF.Services
                 if (status.ErrorMessage == null)
                 {
                     WriteCheckCommand.Execute(batchNum, accountId, checkNum);
-                    CommitCheckCommand.Execute(batchNum, checkNum);
-                    checkNum++;
                     status.IsBusy = true;
+                    status.ShowMessageBox = false;
                     Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
                 }
                 else
+                {
+                    // commit all the checks up to the one that errored out
+                    // send ERROR message to popup 
+                    CommitCheckCommand.Execute(batchNum, --checkNum);
+                    status.ShowMessageBox = true;
                     return status;
+                }
             }
+            // commit the check operation to the database
+            // send completion message to popup with counts and account
+            CommitCheckCommand.Execute(batchNum, checkNum);
             return new StatusInfo() 
             {
                     StatusMessage =
                     String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
-                        startingCheckNum, --checkNum)
+                        startingCheckNum, --checkNum),
+                    ShowMessageBox = true
             };
       }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Wrappers;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
@@ -41,29 +42,28 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 cbSheets.IsEnabled = true;
             }
         }
-        public List<VoucherImport> Vouchers
+        public ObservableCollection<VoucherImport> Vouchers
         {
-            get { return _vm.VoucherImports.ToList(); }
+            get { return _vm.VoucherImports; }
             set
             {
-                _vm.VoucherImports = new ObservableCollection<VoucherImport>(value);
+                _vm.VoucherImports = value;
             }
         }
 
         public static readonly DependencyProperty VouchersProperty =
-           DependencyProperty.Register("Vouchers", typeof(List<VoucherImport>), typeof(ImportWorksheetView),
-               new PropertyMetadata(new List<VoucherImport>()));
+           DependencyProperty.Register("Vouchers", typeof(ObservableCollection<VoucherImport>), typeof(ImportWorksheetView),
+               new PropertyMetadata(new ObservableCollection<VoucherImport>()));
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
             _vm.CreateVoucherBatch();
-            bev.VoucherImports = _vm.VoucherImports;
-            bev.Visibility = Visibility.Visible;
+            vlv.VoucherImports = _vm.VoucherImports.ToList();
+            vlv.Visibility = Visibility.Visible;
             
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            bev.ResetState();
             _vm.ResetState();
             btnClose.Visibility = Visibility.Collapsed;
         }

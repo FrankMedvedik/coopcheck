@@ -1,4 +1,7 @@
-﻿using CoopCheck.WPF.Models;
+﻿using System;
+using System.Windows;
+using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Status
@@ -21,15 +24,20 @@ namespace CoopCheck.WPF.Content.Status
             {
                 StatusMessage = "Welcome to Coopcheck",
                 ErrorMessage = "",
-                IsBusy =false
-
+                IsBusy =false,
+                ShowMessageBox = false
             };
 
             Status = s;
 
             Messenger.Default.Register<NotificationMessage<StatusInfo>>(this, message =>
             {
-                Status = message.Content;
+                Status = ObjectCopier.Clone(message.Content);
+                if (Status.ShowMessageBox)
+                {
+                    Messenger.Default.Send(new NotificationMessage(Notifications.ShowPopupStatus));
+                    Status.ShowMessageBox = false;
+                }
             });
 
         }

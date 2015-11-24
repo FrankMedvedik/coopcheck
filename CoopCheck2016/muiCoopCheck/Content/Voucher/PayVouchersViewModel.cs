@@ -50,6 +50,8 @@ namespace CoopCheck.WPF.Content.Voucher
                 NotifyPropertyChanged();
                 BatchInfo = String.Format("{0} vouchers for job {1}", SelectedBatchEdit.Vouchers.Count,
                     SelectedBatchEdit.JobNum);
+                EndingCheckNum = StartingCheckNum + SelectedBatchEdit.Vouchers.Count;
+
             }
         }
 
@@ -130,6 +132,15 @@ namespace CoopCheck.WPF.Content.Voucher
                 NotifyPropertyChanged();
             }
         }
+        public int EndingCheckNum
+        {
+            get { return _endingCheckNum; }
+            set
+            {
+                _endingCheckNum = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private void HandleNotification(NotificationMessage message)
         {
@@ -170,6 +181,7 @@ namespace CoopCheck.WPF.Content.Voucher
 
         private bool _canProceed;
         private int _startingCheckNum;
+        private int _endingCheckNum;
         private ObservableCollection<bank_account> _accounts;
         private string _batchInfo;
         private BatchEdit _selectedBatchEdit;

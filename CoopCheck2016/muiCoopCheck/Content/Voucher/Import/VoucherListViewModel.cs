@@ -1,43 +1,118 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using CoopCheck.Library;
+using CoopCheck.WPF.Converters;
 using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using CoopCheck.WPF.Wrappers;
+using DataClean;
+using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
 {
 
     public class VoucherListViewModel : ViewModelBase
     {
-        private void FilterVouchers()
+
+        public ObservableCollection<OutputStreetAddress> ValidationResults
         {
-            
+            get { return _validationResults; }
+            set
+            {
+                _validationResults = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
-        public ObservableCollection<VoucherImport> VoucherImports  {             
-            get { return _voucherImports ; }
+        public List<VoucherImport> Vi
+        {
+            get { return VoucherImports.Select(r => r.Model).ToList(); }
+            set
+            {
+                var a = new ObservableCollection<VoucherImportWrapper>();
+                foreach (var v in value)
+                {
+                    a.Add(new VoucherImportWrapper(v));
+                }
+
+                VoucherImports = a;
+            }
+        }
+
+        private ObservableCollection<VoucherImportWrapper> _filteredVoucherImports;
+
+        public ObservableCollection<VoucherImportWrapper> FilteredVoucherImports
+        {
+            get { return _filteredVoucherImports; }
+            set
+            {
+                _filteredVoucherImports = value;
+                NotifyPropertyChanged();
+                var s = new StatusInfo()
+                {
+                    StatusMessage = string.Format("{0} Vouchers Loaded", FilteredVoucherImports.Count)
+                };
+                Status = s;
+            }
+        }
+
+        public RelayCommand DataCleanAddressesCommand { get; private set; }
+
+
+        public bool CanDataClean { get; set; }
+
+        public async void DataCleanAddresses()
+        {
+            Status = new StatusInfo()
+            {
+                StatusMessage = String.Format("Remote Address Validation in progress"),
+                IsBusy = true
+            };
+            try
+            {
+                var a = VoucherImports.Select(v => VoucherImportConverter.ToInputStreetAddress(v.Model)).ToList();
+                var results = new ObservableCollection<OutputStreetAddress>(await DataCleanSvc.ValidateAddresses(a));
+              //  ValidationResults = results;
+                Status = new StatusInfo()
+                {
+                    StatusMessage = String.Format("Address Validation Complete. {0} messages returned", results.Count)
+                };
+                int n = 0;
+                while (n < (VoucherImports.Count - 1))
+                {
+                    //VoucherImports[n].AddressOk = ValidationResults[n].AddressOk;
+                    VoucherImports[n].AltAddress = results[n];
+                    n++;
+                }
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = String.Format("Error during validation"),
+                    ErrorMessage = e.Message  
+                };
+            }
+        }
+
+        private ObservableCollection<VoucherImportWrapper> _voucherImports =
+            new ObservableCollection<VoucherImportWrapper>();
+
+        public ObservableCollection<VoucherImportWrapper> VoucherImports
+        {
+            get { return _voucherImports; }
             set
             {
                 _voucherImports = value;
                 NotifyPropertyChanged();
-
-                if (SelectedBatch != null)
-                {
-                    SelectedBatch.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First()); 
-                    SelectedBatch.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-                    SelectedBatch.Date = DateTime.Today.ToShortDateString();
-                    foreach (var v in VoucherImports)
-                    {
-                        SelectedBatch.Vouchers.Add(v.ToVoucherEdit());
-                    }
-                    //SelectedBatch.Save();
-                }
+                FilterVoucherImports();
             }
         }
- 
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -51,100 +126,93 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public VoucherListViewModel()
         {
-            ResetState();
-            
+            DataCleanAddressesCommand = new RelayCommand(DataCleanAddresses, CanDataCleanAddresses);
         }
 
-        #region DisplayState
-        private bool _canProceed;
+        public bool CanDataCleanAddresses() { return true;}
 
-        private void ResetState()
+    #region DisplayState
+
+        public void DeleteSelectedVoucher()
         {
-            CanProceed = false;
-            ShowGridData = false;
-            Status = new StatusInfo()
-            {
-                StatusMessage = "verify vouchers",
-                ErrorMessage = ""
-            };
-
-            SelectedBatch = BatchEdit.NewBatchEdit();
+                FilteredVoucherImports.Remove(SelectedVoucher);
+                SelectedVoucher = null;
         }
 
-        public bool CanProceed
+        public Boolean ShowSelectedVoucher
         {
-            get { return _canProceed; }
-            set{
-                _canProceed = value;
-                NotifyPropertyChanged();
-            }
-
+            get { return (SelectedVoucher != null); }
         }
 
-        
-        private Boolean _showGridData;
-
-        public Boolean ShowGridData
+        public void CancelNewVoucher()
         {
-            get { return _showGridData; }
-            set
-            {
-                _showGridData = value;
-                NotifyPropertyChanged();
-            }
+            WorkVoucherImport = null; ;
+
         }
-
-
         #endregion
 
-        #region BatchEdit
-
-        private BatchEdit _selectedBatch;
         private StatusInfo _status;
 
-        public BatchEdit  SelectedBatch
-        {
-            get { return _selectedBatch; }
-            set
-            {
-                _selectedBatch = value;
-                NotifyPropertyChanged();
-                ShowGridData = true;
-            }
-        }
+        private VoucherImportWrapper _selectedVoucher ;
 
-        public int  BatchNum
-        {
-            get { return SelectedBatch.Num; }
-            set
-            {
-                SelectedBatch = BatchEdit.GetBatchEdit(value);
-                NotifyPropertyChanged();
-            }
-        }
-
-
-        private VoucherEdit _selectedVoucher;
-
-        public VoucherEdit SelectedVoucher
+        public VoucherImportWrapper SelectedVoucher
         {
             get { return _selectedVoucher; }
             set
             {
                 _selectedVoucher = value;
                 NotifyPropertyChanged();
-                ShowGridData = true;
+                NotifyPropertyChanged("ShowSelectedVoucher");
             }
         }
-        public int SelectedVoucherId
+
+
+    public  void AddNewVoucher()
+    {
+            FilteredVoucherImports.Add(WorkVoucherImport);
+    }
+    public void CreateNewVoucher()
+    {
+            var v = new VoucherImportWrapper(new VoucherImport().GetNewWithDefaults());
+            WorkVoucherImport = v;
+     }
+    public VoucherImportWrapper WorkVoucherImport
+    {
+        get { return _workVoucherImport; }
+        set
         {
-            get
-            {
-                if (SelectedVoucher != null)
-                    return SelectedVoucher.Id;
-                return 0;
-            }
+            _workVoucherImport = value;
+            NotifyPropertyChanged();
         }
-        #endregion
+    }
+    private VoucherImportWrapper _workVoucherImport;
+
+
+    public Boolean HasErrors => VoucherErrorCnt > 0;
+
+    public int VoucherErrorCnt
+    {
+        get { return VoucherImports.Count(v => v.HasErrors); }
+    }
+
+    private bool _filterRows;
+   private ObservableCollection<OutputStreetAddress> _validationResults;
+
+        public bool FilterRows
+    {
+        get { return _filterRows; }
+        set
+        {
+            _filterRows = value;
+            FilterVoucherImports();
+            NotifyPropertyChanged();
+            
+        }
+        }
+
+        private void FilterVoucherImports()
+        {
+            FilteredVoucherImports = (FilterRows) ? new ObservableCollection<VoucherImportWrapper>( VoucherImports.Where(x =>x.HasErrors)) : VoucherImports;
+        }
     }
 }

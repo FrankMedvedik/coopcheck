@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CoopCheck.Library;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
@@ -149,7 +150,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 try
                 {
                     foreach (var v in VoucherImports)
-                        sb.Vouchers.Add(v.ToVoucherEdit());
+                        sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
                     if((sb.IsValid) && (sb.Vouchers.IsValid))
                         SelectedBatch = await sb.SaveAsync();
 
@@ -309,7 +310,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 if (columnName == "SelectedBatch")
                 {
-                    return "The vouchers haev errors";
+                    return "The vouchers have errors";
                 }
                 return null;
             }
@@ -377,7 +378,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             if ((SelectedBatch != null) && (WorkVoucherImport != null))
             {
-                SelectedBatch.Vouchers.Add(WorkVoucherImport.ToVoucherEdit());
+                SelectedBatch.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(WorkVoucherImport));
                 if(SelectedBatch.IsValid)
                     SelectedBatch = await SelectedBatch.SaveAsync();
             }

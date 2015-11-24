@@ -69,5 +69,10 @@ namespace CoopCheck.WPF
         {
             get { return "HonorariaWorksheetImportComplete"; }
         }
+
+        public static string ShowPopupStatus
+        {
+            get { return "ShowPopupStatus"; }
+        }
     }
 }

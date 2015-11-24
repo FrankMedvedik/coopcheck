@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
+             xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
              mc:Ignorable="d" >
     <Grid >
         <Grid.RowDefinitions>
@@ -18,11 +19,14 @@
                 <StackPanel Orientation="Horizontal" Margin="100,10,10,10" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image Source="/Assets/RecknerLogoLeft.jpg"/>
                 <Image Source="/Assets/RecknerLogoRight.jpg"/>
-                </StackPanel>
+                <import:ReplacerView SourceValue="Apples" AlternateValue="Bananas" />
+
+            </StackPanel>
             <TextBlock Text="Co-Op Check" FontSize="32" Grid.Row="1" FontWeight="Bold"  Margin="100,10,10,10" HorizontalAlignment="Left"/>
             </Grid>
     <Grid  Grid.Row="1">
             <status:StatusView />
         </Grid>
+
     </Grid>
 </UserControl>

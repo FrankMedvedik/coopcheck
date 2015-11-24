@@ -5,7 +5,7 @@
     <Setting Name="Setting" Type="System.String" Scope="Application">
       <Value Profile="(Default)">dasa</Value>
     </Setting>
-    <Setting Name="ClientID" Type="System.String" Scope="Application">
+    <Setting Name="PersonatorClientID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">98867798</Value>
     </Setting>
     <Setting Name="PersonatorActions" Type="System.String" Scope="Application">
@@ -27,7 +27,7 @@
       <Value Profile="(Default)">Reckner\\CoopCheckAdmin</Value>
     </Setting>
     <Setting Name="AccentColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">AppearanceManager.LightThemeSource</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Theme" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

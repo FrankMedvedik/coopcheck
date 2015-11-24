@@ -40,7 +40,7 @@
         <DataGrid Grid.Row="2" ItemsSource="{Binding Payments, IsAsync=True}"  AutoGenerateColumns="False"  Width="Auto"  
                   SelectionMode="Extended"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    x:Name="dgPayments"
-                  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}"  MaxHeight="800"
+                  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}"  MaxHeight="600"
                   ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top"   EnableColumnVirtualization="True"
                     EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>

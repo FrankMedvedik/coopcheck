@@ -102,6 +102,9 @@
     <Compile Include="getbatchRpt_Result.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MelissaResultReference.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OpenBatch.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>

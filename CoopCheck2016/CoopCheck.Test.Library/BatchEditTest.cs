@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CoopCheck.Library;
@@ -37,8 +34,7 @@ namespace CoopCheck.Test.Library
         [TestMethod]
         public void AddBatchVoucher()
         {
-            var obj = BatchEdit.NewBatchEdit(  );
-
+            var obj = BatchEdit.NewBatchEdit();
             obj.Amount = 100;
             obj.Date = DateTime.Now.ToShortDateString();
             obj.Description = "Please delete me!";
@@ -48,7 +44,6 @@ namespace CoopCheck.Test.Library
             obj.StudyTopic = "Survey";
             obj.ThankYou1 = "Thank You";
             obj.ThankYou2 = "Thank You Thank You";
-            obj.Save();
 
             var voc = VoucherEdit.NewVoucherEdit();
             voc.First = "John";
@@ -58,10 +53,10 @@ namespace CoopCheck.Test.Library
             voc.Region = "PA";
             voc.PostalCode = "18914";
             voc.Amount = 100;
-            
+
             obj.Vouchers.Add(voc);
 
-            
+
             obj = obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
@@ -71,6 +66,56 @@ namespace CoopCheck.Test.Library
 
             BatchEdit.DeleteBatchEdit(obj.Num);
 
+        }
+        [TestMethod]
+        public void AddVoucherToExistingBatch()
+        {
+            var obj = BatchEdit.NewBatchEdit();
+            obj.Amount = 100;
+            obj.Date = DateTime.Now.ToShortDateString();
+            obj.Description = "Please delete me!";
+            obj.JobNum = 99999999;
+            obj.MarketingResearchMessage = "Thanks";
+            obj.PayDate = DateTime.Now.ToShortDateString();
+            obj.StudyTopic = "Survey";
+            obj.ThankYou1 = "Thank You";
+            obj.ThankYou2 = "Thank You Thank You";
+
+            var voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "John";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            voc.Municipality = "Chalfont";
+            voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+
+            obj = obj.Save();
+
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            voc = VoucherEdit.NewVoucherEdit();
+            voc.Company = "Acme Supply Company";
+            voc.AddressLine1 = "1600 Market Street";
+            voc.AddressLine2 = "Suite 1515";
+            voc.Municipality = "Philadelphia";
+            voc.Region = "PA";
+            voc.PostalCode = "19103";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            obj = obj.Save();
+
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            Assert.IsTrue(obj.Vouchers.Count == 2);
+            Assert.AreEqual("Acme Supply Company", obj.Vouchers[1].Company);
+
+            BatchEdit.DeleteBatchEdit(obj.Num);
         }
 
         [TestMethod]
@@ -92,14 +137,14 @@ namespace CoopCheck.Test.Library
             voc.Last = "Public";
             voc.AddressLine1 = "Your Street";
             voc.Municipality = "Anytown";
-            voc.Region = "PA";
+            // voc.Region = "PA";
             voc.PostalCode = "18914";
             voc.Amount = 100;
 
             obj.Vouchers.Add(voc);
 
-            Assert.IsFalse(obj.IsValid);
-            
+            Assert.IsTrue(obj.IsValid);
+
         }
         [TestMethod]
         public void UpdateVoucherTest()
@@ -140,5 +185,166 @@ namespace CoopCheck.Test.Library
             Assert.IsTrue(obj.Vouchers[0].First == "Jim");
             BatchEdit.DeleteBatchEdit(obj.Num);
         }
+
+        [TestMethod]
+        public void DeleteVoucherTest()
+        {
+            var obj = BatchEdit.NewBatchEdit();
+            obj.Amount = 100;
+            obj.Date = DateTime.Now.ToShortDateString();
+            obj.Description = "Please delete me!";
+            obj.JobNum = 99999999;
+            obj.MarketingResearchMessage = "Thanks";
+            obj.PayDate = DateTime.Now.ToShortDateString();
+            obj.StudyTopic = "Survey";
+            obj.ThankYou1 = "Thank You";
+            obj.ThankYou2 = "Thank You Thank You";
+
+            var voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "John";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            voc.Municipality = "Chalfont";
+            voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "Paul";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            voc.Municipality = "Chalfont";
+            voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            obj = obj.Save();
+
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            obj.Vouchers[0].First = "Jim";
+
+            obj = obj.Save();
+
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            obj.Vouchers.Remove(obj.Vouchers[0].Id);
+
+            obj = obj.Save();
+
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            Assert.IsTrue(obj.Vouchers.Count == 1);
+            BatchEdit.DeleteBatchEdit(obj.Num);
+        }
+
+        [TestMethod]
+        public void DeleteVoucherWithInvalidVouchersTest()
+        {
+            var obj = BatchEdit.NewBatchEdit();
+            obj.Amount = 100;
+            obj.Date = DateTime.Now.ToShortDateString();
+            obj.Description = "Please delete me!";
+            obj.JobNum = 99999999;
+            obj.MarketingResearchMessage = "Thanks";
+            obj.PayDate = DateTime.Now.ToShortDateString();
+            obj.StudyTopic = "Survey";
+            obj.ThankYou1 = "Thank You";
+            obj.ThankYou2 = "Thank You Thank You";
+
+            var voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "John";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            voc.Municipality = "Chalfont";
+            // voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "Paul";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            voc.Municipality = "Chalfont";
+            // voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            obj = obj.Save();
+
+            // don't get why i need to get this 2x 
+            // I assume the save is giving me the good version
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            obj.Vouchers.Remove(obj.Vouchers[0].Id);
+
+            obj = obj.Save();
+
+            //obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            Assert.IsTrue(obj.Vouchers.Count == 1);
+            BatchEdit.DeleteBatchEdit(obj.Num);
+        }
+
+
+        [TestMethod]
+        public void GetInvalidVouchersTest()
+        {
+            var obj = BatchEdit.NewBatchEdit();
+            obj.Amount = 100;
+            obj.Date = DateTime.Now.ToShortDateString();
+            obj.Description = "Please delete me!";
+            obj.JobNum = 99999999;
+            obj.MarketingResearchMessage = "Thanks";
+            obj.PayDate = DateTime.Now.ToShortDateString();
+            obj.StudyTopic = "Survey";
+            obj.ThankYou1 = "Thank You";
+            obj.ThankYou2 = "Thank You Thank You";
+
+            var voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "John";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            voc.Municipality = "Chalfont";
+            // voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            voc = VoucherEdit.NewVoucherEdit();
+            voc.First = "Paul";
+            voc.Last = "Public";
+            voc.AddressLine1 = "1600 Manor Drive";
+            // voc.Municipality = "Chalfont";
+            // voc.Region = "PA";
+            voc.PostalCode = "18914";
+            voc.Amount = 100;
+
+            obj.Vouchers.Add(voc);
+
+            obj = obj.Save();
+
+            // don't get why i need to get this 2x 
+            // I assume the save is giving me the good version
+            obj = BatchEdit.GetBatchEdit(obj.Num);
+
+            int cnt = 0;
+            foreach (var v in obj.Vouchers)
+                if (v.IsValid == false)
+                    cnt = cnt + 1;
+            Assert.IsTrue(cnt == 2);
+            //Assert.IsTrue(obj.Vouchers.Count == 1);
+            BatchEdit.DeleteBatchEdit(obj.Num);
+        }
+
     }
 }

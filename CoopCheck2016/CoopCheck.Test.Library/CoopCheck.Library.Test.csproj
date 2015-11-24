@@ -61,6 +61,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="MelissaCodes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CoopCheck.DalADO.PromoCodeService.BankPromocodeResponse.datasource" />
     <None Include="Properties\DataSources\CoopCheck.DalADO.PromoCodeService.GetPromocodeResponse.datasource" />
