@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Voucher.Import
+namespace CoopCheck.WPF.Content.Voucher.Clean
 {
 
     public partial class ReplacerView : UserControl 
@@ -16,6 +16,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             InitializeComponent();
             (Content as FrameworkElement).DataContext = this;
             PropertyChanged = SetState;
+            SetState(null, null);
         }
 
 
@@ -25,8 +26,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             get { return (string)GetValue(AlternateValueProperty); }
             set { SetValueDp(AlternateValueProperty, value); }
         }
-        public static readonly DependencyProperty AlternateValueProperty =
-            DependencyProperty.Register("AlternateValue", typeof(string), typeof(ReplacerView), new PropertyMetadata(""));
+        public static  DependencyProperty AlternateValueProperty =
+            DependencyProperty.Register("AlternateValue", typeof(string), typeof(ReplacerView), new PropertyMetadata(string.Empty));
 
 
         public string SourceValue
@@ -35,9 +36,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             set { SetValueDp(SourceValueProperty, value);
             }
         }
-        public static readonly DependencyProperty SourceValueProperty =
-            DependencyProperty.Register("SourceValue", typeof(string), typeof(ReplacerView), new PropertyMetadata(""));
-
+        public static DependencyProperty SourceValueProperty =
+            DependencyProperty.Register("SourceValue", typeof(string), typeof(ReplacerView), new PropertyMetadata(string.Empty));
         private StatusInfo _status;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,24 +50,18 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
         }
 
-        private void SetState(object o, PropertyChangedEventArgs e)
+        public void SetState(object o, PropertyChangedEventArgs e)
         {
-
-            //Replacer.Visibility = Visibility.Visible;
-            //Status = new StatusInfo()
-            //{
-            //    StatusMessage = "Set state called " + DateTime.Now
-            //};
 
             Replacer.Visibility = Visibility.Collapsed;
             if (AlternateValue == null) return;
-            if ((AlternateValue.Length > 0) && (SourceValue == null))
+            if ((AlternateValue.Trim().Length > 0) && (SourceValue == null))
             {
                 Replacer.Visibility = Visibility.Visible;
                 return;
             }
 
-            if ((AlternateValue.Length > 0) && (!SourceValue.Equals(AlternateValue, StringComparison.OrdinalIgnoreCase)))
+            if ((AlternateValue.Trim().Length > 0) && (!SourceValue.Equals(AlternateValue, StringComparison.OrdinalIgnoreCase)))
             {
                 Replacer.Visibility = Visibility.Visible;
             }

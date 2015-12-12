@@ -4,19 +4,45 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using CoopCheck.Library;
+using CoopCheck.WPF.Content.Voucher.Clean;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using LinqToExcel;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
 {
 
-    internal class ImportWorksheetViewModel : ViewModelBase, IDataErrorInfo
+    public class ImportWorksheetViewModel : ViewModelBase, IDataErrorInfo
     {
+
+        //private void ReturnVouchersCommand()
+        //{
+        //    var c = new ObservableCollection<VoucherImportWrapper>();
+        //    foreach (var v in VoucherImports)
+        //    {
+        //        c.Add(new VoucherImportWrapper(v));
+        //    }
+
+        //    Messenger.Default.Send(new VoucherWorkbookMessage()
+        //    {
+        //        Vouchers = c,
+        //        Sender = "LoadWorksheet",
+        //         WorkbookName = ExcelFilePath,
+        //        WorksheetName = SelectedWorksheet
+                
+        //    });
+
+        //    Messenger.Default.Send(new NavigationMessage()
+        //    { 
+        //         Page = "/Content/Voucher/VoucherView.xaml"
+        //    });
+        //}
 
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
 
@@ -29,6 +55,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 NotifyPropertyChanged();
             }
         }
+
 
         public StatusInfo Status
         {
@@ -48,21 +75,21 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             SelectedWorksheet = DefaultSelectedWorksheet;
             Status = new StatusInfo()
             {
-                StatusMessage = "Please select an study honoraria excel workbook",
-                ErrorMessage = ""
+                StatusMessage = DefaultWorkbook
             };
 
         }
+        
         public ImportWorksheetViewModel()
         {
             ResetAll();
             
-            Messenger.Default.Register<NotificationMessage>(this, message =>
-            {
-                if (message.Notification == Notifications.HonorariaWorksheetImportComplete)
-                    ResetAll();
-            });
-            
+            //Messenger.Default.Register<NotificationMessage>(this, message =>
+            //{
+            //    if (message.Notification == Notifications.HonorariaWorksheetImportComplete)
+            //        ResetAll();
+            //});
+            //ReturnCommand = new RelayCommand(ReturnVouchersCommand);
 
         }
 
@@ -89,10 +116,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             {
                 _canProceed = value;
                 NotifyPropertyChanged();
-                //if (CanProceed)
-                //    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
-                //else
-                //    Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCannotProceed));
+                Messenger.Default.Send(new NotificationMessage<bool>(CanProceed, Notifications.ImportWorksheetReady));
             }
 
         }
@@ -191,7 +215,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 NotifyPropertyChanged();
                 var s = new StatusInfo()
                 {
-                    StatusMessage = "Select a worksheet",
+                    StatusMessage = DefaultWorkbook,
                     ErrorMessage = ""
                 };
                 Status = s;
@@ -235,7 +259,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         }
 
-        public ExcelQueryFactory ExcelBook;
+        private ExcelQueryFactory ExcelBook;
         private string _selectedWorksheet = null;
 
         public string SelectedWorksheet
@@ -354,7 +378,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 s.ErrorMessage = "";
                 ShowColumnErrorData = false;
                 CanProceed = true;
-                Messenger.Default.Send(this, new NotificationMessage(this, Notifications.ImportCanProceed));
             }
             Status = s;
         }
@@ -373,45 +396,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 NotifyPropertyChanged();
             }
         }
-        //private async void CreateBatchAsync()
-        //{
-        //    var z = await Task.Factory.StartNew(async () =>
-        //    {
-        //        var sb = await BatchSvc.GetNewBatchEditAsync();
-        //        try
-        //        {
-        //            sb.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            sb.JobNum = -1;
-        //        }
-        //        sb.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-        //        sb.Date = DateTime.Today.ToShortDateString();
-        //        sb.SaveAsync();
-
-        //        try
-        //        {
-        //            foreach (var v in VoucherImports)
-        //                sb.Vouchers.Add(v.ToVoucherEdit());
-        //            Status = new StatusInfo()
-        //            {
-        //                StatusMessage = string.Format("Imported {0} Vouchers", sb.Vouchers.Count)
-        //            };
-
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Status = new StatusInfo()
-        //            {
-        //                ErrorMessage = e.Message,
-        //                StatusMessage = "Error Importing Vouchers"
-        //            };
-        //        }
-        //        await sb.SaveAsync();
-        //        SelectedBatch = sb;
-        //    });
-        //}
 
         public void ImportVouchers()
         {
@@ -431,7 +415,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     ExcelBook.AddMapping("EmailAddress", "E-MAIL");
                     ExcelBook.AddMapping("JobNumber", "JOB #");
                     var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
-                    foreach (var a in vouchers.Where(x => x.Last != ""))
+                    foreach (var a in vouchers.Where(x => x.Last != "" ).Where(x => x.First != ""))
                     {
                         if (a.PostalCode != null && a.PostalCode.Length < 5)
                             a.PostalCode = a.PostalCode.PadLeft(5, '0');
@@ -507,8 +491,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             Status = new StatusInfo()
             {
                 StatusMessage = "Importing vouchers please wait",
-                IsBusy = true,
-                ErrorMessage = ""
+                IsBusy = true
             };
             //CreateBatchAsync();
         }

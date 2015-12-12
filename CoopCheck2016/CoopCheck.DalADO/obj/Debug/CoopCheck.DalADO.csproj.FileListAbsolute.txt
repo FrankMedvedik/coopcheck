@@ -114,8 +114,12 @@ C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.pdb
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\Csla.dll
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\EntityFramework.dll
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DAL.pdb
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\Csla.xml
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\EntityFramework.xml
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ar\Csla.resources.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\bs\Csla.resources.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\ca-ES\Csla.resources.dll

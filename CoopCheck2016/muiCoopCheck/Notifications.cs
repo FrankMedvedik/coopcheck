@@ -20,14 +20,9 @@ namespace CoopCheck.WPF
             get { return "StatusInfoChanged"; }
         }
 
-        public static string ImportCannotProceed
+        public static string ImportWorksheetReady
         {
-            get { return "ImportCannotProceed "; }
-        }
-
-        public static string ImportCanProceed
-        {
-            get { return "ImportCanProceed "; }
+            get { return "ImportWorksheetDone"; }
         }
 
         public static string OpenBatchChanged
@@ -73,6 +68,13 @@ namespace CoopCheck.WPF
         public static string ShowPopupStatus
         {
             get { return "ShowPopupStatus"; }
+        }
+
+        public static string NewDataCleanEvents { get { return "NewDataCleanEvents"; } }
+
+        public static string DataCleanCriteriaUpdated
+        {
+            get { return "DataCleanCriteriaUpdated"; }
         }
     }
 }

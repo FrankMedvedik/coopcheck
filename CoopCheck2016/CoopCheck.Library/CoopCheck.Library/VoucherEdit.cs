@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using DataClean;
+using DataClean.DataCleaner;
+using DataClean.Models;
 
 namespace CoopCheck.Library
 {

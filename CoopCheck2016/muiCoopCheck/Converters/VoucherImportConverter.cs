@@ -1,6 +1,7 @@
 ﻿using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using DataClean;
+using DataClean.Models;
 
 namespace CoopCheck.WPF.Converters
 {
@@ -20,6 +21,7 @@ namespace CoopCheck.WPF.Converters
             n.PhoneNumber = v.PhoneNumber;
             n.PostalCode = v.PostalCode;
             n.State = v.Region;
+            n.ID = v.ID;
             return n;
         }
 

@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using CoopCheck.WPF.Content.Settings;
+using CoopCheck.WPF.Interfaces;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
+using CoopCheck.WPF.ViewModel;
 using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF
@@ -17,12 +23,64 @@ namespace CoopCheck.WPF
         {
             InitializeComponent();
             LoadThemeAndColor();
-            //ShowPopUP();
+            RegisterNavigation();
+            //ContentSource = MenuLinkGroups.First().Links.First().Source;
 
         }
-    
+       
 
+        /// <summary>
+        /// Registers the navigation.
+        /// </summary>
+        private void RegisterNavigation()
+        {
+            Messenger.Default.Register<NavigationMessage>(this, p =>
+            {
+                var frame = GetDescendantFromName(this, "ContentFrame") as ModernFrame;
 
+                // Set the frame source, which initiates navigation
+                if (frame != null)
+                {
+                    frame.Source = new Uri(p.Page, UriKind.Relative);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Gets the name of the descendant from.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The FrameworkElement.</returns>
+        private static FrameworkElement GetDescendantFromName(DependencyObject parent, string name)
+        {
+            var count = VisualTreeHelper.GetChildrenCount(parent);
+
+            if (count < 1)
+            {
+                return null;
+            }
+
+            for (var i = 0; i < count; i++)
+            {
+                var frameworkElement = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                if (frameworkElement != null)
+                {
+                    if (frameworkElement.Name == name)
+                    {
+                        return frameworkElement;
+                    }
+
+                    frameworkElement = GetDescendantFromName(frameworkElement, name);
+                    if (frameworkElement != null)
+                    {
+                        return frameworkElement;
+                    }
+                }
+            }
+
+            return null;
+        }
         //public List<VoucherImport> Vouchers
         //{
         //    get { return (List<VoucherImport>)GetValue(VouchersProperty); }

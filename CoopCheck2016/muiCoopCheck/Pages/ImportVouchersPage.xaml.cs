@@ -1,31 +1,34 @@
 ﻿using System.Windows.Controls;
 using CoopCheck.WPF.Content;
-using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Content.Voucher;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Pages
 {
-    /// <summary>
-    /// Interaction logic for EditAccountPage.xaml
-    /// </summary>
     public partial class ImportVouchersPage : UserControl
     {
+        private VouchersWindow _vwin = new VouchersWindow();
         public ImportVouchersPage()
         {
             InitializeComponent();
             DataContext = this;
-            if (UserAuth.Instance.CanRead)
+            if(UserAuth.Instance.CanRead)
             {
-                iv.Visibility = System.Windows.Visibility.Visible;
-                nov.Visibility = System.Windows.Visibility.Collapsed;
-
+                _vwin.ShowDialog();
+                //Messenger.Default.Send(new NavigationMessage()
+                //{
+                //    Page = "/Pages/Home.xaml"
+                //});
+                //iv.Visibility = System.Windows.Visibility.Visible;
+                //nov.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
-                iv.Visibility = System.Windows.Visibility.Collapsed;
+                //iv.Visibility = System.Windows.Visibility.Collapsed;
                 nov.Visibility = System.Windows.Visibility.Visible;
             }
-
+            
         }
+
     }
-    }
+}

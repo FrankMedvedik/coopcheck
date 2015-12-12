@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Import.AltAddressView"
+﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Clean.AltAddressView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,37 +7,37 @@
     <Grid>
         <StackPanel Orientation="Vertical" Margin="12"  >
             <StackPanel Orientation="Vertical" Margin="12" Width="500">
-                    <TextBlock Text="Feedback" Style="{StaticResource Heading2}" Margin="6" />
+                    <TextBlock Text="Address Validator Feedback" Style="{StaticResource Heading2}" Margin="6" />
                     <StackPanel x:Name="Feedback" Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
-                       <Label Content="Errors" Target="{Binding ElementName=lbErrors}" />
+                        <Label Content="Errors" FontWeight="Bold" Target="{Binding ElementName=lbErrors}" HorizontalAlignment="Left"/>
                         <ListBox x:Name="lbErrors" ItemsSource="{Binding SelectedVoucher.AltAddress.Errors}">
                             <ListBox.ItemTemplate >
                                 <DataTemplate>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3"/>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3" HorizontalAlignment="Left"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                         </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Warnings" Target="{Binding ElementName=lbWarnings}" />
+                        <Label Content="Warnings"  FontWeight="Bold" Target="{Binding ElementName=lbWarnings}" HorizontalAlignment="Left"/>
                         <ListBox x:Name="lbWarnings" ItemsSource="{Binding SelectedVoucher.AltAddress.Warnings}" MaxWidth="500" MaxHeight="500">
                             <ListBox.ItemTemplate >
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3" HorizontalAlignment="Left"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Informational" Target="{Binding ElementName=lbInfo}" />
+                        <Label Content="Informational" FontWeight="Bold" Target="{Binding ElementName=lbInfo}" HorizontalAlignment="Left"/>
                         <ListBox x:Name="lbInfo" ItemsSource="{Binding SelectedVoucher.AltAddress.Informational}"  >
                             <ListBox.ItemTemplate >
                                 <DataTemplate>
                                         <StackPanel Orientation="Vertical">
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3" HorizontalAlignment="Left"/>
                                         </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

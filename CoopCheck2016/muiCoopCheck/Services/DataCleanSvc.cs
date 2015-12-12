@@ -7,43 +7,35 @@ using System.Threading.Tasks;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using DataClean;
+using DataClean.DataCleaner;
+using DataClean.Models;
+using DataClean.Repository;
 
 namespace CoopCheck.WPF.Services
 {
     public static class DataCleanSvc
     {
 
-        public static async Task<List<OutputStreetAddress>> ValidateAddresses(List<InputStreetAddress> newVouchers)
+        public static async Task<List<DataCleanEvent>> ValidateAddressesAsync(List<InputStreetAddress> newVouchers,
+            DataCleanCriteria criteria)
         {
-            var outRows = await Task<OutputStreetAddress[]>.Factory.StartNew(() =>
-            {
-                    var mc = GetMelissaReference();
-                    var c = ConfigurationManager.AppSettings;
-                    var d = new DataCleaner(c, mc);
-                    var v = d.VerifyAndCleanAddress(newVouchers.ToArray());
-                    return v;
-            });
-            return outRows.ToList();
-        }
+            List<DataCleanEvent> outRows = new List<DataCleanEvent>();
 
-        public static List<ParseResult> GetMelissaReference()
-        {
-            var r = new List<ParseResult>();
-            using (var ctx = new CoopCheckEntities())
+            try
             {
-                foreach (var p in  ctx.MelissaResultReferences)
+                outRows = await Task<List<DataCleanEvent>>.Factory.StartNew(() =>
                 {
-                    r.Add(new ParseResult()
-                    {
-                        Code = p.Code.Trim(),
-                        AlternateAddressExists = p.AlternateAddressExists.GetValueOrDefault(false),
-                        LongDescription = p.LongDescription,
-                        ShortDescription = p.ShortDescription,
-                        Type = p.Type
-                    });
-                }
+                    var c = ConfigurationManager.AppSettings;
+                    var d = new DataCleanEventFactory(new DataCleaner(c),
+                        new DataClean.Repository.Mgr.DataCleanRespository(), criteria);
+                    return d.ValidateAddresses(newVouchers);
+                });
             }
-            return r;
+    catch (Exception e)
+            {
+                Console.Write(e.Message);
             }
+            return outRows;
         }
+    }
 }

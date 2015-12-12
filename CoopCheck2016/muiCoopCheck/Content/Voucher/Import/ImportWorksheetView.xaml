@@ -4,9 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:edit="clr-namespace:CoopCheck.WPF.Content.Voucher.Edit"
              xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
              mc:Ignorable="d" >
         <Grid >
@@ -70,14 +67,11 @@
                     <TextBlock Style="{StaticResource Emphasis}" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
                     <TextBlock Style="{StaticResource Emphasis}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6">Total $</TextBlock>
                     <TextBlock  Style="{StaticResource Emphasis}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
-                        </StackPanel>
-                        <Button Grid.Row="1" HorizontalAlignment="Left" Margin="172,6,6,6" Content="Next"  Width="100" IsDefault="True" Click="Next_Click"/>
-                    </Grid>
+                    <!--<TextBlock Style="{StaticResource Emphasis}" HorizontalAlignment="Left" Margin="6">Can Proceed</TextBlock>
+                    <TextBlock  Style="{StaticResource Emphasis}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding CanProceed}"/>-->        
+                     </StackPanel>
+                    <!--<Button Grid.Row="1" HorizontalAlignment="Left" Margin="172,6,6,6" Content="Next"  Width="100"  Command="{Binding ReturnCommand}"/>-->
                 </Grid>
-        <StackPanel Orientation="Vertical" Grid.Row="2">
-            <!--<edit:BatchEditView x:Name="bev" />-->
-            <import:VoucherListView Visibility="Collapsed" x:Name="vlv"/>
-            <Button Content="Close" x:Name="btnClose" Visibility="Collapsed" HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" Margin="6" Click="Close_Click" />
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

@@ -1,17 +1,22 @@
-﻿<Application x:Class="CoopCheck.WPF.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:converters="clr-namespace:CoopCheck.WPF.Converters" StartupUri="MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+﻿<Application x:Class="CoopCheck.WPF.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:converters="clr-namespace:CoopCheck.WPF.Converters" 
+             StartupUri="MainWindow.xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             d1p1:Ignorable="d" 
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <Application.Resources>
     <ResourceDictionary>
-      <converters:BooleanToVisibility x:Key="BoolToVisConverter" />
-      <converters:NotBooleanToVisibility x:Key="NotBoolToVisConverter" />
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml">
         </ResourceDictionary>
                 <ResourceDictionary Source="NotifyIconResources.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Assets/ModernUI.Reckner.xaml">
-          <!--<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:CoopCheck.WPF.ViewModel" />-->
         </ResourceDictionary>
         <ResourceDictionary Source="DataGridsResourceDictionary1.xaml"/>
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BooleanToVisibility x:Key="BoolToVisConverter" />
+            <converters:NotBooleanToVisibility x:Key="NotBoolToVisConverter" />
+        </ResourceDictionary>
   </Application.Resources>
 </Application>

@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using CoopCheck.WPF.Content.Voucher.Edit;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.Wrappers;
+using DataClean.Models;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace CoopCheck.WPF.Content.Voucher.Import
+namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public partial class VoucherListView : UserControl
     {
@@ -21,16 +25,18 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             InitializeComponent();
 
         }
-
-        public List<VoucherImport> VoucherImports
-        {
-            get { return _vm.Vi; }
-            set { _vm.Vi = value; }
+        public ObservableCollection<VoucherImportWrapper> ValidationResults        {
+            get { return _vm.VoucherImports; }
+            set { _vm.VoucherImports = value; }
         }
-
-        public static readonly DependencyProperty VoucherImportsProperty =
-            DependencyProperty.Register("VoucherImports", typeof ( List<VoucherImport>), typeof (VoucherListView),
-                new PropertyMetadata(new List<VoucherImport>()));
+        //public List<VoucherImport> VoucherImports
+        //{
+        //    get { return _vm.Vi; }
+        //    set { _vm.Vi = value; }
+        //}
+        //public static readonly DependencyProperty VoucherImportsProperty =
+        //    DependencyProperty.Register("VoucherImports", typeof ( List<VoucherImport>), typeof (VoucherListView),
+        //        new PropertyMetadata(new List<VoucherImport>()));
         private void DeleteVoucher_Click(object sender, RoutedEventArgs e)
         {
             // set the status of the callback to closed
@@ -65,18 +71,16 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void dgVouchers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _vm.DataCleanAddresses();
+            if (_vm.SelectedVoucher != null)
+            {
+                ve.RefreshLookups();
+                btnDelete.IsEnabled = true;
+            }
+            else
+                btnDelete.IsEnabled = false;
         }
-        //private void dgVouchers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (_vm.SelectedVoucher != null)
-        //    {
-        //        ve.Visibility = Visibility.Visible;
-        //    }
-        //    else
-        //        ve.Visibility = Visibility.Collapsed;
-        //}
     }
 }

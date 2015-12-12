@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>coopCheck.UITest</RootNamespace>
     <AssemblyName>coopCheck.UITest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,12 +61,38 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ExcelExportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BankAccountSvcTests.cs" />
+    <Compile Include="Services\BatchSvcTests.cs" />
+    <Compile Include="Services\DataCleanSvcTests.cs" />
+    <Compile Include="Services\OpenBatchSvcTests.cs" />
+    <Compile Include="Services\PaymentPrintSvcTests.cs" />
+    <Compile Include="Services\PaymentSvcTests.cs" />
+    <Compile Include="Services\RptSvcTests.cs" />
+    <Compile Include="Services\UserAuthSvcTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\jradatacleaner\DataCleaner\DataClean.csproj">
+      <Project>{0E725976-76C4-4C29-AA8A-28D020C0F2BF}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
+      <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
+      <Name>CoopCheck.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
+      <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
+      <Name>CoopCheck.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck2016\muiCoopCheck\CoopCheck.WPF.csproj">
+      <Project>{AABD6CF8-BDB2-494C-B8AE-874581154800}</Project>
+      <Name>CoopCheck.WPF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

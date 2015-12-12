@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoopCheck.WPF</RootNamespace>
     <AssemblyName>CoopCheck.WPF</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ExpressionBlendVersion>12.0.60617.0</ExpressionBlendVersion>
@@ -35,6 +35,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -212,6 +213,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\Voucher\Clean\VoucherWorkbookMessage.cs" />
+    <Compile Include="Content\Voucher\Save\VoucherSaveView.xaml.cs">
+      <DependentUpon>VoucherSaveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Save\VoucherSaveViewModel.cs" />
+    <Compile Include="Content\Voucher\VouchersWindow.xaml.cs">
+      <DependentUpon>VouchersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IModernNavigationService.cs" />
+    <Compile Include="NavigationMessage.cs" />
     <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
       <DependentUpon>UnmatchedBankTransactionsGrid.xaml</DependentUpon>
     </Compile>
@@ -230,6 +241,14 @@
       <DependentUpon>BankClearTransactionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionViewModel.cs" />
+    <Compile Include="Content\DataClean\DataCleanFeedbackViewModel.cs" />
+    <Compile Include="Content\DataClean\DataCleanFeedbackView.xaml.cs">
+      <DependentUpon>DataCleanFeedbackView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DataClean\DataCleanCriteriaView.xaml.cs">
+      <DependentUpon>DataCleanCriteriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DataClean\DataCleanCriteriaViewModel.cs" />
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
@@ -289,25 +308,34 @@
     </Compile>
     <Compile Include="Content\Status\StatusViewModel.cs" />
     <Compile Include="Content\UserAuth.cs" />
+    <Compile Include="Content\Voucher\Clean\VoucherCleanViewModel.cs" />
     <Compile Include="Content\Voucher\Edit\BatchListViewModel.cs" />
     <Compile Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml.cs">
       <DependentUpon>VoucherImportAddDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\Import\ReplacerView.xaml.cs">
+    <Compile Include="Content\Voucher\Clean\ReplacerView.xaml.cs">
       <DependentUpon>ReplacerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\Import\AltAddressView.xaml.cs">
+    <Compile Include="Content\Voucher\Clean\AltAddressView.xaml.cs">
       <DependentUpon>AltAddressView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\Import\VoucherImportEditView.xaml.cs">
+    <Compile Include="Content\Voucher\Clean\VoucherImportEditView.xaml.cs">
       <DependentUpon>VoucherImportEditView.xaml</DependentUpon>
     </Compile>
-    <None Include="Content\Voucher\Import\VoucherImportEditViewModel.cs.xxx" />
+    <Compile Include="Content\Voucher\Clean\VoucherCleanView.xaml.cs">
+      <DependentUpon>VoucherCleanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\VoucherViewModel.cs" />
+    <Compile Include="Content\Voucher\VoucherView.xaml.cs">
+      <DependentUpon>VoucherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DataCleanEventConverter.cs" />
     <Compile Include="Converters\VoucherImportConverter.cs" />
-    <Compile Include="Converters\VoucherImportToVoucherEdit.cs" />
+    <None Include="Converters\VoucherImportToVoucherEdit.cs.xxx" />
     <Compile Include="Models\BankClearTransaction.cs" />
     <Compile Include="Models\ObjectCopier.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
+    <Compile Include="Models\ExcelVoucher.cs" />
     <Compile Include="NotifyIconViewModel.cs" />
     <Compile Include="Pages\AccountReconcilePage.xaml.cs">
       <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
@@ -324,8 +352,10 @@
     <Compile Include="Pages\VoidedPaymentReportPage.xaml.cs">
       <DependentUpon>VoidedPaymentReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ExcelExportSvc.cs" />
     <Compile Include="Services\ExportSvc.cs" />
     <Compile Include="Services\DataCleanSvc.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
@@ -374,8 +404,8 @@
     <Compile Include="Pages\PositivePayReportPage.xaml.cs">
       <DependentUpon>PositivePayReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\Import\VoucherListViewModel.cs" />
-    <Compile Include="Content\Voucher\Import\VoucherListView.xaml.cs">
+    <Compile Include="Content\Voucher\Clean\VoucherListViewModel.cs" />
+    <Compile Include="Content\Voucher\Clean\VoucherListView.xaml.cs">
       <DependentUpon>VoucherListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -385,6 +415,7 @@
     </Compile>
     <Compile Include="Services\PaymentSvc.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Models\WorksheetImport.cs" />
     <Compile Include="Wrappers\ModelWrappper.cs" />
     <Compile Include="Wrappers\NotifyDataErrorInfoBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -504,6 +535,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\DataClean\DataCleanFeedbackView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\DataClean\DataCleanCriteriaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\NoAccessView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -572,17 +611,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\Import\ReplacerView.xaml">
+    <Page Include="Content\Voucher\Clean\ReplacerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\Import\AltAddressView.xaml">
+    <Page Include="Content\Voucher\Clean\AltAddressView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Voucher\Import\VoucherImportEditView.xaml">
+    <Page Include="Content\Voucher\Clean\VoucherImportEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\Clean\VoucherCleanView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\Save\VoucherSaveView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\VouchersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Voucher\VoucherView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataGridsResourceDictionary1.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -675,7 +730,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\Import\VoucherListView.xaml">
+    <Page Include="Content\Voucher\Clean\VoucherListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -738,9 +793,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="CoopCheck.WPF_TemporaryKey.pfx" />
-    <Content Include="MelissaCodes.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -761,6 +813,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\JRADataCleaner\DataClean.Repository\DataClean.Repository.csproj">
+      <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
+      <Name>DataClean.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\jradatacleaner\DataCleaner\DataClean.csproj">
       <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
       <Name>DataClean</Name>

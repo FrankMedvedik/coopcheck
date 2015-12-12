@@ -70,17 +70,6 @@
           <Property Name="updated" Type="smalldatetime" />
           <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="MelissaResultReference">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="20" />
-          <Property Name="LongDescription" Type="nvarchar" MaxLength="4000" />
-          <Property Name="ShortDescription" Type="varchar" MaxLength="255" />
-          <Property Name="AlternateAddressExists" Type="bit" />
-          <Property Name="updated" Type="datetime" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.OpenBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OpenBatch">
@@ -370,7 +359,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="batch" EntityType="Self.batch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="check_tran" EntityType="Self.check_tran" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MelissaResultReference" EntityType="Self.MelissaResultReference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OpenBatch" EntityType="Self.OpenBatch" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [OpenBatch].[batch_num] AS [batch_num], 
@@ -724,7 +712,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
           <EntitySet Name="vwBatchRpt" EntityType="CoopCheckModel.vwBatchRpt" />
           <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
-          <EntitySet Name="MelissaResultReference" EntityType="CoopCheckModel.MelissaResultReference" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -1129,17 +1116,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="first_check_date" Type="DateTime" Precision="0" />
           <Property Name="last_check_date" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="MelissaResultReference">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LongDescription" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="ShortDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="AlternateAddressExists" Type="Boolean" />
-          <Property Name="updated" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1641,18 +1617,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
                 <ScalarProperty Name="batch_cnt" ColumnName="batch_cnt" />
                 <ScalarProperty Name="account_id" ColumnName="account_id" />
                 <ScalarProperty Name="job_num" ColumnName="job_num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MelissaResultReference">
-            <EntityTypeMapping TypeName="CoopCheckModel.MelissaResultReference">
-              <MappingFragment StoreEntitySet="MelissaResultReference">
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="AlternateAddressExists" ColumnName="AlternateAddressExists" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

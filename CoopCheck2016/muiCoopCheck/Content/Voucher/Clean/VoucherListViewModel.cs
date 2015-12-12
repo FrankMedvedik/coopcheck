@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using CoopCheck.WPF.Converters;
 using GalaSoft.MvvmLight.Messaging;
@@ -10,23 +11,33 @@ using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
 using DataClean;
+using DataClean.Models;
+using DataClean.Services;
 using GalaSoft.MvvmLight.Command;
 
-namespace CoopCheck.WPF.Content.Voucher.Import
+namespace CoopCheck.WPF.Content.Voucher.Clean
 {
 
     public class VoucherListViewModel : ViewModelBase
     {
 
-        public ObservableCollection<OutputStreetAddress> ValidationResults
-        {
-            get { return _validationResults; }
-            set
-            {
-                _validationResults = value;
-                NotifyPropertyChanged();
-            }
-        }
+        //private List<DataCleanEvent> _validationResults;
+        //public List<DataCleanEvent> ValidationResults
+        //{
+        //    get { return _validationResults; }
+        //    set
+        //    {
+        //        _validationResults = value;
+        //        var ilist = new List<VoucherImportWrapper>();
+        //        foreach (var e in ValidationResults)
+        //        {
+        //            var i = DataCleanEventConverter.ToVoucherImportWrapper(e, VoucherImports.First(x => x.ID == e.ID)); // we want to join the row to get the data we did not send to the cleaner
+        //            ilist.Add(i);
+        //        };
+        //        VoucherImports = new ObservableCollection<VoucherImportWrapper>(ilist);
+        //        NotifyPropertyChanged();
+        //    }
+        //}
 
         public List<VoucherImport> Vi
         {
@@ -60,48 +71,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
-        public RelayCommand DataCleanAddressesCommand { get; private set; }
-
-
-        public bool CanDataClean { get; set; }
-
-        public async void DataCleanAddresses()
-        {
-            Status = new StatusInfo()
-            {
-                StatusMessage = String.Format("Remote Address Validation in progress"),
-                IsBusy = true
-            };
-            try
-            {
-                var a = VoucherImports.Select(v => VoucherImportConverter.ToInputStreetAddress(v.Model)).ToList();
-                var results = new ObservableCollection<OutputStreetAddress>(await DataCleanSvc.ValidateAddresses(a));
-              //  ValidationResults = results;
-                Status = new StatusInfo()
-                {
-                    StatusMessage = String.Format("Address Validation Complete. {0} messages returned", results.Count)
-                };
-                int n = 0;
-                while (n < (VoucherImports.Count - 1))
-                {
-                    //VoucherImports[n].AddressOk = ValidationResults[n].AddressOk;
-                    VoucherImports[n].AltAddress = results[n];
-                    n++;
-                }
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
-                {
-                    StatusMessage = String.Format("Error during validation"),
-                    ErrorMessage = e.Message  
-                };
-            }
-        }
-
-        private ObservableCollection<VoucherImportWrapper> _voucherImports =
-            new ObservableCollection<VoucherImportWrapper>();
-
+        private ObservableCollection<VoucherImportWrapper> _voucherImports = new ObservableCollection<VoucherImportWrapper>();
         public ObservableCollection<VoucherImportWrapper> VoucherImports
         {
             get { return _voucherImports; }
@@ -126,10 +96,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public VoucherListViewModel()
         {
-            DataCleanAddressesCommand = new RelayCommand(DataCleanAddresses, CanDataCleanAddresses);
+           
         }
-
-        public bool CanDataCleanAddresses() { return true;}
 
     #region DisplayState
 
@@ -195,9 +163,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         get { return VoucherImports.Count(v => v.HasErrors); }
     }
 
-    private bool _filterRows;
-   private ObservableCollection<OutputStreetAddress> _validationResults;
-
+        private bool _filterRows;
         public bool FilterRows
     {
         get { return _filterRows; }

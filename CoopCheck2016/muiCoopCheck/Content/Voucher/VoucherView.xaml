@@ -1,0 +1,46 @@
+﻿<UserControl 
+        x:Class="CoopCheck.WPF.Content.Voucher.VoucherView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
+        xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
+        xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:save="clr-namespace:CoopCheck.WPF.Content.Voucher.Save"
+        mc:Ignorable="d ignore">
+        <Grid >
+        <ScrollViewer> 
+            <xctk:Wizard x:Name="VoucherWizard" FinishButtonClosesWindow="True" CanCancel="True" CancelButtonClosesWindow="True" PageChanged="PageChanged"  HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
+                <xctk:WizardPage x:Name="LoadVouchers" 
+                                   Title="Load Vouchers"
+                                   Description="This Wizard will walk you though creating new payment vouchers from an excel workbook of vouchers."
+                                 NextPage="{Binding ElementName=DataClean}" CanSelectNextPage="{Binding HaveValidWorkbook}"  >
+                    <import:ImportWorksheetView x:Name="iwv"/>
+                </xctk:WizardPage>
+                <xctk:WizardPage x:Name="DataClean" PageType="Interior"
+                                   Title="Validate Vouchers"
+                                   Description="This step checks the name, mailing adddress and other elements"
+                                   NextPage="{Binding ElementName=ListVouchers}"
+                                   PreviousPage="{Binding ElementName=LoadVouchers}"  >
+                    <clean:VoucherCleanView x:Name="vcv"/>
+                </xctk:WizardPage >
+                <xctk:WizardPage x:Name="ListVouchers" PageType="Interior"
+                                   Title="Edit Vouchers"
+                                   Description="Edit any vouchers with errors"
+                                   NextPage="{Binding ElementName=SaveVouchers}"
+                                   PreviousPage="{Binding ElementName=DataClean}" >
+                    <clean:VoucherListView x:Name="vlv"/>
+                </xctk:WizardPage>
+                <xctk:WizardPage x:Name="SaveVouchers" PageType="Interior"
+                                   Title="Save vouchers"
+                                   Description="Save the vouchers"
+                                   CanFinish="True">
+                    <save:VoucherSaveView x:Name="vsv"/>
+                </xctk:WizardPage>
+            </xctk:Wizard>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

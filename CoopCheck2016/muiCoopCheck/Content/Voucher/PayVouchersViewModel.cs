@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using CoopCheck.Library;
 using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Voucher.Import;
-using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Voucher
@@ -142,17 +137,17 @@ namespace CoopCheck.WPF.Content.Voucher
             }
         }
 
-        private void HandleNotification(NotificationMessage message)
-        {
-            if (message.Notification == Notifications.ImportCannotProceed)
-            {
-                CanProceed = false;
-            }
-            if (message.Notification == Notifications.ImportCanProceed)
-            {
-                CanProceed = true;
-            }
-        }
+        //private void HandleNotification(NotificationMessage message)
+        //{
+        //    if (message.Notification == Notifications.ImportCannotProceed)
+        //    {
+        //        CanProceed = false;
+        //    }
+        //    if (message.Notification == Notifications.ImportCanProceed)
+        //    {
+        //        CanProceed = true;
+        //    }
+        //}
 
         public bool CanProceed
         {

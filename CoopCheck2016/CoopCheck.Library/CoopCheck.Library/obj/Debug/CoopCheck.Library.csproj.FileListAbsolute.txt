@@ -135,7 +135,6 @@ C:\Users\fmedvedik\Source\Repos\coopcheck2\CoopCheck2016\CoopCheck.Library\CoopC
 C:\Users\fmedvedik\Source\Repos\coopcheck2\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.csprojResolveAssemblyReference.cache
 C:\Users\fmedvedik\Source\Repos\coopcheck2\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.dll
 C:\Users\fmedvedik\Source\Repos\coopcheck2\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\obj\Debug\CoopCheck.Library.pdb
-C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\MelissaCodes.json
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.Library.dll.config
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.Library.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.Library.pdb
@@ -143,13 +142,19 @@ C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.DalADO.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\Csla.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\DataClean.dll
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\EntityFramework.dll
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\log4net.dll
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\DataClean.Repository.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\Newtonsoft.Json.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\DataClean.pdb
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.DalADO.pdb
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.DAL.pdb
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\Csla.xml
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\EntityFramework.xml
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\log4net.xml
+C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\DataClean.Repository.pdb
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\Newtonsoft.Json.xml
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\ar\Csla.resources.dll
 C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\bs\Csla.resources.dll

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using CoopCheck.Repository;
 using System.Linq;
 using DataClean;
+using DataClean.Repository;
 
 namespace CoopCheck.ConsoleApp
 {
@@ -11,7 +12,7 @@ namespace CoopCheck.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var ctx = new CoopCheckEntities();
+            var ctx = new DataCleanEntities();
             var p = new ParseResultDictionary();
             Console.WriteLine("Load Codes");
             int totalCnt= 0;

@@ -2,13 +2,13 @@ using CoopCheck.Library;
 
 namespace CoopCheck.WPF.Models
 {
-    public class VoucherImport
+    public class VoucherImport 
     {
         public VoucherImport()
         {
             AddressOk = false;
         }
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public decimal? Amount { get; set; }
         public string PersonId { get; set; }
