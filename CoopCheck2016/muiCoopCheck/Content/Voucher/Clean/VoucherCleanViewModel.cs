@@ -93,7 +93,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 var dataCleanEvents = new List<DataCleanEvent>(await DataCleanSvc.ValidateAddressesAsync(a, criteria));
                 ValidationResults = new ObservableCollection<DataCleanEvent>(dataCleanEvents);
                 Messenger.Default.Send(new NotificationMessage<List<DataCleanEvent>>(dataCleanEvents, Notifications.NewDataCleanEvents));
-                //  ValidationResults = results;
                 Status = new StatusInfo()
                 {
                     StatusMessage =

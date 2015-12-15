@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" MaxHeight="500" Width="Auto">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="6"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Margin="6"  Grid.Row="0">
             <StackPanel.Resources>
                 <Style TargetType="StackPanel">
                     <Setter Property="Orientation" Value="Horizontal" />
@@ -73,7 +77,7 @@
                             <TextBox x:Name="TextAmount" Width="250"  Text="{Binding SelectedVoucher.Amount, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
                         </StackPanel>
                     </StackPanel>
-            <clean:AltAddressView/>
                 </StackPanel>
-        </Grid>
+        <clean:AltAddressView Grid.Row="1" />
+    </Grid>
 </UserControl>

@@ -5,9 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
         xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-        mc:Ignorable="d ignore">
+        mc:Ignorable="d ignore" Height="400" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
@@ -19,12 +18,16 @@
         </Grid.RowDefinitions>
         <clean:VoucherCleanView x:Name="vcvs" Grid.Row="0" Grid.Column="0"/>
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
-            <TextBlock>Process 10 valid vouchers for payment</TextBlock>
-            <TextBlock Text="{Binding ExcelVoucherFilePath}"/>
-            <TextBlock>save invalid vouchers to Workbook Name and Sheet</TextBlock>
-            <TextBlock Text="{Binding ExcelVoucherWorksheetName}"/>
+        <StackPanel x:Name="spSaveBatch">
+            <TextBlock Style="{StaticResource Heading2}" Text="{Binding SaveBatchInfoMessage}"/>
+        </StackPanel>
+        <StackPanel x:Name="spSaveErrors"  Orientation="Vertical" >
+                <TextBlock Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
+                <TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelVoucherFilePath}" />
+            <TextBox Text="{Binding ExcelVoucherWorksheetName, Mode=TwoWay}" Width="30"/>
+        </StackPanel>
         </StackPanel>
         <Button Margin="6" Height="20"  Click="Button_Click"  Grid.Column="0" Grid.Row="1" Width="100">Save</Button>
-        <Button Margin="6"  Click="btnExportErrors_Click"  Grid.Column="1" Grid.Row="1" Width="100" >Export</Button>
+        <Button Margin="6"  VerticalAlignment="Center"  Click="btnExportErrors_Click"  Grid.Column="1" Grid.Row="1" Width="100" >Export</Button>
     </Grid>
 </UserControl>

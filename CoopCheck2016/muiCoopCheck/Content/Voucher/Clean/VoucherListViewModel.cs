@@ -21,24 +21,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     public class VoucherListViewModel : ViewModelBase
     {
 
-        //private List<DataCleanEvent> _validationResults;
-        //public List<DataCleanEvent> ValidationResults
-        //{
-        //    get { return _validationResults; }
-        //    set
-        //    {
-        //        _validationResults = value;
-        //        var ilist = new List<VoucherImportWrapper>();
-        //        foreach (var e in ValidationResults)
-        //        {
-        //            var i = DataCleanEventConverter.ToVoucherImportWrapper(e, VoucherImports.First(x => x.ID == e.ID)); // we want to join the row to get the data we did not send to the cleaner
-        //            ilist.Add(i);
-        //        };
-        //        VoucherImports = new ObservableCollection<VoucherImportWrapper>(ilist);
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
         public List<VoucherImport> Vi
         {
             get { return VoucherImports.Select(r => r.Model).ToList(); }
@@ -144,6 +126,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             var v = new VoucherImportWrapper(new VoucherImport().GetNewWithDefaults());
             WorkVoucherImport = v;
      }
+
     public VoucherImportWrapper WorkVoucherImport
     {
         get { return _workVoucherImport; }
@@ -154,8 +137,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         }
     }
     private VoucherImportWrapper _workVoucherImport;
-
-
     public Boolean HasErrors => VoucherErrorCnt > 0;
 
     public int VoucherErrorCnt

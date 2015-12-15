@@ -17,7 +17,7 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="validation setting" Style="{StaticResource Emphasis}" Width="Auto" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="6"/>
+        <TextBlock Text="validation setting" Style="{StaticResource Heading2}" Width="Auto" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="6"/>
         <TextBlock Text="automatically fix postal code" Width="Auto" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Margin="6"/>
         <CheckBox IsChecked="{Binding Path=AutoFixPostalCode, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" Margin="6"/>
         <TextBlock Text="automatically fix state" Width="Auto" HorizontalAlignment="Left" OverridesDefaultStyle="True" Grid.Row="2" Grid.Column="1" Margin="6"/>

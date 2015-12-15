@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-             mc:Ignorable="d"  >
+             mc:Ignorable="d"  Width="1000" Height="800">
     <Control.Resources>
             <Style TargetType="{x:Type TextBox}">
                 <Style.Triggers>
@@ -19,10 +19,7 @@
                         <ControlTemplate>
                             <DockPanel LastChildFill="True" 
                    ToolTip="{Binding ElementName=controlWithError,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                                <TextBlock DockPanel.Dock="Right" 
-                       Foreground="Red"
-                       FontSize="14pt" 
-                       Margin="-15,0,0,0" FontWeight="Bold">*
+                                <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14pt" Margin="-15,0,0,0" FontWeight="Bold">*
                                 </TextBlock>
                                 <Border BorderBrush="Red" BorderThickness="1">
                                     <AdornedElementPlaceholder Name="controlWithError" />
@@ -34,34 +31,31 @@
             </Style>
         </Control.Resources>
     <Grid>
-        <Grid.Resources>
-        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical">
-            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                <CheckBox Margin="6" x:Name="chkFilterRows"  VerticalAlignment="Center"
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                <CheckBox Margin="6" x:Name="chkFilterRows"  VerticalAlignment="Center" 
                       IsChecked="True" Checked="chkFilterRows_Checked" Unchecked="chkFilterRows_Unchecked">
                     Show Only Errors?
                 </CheckBox>
                 <Button Content="Add" Margin="6" Width="100"  Click="AddVoucher_Click"/>
                 <Button Margin="6"  x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" >Delete</Button>
             </StackPanel>
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="12"
-                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="1200" 
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="6"
+                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="450" 
                   SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" 
                   EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Width="Auto">
                 <DataGrid.Columns>
-                    <mui:DataGridCheckBoxColumn Binding="{Binding HasBeenDataCleaned, Mode=OneWay}" Header="Clean" />
+                    <!--<mui:DataGridCheckBoxColumn Binding="{Binding HasBeenDataCleaned, Mode=OneWay}" Header="Clean" />
                     <mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
-                    <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />
+                    <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />-->
                     <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
@@ -75,7 +69,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1"  Margin="12" >
+        <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="6" >
             <clean:VoucherImportEditView x:Name="ve"/>
         </StackPanel>
     </Grid>

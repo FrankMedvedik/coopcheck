@@ -21,29 +21,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
     public class ImportWorksheetViewModel : ViewModelBase, IDataErrorInfo
     {
 
-        //private void ReturnVouchersCommand()
-        //{
-        //    var c = new ObservableCollection<VoucherImportWrapper>();
-        //    foreach (var v in VoucherImports)
-        //    {
-        //        c.Add(new VoucherImportWrapper(v));
-        //    }
-
-        //    Messenger.Default.Send(new VoucherWorkbookMessage()
-        //    {
-        //        Vouchers = c,
-        //        Sender = "LoadWorksheet",
-        //         WorkbookName = ExcelFilePath,
-        //        WorksheetName = SelectedWorksheet
-                
-        //    });
-
-        //    Messenger.Default.Send(new NavigationMessage()
-        //    { 
-        //         Page = "/Content/Voucher/VoucherView.xaml"
-        //    });
-        //}
-
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
 
         public ObservableCollection<VoucherImport> VoucherImports
@@ -55,7 +32,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 NotifyPropertyChanged();
             }
         }
-
 
         public StatusInfo Status
         {
@@ -84,13 +60,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             ResetAll();
             
-            //Messenger.Default.Register<NotificationMessage>(this, message =>
-            //{
-            //    if (message.Notification == Notifications.HonorariaWorksheetImportComplete)
-            //        ResetAll();
-            //});
-            //ReturnCommand = new RelayCommand(ReturnVouchersCommand);
-
         }
 
         #region DisplayState

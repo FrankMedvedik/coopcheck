@@ -15,7 +15,7 @@
         <Grid Style="{StaticResource ContentRoot}" >
             <ScrollViewer >
                 <StackPanel Orientation="Vertical">
-                    <Reconcile:ReconcileBankView x:Name="arv"/>
+                    <!--<Reconcile:ReconcileWizardView x:Name="arv"/>-->
                     <content:NoAccessView x:Name="nov" />
                 </StackPanel>
             </ScrollViewer>

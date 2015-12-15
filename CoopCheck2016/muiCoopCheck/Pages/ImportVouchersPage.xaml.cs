@@ -2,7 +2,6 @@
 using CoopCheck.WPF.Content;
 using CoopCheck.WPF.Content.Voucher;
 using GalaSoft.MvvmLight.Messaging;
-
 namespace CoopCheck.WPF.Pages
 {
     public partial class ImportVouchersPage : UserControl

@@ -13,8 +13,7 @@
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Width="100" Text="Account" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     <ComboBox x:Name="ComboAccount" Width="150" Margin="6"  ItemsSource="{Binding Accounts}" VerticalAlignment="Center"
-                          DisplayMemberPath="account_name" 
-            SelectedValue="{Binding PaymentReportCriteria.Account}">
+                          DisplayMemberPath="account_name" SelectedValue="{Binding PaymentReportCriteria.Account}">
                     </ComboBox>
                 </StackPanel>
             <StackPanel Orientation="Horizontal"  x:Name="StartDate">

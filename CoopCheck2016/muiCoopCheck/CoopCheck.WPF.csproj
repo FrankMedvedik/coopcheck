@@ -213,6 +213,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\AccountPaymentsView.xaml.cs">
+      <DependentUpon>AccountPaymentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\AccountPaymentsViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileWizardView.xaml.cs">
+      <DependentUpon>ReconcileWizardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileWizardViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileWindow.xaml.cs">
+      <DependentUpon>ReconcileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Voucher\Clean\VoucherWorkbookMessage.cs" />
     <Compile Include="Content\Voucher\Save\VoucherSaveView.xaml.cs">
       <DependentUpon>VoucherSaveView.xaml</DependentUpon>
@@ -221,7 +232,9 @@
     <Compile Include="Content\Voucher\VouchersWindow.xaml.cs">
       <DependentUpon>VouchersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
     <Compile Include="Interfaces\IModernNavigationService.cs" />
+    <Compile Include="Models\VoucherExcelExport.cs" />
     <Compile Include="NavigationMessage.cs" />
     <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
       <DependentUpon>UnmatchedBankTransactionsGrid.xaml</DependentUpon>
@@ -331,7 +344,6 @@
     </Compile>
     <Compile Include="Converters\DataCleanEventConverter.cs" />
     <Compile Include="Converters\VoucherImportConverter.cs" />
-    <None Include="Converters\VoucherImportToVoucherEdit.cs.xxx" />
     <Compile Include="Models\BankClearTransaction.cs" />
     <Compile Include="Models\ObjectCopier.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
@@ -527,11 +539,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\BankAccount\Reconcile\AccountPaymentsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\BankAccount\Reconcile\ReconcileBankView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\BankAccount\Reconcile\BankClearTransactionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\BankAccount\Reconcile\ReconcileWizardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\BankAccount\Reconcile\ReconcileWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

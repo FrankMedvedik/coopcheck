@@ -1,117 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
-using CsvHelper;
-using CsvHelper.Configuration;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    internal class ReconcileBankViewModel : ViewModelBase  
+    public class ReconcileBankViewModel : ViewModelBase
     {
-        private BankFileViewModel _bankFileViewModel = new BankFileViewModel();
+        private BankFileViewModel _bankFile = new BankFileViewModel();
+        private AccountPaymentsViewModel _accountPayments = new AccountPaymentsViewModel();
         private bool _showGridData;
 
-        private ObservableCollection<KeyValuePair<String, String>> _stats = new ObservableCollection<KeyValuePair<string, string>>();
-
-        public ObservableCollection<KeyValuePair<String, String>> Stats
+        public BankFileViewModel BankFile
         {
-            get { return _stats; }
-            set { _stats = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-   
-
-        private int _allTransactionCnt;
-        public int AllTransactionCnt
-        {
-            get { return _allTransactionCnt; }
+            get { return _bankFile; }
             set
             {
-                _allTransactionCnt = value;
+                _bankFile = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private decimal _allTransactionAmt;
-        public Decimal AllTransactionAmt
+        public AccountPaymentsViewModel AccountPayments
         {
-            get { return _allTransactionAmt; }
+            get { return _accountPayments; }
             set
             {
-                _allTransactionAmt = value;
+                _accountPayments = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private int _openTransactionCnt;
-        public int OpenTransactionCnt
-        {
-            get { return _openTransactionCnt; }
-            set
-            {
-                _openTransactionCnt = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private decimal _openTransactionAmt;
-        public Decimal OpenTransactionAmt
-        {
-            get { return _openTransactionAmt; }
-            set
-            {
-                _openTransactionAmt = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private int _matchedTransactionCnt;
-        public int MatchedTransactionCnt
-        {
-            get { return _matchedTransactionCnt; }
-            set
-            {
-                _matchedTransactionCnt = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private decimal _matchedTransactionAmt;
-        public Decimal MatchedTransactionAmt
-        {
-            get { return _matchedTransactionAmt; }
-            set
-            {
-                _matchedTransactionAmt = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private string _filePath;
-
-
-        public BankFileViewModel BankFileViewModel
-        {
-            get { return _bankFileViewModel; }
-            set
-            {
-                _bankFileViewModel = value;
-                NotifyPropertyChanged();
-            }
-        }
-        
         public StatusInfo Status
         {
             get { return _status; }
@@ -120,7 +45,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 _status = value;
                 NotifyPropertyChanged();
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
-                
+
             }
         }
 
@@ -129,6 +54,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             ResetState();
 
         }
+
         public async void GetPayments()
         {
             Status = new StatusInfo()
@@ -137,103 +63,68 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 IsBusy = true,
                 StatusMessage = "getting payments..."
             };
-            try
-            {
-                WorkPayments = await Task<List<vwPayment>>.Factory.StartNew(() =>
-                {
-                    var task = RptSvc.GetPaymentReconcileReport(PaymentReportCriteria);
-                    AllPayments = new List<vwPayment>(task.Result);
 
-                    MatchedPayments =
-                        (from s in AllPayments
-                            where
-                                BankFileViewModel.BankClearTransactions.Any(
-                                    t => (t.SerialNumber == s.check_num) )
-                            select s).ToList();
+            await Task.Factory.StartNew(async () =>
+            {
+                try
+                {
+                    await AccountPayments.GetPayments();
+                    AccountPayments.MatchedPayments =
+                        (from s in AccountPayments.AllPayments
+                         where BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num))
+                         select s).ToList();
 
                     //ClosedPayments = new List<vwPayment>(v);
 
-                    OpenPayments = (from s in AllPayments
-                        where
-                            !BankFileViewModel.BankClearTransactions.Any(
-                                t => (t.SerialNumber == s.check_num.ToString()))
-                        select s).ToList();
+                    AccountPayments.OpenPayments = (from s in AccountPayments.AllPayments
+                                                    where
+                                                        !BankFile.BankClearTransactions.Any(
+                                                            t => (t.SerialNumber == s.check_num.ToString()))
+                                                    select s).ToList();
 
-                    BankFileViewModel.UnmatchedBankClearTransactions = new ObservableCollection<BankClearTransaction>(
-                         (from s in BankFileViewModel.BankClearTransactions
-                          where
-                                 !AllPayments.Any(
-                                     t => (s.SerialNumber == t.check_num))
-                          select s).ToList());
+                    BankFile.UnmatchedBankClearTransactions = new ObservableCollection<BankClearTransaction>(
+                        (from s in BankFile.BankClearTransactions
+                         where
+                             !AccountPayments.AllPayments.Any(
+                                 t => (s.SerialNumber == t.check_num))
+                         select s).ToList());
 
-                    return new List<vwPayment>(task.Result);
-                });
-                LoadStats();
+                    AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File First Transaction Date", String.Format("{0:d}", BankFile.FirstTransactionDate)));
+                    AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Last Transaction Date", String.Format("{0:d}",BankFile.LastTransactionDate)));
+                    AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Credits", String.Format("{0:c}", BankFile.CreditTransactionTotalDollars)));
+                    AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Debits", String.Format("{0:c}", BankFile.DebitTransactionTotalDollars)));
+                    AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Credit Transaction Cnt", String.Format("{0:n0}", BankFile.CreditTransactionCnt)));
+                    AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Debit Transaction Cnt", String.Format("{0:n0}", BankFile.DebitTransactionCnt)));
+                    AccountPayments.LoadStats();
 
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
+                    Status = new StatusInfo()
+                    {
+                        ErrorMessage = "",
+                        StatusMessage = String.Format("{0:n0} payments found totalling {1:c}",
+                            AccountPayments.AllPayments.Count(), 
+                            AccountPayments.AllPayments.Sum(x=>x.tran_amount))
+                    };
+
+                }
+                catch (Exception e)
                 {
-                    StatusMessage = "Error loading payments",
-                    ErrorMessage = e.Message
-                };
-
-            }
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "Error loading payments",
+                        ErrorMessage = e.Message
+                    };
+                }
+            });
         }
 
-        private void LoadStats()
-        {
-            MatchedTransactionAmt = MatchedPayments.Sum(p => p.tran_amount).GetValueOrDefault(0);
-            MatchedTransactionCnt = MatchedPayments.Count;
-
-            OpenTransactionAmt = OpenPayments.Sum(p => p.tran_amount).GetValueOrDefault(0);
-            OpenTransactionCnt = OpenPayments.Count;
-
-            AllTransactionAmt = AllPayments.Sum(p => p.tran_amount).GetValueOrDefault(0);
-            AllTransactionCnt = AllPayments.Count;
-
-            LoadStatsIntoCollection();
-        }
-
-        private void LoadStatsIntoCollection()
-        {
-            ObservableCollection<KeyValuePair<String, String>> s =
-                new ObservableCollection<KeyValuePair<string, string>>();
-            // bank file stats
-            s.Add(new KeyValuePair<string, string>("Bank File First Transaction Date", BankFileViewModel.FirstTransactionDate.ToString()));
-            s.Add(new KeyValuePair<string, string>("Bank File Last Transaction Date", BankFileViewModel.LastTransactionDate.ToString()));
-            s.Add(new KeyValuePair<string, string>("Bank File Credit $", BankFileViewModel.CreditTransactionTotalDollars.ToString()));
-            s.Add(new KeyValuePair<string, string>("Bank File Debit $", BankFileViewModel.DebitTransactionTotalDollars.ToString()));
-            s.Add(new KeyValuePair<string, string>("Bank File Credit Transaction Cnt", BankFileViewModel.CreditTransactionCnt.ToString()));
-            s.Add(new KeyValuePair<string, string>("Bank File Debit Transaction Cnt", BankFileViewModel.DebitTransactionCnt.ToString()));
-
-            s.Add(new KeyValuePair<string, string>("Total Payments Cnt", AllTransactionCnt.ToString()));
-            s.Add(new KeyValuePair<string, string>("Total Payments $", AllTransactionAmt.ToString()));
-
-            s.Add(new KeyValuePair<string, string>("Matched Payments Cnt", MatchedTransactionCnt.ToString()));
-            s.Add(new KeyValuePair<string, string>("Matched Payments $", MatchedTransactionAmt.ToString()));
-
-            s.Add(new KeyValuePair<string, string>("Open Payments Cnt", OpenTransactionCnt.ToString()));
-            s.Add(new KeyValuePair<string, string>("Open Payments $", OpenTransactionAmt.ToString()));
-            Stats = s;
-        }
-
-
-        public async void RefreshAll()
-        {
-              GetPayments();
-        }
         #region DisplayState
 
-        private bool _canReconcile = false;
 
         public void ResetState()
         {
             CanReconcile = false;
-            //BankClearTransactions = new ObservableCollection<BankClearTransaction>();
         }
-
+        private bool _canReconcile = false;
         public bool CanReconcile
         {
             get { return _canReconcile; }
@@ -255,39 +146,10 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         }
 
         private StatusInfo _status;
-        private bool _canImport;
         private bool _isBusy;
 
         #endregion
-
-        public string this[string columnName]
-        {
-            get
-            {
-                //if (columnName == "FilePath")
-                //{
-                //    if (string.IsNullOrEmpty(FilePath)) return "Select a bank file";
-                //    if (!File.Exists(FilePath)) return "Invalid file name";
-                //}
-                return null;
-            }
-        }
-
-        public string Error
-        {
-            get { return Status.ErrorMessage; }
-            set
-            {
-                StatusInfo s = new StatusInfo()
-                {
-                    ErrorMessage = value,
-                    StatusMessage = "Error"
-                };
-                Status = s;
-            }
-        }
-
-
+        
         private string _headerText;
 
         public string HeaderText
@@ -296,73 +158,13 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             set { _headerText = value; }
         }
 
-        private List<vwPayment> _allPayments = new List< vwPayment >();
-       private List<vwPayment> _workPayments;
-        private List<vwPayment> _matchedPayments = new List<vwPayment>();
-        private List<vwPayment> _openPayments = new List< vwPayment >();
-        private PaymentReportCriteria _paymentReportCriteria;
-
-        public List<vwPayment> WorkPayments
-        {
-            get { return _workPayments; }
-            set
-            {
-                _workPayments = value;
-                //AllPayments = new ObservableCollection<vwPayment>(WorkPayments);
-            }
-        }
-
-        public List<vwPayment> AllPayments
-        {
-            get { return _allPayments; }
-            set
-            {
-                _allPayments = value;
-                NotifyPropertyChanged();
-                ShowGridData = true;
-                Status = new StatusInfo()
-                {
-                    StatusMessage = "payments loaded"
-                };
-            }
-        }
-
-        public bool ShowGridData
-        {
-            get { return _showGridData; }
-            set
-            {
-                _showGridData = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public List<vwPayment> MatchedPayments
-        {
-            get { return _matchedPayments; }
-            set
-            {
-                _matchedPayments = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public List<vwPayment> OpenPayments
-        {
-            get { return _openPayments; }
-            set
-            {
-                _openPayments = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public PaymentReportCriteria PaymentReportCriteria
         {
-            get { return _paymentReportCriteria; }
-            set { _paymentReportCriteria = value;
-                RefreshAll();
-                NotifyPropertyChanged(); }
+            get { return _accountPayments.PaymentReportCriteria; }
+            set {
+                 _accountPayments.PaymentReportCriteria = value;
+                  NotifyPropertyChanged();
+            }
         }
     }
 }

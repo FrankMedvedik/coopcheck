@@ -5,35 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" >
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="12"  >
-            <StackPanel Orientation="Vertical" Margin="12" Width="500">
-                    <TextBlock Text="Address Validator Feedback" Style="{StaticResource Heading2}" Margin="6" />
-                    <StackPanel x:Name="Feedback" Orientation="Vertical">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Errors" FontWeight="Bold" Target="{Binding ElementName=lbErrors}" HorizontalAlignment="Left"/>
-                        <ListBox x:Name="lbErrors" ItemsSource="{Binding SelectedVoucher.AltAddress.Errors}">
-                            <ListBox.ItemTemplate >
-                                <DataTemplate>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+            <Label Content="Errors" FontWeight="Bold" Target="{Binding ElementName=lbErrors}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0"/>
+        <ListBox x:Name="lbErrors" ItemsSource="{Binding SelectedVoucher.AltAddress.Errors}" Grid.Column="0" Grid.Row="1">
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap"  Text="{Binding Path=LongDescription}" Margin="3" HorizontalAlignment="Left" Foreground="Red"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        <Label Content="Warnings"  FontWeight="Bold" Target="{Binding ElementName=lbWarnings}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0"/>
+        <ListBox x:Name="lbWarnings" ItemsSource="{Binding SelectedVoucher.AltAddress.Warnings}" Grid.Column="1" Grid.Row="1">
+                        <ListBox.ItemTemplate >
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
                                     <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3" HorizontalAlignment="Left"/>
-                                </DataTemplate>
+                                </StackPanel>
+                            </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Warnings"  FontWeight="Bold" Target="{Binding ElementName=lbWarnings}" HorizontalAlignment="Left"/>
-                        <ListBox x:Name="lbWarnings" ItemsSource="{Binding SelectedVoucher.AltAddress.Warnings}" MaxWidth="500" MaxHeight="500">
-                            <ListBox.ItemTemplate >
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding Path=LongDescription}" Margin="3" HorizontalAlignment="Left"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Informational" FontWeight="Bold" Target="{Binding ElementName=lbInfo}" HorizontalAlignment="Left"/>
-                        <ListBox x:Name="lbInfo" ItemsSource="{Binding SelectedVoucher.AltAddress.Informational}"  >
+        <Label Content="Informational" FontWeight="Bold" Target="{Binding ElementName=lbInfo}" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="0"/>
+        <ListBox x:Name="lbInfo" ItemsSource="{Binding SelectedVoucher.AltAddress.Informational}"  Grid.Column="2" Grid.Row="1">
                             <ListBox.ItemTemplate >
                                 <DataTemplate>
                                         <StackPanel Orientation="Vertical">
@@ -42,9 +42,5 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                    </StackPanel>
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
         </Grid>
 </UserControl>

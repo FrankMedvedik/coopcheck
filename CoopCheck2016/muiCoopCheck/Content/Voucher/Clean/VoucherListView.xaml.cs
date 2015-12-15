@@ -29,14 +29,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             get { return _vm.VoucherImports; }
             set { _vm.VoucherImports = value; }
         }
-        //public List<VoucherImport> VoucherImports
-        //{
-        //    get { return _vm.Vi; }
-        //    set { _vm.Vi = value; }
-        //}
-        //public static readonly DependencyProperty VoucherImportsProperty =
-        //    DependencyProperty.Register("VoucherImports", typeof ( List<VoucherImport>), typeof (VoucherListView),
-        //        new PropertyMetadata(new List<VoucherImport>()));
+      
         private void DeleteVoucher_Click(object sender, RoutedEventArgs e)
         {
             // set the status of the callback to closed
@@ -68,9 +61,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         private void chkFilterRows_Unchecked(object sender, RoutedEventArgs e)
         {
             _vm.FilterRows = false;
-
         }
-
 
         private void dgVouchers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

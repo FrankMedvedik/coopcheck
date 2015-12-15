@@ -1,0 +1,42 @@
+﻿<UserControl 
+        x:Class="CoopCheck.WPF.Content.BankAccount.Reconcile.ReconcileWizardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:reconcile="clr-namespace:CoopCheck.WPF.Content.BankAccount.Reconcile"
+        mc:Ignorable="d ignore" MaxHeight="600" MinHeight="450" >
+        <Grid >
+        <ScrollViewer> 
+            <xctk:Wizard x:Name="ReconcileWizard" FinishButtonClosesWindow="True" CanCancel="True" CancelButtonClosesWindow="True" PageChanged="PageChanged"  HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
+                <xctk:WizardPage x:Name="BankFilePage" 
+                                   Title="Select Bank File"
+                                   Description="locate and load the bank file to be reconciled."
+                                   NextPage="{Binding ElementName=AccountPaymentsPage}" CanSelectNextPage="{Binding HaveValidBankFile}" >
+                    <reconcile:BankFileView x:Name="bfv"/>
+                </xctk:WizardPage>
+                <xctk:WizardPage x:Name="AccountPaymentsPage" PageType="Interior"
+                                   Title="Select Account"
+                                   Description="choose the account to reconcile"
+                                   NextPage="{Binding ElementName=ReconcilePage}"
+                                   PreviousPage="{Binding ElementName=BankFilePage}" CanSelectNextPage="{Binding HaveValidAccount}"  >
+                    <reconcile:AccountPaymentsView/>
+                </xctk:WizardPage >
+                <xctk:WizardPage x:Name="ReconcilePage" PageType="Interior"
+                                   Title="Reconcile Payments"
+                                   Description="balance payments againt the bank records "
+                                   NextPage="{Binding ElementName=SaveChanges}"
+                                   PreviousPage="{Binding ElementName=AccountPaymentsPage}" >
+                    <!--<reconcile:ReconcileBankView x:Name="vlv"/>-->
+                </xctk:WizardPage>
+                <xctk:WizardPage x:Name="SaveChanges" PageType="Interior"
+                                   Title="create reconciliation report"
+                                   Description="export results to excel "
+                                   CanFinish="True">
+                </xctk:WizardPage>
+            </xctk:Wizard>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

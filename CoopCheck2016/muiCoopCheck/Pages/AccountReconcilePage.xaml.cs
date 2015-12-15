@@ -1,28 +1,33 @@
 ﻿using System.Windows.Controls;
 using CoopCheck.WPF.Content;
+using CoopCheck.WPF.Content.BankAccount.Reconcile;
 
 namespace CoopCheck.WPF.Pages
 {
-  
     public partial class AccountReconcilePage : UserControl
     {
-        public AccountReconcilePage()
+
+        private ReconcileWindow _vwin = new ReconcileWindow();
+    public AccountReconcilePage()
+    {
+        InitializeComponent();
+        DataContext = this;
+        if (UserAuth.Instance.CanRead)
         {
-            InitializeComponent();
-            DataContext = this;
-            if (UserAuth.Instance.CanRead)
-            {
-                arv.Visibility = System.Windows.Visibility.Visible;
-                nov.Visibility = System.Windows.Visibility.Collapsed;
-
-            }
-            else
-            {
-                arv.Visibility = System.Windows.Visibility.Collapsed;
-                nov.Visibility = System.Windows.Visibility.Visible;
-            }
-
+            _vwin.ShowDialog();
+           //Messenger.Default.Send(new NavigationMessage()
+            //{
+            //    Page = "/Pages/Home.xaml"
+            //});
+            //iv.Visibility = System.Windows.Visibility.Visible;
+            //nov.Visibility = System.Windows.Visibility.Collapsed;
+        }
+        else
+        {
+            //iv.Visibility = System.Windows.Visibility.Collapsed;
+            nov.Visibility = System.Windows.Visibility.Visible;
+        }
         }
     }
-    }
+}
 

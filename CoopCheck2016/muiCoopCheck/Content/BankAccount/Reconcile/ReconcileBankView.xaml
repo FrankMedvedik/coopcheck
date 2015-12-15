@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-            <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0"/>
+               <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0"/>
                 <Button x:Name="Payments" Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1"
                 VerticalAlignment="Center" Click="Refresh_Click">Payments</Button>
             </Grid>

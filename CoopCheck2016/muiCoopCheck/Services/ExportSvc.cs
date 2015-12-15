@@ -25,6 +25,8 @@ namespace CoopCheck.WPF.Services
         private Excel.Font _font = null;
         // Optional argument variable
         private object _optionalValue = Missing.Value;
+        public string ExcelWorksheetName { get; set; } = null;
+        public string ExcelSourceWorkbook{ get; set; } = null;
 
         /// <summary>
         /// Generate report and sub functions
@@ -55,7 +57,7 @@ namespace CoopCheck.WPF.Services
                 ReleaseObject(_sheet);
                 ReleaseObject(_sheets);
                 ReleaseObject(_book);
-                ReleaseObject(_books);
+                if(_books != null ) ReleaseObject(_books);
                 ReleaseObject(_excelApp);
             }
         }
@@ -165,10 +167,22 @@ namespace CoopCheck.WPF.Services
         private void CreateExcelRef()
         {
             _excelApp = new Excel.Application();
-            _books = (Excel.Workbooks) _excelApp.Workbooks;
-            _book = (Excel._Workbook) (_books.Add(_optionalValue));
-            _sheets = (Excel.Sheets) _book.Worksheets;
-            _sheet = (Excel._Worksheet) (_sheets.get_Item(1));
+            if (ExcelSourceWorkbook != null)
+            {
+                _book = _excelApp.Workbooks.Open(ExcelSourceWorkbook);
+                _sheets = _book.Worksheets;
+                _sheet = (_sheets.Add());
+                if (ExcelWorksheetName != null)
+                    _sheet.Name = ExcelWorksheetName;
+
+            }
+            else
+            {
+                _books = (Excel.Workbooks) _excelApp.Workbooks;
+                _book = (Excel._Workbook) (_books.Add(_optionalValue));
+                _sheets = (Excel.Sheets) _book.Worksheets;
+                _sheet = (Excel._Worksheet) (_sheets.get_Item(1));
+            }
         }
 
         /// <summary>

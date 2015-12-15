@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -35,7 +35,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     _vm.DataCleanAddresses(dccv.Criteria);
                 });
                 _vm.CanDataClean = false;
-                dcfbv.DataCleanEvents = _vm.ValidationResults;
+              //  dcfbv.DataCleanEvents = _vm.ValidationResults;
             }
             catch (Exception ex)
             {

@@ -3,75 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
-             mc:Ignorable="d" >
-        <Grid >
+             mc:Ignorable="d"  MaxHeight="600" MinHeight="450" >
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Visibility="{Binding CanImport, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="80" Height="80" Style="{StaticResource CircleProgressRingStyle}" Grid.Row="0"/>
-                <!--<xctk:BusyIndicator IsBusy="{Binding IsBusy}">-->
-                <Grid Visibility="{Binding CanImport, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-                    <StackPanel Orientation="Vertical"  Grid.Row="0">
-                        <StackPanel Orientation="Horizontal" >
-                            <Button Content="Select File" Name="btnOpen" Width="150"  Height="30" Margin="6" HorizontalAlignment="Left"  Click="btnOpen_Click" />
-                            <TextBox Height="30" Name="txtFilePath" Width="500" Text="{Binding ExcelFilePath, Mode=TwoWay, ValidatesOnDataErrors=True}"  Margin="6" HorizontalAlignment="Left"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="Voucher Worksheet" Width="150"   HorizontalAlignment="Right" Margin="6"/>
-                            <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding SelectedWorksheet, Mode=TwoWay}"  
+            <StackPanel Orientation="Vertical"  Grid.Row="0">
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="Select File" Name="btnOpen" Width="150"  Height="30" Margin="6" HorizontalAlignment="Left"  VerticalAlignment="Center" Click="btnOpen_Click" />
+                    <TextBox VerticalAlignment="Center" Height="30" Name="txtFilePath" Width="500" Text="{Binding ExcelFilePath, Mode=TwoWay, ValidatesOnDataErrors=True}"  Margin="6" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Voucher Worksheet" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="6"/>
+                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding SelectedWorksheet, Mode=TwoWay}" VerticalAlignment="Center"  
                             IsEnabled="False" Name="cbSheets" Width="300" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}" />
-                        </StackPanel>
-                    </StackPanel>
-                    <Grid Grid.Row="1" Visibility="{Binding ShowColumnErrorData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Emphasis}" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Column Errors</TextBlock>
-                <TextBlock  Grid.Row="1" Grid.Column="0" Style="{StaticResource Emphasis}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Missing Columns</TextBlock>
-                        <DataGrid Grid.Row="2" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center" Name="dtColumns" VerticalAlignment="Top" 
-                      ItemsSource="{Binding FilteredColumnMap}" HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto" >
-                            <DataGrid.Columns>
+                </StackPanel>
+            </StackPanel>
+            <Grid Grid.Row="1" Visibility="{Binding ShowColumnErrorData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource Emphasis}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Column Errors</TextBlock>
+                <TextBlock  Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Style="{StaticResource Emphasis}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6">Missing Columns</TextBlock>
+                <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center" Name="dtColumns" VerticalAlignment="Top" 
+                      ItemsSource="{Binding FilteredColumnMap}" HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto" Margin="12">
+                    <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ColumnName }" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6" Style="{StaticResource Emphasis}">Columns Found</TextBlock>
-                        <ListBox Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Center" Name="dtFoundColumns" VerticalAlignment="Top" 
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6" Style="{StaticResource Emphasis}">Columns Found</TextBlock>
+                <ListBox Grid.Row="2" Grid.Column="2"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Name="dtFoundColumns" VerticalAlignment="Top" Margin="12"
                       ItemsSource="{Binding SrcColumnNames}" />
-                    </Grid>
-                <Grid Grid.Row="2" Visibility="{Binding CanProceed, Converter={StaticResource BoolToVisConverter}}" Name="GridVouchers">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal" Grid.Row="0" Name="spVoucherTotals" >
-                    <TextBlock Style="{StaticResource Emphasis}" HorizontalAlignment="Left" Margin="6">Voucher Count</TextBlock>
-                    <TextBlock Style="{StaticResource Emphasis}" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
-                    <TextBlock Style="{StaticResource Emphasis}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6">Total $</TextBlock>
-                    <TextBlock  Style="{StaticResource Emphasis}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
-                    <!--<TextBlock Style="{StaticResource Emphasis}" HorizontalAlignment="Left" Margin="6">Can Proceed</TextBlock>
-                    <TextBlock  Style="{StaticResource Emphasis}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding CanProceed}"/>-->        
-                     </StackPanel>
-                    <!--<Button Grid.Row="1" HorizontalAlignment="Left" Margin="172,6,6,6" Content="Next"  Width="100"  Command="{Binding ReturnCommand}"/>-->
-                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Visibility="{Binding CanProceed, Converter={StaticResource BoolToVisConverter}}" Name="GridVouchers">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Name="spVoucherTotals" >
+                    <TextBlock Style="{StaticResource Heading2}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6">Voucher Count</TextBlock>
+                    <TextBlock Style="{StaticResource Heading2}" Margin="6" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
+                    <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="6">Total $</TextBlock>
+                    <TextBlock  Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

@@ -5,40 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" >
     <Grid >
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                <TextBlock Text="{Binding EventCnt,Mode=OneWay}"  Style="{StaticResource Emphasis}" Width="50" />
-                <TextBlock Text="vouchers total"  Style="{StaticResource Emphasis}"  Width="100" />
-            </StackPanel>
-            <Border BorderThickness="1" Padding="12">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="errors"  Style="{StaticResource Emphasis}"  HorizontalAlignment="Center" Width="100"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                    <TextBlock Text="{Binding EventErrorCnt,Mode=OneWay}" Width="50" Foreground="Red" />
-                    <TextBlock Text="total" Width="100" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                        <TextBlock Text="{Binding NameErrorCnt,Mode=OneWay}" Width="50" Foreground="Red" />
-                        <TextBlock Text="name" Width="100" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                        <TextBlock Text="{Binding EventMailingAddressErrorCnt,Mode=OneWay}" Width="50" Foreground="Red" />
-                        <TextBlock Text="mailing address" Width="100" />
-                    </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                        <TextBlock Text="{Binding EventMailingAddressErrorCnt,Mode=OneWay}" Width="50" Foreground="Red" />
-                        <TextBlock Text="name" Width="100" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                        <TextBlock Text="{Binding EventEmailErrorCnt,Mode=OneWay}" Width="50" Foreground="Red" />
-                        <TextBlock Text="email" Width="100" />
-                    </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                        <TextBlock Text="{Binding EventPhoneErrorCnt,Mode=OneWay}" Width="50" Foreground="Red" />
-                        <TextBlock Text="phone" Width="100" />
-                    </StackPanel>
-                </StackPanel>
-        </Border>
-        </StackPanel>
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBox}">
+              <Setter Property="Margin" Value="4"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition  Width="Auto" />
+        </Grid.ColumnDefinitions>
+<TextBlock Text="{Binding EventCnt,Mode=OneWay}"  Style="{StaticResource Heading2}" Grid.Column="0" Grid.Row="0" />
+        <TextBlock Text="vouchers total"  Style="{StaticResource Heading2}"  Grid.Column="1" Grid.Row="0" />
+        <TextBlock Text="errors"  Style="{StaticResource Heading2}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+        <TextBlock Text="{Binding EventErrorCnt,Mode=OneWay}" Foreground="Red" Grid.Column="0" Grid.Row="2"/>
+        <TextBlock Text="total" Grid.Column="1" Grid.Row="2"/>
+        <TextBlock Text="{Binding NameErrorCnt,Mode=OneWay}" Grid.Column="0" Grid.Row="3" Foreground="Red" />
+        <TextBlock Text="name" Grid.Column="1" Grid.Row="3"  />
+        <TextBlock Text="{Binding EventMailingAddressErrorCnt,Mode=OneWay}" Grid.Column="0" Grid.Row="4" Foreground="Red" />
+        <TextBlock Text="mailing address" Grid.Column="1" Grid.Row="4"  />
+        <TextBlock Text="{Binding EventMailingAddressErrorCnt,Mode=OneWay}" Grid.Column="0" Grid.Row="5"  Foreground="Red" />
+        <TextBlock Text="name" Grid.Column="1" Grid.Row="5"  />
+        <TextBlock Text="{Binding EventEmailErrorCnt,Mode=OneWay}" Grid.Column="0" Grid.Row="6"  Foreground="Red" />
+        <TextBlock Text="email" Grid.Column="1" Grid.Row="6"  />
+        <TextBlock Text="{Binding EventPhoneErrorCnt,Mode=OneWay}" Grid.Column="0" Grid.Row="7" Foreground="Red" />
+        <TextBlock Text="phone" Grid.Column="1" Grid.Row="7"/>
     </Grid>
 </UserControl>

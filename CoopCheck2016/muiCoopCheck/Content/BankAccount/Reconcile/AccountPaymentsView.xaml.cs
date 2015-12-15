@@ -5,11 +5,11 @@ using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
 
-    public partial class ReconcileBankView : UserControl
+    public partial class AccountPaymentsView : UserControl
     {
         private ReconcileBankViewModel _vm;
 
-        public ReconcileBankView()
+        public AccountPaymentsView()
         {
             InitializeComponent();
             _vm = new ReconcileBankViewModel();
@@ -20,18 +20,21 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             });
             prcv.StartDate.Visibility = Visibility.Collapsed;
             prcv.EndDate.Visibility = Visibility.Collapsed;
+            //Recon.Visibility = Visibility.Collapsed;
         }
         
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private  void Refresh_Click(object sender, RoutedEventArgs e)
         {
 
             _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
-            Recon.IsExpanded = true;
+            _vm.GetPayments();
+            //Recon.Visibility = Visibility.Visible;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnClear_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("This will clear the payments");
 
         }
     }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 
 
 namespace CoopCheck.WPF.Content.Voucher.Save
@@ -12,9 +15,11 @@ namespace CoopCheck.WPF.Content.Voucher.Save
     {
         private void btnExportErrors_Click(object sender, RoutedEventArgs e)
         {
-            //ExportToExcel<VoucherImport, Vouchers> s = new ExportToExcel<VoucherImport, Vouchers>();
-            //s.dataToPrint = VoucherImports.ToList();
-            //s.GenerateReport();
+            ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>();
+            s.ExcelSourceWorkbook = _vm.ExcelVoucherFilePath;
+            s.ExcelWorksheetName = _vm.ExcelVoucherWorksheetName.Substring(0,20) + " err " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now);
+            s.dataToPrint = VoucherExports;
+            s.GenerateReport();
         }
 
 
@@ -51,21 +56,33 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             set { _vm.ExcelVoucherFilePath = value; }
         }
 
-        //public static readonly DependencyProperty ExcelVoucherFilePathProperty =
-        //    DependencyProperty.Register("ExcelVoucherFilePath", typeof(string), typeof(VoucherSaveView), new PropertyMetadata(string.Empty));
-
         public string ExcelVoucherWorksheetName
         {
             get { return _vm.ExcelVoucherWorksheetName; }
             set { _vm.ExcelVoucherWorksheetName = value; }
         }
 
-        //public static readonly DependencyProperty ExcelVoucherWorksheetNameProperty =
-        //    DependencyProperty.Register("ExcelVoucherWorksheetName", typeof(string), typeof(VoucherSaveView), new PropertyMetadata(string.Empty));
         public List<VoucherImport> VoucherImports 
         {
             set { vcvs.VoucherImports = value; }
         }
 
+        public List<VoucherExcelExport> VoucherExports
+        {
+            get
+            {
+                List<VoucherExcelExport> errors = new List<VoucherExcelExport>();
+                foreach (var v in vcvs.ValidationResults.Where(x=>!x.AltAddress.OkComplete))
+                {
+                    errors.Add(VoucherImportWrapperConverter.ToVoucherExcelExport(v));
+                }
+                return errors;
+            }
+        }
+
     }
+
+
+    internal class Vouchers : List<VoucherExcelExport> { }
+    
 }
