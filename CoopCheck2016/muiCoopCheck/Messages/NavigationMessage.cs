@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace CoopCheck.WPF
+namespace CoopCheck.WPF.Messages
 {
     /// <summary>
     /// The navigation message.

@@ -234,8 +234,9 @@
     </Compile>
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
     <Compile Include="Interfaces\IModernNavigationService.cs" />
+    <Compile Include="Messages\ExcelVouchersMessage.cs" />
     <Compile Include="Models\VoucherExcelExport.cs" />
-    <Compile Include="NavigationMessage.cs" />
+    <Compile Include="Messages\NavigationMessage.cs" />
     <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
       <DependentUpon>UnmatchedBankTransactionsGrid.xaml</DependentUpon>
     </Compile>
@@ -378,7 +379,7 @@
     <Compile Include="Content\Voucher\PayVouchersViewModel.cs" />
     <Compile Include="Converters\NumberConverter.cs" />
     <Compile Include="Models\StatusInfo.cs" />
-    <Compile Include="Notifications.cs" />
+    <Compile Include="Messages\Notifications.cs" />
     <Compile Include="Content\BankAccount\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>

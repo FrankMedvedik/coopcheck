@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using CoopCheck.Library;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;

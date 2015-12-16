@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Library;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;

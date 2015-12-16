@@ -1,6 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-
-namespace CoopCheck.WPF
+﻿namespace CoopCheck.WPF.Messages
 {
     public static class Notifications
     {
@@ -76,5 +74,7 @@ namespace CoopCheck.WPF
         {
             get { return "DataCleanCriteriaUpdated"; }
         }
+
+        public static string VouchersDataCleaned { get { return "VouchersDataCleaned"; } }
     }
 }

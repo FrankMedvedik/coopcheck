@@ -28,7 +28,7 @@
                             IsEnabled="False" Name="cbSheets" Width="300" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
-            <Grid Grid.Row="1" Visibility="{Binding ShowColumnErrorData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors">
+            <Grid Grid.Row="1" Visibility="{Binding ShowColumnErrorData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors" Margin="20,6,20,6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -58,10 +58,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Name="spVoucherTotals" >
-                    <TextBlock Style="{StaticResource Heading2}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6">Voucher Count</TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                    <TextBlock Style="{StaticResource Heading2}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" Margin="160,6,6,6">Voucher Count</TextBlock>
                     <TextBlock Style="{StaticResource Heading2}" Margin="6" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
-                    <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="6">Total $</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" >
+                    <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="130" Margin="160,6,6,6">Total $</TextBlock>
                     <TextBlock  Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
                 </StackPanel>
             </Grid>

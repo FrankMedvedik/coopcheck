@@ -6,11 +6,15 @@
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
              mc:Ignorable="d" MaxHeight="500" Width="Auto">
     <Grid>
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Margin="6"  Grid.Row="0">
+        </Grid.RowDefinitions>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="6"  Grid.Column="0">
             <StackPanel.Resources>
                 <Style TargetType="StackPanel">
                     <Setter Property="Orientation" Value="Horizontal" />
@@ -78,6 +82,6 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-        <clean:AltAddressView Grid.Row="1" />
+        <clean:AltAddressView Grid.Column="1" />
     </Grid>
 </UserControl>

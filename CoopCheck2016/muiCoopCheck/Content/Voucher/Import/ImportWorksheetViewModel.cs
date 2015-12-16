@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CoopCheck.Library;
 using CoopCheck.WPF.Content.Voucher.Clean;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
@@ -85,7 +86,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             {
                 _canProceed = value;
                 NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<bool>(CanProceed, Notifications.ImportWorksheetReady));
             }
 
         }
@@ -394,7 +394,17 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     VoucherCnt = VoucherImports.Count();
                     VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
                     CanProceed = true;
-                }
+                    Messenger.Default.Send(new NotificationMessage<ExcelVouchersMessage>(
+                        new ExcelVouchersMessage()
+                        {
+                            VoucherImports = VoucherImports.ToList(),
+                            ExcelFileInfo = new ExcelFileInfoMessage()
+                            {
+                                ExcelFilePath = ExcelFilePath,
+                                SelectedWorksheet = SelectedWorksheet
+                            }
+                        }, Notifications.ImportWorksheetReady));
+                    }
             }
             catch (Exception e)
                 {
@@ -409,8 +419,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         private StatusInfo _status;
         private bool _canImport;
         private bool _isBusy;
-        private BatchEdit _selectedBatch;
-
+     
         public decimal VoucherTotalDollars
         {
             get { return _voucherTotalDollars; }
@@ -454,22 +463,17 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
-        public  void CreateVoucherBatch()
-        {
-            CanImport = false;
-            Status = new StatusInfo()
-            {
-                StatusMessage = "Importing vouchers please wait",
-                IsBusy = true
-            };
-            //CreateBatchAsync();
-        }
-
-        //private async void GetBatch(int batchNum)
+        //public  void CreateVoucherBatch()
         //{
-        //    SelectedBatch = await BatchSvc.GetBatchEditAsync(batchNum);
+        //    CanImport = false;
+        //    Status = new StatusInfo()
+        //    {
+        //        StatusMessage = "Importing vouchers please wait",
+        //        IsBusy = true
+        //    };
         //}
 
+     
         private string _headerText;
 
         public string HeaderText
@@ -478,39 +482,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             set { _headerText = value; }
         }
 
-        public BatchEdit SelectedBatch
-        {
-            get { return _selectedBatch; }
-            set
-            {
-                _selectedBatch = value;
-                NotifyPropertyChanged();
-                if (SelectedBatch != null)
-                {
-
-                    HeaderText = string.Format("Batch Number {0} Job Number {1}  Voucher Cnt {2} Total Amount {3:C}",
-                        SelectedBatch.Num, SelectedBatch.JobNum, SelectedBatch.Vouchers.Count,
-                        SelectedBatch.Amount.GetValueOrDefault(0));
-                    Status = new StatusInfo()
-                    {
-                        StatusMessage = HeaderText
-                    };
-                }
-                else
-                    ShowSelectedBatch = false;
-            }
-        }
-
-        private Boolean _showSelectedBatch;
-
-        public Boolean ShowSelectedBatch
-        {
-            get { return _showSelectedBatch; }
-            set
-            {
-                _showSelectedBatch = value;
-                NotifyPropertyChanged();
-            }
-        }
+     
     }
 }

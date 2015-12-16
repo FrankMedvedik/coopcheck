@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using CoopCheck.WPF.Content;
 using CoopCheck.WPF.Content.Voucher;
+using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Pages
 {
@@ -13,11 +14,11 @@ namespace CoopCheck.WPF.Pages
             DataContext = this;
             if(UserAuth.Instance.CanRead)
             {
-                _vwin.ShowDialog();
-                //Messenger.Default.Send(new NavigationMessage()
-                //{
-                //    Page = "/Pages/Home.xaml"
-                //});
+                var b = _vwin.ShowDialog();
+                Messenger.Default.Send(new NavigationMessage()
+                {
+                    Page = "/Pages/Home.xaml"
+                });
                 //iv.Visibility = System.Windows.Visibility.Visible;
                 //nov.Visibility = System.Windows.Visibility.Collapsed;
             }

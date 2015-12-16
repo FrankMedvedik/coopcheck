@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
-using CoopCheck.WPF.Converters;
+using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
-using DataClean;
-using DataClean.Models;
-using DataClean.Services;
-using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
@@ -78,10 +71,21 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public VoucherListViewModel()
         {
-           
+            Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
+            {
+                if (message.Notification == Notifications.VouchersDataCleaned)
+                {
+                    VoucherImports = message.Content.VoucherImports;
+                    ExcelFileInfo = message.Content.ExcelFileInfo;
+                }
+
+            });
+
         }
 
-    #region DisplayState
+        public ExcelFileInfoMessage ExcelFileInfo { get; set; }
+
+        #region DisplayState
 
         public void DeleteSelectedVoucher()
         {
@@ -162,4 +166,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             FilteredVoucherImports = (FilterRows) ? new ObservableCollection<VoucherImportWrapper>( VoucherImports.Where(x =>x.HasErrors)) : VoucherImports;
         }
     }
+
+ 
 }

@@ -17,7 +17,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0" Grid.Row="0"/>
-        <Button Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1" VerticalAlignment="Center" Click="Refresh_Click">Payments</Button>
+        <Button Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1" VerticalAlignment="Center" x:Name="btnPayments" Click="Refresh_Click">Payments</Button>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="450"
                   Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
                 MinHeight="200"  ItemsSource="{Binding AccountPayments.Stats, IsAsync=True}" HorizontalScrollBarVisibility="Auto" 

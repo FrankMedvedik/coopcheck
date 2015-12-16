@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using CoopCheck.WPF.Content.Settings;
 using CoopCheck.WPF.Interfaces;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;

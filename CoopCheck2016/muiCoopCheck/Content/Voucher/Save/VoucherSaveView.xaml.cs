@@ -16,9 +16,10 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         private void btnExportErrors_Click(object sender, RoutedEventArgs e)
         {
             ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>();
-            s.ExcelSourceWorkbook = _vm.ExcelVoucherFilePath;
-            s.ExcelWorksheetName = _vm.ExcelVoucherWorksheetName.Substring(0,20) + " err " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now);
-            s.dataToPrint = VoucherExports;
+            s.ExcelSourceWorkbook = _vm.ExcelFileInfo.ExcelFilePath;
+            s.ExcelWorksheetName = _vm.VoucherImports.Max(x=>x.JobNumber) + " errors " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now); ;
+            //s.ExcelWorksheetName = _vm.ExcelVoucherWorksheetName.Substring(0,20) + " err " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now);
+            s.dataToPrint = _vm.VoucherExports.Where(x=>!x.OkComplete).ToList();
             s.GenerateReport();
         }
 
@@ -52,37 +53,19 @@ namespace CoopCheck.WPF.Content.Voucher.Save
 
         public string ExcelVoucherFilePath
         {
-            get { return _vm.ExcelVoucherFilePath; }
-            set { _vm.ExcelVoucherFilePath = value; }
+            get { return _vm.ExcelFileInfo.ExcelFilePath; }
+            set { _vm.ExcelFileInfo.ExcelFilePath = value; }
         }
 
         public string ExcelVoucherWorksheetName
         {
-            get { return _vm.ExcelVoucherWorksheetName; }
-            set { _vm.ExcelVoucherWorksheetName = value; }
+            get { return _vm.ExcelFileInfo.SelectedWorksheet; }
+            set { _vm.ExcelFileInfo.SelectedWorksheet = value; }
         }
 
-        public List<VoucherImport> VoucherImports 
-        {
-            set { vcvs.VoucherImports = value; }
-        }
-
-        public List<VoucherExcelExport> VoucherExports
-        {
-            get
-            {
-                List<VoucherExcelExport> errors = new List<VoucherExcelExport>();
-                foreach (var v in vcvs.ValidationResults.Where(x=>!x.AltAddress.OkComplete))
-                {
-                    errors.Add(VoucherImportWrapperConverter.ToVoucherExcelExport(v));
-                }
-                return errors;
-            }
-        }
 
     }
 
-
-    internal class Vouchers : List<VoucherExcelExport> { }
+    public class Vouchers : List<VoucherExcelExport> { }
     
 }

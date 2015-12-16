@@ -25,11 +25,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             InitializeComponent();
 
         }
-        public ObservableCollection<VoucherImportWrapper> ValidationResults        {
-            get { return _vm.VoucherImports; }
-            set { _vm.VoucherImports = value; }
-        }
-      
+
         private void DeleteVoucher_Click(object sender, RoutedEventArgs e)
         {
             // set the status of the callback to closed

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Converters;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 

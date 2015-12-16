@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
@@ -63,31 +64,41 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 IsBusy = true,
                 StatusMessage = "getting payments..."
             };
+            await AccountPayments.GetPayments();
 
-            await Task.Factory.StartNew(async () =>
+            Status = new StatusInfo()
+            {
+                ErrorMessage = "",
+                IsBusy = true,
+                StatusMessage = String.Format("loaded {0:n0} payments found totalling {1:c}",
+                 AccountPayments.AllPayments.Count,
+                 AccountPayments.AllPayments.Sum(x => x.tran_amount))
+            };
+
+            await Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    await AccountPayments.GetPayments();
+
                     AccountPayments.MatchedPayments =
-                        (from s in AccountPayments.AllPayments
-                         where BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num))
-                         select s).ToList();
+                        (AccountPayments.AllPayments.Where(
+                            s => BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();
 
                     //ClosedPayments = new List<vwPayment>(v);
 
-                    AccountPayments.OpenPayments = (from s in AccountPayments.AllPayments
-                                                    where
-                                                        !BankFile.BankClearTransactions.Any(
-                                                            t => (t.SerialNumber == s.check_num.ToString()))
-                                                    select s).ToList();
+                    AccountPayments.OpenPayments = (AccountPayments.AllPayments.Where(
+                        s => !BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();
 
                     BankFile.UnmatchedBankClearTransactions = new ObservableCollection<BankClearTransaction>(
-                        (from s in BankFile.BankClearTransactions
-                         where
-                             !AccountPayments.AllPayments.Any(
-                                 t => (s.SerialNumber == t.check_num))
-                         select s).ToList());
+                        (BankFile.BankClearTransactions.Where(s => !AccountPayments.AllPayments.Any(
+                            t => (s.SerialNumber == t.check_num)))).ToList());
+
+                    //Status = new StatusInfo()
+                    //{
+                    //    ErrorMessage = "",
+                    //    IsBusy = true,
+                    //    StatusMessage = "calculating totals..."
+                    //};
 
                     AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File First Transaction Date", String.Format("{0:d}", BankFile.FirstTransactionDate)));
                     AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Last Transaction Date", String.Format("{0:d}",BankFile.LastTransactionDate)));
@@ -96,14 +107,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Credit Transaction Cnt", String.Format("{0:n0}", BankFile.CreditTransactionCnt)));
                     AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Debit Transaction Cnt", String.Format("{0:n0}", BankFile.DebitTransactionCnt)));
                     AccountPayments.LoadStats();
-
-                    Status = new StatusInfo()
-                    {
-                        ErrorMessage = "",
-                        StatusMessage = String.Format("{0:n0} payments found totalling {1:c}",
-                            AccountPayments.AllPayments.Count(), 
-                            AccountPayments.AllPayments.Sum(x=>x.tran_amount))
-                    };
 
                 }
                 catch (Exception e)
@@ -115,6 +118,13 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     };
                 }
             });
+
+            Status = new StatusInfo()
+            {
+                ErrorMessage = "",
+                StatusMessage = String.Format("Matching complete: {0:n0} payments found totalling {1:c}",
+                    AccountPayments.AllPayments.Count, AccountPayments.AllPayments.Sum(x => x.tran_amount))
+            };
         }
 
         #region DisplayState

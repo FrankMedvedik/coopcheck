@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;

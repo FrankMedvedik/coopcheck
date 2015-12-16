@@ -6,28 +6,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-        mc:Ignorable="d ignore" Height="400" Width="800">
+        xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
+        mc:Ignorable="d ignore" >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <clean:VoucherCleanView x:Name="vcvs" Grid.Row="0" Grid.Column="0"/>
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
-        <StackPanel x:Name="spSaveBatch">
+        <StackPanel Orientation="Vertical" Grid.Row="0" >
+            <!--<clean:VoucherCleanView x:Name="vcvs" />-->
+            <dataClean:DataCleanFeedbackView />
+            <StackPanel Orientation="Horizontal" >
             <TextBlock Style="{StaticResource Heading2}" Text="{Binding SaveBatchInfoMessage}"/>
+            <Button Margin="6" Height="20"  Click="Button_Click"  Width="100">Save</Button>
+            </StackPanel>
+            <TextBlock Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
+            <TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelFileInfo.ExcelFilePath}" />
+            <StackPanel x:Name="spSaveErrors"  Orientation="Horizontal" >
+            <TextBox Text="{Binding ExcelFileInfo.SelectedWorksheet, Mode=TwoWay}" Width="30"/>
+            <Button Margin="6"  VerticalAlignment="Center"  Click="btnExportErrors_Click" Width="100" >Export</Button>
         </StackPanel>
-        <StackPanel x:Name="spSaveErrors"  Orientation="Vertical" >
-                <TextBlock Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
-                <TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelVoucherFilePath}" />
-            <TextBox Text="{Binding ExcelVoucherWorksheetName, Mode=TwoWay}" Width="30"/>
         </StackPanel>
-        </StackPanel>
-        <Button Margin="6" Height="20"  Click="Button_Click"  Grid.Column="0" Grid.Row="1" Width="100">Save</Button>
-        <Button Margin="6"  VerticalAlignment="Center"  Click="btnExportErrors_Click"  Grid.Column="1" Grid.Row="1" Width="100" >Export</Button>
     </Grid>
 </UserControl>

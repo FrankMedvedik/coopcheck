@@ -6,6 +6,7 @@ using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using System.Linq;
+using CoopCheck.WPF.Messages;
 
 namespace CoopCheck.WPF.Content.Payment
 {

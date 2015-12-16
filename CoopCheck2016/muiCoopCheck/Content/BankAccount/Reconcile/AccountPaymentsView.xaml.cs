@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -24,14 +25,20 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         }
         
 
-        private  void Refresh_Click(object sender, RoutedEventArgs e)
+        private async  void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            btnPayments.IsEnabled = false;
 
-            _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
-            _vm.GetPayments();
-            //Recon.Visibility = Visibility.Visible;
+            await Task.Factory.StartNew(() =>
+            {
+                _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
+                _vm.GetPayments();
+            });
+
+
+            btnPayments.IsEnabled = true;
         }
-
+ 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("This will clear the payments");

@@ -7,6 +7,7 @@ using System.Windows;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Converters;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;

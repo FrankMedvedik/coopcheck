@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-             mc:Ignorable="d"  Width="1000" Height="800">
+             mc:Ignorable="d"  >
     <Control.Resources>
             <Style TargetType="{x:Type TextBox}">
                 <Style.Triggers>
@@ -30,7 +30,8 @@
                 </Setter>
             </Style>
         </Control.Resources>
-    <Grid>
+    <ScrollViewer>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -48,7 +49,7 @@
                 <Button Margin="6"  x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" >Delete</Button>
             </StackPanel>
             <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="6"
-                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="450" 
+                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" 
                   SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" 
                   EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Width="Auto">
@@ -73,4 +74,5 @@
             <clean:VoucherImportEditView x:Name="ve"/>
         </StackPanel>
     </Grid>
+    </ScrollViewer>
 </UserControl>

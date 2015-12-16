@@ -1,4 +1,5 @@
-﻿using CoopCheck.WPF.Models;
+﻿using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Wrappers;
 using DataClean.Models;
 using GalaSoft.MvvmLight.Messaging;

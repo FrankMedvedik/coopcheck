@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 

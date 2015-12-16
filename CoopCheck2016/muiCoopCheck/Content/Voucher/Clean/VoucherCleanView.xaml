@@ -6,11 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
-        mc:Ignorable="d ignore"  Height="400" Width="800" >
+        mc:Ignorable="d ignore"  >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />

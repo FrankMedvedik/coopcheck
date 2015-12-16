@@ -15,27 +15,24 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     {
         private VoucherCleanViewModel _vm;
 
-        private void Button_Click(object sender, RoutedEventArgs routedEventArgs)
+        private async void Button_Click(object sender, RoutedEventArgs routedEventArgs)
         {
-            CleanVouchers();
-
-        }
-        private async void CleanVouchers()
-        {
+            
             _vm.Status = new StatusInfo()
             {
                 StatusMessage = String.Format("running address validation."),
                 IsBusy = true
             };
-
+            await CleanVouchers();
+        }
+        private async Task CleanVouchers()
+        {
             try
             {
                 await Task.Factory.StartNew(() =>
                 {
-                    _vm.DataCleanAddresses(dccv.Criteria);
+                    _vm.CleanTheVouchers();
                 });
-                _vm.CanDataClean = false;
-              //  dcfbv.DataCleanEvents = _vm.ValidationResults;
             }
             catch (Exception ex)
             {
@@ -50,14 +47,9 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             DataContext = _vm;
         }
 
+        //public List<VoucherImport> VoucherImports { set { _vm.Vi = value; } }
 
-        public List<VoucherImport> VoucherImports { 
-            set {
-                _vm.Vi = value;
-                CleanVouchers();
-            } 
-        }
+        //public ObservableCollection<VoucherImportWrapper> ValidationResults { get { return _vm.VoucherImports; } }
 
-        public ObservableCollection<VoucherImportWrapper> ValidationResults { get { return _vm.VoucherImports; } }
        }
 }
