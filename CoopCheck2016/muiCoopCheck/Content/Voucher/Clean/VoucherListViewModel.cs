@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
+using DataClean.Models;
+using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
 
     public class VoucherListViewModel : ViewModelBase
     {
-
+        private DataCleanCriteria _dataCleanCriteria;
+        public RelayCommand CleanAndPostVouchersCommand { get; private set; }
+        public bool CanCleanAndPostVouchers()
+        {
+            return true;
+        }
+       
         public List<VoucherImport> Vi
         {
             get { return VoucherImports.Select(r => r.Model).ToList(); }
@@ -81,7 +91,54 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
             });
 
+            Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
+            {
+                if (message.Notification == Notifications.DataCleanCriteriaUpdated)
+                {
+                    _dataCleanCriteria = message.Content;
+                }
+            });
+
+            this.CleanAndPostVouchersCommand = new RelayCommand(CleanTheVouchers, CanCleanAndPostVouchers);
+
         }
+        public async void CleanTheVouchers()
+        {
+            //CanDataClean = false;
+            List<VoucherImport> l = new List<VoucherImport>();
+            foreach (var v in VoucherImports)
+                l.Add(VoucherImportWrapperConverter.ToVoucherImport(v));
+            try
+            {
+                VoucherImports = new ObservableCollection<VoucherImportWrapper>(
+                    await DataCleanVoucherImportSvc.CleanVouchers(l, _dataCleanCriteria, ExcelFileInfo));
+
+                Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>
+                    (new VoucherWrappersMessage {  VoucherImports = this.VoucherImports, ExcelFileInfo = this.ExcelFileInfo}
+                        , Notifications.HaveReviewedVouchers));
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = String.Format("Error during validation"),
+                    ErrorMessage = e.Message
+                };
+            }
+
+        }
+        //private void CleanAndSaveVouchers()
+        //{ 
+        //Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
+        //    {
+        //        if (message.Notification == Notifications.VouchersDataCleaned)
+        //        {
+        //            ExcelFileInfo = message.Content.ExcelFileInfo;
+        //            VoucherImportWrappers = message.Content.VoucherImports;
+        //        }
+        //            });
+        //}
+
 
         public ExcelFileInfoMessage ExcelFileInfo { get; set; }
 

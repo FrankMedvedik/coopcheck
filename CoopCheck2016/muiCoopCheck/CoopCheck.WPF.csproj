@@ -365,6 +365,7 @@
     <Compile Include="Pages\VoidedPaymentReportPage.xaml.cs">
       <DependentUpon>VoidedPaymentReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\DataCleanVoucherImportSvc.cs" />
     <Compile Include="Services\ExcelExportSvc.cs" />
     <Compile Include="Services\ExportSvc.cs" />
     <Compile Include="Services\DataCleanSvc.cs" />

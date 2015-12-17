@@ -7,7 +7,6 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
         xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
-        xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:save="clr-namespace:CoopCheck.WPF.Content.Voucher.Save"
         mc:Ignorable="d ignore">
@@ -24,20 +23,20 @@
                                    Title="Validate Vouchers"
                                    Description="This step checks the name, mailing adddress and other elements"
                                    NextPage="{Binding ElementName=ListVouchers}"
-                                   PreviousPage="{Binding ElementName=LoadVouchers}"  >
+                                   PreviousPage="{Binding ElementName=LoadVouchers}" CanSelectNextPage="{Binding HaveCleanedVouchers}"  >
                     <clean:VoucherCleanView x:Name="vcv"/>
                 </xctk:WizardPage >
                 <xctk:WizardPage x:Name="ListVouchers" PageType="Interior"
                                    Title="Edit Vouchers"
                                    Description="Edit any vouchers with errors"
                                    NextPage="{Binding ElementName=SaveVouchers}"
-                                   PreviousPage="{Binding ElementName=DataClean}" >
+                                   PreviousPage="{Binding ElementName=DataClean}"  CanSelectNextPage="{Binding HaveReviewedVouchers}">
                     <clean:VoucherListView x:Name="vlv"/>
                 </xctk:WizardPage>
                 <xctk:WizardPage x:Name="SaveVouchers" PageType="Interior"
                                    Title="Save vouchers"
                                    Description="Save the vouchers"
-                                   CanFinish="True">
+                                   CanFinish="{Binding HaveCommittedVouchers}">
                     <save:VoucherSaveView x:Name="vsv"/>
                 </xctk:WizardPage>
             </xctk:Wizard>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.WPF", "CoopCheck2016\muiCoopCheck\CoopCheck.WPF.csproj", "{AABD6CF8-BDB2-494C-B8AE-874581154800}"
 EndProject
@@ -104,8 +104,8 @@ Global
 		{60D9A8B9-BAD1-49A3-9D86-EE9FD782565E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{60D9A8B9-BAD1-49A3-9D86-EE9FD782565E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{60D9A8B9-BAD1-49A3-9D86-EE9FD782565E}.Release|x86.ActiveCfg = Release|Any CPU
-		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{823874A2-D57C-4BB2-B71E-7076D9309589}.Debug|x86.ActiveCfg = Debug|Any CPU

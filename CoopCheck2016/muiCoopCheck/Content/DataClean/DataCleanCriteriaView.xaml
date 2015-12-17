@@ -12,6 +12,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -24,7 +25,9 @@
         <CheckBox IsChecked="{Binding Path=AutoFixStateCode, Mode=TwoWay}" Grid.Row="2" Grid.Column="0" Margin="6"/>
         <TextBlock Text="automatically fix city" Width="Auto" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" Margin="6"/>
         <CheckBox IsChecked="{Binding Path=AutoFixCity, Mode=TwoWay}" Grid.Row="3" Grid.Column="0" Margin="6"/>
-        <TextBlock Text="force new validation" Width="Auto" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Margin="6"/>
-        <CheckBox IsChecked="{Binding Path=ForceValidation, Mode=TwoWay}" Grid.Row="4" Grid.Column="0" Margin="6"/>
+        <TextBlock Text="automatically street address" Width="Auto" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Margin="6"/>
+        <CheckBox IsChecked="{Binding Path=AutoFixAddressLine1, Mode=TwoWay}" Grid.Row="4" Grid.Column="0" Margin="6"/>
+        <TextBlock Text="force new validation" Width="Auto" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" Margin="6"/>
+        <CheckBox IsChecked="{Binding Path=ForceValidation, Mode=TwoWay}" Grid.Row="5" Grid.Column="0" Margin="6"/>
     </Grid>
 </UserControl>

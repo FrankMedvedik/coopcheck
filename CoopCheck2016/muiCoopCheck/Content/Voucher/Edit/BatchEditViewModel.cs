@@ -43,18 +43,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        //private Boolean _showImportedBatch;
-
-        //public Boolean ShowImportedBatch
-        //{
-        //    get { return _showImportedBatch; }
-        //    set
-        //    {
-        //        _showImportedBatch = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
+      
         private Boolean _showSelectedVoucher;
 
         public Boolean ShowSelectedVoucher
@@ -67,18 +56,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        //private Boolean _showNewVoucher;
-
-        //public Boolean ShowNewVoucher
-        //{
-        //    get { return _showNewVoucher; }
-        //    set
-        //    {
-        //        _showNewVoucher = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
+        
         public bool IsBusy
         {
             get { return Status.IsBusy; }
@@ -93,29 +71,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             get { return SelectedVoucher != null && UserCanWrite; }
         }
 
-        private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
-
-        public ObservableCollection<VoucherImport> VoucherImports
-        {
-            get { return _voucherImports; }
-            set
-            {
-                _voucherImports = value;
-                NotifyPropertyChanged();
-                Status = new StatusInfo()
-                {
-                    StatusMessage = "Importing vouchers please wait",
-                    IsBusy = true
-                };
-
-                if ((_voucherImports.Count > 0))
-                {
-                    ImportVouchers();
-                    NotifyPropertyChanged("VouchersWithErrors");
-                }
-            }
-        }
-
+        
         private ObservableCollection<VoucherEdit> _vouchersWithErrors = new ObservableCollection<VoucherEdit>();
         public ObservableCollection<VoucherEdit> VouchersWithErrors
         {
@@ -129,49 +85,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 NotifyPropertyChanged();
             }
 
-        }
-
-        private async void ImportVouchers()
-        {
-            var z =  Task.Factory.StartNew(async () =>
-            {
-                var sb  = await BatchSvc.GetNewBatchEditAsync();
-                try
-                {
-                    sb.JobNum = int.Parse(VoucherImports.Select(x => x.JobNumber).First());
-                }
-                catch (Exception e)
-                {
-                    sb.JobNum = -1;
-                }
-                sb.Amount = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
-                sb.Date = DateTime.Today.ToShortDateString();
-                sb = await sb.SaveAsync();
-
-                try
-                {
-                    foreach (var v in VoucherImports)
-                        sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
-                    if((sb.IsValid) && (sb.Vouchers.IsValid))
-                        SelectedBatch = await sb.SaveAsync();
-
-                    Status = new StatusInfo()
-                    {
-                        StatusMessage = string.Format("Imported {0} Vouchers",
-                            sb.Vouchers.Count)
-                    };
-                }
-                catch (Exception e)
-                {
-                    Status = new StatusInfo()
-                    {
-                        ErrorMessage = e.Message,
-                        StatusMessage = "Error Importing Vouchers"
-                    };
-                }
-                ResetState();
-                Messenger.Default.Send(new NotificationMessage(Notifications.HonorariaWorksheetImportComplete));
-            });
         }
 
         public StatusInfo Status

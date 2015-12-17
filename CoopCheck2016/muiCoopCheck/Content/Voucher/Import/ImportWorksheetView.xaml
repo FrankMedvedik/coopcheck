@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d"  MaxHeight="600" MinHeight="450" >
     <Grid >
         <Grid.RowDefinitions>
@@ -24,8 +26,9 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Voucher Worksheet" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="6"/>
-                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding SelectedWorksheet, Mode=TwoWay}" VerticalAlignment="Center"  
-                            IsEnabled="False" Name="cbSheets" Width="300" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}" />
+                   <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding SelectedWorksheet, Mode=TwoWay}" VerticalAlignment="Center"  
+                            IsEnabled="False" Name="cbSheets" Width="300" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}"  SelectionChanged="cbSheets_SelectionChanged">
+                    </ComboBox>
                 </StackPanel>
             </StackPanel>
             <Grid Grid.Row="1" Visibility="{Binding ShowColumnErrorData, Converter={StaticResource BoolToVisConverter}}" Name="GridErrors" Margin="20,6,20,6">
@@ -66,6 +69,7 @@
                     <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="130" Margin="160,6,6,6">Total $</TextBlock>
                     <TextBlock  Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
                 </StackPanel>
+                <Button Content="Import" Width="150" Height="30"  Margin="180,32,12,12"  HorizontalAlignment="Left"  VerticalAlignment="Center" Command="{Binding PostVouchersCommand}" Grid.Row="2" />
             </Grid>
         </Grid>
     </Grid>

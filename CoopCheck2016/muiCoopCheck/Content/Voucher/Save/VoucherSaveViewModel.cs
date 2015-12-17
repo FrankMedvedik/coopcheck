@@ -1,10 +1,17 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Library;
+using CoopCheck.WPF.Content.Voucher.Edit;
+using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Voucher.Save
@@ -12,15 +19,24 @@ namespace CoopCheck.WPF.Content.Voucher.Save
     public class VoucherSaveViewModel : ViewModelBase
     {
         private StatusInfo _status;
+        public RelayCommand SaveVouchersCommand { get; private set; }
+        public bool CanSaveVouchers()
+        {
+            return true;
+        }
 
+        
         public VoucherSaveViewModel()
         {
+            this.SaveVouchersCommand = new RelayCommand(CreateBatchEditAndImportVouchers, CanSaveVouchers);
+
             Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
             {
-                if (message.Notification == Notifications.VouchersDataCleaned)
+                if (message.Notification == Notifications.HaveReviewedVouchers)
                 {
                     ExcelFileInfo = message.Content.ExcelFileInfo;
-                    VoucherImports = message.Content.VoucherImports;
+                    VoucherImportWrappers = message.Content.VoucherImports;
+                    Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
                 }
             });
         }
@@ -45,37 +61,38 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             }
         }
 
-        private ObservableCollection<VoucherImportWrapper> _voucherImports = new ObservableCollection<VoucherImportWrapper>();
+        private ObservableCollection<VoucherImportWrapper> _voucherImportWrappers = new ObservableCollection<VoucherImportWrapper>();
 
-        public ObservableCollection<VoucherImportWrapper> VoucherImports
+        public ObservableCollection<VoucherImportWrapper> VoucherImportWrappers
             {
-                get { return _voucherImports; }
+                get { return _voucherImportWrappers; }
                 set
                 {
-                    _voucherImports = value;
+                    _voucherImportWrappers = value;
                     NotifyPropertyChanged();
-                    setupMessages();
-                CanSave = true;
-
+                    SetupMessages();
                 }
             }
 
         public bool CanSave
         {
             get { return _canSave; }
-            set { _canSave = value; NotifyPropertyChanged(); }
+            set { _canSave = value;
+                NotifyPropertyChanged(); }
         }
 
-        private void setupMessages()
+        private void SetupMessages()
         {
 
             SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1}",
-                VoucherImports.Count(x => x.AltAddress.OkComplete),
-                VoucherImports.Where(x => x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
+                VoucherImportWrappers.Count(x => x.AltAddress.OkComplete),
+                VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
             ErrorBatchInfoMessage = string.Format("{0} Vouchers WITH ERRORS totalling {1} Will be saved to this workbook worksheet",
-                VoucherImports.Count(x => !x.AltAddress.OkComplete),
-                VoucherImports.Where(x => !x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
-            
+                VoucherImportWrappers.Count(x => !x.AltAddress.OkComplete),
+                VoucherImportWrappers.Where(x => !x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
+
+            CanSave = (VoucherImportWrappers.Count(x => x.AltAddress.OkComplete) > 0);
+
         }
         public string SaveBatchInfoMessage
         {
@@ -102,5 +119,30 @@ namespace CoopCheck.WPF.Content.Voucher.Save
 
         private string _errorBatchInfoMessage;
         private bool _canSave;
+
+        public async void CreateBatchEditAndImportVouchers()
+        {
+
+            try
+            {
+                List<VoucherImport> vouchers = new List<VoucherImport>();
+                foreach (var v in VoucherImportWrappers)                /// .Where(x=>x.AltAddress.OkComplete))
+                    vouchers.Add(VoucherImportWrapperConverter.ToVoucherImport(v));
+
+                await BatchSvc.ImportVouchers(vouchers);
+            }
+            catch (Exception ex)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "Failed to create batch",
+                    ErrorMessage = ex.Message,
+                    ShowMessageBox=true
+                };
+            }
+        }
+
+        }
+
     }
-}
+

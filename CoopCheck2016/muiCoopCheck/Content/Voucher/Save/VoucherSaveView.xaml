@@ -14,7 +14,7 @@
             <dataClean:DataCleanFeedbackView />
             <StackPanel Orientation="Horizontal" >
             <TextBlock Style="{StaticResource Heading2}" Text="{Binding SaveBatchInfoMessage}"/>
-            <Button Margin="6" Height="20"  Click="Button_Click"  Width="100">Save</Button>
+                <Button Margin="6" Command="{Binding SaveVouchersCommand}"  Width="100">Save</Button>
             </StackPanel>
             <TextBlock Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
             <TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelFileInfo.ExcelFilePath}" />

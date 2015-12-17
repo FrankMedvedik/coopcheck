@@ -16,7 +16,7 @@ namespace CoopCheck.WPF.Content.DataClean
 
         private void BroadcastUpdate()
         {
-            Messenger.Default.Send(new NotificationMessage( Notifications.DataCleanCriteriaUpdated));
+            Messenger.Default.Send(new NotificationMessage<DataCleanCriteria>(Model, Notifications.DataCleanCriteriaUpdated));
         }
 
         public DataCleanCriteriaViewModel(DataCleanCriteria model) : base(model)

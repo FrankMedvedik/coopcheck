@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
 {
-    public partial class ImportWorksheetView : UserControl
+    public partial class ImportWorksheetView : UserControl 
     {
         private ImportWorksheetViewModel _vm;
 
@@ -34,6 +38,24 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 cbSheets.IsEnabled = true;
             }
         }
+
+        private async void cbSheets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbSheets.IsEnabled = false;
+            _vm.Status = new StatusInfo
+            {
+                StatusMessage = "Importing worksheet...",
+                ErrorMessage = "",
+                IsBusy = true
+            };
+
+            await Task.Factory.StartNew(() =>
+            {
+                _vm.LoadWorkSheetData();
+            });
+            cbSheets.IsEnabled = true;
+        }
+ 
     }
 
 }

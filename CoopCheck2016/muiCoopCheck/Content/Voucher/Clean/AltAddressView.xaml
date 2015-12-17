@@ -12,7 +12,7 @@
             </Style>
         </Grid.Resources>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="450"
-           ItemsSource="{Binding SelectedVoucher.AltAddress.Results, IsAsync=True}" HorizontalScrollBarVisibility="Auto"  MaxWidth="400"
+           ItemsSource="{Binding SelectedVoucher.AltAddress.Results, IsAsync=True}" HorizontalScrollBarVisibility="Auto"   Margin="6"
                Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" ClipboardCopyMode="IncludeHeader" >
             <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding Type}" Header="Type" />

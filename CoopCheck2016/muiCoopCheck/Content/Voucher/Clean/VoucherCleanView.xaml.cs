@@ -17,7 +17,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         private async void Button_Click(object sender, RoutedEventArgs routedEventArgs)
         {
-            
             _vm.Status = new StatusInfo()
             {
                 StatusMessage = String.Format("running address validation."),

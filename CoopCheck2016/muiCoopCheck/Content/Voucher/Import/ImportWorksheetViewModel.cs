@@ -3,15 +3,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using CoopCheck.Library;
-using CoopCheck.WPF.Content.Voucher.Clean;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
-using CoopCheck.WPF.Wrappers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using LinqToExcel;
@@ -23,7 +17,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
     {
 
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
-
         public ObservableCollection<VoucherImport> VoucherImports
         {
             get { return _voucherImports; }
@@ -56,12 +49,20 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             };
 
         }
-        
+        public RelayCommand ImportWorksheetCommand { get; private set; }
+        public bool CanImportWorkSheet()
+        {
+            return CanImport;
+        }
+
         public ImportWorksheetViewModel()
         {
             ResetAll();
-            
+            this.ImportWorksheetCommand = new RelayCommand(LoadWorkSheetData, CanImportWorkSheet);
+            this.PostVouchersCommand = new RelayCommand(PostVouchers, CanPostVouchers);
         }
+
+
 
         #region DisplayState
 
@@ -74,9 +75,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             CanProceed = false;
             ShowColumnErrorData = false;
             CanImport = true;
-            VoucherImports = new ObservableCollection<VoucherImport>();
-            VoucherCnt = 0;
-            VoucherTotalDollars = 0;
         }
 
         public bool CanProceed
@@ -89,18 +87,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
 
         }
-
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                _isBusy = value;
-                NotifyPropertyChanged();
-            }
-
-        }
-
         public bool CanImport
         {
             get { return _canImport; }
@@ -240,22 +226,26 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 ResetState();
                 _selectedWorksheet = value;
                 NotifyPropertyChanged();
-                IsBusy = true;
-                LoadWorkSheetData();
-                IsBusy = false;
             }
         }
 
 
         public void LoadWorkSheetData()
         {
-            if (SelectedWorksheet == DefaultSelectedWorksheet) return;
-            LoadWorksheetStats();
-            ImportVouchers();
+            if (SelectedWorksheet != DefaultSelectedWorksheet)
+            {
+                LoadWorksheetStats();
+                ImportVouchers();
+            }
+            Status  = new StatusInfo()
+            {
+                StatusMessage = ""
+            };
         }
 
         public void LoadWorksheetStats()
         {
+
             Status = new StatusInfo()
             {
                 StatusMessage = "Loading columns...",
@@ -368,6 +358,10 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public void ImportVouchers()
         {
+            VoucherImports = new ObservableCollection<VoucherImport>();
+            VoucherCnt = 0;
+            VoucherTotalDollars = 0;
+
             try
             {
                 if (!ShowColumnErrorData)
@@ -394,16 +388,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     VoucherCnt = VoucherImports.Count();
                     VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
                     CanProceed = true;
-                    Messenger.Default.Send(new NotificationMessage<ExcelVouchersMessage>(
-                        new ExcelVouchersMessage()
-                        {
-                            VoucherImports = VoucherImports.ToList(),
-                            ExcelFileInfo = new ExcelFileInfoMessage()
-                            {
-                                ExcelFilePath = ExcelFilePath,
-                                SelectedWorksheet = SelectedWorksheet
-                            }
-                        }, Notifications.ImportWorksheetReady));
                     }
             }
             catch (Exception e)
@@ -463,16 +447,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
-        //public  void CreateVoucherBatch()
-        //{
-        //    CanImport = false;
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "Importing vouchers please wait",
-        //        IsBusy = true
-        //    };
-        //}
-
      
         private string _headerText;
 
@@ -482,6 +456,27 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             set { _headerText = value; }
         }
 
-     
+        public void PostVouchers()
+        {
+            Messenger.Default.Send(new NotificationMessage<ExcelVouchersMessage>(
+                new ExcelVouchersMessage()
+                {
+                    VoucherImports = VoucherImports.ToList(),
+                    ExcelFileInfo = new ExcelFileInfoMessage()
+                    {
+                        ExcelFilePath = ExcelFilePath,
+                        SelectedWorksheet = SelectedWorksheet
+                    }
+                }, Notifications.ImportWorksheetReady));
+
+        }
+
+        public RelayCommand PostVouchersCommand { get; private set; }
+        public bool CanPostVouchers()
+        {
+            return true;
+        }
+        
+
     }
 }

@@ -32,13 +32,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             get { return _vm.IsDirty; }
         }
-        public ObservableCollection<VoucherImport> VoucherImports
-        {
-            get { return _vm.VoucherImports; }
-            set { _vm.VoucherImports = value; }
-        }
-        public static readonly DependencyProperty VoucherImportsProperty =
-        DependencyProperty.Register("VoucherImports", typeof(ObservableCollection<VoucherImport>), typeof(BatchEditView), new PropertyMetadata(new ObservableCollection<VoucherImport>()));
+        //public ObservableCollection<VoucherImport> VoucherImports
+        //{
+        //    get { return _vm.VoucherImports; }
+        //    set { _vm.VoucherImports = value; }
+        //}
+        //public static readonly DependencyProperty VoucherImportsProperty =
+        //DependencyProperty.Register("VoucherImports", typeof(ObservableCollection<VoucherImport>), typeof(BatchEditView), new PropertyMetadata(new ObservableCollection<VoucherImport>()));
 
         private void SaveSelectedBatch_Click(object sender, RoutedEventArgs e)
         {

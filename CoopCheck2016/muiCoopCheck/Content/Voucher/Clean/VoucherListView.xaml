@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-             mc:Ignorable="d"  >
+             mc:Ignorable="d" MinWidth="1100" >
     <Control.Resources>
             <Style TargetType="{x:Type TextBox}">
                 <Style.Triggers>
@@ -30,26 +30,24 @@
                 </Setter>
             </Style>
         </Control.Resources>
-    <ScrollViewer>
-        <Grid>
+    <ScrollViewer MinWidth="1000">
+        <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
                 <CheckBox Margin="6" x:Name="chkFilterRows"  VerticalAlignment="Center" 
                       IsChecked="True" Checked="chkFilterRows_Checked" Unchecked="chkFilterRows_Unchecked">
                     Show Only Errors?
                 </CheckBox>
-                <Button Content="Add" Margin="6" Width="100"  Click="AddVoucher_Click"/>
+                    <Button Content="Post Vouchers" Width="150" Height="30"  Margin="6,6,50,6"  HorizontalAlignment="Left"  VerticalAlignment="Center" Command="{Binding CleanAndPostVouchersCommand}"  />
+                    <Button Content="Add" Margin="6" Width="100"  Click="AddVoucher_Click"/>
                 <Button Margin="6"  x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" >Delete</Button>
-            </StackPanel>
+                </StackPanel>
             <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="6"
-                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" 
+                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="400"  MinWidth="1000"
                   SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" 
                   EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Width="Auto">
@@ -69,7 +67,8 @@
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+            
+            </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="6" >
             <clean:VoucherImportEditView x:Name="ve"/>
         </StackPanel>

@@ -17,7 +17,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         {
             ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>();
             s.ExcelSourceWorkbook = _vm.ExcelFileInfo.ExcelFilePath;
-            s.ExcelWorksheetName = _vm.VoucherImports.Max(x=>x.JobNumber) + " errors " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now); ;
+            s.ExcelWorksheetName = _vm.VoucherImportWrappers.Max(x=>x.JobNumber) + " errors " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now); ;
             //s.ExcelWorksheetName = _vm.ExcelVoucherWorksheetName.Substring(0,20) + " err " + String.Format("{0:dMyyyyHHmmss}", DateTime.Now);
             s.dataToPrint = _vm.VoucherExports.Where(x=>!x.OkComplete).ToList();
             s.GenerateReport();
@@ -31,7 +31,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             {
                 await Task.Factory.StartNew(() =>
                 {
-        //
+                    _vm.CreateBatchEditAndImportVouchers();
                 });
 
           
@@ -49,20 +49,6 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             _vm = new VoucherSaveViewModel();
             DataContext = _vm;
         }
-
-
-        public string ExcelVoucherFilePath
-        {
-            get { return _vm.ExcelFileInfo.ExcelFilePath; }
-            set { _vm.ExcelFileInfo.ExcelFilePath = value; }
-        }
-
-        public string ExcelVoucherWorksheetName
-        {
-            get { return _vm.ExcelFileInfo.SelectedWorksheet; }
-            set { _vm.ExcelFileInfo.SelectedWorksheet = value; }
-        }
-
 
     }
 
