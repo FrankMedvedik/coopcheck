@@ -15,7 +15,7 @@ namespace CoopCheck.WPF.Content.DataClean
             _vm = new DataCleanCriteriaViewModel(new DataCleanCriteria()
 
             {
-                AutoFixAddressLine1 = false,
+                AutoFixAddressLine1 = true,
                 AutoFixCity = true,
                 AutoFixPostalCode = true,
                 AutoFixState = true,

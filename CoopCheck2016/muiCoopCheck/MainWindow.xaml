@@ -34,7 +34,7 @@
                 <mui:Link DisplayName="reconcile" Source="/Pages/AccountReconcilePage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="Settings" GroupKey="settings">
+        <mui:LinkGroup DisplayName="Settings">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Software" Source="/Pages/SettingsPage.xaml" />
             </mui:LinkGroup.Links>

@@ -14,7 +14,7 @@ namespace CoopCheck.WPF.Content.DataClean
         get { return Model; }
     }
 
-        private void BroadcastUpdate()
+        public  void BroadcastUpdate()
         {
             Messenger.Default.Send(new NotificationMessage<DataCleanCriteria>(Model, Notifications.DataCleanCriteriaUpdated));
         }
@@ -27,7 +27,6 @@ namespace CoopCheck.WPF.Content.DataClean
         public bool AutoFixPostalCode { get { return Model.AutoFixPostalCode; }
             set { Model.AutoFixPostalCode = value;
                 NotifyPropertyChanged();
-                BroadcastUpdate();
             } }
 
         public bool AutoFixState
@@ -37,7 +36,6 @@ namespace CoopCheck.WPF.Content.DataClean
             {
                 Model.AutoFixState = value;
                 NotifyPropertyChanged();
-                BroadcastUpdate();
             }
         }
         public bool AutoFixCity
@@ -47,7 +45,6 @@ namespace CoopCheck.WPF.Content.DataClean
             {
                 Model.AutoFixCity = value;
                 NotifyPropertyChanged();
-                BroadcastUpdate();
             }
         }
         public bool AutoFixAddressLine1
@@ -57,7 +54,6 @@ namespace CoopCheck.WPF.Content.DataClean
             {
                 Model.AutoFixAddressLine1 = value;
                 NotifyPropertyChanged();
-                BroadcastUpdate();
             }
         }
         public bool ForceValidation
@@ -67,7 +63,6 @@ namespace CoopCheck.WPF.Content.DataClean
             {
                 Model.ForceValidation = value;
                 NotifyPropertyChanged();
-                BroadcastUpdate();
             }
         }
 

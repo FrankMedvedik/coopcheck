@@ -15,8 +15,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="validation setting" Style="{StaticResource Heading2}" Width="Auto" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="6"/>
         <TextBlock Text="automatically fix postal code" Width="Auto" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Margin="6"/>

@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Messages;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FirstFloor.ModernUI.App.Content
 {
@@ -22,6 +24,11 @@ namespace FirstFloor.ModernUI.App.Content
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _vm.SaveSettings();
+
+            Messenger.Default.Send(new NavigationMessage()
+            {
+                Page = "/Pages/Home.xaml"
+            });
         }
     }
 }

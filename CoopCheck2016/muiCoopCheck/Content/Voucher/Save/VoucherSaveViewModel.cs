@@ -84,14 +84,19 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         private void SetupMessages()
         {
 
-            SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1}",
-                VoucherImportWrappers.Count(x => x.AltAddress.OkComplete),
-                VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
-            ErrorBatchInfoMessage = string.Format("{0} Vouchers WITH ERRORS totalling {1} Will be saved to this workbook worksheet",
-                VoucherImportWrappers.Count(x => !x.AltAddress.OkComplete),
-                VoucherImportWrappers.Where(x => !x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
+            SaveBatchInfoMessage = string.Format("8 Vouchers will be posted totalling $900");
+            ErrorBatchInfoMessage = string.Format("3 Vouchers WITH ERRORS totaling $300 will be saved to the job errors worksheet");
 
-            CanSave = (VoucherImportWrappers.Count(x => x.AltAddress.OkComplete) > 0);
+            CanSave =true;
+
+            //SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1}",
+            //    VoucherImportWrappers.Count(x => x.AltAddress.OkComplete),
+            //    VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
+            //ErrorBatchInfoMessage = string.Format("{0} Vouchers WITH ERRORS totalling {1} Will be saved to this workbook worksheet",
+            //    VoucherImportWrappers.Count(x => !x.AltAddress.OkComplete),
+            //    VoucherImportWrappers.Where(x => !x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
+
+            //CanSave = (VoucherImportWrappers.Count(x => x.AltAddress.OkComplete) > 0);
 
         }
         public string SaveBatchInfoMessage
@@ -129,7 +134,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 foreach (var v in VoucherImportWrappers)                /// .Where(x=>x.AltAddress.OkComplete))
                     vouchers.Add(VoucherImportWrapperConverter.ToVoucherImport(v));
 
-                await BatchSvc.ImportVouchers(vouchers);
+                //await BatchSvc.ImportVouchers(vouchers);
             }
             catch (Exception ex)
             {
