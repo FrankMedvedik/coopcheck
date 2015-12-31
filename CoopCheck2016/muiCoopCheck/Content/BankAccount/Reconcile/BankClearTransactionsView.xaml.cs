@@ -19,7 +19,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             DataContext = _vm;
             Messenger.Default.Register<NotificationMessage<BankFileViewModel>>(this, message =>
             {
-                _vm.BankClearTransactions = message.Content.BankClearTransactions;
+                _vm.BankClearTransactions = message.Content.UnmatchedBankClearTransactions;
 
             });
         }

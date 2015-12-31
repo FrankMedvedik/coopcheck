@@ -16,11 +16,14 @@ namespace CoopCheck.Library
         #region Authorization
         public static bool CanExecuteCommand()
         {
+#if !DEBUG
             return Csla.ApplicationContext.User.IsInRole("RECKNER\\CoopCheckAdmin");
+#endif
+            return true;
         }
-        #endregion
+#endregion
 
-        #region Factory Methods
+#region Factory Methods
         public static void Execute(int tranId, DateTime clearedDate, decimal clearedAmount)
         {
             if (!CanExecuteCommand()) throw new System.Security.SecurityException("Not authorized to execute clear check command.");
@@ -32,8 +35,8 @@ namespace CoopCheck.Library
             _clearedDate = clearedDate;
             _clearedAmount = clearedAmount;
         }
-        #endregion
-        #region Server-side Code
+#endregion
+#region Server-side Code
         protected override void DataPortal_Execute()
         {
             using (var dalManager = DalFactory.GetManager())
@@ -42,6 +45,6 @@ namespace CoopCheck.Library
                 dal.ClearCheck(_tranId, _clearedDate, _clearedAmount);
             }
         }
-        #endregion
+#endregion
     }
 }

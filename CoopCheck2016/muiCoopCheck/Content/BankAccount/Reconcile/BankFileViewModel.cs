@@ -24,6 +24,19 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             {
                 _bankClearTransactions = value;
                 NotifyPropertyChanged();
+                if (BankClearTransactions.Any())
+                {
+                    CreditTransactionCnt = BankClearTransactions.Count(x => x.CRDR == "CR");
+                    CreditTransactionTotalDollars =
+                        BankClearTransactions.Where(x => x.CRDR == "CR").Select(x => x.Amount).Sum();
+                    DebitTransactionCnt = BankClearTransactions.Count(x => x.CRDR == "DR");
+                    DebitTransactionTotalDollars =
+                        BankClearTransactions.Where(x => x.CRDR == "DR").Select(x => x.Amount).Sum();
+                    FirstTransactionDate = BankClearTransactions.Min(x => x.PostDate);
+                    LastTransactionDate = BankClearTransactions.Max(x => x.PostDate);
+                    CanReconcile = true;
+                }
+
             }
         }
 
@@ -34,9 +47,42 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             {
                 _unmatchedBankClearTransactions = value;
                 NotifyPropertyChanged();
-
+                if (UnmatchedBankClearTransactions.Any())
+                {
+                    UnmatchedCreditTransactionCnt = UnmatchedBankClearTransactions.Count(x => x.CRDR == "CR");
+                    UnmatchedCreditTransactionTotalDollars =
+                        UnmatchedBankClearTransactions.Where(x => x.CRDR == "CR").Select(x => x.Amount).Sum();
+                    UnmatchedDebitTransactionCnt = UnmatchedBankClearTransactions.Count(x => x.CRDR == "DR");
+                    UnmatchedDebitTransactionTotalDollars =
+                        UnmatchedBankClearTransactions.Where(x => x.CRDR == "DR").Select(x => x.Amount).Sum();
+                }
             }
         }
+
+        public decimal UnmatchedDebitTransactionTotalDollars
+        {
+            get { return _unmatchedDebitTransactionTotalDollars; }
+            set { _unmatchedDebitTransactionTotalDollars = value; NotifyPropertyChanged(); }
+        }
+
+        public int UnmatchedDebitTransactionCnt
+        {
+            get { return _unmatchedDebitTransactionCnt; }
+            set { _unmatchedDebitTransactionCnt = value; NotifyPropertyChanged(); }
+        }
+
+        public decimal UnmatchedCreditTransactionTotalDollars
+        {
+            get { return _unmatchedCreditTransactionTotalDollars; }
+            set { _unmatchedCreditTransactionTotalDollars = value; NotifyPropertyChanged(); }
+        }
+
+        public int UnmatchedCreditTransactionCnt
+        {
+            get { return _unmatchedCreditTransactionCnt; }
+            set { _unmatchedCreditTransactionCnt = value; NotifyPropertyChanged(); }
+        }
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -68,10 +114,15 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             CanReconcile = false;
             CanImport = true;
             BankClearTransactions = new ObservableCollection<BankClearTransaction>();
+            UnmatchedBankClearTransactions = new ObservableCollection<BankClearTransaction>();
             DebitTransactionCnt = 0;
             CreditTransactionCnt = 0;
             CreditTransactionTotalDollars = 0;
             DebitTransactionTotalDollars = 0;
+            UnmatchedDebitTransactionCnt = 0;
+            UnmatchedCreditTransactionCnt = 0;
+            UnmatchedCreditTransactionTotalDollars = 0;
+            UnmatchedDebitTransactionTotalDollars = 0;
             FirstTransactionDate = null;
             LastTransactionDate = null;
         }
@@ -158,15 +209,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 var csv = new CsvReader(readFile);
                 csv.Configuration.HasHeaderRecord = true;
                 csv.Configuration.RegisterClassMap(new BankClearTransactionMap());
-                                BankClearTransactions =
-                    new ObservableCollection<BankClearTransaction>(csv.GetRecords<BankClearTransaction>().ToList());
-                CreditTransactionCnt = BankClearTransactions.Where(x=>x.CRDR == "CR").Count();
-                CreditTransactionTotalDollars = BankClearTransactions.Where(x => x.CRDR == "CR").Select(x => x.Amount).Sum();
-                DebitTransactionCnt = BankClearTransactions.Where(x => x.CRDR == "DR").Count();
-                DebitTransactionTotalDollars = BankClearTransactions.Where(x => x.CRDR == "DR").Select(x => x.Amount).Sum();
-                FirstTransactionDate = BankClearTransactions.Min(x => x.PostDate);
-                LastTransactionDate = BankClearTransactions.Max(x => x.PostDate);
-                CanReconcile = true;
+                BankClearTransactions = new ObservableCollection<BankClearTransaction>(csv.GetRecords<BankClearTransaction>().ToList());
             }
         }
 
@@ -213,6 +256,10 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         private string _headerText;
         private DateTime? _firstTransactionDate;
         private DateTime? _lastTransactionDate;
+        private int _unmatchedCreditTransactionCnt;
+        private decimal _unmatchedCreditTransactionTotalDollars;
+        private int _unmatchedDebitTransactionCnt;
+        private decimal _unmatchedDebitTransactionTotalDollars;
 
 
         public decimal CreditTransactionTotalDollars

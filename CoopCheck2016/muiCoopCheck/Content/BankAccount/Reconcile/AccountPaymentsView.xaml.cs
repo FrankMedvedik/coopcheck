@@ -38,12 +38,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
             btnPayments.IsEnabled = true;
         }
- 
-        private void btnClear_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("This will clear the payments");
 
-        }
     }
 
 }

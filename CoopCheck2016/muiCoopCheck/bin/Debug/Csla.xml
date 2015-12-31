@@ -3455,6 +3455,43 @@
             result.
             </remarks>
         </member>
+        <member name="M:Csla.Core.BusinessBase.LazyGetProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </remarks>
+        </member>
+        <member name="M:Csla.Core.BusinessBase.LazyGetPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            <para>
+            Note that the first value returned is almost certainly
+            the defaultValue because the value is initialized asynchronously.
+            The real value is provided later along with a PropertyChanged
+            event to indicate the value has changed.
+            </para><para>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </para>
+            </remarks>
+        </member>
         <member name="M:Csla.Core.BusinessBase.ReadPropertyConvert``2(Csla.PropertyInfo{``0})">
             <summary>
             Gets a property's value from the list of 
@@ -3486,6 +3523,28 @@
             </summary>
             <param name="propertyInfo">
             PropertyInfo object containing property metadata.</param>
+        </member>
+        <member name="M:Csla.Core.BusinessBase.LazyReadProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+        </member>
+        <member name="M:Csla.Core.BusinessBase.LazyReadPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.SetProperty``1(Csla.PropertyInfo{``0},``0@,``0)">
             <summary>
@@ -8150,7 +8209,7 @@
         </member>
         <member name="T:Csla.DataPortalException">
             <summary>
-            This exception is returned for any errors occuring
+            This exception is returned for any errors occurring
             during the server-side DataPortal invocation.
             </summary>
         </member>
@@ -10860,16 +10919,6 @@
             </summary>
             <typeparam name="C">Type of the child objects contained in the list.</typeparam>
         </member>
-        <member name="T:Csla.ICloneable">
-            <summary>
-            Defines a cloneable object.
-            </summary>
-        </member>
-        <member name="M:Csla.ICloneable.Clone">
-            <summary>
-            Gets a clone of the object.
-            </summary>
-        </member>
         <member name="T:Csla.ICommandBase">
             <summary>
             This is the base class from which command 
@@ -12209,6 +12258,43 @@
             True if an exception should be thrown when the
             user is not authorized to read this property.</param>
         </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyGetProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </remarks>
+        </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyGetPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            <para>
+            Note that the first value returned is almost certainly
+            the defaultValue because the value is initialized asynchronously.
+            The real value is provided later along with a PropertyChanged
+            event to indicate the value has changed.
+            </para><para>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </para>
+            </remarks>
+        </member>
         <member name="M:Csla.ReadOnlyBase`1.GetPropertyConvert``2(Csla.PropertyInfo{``0},``0)">
             <summary>
             Gets a property's value as 
@@ -12375,6 +12461,28 @@
             </summary>
             <param name="propertyInfo">
             PropertyInfo object containing property metadata.</param>
+        </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyReadProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+        </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyReadPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.LoadPropertyConvert``2(Csla.PropertyInfo{``0},``1)">
             <summary>
@@ -13262,7 +13370,7 @@
             Gets a value indicating whether this
             type is marked as Serializable.
             </summary>
-            <param name="type">Type to check.</param>
+            <param name="objectType">Type to check.</param>
             <returns>True if the type is Serializable.</returns>
         </member>
         <member name="T:Csla.RelationshipTypes">
@@ -16180,6 +16288,30 @@
             <param name="serializationStream">
             Stream that will contain the the serialized data.</param>
             <param name="graph">Object graph to be serialized.</param>
+        </member>
+        <member name="T:Csla.Serialization.Mobile.AssemblyNameTranslator">
+            <summary>
+            Translates assembly names to and from short
+            code values for serialization in MobileFormatter
+            </summary>
+        </member>
+        <member name="M:Csla.Serialization.Mobile.AssemblyNameTranslator.GetAssemblyQualifiedName(System.Type)">
+            <summary>
+            Gets the assembly qualified type name with any use
+            of common assemblies translated to
+            a short code.
+            </summary>
+            <param name="type">Original type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Csla.Serialization.Mobile.AssemblyNameTranslator.GetAssemblyQualifiedName(System.String)">
+            <summary>
+            Gets the assembly qualified type name after
+            translating the assembly name codes to the platform-
+            specific assembly name.
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
         </member>
         <member name="T:Csla.Serialization.Mobile.CslaBinaryReader">
             <summary>

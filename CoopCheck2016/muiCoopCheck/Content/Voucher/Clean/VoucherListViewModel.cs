@@ -19,6 +19,32 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     {
         private DataCleanCriteria _dataCleanCriteria;
         public RelayCommand CleanAndPostVouchersCommand { get; private set; }
+        public VoucherListViewModel()
+        {
+            Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
+            {
+                if (message.Notification == Notifications.VouchersDataCleaned)
+                {
+                    VoucherImports = message.Content.VoucherImports;
+                    ExcelFileInfo = message.Content.ExcelFileInfo;
+                }
+
+            });
+
+            Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
+            {
+                if (message.Notification == Notifications.DataCleanCriteriaUpdated)
+                {
+                    _dataCleanCriteria = message.Content;
+                }
+            });
+
+            this.CleanAndPostVouchersCommand = new RelayCommand(CleanTheVouchers, CanCleanAndPostVouchers);
+
+        }
+
+
+
         public bool CanCleanAndPostVouchers()
         {
             return true;
@@ -79,29 +105,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             }
         }
 
-        public VoucherListViewModel()
-        {
-            Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
-            {
-                if (message.Notification == Notifications.VouchersDataCleaned)
-                {
-                    VoucherImports = message.Content.VoucherImports;
-                    ExcelFileInfo = message.Content.ExcelFileInfo;
-                }
 
-            });
-
-            Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
-            {
-                if (message.Notification == Notifications.DataCleanCriteriaUpdated)
-                {
-                    _dataCleanCriteria = message.Content;
-                }
-            });
-
-            this.CleanAndPostVouchersCommand = new RelayCommand(CleanTheVouchers, CanCleanAndPostVouchers);
-
-        }
         public async void CleanTheVouchers()
         {
             //CanDataClean = false;

@@ -57,7 +57,10 @@
         {
             get { return "ReconcileBankFileLoaded"; }
         }
-
+        public static string ReconcileAccountPaymentsLoaded
+        {
+            get { return "ReconcileAccountPaymentsLoaded"; }
+        }
         public static string HonorariaWorksheetImportComplete
         {
             get { return "HonorariaWorksheetImportComplete"; }

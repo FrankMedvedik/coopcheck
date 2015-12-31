@@ -6,6 +6,8 @@ namespace CoopCheck.DAL
     /// <summary>
     /// DTO for CheckInfo type
     /// </summary>
+    /// 
+    [Serializable]
     public partial class CheckInfoDto
     {
         /// <summary>

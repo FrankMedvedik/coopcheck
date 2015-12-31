@@ -33,6 +33,9 @@
                 </mui:DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" x:Name="btnClear" HorizontalAlignment="Left" Margin="6" Grid.Column="0" VerticalAlignment="Center" Click="btnClear_Click">Clear All Matched Payments</Button>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+        <Button Margin="6" VerticalAlignment="Center" Command="{Binding EditUnMatchedCommand}">Edit Unmatched Bank Transactions</Button>
+            <Button  Margin="6" VerticalAlignment="Center"  Command="{Binding ClearMatchedChecksCommand}">Clear Matched Payments</Button>
+        </StackPanel>
     </Grid>
 </UserControl>

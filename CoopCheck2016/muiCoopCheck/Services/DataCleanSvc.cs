@@ -26,8 +26,7 @@ namespace CoopCheck.WPF.Services
                 outRows = await Task<List<DataCleanEvent>>.Factory.StartNew(() =>
                 {
                     var c = ConfigurationManager.AppSettings;
-                    var d = new DataCleanEventFactory(new DataCleaner(c),
-                        new DataClean.Repository.Mgr.DataCleanRespository(), criteria);
+                    var d = new DataCleanEventFactory(new DataCleaner(c),new DataClean.Repository.Mgr.DataCleanRespository(), criteria);
                     return d.ValidateAddresses(newVouchers);
                 });
             }

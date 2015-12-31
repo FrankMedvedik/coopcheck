@@ -21,7 +21,7 @@
                                    Title="Select Account"
                                    Description="choose the account to reconcile"
                                    NextPage="{Binding ElementName=ReconcilePage}"
-                                   PreviousPage="{Binding ElementName=BankFilePage}" CanSelectNextPage="{Binding HaveValidAccount}"  >
+                                   PreviousPage="{Binding ElementName=BankFilePage}" >
                     <reconcile:AccountPaymentsView/>
                 </xctk:WizardPage >
                 <xctk:WizardPage x:Name="ReconcilePage" PageType="Interior"
@@ -29,7 +29,7 @@
                                    Description="balance payments againt the bank records "
                                    NextPage="{Binding ElementName=SaveChanges}"
                                    PreviousPage="{Binding ElementName=AccountPaymentsPage}" >
-                    <!--<reconcile:ReconcileBankView x:Name="vlv"/>-->
+                    <reconcile:BankClearTransactionsView x:Name="vlv"/>
                 </xctk:WizardPage>
                 <xctk:WizardPage x:Name="SaveChanges" PageType="Interior"
                                    Title="create reconciliation report"

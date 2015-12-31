@@ -5,18 +5,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-        xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
         mc:Ignorable="d ignore" >
     <Grid>
         <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource Heading2}" Text="{Binding SaveBatchInfoMessage}"/>
+            <TextBlock HorizontalAlignment="Left" Style="{StaticResource Heading2}" Text="{Binding SaveBatchInfoMessage}"/>
             <Button Margin="6" Command="{Binding SaveVouchersCommand}"  Width="100">Save</Button>
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
+            <TextBlock HorizontalAlignment="Left" Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
             <!--<TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelFileInfo.ExcelFilePath}" />
             <TextBox Text="{Binding ExcelFileInfo.SelectedWorksheet, Mode=TwoWay}" Width="30"/>-->
-            <Button Margin="6"  VerticalAlignment="Center"  Click="btnExportErrors_Click" Width="100" >Export</Button>
-
+            <Button Margin="6"  VerticalAlignment="Center"  Command="{Binding ExportVouchersCommand}" Width="100" >Export</Button>
 
             <!--<clean:VoucherCleanView x:Name="vcvs" />-->
             <!--<dataClean:DataCleanFeedbackView />-->

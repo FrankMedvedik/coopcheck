@@ -13,6 +13,7 @@
                   Style="{StaticResource BlankWindow}">
 
     <DockPanel >
+        <!--<reconcile:BankFileView x:Name="bfv"/>-->
         <reconcile:ReconcileWizardView DockPanel.Dock="Top"/>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>

@@ -42,7 +42,8 @@ namespace CoopCheck.WPF.Services
                         Mouse.SetCursor(Cursors.Wait);
                         CreateExcelRef();
                         FillSheet();
-                        OpenReport();
+                        _book.Save();
+                        _excelApp.Quit();
                         Mouse.SetCursor(Cursors.Arrow);
                     }
                 }
@@ -65,10 +66,11 @@ namespace CoopCheck.WPF.Services
         /// <summary>
         /// Make MS Excel application visible
         /// </summary>
-        private void OpenReport()
-        {
-            _excelApp.Visible = true;
-        }
+        //private void OpenReport()
+        //{
+        //    _excelApp.Visible = true;
+
+        //}
 
         /// <summary>
         /// Populate the Excel sheet
