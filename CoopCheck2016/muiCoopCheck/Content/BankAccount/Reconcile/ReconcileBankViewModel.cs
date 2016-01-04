@@ -89,7 +89,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             {
                 try
                 {
-                   ClearCheckBatchCommand.Execute(_accountPayments.ChecksToClear);
+                   ClearCheckSvc.ClearChecks(_accountPayments.ChecksToClear);
                 }
                 catch (Exception ex)
                 {
@@ -164,15 +164,24 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             {
                 try
                 {
-                    var query = from s in AccountPayments.AllPayments
-                                join t in BankFile.BankClearTransactions on s.check_num equals t.SerialNumber
-                                select new CheckInfoDto
-                                {
-                                    ClearedAmount = t.Amount,
-                                    ClearedDate = t.PostDate,
-                                    CheckNum = s.check_num,
-                                    Id = s.tran_id 
-                                };
+                    var query = from s in AccountPayments.AllPayments join t in BankFile.BankClearTransactions on new
+                    {
+                        a = s.check_num,
+                        b = s.tran_amount.GetValueOrDefault(0)
+                    } 
+                    equals
+                    new
+                    {
+                        a = t.SerialNumber,
+                        b = t.Amount
+                    }  
+                    select new CheckInfoDto
+                    {
+                        ClearedAmount = t.Amount,
+                        ClearedDate = t.PostDate,
+                        CheckNum = s.check_num,
+                        Id = s.tran_id 
+                    };
 
                     AccountPayments.ChecksToClear = query.ToList();
 

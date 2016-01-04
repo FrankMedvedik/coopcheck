@@ -13,7 +13,7 @@ namespace CoopCheck.Library
         //private int _tranId;
         //private DateTime _clearedDate;
         //private decimal _clearedAmount;
-        private List<CheckInfoDto> _checkBatch;
+        //private List<CheckInfoDto> _checkBatch;
 
         #region Authorization
         public static bool CanExecuteCommand()
@@ -23,17 +23,18 @@ namespace CoopCheck.Library
 #endif
             return true;
         }
-#endregion
+        #endregion
 
-#region Factory Methods
-        public static void Execute(List<CheckInfoDto> checkBatch)
+        #region Factory Methods
+        //public static void Execute(List<CheckInfoDto> checkBatch)
+        public static void Execute()
         {
             if (!CanExecuteCommand()) throw new System.Security.SecurityException("Not authorized to execute clear check batch command.");
-            DataPortal.Execute<ClearCheckBatchCommand>(new ClearCheckBatchCommand(checkBatch));
+            DataPortal.Execute<ClearCheckBatchCommand>(new ClearCheckBatchCommand());
         }
-        private ClearCheckBatchCommand(List<CheckInfoDto> checkBatch)
+        private ClearCheckBatchCommand()
         {
-            _checkBatch = checkBatch;
+            //_checkBatch = checkBatch;
         }
 #endregion
 #region Server-side Code
@@ -42,7 +43,7 @@ namespace CoopCheck.Library
             using (var dalManager = DalFactory.GetManager())
             {
                 var dal = dalManager.GetProvider<IPaymentInfoListDal>();
-                dal.ClearCheckBatch(_checkBatch);
+                dal.ClearCheckBatch();
             }
         }
 #endregion

@@ -20,6 +20,6 @@ namespace CoopCheck.DAL
         void CommitChecks(int batchNum, int lastCheckNum);
         void ClearCheck(int tranId, DateTime clearedDate, decimal clearedAmount);
         int NextCheckNum(int accoundId);
-        void ClearCheckBatch(List<CheckInfoDto> checks);
+        void ClearCheckBatch();
     }
 }
