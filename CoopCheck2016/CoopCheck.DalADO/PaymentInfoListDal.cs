@@ -227,6 +227,21 @@ namespace CoopCheck.DalADO
             }
         }
 
+        public void VoidCheck(int tranId)
+        {
+            using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
+            {
+                using (var cmd = new SqlCommand("dbo.dal_VoidCheck", ctx.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tran_id", tranId).DbType = DbType.Int32;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
+                        DbType.String;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void VoidSwiftBatch(int batch_num)
         {
             var b = FetchBatch(batch_num);

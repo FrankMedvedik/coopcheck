@@ -26,6 +26,11 @@ namespace CoopCheck.WPF.Content.Payment
             }
 
         }
-     
+
+        public void ResetState()
+        {
+            _vm.ResetState();
+        }
+
     }
 }

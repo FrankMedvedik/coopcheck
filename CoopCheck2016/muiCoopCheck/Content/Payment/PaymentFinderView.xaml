@@ -19,13 +19,14 @@
                 <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
                     <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
                     <Button Width="Auto" Margin="12" HorizontalAlignment="Right" Click="Clear_Click">Clear Criteria</Button>
-            </StackPanel>
+                    <Button Width="Auto" Margin="12" HorizontalAlignment="Right" Command="{Binding TheVoidCheckCommand}" >Void Payment</Button>
+                </StackPanel>
             </StackPanel>
         </Expander>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
-                      VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment, IsAsync=True}"
+                      VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}"
                    MaxHeight="600" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"
                     EnableRowVirtualization="True"
                     ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >

@@ -48,7 +48,7 @@ namespace CoopCheck.WPF.Services
             {
                 query =
                     ctx.vwPayments.Where(
-                        x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate).Take(1000);
+                        x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate);
                 if (!String.IsNullOrEmpty(crc.CheckNumber))
                 {
                     query = query.Where(x => x.check_num == crc.CheckNumber);

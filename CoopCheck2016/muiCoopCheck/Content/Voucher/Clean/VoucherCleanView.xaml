@@ -9,15 +9,15 @@
         mc:Ignorable="d ignore"  >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <!--<ColumnDefinition Width="Auto"/>-->
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <dataClean:DataCleanCriteriaView x:Name="dccv" Margin="10" Grid.Column="0" Grid.Row="0"/>
-        <dataClean:DataCleanFeedbackView x:Name="dcfbv" Margin="10" Height="Auto" Grid.Column="1" Grid.Row="0"/>
-        <Button Margin="6" VerticalAlignment="Center" IsEnabled="{Binding CanDataClean}" Click="Button_Click"  Grid.Column="0" Grid.Row="1" Width="100">DataClean</Button>
+        <!--<dataClean:DataCleanCriteriaView x:Name="dccv" Margin="10" Grid.Column="0" Grid.Row="0"/>-->
+        <dataClean:DataCleanFeedbackView x:Name="dcfbv" Margin="10" Height="Auto" Grid.Column="0" Grid.Row="0"/>
+        <!--<Button Margin="6" VerticalAlignment="Center" IsEnabled="{Binding CanDataClean}" Click="Button_Click"  Grid.Column="0" Grid.Row="1" Width="100">DataClean</Button>-->
     </Grid>
 </UserControl>

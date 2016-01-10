@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using GalaSoft.MvvmLight.Threading;
-using Hardcodet.Wpf.TaskbarNotification;
+//using Hardcodet.Wpf.TaskbarNotification;
 
 namespace CoopCheck.WPF
 {

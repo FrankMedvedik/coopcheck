@@ -1,24 +1,66 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Payment
 {
-    /// <summary>
     public class PaymentFinderViewModel : ViewModelBase
     {
         public PaymentFinderViewModel()
         {
             ResetState();
+            TheVoidCheckCommand = new RelayCommand(VoidCheck, CanVoidCheck);
+        }
+    public RelayCommand TheVoidCheckCommand { get; private set; }
 
+    public async void VoidCheck()
+        {
+
+            Status = new StatusInfo()
+            {
+                StatusMessage = "voiding check",
+                IsBusy = true
+            };
+
+
+
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    VoidCheckCommand.Execute(SelectedPayment.tran_id);
+                }
+                catch (Exception ex)
+                {
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "failed to clear payments",
+                        ErrorMessage = ex.Message,
+                        ShowMessageBox = true
+                    };
+                }
+            });
+            Status = new StatusInfo()
+            {
+                StatusMessage = String.Format("check number {0} has been voided", SelectedPayment.check_num),
+                ShowMessageBox = true
+            };
         }
 
+        public bool CanVoidCheck()
+        {
+            if (SelectedPayment == null ) return false;
+            if (SelectedPayment.cleared_flag) return false;
+            return true;
+        }
 
         private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
         public ObservableCollection<vwPayment> Payments
@@ -88,6 +130,7 @@ namespace CoopCheck.WPF.Content.Payment
             {
                 _selectedPayment = value;
                 NotifyPropertyChanged();
+                TheVoidCheckCommand.RaiseCanExecuteChanged();
             }
         }
 

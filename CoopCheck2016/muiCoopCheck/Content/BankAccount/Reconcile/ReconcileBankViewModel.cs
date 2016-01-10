@@ -109,7 +109,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         public bool CanClearChecks()
         {
-            return true;// _accountPayments.MatchedPayments.Count > 0;
+            return true; //_accountPayments.MatchedPayments.Count > 0;
         }
 
         public AccountPaymentsViewModel AccountPayments
@@ -149,6 +149,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 IsBusy = true,
                 StatusMessage = "getting payments..."
             };
+
             await AccountPayments.GetPayments();
 
             Status = new StatusInfo()

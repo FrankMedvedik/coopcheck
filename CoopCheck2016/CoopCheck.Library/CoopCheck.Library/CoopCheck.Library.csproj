@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoopCheck.Library</RootNamespace>
     <AssemblyName>CoopCheck.Library</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -84,6 +84,7 @@
       <DependentUpon>CheckInfoList.cs</DependentUpon>
     </Compile>
     <Compile Include="ClearCheckBatchCommand.cs" />
+    <Compile Include="VoidCheckCommand.cs" />
     <Compile Include="ClearCheckCommand.cs" />
     <Compile Include="CommitCheckCommand.cs" />
     <Compile Include="DataPortalHookArgs.cs" />
