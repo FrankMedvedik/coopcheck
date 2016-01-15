@@ -28,13 +28,8 @@ namespace CoopCheck.WPF.Content.Payment
             {
                 _payments = value;
                 NotifyPropertyChanged();
-                string em = null;
-
-                if (Payments.Count == PaymentSvc.MAX_PAYMENT_COUNT)
-                    em = String.Format("Showing only the first {0} payments add additional criteria to limit your search", PaymentSvc.MAX_PAYMENT_COUNT);
                 Status = new StatusInfo()
                 {
-                    ErrorMessage = em,
                     StatusMessage = String.Format("{0} Payments found", Payments.Count)
                 };
                 ShowGridData = true;

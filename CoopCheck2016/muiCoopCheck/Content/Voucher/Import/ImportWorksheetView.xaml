@@ -69,7 +69,8 @@
                     <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="130" Margin="160,6,6,6">Total $</TextBlock>
                     <TextBlock  Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
                 </StackPanel>
-                <Button Content="Import" Width="150" Height="30"  Margin="180,32,12,12"  HorizontalAlignment="Left"  VerticalAlignment="Center" Command="{Binding PostVouchersCommand}" Grid.Row="2" />
+                <Button Content="Import" Width="150" Height="30"  Margin="180,32,12,12"  HorizontalAlignment="Left"
+                        VerticalAlignment="Center" Command="{Binding PostVouchersCommand}" Grid.Row="2" IsEnabled="{Binding CanImport}"/>
             </Grid>
         </Grid>
     </Grid>

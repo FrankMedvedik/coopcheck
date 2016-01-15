@@ -165,7 +165,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     Status = new StatusInfo()
                     {
                         StatusMessage =
-                            String.Format("{0} amount {1}", SelectedVoucher.EmailAddress, SelectedVoucher.Amount)
+                            String.Format("{0} amount {1:0C}", SelectedVoucher.EmailAddress, SelectedVoucher.Amount)
                     };
                     ShowSelectedVoucher = true;
                 }
@@ -250,8 +250,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 Status = new StatusInfo()
                 { StatusMessage = "saving...", IsBusy = true };
-                //await SelectedBatch.SaveAsync();
+                SelectedBatch = await SelectedBatch.SaveAsync();
                 Status = new StatusInfo() { StatusMessage = "saved" };
+                Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
             }
             else
                 if(UserCanWrite)

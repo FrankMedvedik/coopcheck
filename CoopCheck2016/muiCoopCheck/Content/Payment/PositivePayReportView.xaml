@@ -36,7 +36,7 @@
         </Grid>
         <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="1"  Width="Auto" VerticalScrollBarVisibility="Auto"  
                   HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding Path=PositivePays, Mode=TwoWay}"  VerticalAlignment="Top" 
-                      SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay,IsAsync=True}" MaxHeight="600"  
+                      SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay,IsAsync=True}" MaxHeight="600" IsReadOnly="True"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                     ToolTipService.ToolTip="Positive Payment Report" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
                 <DataGrid.Columns>

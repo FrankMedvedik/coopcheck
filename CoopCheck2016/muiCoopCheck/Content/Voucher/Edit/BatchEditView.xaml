@@ -49,7 +49,7 @@
                 <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
-                 <TextBlock Text="{Binding HeaderText}" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" HorizontalAlignment="Left" Margin="12" />
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Batch Date" Style="{StaticResource TextBlockStyle}"/>
                     <TextBlock  Text="{Binding SelectedBatch.Date }"  Margin="6"  />
@@ -69,7 +69,8 @@
                     <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
-                    <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
+                    <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
+                        ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="File">
                             <TextBlock Text="Date" Style="{StaticResource TextBlockStyle}"/>
@@ -81,20 +82,28 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="s">
                             <TextBlock Text="Study Topic"  Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
+                            <Border BorderThickness="1" BorderBrush="Black">
                         <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.StudyTopic, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="5" />
-                    </StackPanel>
+                            </Border>
+                        </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Description" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
-                        <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
-                    </StackPanel>
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
+                            </Border>
+                        </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Thank You 1" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
-                        <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
-                    </StackPanel>
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
+                            </Border>
+                        </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Thank You 2" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
-                        <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
-                    </StackPanel>
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
+                            </Border>
+                        </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Expander>

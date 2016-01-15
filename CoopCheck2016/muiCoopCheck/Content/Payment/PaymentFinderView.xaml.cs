@@ -29,7 +29,7 @@ namespace CoopCheck.WPF.Content.Payment
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             prcv.ResetState();
-
+            _vm.ResetState();
         }
         private void Excel_Click(object sender, RoutedEventArgs e)
         {

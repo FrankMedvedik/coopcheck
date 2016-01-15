@@ -69,20 +69,21 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public async void CleanTheVouchers()
         {
-            CanDataClean = false;
-            try
-            {
-                CleanVouchers = new ObservableCollection<VoucherImportWrapper>(
-                    await DataCleanVoucherImportSvc.CleanVouchers(_vouchers, _dataCleanCriteria, _excelFileInfo));
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
-                {
-                    StatusMessage = String.Format("Error during validation"),
-                    ErrorMessage = e.Message
-                };
-            }
+            throw new NotImplementedException();
+            //CanDataClean = false;
+            //try
+            //{
+            //    CleanVouchers = new ObservableCollection<VoucherImportWrapper>(
+            //        await DataCleanVoucherImportSvc.CleanVouchers(_vouchers, _dataCleanCriteria, _excelFileInfo));
+            //}
+            //catch (Exception e)
+            //{
+            //    Status = new StatusInfo()
+            //    {
+            //        StatusMessage = String.Format("Error during validation"),
+            //        ErrorMessage = e.Message
+            //    };
+            //}
 
         }
 

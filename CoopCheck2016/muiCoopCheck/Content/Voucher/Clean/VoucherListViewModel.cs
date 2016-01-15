@@ -21,14 +21,33 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         public RelayCommand CleanAndPostVouchersCommand { get; private set; }
         public VoucherListViewModel()
         {
-            Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
+            // caled when the vouchers come out of the excel import process
+            Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
+            {
+                if (message.Notification == Notifications.ImportWorksheetReady && message.Content.VoucherImports.Any())
+                {
+                    ExcelFileInfo = message.Content.ExcelFileInfo;
+                    _dataCleanCriteria = _dataCleanCriteria ?? new DataCleanCriteria()
+                    {
+                        AutoFixAddressLine1 = true,
+                        AutoFixCity = true,
+                        AutoFixPostalCode = true,
+                        AutoFixState = true,
+                        ForceValidation = false
+                    };
+                    Vi = message.Content.VoucherImports;
+                    CleanTheVouchers();
+                }
+            });
+        
+        Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
             {
                 if (message.Notification == Notifications.VouchersDataCleaned)
                 {
                     VoucherImports = message.Content.VoucherImports;
                     ExcelFileInfo = message.Content.ExcelFileInfo;
                 }
-
+                CanPost = true;
             });
 
             Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
@@ -43,13 +62,19 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         }
 
-
-
         public bool CanCleanAndPostVouchers()
         {
-            return true;
+            return CanPost;
         }
-       
+
+        public bool CanPost
+        {
+            get { return _canPost; }
+            set { _canPost = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public List<VoucherImport> Vi
         {
             get { return VoucherImports.Select(r => r.Model).ToList(); }
@@ -108,18 +133,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public async void CleanTheVouchers()
         {
-            //CanDataClean = false;
-            List<VoucherImport> l = new List<VoucherImport>();
-            foreach (var v in VoucherImports)
-                l.Add(VoucherImportWrapperConverter.ToVoucherImport(v));
             try
             {
                 VoucherImports = new ObservableCollection<VoucherImportWrapper>(
-                    await DataCleanVoucherImportSvc.CleanVouchers(l, _dataCleanCriteria, ExcelFileInfo));
+                    await DataCleanVoucherImportSvc.CleanVouchers(VoucherImports.ToList(), _dataCleanCriteria, ExcelFileInfo));
 
                 Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>
-                    (new VoucherWrappersMessage {  VoucherImports = this.VoucherImports, ExcelFileInfo = this.ExcelFileInfo}
+                    (new VoucherWrappersMessage { VoucherImports = this.VoucherImports, ExcelFileInfo = this.ExcelFileInfo }
                         , Notifications.HaveReviewedVouchers));
+                CanPost = false;
             }
             catch (Exception e)
             {
@@ -131,17 +153,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             }
 
         }
-        //private void CleanAndSaveVouchers()
-        //{ 
-        //Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
-        //    {
-        //        if (message.Notification == Notifications.VouchersDataCleaned)
-        //        {
-        //            ExcelFileInfo = message.Content.ExcelFileInfo;
-        //            VoucherImportWrappers = message.Content.VoucherImports;
-        //        }
-        //            });
-        //}
 
 
         public ExcelFileInfoMessage ExcelFileInfo { get; set; }
@@ -184,7 +195,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
     public  void AddNewVoucher()
     {
-            FilteredVoucherImports.Add(WorkVoucherImport);
+            VoucherImports.Add(WorkVoucherImport);
     }
     public void CreateNewVoucher()
     {
@@ -210,6 +221,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     }
 
         private bool _filterRows;
+        private bool _canPost;
+
         public bool FilterRows
     {
         get { return _filterRows; }

@@ -41,7 +41,7 @@
                   SelectionMode="Extended"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"    x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}"  MaxHeight="600"
-                  ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top"   EnableColumnVirtualization="True"
+                  ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top"   EnableColumnVirtualization="True" IsReadOnly="True"
                     EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />

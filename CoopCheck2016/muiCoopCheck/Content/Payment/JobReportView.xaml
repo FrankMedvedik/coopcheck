@@ -16,7 +16,7 @@
         </StackPanel>
         <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
-                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   
+                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"
                       ItemsSource="{Binding Path=Jobs, Mode=TwoWay}"  VerticalAlignment="Top" 
                       SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >

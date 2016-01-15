@@ -196,7 +196,7 @@ namespace CoopCheck.WPF.Services
             using (var ctx = new CoopCheckEntities())
             {
                 query =
-                    ctx.vwVoidedPayments.Where(x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate).OrderBy(x => x.check_num);
+                    ctx.vwVoidedPayments.Where(x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate).OrderBy(x => x.check_num).ThenBy(x=> x.check_date);
                 if (!String.IsNullOrEmpty(crc.CheckNumber))
                 {
                     query = query.Where(x => x.check_num == crc.CheckNumber);

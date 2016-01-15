@@ -7,7 +7,54 @@
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
              mc:Ignorable="d" MinWidth="1100" >
     <Control.Resources>
-            <Style TargetType="{x:Type TextBox}">
+        <Style TargetType="CheckBox" x:Key="CircleCheckbox">
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Content" Value=""></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <Ellipse x:Name="outerEllipse" Height="15" Width="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="Red" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Margin="1" x:Name="highlightCircle" Height="15" Width="15"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Ellipse.Fill >
+                                    <SolidColorBrush Color="Green" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="highlightCircle" Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Green" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="outerEllipse" Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="LightGreen" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="highlightCircle" Property="Fill">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Red" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type TextBox}">
                 <Style.Triggers>
                     <Trigger Property="Validation.HasError" Value="true">
                         <Setter Property="Background" Value="Pink"/>
@@ -29,7 +76,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-        </Control.Resources>
+</Control.Resources>
     <ScrollViewer MinWidth="1000">
         <Grid >
         <Grid.RowDefinitions>
@@ -38,12 +85,11 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                <CheckBox Margin="6" x:Name="chkFilterRows"  VerticalAlignment="Center" 
-                      IsChecked="True" Checked="chkFilterRows_Checked" Unchecked="chkFilterRows_Unchecked">
-                    Show Only Errors?
-                </CheckBox>
-                    <Button Content="Post Vouchers" Width="150" Height="30"  Margin="6,6,50,6"  HorizontalAlignment="Left"  VerticalAlignment="Center" Command="{Binding CleanAndPostVouchersCommand}"  />
-                    <Button Content="Add" Margin="6" Width="100"  Click="AddVoucher_Click"/>
+                    <CheckBox Margin="6" x:Name="chkFilterRows"  VerticalAlignment="Center"  IsChecked="True" Checked="chkFilterRows_Checked" Unchecked="chkFilterRows_Unchecked"/>
+                    <TextBlock Margin="2,5,5,5" VerticalAlignment="Center" FontWeight="Bold">Show Only Errors?</TextBlock>
+                    <Button Content="Post Vouchers" Width="150" Height="30"  Margin="6,6,50,6"  HorizontalAlignment="Left"  VerticalAlignment="Center" 
+                            Command="{Binding CleanAndPostVouchersCommand}" IsEnabled="{Binding CanPost}" />
+                    <!--<Button Content="Add" Margin="6" Width="100"  Click="AddVoucher_Click"/>-->
                 <Button Margin="6"  x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" >Delete</Button>
                 </StackPanel>
             <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="6"
@@ -52,14 +98,17 @@
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" 
                   EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Width="Auto">
                 <DataGrid.Columns>
-                    <!--<mui:DataGridCheckBoxColumn Binding="{Binding HasBeenDataCleaned, Mode=OneWay}" Header="Clean" />
-                    <mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
-                    <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />-->
+                        <!--<mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
+                        <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />-->
+                        <!--<mui:DataGridCheckBoxColumn Binding="{Binding HasBeenDataCleaned, Mode=OneWay}" Header="Clean" /> -->
                     <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <DataGridCheckBoxColumn Binding="{Binding OkEmailAddress, Mode=OneWay}" Header="Ok" ElementStyle="{StaticResource CircleCheckbox}"  />
                     <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <DataGridCheckBoxColumn Binding="{Binding OkPhone, Mode=OneWay}"    Header="OK" ElementStyle="{StaticResource CircleCheckbox}" IsReadOnly="False"  />
                     <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                    <DataGridCheckBoxColumn   Binding="{Binding OkMailingAddress, Mode=OneWay}" Header="Ok" ElementStyle="{StaticResource CircleCheckbox}"  />
+                <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" />
                     <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
@@ -67,7 +116,6 @@
                     <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            
             </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="6" >
             <clean:VoucherImportEditView x:Name="ve"/>

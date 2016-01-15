@@ -8,8 +8,8 @@
         <Border  BorderBrush="Red" BorderThickness="1">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
                 <Button x:Name="BtnSwapit" Margin="3,0,3,0" Click="BtnSwapit_Click" Width="Auto" Content="Replace" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="tbSourceValue" Visibility="Collapsed" Margin="3,0,3,0" Text="{Binding SourceValue,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Foreground="{Binding AppearanceManager.Current.AccentColor}"  />
-                <TextBox x:Name="tbAlternateValue" Margin="3,0,3,0" Text="{Binding AlternateValue, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{Binding AppearanceManager.Current.AccentColor}" />
+                <TextBox x:Name="tbSourceValue" Visibility="Collapsed" Margin="3,0,3,0" Text="{Binding SourceValue,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Foreground="Red"  />
+                <TextBox x:Name="tbAlternateValue" Margin="3,0,3,0" Text="{Binding AlternateValue, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Red" />
                 <!--<TextBlock x:Name="NewValue" Margin="3,0,0,0" Width="100" Foreground="{Binding AppearanceManager.Current.AccentColor}" />-->
             </StackPanel>
         </Border>

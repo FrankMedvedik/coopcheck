@@ -247,6 +247,7 @@
     <Compile Include="Content\Voucher\VouchersWindow.xaml.cs">
       <DependentUpon>VouchersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
     <Compile Include="Interfaces\IModernNavigationService.cs" />
     <Compile Include="Messages\ExcelVouchersMessage.cs" />

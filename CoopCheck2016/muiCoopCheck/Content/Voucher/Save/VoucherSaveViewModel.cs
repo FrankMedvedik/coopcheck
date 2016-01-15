@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
@@ -32,8 +33,12 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         
         public VoucherSaveViewModel()
         {
+            CanSave = false;
+            CanExport = false;
+
             SaveVouchersCommand = new RelayCommand(CreateBatchEditAndImportVouchers, CanSaveVouchers);
             ExportVouchersCommand = new RelayCommand(ExportVouchers, CanSaveVouchers);
+
             Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
             {
                 if (message.Notification == Notifications.HaveReviewedVouchers)
@@ -41,6 +46,8 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                     ExcelFileInfo = message.Content.ExcelFileInfo;
                     VoucherImportWrappers = message.Content.VoucherImports;
                     Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
+                    if(VoucherImportWrappers.Any(x => x.OkMailingAddress)) CanSave = true;
+                    if (VoucherImportWrappers.Any(x => !x.OkMailingAddress)) CanExport = true;
                 }
             });
         }
@@ -64,9 +71,14 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                         dataToPrint = BadVoucherExports
                     };
                     s.GenerateReport();
-                    s.ExcelWorksheetName = String.Format("Processed {0:dd-mm-yyyy HH mm}", DateTime.Now);
-                    s.dataToPrint = GoodVoucherExports;
-                    s.GenerateReport();
+                    if (GoodVoucherExports.Count > 0) 
+                    {
+                        s.ExcelWorksheetName = String.Format("Processed {0:dd-mm-yyyy HH mm}", DateTime.Now);
+                        s.dataToPrint = GoodVoucherExports;
+                        s.GenerateReport();
+                        CanExport = false;
+                    }
+                    ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}", Path.GetFileName(ExcelFileInfo.ExcelFilePath));
                 }
                 catch (Exception e)
                 {
@@ -74,9 +86,8 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                     {
                         StatusMessage = "export to excel failed",
                         ErrorMessage = e.Message,
-                        ShowMessageBox =true
+                        ShowMessageBox = true
                     };
-
                 }
             });
 
@@ -84,8 +95,6 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             {
                 StatusMessage = "export complete",
             };
-
-            
         }
 
         private ExcelFileInfoMessage _excelVoucherInfo;
@@ -126,6 +135,15 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             get { return _canSave; }
             set { _canSave = value;
                 NotifyPropertyChanged(); }
+        }
+        public bool CanExport
+        {
+            get { return _canExport; }
+            set
+            {
+                _canExport = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private void SetupMessages()
@@ -178,6 +196,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
 
         private string _errorBatchInfoMessage;
         private bool _canSave;
+        private bool _canExport;
 
         public async void CreateBatchEditAndImportVouchers()
         {
@@ -192,11 +211,13 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             try
             {
                 List<VoucherImport> vouchers = VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(VoucherImportWrapperConverter.ToVoucherImport).ToList();
-                await BatchSvc.ImportVouchers(vouchers);
+                var batchNum = await BatchSvc.ImportVouchers(vouchers);
                 Status = new StatusInfo()
                 {
                     StatusMessage = "batch created"
                 };
+                CanSave = false;
+                SaveBatchInfoMessage = String.Format("batch {0} has been created", batchNum);
 
             }
             catch (Exception ex)

@@ -3,8 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
+using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
@@ -20,7 +22,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             SetState(null, null);
         }
 
-
+        public SolidColorBrush AccentColor
+        {
+            get
+            {
+                return new SolidColorBrush(AppearanceManager.Current.AccentColor);
+            }
+        }
+        public static DependencyProperty AccentColorProperty =
+            DependencyProperty.Register("AccentColor", typeof(SolidColorBrush), typeof(ReplacerView), new PropertyMetadata(new SolidColorBrush()));
 
         public string AlternateValue
         {

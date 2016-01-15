@@ -37,15 +37,19 @@
                 </Grid.RowDefinitions>
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="800" Grid.Column="0"
                 MaxWidth="1000" MinHeight="200"  ItemsSource="{Binding Stats, IsAsync=True}" HorizontalScrollBarVisibility="Auto"  Grid.Row="0"  FontWeight="Normal"
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single"
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Extended" x:Name="DgStats"
                             ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True">
                     <DataGrid.Columns>
                         <mui:DataGridTextColumn Binding="{Binding Key}" Header="Metric" />
                         <mui:DataGridTextColumn Binding="{Binding Value}" Header="Value" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Grid.Row="1"  HorizontalAlignment="Left" Margin="6" Grid.Column="0"
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                <Button HorizontalAlignment="Left" Margin="6" 
                 VerticalAlignment="Center" Click="Button_Click">Clear All Matched Payments</Button>
+                <Button HorizontalAlignment="Left" Margin="6" 
+                VerticalAlignment="Center" Click="Excel_Click">Export to Excel</Button>
+                </StackPanel>
             </Grid>
         </Expander>
             <reconcile:BankClearTransactionsView x:Name="bctv" Grid.Row="3" />

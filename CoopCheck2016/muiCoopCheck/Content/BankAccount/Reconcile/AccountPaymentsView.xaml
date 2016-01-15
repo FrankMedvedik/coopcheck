@@ -18,10 +18,9 @@
         </Grid.ColumnDefinitions>
         <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0" Grid.Row="0"/>
         <Button Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1" VerticalAlignment="Center" x:Name="btnPayments" Click="Refresh_Click">Payments</Button>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="450"
-                  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
-                MinHeight="200"  ItemsSource="{Binding AccountPayments.Stats, IsAsync=True}" HorizontalScrollBarVisibility="Auto" 
-                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Single" ClipboardCopyMode="IncludeHeader" >
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  MaxHeight="450" x:Name="DgStats"
+                  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"   MinHeight="200"  ItemsSource="{Binding AccountPayments.Stats}" HorizontalScrollBarVisibility="Auto" 
+                      Height="Auto" VerticalScrollBarVisibility="Auto"  SelectionMode="Extended" ClipboardCopyMode="IncludeHeader" >
             <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding Key}" Header="Metric" />
                 <mui:DataGridTextColumn Binding="{Binding Value}" Header="Value" >
@@ -34,7 +33,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
-        <Button Margin="6" VerticalAlignment="Center" Command="{Binding EditUnMatchedCommand}">Edit Unmatched Bank Transactions</Button>
+            <Button HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" Click="Excel_Click">Export to Excel</Button>
+            <Button Margin="6" VerticalAlignment="Center" Command="{Binding EditUnMatchedCommand}">Edit Unmatched Bank Transactions</Button>
             <Button  Margin="6" VerticalAlignment="Center"  Command="{Binding ClearMatchedChecksCommand}">Clear Matched Payments</Button>
         </StackPanel>
     </Grid>

@@ -12,23 +12,24 @@
         mc:Ignorable="d ignore">
         <Grid >
         <ScrollViewer> 
-            <xctk:Wizard x:Name="VoucherWizard" FinishButtonClosesWindow="True" CanCancel="True" CancelButtonClosesWindow="True" PageChanged="PageChanged"  HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
+            <xctk:Wizard x:Name="VoucherWizard" FinishButtonClosesWindow="True" CanCancel="True" CancelButtonClosesWindow="True" PageChanged="PageChanged" 
+                         HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
                 <xctk:WizardPage x:Name="LoadVouchers" 
                                    Title="Load Vouchers"
-                                   Description="This Wizard will walk you though creating new payment vouchers from an excel workbook of vouchers."
+                                   Description="This will walk you though loading payment vouchers from an excel workbook."
                                  NextPage="{Binding ElementName=DataClean}" CanSelectNextPage="{Binding HaveValidWorkbook}"  >
                     <import:ImportWorksheetView x:Name="iwv"/>
                 </xctk:WizardPage>
-                <xctk:WizardPage x:Name="DataClean" PageType="Interior"
+                <!--<xctk:WizardPage x:Name="DataClean" PageType="Interior"
                                    Title="Validate Vouchers"
                                    Description="This step checks the name, mailing adddress and other elements"
                                    NextPage="{Binding ElementName=ListVouchers}"
                                    PreviousPage="{Binding ElementName=LoadVouchers}" CanSelectNextPage="{Binding HaveCleanedVouchers}"  >
                     <clean:VoucherCleanView x:Name="vcv"/>
-                </xctk:WizardPage >
+                </xctk:WizardPage >-->
                 <xctk:WizardPage x:Name="ListVouchers" PageType="Interior"
                                    Title="Edit Vouchers"
-                                   Description="Edit any vouchers with errors"
+                                   Description="corect vouchers with errors (shown in red)"
                                    NextPage="{Binding ElementName=SaveVouchers}"
                                    PreviousPage="{Binding ElementName=DataClean}"  CanSelectNextPage="{Binding HaveReviewedVouchers}">
                     <clean:VoucherListView x:Name="vlv"/>

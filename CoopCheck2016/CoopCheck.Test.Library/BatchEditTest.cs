@@ -49,6 +49,7 @@ namespace CoopCheck.Test.Library
             voc.First = "John";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             voc.Region = "PA";
             voc.PostalCode = "18914";
@@ -85,6 +86,7 @@ namespace CoopCheck.Test.Library
             voc.First = "John";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             voc.Region = "PA";
             voc.PostalCode = "18914";
@@ -164,6 +166,7 @@ namespace CoopCheck.Test.Library
             voc.First = "John";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             voc.Region = "PA";
             voc.PostalCode = "18914";
@@ -171,7 +174,7 @@ namespace CoopCheck.Test.Library
 
             obj.Vouchers.Add(voc);
 
-
+            obj.MarketingResearchMessage = "Thanks";
             obj = obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
@@ -215,6 +218,7 @@ namespace CoopCheck.Test.Library
             voc.First = "Paul";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             voc.Region = "PA";
             voc.PostalCode = "18914";
@@ -260,6 +264,7 @@ namespace CoopCheck.Test.Library
             voc.First = "John";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             // voc.Region = "PA";
             voc.PostalCode = "18914";
@@ -271,6 +276,7 @@ namespace CoopCheck.Test.Library
             voc.First = "Paul";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             // voc.Region = "PA";
             voc.PostalCode = "18914";
@@ -313,6 +319,7 @@ namespace CoopCheck.Test.Library
             voc.First = "John";
             voc.Last = "Public";
             voc.AddressLine1 = "1600 Manor Drive";
+            voc.AddressLine2 = "Suite 100";
             voc.Municipality = "Chalfont";
             // voc.Region = "PA";
             voc.PostalCode = "18914";

@@ -6,6 +6,7 @@ using System.Configuration;
 using DataClean;
 using DataClean.DataCleaner;
 using DataClean.Models;
+using DataClean.Repository.Mgr;
 
 namespace CoopCheck.Library
 {
@@ -161,8 +162,20 @@ namespace CoopCheck.Library
                 {
                         //if a complete address then verify against web service
                         var config = ConfigurationManager.AppSettings;
-                        var chk = new DataCleaner(config);
-                        var inputAddress = new InputStreetAddress()
+                    var dataCleanEventFactory =
+                        new DataCleanEventFactory(
+                            new DataCleaner(config),
+                            new DataCleanRespository(), 
+                            new DataCleanCriteria()
+                            {
+                                AutoFixAddressLine1 = false,
+                                AutoFixCity = false,
+                                AutoFixPostalCode = false,
+                                AutoFixState = false,
+                                ForceValidation = false
+                            });
+
+                    var inputAddress = new InputStreetAddress()
                         {
                             AddressLine1 = target.AddressLine1,
                             AddressLine2 = target.AddressLine2,
@@ -176,20 +189,17 @@ namespace CoopCheck.Library
                             State = target.Region
                         };
 
-                        OutputStreetAddress outputAddress;
+                    var dataCleanEvent = dataCleanEventFactory.ValidateAddress(inputAddress);
 
-                        var isValid = chk.VerifyAndCleanAddress(inputAddress, out outputAddress);
-
-                        if (!isValid)
-                        {
+                        if (!dataCleanEvent.Output.OkMailingAddress)
+                    {
                             var errStr = string.Empty;
-                            foreach (var err in outputAddress.Errors)
+                            foreach (var err in dataCleanEvent.Output.Errors)
                             {
                                 context.AddErrorResult(err.LongDescription);
                             }
                             
                         }
-            
                         
                 }
 

@@ -1,7 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
@@ -38,6 +42,30 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
             btnPayments.IsEnabled = true;
         }
+        private void Excel_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToExcel();
+
+        }
+
+        private void ExportToExcel()
+        {
+            DgStats.SelectAllCells();
+            DgStats.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, DgStats);
+            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            //String result = (string)Clipboard.GetData(DataFormats..Text);
+            DgStats.UnselectAllCells();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = string.Format("Reconcile.{0}.csv", Path.GetFileName(_vm.BankFile.FilePath));
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName);
+                file.WriteLine(result);
+                file.Close();
+            }
+        }
+
 
     }
 

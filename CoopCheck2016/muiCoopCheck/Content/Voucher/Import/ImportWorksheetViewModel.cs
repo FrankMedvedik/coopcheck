@@ -237,7 +237,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 LoadWorksheetStats();
                 ImportVouchers();
             }
-            Status  = new StatusInfo()
+            Status = new StatusInfo()
             {
                 StatusMessage = ""
             };
@@ -377,8 +377,20 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     ExcelBook.AddMapping("Amount", "AMOUNT");
                     ExcelBook.AddMapping("EmailAddress", "E-MAIL");
                     ExcelBook.AddMapping("JobNumber", "JOB #");
+
+                    //ExcelBook.AddMapping("First", "first name");
+                    //ExcelBook.AddMapping("Last", "last name");
+                    //ExcelBook.AddMapping("AddressLine1", "address 1");
+                    //ExcelBook.AddMapping("AddressLine2", "address 2");
+                    //ExcelBook.AddMapping("Municipality", "city");
+                    //ExcelBook.AddMapping("Region", "state");
+                    //ExcelBook.AddMapping("PostalCode", "zipcode");
+                    //ExcelBook.AddMapping("PhoneNumber", "phone");
+                    //ExcelBook.AddMapping("Amount", "amount");
+                    //ExcelBook.AddMapping("EmailAddress", "e-mail");
+                    //ExcelBook.AddMapping("JobNumber", "job #");
                     var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
-                    foreach (var a in vouchers.Where(x => x.Last != "" ).Where(x => x.First != ""))
+                    foreach (var a in vouchers.Where(x => x.Last != "").Where(x => x.First != ""))
                     {
                         if (a.PostalCode != null && a.PostalCode.Length < 5)
                             a.PostalCode = a.PostalCode.PadLeft(5, '0');
@@ -388,22 +400,22 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     VoucherCnt = VoucherImports.Count();
                     VoucherTotalDollars = VoucherImports.Select(x => x.Amount).Sum().GetValueOrDefault(0);
                     CanProceed = true;
-                    }
-            }
-            catch (Exception e)
-                {
-                    var s = new StatusInfo();
-                    s.ErrorMessage = e.Message;
-                    s.StatusMessage = "import failed";
-                    Status = s;
                 }
             }
+            catch (Exception e)
+            {
+                var s = new StatusInfo();
+                s.ErrorMessage = e.Message;
+                s.StatusMessage = "import failed";
+                Status = s;
+            }
+        }
 
         private decimal _voucherTotalDollars;
         private StatusInfo _status;
         private bool _canImport;
         private bool _isBusy;
-     
+
         public decimal VoucherTotalDollars
         {
             get { return _voucherTotalDollars; }
@@ -447,7 +459,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
-     
+
         private string _headerText;
 
         public string HeaderText
@@ -469,6 +481,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     }
                 }, Notifications.ImportWorksheetReady));
 
+            CanProceed = false;
+
         }
 
         public RelayCommand PostVouchersCommand { get; private set; }
@@ -476,7 +490,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             return true;
         }
-        
+
 
     }
 }
