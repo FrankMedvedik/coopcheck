@@ -19,6 +19,8 @@ namespace CoopCheck.WPF.Services
     {
         public static async Task<ObservableCollection<VoucherImportWrapper>> CleanVouchers(List<VoucherImportWrapper> vouchers, DataCleanCriteria dataCleanCriteria, ExcelFileInfoMessage excelFileInfo)
         {
+            dataCleanCriteria.AutoFixPostalCode = false;
+            dataCleanCriteria.ForceValidation = false;
 
             var cleanVouchers = new ObservableCollection<VoucherImportWrapper>();
             foreach (var v in vouchers)

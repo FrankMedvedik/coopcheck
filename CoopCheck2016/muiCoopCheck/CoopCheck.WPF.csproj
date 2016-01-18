@@ -383,7 +383,7 @@
     </Compile>
     <Compile Include="Services\DataCleanVoucherImportSvc.cs" />
     <Compile Include="Services\ExcelExportSvc.cs" />
-    <Compile Include="Services\ExportSvc.cs" />
+    <Compile Include="Services\ExportToExcel.cs" />
     <Compile Include="Services\DataCleanSvc.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />

@@ -62,23 +62,32 @@ namespace CoopCheck.WPF.Content.Voucher.Save
            
             await Task.Factory.StartNew(() =>
             {
+                string dtFmt = String.Format("{0:g}", DateTime.Now).Replace('/', '.');
+                dtFmt = dtFmt.Replace(':', '.');
+                dtFmt = dtFmt.Replace(' ', '.');
+
                 try
                 {
-                    ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>
+                    if (BadVoucherExports.Count > 0)
                     {
-                        ExcelSourceWorkbook = ExcelFileInfo.ExcelFilePath,
-                        ExcelWorksheetName = String.Format("Errors {0:dd-mm-yyyy HH mm}", DateTime.Now),
-                        dataToPrint = BadVoucherExports
-                    };
-                    s.GenerateReport();
-                    if (GoodVoucherExports.Count > 0) 
-                    {
-                        s.ExcelWorksheetName = String.Format("Processed {0:dd-mm-yyyy HH mm}", DateTime.Now);
-                        s.dataToPrint = GoodVoucherExports;
+                        ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>
+                        {
+                            ExcelSourceWorkbook = ExcelFileInfo.ExcelFilePath,
+                            ExcelWorksheetName = String.Format("Errors.{0}", dtFmt),
+                            dataToPrint = BadVoucherExports
+                        };
                         s.GenerateReport();
-                        CanExport = false;
+                        
+                        if (GoodVoucherExports.Count > 0)
+                        {
+                            s.ExcelWorksheetName = String.Format("Processed.{0}", dtFmt);
+                            s.dataToPrint = GoodVoucherExports;
+                            s.GenerateReport();
+                            CanExport = false;
+                        }
+                        ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}",
+                            Path.GetFileName(ExcelFileInfo.ExcelFilePath));
                     }
-                    ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}", Path.GetFileName(ExcelFileInfo.ExcelFilePath));
                 }
                 catch (Exception e)
                 {
@@ -153,14 +162,12 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             //ErrorBatchInfoMessage = string.Format("3 Vouchers WITH ERRORS totaling $300 will be saved to the job errors worksheet");
             //CanSave =true;
 
-                SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1}",
+                SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1:C}",
                 VoucherImportWrappers.Count(x => x.AltAddress.OkComplete),
                 VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
-                ErrorBatchInfoMessage = string.Format("{0} Vouchers with errors totalling {1} Will be saved to workbook {2} ",
-                VoucherImportWrappers.Count(x => !x.AltAddress.OkComplete),
-                VoucherImportWrappers.Where(x => !x.AltAddress.OkComplete).Select(x => x.Amount).Sum(),
-                ExcelFileInfo.ExcelFilePath
-                );
+                ErrorBatchInfoMessage = string.Format("{0} Vouchers with errors totalling {1:C} will be saved to Excel",
+                VoucherImportWrappers.Count(x => !x.AltAddress.OkMailingAddress),
+                VoucherImportWrappers.Where(x => !x.AltAddress.OkMailingAddress).Select(x => x.Amount).Sum());
 
             CanSave = (VoucherImportWrappers.Count(x => x.AltAddress.OkComplete) > 0);
 
@@ -188,11 +195,11 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         public List<VoucherExcelExport> GoodVoucherExports
         {
             get
-            { return VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList(); }
+            { return VoucherImportWrappers.Where(x => x.AltAddress.OkMailingAddress).Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList(); }
         }
 
         public List<VoucherExcelExport> BadVoucherExports { get
-            { return  VoucherImportWrappers.Where(x => !x.AltAddress.OkComplete).Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList(); } }
+            { return  VoucherImportWrappers.Where(x => !x.AltAddress.OkMailingAddress).Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList(); } }
 
         private string _errorBatchInfoMessage;
         private bool _canSave;

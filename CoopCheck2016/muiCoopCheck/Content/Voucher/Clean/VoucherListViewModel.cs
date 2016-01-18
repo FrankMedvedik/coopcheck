@@ -57,14 +57,14 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     _dataCleanCriteria = message.Content;
                 }
             });
-
+            
             this.CleanAndPostVouchersCommand = new RelayCommand(CleanTheVouchers, CanCleanAndPostVouchers);
 
         }
 
         public bool CanCleanAndPostVouchers()
         {
-            return CanPost;
+            return true;
         }
 
         public bool CanPost

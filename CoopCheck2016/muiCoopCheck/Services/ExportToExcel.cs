@@ -23,10 +23,25 @@ namespace CoopCheck.WPF.Services
         private Excel._Worksheet _sheet = null;
         private Excel.Range _range = null;
         private Excel.Font _font = null;
+        private Dictionary<string, string> _columnNameDictionary = ExportToExcel<T,U>.buildColumnNameDictionary();
+        private List<string> _numberColumnsToDisplayAsText = ExportToExcel<T, U>.buildNumberColumnList();
+
+        private static List<string> buildNumberColumnList()
+        {
+            List<string> l = new List<string>();
+            l.Add("ZIPCODE");
+            l.Add("PHONE");
+            l.Add("PostalCode");
+            l.Add("PhoneNumber");
+            return l;
+        }
+
         // Optional argument variable
         private object _optionalValue = Missing.Value;
         public string ExcelWorksheetName { get; set; } = null;
         public string ExcelSourceWorkbook{ get; set; } = null;
+
+       
 
         /// <summary>
         /// Generate report and sub functions
@@ -41,6 +56,7 @@ namespace CoopCheck.WPF.Services
                     {
                         Mouse.SetCursor(Cursors.Wait);
                         CreateExcelRef();
+                        buildColumnNameDictionary();
                         FillSheet();
                         _book.Save();
                         _excelApp.Quit();
@@ -62,15 +78,6 @@ namespace CoopCheck.WPF.Services
                 ReleaseObject(_excelApp);
             }
         }
-
-        /// <summary>
-        /// Make MS Excel application visible
-        /// </summary>
-        //private void OpenReport()
-        //{
-        //    _excelApp.Visible = true;
-
-        //}
 
         /// <summary>
         /// Populate the Excel sheet
@@ -99,8 +106,56 @@ namespace CoopCheck.WPF.Services
                     objData[j, i] = (y == null) ? "" : y.ToString();
                 }
             }
+            SetColumnDataTypes(header);
             AddExcelRows("A2", dataToPrint.Count, header.Length, objData);
             AutoFitColumns("A1", dataToPrint.Count + 1, header.Length);
+            FixColumnHeadings("A1", header.Length);
+        }
+
+        private void SetColumnDataTypes(object[] header)
+        {
+            for (int i = 0; i < header.Length; i++)
+            {
+                if (_numberColumnsToDisplayAsText.Contains(header[i].ToString()))
+                {
+                    // account for zero to one array offset and add that we are working with row one 
+                    var s = GetExcelColumnName(i + 1) +"1";
+                    SetExcelColumnDataType(s);
+                }
+            }
+
+        }
+
+        private string GetExcelColumnName(int columnNumber)
+        {
+            int dividend = columnNumber;
+            string columnName = String.Empty;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                columnName = Convert.ToChar(65 + modulo).ToString() + columnName;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+
+            return columnName;
+        }
+
+        private void SetExcelColumnDataType(string columnName)
+        {
+            _range = _sheet.get_Range(columnName).EntireColumn;
+            _range.NumberFormat = "@";
+        }
+        private void FixColumnHeadings(string startRange, int colCount)
+        {
+
+            _range = _sheet.get_Range(startRange, _optionalValue);
+            _range = _range.get_Resize(1, colCount);
+            foreach (var c in _columnNameDictionary)
+            {
+                var b = _range.Replace(c.Key, c.Value, Excel.XlLookAt.xlWhole, Excel.XlSearchOrder.xlByColumns);
+            }
         }
 
         /// <summary>
@@ -114,8 +169,35 @@ namespace CoopCheck.WPF.Services
             _range = _sheet.get_Range(startRange, _optionalValue);
             _range = _range.get_Resize(rowCount, colCount);
             _range.Columns.AutoFit();
+            
         }
 
+        private string GetColumnName(string classPropertyName)
+        {
+            string returnValue = string.Empty;
+            if (_columnNameDictionary.TryGetValue(classPropertyName, out returnValue))
+                return returnValue;
+            return classPropertyName;
+
+        }
+
+
+        private static Dictionary<string,string> buildColumnNameDictionary()
+        {
+            var d = new Dictionary<string, string>(); 
+            d.Add("First", "FIRST NAME");
+            d.Add("Last", "LAST NAME");
+            d.Add("AddressLine1", "ADDRESS 1");
+            d.Add("AddressLine2", "ADDRESS 2");
+            d.Add("Municipality", "CITY");
+            d.Add("Region", "STATE");
+            d.Add("PostalCode", "ZIPCODE");
+            d.Add("PhoneNumber", "PHONE");
+            d.Add("Amount", "AMOUNT");
+            d.Add("EmailAddress", "E-MAIL");
+            d.Add("JobNumber", "JOB #");
+            return d;
+        }
         /// <summary>
         /// Create header from the properties
         /// </summary>
@@ -123,19 +205,17 @@ namespace CoopCheck.WPF.Services
         private object[] CreateHeader()
         {
             PropertyInfo[] headerInfo = typeof (T).GetProperties();
-
             // Create an array for the headers and add it to the
             // worksheet starting at cell A1.
             List<object> objHeaders = new List<object>();
             for (int n = 0; n < headerInfo.Length; n++)
             {
                 objHeaders.Add(headerInfo[n].Name);
+                //objHeaders.Add(GetColumnName(headerInfo[n].Name));
             }
-
             var headerToAdd = objHeaders.ToArray();
             AddExcelRows("A1", 1, headerToAdd.Length, headerToAdd);
             SetHeaderStyle();
-
             return headerToAdd;
         }
 
@@ -169,6 +249,8 @@ namespace CoopCheck.WPF.Services
         private void CreateExcelRef()
         {
             _excelApp = new Excel.Application();
+            // _excelApp.Visible = true;
+            _excelApp.DisplayAlerts = false;
             if (ExcelSourceWorkbook != null)
             {
                 _book = _excelApp.Workbooks.Open(ExcelSourceWorkbook);
