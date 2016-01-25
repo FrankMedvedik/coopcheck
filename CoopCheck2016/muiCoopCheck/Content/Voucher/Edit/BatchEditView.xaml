@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
              mc:Ignorable="d" >
     <Control.Resources>
         <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
@@ -36,48 +37,40 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <mui:ModernProgressRing IsActive="{Binding IsBusy}" Grid.Row="0" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" 
+        <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" 
                                 Visibility="{Binding ShowSelectedBatch, Converter={StaticResource NotBoolToVisConverter}}"/>
-        <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1" >
+        <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}"  >
         <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
-                <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" HorizontalAlignment="Left" Margin="12" />
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Batch Date" Style="{StaticResource TextBlockStyle}"/>
-                    <TextBlock  Text="{Binding SelectedBatch.Date }"  Margin="6"  />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Payment Date" Style="{StaticResource TextBlockStyle}"/>
-                    <TextBlock  Text="{Binding SelectedBatch.PayDate}"  Margin="6"  />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <Button Content="Save" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  IsDefault="True"/>
+                    <Button Content="Refresh List" HorizontalAlignment="Center" Command="{Binding RefreshBatchListCommand}"  Margin="12" Width="150" VerticalAlignment="Center"/>
+                    <!--<Button Content="Pay" HorizontalAlignment="Center" Command="{Binding PayBatchCommand}"  Margin="200,6,6,6" Width="100" VerticalAlignment="Center"/>-->
+                    <Button Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  Width="100"  />
                     <Button Content="Delete " HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="DeleteSelectedBatch_Click" />
-                    <!--<voucher:PayVoucherView Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
                 </StackPanel>
             </StackPanel>
-            <Expander Header="Batch Details" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+                <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+                    <voucher:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Expander>
+            <Expander Header="Batch Details" Grid.Row="2" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
             <StackPanel Orientation="Vertical" >
-                    <StackPanel  Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
-                    <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
                         ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
-                    </StackPanel>
+                            </Border>
+                            <TextBlock Text="Create Date" Style="{StaticResource TextBlockStyle}" Margin="12,6,6,6" />
+                            <TextBlock Text="{Binding SelectedBatch.Date, Mode=OneWay,StringFormat=d}"  Margin="6"/>
+                        </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="File">
-                            <TextBlock Text="Date" Style="{StaticResource TextBlockStyle}"/>
-                        <DatePicker SelectedDate="{Binding SelectedBatch.Date, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Margin="6" TabIndex="2" />
-                    <!--</StackPanel>
-                    <StackPanel Orientation="Horizontal" >-->
-                            <TextBlock Text="Payment Date" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="Payment Date" Style="{StaticResource TextBlockStyle}"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" TabIndex="3" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Name="s">
@@ -104,52 +97,52 @@
                                 <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
                             </Border>
                         </StackPanel>
-                </StackPanel>
             </StackPanel>
         </Expander>
-            <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="0"
+            <Expander Header="Vouchers" Grid.Row="3" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="0"
                 ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800"
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                           VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
-                    <DataGrid.Columns>
-                        <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
-                        <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                        <!--<mui:DataGridTextColumn Binding="{Binding NamePrefix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Prefix" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
+                            <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <!--<mui:DataGridTextColumn Binding="{Binding NamePrefix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Prefix" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Suffix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Suffix" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Title, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Title" EditingElementStyle="{StaticResource CellEditStyle}"/>-->
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1"  Margin="12" >
-                <StackPanel Orientation="Vertical" Margin="12"
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1"  Margin="12" >
+                        <StackPanel Orientation="Vertical" Margin="12"
                             Visibility="{Binding ShowSelectedVoucher, Converter={StaticResource BoolToVisConverter}}">
-                        <TextBlock Text="edit voucher" Style="{StaticResource Heading2}" Margin="6" />
-                        <StackPanel x:Name="Form" Orientation="Vertical">
-                            <StackPanel>
-                                <Label Content="Last name" Target="{Binding ElementName=TextLastName}"/>
-                                <TextBox x:Name="TextLastName" Width="250" Text="{Binding SelectedVoucher.Last, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="First name" Target="{Binding ElementName=TextFirstName}"/>
-                                <TextBox x:Name="TextFirstName" Width="250" Text="{Binding SelectedVoucher.First, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
-                            </StackPanel>
-                            <StackPanel>
+                            <TextBlock Text="edit voucher" Style="{StaticResource Heading2}" Margin="6" />
+                            <StackPanel x:Name="Form" Orientation="Vertical">
+                                <StackPanel>
+                                    <Label Content="Last name" Target="{Binding ElementName=TextLastName}"/>
+                                    <TextBox x:Name="TextLastName" Width="250" Text="{Binding SelectedVoucher.Last, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="First name" Target="{Binding ElementName=TextFirstName}"/>
+                                    <TextBox x:Name="TextFirstName" Width="250" Text="{Binding SelectedVoucher.First, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                                </StackPanel>
+                                <StackPanel>
                                     <Label Content="Email" Target="{Binding ElementName=TextEmail}"/>
                                     <TextBox x:Name="TextEmail" Width="250" Text="{Binding SelectedVoucher.EmailAddress, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
                                 </StackPanel>
@@ -157,54 +150,39 @@
                                     <Label Content="Phone" Target="{Binding ElementName=TextPhone}"/>
                                     <TextBox x:Name="TextPhone" Width="250"  Text="{Binding SelectedVoucher.PhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
                                 </StackPanel>
-                            <StackPanel>
-                                <Label Content="Address 1" Target="{Binding ElementName=TextAddress1}"/>
-                            <TextBox x:Name="TextAddress1" Width="250" Text="{Binding SelectedVoucher.AddressLine1, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="Address 2" Target="{Binding ElementName=TextAddress2}"/>
-                            <TextBox x:Name="TextAddress2" Width="250" Text="{Binding SelectedVoucher.AddressLine2, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="City" Target="{Binding ElementName=TextCity}"/>
-                            <TextBox x:Name="TextCity" Width="250" Text="{Binding SelectedVoucher.Municipality, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="State" Target="{Binding ElementName=TextState}"/>
-                            <TextBox x:Name="TextRegion" Width="250" Text="{Binding SelectedVoucher.Region, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="Zip code" Target="{Binding ElementName=TextZipCode}"/>
-                            <TextBox x:Name="TextZipCode" Width="250"  Text="{Binding SelectedVoucher.PostalCode, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="Amount" Target="{Binding ElementName=TextAmount}"/>
-                            <TextBox x:Name="TextAmount" Width="250"  Text="{Binding SelectedVoucher.Amount, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                <StackPanel>
+                                    <Label Content="Address 1" Target="{Binding ElementName=TextAddress1}"/>
+                                    <TextBox x:Name="TextAddress1" Width="250" Text="{Binding SelectedVoucher.AddressLine1, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Address 2" Target="{Binding ElementName=TextAddress2}"/>
+                                    <TextBox x:Name="TextAddress2" Width="250" Text="{Binding SelectedVoucher.AddressLine2, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="City" Target="{Binding ElementName=TextCity}"/>
+                                    <TextBox x:Name="TextCity" Width="250" Text="{Binding SelectedVoucher.Municipality, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="State" Target="{Binding ElementName=TextState}"/>
+                                    <TextBox x:Name="TextRegion" Width="250" Text="{Binding SelectedVoucher.Region, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Zip code" Target="{Binding ElementName=TextZipCode}"/>
+                                    <TextBox x:Name="TextZipCode" Width="250"  Text="{Binding SelectedVoucher.PostalCode, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Amount" Target="{Binding ElementName=TextAmount}"/>
+                                    <TextBox x:Name="TextAmount" Width="250"  Text="{Binding SelectedVoucher.Amount, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                        <Button Content="Add Voucher" IsEnabled="{Binding UserCanWrite}"  Margin="6" Width="125"  Click="AddVoucher_Click"/>
-                        <Button Margin="6"  HorizontalAlignment="Right" Click="DeleteVoucher_Click" IsEnabled="{Binding CanDeleteVoucher}" Width="125" >Delete Voucher</Button>
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Content="Add Voucher" IsEnabled="{Binding UserCanWrite}"  Margin="6" Width="125"  Click="AddVoucher_Click"/>
+                            <Button Margin="6"  HorizontalAlignment="Right" Click="DeleteVoucher_Click" IsEnabled="{Binding CanDeleteVoucher}" Width="125" >Delete Voucher</Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Grid>
+                </Grid>
+            </Expander>
         </Grid>
-        <!--<Grid Visibility="{Binding ShowImportedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1" >
-        <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" Grid.Row="0">
-                 <TextBlock Text="{Binding HeaderText}" Style="{StaticResource Heading2}" Margin="6" />
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Batch Date" Width="100"   Margin="6"/>
-                    <TextBlock  Text="{Binding SelectedBatch.Date }"  Margin="6"  />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Payment Date" Width="100"  HorizontalAlignment="Right" Margin="6"/>
-                    <TextBlock  Text="{Binding SelectedBatch.PayDate}"  Margin="6"  />
-                </StackPanel>
-            </StackPanel>
-        </Grid>-->
     </Grid>
 </UserControl>

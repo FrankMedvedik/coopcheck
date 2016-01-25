@@ -21,6 +21,4 @@ namespace CoopCheck.WPF.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
-  
-  
 }

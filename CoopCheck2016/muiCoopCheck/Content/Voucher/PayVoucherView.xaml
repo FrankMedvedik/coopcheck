@@ -6,63 +6,49 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="700">
-    <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="pay vouchers" Style="{StaticResource Heading2}" Margin="6,10,6,10"/>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Account" Width="150"   HorizontalAlignment="Right" Margin="6"/>
+    <!--<Grid Style="{StaticResource ContentRoot}">-->
+    <Grid>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"  >
+                <TextBlock Margin="6"  Style="{StaticResource Heading2}" Text="{Binding Status.StatusMessage}"/>
+                <TextBlock Margin="6"  Style="{StaticResource Heading2}" Text="{Binding Status.ErrorMessage}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  >
+                <TextBlock Text="Account" Width="150" FontWeight="Bold" HorizontalAlignment="Right" Margin="6"/>
                     <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}"  TabIndex="1"
-                            Name="cbAccounts" Width="200" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}">
-                        <i:Interaction.Triggers >
+                            Name="cbAccounts" Width="200" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}" >
+                        <!--<i:Interaction.Triggers >
                             <i:EventTrigger EventName="SelectionChanged" x:Name="Interactivity1Fix">
                                 <i:InvokeCommandAction Command="{Binding AccountChangedCommand}"  x:Name="InteractivityFix"/>
                             </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                        </i:Interaction.Triggers>-->
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding account_name}" Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding account_type}" />
+                                <TextBlock FontWeight="Bold" Text="{Binding account_name}" Margin="0,0,5,0"/>
+                                <TextBlock FontWeight="Bold" Text="{Binding account_type}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Batch" Width="150"   HorizontalAlignment="Right" Margin="6"  />
-                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedBatch, Mode=TwoWay}"  
-                            Name="cbOpenBatches" Width="200" ItemsSource="{Binding Path=OpenBatches, Mode=TwoWay}" TabIndex="2">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding batch_num}" Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding batch_label}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <TextBlock Text="{Binding BatchInfo}" Width="300"   HorizontalAlignment="Right" Margin="6"  />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Visibility="{Binding CanPrintChecks, Converter={StaticResource BoolToVisConverter}}">
                     <StackPanel Orientation="Horizontal"  >
-                        <TextBlock Margin="6"   Width="150">Starting Check #</TextBlock>
-                        <TextBox Margin="6"  Text="{Binding StartingCheckNum}" Width="150"/>
+                    <TextBlock FontWeight="Bold" Margin="6"   Width="150">Starting Check #</TextBlock>
+                    <TextBox FontWeight="Bold" Margin="6"  Text="{Binding StartingCheckNum}" Width="150"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"  >
-                        <TextBlock Margin="6"   Width="150">Ending Check #</TextBlock>
-                        <TextBlock Margin="6"  Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150" />
+                    <TextBlock FontWeight="Bold" Margin="6"   Width="151">Ending Check #  </TextBlock>
+                    <TextBlock FontWeight="Bold"  Margin="6"  Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150" />
                     </StackPanel>
-                    <Button Margin="172,6,6,6" Width="150" Content="Print Checks"  HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="PrintChecks"  IsEnabled="{Binding CanPrintChecks}"/>
+                    <Button Margin="172,6,6,6" Width="150" Content="Print Checks"  HorizontalAlignment="Left" TabIndex="3" 
+                            IsDefault="True"  Click="PrintChecks"  IsEnabled="{Binding CanPrintChecks}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Visibility="{Binding CanSwiftPay, Converter={StaticResource BoolToVisConverter}}">
                     <StackPanel Orientation="Horizontal" >
                         <Button Margin="172,6,6,6" Width="150" Content="Swift Pay" HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="SwiftPay" IsEnabled="{Binding CanSwiftPay}"/>
                     </StackPanel>
                 </StackPanel>
-                <!--<tb:TaskbarIcon x:Name="MyNotifyIcon"  IconSource="pack://application:,,,/Icons/MakePayment.ico" ToolTipText="Co-op Check Alert" />-->
-
             </StackPanel>
-        </ScrollViewer>
     </Grid>
 </UserControl>

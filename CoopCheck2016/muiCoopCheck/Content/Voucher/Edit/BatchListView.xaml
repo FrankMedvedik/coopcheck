@@ -16,10 +16,14 @@
                 ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
                 VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding batch_num }" Header="Batch Number"/>
-                    <DataGridTextColumn Binding="{Binding batch_label }" Header="Description" Width="300"/>
-                </DataGrid.Columns>
+                 <DataGridTextColumn Binding="{Binding batch_num }" Header="Batch Number"/>
+                <DataGridTextColumn Binding="{Binding job_num }" Header="Job" />
+                <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="Create Date" />
+                <DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="Pay Date" />
+                <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="Count" />
+                <DataGridTextColumn Binding="{Binding total_amount,StringFormat=c}" Header="Dollars" />
+            </DataGrid.Columns>
             </DataGrid>
-        <Button Grid.Row="1" Content="Refresh" HorizontalAlignment="Left" Click="Button_Click" Width="100" Margin="12" VerticalAlignment="Center"/>
+        <!--<Button Grid.Row="1" Content="Refresh" HorizontalAlignment="Left" Click="Button_Click" Width="100" Margin="12" VerticalAlignment="Center"/>-->
     </Grid>
 </UserControl>

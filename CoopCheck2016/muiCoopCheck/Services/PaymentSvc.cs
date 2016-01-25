@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
-using CoopCheck.Repository;
-using CoopCheck.WPF.Converters;
-using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Services
 {
@@ -21,8 +14,7 @@ namespace CoopCheck.WPF.Services
         {
             StatusInfo i = new StatusInfo()
             {
-                StatusMessage = String.Format("Batch {0} Submitted for swiftpay ", batchNum),
-                ShowMessageBox = true
+                StatusMessage = String.Format("Batch {0} Submitted for swiftpay ", batchNum)//,ShowMessageBox = true
             };
             // test code 
             //i.StatusMessage = "            StatusInfo i = new StatusInfo();
@@ -57,28 +49,31 @@ namespace CoopCheck.WPF.Services
             //return 
             var status = new StatusInfo();
 
-            int checkNum = startingCheckNum;
             var b = BatchEdit.GetBatchEdit(batchNum);
+            int checkNum = startingCheckNum + b.Vouchers.Count-1;
 
-            foreach (var c in b.Vouchers)
-            {
-                //status = PaymentPrintSvc.PrintCheck(b, c, checkNum);
-                //if (status.ErrorMessage == null)
-                //{
-                    WriteCheckCommand.Execute(batchNum, accountId, checkNum);
-                    status.IsBusy = true;
-                    status.ShowMessageBox = false;
-                    Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
-                //}
-                //else
-                //{
-                //    // commit all the checks up to the one that errored out
-                //    // send ERROR message to popup 
-                //    CommitCheckCommand.Execute(batchNum, --checkNum);
-                //    status.ShowMessageBox = true;
-                //    return status;
-                //}
-            }
+            // the write check should happen AFTER THE PHYSICAL CHECKS ARE PRINTED 
+
+            WriteCheckBatchCommand.Execute(batchNum, accountId, startingCheckNum);
+            //foreach (var c in b.Vouchers)
+            //{
+            //    //status = PaymentPrintSvc.PrintCheck(b, c, checkNum);
+            //    //if (status.ErrorMessage == null)
+            //    //{
+            //        WriteCheckCommand.Execute(batchNum, accountId, checkNum);
+            //        //status.IsBusy = true;
+            //        //status.ShowMessageBox = false;
+            //        //Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
+            //    //}
+            //    //else
+            //    //{
+            //    //    // commit all the checks up to the one that errored out
+            //    //    // send ERROR message to popup 
+            //    //    CommitCheckCommand.Execute(batchNum, --checkNum);
+            //    //    status.ShowMessageBox = true;
+            //    //    return status;
+            //    //}
+            //}
             // commit the check operation to the database
             // send completion message to popup with counts and account
             CommitCheckCommand.Execute(batchNum, checkNum);
@@ -86,8 +81,7 @@ namespace CoopCheck.WPF.Services
             {
                     StatusMessage =
                     String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
-                        startingCheckNum, --checkNum),
-                    ShowMessageBox = true
+                        startingCheckNum, checkNum)//,ShowMessageBox = true
             };
       }
 

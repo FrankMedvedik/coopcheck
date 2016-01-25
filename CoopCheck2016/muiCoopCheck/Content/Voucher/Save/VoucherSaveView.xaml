@@ -10,10 +10,12 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center">
             <TextBlock HorizontalAlignment="Left" Style="{StaticResource Heading2}" Text="{Binding SaveBatchInfoMessage}"/>
             <Button Margin="6" Command="{Binding SaveVouchersCommand}"  Width="100" IsEnabled="{Binding CanSave}">Save</Button>
-            <TextBlock HorizontalAlignment="Left" Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
-            <!--<TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelFileInfo.ExcelFilePath}" />
+            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock HorizontalAlignment="Left" Style="{StaticResource Heading2}" Text="{Binding ErrorBatchInfoMessage}"/>
+                <!--<TextBlock Style="{StaticResource Heading2}" Text="{Binding ExcelFileInfo.ExcelFilePath}" />
             <TextBox Text="{Binding ExcelFileInfo.SelectedWorksheet, Mode=TwoWay}" Width="30"/>-->
-            <Button Margin="6"  VerticalAlignment="Center"  Command="{Binding ExportVouchersCommand}" Width="100" IsEnabled="{Binding CanExport}">Export</Button>
+                <Button Margin="6"  VerticalAlignment="Center"  Command="{Binding ExportVouchersCommand}" Width="100" IsEnabled="{Binding CanExport}">Export</Button>
+            </StackPanel>
 
             <!--<clean:VoucherCleanView x:Name="vcvs" />-->
             <!--<dataClean:DataCleanFeedbackView />-->

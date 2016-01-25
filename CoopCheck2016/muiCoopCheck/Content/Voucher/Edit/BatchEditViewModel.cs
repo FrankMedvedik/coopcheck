@@ -11,6 +11,7 @@ using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
@@ -20,6 +21,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
     {
 
         private Boolean _showSelectedBatch;
+        public RelayCommand RefreshBatchListCommand { get; private set; }
 
         public Boolean ShowSelectedBatch
         {
@@ -103,12 +105,27 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public BatchEditViewModel()
         {
+            RefreshBatchListCommand = new RelayCommand(RefreshBatchList, CanRefreshBatchList);
             ResetState();
-            Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
             {
-                if(message.Content != null)
+                if (message.Content != null)
                     BatchNum = message.Content.batch_num;
+                else
+                    ShowSelectedBatch = false;
             });
+        }
+
+        private bool CanRefreshBatchList()
+        {
+            return true;
+        }
+
+      
+
+        private void RefreshBatchList()
+        {
+            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
         }
 
         public void ResetState()
@@ -252,6 +269,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 { StatusMessage = "saving...", IsBusy = true };
                 SelectedBatch = await SelectedBatch.SaveAsync();
                 Status = new StatusInfo() { StatusMessage = "saved" };
+                RefreshBatchList();
                 Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
             }
             else

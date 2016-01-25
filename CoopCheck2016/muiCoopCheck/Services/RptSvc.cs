@@ -15,7 +15,7 @@ namespace CoopCheck.WPF.Services
             using (var ctx = new CoopCheckEntities())
             {
                 var x = await (
-                    from l in ctx.vwJobRpt
+                    from l in ctx.vwJobRpts
                     where ((l.first_pay_date >= grc.StartDate) 
                         && (l.last_pay_date <= grc.EndDate) 
                         && l.account_id == grc.Account.account_id) 
@@ -49,6 +49,7 @@ namespace CoopCheck.WPF.Services
                 query =
                     ctx.vwPayments.Where(
                         x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate);
+
                 if (!String.IsNullOrEmpty(crc.CheckNumber))
                 {
                     query = query.Where(x => x.check_num == crc.CheckNumber);
@@ -195,65 +196,53 @@ namespace CoopCheck.WPF.Services
             List<vwVoidedPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
-                query =
-                    ctx.vwVoidedPayments.Where(x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate).OrderBy(x => x.check_num).ThenBy(x=> x.check_date);
+                query = ctx.vwVoidedPayments.Where(x => x.account_id == crc.Account.account_id).OrderBy(x => x.check_num).ThenBy(x => x.check_date); ;
+                    // if they pass a check number in ignore other criteria
                 if (!String.IsNullOrEmpty(crc.CheckNumber))
                 {
                     query = query.Where(x => x.check_num == crc.CheckNumber);
-
                 }
-
-                query = query.Where(x => x.account_id == crc.Account.account_id);
-
-                if (!String.IsNullOrWhiteSpace(crc.Email))
+                else
                 {
-                    query = query.Where(x => x.email.Contains(crc.Email));
+                    query = query.Where(x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate);
 
-                }
+                    if (!String.IsNullOrWhiteSpace(crc.Email))
+                    {
+                        query = query.Where(x => x.email.Contains(crc.Email));
 
-                if (!String.IsNullOrWhiteSpace(crc.PhoneNumber))
-                {
-                    query = query.Where(x => x.phone_number.Contains(crc.PhoneNumber));
+                    }
 
-                }
+                    if (!String.IsNullOrWhiteSpace(crc.PhoneNumber))
+                    {
+                        query = query.Where(x => x.phone_number.Contains(crc.PhoneNumber));
 
-                if (!String.IsNullOrEmpty(crc.LastName))
-                {
-                    query = query.Where(x => x.last_name.Contains(crc.LastName));
-                }
+                    }
 
-                if (!String.IsNullOrEmpty(crc.FirstName))
-                {
-                    query = query.Where(x => x.first_name.Contains(crc.FirstName));
-                }
+                    if (!String.IsNullOrEmpty(crc.LastName))
+                    {
+                        query = query.Where(x => x.last_name.Contains(crc.LastName));
+                    }
 
-                if (crc.IsCleared)
-                {
-                    query = query.Where(x => x.cleared_flag == true);
-                }
+                    if (!String.IsNullOrEmpty(crc.FirstName))
+                    {
+                        query = query.Where(x => x.first_name.Contains(crc.FirstName));
+                    }
 
-                if (crc.IsPrinted)
-                {
-                    query = query.Where(x => x.print_flag == true);
-                }
+                    if (crc.BatchNumber != null)
+                    {
+                        query =
+                            query.Where(
+                                x => x.batch_num == crc.BatchNumber);
+                    }
 
-                if (crc.BatchNumber != null)
-                {
-                    query =
-                        query.Where(
-                            x => x.batch_num == crc.BatchNumber);
-                }
-
-                if (!String.IsNullOrEmpty(crc.JobNumber))
-                {
-                    //int filter;
-                    //if (int.TryParse(crc.JobNumber, out filter))
-                    //query = query.Where(x => x.job_num == n);
-                    query =
-                        query.Where(
-                            x =>
-                                System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double) x.job_num)
-                                    .Contains(crc.JobNumber));
+                    if (!String.IsNullOrEmpty(crc.JobNumber))
+                    {
+                        query =
+                            query.Where(
+                                x =>
+                                    System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double) x.job_num)
+                                        .Contains(crc.JobNumber));
+                    }
                 }
                 v = await (from b in query select b).ToListAsync();
             }

@@ -29,7 +29,6 @@ namespace CoopCheck.Repository
     
         public virtual DbSet<batch> batches { get; set; }
         public virtual DbSet<check_tran> check_tran { get; set; }
-        public virtual DbSet<OpenBatch> OpenBatches { get; set; }
         public virtual DbSet<voucher> vouchers { get; set; }
         public virtual DbSet<vwCheck> vwCheck { get; set; }
         public virtual DbSet<vwPositivePay> vwPositivePay { get; set; }
@@ -38,7 +37,8 @@ namespace CoopCheck.Repository
         public virtual DbSet<vwBasicPayment> vwBasicPayments { get; set; }
         public virtual DbSet<bank_account> bank_accounts { get; set; }
         public virtual DbSet<vwBatchRpt> vwBatchRpts { get; set; }
-        public virtual DbSet<vwJobRpt> vwJobRpt { get; set; }
+        public virtual DbSet<vwJobRpt> vwJobRpts { get; set; }
+        public virtual DbSet<vwOpenBatch> vwOpenBatches { get; set; }
     
         public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()
         {
@@ -89,11 +89,6 @@ namespace CoopCheck.Repository
                 new ObjectParameter("last_name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<dsa_GetChecks_Result>("dsa_GetChecks", account_idParameter, batch_numParameter, starting_check_numParameter, ending_check_numParameter, starting_check_dateParameter, ending_check_dateParameter, job_numParameter, last_nameParameter);
-        }
-    
-        public virtual ObjectResult<dsa_GetOpenBatch_Result> dsa_GetOpenBatch()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<dsa_GetOpenBatch_Result>("dsa_GetOpenBatch");
         }
     
         public virtual ObjectResult<dsa_GetOutstandingChecks_Result> dsa_GetOutstandingChecks(Nullable<int> account_id)
@@ -147,6 +142,16 @@ namespace CoopCheck.Repository
                 new ObjectParameter("EndDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getbatchRpt_Result>("getbatchRpt", startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<vwOpenBatch> dal_GetOpenBatch()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwOpenBatch>("dal_GetOpenBatch");
+        }
+    
+        public virtual ObjectResult<vwOpenBatch> dal_GetOpenBatch(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwOpenBatch>("dal_GetOpenBatch", mergeOption);
         }
     }
 }

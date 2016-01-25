@@ -96,8 +96,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     Status = new StatusInfo()
                     {
                         StatusMessage = "failed to clear payments",
-                        ErrorMessage = ex.Message,
-                        ShowMessageBox = true
+                        ErrorMessage = ex.Message
+                        //,ShowMessageBox = true
                     };
                 }
             });

@@ -106,7 +106,7 @@
     <Compile Include="VoucherList.designer.cs">
       <DependentUpon>VoucherList.cs</DependentUpon>
     </Compile>
-    <Compile Include="WriteCheckCommand.cs" />
+    <Compile Include="WriteCheckBatchCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

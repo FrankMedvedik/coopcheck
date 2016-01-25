@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
@@ -21,6 +22,10 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         public RelayCommand CleanAndPostVouchersCommand { get; private set; }
         public VoucherListViewModel()
         {
+
+            //FilteredVoucherImports.CollectionChanged += FilteredVoucherImportsChanged;
+            //VoucherImports.CollectionChanged += VoucherImportsChanged;
+
             // caled when the vouchers come out of the excel import process
             Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
             {
@@ -44,10 +49,16 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             {
                 if (message.Notification == Notifications.VouchersDataCleaned)
                 {
-                    VoucherImports = message.Content.VoucherImports;
+                    var v =
+                        message.Content.VoucherImports.OrderBy(x => x.OkMailingAddress)
+                            .ThenBy(x => x.OkPhone)
+                            .ThenBy(x => x.OkEmailAddress)
+                            .ToList();
+                    VoucherImports = new ObservableCollection<VoucherImportWrapper>(v);
                     ExcelFileInfo = message.Content.ExcelFileInfo;
+                    CanPost = true;
+                    FilterVoucherImports();
                 }
-                CanPost = true;
             });
 
             Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
@@ -60,6 +71,18 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             
             this.CleanAndPostVouchersCommand = new RelayCommand(CleanTheVouchers, CanCleanAndPostVouchers);
 
+        }
+
+        private void VoucherImportsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+         // enable post
+         // disable next
+
+        }
+
+        private void FilteredVoucherImportsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public bool CanCleanAndPostVouchers()
@@ -161,7 +184,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public void DeleteSelectedVoucher()
         {
-                FilteredVoucherImports.Remove(SelectedVoucher);
+                VoucherImports.Remove(SelectedVoucher);
+                FilterVoucherImports();
                 SelectedVoucher = null;
         }
 
@@ -237,9 +261,13 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         private void FilterVoucherImports()
         {
-            FilteredVoucherImports = (FilterRows) ? new ObservableCollection<VoucherImportWrapper>( VoucherImports.Where(x =>x.HasErrors)) : VoucherImports;
+            FilteredVoucherImports = (FilterRows) ? 
+                new ObservableCollection<VoucherImportWrapper>(VoucherImports.Where(x => x.HasErrors || !x.OkEmailAddress || !x.OkMailingAddress || !x.OkPhone)) : VoucherImports;
         }
+
+        
     }
 
- 
+
 }
+

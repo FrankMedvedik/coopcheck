@@ -13,16 +13,12 @@
         </Grid.RowDefinitions>
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
-                <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Vertical" x:Name="cv">
-                    <Expander  Header="Open Batches" IsExpanded="True">
-                        <edit:BatchListView HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    </Expander>
+                <StackPanel Orientation="Vertical" x:Name="cv" VerticalAlignment="Top">
+                    <edit:BatchListView HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <edit:BatchEditView HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" x:Name="nov">
+                    <StackPanel x:Name="nov">
                     <Content:NoAccessView />
-                </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

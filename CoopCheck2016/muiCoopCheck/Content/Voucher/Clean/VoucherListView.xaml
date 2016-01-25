@@ -95,7 +95,7 @@
             <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="6"
                 ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="400"  MinWidth="1000"
                   SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged"
-                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" 
+                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"  
                   EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Width="Auto">
                 <DataGrid.Columns>
                         <!--<mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
@@ -103,11 +103,11 @@
                         <!--<mui:DataGridCheckBoxColumn Binding="{Binding HasBeenDataCleaned, Mode=OneWay}" Header="Clean" /> -->
                     <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                     <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <DataGridCheckBoxColumn Binding="{Binding OkEmailAddress, Mode=OneWay}" Header="Ok" ElementStyle="{StaticResource CircleCheckbox}"  />
+                    <DataGridCheckBoxColumn Binding="{Binding OkEmailAddress, Mode=OneWay}" Header="Email" ElementStyle="{StaticResource CircleCheckbox}"  />
                     <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <DataGridCheckBoxColumn Binding="{Binding OkPhone, Mode=OneWay}"    Header="OK" ElementStyle="{StaticResource CircleCheckbox}" IsReadOnly="False"  />
+                    <DataGridCheckBoxColumn Binding="{Binding OkPhone, Mode=OneWay}"    Header="Phone" ElementStyle="{StaticResource CircleCheckbox}" IsReadOnly="False"  />
                     <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                    <DataGridCheckBoxColumn   Binding="{Binding OkMailingAddress, Mode=OneWay}" Header="Ok" ElementStyle="{StaticResource CircleCheckbox}"  />
+                    <DataGridCheckBoxColumn   Binding="{Binding OkMailingAddress, Mode=OneWay}" Header="Mail" ElementStyle="{StaticResource CircleCheckbox}"  />
                 <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"  Header="State" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" />

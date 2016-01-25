@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace CoopCheck.Library
 {
     [Serializable]
-    public class WriteCheckCommand : ReadOnlyBase<WriteCheckCommand>
+    public class WriteCheckBatchCommand : ReadOnlyBase<WriteCheckBatchCommand>
     {
         #region properties
         public static readonly PropertyInfo<PaymentInfoList> PaymentInfoListProperty = RegisterProperty<PaymentInfoList>(c => c.List);
@@ -26,27 +26,27 @@ namespace CoopCheck.Library
             base.AddBusinessRules();
 #if!Debug
             // TODO: add business rules
-            BusinessRules.AddRule(typeof(WriteCheckCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(WriteCheckBatchCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
 #endif
         }
         public static bool CanExecuteObject()
         {
-            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.ExecuteMethod, typeof(WriteCheckCommand));
+            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.ExecuteMethod, typeof(WriteCheckBatchCommand));
         }
 
         #endregion
         #region Factory Methods
 #if !SILVERLIGHT
-        public static WriteCheckCommand Execute(int batchNum, int accountId, int firstCheckNum)
+        public static WriteCheckBatchCommand Execute(int batchNum, int accountId, int firstCheckNum)
         {
 
-            return DataPortal.Fetch<WriteCheckCommand>(new Criteria() { BatchNum = batchNum, AccountId = accountId, FirstCheckNum = firstCheckNum });
+            return DataPortal.Fetch<WriteCheckBatchCommand>(new Criteria() { BatchNum = batchNum, AccountId = accountId, FirstCheckNum = firstCheckNum });
         }
 #endif
 
-        public static void Execute(int batchNum, int accountId, int firstCheckNum, EventHandler<DataPortalResult<WriteCheckCommand>> callback)
+        public static void Execute(int batchNum, int accountId, int firstCheckNum, EventHandler<DataPortalResult<WriteCheckBatchCommand>> callback)
         {
-            DataPortal.BeginFetch<WriteCheckCommand>(new Criteria() { BatchNum = batchNum, AccountId = accountId, FirstCheckNum = firstCheckNum }, callback);
+            DataPortal.BeginFetch<WriteCheckBatchCommand>(new Criteria() { BatchNum = batchNum, AccountId = accountId, FirstCheckNum = firstCheckNum }, callback);
         }
         #endregion
 
@@ -103,7 +103,7 @@ namespace CoopCheck.Library
             using (var dalManager = DAL.DalFactory.GetManager())
             {
                 var dal = dalManager.GetProvider<IPaymentInfoListDal>();
-                List<PaymentInfoDto> data = dal.WriteChecks(crit.BatchNum, crit.AccountId, crit.FirstCheckNum);
+                List<PaymentInfoDto> data = dal.WriteCheckBatch(crit.BatchNum, crit.AccountId, crit.FirstCheckNum);
                 List = PaymentInfoList.LoadPaymentInfoList(data);
             }
         }

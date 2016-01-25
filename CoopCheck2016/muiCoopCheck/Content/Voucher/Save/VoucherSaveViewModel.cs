@@ -1,12 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CoopCheck.Library;
-using CoopCheck.WPF.Content.Voucher.Edit;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -46,8 +43,8 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                     ExcelFileInfo = message.Content.ExcelFileInfo;
                     VoucherImportWrappers = message.Content.VoucherImports;
                     Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
-                    if(VoucherImportWrappers.Any(x => x.OkMailingAddress)) CanSave = true;
-                    if (VoucherImportWrappers.Any(x => !x.OkMailingAddress)) CanExport = true;
+                    if(GoodVouchers.Any()) CanSave = true;
+                    if (BadVouchers.Any()) CanExport = true;
                 }
             });
         }
@@ -94,8 +91,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                     Status = new StatusInfo()
                     {
                         StatusMessage = "export to excel failed",
-                        ErrorMessage = e.Message,
-                        ShowMessageBox = true
+                        ErrorMessage = e.Message//,ShowMessageBox = true
                     };
                 }
             });
@@ -127,6 +123,16 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         }
 
         private ObservableCollection<VoucherImportWrapper> _voucherImportWrappers = new ObservableCollection<VoucherImportWrapper>();
+
+        public List<VoucherImportWrapper> BadVouchers
+        {
+            get { return VoucherImportWrappers.Where(x => !x.OkMailingAddress).ToList(); }
+        }
+        public List<VoucherImportWrapper> GoodVouchers
+        {
+            //get { return VoucherImportWrappers.Where(x => x.OkMailingAddress).ToList(); }
+           get { return VoucherImportWrappers.ToList(); }
+        }
 
         public ObservableCollection<VoucherImportWrapper> VoucherImportWrappers
             {
@@ -163,13 +169,13 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             //CanSave =true;
 
                 SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1:C}",
-                VoucherImportWrappers.Count(x => x.AltAddress.OkComplete),
-                VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(x => x.Amount).Sum());
+                GoodVouchers.Count,
+                GoodVouchers.Select(x => x.Amount).Sum());
                 ErrorBatchInfoMessage = string.Format("{0} Vouchers with errors totalling {1:C} will be saved to Excel",
-                VoucherImportWrappers.Count(x => !x.AltAddress.OkMailingAddress),
-                VoucherImportWrappers.Where(x => !x.AltAddress.OkMailingAddress).Select(x => x.Amount).Sum());
+                BadVouchers.Count,
+                BadVouchers.Select(x => x.Amount).Sum());
 
-            CanSave = (VoucherImportWrappers.Count(x => x.AltAddress.OkComplete) > 0);
+            CanSave = (GoodVouchers.Any());
 
         }
         public string SaveBatchInfoMessage
@@ -199,7 +205,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         }
 
         public List<VoucherExcelExport> BadVoucherExports { get
-            { return  VoucherImportWrappers.Where(x => !x.AltAddress.OkMailingAddress).Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList(); } }
+            { return  BadVouchers.Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList(); } }
 
         private string _errorBatchInfoMessage;
         private bool _canSave;
@@ -217,7 +223,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
 
             try
             {
-                List<VoucherImport> vouchers = VoucherImportWrappers.Where(x => x.AltAddress.OkComplete).Select(VoucherImportWrapperConverter.ToVoucherImport).ToList();
+                List<VoucherImport> vouchers = GoodVouchers.Select(VoucherImportWrapperConverter.ToVoucherImport).ToList();
                 var batchNum = await BatchSvc.ImportVouchers(vouchers);
                 Status = new StatusInfo()
                 {
@@ -232,8 +238,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 Status = new StatusInfo()
                 {
                     StatusMessage = "Failed to create batch",
-                    ErrorMessage = ex.Message,
-                    ShowMessageBox=true
+                    ErrorMessage = ex.Message//,ShowMessageBox=true
                 };
             }
         }

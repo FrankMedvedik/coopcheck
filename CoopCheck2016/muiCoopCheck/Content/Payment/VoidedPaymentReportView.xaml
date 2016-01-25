@@ -15,6 +15,7 @@
         <Expander Header="payment search criteria" Grid.Row="0" IsExpanded="true">
             <StackPanel>
                 <payment:PaymentReportCriteriaView x:Name="prcv"/>
+                
                 <StackPanel Orientation="Horizontal" >
                     <Button Width="100" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
                     <Button Width="100" Margin="6" HorizontalAlignment="Left"   Click="Excel_Click">Excel</Button>
@@ -46,7 +47,6 @@
                 <StaticResource ResourceKey="dgPAddress2"  />
                 <StaticResource ResourceKey="dgPCleared"/>
                 <StaticResource ResourceKey="dgPPrintFlag"/>
-
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

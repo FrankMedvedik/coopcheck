@@ -42,7 +42,7 @@ namespace CoopCheck.Test.Library
 
             var nextCheckNum = NextCheckNumCommand.Execute(3);
 
-            var list = WriteCheckCommand.Execute(obj.Num, 3, nextCheckNum);
+            var list = WriteCheckBatchCommand.Execute(obj.Num, 3, nextCheckNum);
 
             var retVal = string.Empty;
             try
@@ -95,7 +95,7 @@ namespace CoopCheck.Test.Library
 
             var nextCheckNum = NextCheckNumCommand.Execute(3);
 
-            var list = WriteCheckCommand.Execute(obj.Num, 3, nextCheckNum);
+            var list = WriteCheckBatchCommand.Execute(obj.Num, 3, nextCheckNum);
 
             var retVal = string.Empty;
             try

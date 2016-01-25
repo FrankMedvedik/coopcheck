@@ -25,8 +25,7 @@ namespace CoopCheck.WPF.Content.Status
             {
                 StatusMessage = "Welcome to Coopcheck",
                 ErrorMessage = "",
-                IsBusy =false,
-                ShowMessageBox = false
+                IsBusy =false
             };
 
             Status = s;
@@ -34,11 +33,11 @@ namespace CoopCheck.WPF.Content.Status
             Messenger.Default.Register<NotificationMessage<StatusInfo>>(this, message =>
             {
                 Status = ObjectCopier.Clone(message.Content);
-                if (Status.ShowMessageBox)
-                {
-                    Messenger.Default.Send(new NotificationMessage(Notifications.ShowPopupStatus));
-                    Status.ShowMessageBox = false;
-                }
+                //if (Status.ShowMessageBox)
+                //{
+                //    Messenger.Default.Send(new NotificationMessage(Notifications.ShowPopupStatus));
+                //    Status.ShowMessageBox = false;
+                //}
             });
 
         }

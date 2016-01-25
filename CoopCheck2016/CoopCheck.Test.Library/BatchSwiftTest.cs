@@ -34,7 +34,7 @@ namespace CoopCheck.Test.Library
             voc.Municipality = "Chalfont";
             voc.Region = "PA";
             voc.PostalCode = "18914";
-            voc.Amount = 1;
+            voc.Amount = 5;
             voc.EmailAddress = "dreckner@reckner.com";
 
             obj.Vouchers.Add(voc);

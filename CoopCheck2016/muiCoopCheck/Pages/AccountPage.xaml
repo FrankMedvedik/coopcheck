@@ -8,22 +8,12 @@
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              mc:Ignorable="d" >
-    <Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="9*"/>
-        <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
     <Grid Style="{StaticResource ContentRoot}" >
-            <ScrollViewer >
-                <StackPanel Orientation="Vertical">
-                    <bankAccount:AccountView x:Name="av"/>
-                    <content:NoAccessView x:Name="nov" />
-                </StackPanel>
-            </ScrollViewer>
-            
-    </Grid>
-    <Grid  Grid.Row="1" >
-            <status:StatusView />
-        </Grid>
+        <ScrollViewer >
+            <StackPanel Orientation="Vertical">
+                <bankAccount:AccountView x:Name="av"/>
+                <content:NoAccessView x:Name="nov" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

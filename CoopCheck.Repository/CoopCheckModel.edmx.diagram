@@ -4,10 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="19ea3181468246cc83607e824c1010ad" Name="Diagram1" ZoomLevel="75">
+      <Diagram DiagramId="19ea3181468246cc83607e824c1010ad" Name="Diagram1" ZoomLevel="54">
         <EntityTypeShape EntityType="CoopCheckModel.batch" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CoopCheckModel.check_tran" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CoopCheckModel.OpenBatch" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CoopCheckModel.voucher" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CoopCheckModel.vwCheck" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwPositivePay" Width="1.5" PointX="2.75" PointY="9.75" />
@@ -17,6 +16,7 @@
         <EntityTypeShape EntityType="CoopCheckModel.bank_account" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwBatchRpt" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwJobRpt" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.vwOpenBatch" Width="1.5" PointX="7.375" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

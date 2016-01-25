@@ -43,15 +43,15 @@ namespace CoopCheck.WPF.Content.Payment
                     Status = new StatusInfo()
                     {
                         StatusMessage = "failed to clear payments",
-                        ErrorMessage = ex.Message,
-                        ShowMessageBox = true
+                        ErrorMessage = ex.Message
+                        //ShowMessageBox = true
                     };
                 }
             });
             Status = new StatusInfo()
             {
-                StatusMessage = String.Format("check number {0} has been voided", SelectedPayment.check_num),
-                ShowMessageBox = true
+                StatusMessage = String.Format("check number {0} has been voided", SelectedPayment.check_num)
+                //ShowMessageBox = true
             };
         }
 

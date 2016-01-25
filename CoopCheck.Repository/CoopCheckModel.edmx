@@ -71,15 +71,6 @@
           <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'CoopCheck.dbo.OpenBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="OpenBatch">
-          <Key>
-            <PropertyRef Name="batch_num" />
-          </Key>
-          <Property Name="batch_num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="batch_label" Type="nvarchar" MaxLength="266" />
-        </EntityType>
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.voucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="voucher">
           <Key>
@@ -227,6 +218,19 @@ warning 6002: The table/view 'CoopCheck.dbo.vwJobRpt' does not have a primary ke
           <Property Name="last_check_date" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CoopCheck.dbo.vwOpenBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwOpenBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="job_num" Type="int" />
+          <Property Name="batch_date" Type="smalldatetime" />
+          <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="voucher_cnt" Type="int" />
+          <Property Name="total_amount" Type="money" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwPayment">
           <Key>
@@ -327,6 +331,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="updated" Type="smalldatetime" />
           <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Function Name="dal_GetOpenBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="dsa_GetCheckList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="person_id" Type="nvarchar" Mode="In" />
         </Function>
@@ -359,12 +364,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="batch" EntityType="Self.batch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="check_tran" EntityType="Self.check_tran" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OpenBatch" EntityType="Self.OpenBatch" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OpenBatch].[batch_num] AS [batch_num], 
-    [OpenBatch].[batch_label] AS [batch_label]
-    FROM [dbo].[OpenBatch] AS [OpenBatch]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="voucher" EntityType="Self.voucher" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [voucher].[tran_id] AS [tran_id], 
@@ -492,6 +491,16 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     [vwJobRpt].[first_check_date] AS [first_check_date], 
     [vwJobRpt].[last_check_date] AS [last_check_date]
     FROM [dbo].[vwJobRpt] AS [vwJobRpt]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwOpenBatch" EntityType="Self.vwOpenBatch" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwOpenBatch].[batch_num] AS [batch_num], 
+    [vwOpenBatch].[job_num] AS [job_num], 
+    [vwOpenBatch].[batch_date] AS [batch_date], 
+    [vwOpenBatch].[pay_date] AS [pay_date], 
+    [vwOpenBatch].[voucher_cnt] AS [voucher_cnt], 
+    [vwOpenBatch].[total_amount] AS [total_amount]
+    FROM [dbo].[vwOpenBatch] AS [vwOpenBatch]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwPayment" EntityType="Self.vwPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -635,13 +644,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="updated" Type="DateTime" Precision="0" />
           <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="OpenBatch">
-          <Key>
-            <PropertyRef Name="batch_num" />
-          </Key>
-          <Property Name="batch_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="batch_label" Type="String" MaxLength="266" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="voucher">
           <Key>
             <PropertyRef Name="tran_id" />
@@ -670,7 +672,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
         <EntityContainer Name="CoopCheckEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="batches" EntityType="Self.batch" />
           <EntitySet Name="check_tran" EntityType="Self.check_tran" />
-          <EntitySet Name="OpenBatches" EntityType="Self.OpenBatch" />
           <EntitySet Name="vouchers" EntityType="Self.voucher" />
           <FunctionImport Name="dsa_GetCheckingAccounts" ReturnType="Collection(CoopCheckModel.dsa_GetCheckingAccounts_Result)" />
           <FunctionImport Name="dsa_GetCheckList" ReturnType="Collection(CoopCheckModel.dsa_GetCheckList_Result)">
@@ -686,7 +687,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
             <Parameter Name="job_num" Mode="In" Type="Int32" />
             <Parameter Name="last_name" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="dsa_GetOpenBatch" ReturnType="Collection(CoopCheckModel.dsa_GetOpenBatch_Result)" />
           <FunctionImport Name="dsa_GetOutstandingChecks" ReturnType="Collection(CoopCheckModel.dsa_GetOutstandingChecks_Result)">
           <Parameter Name="account_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -712,6 +712,8 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
           <EntitySet Name="vwBatchRpt" EntityType="CoopCheckModel.vwBatchRpt" />
           <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
+          <FunctionImport Name="dal_GetOpenBatch" EntitySet="vwOpenBatches" ReturnType="Collection(CoopCheckModel.vwOpenBatch)" />
+          <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -1117,6 +1119,25 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="first_check_date" Type="DateTime" Precision="0" />
           <Property Name="last_check_date" Type="DateTime" Precision="0" />
         </EntityType>
+        <ComplexType Name="dal_GetOpenBatch_Result">
+          <Property Type="Int32" Name="job_num" Nullable="true" />
+          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="batch_num" Nullable="true" />
+          <Property Type="Int32" Name="voucher_cnt" Nullable="true" />
+          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
+        </ComplexType>
+        <EntityType Name="vwOpenBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="voucher_cnt" Type="Int32" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1173,14 +1194,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="updated" ColumnName="updated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OpenBatches">
-            <EntityTypeMapping TypeName="CoopCheckModel.OpenBatch">
-              <MappingFragment StoreEntitySet="OpenBatch">
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="batch_label" ColumnName="batch_label" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1275,14 +1288,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="updated" ColumnName="updated" />
                 <ScalarProperty Name="usr" ColumnName="usr" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetOpenBatch" FunctionName="CoopCheckModel.Store.dsa_GetOpenBatch">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetOpenBatch_Result">
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="batch_label" ColumnName="batch_label" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1620,6 +1625,20 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="dal_GetOpenBatch" FunctionName="CoopCheckModel.Store.dal_GetOpenBatch">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="vwOpenBatches">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwOpenBatch">
+              <MappingFragment StoreEntitySet="vwOpenBatch">
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1634,7 +1653,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

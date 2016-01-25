@@ -56,6 +56,7 @@ namespace CoopCheck.WPF.Services
                         sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
                         sb = sb.Save();
                     }
+                    
                 }
                 catch (Exception e)
                 {

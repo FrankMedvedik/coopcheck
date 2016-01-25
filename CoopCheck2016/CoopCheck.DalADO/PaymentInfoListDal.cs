@@ -372,7 +372,7 @@ namespace CoopCheck.DalADO
                 throw new Csla.DataPortalException(err);
             }
         }
-        public List<PaymentInfoDto> WriteChecks(int batchNum, int accountId, int firstCheckNum)
+        public List<PaymentInfoDto> WriteCheckBatch(int batchNum, int accountId, int firstCheckNum)
         {
             var list = new List<PaymentInfoDto>();
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))

@@ -9,13 +9,12 @@ namespace CoopCheck.WPF.Services
     public static class OpenBatchSvc
     {
 
-        public static async Task<List<OpenBatch>> GetOpenBatches()
+        public static async Task<List<vwOpenBatch>> GetOpenBatches()
         {
             using (var ctx = new CoopCheckEntities())
             {
-
-                var x = await (
-                    from a in ctx.OpenBatches
+                var x = await ( 
+                    from a in ctx.vwOpenBatches
                     orderby a.batch_num
                     select a).ToListAsync();
                 return x;

@@ -5,6 +5,7 @@
             VerticalAlignment="Top" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>
             <StaticResource ResourceKey="dgPJob" />
+            <StaticResource ResourceKey="dgPBatch" />
             <StaticResource ResourceKey="dgPCheckNum"  />
             <StaticResource ResourceKey="dgPEmail"/>
             <StaticResource ResourceKey="dgPLast"  />

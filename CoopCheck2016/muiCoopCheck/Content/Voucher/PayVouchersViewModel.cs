@@ -12,21 +12,13 @@ namespace CoopCheck.WPF.Content.Voucher
 {
     public class PayVouchersViewModel : ViewModelBase
     {
-        private ObservableCollection<OpenBatch> _openBatches;
-
-        public ObservableCollection<OpenBatch> OpenBatches
+    
+        private vwOpenBatch _selectedBatch = new vwOpenBatch();
+        private void RefreshBatchList()
         {
-            get { return _openBatches; }
-            set
-            {
-                _openBatches = value;
-                NotifyPropertyChanged();
-            }
+            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
         }
-
-        private OpenBatch _selectedBatch = new OpenBatch();
-
-        public OpenBatch SelectedBatch
+        public vwOpenBatch SelectedBatch
         {
             get { return _selectedBatch; }
             set
@@ -44,10 +36,13 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _selectedBatchEdit = value;
                 NotifyPropertyChanged();
-                BatchInfo = String.Format("{0} vouchers for job {1}", SelectedBatchEdit.Vouchers.Count,
-                    SelectedBatchEdit.JobNum);
-                EndingCheckNum = StartingCheckNum + SelectedBatchEdit.Vouchers.Count;
-
+                //if (SelectedBatchEdit == null)
+                //    BatchInfo = "";
+                //else
+                //    BatchInfo = string.Format("{0} vouchers for job {1}", SelectedBatchEdit.Vouchers.Count,
+                //        SelectedBatchEdit.JobNum);
+                //if (SelectedAccount.account_type == "CHECKING")
+                //    SetCheckNumbers();
             }
         }
 
@@ -81,41 +76,53 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _selectedAccount = value;
                 NotifyPropertyChanged();
-                if (SelectedAccount.account_type == "CHECKING")
-                {
-                    SetStartingCheckNum();
-                    CanPrintChecks = true;
-                    CanSwiftPay = false;
-
-                }
-                else if (SelectedAccount.account_type == "PROMOCODE")
-                {
-                    CanPrintChecks = false;
-                    CanSwiftPay = true;
-                }
+                SetAccountInfo();
             }
 
         }
 
-        private async void SetStartingCheckNum()
+        private void SetAccountInfo()
+        {
+            if (SelectedAccount.account_type == "CHECKING")
+            {
+                SetCheckNumbers();
+                CanPrintChecks = true;
+                CanSwiftPay = false;
+
+            }
+            else if (SelectedAccount.account_type == "PROMOCODE")
+            {
+                CanPrintChecks = false;
+                CanSwiftPay = true;
+            }
+        }
+        private async void SetCheckNumbers()
         {
             StartingCheckNum = await BatchSvc.NextCheckNum(SelectedAccount.account_id);
         }
 
         private async void SetSelectedBatchEdit()
         {
-            SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
+            if (SelectedBatch != null)
+            {
+                SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
+                SetAccountInfo();
+            }
+            else
+            {
+                CanPrintChecks = false;
+                CanSwiftPay = false;
+            }
         }
 
         public PayVouchersViewModel()
         {
-            var s = new StatusInfo()
-            {
-                StatusMessage = "click select file to choose a new excel file to import voucher from",
-                ErrorMessage = "No Errors"
-            };
 
-            Status = s;
+            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
+            {
+                //if (message.Content != null)
+                    SelectedBatch = message.Content;
+            });
             ResetState();
         }
 
@@ -126,6 +133,7 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _startingCheckNum = value;
                 NotifyPropertyChanged();
+                EndingCheckNum = StartingCheckNum + SelectedBatchEdit.Vouchers.Count-1;
             }
         }
         public int EndingCheckNum
@@ -137,29 +145,6 @@ namespace CoopCheck.WPF.Content.Voucher
                 NotifyPropertyChanged();
             }
         }
-
-        //private void HandleNotification(NotificationMessage message)
-        //{
-        //    if (message.Notification == Notifications.ImportCannotProceed)
-        //    {
-        //        CanProceed = false;
-        //    }
-        //    if (message.Notification == Notifications.ImportCanProceed)
-        //    {
-        //        CanProceed = true;
-        //    }
-        //}
-
-        public bool CanProceed
-        {
-            get { return _canProceed; }
-            set
-            {
-                _canProceed = value;
-                NotifyPropertyChanged();
-            }
-        }
-
 
 
         public StatusInfo Status
@@ -175,7 +160,6 @@ namespace CoopCheck.WPF.Content.Voucher
 
         private StatusInfo _status;
 
-        private bool _canProceed;
         private int _startingCheckNum;
         private int _endingCheckNum;
         private ObservableCollection<bank_account> _accounts;
@@ -187,7 +171,6 @@ namespace CoopCheck.WPF.Content.Voucher
         public async void ResetState()
         {
             Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
-            OpenBatches = new ObservableCollection<OpenBatch>(await OpenBatchSvc.GetOpenBatches());
 
         }
 
@@ -211,8 +194,23 @@ namespace CoopCheck.WPF.Content.Voucher
                 IsBusy = true,
                 StatusMessage = "printing checks..."
             };
-
-            Status = await PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num, StartingCheckNum);
+            try
+            {
+                Status =
+                    await
+                        PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
+                            StartingCheckNum);
+                RefreshBatchList();
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = e.Message,
+                    IsBusy = true,
+                    StatusMessage = "checks failed to print"
+                };
+            }
         }
 
 
@@ -224,8 +222,21 @@ namespace CoopCheck.WPF.Content.Voucher
                 IsBusy = true,
                 StatusMessage = "executing swiftpay..."
             };
+            try
+            {
+                Status = await PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);
+                RefreshBatchList();
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = e.Message,
+                    IsBusy = true,
+                    StatusMessage = "swift payment failed"
+                };
+            }
 
-            Status = await PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);
         }
     }
 }

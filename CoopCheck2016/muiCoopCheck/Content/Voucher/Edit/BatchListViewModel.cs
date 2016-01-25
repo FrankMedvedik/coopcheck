@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Services;
@@ -9,9 +10,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public class BatchListViewModel : ViewModelBase
     {
-        private ObservableCollection<OpenBatch> _batchList;
+        private ObservableCollection<vwOpenBatch> _batchList;
 
-        public ObservableCollection<OpenBatch> BatchList
+        public ObservableCollection<vwOpenBatch> BatchList
         {
             get { return _batchList; }
             set
@@ -47,7 +48,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public async void ResetState()
         {
             IsBusy = true;
-            BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc.GetOpenBatches());
+            vwOpenBatch v = null; 
+            if (SelectedBatch != null) v = SelectedBatch;
+            BatchList = new ObservableCollection<vwOpenBatch>(await OpenBatchSvc.GetOpenBatches());
+            if((v != null) && (BatchList.Contains(v)))
+                SelectedBatch = BatchList.First(x => x.batch_num == v.batch_num);
+            SelectedBatch = null;
+            IsBusy = false;
         }
 
         private int _selectedBatchNum = 0;
@@ -62,17 +69,17 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        private OpenBatch _selectedBatch = new OpenBatch();
+        private vwOpenBatch _selectedBatch = new vwOpenBatch();
         private bool _isBusy;
 
-        public OpenBatch SelectedBatch
+        public vwOpenBatch SelectedBatch
         {
             get { return _selectedBatch; }
             set
             {
                 _selectedBatch = value;
                 NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<OpenBatch>(SelectedBatch, Notifications.OpenBatchChanged));
+                Messenger.Default.Send(new NotificationMessage<vwOpenBatch>(SelectedBatch, Notifications.OpenBatchChanged));
             }
         }
 
