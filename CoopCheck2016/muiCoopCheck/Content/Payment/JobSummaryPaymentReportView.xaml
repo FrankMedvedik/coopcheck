@@ -25,7 +25,7 @@
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
                 <mui:Link DisplayName="Closed" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
-                <mui:Link DisplayName="Open" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
+                <mui:Link DisplayName="Outstanding" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

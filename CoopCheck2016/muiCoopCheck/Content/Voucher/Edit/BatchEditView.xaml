@@ -55,9 +55,9 @@
                     <Button Content="Delete " HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="DeleteSelectedBatch_Click" />
                 </StackPanel>
             </StackPanel>
-                <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
-                    <voucher:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                </Expander>
+           <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left"  VerticalAlignment="Top" >
+                    <voucher:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Expander>
             <Expander Header="Batch Details" Grid.Row="2" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
             <StackPanel Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
@@ -66,14 +66,14 @@
                                 <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
                         ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
                             </Border>
-                            <TextBlock Text="Create Date" Style="{StaticResource TextBlockStyle}" Margin="12,6,6,6" />
-                            <TextBlock Text="{Binding SelectedBatch.Date, Mode=OneWay,StringFormat=d}"  Margin="6"/>
                         </StackPanel>
-                    <StackPanel Orientation="Horizontal" Name="File">
-                        <TextBlock Text="Payment Date" Style="{StaticResource TextBlockStyle}"/>
-                        <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" TabIndex="3" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="0,3,0,3" Text="Payment Date" Style="{StaticResource TextBlockStyle}" Width="104"/>
+                        <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="6" TabIndex="3" Width="126" />
+                        <TextBlock Text="Create Date" Style="{StaticResource TextBlockStyle}" Margin="50,6,6,6" />
+                        <TextBlock Text="{Binding SelectedBatch.Date, Mode=OneWay,StringFormat=d}" VerticalAlignment="Center" Margin="6"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Name="s">
+                    <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Study Topic"  Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                             <Border BorderThickness="1" BorderBrush="Black">
                         <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.StudyTopic, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="5" />
@@ -114,6 +114,7 @@
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                           VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
                         <DataGrid.Columns>
+                            <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                             <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>
@@ -123,7 +124,6 @@
                             <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}"/>
-                            <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <!--<mui:DataGridTextColumn Binding="{Binding NamePrefix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Prefix" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Suffix, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Suffix" EditingElementStyle="{StaticResource CellEditStyle}"/>
                     <mui:DataGridTextColumn Binding="{Binding Title, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Title" EditingElementStyle="{StaticResource CellEditStyle}"/>-->

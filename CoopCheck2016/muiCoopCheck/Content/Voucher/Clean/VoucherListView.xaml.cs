@@ -1,16 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using CoopCheck.WPF.Content.Voucher.Edit;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
-using CoopCheck.WPF.Wrappers;
-using DataClean.Models;
 using FirstFloor.ModernUI.Windows.Controls;
+using VoucherImportAddDialog = CoopCheck.WPF.Content.Voucher.Edit.VoucherImportAddDialog;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {

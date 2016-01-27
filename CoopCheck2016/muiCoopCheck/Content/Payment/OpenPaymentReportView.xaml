@@ -27,7 +27,7 @@
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
                 <TextBlock Text="{Binding HeadingText}"  FontWeight="Bold" HorizontalAlignment="Stretch" Margin="6"/>
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right" >Payment Count</TextBlock>
+                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right" >Check Count</TextBlock>
                     <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"  Margin="6">
@@ -45,6 +45,7 @@
                     EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />
+                <StaticResource ResourceKey="dgPBatch" />
                 <StaticResource ResourceKey="dgPCheckNum"  />
                 <StaticResource ResourceKey="dgPEmail"/>
                 <StaticResource ResourceKey="dgPLast"  />

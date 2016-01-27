@@ -1,3 +1,4 @@
+using System.Linq;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
@@ -40,14 +41,9 @@ namespace CoopCheck.Library
         #endregion
         public decimal TotalAmount()
         {
-            decimal retVal = 0;
-            foreach (var voc in this)
-            {
-                retVal = retVal + voc.Amount ?? 0;
-            }
-            return retVal;
+            return this.Aggregate<VoucherEdit, decimal>(0, (current, voc) => current + voc.Amount ?? 0);
         }
-        
+
         public void AddVoucher(decimal amount, string personId, string namePrefix, string firstName, string middleName, string lastName, string suffix, string title, string company, string address1, string address2,
                string municipality, string region, string postalCode, string country, string phone, string email)
         {

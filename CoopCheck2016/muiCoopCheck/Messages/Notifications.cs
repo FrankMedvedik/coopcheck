@@ -81,5 +81,6 @@
         public static string VouchersDataCleaned { get { return "VouchersDataCleaned"; } }
         public static string HaveReviewedVouchers { get { return "HaveReviewedVouchers"; } }
         public static string HaveCommittedVouchers { get { return "HaveCommittedVouchers"; } }
+        public static string FindChecks { get { return "FindChecks"; } }
     }
 }

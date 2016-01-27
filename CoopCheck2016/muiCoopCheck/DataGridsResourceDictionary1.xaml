@@ -11,10 +11,10 @@
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPPhone" Binding="{Binding phone_number}" Header="phone"/>
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCity" Binding="{Binding municipality}" Header="city" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPState" Binding="{Binding region}"  Header="state" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPZip" Binding="{Binding postal_code }" Header="zip" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPDate" Binding="{Binding check_date,StringFormat=d}" Header="payment date" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCheckNum" Binding="{Binding check_num}" Header="payment #" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAmount"  Binding="{Binding tran_amount, StringFormat=c}" Header="amount" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPZip" Binding="{Binding postal_code}" Header="zip" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPDate" Binding="{Binding check_date, StringFormat=d}" Header="check date" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCheckNum" Binding="{Binding check_num}" Header="check #" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAmount"  Binding="{Binding tran_amount, StringFormat={} {0:C}}" Header="amount" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCompany"  Binding="{Binding company}"  Header="company"/>
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress1" Binding="{Binding address_1}" Header="address 1" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress2" Binding="{Binding address_2}" Header="address 2" />

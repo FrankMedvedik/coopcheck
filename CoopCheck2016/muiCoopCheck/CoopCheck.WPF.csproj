@@ -31,7 +31,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>47</ApplicationRevision>
+    <ApplicationRevision>48</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -237,6 +237,12 @@
     <Compile Include="Content\BankAccount\Reconcile\ReconcileWizardViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\ReconcileWindow.xaml.cs">
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\VoidPaymentDialog.xaml.cs">
+      <DependentUpon>VoidPaymentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\ClearPaymentDialog.xaml.cs">
+      <DependentUpon>ClearPaymentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Voucher\Clean\VoucherWorkbookMessage.cs" />
     <Compile Include="Content\Voucher\Save\VoucherSaveView.xaml.cs">
@@ -606,6 +612,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\Payment\VoidPaymentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -643,6 +653,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Payment\PositivePayReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Payment\ClearPaymentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

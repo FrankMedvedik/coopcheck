@@ -39,7 +39,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         {
         }
 
-        private void AddBankClearTransaction_Click(object sender, RoutedEventArgs e)
+        private void SaveBankClearTransaction_Click(object sender, RoutedEventArgs e)
         {
 
         }

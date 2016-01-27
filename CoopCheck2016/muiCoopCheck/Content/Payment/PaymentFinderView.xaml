@@ -17,13 +17,16 @@
             <payment:PaymentReportCriteriaView x:Name="prcv"/>
             <StackPanel Orientation="Horizontal" >
                     <Button Width="100" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
-                    <Button Width="100" Margin="6" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>
-                    <Button Width="150" Margin="6"  HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
-                    <Button Width="150" Margin="6"  HorizontalAlignment="Left" Command="{Binding TheVoidCheckCommand}" >Void Payment</Button>
+                    <Button Width="150" Margin="6"  HorizontalAlignment="Left" Click="Clear_Click">Reset Criteria</Button>
                 </StackPanel>
             </StackPanel>
         </Expander>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" >
+            <Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>
+            <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="VoidCheck_Click"  IsEnabled="{Binding CanVoidSelectedCheck}" Content="Void Check"/>
+            <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="ClearCheck_Click" IsEnabled="{Binding CanClearSelectedCheck}" Content="Clear Check"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
                       VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}" IsReadOnly="True"
@@ -32,6 +35,7 @@
                     ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />
+                <StaticResource ResourceKey="dgPBatch" />
                 <StaticResource ResourceKey="dgPCheckNum"  />
                 <StaticResource ResourceKey="dgPEmail"/>
                 <StaticResource ResourceKey="dgPLast"  />
@@ -47,7 +51,6 @@
                 <StaticResource ResourceKey="dgPAddress2"  />
                 <StaticResource ResourceKey="dgPCleared"/>
                 <StaticResource ResourceKey="dgPPrintFlag"/>
-
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

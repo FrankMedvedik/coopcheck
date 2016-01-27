@@ -41,7 +41,7 @@
                     ToolTipService.ToolTip="Positive Payment Report" Margin="6" HorizontalAlignment="Left" SelectionMode="Single" >
                 <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding account_number}" Header="Account Number" />
-                <mui:DataGridTextColumn Binding="{Binding check_num}" Header="Check Number" />
+ <mui:DataGridTextColumn Binding="{Binding check_num}" Header="Check Number" />
                 <mui:DataGridTextColumn Binding="{Binding tran_amount,  StringFormat=c}"  Header="Check Amount"/>
                 <mui:DataGridTextColumn Binding="{Binding check_date, StringFormat=d}" Header="Check Date"/>
                 <mui:DataGridTextColumn Binding="{Binding payee}" Header="Payee"/>

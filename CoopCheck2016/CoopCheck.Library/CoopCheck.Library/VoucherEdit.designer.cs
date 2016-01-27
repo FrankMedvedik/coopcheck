@@ -53,7 +53,7 @@ namespace CoopCheck.Library
         /// Gets or sets the Amount.
         /// </summary>
         /// <value>The Amount.</value>
-        [Display(Name="Voucher Amount"), Range(-500,500)]
+        [Display(Name="Voucher Amount"), Range(-5000,5000)]
         public Decimal? Amount
         {
             get { return GetProperty(AmountProperty); }

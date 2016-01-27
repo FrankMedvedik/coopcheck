@@ -173,6 +173,19 @@ namespace CoopCheck.WPF.Services
             }
         }
 
+        public static async Task<List<vwPayment>> GetUnclearedCheckReport(PaymentReportCriteria grc)
+        {
+            using (var ctx = new CoopCheckEntities())
+            {
+                var x = await (
+                    from l in ctx.vwPayments
+                    where (l.account_id == grc.Account.account_id && !l.cleared_flag && l.check_num == grc.CheckNumber)
+                    orderby l.check_date
+                    select l).ToListAsync();
+                return x;
+            }
+        }
+
         public static async Task<List<vwBasicPayment>> GetOpenPayments(PaymentReportCriteria prc)
         {
             IQueryable<vwBasicPayment> query;

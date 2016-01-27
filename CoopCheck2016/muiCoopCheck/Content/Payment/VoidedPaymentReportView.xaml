@@ -32,6 +32,7 @@
                     ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />
+                <StaticResource ResourceKey="dgPBatch" />
                 <StaticResource ResourceKey="dgPCheckNum"  />
                 <StaticResource ResourceKey="dgPEmail"/>
                 <StaticResource ResourceKey="dgPLast"  />

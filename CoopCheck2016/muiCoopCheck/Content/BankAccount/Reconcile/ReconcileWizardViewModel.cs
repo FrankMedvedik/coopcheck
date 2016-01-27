@@ -15,6 +15,11 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 HaveValidBankFile = true;
             });
 
+            Messenger.Default.Register<NotificationMessage<BankFileViewModel>>(this, message =>
+            {
+                HaveValidBankFile = true;
+            });
+
         }
 
         private void ResetAll()
@@ -26,6 +31,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         
         private bool _haveValidBankFile;
         private bool _haveValidAccount;
+        private bool _haveAutoReconciledAccount;
 
         public bool HaveValidBankFile
         {
@@ -40,6 +46,16 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             set
             {
                 _haveValidAccount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool HaveAutoReconciledAccount
+        {
+            get { return _haveAutoReconciledAccount; }
+            set
+            {
+                _haveAutoReconciledAccount = value;
                 NotifyPropertyChanged();
             }
         }

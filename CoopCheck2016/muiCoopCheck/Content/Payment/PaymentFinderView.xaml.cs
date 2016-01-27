@@ -36,7 +36,23 @@ namespace CoopCheck.WPF.Content.Payment
             ExportToExcel();
 
         }
+        private void ClearCheck_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.SelectedPayment.cleared_date = DateTime.Today;
+            _vm.SelectedPayment.cleared_amount = _vm.SelectedPayment.tran_amount;
+            var cw = new ClearPaymentDialog() { DataContext = _vm };
+            var result = cw.ShowDialog();
+            if (result == true)
+               _vm.ClearCheck();
+        }
 
+        private void VoidCheck_Click(object sender, RoutedEventArgs e)
+        {
+            var cw = new VoidPaymentDialog() { DataContext = _vm };
+            var result = cw.ShowDialog();
+            if (result == true)
+                _vm.VoidCheck();
+        }
 
         private void ExportToExcel()
         {

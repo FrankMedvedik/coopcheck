@@ -18,20 +18,71 @@ namespace CoopCheck.WPF.Content.Payment
         {
             ResetState();
             TheVoidCheckCommand = new RelayCommand(VoidCheck, CanVoidCheck);
+            TheClearCheckCommand = new RelayCommand(ClearCheck, CanClearCheck);
+
+            Messenger.Default.Register<NotificationMessage<PaymentReportCriteria>>(this, message =>
+            {
+                if (message.Notification == Notifications.FindChecks)
+                {
+                     GetPayments(message.Content);
+                }
+            });
+
         }
-    public RelayCommand TheVoidCheckCommand { get; private set; }
+        public RelayCommand TheVoidCheckCommand { get; private set; }
+        public RelayCommand TheClearCheckCommand { get; private set; }
 
-    public async void VoidCheck()
+        public async void ClearCheck()
         {
+            Status = new StatusInfo()
+            {
+                StatusMessage = "clearing check",
+                IsBusy = true
+            };
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    ClearCheckCommand.Execute(SelectedPayment.tran_id,DateTime.Today, SelectedPayment.tran_amount.GetValueOrDefault(0));
+                }
+                catch (Exception ex)
+                {
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = String.Format("failed to clear check number {0}", SelectedPayment.check_num),
+                        ErrorMessage = ex.Message
+                    };
+                }
+            });
+            Status = new StatusInfo()
+            {
+                StatusMessage = String.Format("check number {0} has been cleared", SelectedPayment.check_num)
+            };
+        }
 
+        public bool CanVoidSelectedCheck
+        {
+            get
+            {
+                return CanVoidCheck();
+            }
+        }
+
+        public bool CanClearSelectedCheck
+        {
+            get
+            {
+                return CanClearCheck();
+            }
+        }
+
+        public async void VoidCheck()
+        {
             Status = new StatusInfo()
             {
                 StatusMessage = "voiding check",
                 IsBusy = true
             };
-
-
-
             await Task.Factory.StartNew(() =>
             {
                 try
@@ -42,7 +93,7 @@ namespace CoopCheck.WPF.Content.Payment
                 {
                     Status = new StatusInfo()
                     {
-                        StatusMessage = "failed to clear payments",
+                        StatusMessage = "failed to void payment",
                         ErrorMessage = ex.Message
                         //ShowMessageBox = true
                     };
@@ -58,6 +109,12 @@ namespace CoopCheck.WPF.Content.Payment
         public bool CanVoidCheck()
         {
             if (SelectedPayment == null ) return false;
+            if (SelectedPayment.cleared_flag) return false;
+            return true;
+        }
+        public bool CanClearCheck()
+        {
+            if (SelectedPayment == null) return false;
             if (SelectedPayment.cleared_flag) return false;
             return true;
         }
@@ -131,6 +188,7 @@ namespace CoopCheck.WPF.Content.Payment
                 _selectedPayment = value;
                 NotifyPropertyChanged();
                 TheVoidCheckCommand.RaiseCanExecuteChanged();
+                TheClearCheckCommand.RaiseCanExecuteChanged();
             }
         }
 

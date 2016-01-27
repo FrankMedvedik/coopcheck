@@ -13,20 +13,20 @@
             <xctk:Wizard x:Name="ReconcileWizard" FinishButtonClosesWindow="True" CanCancel="True" CancelButtonClosesWindow="True" PageChanged="PageChanged"  HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
                 <xctk:WizardPage x:Name="BankFilePage" 
                                    Title="Select Bank File"
-                                   Description="locate and load the bank file to be reconciled."
+                                   Description="find and load the bank file to be reconciled."
                                    NextPage="{Binding ElementName=AccountPaymentsPage}" CanSelectNextPage="{Binding HaveValidBankFile}" >
                     <reconcile:BankFileView x:Name="bfv"/>
                 </xctk:WizardPage>
                 <xctk:WizardPage x:Name="AccountPaymentsPage" PageType="Interior"
                                    Title="Select Account"
                                    Description="choose the account to reconcile"
-                                   NextPage="{Binding ElementName=ReconcilePage}"
+                                   NextPage="{Binding ElementName=ManualReconcileAccountPage}"
                                    PreviousPage="{Binding ElementName=BankFilePage}" >
                     <reconcile:AccountPaymentsView/>
                 </xctk:WizardPage >
-                <xctk:WizardPage x:Name="ReconcilePage" PageType="Interior"
-                                   Title="Reconcile Payments"
-                                   Description="balance payments againt the bank records "
+                <xctk:WizardPage x:Name="ManualReconcileAccountPage" PageType="Interior"
+                                   Title="Select Payment"
+                                   Description="maunally clear payments"
                                    NextPage="{Binding ElementName=SaveChanges}"
                                    PreviousPage="{Binding ElementName=AccountPaymentsPage}" >
                     <reconcile:BankClearTransactionsView x:Name="vlv"/>

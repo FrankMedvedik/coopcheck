@@ -16,7 +16,6 @@
                          HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
                 <xctk:WizardPage x:Name="LoadVouchers" 
                                    Title="Load Vouchers"
-                                   Description="This will walk you though loading payment vouchers from an excel workbook."
                                  NextPage="{Binding ElementName=DataClean}" CanSelectNextPage="{Binding HaveValidWorkbook}"  >
                     <import:ImportWorksheetView x:Name="iwv"/>
                 </xctk:WizardPage>
@@ -29,14 +28,13 @@
                 </xctk:WizardPage >-->
                 <xctk:WizardPage x:Name="ListVouchers" PageType="Interior"
                                    Title="Edit Vouchers"
-                                   Description="corect vouchers with errors (shown in red)"
                                    NextPage="{Binding ElementName=SaveVouchers}"
-                                   PreviousPage="{Binding ElementName=DataClean}"  CanSelectNextPage="{Binding HaveReviewedVouchers}">
+                                   PreviousPage="{Binding ElementName=DataClean}"  
+                                   CanSelectNextPage="{Binding HaveReviewedVouchers}">
                     <clean:VoucherListView x:Name="vlv"/>
                 </xctk:WizardPage>
                 <xctk:WizardPage x:Name="SaveVouchers" PageType="Interior"
                                    Title="Save vouchers"
-                                   Description="Save the vouchers"
                                    CanFinish="{Binding HaveCommittedVouchers}">
                     <save:VoucherSaveView x:Name="vsv"/>
                 </xctk:WizardPage>
