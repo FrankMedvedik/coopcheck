@@ -17,6 +17,7 @@ namespace CoopCheck.WPF.Content.Payment
             _vm = new VoidedPaymentReportViewModel();
             DataContext = _vm;
             prcv.DetailedCriteria.Visibility = Visibility.Visible;
+            prcv.CheckNumSP.Visibility = Visibility.Visible;
         }
 
         private VoidedPaymentReportViewModel _vm;

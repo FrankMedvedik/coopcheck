@@ -13,7 +13,7 @@
         <Grid >
         <ScrollViewer> 
             <xctk:Wizard x:Name="VoucherWizard" FinishButtonClosesWindow="True" CanCancel="True" CancelButtonClosesWindow="True" PageChanged="PageChanged" 
-                         HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" >
+                         HorizontalAlignment="Left" VerticalAlignment="Top" ExteriorPanelMinWidth="0" HelpButtonVisibility="Hidden" >
                 <xctk:WizardPage x:Name="LoadVouchers" 
                                    Title="Load Vouchers"
                                  NextPage="{Binding ElementName=DataClean}" CanSelectNextPage="{Binding HaveValidWorkbook}"  >

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -45,7 +46,15 @@ namespace CoopCheck.WPF.Content.Payment
             set { _canRefresh = value; }
         }
 
+        public int PaymentsCnt
+        {
+            get { return Jobs.ToList().Sum(x => x.total_cnt.GetValueOrDefault(0)); }
+        }
 
+        public decimal? PaymentsTotalDollars
+        {
+            get { return Jobs.Sum(x => x.total_amount); }
+        }
         private ObservableCollection<vwJobRpt> _jobs = new ObservableCollection<vwJobRpt>();
         public ObservableCollection<vwJobRpt> Jobs
         {
@@ -57,6 +66,8 @@ namespace CoopCheck.WPF.Content.Payment
                 ShowGridData = true;
                 HeadingText = String.Format("{0} Jobs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}",
                                         Jobs.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
+                NotifyPropertyChanged("PaymentsTotalDollars");
+                NotifyPropertyChanged("PaymentsCnt");
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
@@ -108,8 +119,11 @@ namespace CoopCheck.WPF.Content.Payment
         public async void GetJobs()
         {
               ShowGridData = false;
+              Jobs = new ObservableCollection<vwJobRpt>();
             try
             {
+                Jobs = new ObservableCollection<vwJobRpt>();
+
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",

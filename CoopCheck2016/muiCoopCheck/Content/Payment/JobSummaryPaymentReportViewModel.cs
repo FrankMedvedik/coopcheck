@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Repository;
@@ -38,7 +39,17 @@ namespace CoopCheck.WPF.Content.Payment
                 NotifyPropertyChanged();
             }
         }
-
+        private string _headingText;
+        public string HeadingText
+        {
+            get { return _headingText; }
+            set
+            {
+                _headingText = value;
+                NotifyPropertyChanged();
+            }
+        }
+   
         public  async void RefreshAll()
         {
             WorkPayments = await RptSvc.GetJobPayments(PaymentReportCriteria);
@@ -68,13 +79,13 @@ namespace CoopCheck.WPF.Content.Payment
                     where !l.cleared_flag
                     orderby l.check_date
                     select l).ToList());
-
+                ShowGridData = true;
+                //HeadingText = String.Format("{0} Jobs for Account {1} Between {2:ddd, MMM d, yyyy} to {3:ddd, MMM d, yyyy}", a,
+                //         PaymentReportCriteria.Account.account_name, PaymentReportCriteria.StartDate,PaymentReportCriteria.EndDate);
 
             }
         }
 
-
-        public string HeadingText => PaymentReportCriteria.ToFormattedString(' ');
 
         public StatusInfo Status
         {

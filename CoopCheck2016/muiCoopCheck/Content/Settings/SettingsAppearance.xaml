@@ -3,15 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <ScrollViewer>
             <StackPanel x:Name="Panel" MinWidth="150" Orientation="Vertical">
                 <TextBlock Text="APPEARANCE" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
-
                 <ListBox ItemsSource="{Binding AccentColors}"
                          SelectedItem="{Binding SelectedAccentColor, Mode=TwoWay}"
                          Margin="0,0,0,16">
@@ -41,21 +38,15 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-
                     <TextBlock Text="Palette:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <ComboBox Grid.Column="1" ItemsSource="{Binding Palettes}" SelectedItem="{Binding SelectedPalette, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" />
-
-                    <TextBlock Grid.Row="1" Text="Theme:" VerticalAlignment="Center" Margin="0,0,16,4" />
+                    <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Palettes}" SelectedItem="{Binding SelectedPalette, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,4" />
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Theme:" VerticalAlignment="Center" Margin="0,0,16,4" />
                     <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
-
-                    <TextBlock Grid.Row="2" Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
-                    
                 </Grid>
-                <dataClean:DataCleanCriteriaView/>
-                <Button  Width="Auto" Margin="12" HorizontalAlignment="Center" IsDefault="True" Click="Button_Click">Save</Button>
+                <Button   Margin="65,20,6,8" HorizontalAlignment="Left" Width="166" IsDefault="True" Click="Button_Click" Content="Save"/>
             </StackPanel>
-            
         </ScrollViewer>
     </Grid>
 </UserControl>

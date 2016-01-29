@@ -17,6 +17,7 @@ namespace CoopCheck.WPF.Content.Payment
             _vm = new PaymentFinderViewModel();
             DataContext = _vm;
             prcv.DetailedCriteria.Visibility = Visibility.Visible;
+            prcv.CheckNumSP.Visibility = Visibility.Visible;
         }
 
         private PaymentFinderViewModel _vm;
@@ -43,15 +44,21 @@ namespace CoopCheck.WPF.Content.Payment
             var cw = new ClearPaymentDialog() { DataContext = _vm };
             var result = cw.ShowDialog();
             if (result == true)
-               _vm.ClearCheck();
+            {
+                _vm.ClearCheck();
+                _vm.GetPayments(prcv.PaymentReportCriteria);
+            }
         }
 
         private void VoidCheck_Click(object sender, RoutedEventArgs e)
         {
-            var cw = new VoidPaymentDialog() { DataContext = _vm };
+            var cw = new VoidPaymentDialog() {DataContext = _vm};
             var result = cw.ShowDialog();
             if (result == true)
+            {
                 _vm.VoidCheck();
+                _vm.GetPayments(prcv.PaymentReportCriteria);
+            }
         }
 
         private void ExportToExcel()

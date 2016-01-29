@@ -182,7 +182,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     Status = new StatusInfo()
                     {
                         StatusMessage =
-                            String.Format("{0} amount {1:0C}", SelectedVoucher.EmailAddress, SelectedVoucher.Amount)
+                            String.Format("{0} amount {1:C}", SelectedVoucher.EmailAddress, SelectedVoucher.Amount.GetValueOrDefault(0))
                     };
                     ShowSelectedVoucher = true;
                 }

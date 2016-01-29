@@ -17,9 +17,9 @@
                 <payment:PaymentReportCriteriaView x:Name="prcv"/>
                 
                 <StackPanel Orientation="Horizontal" >
-                    <Button Width="100" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
-                    <Button Width="100" Margin="6" HorizontalAlignment="Left"   Click="Excel_Click">Excel</Button>
-                    <Button Width="100" Margin="6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
+                    <Button Width="150" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
+                    <Button Width="150" Margin="6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
+                    <Button Width="150" Margin="6" HorizontalAlignment="Left" Click="Excel_Click">Excel</Button>
                 </StackPanel>
             </StackPanel>
         </Expander>

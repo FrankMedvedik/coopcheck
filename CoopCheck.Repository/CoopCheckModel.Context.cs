@@ -30,7 +30,7 @@ namespace CoopCheck.Repository
         public virtual DbSet<batch> batches { get; set; }
         public virtual DbSet<check_tran> check_tran { get; set; }
         public virtual DbSet<voucher> vouchers { get; set; }
-        public virtual DbSet<vwCheck> vwCheck { get; set; }
+        public virtual DbSet<vwCheck> vwChecks { get; set; }
         public virtual DbSet<vwPositivePay> vwPositivePay { get; set; }
         public virtual DbSet<vwVoidedPayment> vwVoidedPayments { get; set; }
         public virtual DbSet<vwPayment> vwPayments { get; set; }

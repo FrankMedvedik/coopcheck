@@ -31,7 +31,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>48</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -253,6 +253,7 @@
       <DependentUpon>VouchersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
     <Compile Include="Interfaces\IModernNavigationService.cs" />
     <Compile Include="Messages\ExcelVouchersMessage.cs" />
@@ -272,10 +273,10 @@
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\BankFileViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\ReconcileBankViewModel.cs" />
-    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionsView.xaml.cs">
-      <DependentUpon>BankClearTransactionsView.xaml</DependentUpon>
+    <Compile Include="Content\BankAccount\Reconcile\BankTransactionsView.xaml.cs">
+      <DependentUpon>BankTransactionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\BankTransactionViewModel.cs" />
     <Compile Include="Content\DataClean\DataCleanFeedbackViewModel.cs" />
     <Compile Include="Content\DataClean\DataCleanFeedbackView.xaml.cs">
       <DependentUpon>DataCleanFeedbackView.xaml</DependentUpon>
@@ -572,7 +573,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\BankAccount\Reconcile\BankClearTransactionsView.xaml">
+    <Page Include="Content\BankAccount\Reconcile\BankTransactionsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -931,12 +932,12 @@
   <ItemGroup>
     <PublishFile Include="Assets\RecknerCheck.dotx">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

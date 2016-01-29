@@ -32,5 +32,12 @@ namespace CoopCheck.WPF.Content.Payment
             _vm.ResetState();
         }
 
+        private void CheckNumTextBox_GotFocus(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _vm.EnableCheckNum = true;
+            _vm.EnableMiscFields = false;
+
+        }
+
     }
 }

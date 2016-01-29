@@ -57,7 +57,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             //String result = (string)Clipboard.GetData(DataFormats..Text);
             DgStats.UnselectAllCells();
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = string.Format("Reconcile.{0}.csv", Path.GetFileName(_vm.BankFile.FilePath));
+            saveFileDialog.FileName = string.Format("{0}.Reconcile", Path.GetFileName(_vm.BankFile.FilePath));
             if (saveFileDialog.ShowDialog() == true)
             {
                 System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName);

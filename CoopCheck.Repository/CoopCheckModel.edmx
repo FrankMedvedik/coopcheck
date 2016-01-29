@@ -18,6 +18,7 @@
           <Property Name="last_rec_balance" Type="money" />
           <Property Name="account_type" Type="varchar" MaxLength="50" />
           <Property Name="IsDefault" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="batch">
           <Key>
@@ -1075,6 +1076,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="last_rec_balance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="account_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDefault" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="vwBatchRpt">
           <Key>
@@ -1568,6 +1570,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySetMapping Name="bank_account">
             <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
               <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="last_rec_balance" ColumnName="last_rec_balance" />

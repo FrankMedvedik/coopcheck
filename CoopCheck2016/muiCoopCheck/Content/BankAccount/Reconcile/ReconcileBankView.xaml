@@ -52,7 +52,7 @@
                 </StackPanel>
             </Grid>
         </Expander>
-            <reconcile:BankClearTransactionsView x:Name="bctv" Grid.Row="3" />
+            <reconcile:BankTransactionsView x:Name="bctv" Grid.Row="3" />
         <!--<Expander Grid.Row="3" IsExpanded="False" Header="Details" FontWeight="Bold">
             <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  FontWeight="Normal" Margin="10"  Layout="Tab" >
                 <mui:ModernTab.Links>

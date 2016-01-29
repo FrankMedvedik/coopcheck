@@ -38,12 +38,17 @@ namespace CoopCheck.WPF.Content.Payment
                     _vm.RefreshAll();
                 });
             }
+            else
+            {
+                _vm.ShowGridData = false;
+            }
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             brv.PaymentReportCriteria = prcv.PaymentReportCriteria;
             _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
+            _vm.ShowGridData = false;
 
         }
 
@@ -72,5 +77,10 @@ namespace CoopCheck.WPF.Content.Payment
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
             DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<vwPayment>), typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        private void brv_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

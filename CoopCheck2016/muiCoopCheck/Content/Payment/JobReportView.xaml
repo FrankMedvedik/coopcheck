@@ -11,8 +11,25 @@
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding HeadingText}"  HorizontalAlignment="Left" Margin="6" FontWeight="Bold"/>
-            <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="6" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding HeadingText}" />
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Width="70" >Check Count</TextBlock>
+                    <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Width="100" >Total Dollars</TextBlock>
+                    <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                </StackPanel>
+                <Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
+            </StackPanel>
         </StackPanel>
         <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 

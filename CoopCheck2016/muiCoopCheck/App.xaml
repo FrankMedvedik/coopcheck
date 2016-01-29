@@ -12,8 +12,9 @@
           <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:CoopCheck.WPF.ViewModel" />
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
-      <converters:BooleanToVisibility x:Key="BoolToVisConverter" />
-      <converters:NotBooleanToVisibility x:Key="NotBoolToVisConverter" />
+             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:BooleanToVisibility x:Key="BoolToVisConverter"/>
+            <converters:NotBooleanToVisibility x:Key="NotBoolToVisConverter" />
     </ResourceDictionary>
   </Application.Resources>
 </Application>

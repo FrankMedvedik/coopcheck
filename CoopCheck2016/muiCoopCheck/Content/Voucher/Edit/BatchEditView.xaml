@@ -37,10 +37,14 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Content="Refresh Batch List" HorizontalAlignment="Center" Command="{Binding RefreshBatchListCommand}" Margin="6" Width="150" VerticalAlignment="Center" />
+        </StackPanel>
         <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" 
-                                Visibility="{Binding ShowSelectedBatch, Converter={StaticResource NotBoolToVisConverter}}"/>
-        <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}"  >
+                            Visibility="{Binding ShowSelectedBatch, Converter={StaticResource NotBoolToVisConverter}}" Grid.Row="1"/>
+            <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1">
         <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -49,10 +53,8 @@
         </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
                 <StackPanel Orientation="Horizontal" >
-                    <Button Content="Refresh List" HorizontalAlignment="Center" Command="{Binding RefreshBatchListCommand}"  Margin="12" Width="150" VerticalAlignment="Center"/>
-                    <!--<Button Content="Pay" HorizontalAlignment="Center" Command="{Binding PayBatchCommand}"  Margin="200,6,6,6" Width="100" VerticalAlignment="Center"/>-->
-                    <Button Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  Width="100"  />
-                    <Button Content="Delete " HorizontalAlignment="Center" Width="100" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="DeleteSelectedBatch_Click" />
+                    <Button Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  Width="150"  />
+                    <Button Content="Delete " HorizontalAlignment="Center" Width="150" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="DeleteSelectedBatch_Click" />
                 </StackPanel>
             </StackPanel>
            <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left"  VerticalAlignment="Top" >
@@ -114,7 +116,7 @@
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                           VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
                         <DataGrid.Columns>
-                            <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
+                            <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True,StringFormat={}{0:C}}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
                             <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}"/>

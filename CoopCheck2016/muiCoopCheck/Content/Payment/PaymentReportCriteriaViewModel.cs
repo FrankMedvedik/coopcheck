@@ -2,9 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Payment
 {
@@ -23,7 +25,28 @@ namespace CoopCheck.WPF.Content.Payment
         public PaymentReportCriteriaViewModel()
         {
             ResetState();
+            Messenger.Default.Register<NotificationMessage>(this, message =>
+            {
+                if (message.Notification == Notifications.PaymentReportCriteriaCheckNumberChanged)
+                {
+                    SetCheckNumVisibility();
+                }
+            });
+            
+        }
 
+        private void SetCheckNumVisibility()
+        {
+            if (string.IsNullOrEmpty(PaymentReportCriteria.CheckNumber))
+            {
+                EnableCheckNum = true;
+                EnableMiscFields = true;
+            }
+            else
+            {
+                EnableCheckNum = true;
+                EnableMiscFields = false;
+            }
         }
 
         private PaymentReportCriteria _paymentReportCriteria;
@@ -46,10 +69,12 @@ namespace CoopCheck.WPF.Content.Payment
 
             PaymentReportCriteria = new PaymentReportCriteria();
             PaymentReportCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-30, 0, 0, 0));
-            PaymentReportCriteria.EndDate = DateTime.Today;
+            PaymentReportCriteria.EndDate = DateTime.Today.AddDays(1);
             Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
             PaymentReportCriteria.Account = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
             ShowGridData = false;
+            EnableMiscFields = true;
+            EnableCheckNum = true;
         }
 
         private Boolean _showGridData;
@@ -63,7 +88,33 @@ namespace CoopCheck.WPF.Content.Payment
                 NotifyPropertyChanged();
             }
         }
+
+        private Boolean _enableCheckNum;
+
+        public Boolean EnableCheckNum
+        {
+            get { return _enableCheckNum; }
+            set
+            {
+                _enableCheckNum = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _enableMiscFields;
+        public Boolean EnableMiscFields
+        {
+            get { return _enableMiscFields; }
+            set
+            {
+                _enableMiscFields = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private ObservableCollection<bank_account> _accounts;
+        
+
         public ObservableCollection<bank_account> Accounts
         {
             get { return _accounts; }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Content;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Models
 {
@@ -35,7 +37,8 @@ namespace CoopCheck.WPF.Models
             get { return _checkNumber; }
             set {
                 _checkNumber = value; 
-                NotifyPropertyChanged(); 
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage(Notifications.PaymentReportCriteriaCheckNumberChanged));
             }
         }
         private string _phoneNumber;

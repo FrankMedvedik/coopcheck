@@ -17,6 +17,7 @@ namespace CoopCheck.WPF.Converters
     /// BooleanToVisibility Converter. Checks a boolean property and changes it to
     /// either Visible or Collapsed
     /// </summary>
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     public class BooleanToVisibility : IValueConverter
     {
         /// <summary>

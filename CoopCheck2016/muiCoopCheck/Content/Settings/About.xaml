@@ -11,7 +11,9 @@
                 <TextBlock Text="ABOUT" Style="{StaticResource Heading2}" />
                 <TextBlock Margin="16" Text="{Binding UserName}" Style="{StaticResource Heading2}" />
                 <TextBlock Text="Application Security " Style="{StaticResource Heading2}" Margin="8"/>
-                <ListView Margin="16" ItemsSource="{Binding UserRights}"/>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="8" >
+                <ListView Margin="10" ItemsSource="{Binding UserRights}"/>
+                </Border>
             </StackPanel>
         </ScrollViewer>
     </Grid>

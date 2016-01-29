@@ -15,9 +15,7 @@ namespace CoopCheck.WPF.Services
             {
 
                 var x = await (
-                    from a in ctx.bank_accounts
-                    orderby a.account_name
-                    select a).ToListAsync();
+                    ctx.bank_accounts.Where(a => (bool) a.IsActive).OrderBy(a => a.account_name)).ToListAsync();
                 return x;
             }
         }

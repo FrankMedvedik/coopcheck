@@ -136,26 +136,10 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 NotifyPropertyChanged();
                 if (CanReconcile)
                 {
-                    var p = new PaymentReportCriteria()
-                    {
-                        StartDate = FirstTransactionDate.GetValueOrDefault(DateTime.Now.AddDays(-30)),
-                        EndDate = LastTransactionDate.GetValueOrDefault(DateTime.Now)
-                    };
                     Messenger.Default.Send(new NotificationMessage<BankFileViewModel>(this,
                         Notifications.ReconcileBankFileLoaded));
                 }
             }
-        }
-
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                _isBusy = value;
-                NotifyPropertyChanged();
-            }
-
         }
 
         public bool CanImport
@@ -310,13 +294,5 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
- 
-        public string HeaderText
-        {
-            get { return _headerText; }
-            set { _headerText = value; }
-        }
-
-        
     }
 }

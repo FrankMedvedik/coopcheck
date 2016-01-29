@@ -16,12 +16,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <Grid>
-                            <Ellipse x:Name="outerEllipse" Height="15" Width="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Ellipse x:Name="outerEllipse" Height="12" Width="12" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Ellipse.Fill>
                                     <SolidColorBrush Color="Red" />
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse Margin="1" x:Name="highlightCircle" Height="15" Width="15"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Ellipse Margin="1" x:Name="highlightCircle" Height="10" Width="10"  HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Ellipse.Fill >
                                     <SolidColorBrush Color="Green" />
                                 </Ellipse.Fill>
@@ -44,7 +44,7 @@
                             <Trigger Property="IsChecked" Value="False">
                                 <Setter TargetName="highlightCircle" Property="Fill">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Red" />
+                                        <SolidColorBrush Color="DarkMagenta" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>

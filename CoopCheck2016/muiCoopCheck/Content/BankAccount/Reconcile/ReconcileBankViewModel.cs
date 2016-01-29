@@ -19,8 +19,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
     {
         private BankFileViewModel _bankFile = new BankFileViewModel();
         private AccountPaymentsViewModel _accountPayments = new AccountPaymentsViewModel();
-        private bool _showGridData;
-
         public BankFileViewModel BankFile
         {
             get { return _bankFile; }
@@ -32,64 +30,25 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         }
         public RelayCommand ClearMatchedChecksCommand { get; private set; }
 
-
-
-        //public async void ClearMatchedChecks()
-        //{
-
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "clearing matched vouchers",
-        //        IsBusy = true
-        //    };
-
-
-
-        //    await Task.Factory.StartNew(() =>
-        //    {
-        //        try
-        //        {
-
-        //            foreach (var payment in _accountPayments.MatchedPayments)
-        //            {
-        //                ClearCheckCommand.Execute(payment.tran_id, DateTime.Now,
-        //                    payment.tran_amount.GetValueOrDefault(0));
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Status = new StatusInfo()
-        //            {
-        //                StatusMessage = "failed to clear payments",
-        //                ErrorMessage = ex.Message,
-        //                ShowMessageBox = true
-        //            };
-        //        }
-
-        //    });
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = String.Format("{0} payments have been cleared", _accountPayments.MatchedPayments.Count)
-        //    };
-        //}
-
-
         public async void ClearMatchedChecks()
         {
-
             Status = new StatusInfo()
             {
                 StatusMessage = "clearing matched vouchers",
                 IsBusy = true
             };
 
-
-
             await Task.Factory.StartNew(() =>
             {
                 try
                 {
                    ClearCheckSvc.ClearChecks(_accountPayments.ChecksToClear);
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = String.Format("{0} payments have been cleared", _accountPayments.MatchedPayments.Count)
+                    };
+                    CanClearChecks = true;
+                    Messenger.Default.Send(new NotificationMessage(Notifications.BankAccountReconcileWizardCanFinish));
                 }
                 catch (Exception ex)
                 {
@@ -101,15 +60,23 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     };
                 }
             });
-            Status = new StatusInfo()
-            {
-                StatusMessage = String.Format("{0} payments have been cleared", _accountPayments.MatchedPayments.Count)
-            };
         }
 
-        public bool CanClearChecks()
+        public bool CanClearChecks
         {
-            return true; //_accountPayments.MatchedPayments.Count > 0;
+            get { return _canClearChecks; }
+            set
+            {
+                _canClearChecks = value;
+                 NotifyPropertyChanged();
+                ClearMatchedChecksCommand.RaiseCanExecuteChanged();
+
+            }
+        }
+
+        public bool CanClearChecksFunc()
+        {
+            return CanClearChecks;
         }
 
         public AccountPaymentsViewModel AccountPayments
@@ -136,9 +103,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         public ReconcileBankViewModel()
         {
+            ClearMatchedChecksCommand = new RelayCommand(ClearMatchedChecks, CanClearChecksFunc);
             ResetState();
-            ClearMatchedChecksCommand = new RelayCommand(ClearMatchedChecks, CanClearChecks);
-
         }
 
         public async void GetPayments()
@@ -221,6 +187,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
                     Messenger.Default.Send(new NotificationMessage<AccountPaymentsViewModel>(AccountPayments, Notifications.ReconcileAccountPaymentsLoaded));
                     Messenger.Default.Send(new NotificationMessage<BankFileViewModel>(BankFile, Notifications.ReconcileBankFileLoaded));
+                    CanClearChecks = true;
                 }
                 catch (Exception e)
                 {
@@ -245,42 +212,18 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         public void ResetState()
         {
-            CanReconcile = false;
+            CanClearChecks = false;
         }
-        private bool _canReconcile = false;
-        public bool CanReconcile
-        {
-            get { return _canReconcile; }
-            set
-            {
-                _canReconcile = value;
-                NotifyPropertyChanged();
-            }
-        }
+    
 
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                _isBusy = value;
-                NotifyPropertyChanged();
-            }
-        }
+
 
         private StatusInfo _status;
-        private bool _isBusy;
+        private bool _canClearChecks;
 
         #endregion
         
-        private string _headerText;
-
-        public string HeaderText
-        {
-            get { return _headerText; }
-            set { _headerText = value; }
-        }
-
+        
         public PaymentReportCriteria PaymentReportCriteria
         {
             get { return _accountPayments.PaymentReportCriteria; }

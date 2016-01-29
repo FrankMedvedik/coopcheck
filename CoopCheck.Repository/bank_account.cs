@@ -23,5 +23,6 @@ namespace CoopCheck.Repository
         public Nullable<decimal> last_rec_balance { get; set; }
         public string account_type { get; set; }
         public Nullable<bool> IsDefault { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

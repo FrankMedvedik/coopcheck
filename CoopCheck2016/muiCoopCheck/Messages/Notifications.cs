@@ -82,5 +82,7 @@
         public static string HaveReviewedVouchers { get { return "HaveReviewedVouchers"; } }
         public static string HaveCommittedVouchers { get { return "HaveCommittedVouchers"; } }
         public static string FindChecks { get { return "FindChecks"; } }
+        public static string PaymentReportCriteriaCheckNumberChanged { get { return "PaymentReportCriteriaCheckNumberChanged"; } }
+        public static string BankAccountReconcileWizardCanFinish { get { return "BankAccountReconcileWizardCanFinish"; } }
     }
 }

@@ -10,7 +10,7 @@ using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
 
-    public class BankClearTransactionViewModel : ViewModelBase
+    public class BankTransactionViewModel : ViewModelBase
     {
         private ObservableCollection<BankClearTransaction> _bankClearTransaction = new ObservableCollection<BankClearTransaction>();
         public ObservableCollection<BankClearTransaction> BankClearTransactions
@@ -36,7 +36,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
-        public BankClearTransactionViewModel()
+        public BankTransactionViewModel()
         {
             ResetState();
             Messenger.Default.Register<NotificationMessage<BankFileViewModel>>(this, message =>

@@ -5,6 +5,7 @@
 =====================================================================*/
 
 using System.Windows;
+using System.Windows.Data;
 
 namespace CoopCheck.WPF.Converters
 {
@@ -13,6 +14,7 @@ namespace CoopCheck.WPF.Converters
     /// overrides the ConvertValue method to return the opposite of the implementation in the
     /// base class.
     /// </summary>
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     public class NotBooleanToVisibility :
         CoopCheck.WPF.Converters.BooleanToVisibility
     {
