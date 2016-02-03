@@ -17,7 +17,7 @@ namespace CoopCheck.WPF.Services
 {
     public static class DataCleanVoucherImportSvc
     {
-        public static async Task<ObservableCollection<VoucherImportWrapper>> CleanVouchers(List<VoucherImportWrapper> vouchers, DataCleanCriteria dataCleanCriteria, ExcelFileInfoMessage excelFileInfo)
+        public static ObservableCollection<VoucherImportWrapper> CleanVouchers(List<VoucherImportWrapper> vouchers, DataCleanCriteria dataCleanCriteria)
         {
             dataCleanCriteria.AutoFixPostalCode = true;
             dataCleanCriteria.ForceValidation = false;
@@ -29,32 +29,59 @@ namespace CoopCheck.WPF.Services
                     v.AddressLine2, v.EmailAddress, v.PhoneNumber, v.Last, v.First);
             }
             var inputAddresses = vouchers.Select(v => VoucherImportWrapperConverter.ToInputStreetAddress(v)).ToList();
-            var dataCleanEvents = new List<DataCleanEvent>(await DataCleanSvc.ValidateAddressesAsync(inputAddresses, dataCleanCriteria));
-
-            Messenger.Default.Send(
-                new NotificationMessage<ObservableCollection<DataCleanEvent>>(
-                    new ObservableCollection<DataCleanEvent>(dataCleanEvents),
-                    Notifications.NewDataCleanEvents));
+            var dataCleanEvents = (List<DataCleanEvent>) DataCleanSvc.ValidateAddressesAsync(inputAddresses, dataCleanCriteria).Result;
 
             var ilist = new List<VoucherImportWrapper>();
 
             foreach (var e in dataCleanEvents)
             {
-                var i = DataCleanEventConverter.ToVoucherImportWrapper(e,vouchers.First(x => x.ID == e.ID));
+                var i = DataCleanEventConverter.ToVoucherImportWrapper(e, vouchers.First(x => x.ID == e.ID));
                 // we want to join the row to get the data we did not send to the cleaner
                 ilist.Add(i);
             }
-
-            cleanVouchers = new ObservableCollection<VoucherImportWrapper>(ilist);
-
-            //Messenger.Default.Send(
-            //    new NotificationMessage<VoucherWrappersMessage>(new VoucherWrappersMessage()
-            //    {
-            //        ExcelFileInfo = excelFileInfo,
-            //        VoucherImports = cleanVouchers
-            //    }, Notifications.VouchersDataCleaned));
-            return cleanVouchers;
+            
+            return new ObservableCollection<VoucherImportWrapper>(ilist);
         }
+
+
+        //public static async Task<ObservableCollection<VoucherImportWrapper>> CleanVouchers(List<VoucherImportWrapper> vouchers, DataCleanCriteria dataCleanCriteria, ExcelFileInfoMessage excelFileInfo)
+        //{
+        //    dataCleanCriteria.AutoFixPostalCode = true;
+        //    dataCleanCriteria.ForceValidation = false;
+
+        //    var cleanVouchers = new ObservableCollection<VoucherImportWrapper>();
+        //    foreach (var v in vouchers)
+        //    {
+        //        v.ID = HashHelperSvc.GetHashCode(v.Region, v.Municipality, v.PostalCode, v.AddressLine1,
+        //            v.AddressLine2, v.EmailAddress, v.PhoneNumber, v.Last, v.First);
+        //    }
+        //    var inputAddresses = vouchers.Select(v => VoucherImportWrapperConverter.ToInputStreetAddress(v)).ToList();
+        //    var dataCleanEvents = new List<DataCleanEvent>(await DataCleanSvc.ValidateAddressesAsync(inputAddresses, dataCleanCriteria));
+
+        //    //Messenger.Default.Send(
+        //    //    new NotificationMessage<ObservableCollection<DataCleanEvent>>(
+        //    //        new ObservableCollection<DataCleanEvent>(dataCleanEvents),
+        //    //        Notifications.NewDataCleanEvents));
+
+        //    var ilist = new List<VoucherImportWrapper>();
+
+        //    foreach (var e in dataCleanEvents)
+        //    {
+        //        var i = DataCleanEventConverter.ToVoucherImportWrapper(e,vouchers.First(x => x.ID == e.ID));
+        //        // we want to join the row to get the data we did not send to the cleaner
+        //        ilist.Add(i);
+        //    }
+
+        //    cleanVouchers = new ObservableCollection<VoucherImportWrapper>(ilist);
+
+        //    //Messenger.Default.Send(
+        //    //    new NotificationMessage<VoucherWrappersMessage>(new VoucherWrappersMessage()
+        //    //    {
+        //    //        ExcelFileInfo = excelFileInfo,
+        //    //        VoucherImports = cleanVouchers
+        //    //    }, Notifications.VouchersDataCleaned));
+        //    return cleanVouchers;
+        //}
 
     }
 }

@@ -17,6 +17,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
     {
 
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
+
         public ObservableCollection<VoucherImport> VoucherImports
         {
             get { return _voucherImports; }
@@ -49,7 +50,9 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             };
 
         }
+
         public RelayCommand ImportWorksheetCommand { get; private set; }
+
         public bool CanImportWorkSheet()
         {
             return CanImport;
@@ -58,8 +61,28 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         public ImportWorksheetViewModel()
         {
             ResetAll();
-            this.ImportWorksheetCommand = new RelayCommand(LoadWorkSheetData, CanImportWorkSheet);
+            this.ImportWorksheetCommand = new RelayCommand(LoadWorksheetData, CanImportWorkSheet);
             this.PostVouchersCommand = new RelayCommand(PostVouchers, CanPostVouchers);
+            _voucherImporter = new BackgroundWorker()
+            {
+                WorkerReportsProgress = false,
+                WorkerSupportsCancellation = false
+            };
+            _voucherImporter.DoWork += worker_DoWork;
+            _voucherImporter.RunWorkerCompleted += worker_RunWorkerCompleted;
+
+        }
+
+        private void LoadWorksheetData()
+        {
+            Status = new StatusInfo()
+            {
+                StatusMessage = "loading vouchers and checking address...",
+                IsBusy = true
+            };
+            if (!_voucherImporter.IsBusy)
+                _voucherImporter.RunWorkerAsync();
+            StartEnabled = !_voucherImporter.IsBusy;
         }
 
 
@@ -87,6 +110,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
 
         }
+
         public bool CanImport
         {
             get { return _canImport; }
@@ -377,18 +401,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     ExcelBook.AddMapping("Amount", "AMOUNT");
                     ExcelBook.AddMapping("EmailAddress", "E-MAIL");
                     ExcelBook.AddMapping("JobNumber", "JOB #");
-
-                    //ExcelBook.AddMapping("First", "first name");
-                    //ExcelBook.AddMapping("Last", "last name");
-                    //ExcelBook.AddMapping("AddressLine1", "address 1");
-                    //ExcelBook.AddMapping("AddressLine2", "address 2");
-                    //ExcelBook.AddMapping("Municipality", "city");
-                    //ExcelBook.AddMapping("Region", "state");
-                    //ExcelBook.AddMapping("PostalCode", "zipcode");
-                    //ExcelBook.AddMapping("PhoneNumber", "phone");
-                    //ExcelBook.AddMapping("Amount", "amount");
-                    //ExcelBook.AddMapping("EmailAddress", "e-mail");
-                    //ExcelBook.AddMapping("JobNumber", "job #");
                     var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
                     foreach (var a in vouchers.Where(x => x.Last != "").Where(x => x.First != ""))
                     {
@@ -428,6 +440,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         #endregion
 
+        #region Validation
+
         public string this[string columnName]
         {
             get
@@ -459,14 +473,15 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
+        #endregion
 
-        private string _headerText;
+        //private string _headerText;
 
-        public string HeaderText
-        {
-            get { return _headerText; }
-            set { _headerText = value; }
-        }
+        //public string HeaderText
+        //{
+        //    get { return _headerText; }
+        //    set { _headerText = value; }
+        //}
 
         public void PostVouchers()
         {
@@ -486,11 +501,84 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         }
 
         public RelayCommand PostVouchersCommand { get; private set; }
+
         public bool CanPostVouchers()
         {
             return true;
         }
 
 
+        #region backgroundworker
+
+        private BackgroundWorker _voucherImporter;
+
+        private bool _startEnabled = true;
+
+        public bool StartEnabled
+        {
+            get { return _startEnabled; }
+            set
+            {
+                if (_startEnabled != value)
+                {
+                    _startEnabled = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        #region BackgroundWorker Events
+
+        // Note: This event fires on the background thread.
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ImportVouchers();
+        }
+
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            StartEnabled = !_voucherImporter.IsBusy;
+            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+            Status = new StatusInfo()
+            {
+                StatusMessage = "vouchers loaded - select next to continue",
+                IsBusy = false
+            };
+        }
+
+
+        private bool _isCleaning = true;
+
+        public bool IsCleaning
+        {
+            get { return _isCleaning; }
+            set
+            {
+                if (_isCleaning != value)
+                {
+                    _isCleaning = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+        }
+
+        private bool _isSaving = true;
+
+        public bool IsSaving
+        {
+            get { return _isSaving; }
+            set
+            {
+                if (_isSaving != value)
+                {
+                    _isSaving = value;
+                    NotifyPropertyChanged();
+                }
+            }
+            #endregion
+        }
     }
 }

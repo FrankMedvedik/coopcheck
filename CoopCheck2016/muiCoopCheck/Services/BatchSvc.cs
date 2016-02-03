@@ -30,10 +30,8 @@ namespace CoopCheck.WPF.Services
             return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));
         }
 
-        public static async Task<int> ImportVouchers(List<VoucherImport> vouchers)
+        public static int ImportVouchers(List<VoucherImport> vouchers)
         {
-            return await Task<int>.Factory.StartNew(() => 
-            {
                 var sb = BatchEdit.NewBatchEdit();
                 VoucherImport currentVoucher = null; 
                 try
@@ -56,7 +54,6 @@ namespace CoopCheck.WPF.Services
                         sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
                         sb = sb.Save();
                     }
-                    
                 }
                 catch (Exception e)
                 {
@@ -64,7 +61,6 @@ namespace CoopCheck.WPF.Services
                     throw (new Exception(string.Format("batch import failed  {0} - {1}", "Voucher = " + (currentVoucher?.EmailAddress) ?? "" ,e.Message)));
                 }
                 return sb.Num;
-            });
         }
     }
 }

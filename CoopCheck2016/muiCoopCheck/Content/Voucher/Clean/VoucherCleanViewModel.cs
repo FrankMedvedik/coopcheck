@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
@@ -46,6 +47,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     CleanTheVouchers();
                 }
             });
+
         }
 
         private ExcelFileInfoMessage _excelFileInfo;
@@ -100,6 +102,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 NotifyPropertyChanged();
             }
         }
+       
 
     }
 }

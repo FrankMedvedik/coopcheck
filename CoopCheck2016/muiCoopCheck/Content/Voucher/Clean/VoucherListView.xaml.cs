@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using FirstFloor.ModernUI.Windows.Controls;
 using VoucherImportAddDialog = CoopCheck.WPF.Content.Voucher.Edit.VoucherImportAddDialog;
@@ -21,7 +22,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         {
             // set the status of the callback to closed
             if (_vm.SelectedVoucher == null) return;
-            MessageBoxResult result = ModernDialog.ShowMessage("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel);
+            MessageBoxResult result = ModernDialog.ShowMessage("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel,(Window)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive));
             if (result == MessageBoxResult.OK)
             {
                 _vm.DeleteSelectedVoucher();

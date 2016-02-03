@@ -31,7 +31,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>50</ApplicationRevision>
+    <ApplicationRevision>52</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -131,9 +131,6 @@
       <HintPath>..\..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Lync.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Lync.Controls.Framework, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Lync.Utilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -361,9 +358,9 @@
     <Compile Include="Content\Voucher\Clean\VoucherCleanView.xaml.cs">
       <DependentUpon>VoucherCleanView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\VoucherViewModel.cs" />
-    <Compile Include="Content\Voucher\VoucherView.xaml.cs">
-      <DependentUpon>VoucherView.xaml</DependentUpon>
+    <Compile Include="Content\Voucher\VoucherImportWizardViewModel.cs" />
+    <Compile Include="Content\Voucher\VoucherImportWizardView.xaml.cs">
+      <DependentUpon>VoucherImportWizardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DataCleanEventConverter.cs" />
     <Compile Include="Converters\VoucherImportConverter.cs" />
@@ -693,8 +690,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\VoucherView.xaml">
-      <SubType>Form</SubType>
+    <Page Include="Content\Voucher\VoucherImportWizardView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataGridsResourceDictionary1.xaml">
@@ -932,12 +929,12 @@
   <ItemGroup>
     <PublishFile Include="Assets\RecknerCheck.dotx">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
