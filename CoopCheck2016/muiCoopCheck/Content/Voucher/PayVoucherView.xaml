@@ -35,7 +35,7 @@
                 <StackPanel Orientation="Vertical" Visibility="{Binding CanPrintChecks, Converter={StaticResource BoolToVisConverter}}">
                     <StackPanel Orientation="Horizontal"  >
                     <TextBlock FontWeight="Bold" Margin="6"   Width="150">Starting Check #</TextBlock>
-                    <TextBox FontWeight="Bold" Margin="6"  Text="{Binding StartingCheckNum}" Width="150"/>
+                    <TextBox FontWeight="Bold" Margin="6" Text="{Binding StartingCheckNum,Mode=TwoWay}" Width="150"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"  >
                     <TextBlock FontWeight="Bold" Margin="6"   Width="151">Ending Check #  </TextBlock>

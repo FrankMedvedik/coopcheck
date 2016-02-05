@@ -361,6 +361,11 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GetJobPaymentsReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="account_id" Type="int" Mode="In" />
+          <Parameter Name="start_date" Type="smalldatetime" Mode="In" />
+          <Parameter Name="end_date" Type="smalldatetime" Mode="In" />
+        </Function>
         <EntityContainer Name="CoopCheckModelStoreContainer">
           <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="batch" EntityType="Self.batch" Schema="dbo" store:Type="Tables" />
@@ -715,6 +720,11 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
           <FunctionImport Name="dal_GetOpenBatch" EntitySet="vwOpenBatches" ReturnType="Collection(CoopCheckModel.vwOpenBatch)" />
           <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
+          <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpt" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
+            <Parameter Name="account_id" Mode="In" Type="Int32" />
+            <Parameter Name="start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="end_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -1140,6 +1150,25 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="voucher_cnt" Type="Int32" />
           <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
+        <ComplexType Name="GetJobPaymentsReport_Result">
+          <Property Type="Int32" Name="job_num" Nullable="false" />
+          <Property Type="Int32" Name="account_id" Nullable="true" />
+          <Property Type="Int32" Name="batch_cnt" Nullable="true" />
+          <Property Type="DateTime" Name="first_batch_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="last_batch_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="first_pay_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="last_pay_date" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="total_cnt" Nullable="true" />
+          <Property Type="Int32" Name="open_cnt" Nullable="true" />
+          <Property Type="Int32" Name="cleared_cnt" Nullable="true" />
+          <Property Type="Decimal" Name="open_amount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="first_check_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="last_check_date" Nullable="true" Precision="16" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1642,6 +1671,8 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetJobPaymentsReport" FunctionName="CoopCheckModel.Store.GetJobPaymentsReport">
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

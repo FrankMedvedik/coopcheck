@@ -23,7 +23,7 @@
                                    Description="choose the account to reconcile then click 'get payments' to match the bank file to the account."
                                    PreviousPage="{Binding ElementName=BankFilePage}"
                                    CanSelectPreviousPage="{Binding CanFinish}"
-                                   CanCancel="False" CanFinish="{Binding CanFinish, Converter={StaticResource InverseBooleanConverter}}">
+                                   CanCancel="False" CanFinish="{Binding CanFinish}">
                     <reconcile:AccountPaymentsView Height="400" />
                 </xctk:WizardPage >
                 <!--<xctk:WizardPage x:Name="ReconcileReportPage" PageType="Interior"

@@ -111,7 +111,7 @@ namespace CoopCheck.Test.Library
             {
                 var l = PaymentInfoList.GetPaymentInfoListByBatch(obj.Num);
                 var p = l[0];
-                ClearCheckCommand.Execute(p.Id, DateTime.Now, p.Amount);
+                ClearChecksCommand.Execute(p.Id, DateTime.Now, p.Amount);
             }
             catch (Csla.DataPortalException e)
             {

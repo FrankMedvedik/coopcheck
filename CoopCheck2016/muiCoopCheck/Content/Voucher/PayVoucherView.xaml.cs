@@ -3,6 +3,7 @@ using System.Deployment.Application;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
@@ -35,7 +36,6 @@ namespace CoopCheck.WPF.Content.Voucher
         private void PrintChecks(object sender, RoutedEventArgs e)
         {
             var f = System.AppDomain.CurrentDomain.BaseDirectory + @"\" + @Properties.Settings.Default.CheckTemplate;
-            //ModernDialog.ShowMessage(f, "check template", MessageBoxButton.OK);
             if (!File.Exists(f))
             {
                 ModernDialog.ShowMessage(f + " not found, cannot print checks. ",
@@ -43,16 +43,16 @@ namespace CoopCheck.WPF.Content.Voucher
                 return;
             }
             _vm.PrintChecks();
+            var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
+            var result = cw.ShowDialog();
+            if(_vm.EndingCheckNum != 0)
+            {
+                CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
+                _vm.RefreshBatchList();
+            }
+
+
         }
-
-        //private void ShowPopUP()
-        //{
-        //    string title = "Co-op Check";
-        //    string text = "Checks are printed";
-
-        //    MyNotifyIcon.ShowBalloonTip(title, text, MyNotifyIcon.Icon);
-        //}
-
     }
 }
  

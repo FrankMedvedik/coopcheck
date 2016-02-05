@@ -14,7 +14,8 @@ namespace CoopCheck.WPF.Content.Voucher
     {
     
         private vwOpenBatch _selectedBatch = new vwOpenBatch();
-        private void RefreshBatchList()
+
+        public void RefreshBatchList()
         {
             Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
         }
@@ -200,7 +201,6 @@ namespace CoopCheck.WPF.Content.Voucher
                     await
                         PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
                             StartingCheckNum);
-                RefreshBatchList();
             }
             catch (Exception e)
             {

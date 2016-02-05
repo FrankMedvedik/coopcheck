@@ -43,7 +43,7 @@ namespace CoopCheck.WPF.Content.Payment
             {
                 try
                 {
-                    ClearCheckCommand.Execute(SelectedPayment.tran_id,DateTime.Today, SelectedPayment.tran_amount.GetValueOrDefault(0));
+                    ClearChecksCommand.Execute(SelectedPayment.tran_id,DateTime.Today, SelectedPayment.tran_amount.GetValueOrDefault(0));
                 }
                 catch (Exception ex)
                 {

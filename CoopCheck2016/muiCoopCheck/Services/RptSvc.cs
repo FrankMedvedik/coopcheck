@@ -14,14 +14,20 @@ namespace CoopCheck.WPF.Services
         {
             using (var ctx = new CoopCheckEntities())
             {
-                var x = await (
-                    from l in ctx.vwJobRpts
-                    where ((l.first_pay_date >= grc.StartDate) 
-                        && (l.last_pay_date <= grc.EndDate) 
-                        && l.account_id == grc.Account.account_id) 
-                    orderby l.first_pay_date
-                    select l).ToListAsync();
-                return x;
+                return await Task.Factory.StartNew(() =>
+                {
+                    return ctx.GetJobPaymentsReport(grc.Account.account_id, grc.StartDate,
+                        grc.EndDate).ToList();
+                });
+                        ;
+
+                    //from l in ctx.vwJobRpts
+                    //where ((l.first_pay_date >= grc.StartDate) 
+                    //    && (l.last_pay_date <= grc.EndDate) 
+                    //    && l.account_id == grc.Account.account_id) 
+                    //orderby l.first_pay_date
+                    //select l).ToListAsync();
+               // return x;
             }
         }
 

@@ -101,6 +101,9 @@ namespace CoopCheck.DalADO
                     request.PaymentReferenceId = p.Id.ToString();
                     request.IssuanceProductId = issuanceId;
                     request.Amount = p.Amount.ToString();
+                    request.ClientData1 = p.BatchNum.ToString();
+                    request.ClientData2 = p.JobNum.ToString();
+                    request.ClientData3 = Csla.ApplicationContext.User.Identity.Name;
 
                     var c = new PromoCodeService.Customer();
                     c.Address1 = p.Address1;
@@ -117,7 +120,7 @@ namespace CoopCheck.DalADO
 
                     request.Customer = c;
                     request.RedemptionMessage = p.StudyTopic;
-                    request.EmailMessage = p.ThankYou2;
+                    request.EmailMessage = p.StudyTopic; 
 
                     PromoCodeService.GetPromocodeResponse response = srv.GetPromocode(request);
 

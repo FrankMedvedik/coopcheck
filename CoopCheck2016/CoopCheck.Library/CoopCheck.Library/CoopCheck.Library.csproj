@@ -85,7 +85,7 @@
     </Compile>
     <Compile Include="ClearCheckBatchCommand.cs" />
     <Compile Include="VoidCheckCommand.cs" />
-    <Compile Include="ClearCheckCommand.cs" />
+    <Compile Include="ClearChecksCommand.cs" />
     <Compile Include="CommitCheckCommand.cs" />
     <Compile Include="DataPortalHookArgs.cs" />
     <Compile Include="data\PersonatorErrorCodes.cs" />

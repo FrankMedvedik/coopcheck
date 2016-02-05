@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CoopCheck.Library;
+using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Services
 {
@@ -52,36 +54,27 @@ namespace CoopCheck.WPF.Services
             var b = BatchEdit.GetBatchEdit(batchNum);
             int checkNum = startingCheckNum + b.Vouchers.Count-1;
 
-            // the write check should happen AFTER THE PHYSICAL CHECKS ARE PRINTED 
-
+            // WriteCheckBatchCommand works like a begin transaction and 
+            // marks the whole batch as in progress... see commit afterwards
             WriteCheckBatchCommand.Execute(batchNum, accountId, startingCheckNum);
-            //foreach (var c in b.Vouchers)
-            //{
-            //    //status = PaymentPrintSvc.PrintCheck(b, c, checkNum);
-            //    //if (status.ErrorMessage == null)
-            //    //{
-            //        WriteCheckCommand.Execute(batchNum, accountId, checkNum);
-            //        //status.IsBusy = true;
-            //        //status.ShowMessageBox = false;
-            //        //Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
-            //    //}
-            //    //else
-            //    //{
-            //    //    // commit all the checks up to the one that errored out
-            //    //    // send ERROR message to popup 
-            //    //    CommitCheckCommand.Execute(batchNum, --checkNum);
-            //    //    status.ShowMessageBox = true;
-            //    //    return status;
-            //    //}
-            //}
-            // commit the check operation to the database
-            // send completion message to popup with counts and account
-            CommitCheckCommand.Execute(batchNum, checkNum);
+            foreach (var c in b.Vouchers)
+            {
+                status = PaymentPrintSvc.PrintCheck(b, c, checkNum);
+                if (status.ErrorMessage == null)
+                {
+                    status.IsBusy = true;
+                    Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
+                }
+                else
+                {
+                    return status;
+                }
+            }
             return new StatusInfo() 
             {
                     StatusMessage =
                     String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
-                        startingCheckNum, checkNum)//,ShowMessageBox = true
+                        startingCheckNum, checkNum)
             };
       }
 

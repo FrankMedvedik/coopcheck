@@ -40,7 +40,7 @@
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock> FUCK FUCK FUCK</TextBlock>
+                <TextBlock></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </DockPanel>
