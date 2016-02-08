@@ -30,26 +30,26 @@
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
                       VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}" IsReadOnly="True"
-                     MaxHeight="600" ClipboardCopyMode="IncludeHeader" 
+                     MaxHeight="300" ClipboardCopyMode="IncludeHeader" 
                   EnableColumnVirtualization="True" EnableRowVirtualization="True"
                     ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
             <DataGrid.Columns>
-                <StaticResource ResourceKey="dgPJob" />
-                <StaticResource ResourceKey="dgPBatch" />
-                <StaticResource ResourceKey="dgPCheckNum"  />
-                <StaticResource ResourceKey="dgPEmail"/>
-                <StaticResource ResourceKey="dgPLast"  />
                 <StaticResource ResourceKey="dgPFirst" />
-                <StaticResource ResourceKey="dgPPhone" />
+                <StaticResource ResourceKey="dgPLast" />
+                <StaticResource ResourceKey="dgPAddress1" />
+                <StaticResource ResourceKey="dgPAddress2" />
                 <StaticResource ResourceKey="dgPCity" />
                 <StaticResource ResourceKey="dgPState"  />
                 <StaticResource ResourceKey="dgPZip" />
+                <StaticResource ResourceKey="dgPEmail" />
+                <StaticResource ResourceKey="dgPPhone" />
+                <StaticResource ResourceKey="dgPCompany" />
+                <StaticResource ResourceKey="dgPJob" />
+                <StaticResource ResourceKey="dgPBatch" />
+                <StaticResource ResourceKey="dgPCheckNum" />
                 <StaticResource ResourceKey="dgPDate" />
                 <StaticResource ResourceKey="dgPAmount" />
-                <StaticResource ResourceKey="dgPCompany" />
-                <StaticResource ResourceKey="dgPAddress1"  />
-                <StaticResource ResourceKey="dgPAddress2"  />
-                <StaticResource ResourceKey="dgPCleared"/>
+                <StaticResource ResourceKey="dgClearedDate"/>
                 <StaticResource ResourceKey="dgPPrintFlag"/>
             </DataGrid.Columns>
         </DataGrid>

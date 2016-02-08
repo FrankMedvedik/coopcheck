@@ -12,6 +12,7 @@
                 <mui:Link DisplayName="outstanding" Source="/Pages/OpenPaymentReportPage.xaml" />
                 <mui:Link DisplayName="voided" Source="/Pages/VoidedPaymentReportPage.xaml" />
                 <mui:Link DisplayName="job" Source="/Pages/JobSummaryReportPage.xaml" />
+                <!--<mui:Link DisplayName="batch" Source="/Pages/BatchSummaryReportPage.xaml" />-->
                 <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayReportPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>

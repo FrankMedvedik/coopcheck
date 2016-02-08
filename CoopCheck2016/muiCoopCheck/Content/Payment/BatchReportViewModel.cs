@@ -79,7 +79,7 @@ namespace CoopCheck.WPF.Content.Payment
 
         public void RefreshAll()
         {
-            GetBatchs();
+            GetBatches();
         }
 
 
@@ -114,11 +114,11 @@ namespace CoopCheck.WPF.Content.Payment
             set
             {
                 _paymentReportCriteria = value;
-                GetBatchs();
+                GetBatches();
             }
         }
 
-        public async void GetBatchs()
+        public async void GetBatches()
         {
             ShowGridData = false;
             try

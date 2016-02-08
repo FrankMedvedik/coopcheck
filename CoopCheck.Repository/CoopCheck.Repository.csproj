@@ -103,6 +103,9 @@
     <Compile Include="dsa_GetVoucher_Result.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetBatchPaymentsReport_Result.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="getbatchRpt_Result.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>

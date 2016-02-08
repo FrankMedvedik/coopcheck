@@ -45,12 +45,11 @@ namespace CoopCheck.WPF.Content.Voucher
             _vm.PrintChecks();
             var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
             var result = cw.ShowDialog();
-            if(_vm.EndingCheckNum != 0)
+            CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
+            if (_vm.EndingCheckNum != 0)
             {
-                CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
                 _vm.RefreshBatchList();
             }
-
 
         }
     }

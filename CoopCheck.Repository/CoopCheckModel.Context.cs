@@ -28,7 +28,7 @@ namespace CoopCheck.Repository
         }
     
         public virtual DbSet<batch> batches { get; set; }
-        public virtual DbSet<check_tran> check_tran { get; set; }
+        public virtual DbSet<check_tran> check_trans { get; set; }
         public virtual DbSet<voucher> vouchers { get; set; }
         public virtual DbSet<vwCheck> vwCheck { get; set; }
         public virtual DbSet<vwPositivePay> vwPositivePay { get; set; }
@@ -186,6 +186,40 @@ namespace CoopCheck.Repository
                 new ObjectParameter("end_date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwJobRpt>("GetJobPaymentsReport", mergeOption, account_idParameter, start_dateParameter, end_dateParameter);
+        }
+    
+        public virtual ObjectResult<vwBatchRpt> GetBatchPaymentReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
+        {
+            var account_idParameter = account_id.HasValue ?
+                new ObjectParameter("account_id", account_id) :
+                new ObjectParameter("account_id", typeof(int));
+    
+            var start_dateParameter = start_date.HasValue ?
+                new ObjectParameter("start_date", start_date) :
+                new ObjectParameter("start_date", typeof(System.DateTime));
+    
+            var end_dateParameter = end_date.HasValue ?
+                new ObjectParameter("end_date", end_date) :
+                new ObjectParameter("end_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwBatchRpt>("GetBatchPaymentReport", account_idParameter, start_dateParameter, end_dateParameter);
+        }
+    
+        public virtual ObjectResult<vwBatchRpt> GetBatchPaymentReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date, MergeOption mergeOption)
+        {
+            var account_idParameter = account_id.HasValue ?
+                new ObjectParameter("account_id", account_id) :
+                new ObjectParameter("account_id", typeof(int));
+    
+            var start_dateParameter = start_date.HasValue ?
+                new ObjectParameter("start_date", start_date) :
+                new ObjectParameter("start_date", typeof(System.DateTime));
+    
+            var end_dateParameter = end_date.HasValue ?
+                new ObjectParameter("end_date", end_date) :
+                new ObjectParameter("end_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwBatchRpt>("GetBatchPaymentReport", mergeOption, account_idParameter, start_dateParameter, end_dateParameter);
         }
     }
 }

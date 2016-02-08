@@ -357,6 +357,11 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
         <Function Name="dsa_GetVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tran_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetBatchPaymentsReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="account_id" Type="int" Mode="In" />
+          <Parameter Name="start_date" Type="smalldatetime" Mode="In" />
+          <Parameter Name="end_date" Type="smalldatetime" Mode="In" />
+        </Function>
         <Function Name="getbatchRpt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
@@ -721,6 +726,11 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <FunctionImport Name="dal_GetOpenBatch" EntitySet="vwOpenBatches" ReturnType="Collection(CoopCheckModel.vwOpenBatch)" />
           <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
           <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpt" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
+            <Parameter Name="account_id" Mode="In" Type="Int32" />
+            <Parameter Name="start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="end_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchPaymentReport" EntitySet="vwBatchRpt" ReturnType="Collection(CoopCheckModel.vwBatchRpt)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
             <Parameter Name="end_date" Mode="In" Type="DateTime" />
@@ -1168,6 +1178,24 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="first_check_date" Nullable="true" Precision="16" />
           <Property Type="DateTime" Name="last_check_date" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="GetBatchPaymentsReport_Result">
+          <Property Type="Int32" Name="account_id" Nullable="true" />
+          <Property Type="String" Name="account_name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="job_num" Nullable="true" />
+          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
+          <Property Type="Decimal" Name="batch_amount" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="batch_num" Nullable="true" />
+          <Property Type="String" Name="payment_type" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="total_cnt" Nullable="true" />
+          <Property Type="Int32" Name="open_cnt" Nullable="true" />
+          <Property Type="Int32" Name="cleared_cnt" Nullable="true" />
+          <Property Type="Decimal" Name="open_amount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1673,6 +1701,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetJobPaymentsReport" FunctionName="CoopCheckModel.Store.GetJobPaymentsReport">
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchPaymentReport" FunctionName="CoopCheckModel.Store.GetBatchPaymentsReport" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1687,7 +1716,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

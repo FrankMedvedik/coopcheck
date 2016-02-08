@@ -13,6 +13,7 @@
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPState" Binding="{Binding region}"  Header="state" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPZip" Binding="{Binding postal_code}" Header="zip" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPDate" Binding="{Binding check_date, StringFormat=d}" Header="check date" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgClearedDate" Binding="{Binding cleared_date, StringFormat=d}" Header="cleared date" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCheckNum" Binding="{Binding check_num}" Header="check #" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAmount"  Binding="{Binding tran_amount, StringFormat={} {0:C}}" Header="amount" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCompany"  Binding="{Binding company}"  Header="company"/>

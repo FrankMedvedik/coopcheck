@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
@@ -15,6 +16,8 @@ namespace CoopCheck.WPF.Content.Payment
             InitializeComponent();
             _vm = new PositivePayReportViewModel();
             DataContext = _vm;
+            prcv.PaymentReportCriteria.StartDate = DateTime.Today;
+            prcv.PaymentReportCriteria.EndDate = DateTime.Today;
         }
  
 

@@ -46,7 +46,7 @@
                 <StaticResource ResourceKey="dgPCompany" />
                 <StaticResource ResourceKey="dgPAddress1"  />
                 <StaticResource ResourceKey="dgPAddress2"  />
-                <StaticResource ResourceKey="dgPCleared"/>
+                <StaticResource ResourceKey="dgClearedDate" />
                 <StaticResource ResourceKey="dgPPrintFlag"/>
             </DataGrid.Columns>
         </DataGrid>

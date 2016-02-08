@@ -12,7 +12,7 @@
             <StaticResource ResourceKey="dgPEmail" />
             <StaticResource ResourceKey="dgPLast" />
             <StaticResource ResourceKey="dgPFirst" />
-            <StaticResource ResourceKey="dgPCleared" />
+            <StaticResource ResourceKey="dgClearedDate" />
             <StaticResource ResourceKey="dgPPrintFlag" />
             <StaticResource ResourceKey="dgPPhone" />
             <StaticResource ResourceKey="dgPCity" />

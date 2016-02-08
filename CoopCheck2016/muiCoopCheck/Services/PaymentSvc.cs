@@ -59,7 +59,7 @@ namespace CoopCheck.WPF.Services
             WriteCheckBatchCommand.Execute(batchNum, accountId, startingCheckNum);
             foreach (var c in b.Vouchers)
             {
-                status = PaymentPrintSvc.PrintCheck(b, c, checkNum);
+                status = PaymentPrintSvc.PrintCheck(b, c, checkNum++);
                 if (status.ErrorMessage == null)
                 {
                     status.IsBusy = true;
