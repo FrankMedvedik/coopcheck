@@ -36,6 +36,12 @@ namespace CoopCheck.WPF.Content.Payment
                 _selectedBatch = value;
                 NotifyPropertyChanged();
                 Messenger.Default.Send(new NotificationMessage<vwBatchRpt>(SelectedBatch, Notifications.SelectedBatchChanged));
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = "",
+                    StatusMessage = string.Format("batch {0} contains {1} payments total {2:C}", SelectedBatch.batch_num, SelectedBatch.total_cnt, SelectedBatch.total_amount)
+                };
+
             }
         }
 
@@ -56,7 +62,15 @@ namespace CoopCheck.WPF.Content.Payment
                 _batchTotalDollars = value; NotifyPropertyChanged();
             }
         }
+        public int PaymentsCnt
+        {
+            get { return Batches.ToList().Sum(x => x.total_cnt.GetValueOrDefault(0)); }
+        }
 
+        public decimal? PaymentsTotalDollars
+        {
+            get { return Batches.Sum(x => x.total_amount); }
+        }
         private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
         public ObservableCollection<vwBatchRpt> Batches
         {
@@ -67,12 +81,18 @@ namespace CoopCheck.WPF.Content.Payment
                 NotifyPropertyChanged();
                 ShowGridData = true;
 
-                HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}  Total = {3:c}",
-                                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate, BatchTotalDollars);
+                //HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}  Total = {3:c}",
+                //                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate, BatchTotalDollars);
+
+                HeadingText = String.Format("{0} batches paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}",
+                                      Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
+                NotifyPropertyChanged("PaymentsTotalDollars");
+                NotifyPropertyChanged("PaymentsCnt");
+
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",
-                    StatusMessage = "select a Batch"
+                    StatusMessage = "select a batch to show the related payments"
                 };
             }
         }

@@ -1,4 +1,5 @@
-﻿using CoopCheck.Library;
+﻿using System;
+using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using DataClean;
 using DataClean.Models;
@@ -28,23 +29,23 @@ namespace CoopCheck.WPF.Converters
         public static VoucherEdit ToVoucherEdit(VoucherImport v)
         {
             var n = VoucherEdit.NewVoucherEdit();
-            n.AddressLine1 = v.AddressLine1;
-            n.AddressLine2 = v.AddressLine2;
+            n.AddressLine1 = !string.IsNullOrEmpty(v.AddressLine1) ? v.AddressLine1.ToUpper():v.AddressLine1;
+            n.AddressLine2 = !string.IsNullOrEmpty(v.AddressLine2) ? v.AddressLine2.ToUpper() : v.AddressLine2;
             n.Amount = v.Amount;
-            n.Company = v.Company;
+            n.Company = !string.IsNullOrEmpty(v.Company) ? v.Company.ToUpper(): v.Company;
             //n.Country = Country;
             n.EmailAddress = v.EmailAddress;
-            n.First = v.First;
-            n.Last = v.Last;
-            n.Middle = v.Middle;
-            n.Municipality = v.Municipality;
-            n.NamePrefix = v.NamePrefix;
+            n.First = !string.IsNullOrEmpty(v.First) ?  v.First.ToUpper(): v.First;
+            n.Last = !string.IsNullOrEmpty(v.Last) ? v.Last.ToUpper() : v.Last;
+            n.Middle = !string.IsNullOrEmpty(v.Middle) ? v.Middle.ToUpper(): v.Middle;
+            n.Municipality = !string.IsNullOrEmpty(v.Municipality) ? v.Municipality.ToUpper(): v.Municipality;
+            n.NamePrefix = !string.IsNullOrEmpty(v.NamePrefix) ? v.NamePrefix.ToUpper(): v.NamePrefix;
             n.PersonId = v.PersonId;
             n.PhoneNumber = v.PhoneNumber;
             n.PostalCode = v.PostalCode;
-            n.Region = v.Region;
-            n.Suffix = v.Suffix;
-            n.Title = v.Title;
+            n.Region = !string.IsNullOrEmpty(v.Region) ? v.Region.ToUpper() : v.Region;
+            n.Suffix = !string.IsNullOrEmpty(v.Suffix)? v.Suffix.ToUpper(): v.Suffix;
+            n.Title = !string.IsNullOrEmpty(v.Title) ? v.Title.ToUpper() : v.Title;
             return n;
         }
     }

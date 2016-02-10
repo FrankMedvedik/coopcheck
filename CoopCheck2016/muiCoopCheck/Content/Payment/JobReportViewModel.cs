@@ -36,6 +36,12 @@ namespace CoopCheck.WPF.Content.Payment
                 _selectedJob = value;
                 NotifyPropertyChanged();
                 Messenger.Default.Send(new NotificationMessage<vwJobRpt>(SelectedJob, Notifications.SelectedJobChanged));
+                Status = new StatusInfo()
+                {
+                    ErrorMessage = "",
+                    StatusMessage = string.Format("Job {0} contains {1} payments total {2:C}", SelectedJob.job_num, SelectedJob.total_cnt, SelectedJob.total_amount)
+                };
+
             }
         }
 

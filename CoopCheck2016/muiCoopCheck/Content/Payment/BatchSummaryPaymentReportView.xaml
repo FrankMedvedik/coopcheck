@@ -14,7 +14,7 @@
             <RowDefinition  Height="Auto"/>
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>
+        <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
         <Expander Grid.Row="1" IsExpanded="True">
         <payment:PaymentReportCriteriaView x:Name="prcv" />
         </Expander>

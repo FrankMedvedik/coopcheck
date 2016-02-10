@@ -146,7 +146,9 @@ namespace CoopCheck.WPF.Services
             {
                 v = await (from b in ctx.vwPayments
                            where ((b.job_num.ToString() == grc.JobNumber) 
-                            && (b.account_id == grc.Account.account_id))
+                            && (b.account_id == grc.Account.account_id)
+                            && (b.check_date >=  grc.StartDate)
+                            && (b.check_date <= grc.EndDate))
                            select b).ToListAsync();
             }
             return v;

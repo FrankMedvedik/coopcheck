@@ -37,7 +37,12 @@ namespace CoopCheck.WPF.Services
                             app.Selection.TypeText(b.ThankYou1 ?? "");
 
                         }
-                        else if (f.Code.Text.Contains("thank_you_2"))
+                        else if (f.Code.Text.Contains("study_topic"))
+                        {
+                            f.Select();
+                            app.Selection.TypeText(b.StudyTopic ?? "");
+                        }
+                         else if (f.Code.Text.Contains("thank_you_2"))
                         {
                             f.Select();
                             app.Selection.TypeText(b.ThankYou2 ?? "");

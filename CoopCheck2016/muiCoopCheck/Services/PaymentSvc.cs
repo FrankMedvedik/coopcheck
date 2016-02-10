@@ -52,7 +52,7 @@ namespace CoopCheck.WPF.Services
             var status = new StatusInfo();
 
             var b = BatchEdit.GetBatchEdit(batchNum);
-            int checkNum = startingCheckNum + b.Vouchers.Count-1;
+            int checkNum = startingCheckNum;
 
             // WriteCheckBatchCommand works like a begin transaction and 
             // marks the whole batch as in progress... see commit afterwards
@@ -74,7 +74,7 @@ namespace CoopCheck.WPF.Services
             {
                     StatusMessage =
                     String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
-                        startingCheckNum, checkNum)
+                        startingCheckNum, --checkNum)
             };
       }
 

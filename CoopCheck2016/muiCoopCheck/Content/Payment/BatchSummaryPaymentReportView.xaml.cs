@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,9 @@ namespace CoopCheck.WPF.Content.Payment
             InitializeComponent();
             _vm = new BatchSummaryPaymentReportViewModel();
             DataContext = _vm;
+            prcv.PaymentReportCriteria.StartDate = DateTime.Today.AddDays(-1);
+            prcv.PaymentReportCriteria.EndDate = DateTime.Today;
+
             Messenger.Default.Register<NotificationMessage<vwBatchRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.SelectedBatchChanged)
