@@ -71,7 +71,7 @@ namespace CoopCheck.WPF.Services
                         else if (f.Code.Text.Contains("check_date"))
                         {
                             f.Select();
-                            app.Selection.TypeText(DateTime.Now.ToString("MMMM dd, yyyy"));
+                            app.Selection.TypeText(Convert.ToDateTime(b.PayDate).ToString("MMMM dd, yyyy"));
                         }
 
                         else if (f.Code.Text.Contains("check_num"))
