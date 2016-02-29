@@ -114,7 +114,7 @@ namespace CoopCheck.Library
             BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = LastProperty, AffectedProperties = { FirstProperty, CountryProperty }, Priority = 1 });
             BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = CountryProperty, AffectedProperties = { FirstProperty, LastProperty }, Priority = 1 });
 
-            BusinessRules.AddRule(new VerifyAddressRule() { PrimaryProperty = PostalCodeProperty, AffectedProperties = { AddressLine1Property, MunicipalityProperty } });
+            // BusinessRules.AddRule(new VerifyAddressRule() { PrimaryProperty = PostalCodeProperty, AffectedProperties = { AddressLine1Property, MunicipalityProperty } });
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
