@@ -28,6 +28,11 @@
                 <mui:Link DisplayName="reconcile" Source="/Pages/AccountReconcilePage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Utilities">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Unprint Checks" Source="/Pages/UtilitiesPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Settings">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Display" Source="/Pages/SettingsPage.xaml" />

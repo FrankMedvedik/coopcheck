@@ -290,6 +290,19 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="payee" Type="nvarchar" MaxLength="38" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CoopCheck.dbo.vwUnclearedBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUnclearedBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="job_num" Type="int" />
+          <Property Name="batch_date" Type="smalldatetime" />
+          <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="voucher_cnt" Type="int" />
+          <Property Name="total_amount" Type="money" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwVoidedPayment">
           <Key>
@@ -562,6 +575,16 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     [vwPositivePay].[payee] AS [payee]
     FROM [dbo].[vwPositivePay] AS [vwPositivePay]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwUnclearedBatch" EntityType="Self.vwUnclearedBatch" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUnclearedBatch].[batch_num] AS [batch_num], 
+    [vwUnclearedBatch].[job_num] AS [job_num], 
+    [vwUnclearedBatch].[batch_date] AS [batch_date], 
+    [vwUnclearedBatch].[pay_date] AS [pay_date], 
+    [vwUnclearedBatch].[voucher_cnt] AS [voucher_cnt], 
+    [vwUnclearedBatch].[total_amount] AS [total_amount]
+    FROM [dbo].[vwUnclearedBatch] AS [vwUnclearedBatch]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwVoidedPayment" EntityType="Self.vwVoidedPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwVoidedPayment].[tran_id] AS [tran_id], 
@@ -736,6 +759,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
             <Parameter Name="end_date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="vwBatchRpt" EntityType="CoopCheckModel.vwBatchRpt" />
+          <EntitySet Name="vwUnclearedBatch" EntityType="CoopCheckModel.vwUnclearedBatch" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -1198,6 +1222,17 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwUnclearedBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="voucher_cnt" Type="Int32" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1700,6 +1735,18 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
                 <ScalarProperty Name="job_num" ColumnName="job_num" />
                 <ScalarProperty Name="account_name" ColumnName="account_name" />
                 <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUnclearedBatch">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwUnclearedBatch">
+              <MappingFragment StoreEntitySet="vwUnclearedBatch">
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
                 <ScalarProperty Name="batch_num" ColumnName="batch_num" />
               </MappingFragment>
             </EntityTypeMapping>

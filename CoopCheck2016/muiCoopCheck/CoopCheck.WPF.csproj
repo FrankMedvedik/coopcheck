@@ -241,6 +241,18 @@
     <Compile Include="Content\Payment\ClearPaymentDialog.xaml.cs">
       <DependentUpon>ClearPaymentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Utilities\Unpay\BatchEditView.xaml.cs">
+      <DependentUpon>BatchEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Utilities\Unpay\BatchEditViewModel.cs" />
+    <Compile Include="Content\Utilities\Unpay\UnclearedBatchListView.xaml.cs">
+      <DependentUpon>UnclearedBatchListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Utilities\Unpay\UnclearedBatchListViewModel.cs" />
+    <Compile Include="Content\Utilities\Unpay\UnpayVouchersViewModel.cs" />
+    <Compile Include="Content\Utilities\Unpay\UnpayVoucherView.xaml.cs">
+      <DependentUpon>UnpayVoucherView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Voucher\Clean\VoucherWorkbookMessage.cs" />
     <Compile Include="Content\Voucher\Save\VoucherSaveView.xaml.cs">
       <DependentUpon>VoucherSaveView.xaml</DependentUpon>
@@ -393,6 +405,7 @@
     <Compile Include="Services\DataCleanSvc.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />
+    <Compile Include="Services\UnclearedBatchSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
@@ -424,8 +437,8 @@
     <Compile Include="Content\Voucher\Edit\BatchListView.xaml.cs">
       <DependentUpon>BatchListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PayPage.xaml.cs">
-      <DependentUpon>PayPage.xaml</DependentUpon>
+    <Compile Include="Pages\UtilitiesPage.xaml.cs">
+      <DependentUpon>UtilitiesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Voucher\PayVoucherView.xaml.cs">
       <DependentUpon>PayVoucherView.xaml</DependentUpon>
@@ -665,6 +678,18 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Utilities\Unpay\BatchEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Utilities\Unpay\UnclearedBatchListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Utilities\Unpay\UnpayVoucherView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -768,7 +793,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\PayPage.xaml">
+    <Page Include="Pages\UtilitiesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

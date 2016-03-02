@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
+             xmlns:utilities="clr-namespace:CoopCheck.WPF.Content.Utilities"
              mc:Ignorable="d" >
     <Control.Resources>
         <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
@@ -78,25 +79,25 @@
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Study Topic"  Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                             <Border BorderThickness="1" BorderBrush="Black">
-                        <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.StudyTopic, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="5" />
+                        <TextBox Height="100"  Width="500"  MaxLength="75" Text="{Binding SelectedBatch.StudyTopic, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="5" />
                             </Border>
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Description" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                             <Border BorderThickness="1" BorderBrush="Black">
-                                <TextBox Height="100"  Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
+                            <TextBox Height="100" MaxLength="75" Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
                             </Border>
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Thank You 1" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                             <Border BorderThickness="1" BorderBrush="Black">
-                                <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
+                            <TextBox Height="100" MaxLength="75" Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
                             </Border>
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Thank You 2" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                             <Border BorderThickness="1" BorderBrush="Black">
-                                <TextBox  Height="100"  Width="500" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
+                            <TextBox Height="100" Width="500" MaxLength="75" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
                             </Border>
                         </StackPanel>
             </StackPanel>
@@ -174,7 +175,7 @@
                                 </StackPanel>
                                 <StackPanel>
                                     <Label Content="Amount" Target="{Binding ElementName=TextAmount}"/>
-                                    <TextBox x:Name="TextAmount" Width="250"  Text="{Binding SelectedVoucher.Amount, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
+                                    <TextBox x:Name="TextAmount" Width="250" Text="{Binding SelectedVoucher.Amount, Mode=TwoWay,StringFormat={}{0:C}, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

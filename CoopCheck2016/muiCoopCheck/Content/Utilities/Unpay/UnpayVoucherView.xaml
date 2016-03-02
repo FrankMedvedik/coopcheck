@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="CoopCheck.WPF.Content.Utilities.Unpay.UnpayVoucherView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="700">
+    <!--<Grid Style="{StaticResource ContentRoot}">-->
+    <Grid>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"  >
+                <TextBlock Margin="6"  Style="{StaticResource Heading2}" Text="{Binding Status.StatusMessage}"/>
+                <TextBlock Margin="6"  Style="{StaticResource Heading2}" Text="{Binding Status.ErrorMessage}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  >
+                <TextBlock Text="Account" Width="150" FontWeight="Bold" HorizontalAlignment="Right" Margin="6"/>
+                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}"  TabIndex="1"
+                            Name="cbAccounts" Width="200" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}" >
+                        <!--<i:Interaction.Triggers >
+                            <i:EventTrigger EventName="SelectionChanged" x:Name="Interactivity1Fix">
+                                <i:InvokeCommandAction Command="{Binding AccountChangedCommand}"  x:Name="InteractivityFix"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                <TextBlock FontWeight="Bold" Text="{Binding account_name}" Margin="0,0,5,0"/>
+                                <TextBlock FontWeight="Bold" Text="{Binding account_type}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Visibility="{Binding CanUnprintChecks, Converter={StaticResource BoolToVisConverter}}">
+                    <StackPanel Orientation="Horizontal"  >
+                    <TextBlock FontWeight="Bold" Margin="6"   Width="150">Starting Check #</TextBlock>
+                    <TextBox FontWeight="Bold" Margin="6" Text="{Binding StartingCheckNum,Mode=TwoWay}" Width="150"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"  >
+                    <TextBlock FontWeight="Bold" Margin="6"   Width="151">Ending Check #  </TextBlock>
+                    <TextBox FontWeight="Bold"  Margin="6"  Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150" />
+                    </StackPanel>
+                    <Button Margin="172,6,6,6" Width="150" Content="Print Checks"  HorizontalAlignment="Left" TabIndex="3" 
+                            IsDefault="True"  Click="CancelChecks"  IsEnabled="{Binding CanUnprintChecks}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Visibility="{Binding CanUnswiftPay, Converter={StaticResource BoolToVisConverter}}">
+                    <StackPanel Orientation="Horizontal" >
+                        <Button Margin="172,6,6,6" Width="150" Content="Cancel Swift Pay" HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="CancelSwiftPay" IsEnabled="{Binding CanUnswiftPay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+    </Grid>
+</UserControl>

@@ -78,5 +78,14 @@ namespace CoopCheck.WPF.Services
             };
       }
 
-   }
+        public static Task<StatusInfo> UnprintChecksAsync(int accountId, int batchNum, int startingCheckNum)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Task<StatusInfo> CancelSwiftFulfillAsync(int accountId, int batchNum)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

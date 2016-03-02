@@ -137,6 +137,9 @@
     <Compile Include="vwPositivePay.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwUnclearedBatch.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwVoidedPayment.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
