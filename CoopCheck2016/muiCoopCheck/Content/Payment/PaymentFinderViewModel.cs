@@ -24,7 +24,8 @@ namespace CoopCheck.WPF.Content.Payment
             {
                 if (message.Notification == Notifications.FindChecks)
                 {
-                     GetPayments(message.Content);
+                    PaymentReportCriteria = message.Content;
+                     GetPayments();
                 }
             });
 
@@ -44,6 +45,7 @@ namespace CoopCheck.WPF.Content.Payment
                 try
                 {
                     ClearChecksCommand.Execute(SelectedPayment.tran_id,DateTime.Today, SelectedPayment.tran_amount.GetValueOrDefault(0));
+                    GetPayments();
                 }
                 catch (Exception ex)
                 {
@@ -88,6 +90,7 @@ namespace CoopCheck.WPF.Content.Payment
                 try
                 {
                     VoidCheckCommand.Execute(SelectedPayment.tran_id);
+                    GetPayments();
                 }
                 catch (Exception ex)
                 {
@@ -194,7 +197,9 @@ namespace CoopCheck.WPF.Content.Payment
 
         #endregion
 
-        public async void GetPayments(PaymentReportCriteria p)
+        public PaymentReportCriteria PaymentReportCriteria  { get; set; }
+
+        public async void GetPayments()
         {
             Status = new StatusInfo()
             {
@@ -206,7 +211,7 @@ namespace CoopCheck.WPF.Content.Payment
             {
                 Payments = await Task<ObservableCollection<vwPayment>>.Factory.StartNew(() =>
                 {
-                    var task =  RptSvc.GetPayments(p);
+                    var task =  RptSvc.GetPayments(PaymentReportCriteria);
                     return new ObservableCollection<vwPayment>(task.Result);
                 });
 

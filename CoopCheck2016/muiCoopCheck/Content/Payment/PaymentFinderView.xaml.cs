@@ -24,7 +24,8 @@ namespace CoopCheck.WPF.Content.Payment
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            _vm.GetPayments(prcv.PaymentReportCriteria);
+            _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
+            _vm.GetPayments();
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
@@ -45,19 +46,20 @@ namespace CoopCheck.WPF.Content.Payment
             var result = cw.ShowDialog();
             if (result == true)
             {
+                _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
                 _vm.ClearCheck();
-                _vm.GetPayments(prcv.PaymentReportCriteria);
+                _vm.GetPayments();
             }
         }
 
-        private void VoidCheck_Click(object sender, RoutedEventArgs e)
+        private async void VoidCheck_Click(object sender, RoutedEventArgs e)
         {
             var cw = new VoidPaymentDialog() {DataContext = _vm};
             var result = cw.ShowDialog();
             if (result == true)
             {
+                _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
                 _vm.VoidCheck();
-                _vm.GetPayments(prcv.PaymentReportCriteria);
             }
         }
 
