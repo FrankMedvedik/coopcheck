@@ -9,6 +9,7 @@
         <mui:LinkGroup DisplayName="payments">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="find" Source="/Pages/PaymentFinderReportPage.xaml" />
+                <mui:Link DisplayName="clients" Source="/Pages/JobFinderReportPage.xaml" />
                 <mui:Link DisplayName="outstanding" Source="/Pages/OpenPaymentReportPage.xaml" />
                 <mui:Link DisplayName="voided" Source="/Pages/VoidedPaymentReportPage.xaml" />
                 <mui:Link DisplayName="job" Source="/Pages/JobSummaryReportPage.xaml" />

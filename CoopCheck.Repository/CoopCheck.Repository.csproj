@@ -61,6 +61,9 @@
     <Compile Include="check_tran.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="client.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CoopCheckModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,6 +113,9 @@
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetJobPaymentsReport_Result.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="jobLog.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

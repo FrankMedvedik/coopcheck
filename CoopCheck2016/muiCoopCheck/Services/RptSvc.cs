@@ -16,15 +16,6 @@ namespace CoopCheck.WPF.Services
             {
                 return await Task.Factory.StartNew(() => 
                     ctx.GetJobPaymentsReport(grc.Account.account_id, grc.StartDate,grc.EndDate).ToList());
-                        ;
-
-                    //from l in ctx.vwJobRpts
-                    //where ((l.first_pay_date >= grc.StartDate) 
-                    //    && (l.last_pay_date <= grc.EndDate) 
-                    //    && l.account_id == grc.Account.account_id) 
-                    //orderby l.first_pay_date
-                    //select l).ToListAsync();
-               // return x;
             }
         }
 
@@ -45,6 +36,7 @@ namespace CoopCheck.WPF.Services
                 //return x;
             }
         }
+
 
         public static async Task<List<vwPayment>> GetPayments(PaymentReportCriteria crc)
         {
@@ -122,7 +114,78 @@ namespace CoopCheck.WPF.Services
             }
             return v;
         }
+        public static async Task<List<vwBatchRpt>> GetJobBatchRpt(int jobNumber)
+        {
+            using (var ctx = new CoopCheckEntities())
+            {
 
+                var x = await (
+                    from l in ctx.vwBatchRpts
+                    where (l.job_num == jobNumber)
+                    orderby l.batch_num
+                    select l).ToListAsync();
+                return x;
+            }
+        }
+
+
+        public static async Task<List<vwPayment>> GetAllBatchPayments(int batchNum)
+        {
+            List<vwPayment> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                v = await (from b in ctx.vwPayments
+                           where ((b.batch_num == batchNum))
+                           select b).ToListAsync();
+            }
+            return v;
+        }
+        public static async Task<List<vwJobRpt>> GetJob(int jobNumber)
+        {
+            List<vwJobRpt> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                v = await (from b in ctx.vwJobRpts
+                           where (b.job_num == jobNumber)
+                           select b).ToListAsync();
+            }
+            return v;
+        }
+        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientID)
+        {
+            List<vwJobRpt> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                v = await (from b in ctx.vwJobRpts
+                           where (b.clientId == clientID)
+                           select b).ToListAsync();
+            }
+            return v;
+        }
+        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientID, string jobYear)
+        {
+            List<vwJobRpt> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                v = await (from b in ctx.vwJobRpts
+                           where ((b.clientId == clientID) and (b.JobYear == jobYear))
+                           select b).ToListAsync();
+            }
+            return v;
+        }
+
+
+        public static async Task<List<vwPayment>> GetAllJobPayments(int jobNumber)
+        {
+            List<vwPayment> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                v = await (from b in ctx.vwPayments
+                           where (b.job_num == jobNumber)
+                           select b).ToListAsync();
+            }
+            return v;
+        }
 
 
         public static async Task<List<vwPayment>> GetBatchPayments(PaymentReportCriteria grc)

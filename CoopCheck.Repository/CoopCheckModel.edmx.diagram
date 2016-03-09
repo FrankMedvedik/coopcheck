@@ -18,6 +18,8 @@
         <EntityTypeShape EntityType="CoopCheckModel.vwOpenBatch" Width="1.5" PointX="7.375" PointY="4.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwBatchRpt" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwUnclearedBatch" Width="1.5" PointX="13.375" PointY="5.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.client" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.jobLog" Width="1.5" PointX="0.75" PointY="15.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

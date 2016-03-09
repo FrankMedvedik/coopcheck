@@ -9,9 +9,14 @@
             Provides various common helper methods.
             </summary>
         </member>
-        <member name="M:FirstFloor.ModernUI.ModernUIHelper.GetDpiAwereness">
+        <member name="P:FirstFloor.ModernUI.ModernUIHelper.IsInDesignMode">
             <summary>
-            Gets the DPI awereness of the current process.
+            Determines whether the current code is executed in a design time environment such as Visual Studio or Blend.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.ModernUIHelper.GetDpiAwareness">
+            <summary>
+            Gets the DPI awareness of the current process.
             </summary>
             <returns>
             The DPI awareness of the current process
@@ -34,193 +39,19 @@
             </para>
             </remarks>
         </member>
-        <member name="P:FirstFloor.ModernUI.ModernUIHelper.IsInDesignMode">
-            <summary>
-            Determines whether the current code is executed in a design time environment such as Visual Studio or Blend.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection">
-            <summary>
-            Represents a read-only observable collection of link groups.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection.#ctor(FirstFloor.ModernUI.Presentation.LinkGroupCollection)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection"/> class.
-            </summary>
-            <param name="list">The <see cref="T:FirstFloor.ModernUI.Presentation.LinkGroupCollection"/> with which to create this instance of the <see cref="T:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection"/> class.</param>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection.List">
-            <summary>
-            Provides access to the wrapped list.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.FontSize">
-            <summary>
-            Identifies the available font size.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Presentation.FontSize.Large">
-            <summary>
-            Large fonts.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Presentation.FontSize.Small">
-            <summary>
-            Small fonts.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.CommandBase">
-            <summary>
-            The base implementation of a command.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.OnCanExecuteChanged">
-            <summary>
-            Raises the <see cref="E:FirstFloor.ModernUI.Presentation.CommandBase.CanExecuteChanged"/> event.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.CanExecute(System.Object)">
-            <summary>
-            Defines the method that determines whether the command can execute in its current state.
-            </summary>
-            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-            <returns>
-            true if this command can be executed; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.Execute(System.Object)">
-            <summary>
-            Defines the method to be called when the command is invoked.
-            </summary>
-            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.OnExecute(System.Object)">
-            <summary>
-            Executes the command.
-            </summary>
-            <param name="parameter">The parameter.</param>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Presentation.CommandBase.CanExecuteChanged">
-            <summary>
-            Occurs when changes occur that affect whether or not the command should execute.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.LinkGroupCollection">
-            <summary>
-            Represents an observable collection of link groups.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.Displayable">
-            <summary>
-            Provides a base implementation for objects that are displayed in the UI.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.NotifyPropertyChanged">
-            <summary>
-            The base implementation of the INotifyPropertyChanged contract.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.NotifyPropertyChanged.OnPropertyChanged(System.String)">
-            <summary>
-            Raises the PropertyChanged event.
-            </summary>
-            <param name="propertyName">Name of the property.</param>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Presentation.NotifyPropertyChanged.PropertyChanged">
-            <summary>
-            Occurs when a property value changes.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Presentation.Displayable.DisplayName">
-            <summary>
-            Gets or sets the display name.
-            </summary>
-            <value>The display name.</value>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.Link">
-            <summary>
-            Represents a displayable link.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Presentation.Link.Source">
-            <summary>
-            Gets or sets the source uri.
-            </summary>
-            <value>The source.</value>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.LinkCollection">
-            <summary>
-            Represents an observable collection of links.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.LinkCollection.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.LinkCollection"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.LinkCollection.#ctor(System.Collections.Generic.IEnumerable{FirstFloor.ModernUI.Presentation.Link})">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.LinkCollection"/> class that contains specified links.
-            </summary>
-            <param name="links">The links that are copied to this collection.</param>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.LinkGroup">
-            <summary>
-            Represents a named group of links.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Presentation.LinkGroup.GroupKey">
-            <summary>
-            Gets or sets the key of the group.
-            </summary>
-            <value>The key of the group.</value>
-            <remarks>
-            The group key is used to group link groups in a <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernMenu"/>.
-            </remarks>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Presentation.LinkGroup.SelectedLink">
-            <summary>
-            Gets or sets the selected link in this group.
-            </summary>
-            <value>The selected link.</value>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Presentation.LinkGroup.Links">
-            <summary>
-            Gets the links.
-            </summary>
-            <value>The links.</value>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Presentation.RelayCommand">
-            <summary>
-            The command that relays its functionality by invoking delegates.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.RelayCommand"/> class.
-            </summary>
-            <param name="execute">The execute.</param>
-            <param name="canExecute">The can execute.</param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.RelayCommand.CanExecute(System.Object)">
-            <summary>
-            Defines the method that determines whether the command can execute in its current state.
-            </summary>
-            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-            <returns>
-            true if this command can be executed; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Presentation.RelayCommand.OnExecute(System.Object)">
-            <summary>
-            Executes the command.
-            </summary>
-            <param name="parameter">The parameter.</param>
-        </member>
         <member name="T:FirstFloor.ModernUI.Presentation.AppearanceManager">
             <summary>
             Manages the theme, font size and accent colors for a Modern UI application.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Presentation.AppearanceManager.DarkThemeSource">
+            <summary>
+            The location of the dark theme resource dictionary.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Presentation.AppearanceManager.LightThemeSource">
+            <summary>
+            The location of the light theme resource dictionary.
             </summary>
         </member>
         <member name="F:FirstFloor.ModernUI.Presentation.AppearanceManager.KeyAccentColor">
@@ -241,16 +72,6 @@
         <member name="F:FirstFloor.ModernUI.Presentation.AppearanceManager.KeyFixedFontSize">
             <summary>
             The resource key for the fixed font size.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Presentation.AppearanceManager.DarkThemeSource">
-            <summary>
-            The location of the dark theme resource dictionary.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Presentation.AppearanceManager.LightThemeSource">
-            <summary>
-            The location of the light theme resource dictionary.
             </summary>
         </member>
         <member name="M:FirstFloor.ModernUI.Presentation.AppearanceManager.#ctor">
@@ -307,6 +128,185 @@
             <summary>
             Gets or sets the accent color.
             </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.CommandBase">
+            <summary>
+            The base implementation of a command.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Presentation.CommandBase.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.OnCanExecuteChanged">
+            <summary>
+            Raises the <see cref="E:FirstFloor.ModernUI.Presentation.CommandBase.CanExecuteChanged" /> event.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.CommandBase.OnExecute(System.Object)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.Displayable">
+            <summary>
+            Provides a base implementation for objects that are displayed in the UI.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Presentation.Displayable.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>The display name.</value>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.FontSize">
+            <summary>
+            Identifies the available font size.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Presentation.FontSize.Large">
+            <summary>
+            Large fonts.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Presentation.FontSize.Small">
+            <summary>
+            Small fonts.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.Link">
+            <summary>
+            Represents a displayable link.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Presentation.Link.Source">
+            <summary>
+            Gets or sets the source uri.
+            </summary>
+            <value>The source.</value>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.LinkCollection">
+            <summary>
+            Represents an observable collection of links.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.LinkCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.LinkCollection"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.LinkCollection.#ctor(System.Collections.Generic.IEnumerable{FirstFloor.ModernUI.Presentation.Link})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.LinkCollection"/> class that contains specified links.
+            </summary>
+            <param name="links">The links that are copied to this collection.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.LinkGroup">
+            <summary>
+            Represents a named group of links.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Presentation.LinkGroup.GroupKey">
+            <summary>
+            Gets or sets the key of the group.
+            </summary>
+            <value>The key of the group.</value>
+            <remarks>
+            The group key is used to group link groups in a <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernMenu"/>.
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Presentation.LinkGroup.SelectedLink">
+            <summary>
+            Gets or sets the selected link in this group.
+            </summary>
+            <value>The selected link.</value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Presentation.LinkGroup.Links">
+            <summary>
+            Gets the links.
+            </summary>
+            <value>The links.</value>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.LinkGroupCollection">
+            <summary>
+            Represents an observable collection of link groups.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.NotifyPropertyChanged">
+            <summary>
+            The base implementation of the INotifyPropertyChanged contract.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Presentation.NotifyPropertyChanged.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.NotifyPropertyChanged.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection">
+            <summary>
+            Represents a read-only observable collection of link groups.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection.#ctor(FirstFloor.ModernUI.Presentation.LinkGroupCollection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection"/> class.
+            </summary>
+            <param name="list">The <see cref="T:FirstFloor.ModernUI.Presentation.LinkGroupCollection"/> with which to create this instance of the <see cref="T:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection"/> class.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Presentation.ReadOnlyLinkGroupCollection.List">
+            <summary>
+            Provides access to the wrapped list.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Presentation.RelayCommand">
+            <summary>
+            The command that relays its functionality by invoking delegates.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.RelayCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Presentation.RelayCommand"/> class.
+            </summary>
+            <param name="execute">The execute.</param>
+            <param name="canExecute">The can execute.</param>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.RelayCommand.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Presentation.RelayCommand.OnExecute(System.Object)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="parameter">The parameter.</param>
         </member>
         <member name="T:FirstFloor.ModernUI.ProcessDpiAwareness">
             <summary>
@@ -433,6 +433,182 @@
             <summary>
             .NET wrapper for Version Helper functions.
             http://msdn.microsoft.com/library/windows/desktop/dn424972.aspx
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS">
+            <summary>
+            Operating systems, the information which is stored within
+            the class <seealso cref="T:FirstFloor.ModernUI.Win32.OSVersionHelper"/>.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXP">
+            <summary>
+            Windows XP.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXPSP1">
+            <summary>
+            Windows XP SP1.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXPSP2">
+            <summary>
+            Windows XP SP2.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXPSP3">
+            <summary>
+            Windows XP SP3.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsVista">
+            <summary>
+            Windows Vista.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsVistaSP1">
+            <summary>
+            Windows Vista SP1.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsVistaSP2">
+            <summary>
+            Windows Vista SP2.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows7">
+            <summary>
+            Windows 7.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows7SP1">
+            <summary>
+            Windows 7 SP1.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows8">
+            <summary>
+            Windows 8.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows8Point1">
+            <summary>
+            Windows 8.1.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry">
+            <summary>
+            Information about operating system.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.MajorVersion">
+            <summary>
+            The major version number of the operating system.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.MinorVersion">
+            <summary>
+            The minor version number of the operating system.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.ServicePackMajor">
+            <summary>
+            The major version number of the latest Service Pack installed
+            on the system. For example, for Service Pack 3, the major
+            version number is 3. If no Service Pack has been installed,
+            the value is zero.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.MatchesOrGreater">
+            <summary>
+            Flag indicating if the running OS matches, or is greater
+            than, the OS specified with this entry. Should be initialized
+            with <see cref="M:FirstFloor.ModernUI.Win32.OSVersionHelper.VerifyVersionInfo(FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx@,System.UInt32,System.UInt64)"/> method.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.#ctor(System.UInt32,System.UInt32,System.UInt16)">
+            <summary>
+            Creates a new entry of operating system.
+            </summary>
+            <param name="majorVersion">The major version number of the
+            operating system.</param>
+            <param name="minorVersion">The minor version number of the
+            operating system.</param>
+            <param name="servicePackMajor">The major version number of the
+            latest Service Pack installed on the system. For example, for
+            Service Pack 3, the major version number is 3. If no Service
+            Pack has been installed, the value is zero.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx">
+            <summary>
+            Wrapper for OSVERSIONINFOEX structure.
+            http://msdn.microsoft.com/library/windows/desktop/ms724833.aspx
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.OSVersionInfoSize">
+            <summary>
+            The size of this data structure, in bytes.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.MajorVersion">
+            <summary>
+            The major version number of the operating system.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.MinorVersion">
+            <summary>
+            The minor version number of the operating system.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.BuildNumber">
+            <summary>
+            The build number of the operating system.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.PlatformId">
+            <summary>
+            The operating system platform.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.CSDVersion">
+            <summary>
+            A null-terminated string, such as "Service Pack 3", that
+            indicates the latest Service Pack installed on the system. If
+            no Service Pack has been installed, the string is empty.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.ServicePackMajor">
+            <summary>
+            The major version number of the latest Service Pack installed
+            on the system. For example, for Service Pack 3, the major
+            version number is 3. If no Service Pack has been installed,
+            the value is zero.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.ServicePackMinor">
+            <summary>
+            The minor version number of the latest Service Pack installed
+            on the system. For example, for Service Pack 3, the minor
+            version number is 0.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.SuiteMask">
+            <summary>
+            A bit mask that identifies the product suites available on the
+            system, e.g., flags indicating if the operating system is
+            Datacenter Server or Windows XP Embedded.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.ProductType">
+            <summary>
+            Any additional information about the system, e.g., flags
+            indicating if the operating system is a domain controller,
+            a server or a workstation.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.Reserved">
+            <summary>
+            Reserved for future use.
             </summary>
         </member>
         <member name="M:FirstFloor.ModernUI.Win32.OSVersionHelper.VerSetConditionMask(System.UInt64,System.UInt32,System.Byte)">
@@ -588,403 +764,10 @@
             Indicates if the current OS is a Windows Server release.
             </summary>
         </member>
-        <member name="T:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS">
-            <summary>
-            Operating systems, the information which is stored within
-            the class <seealso cref="T:FirstFloor.ModernUI.Win32.OSVersionHelper"/>.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXP">
-            <summary>
-            Windows XP.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXPSP1">
-            <summary>
-            Windows XP SP1.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXPSP2">
-            <summary>
-            Windows XP SP2.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsXPSP3">
-            <summary>
-            Windows XP SP3.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsVista">
-            <summary>
-            Windows Vista.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsVistaSP1">
-            <summary>
-            Windows Vista SP1.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.WindowsVistaSP2">
-            <summary>
-            Windows Vista SP2.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows7">
-            <summary>
-            Windows 7.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows7SP1">
-            <summary>
-            Windows 7 SP1.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows8">
-            <summary>
-            Windows 8.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.KnownOS.Windows8Point1">
-            <summary>
-            Windows 8.1.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry">
-            <summary>
-            Information about operating system.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.#ctor(System.UInt32,System.UInt32,System.UInt16)">
-            <summary>
-            Creates a new entry of operating system.
-            </summary>
-            <param name="majorVersion">The major version number of the
-            operating system.</param>
-            <param name="minorVersion">The minor version number of the
-            operating system.</param>
-            <param name="servicePackMajor">The major version number of the
-            latest Service Pack installed on the system. For example, for
-            Service Pack 3, the major version number is 3. If no Service
-            Pack has been installed, the value is zero.</param>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.MajorVersion">
-            <summary>
-            The major version number of the operating system.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.MinorVersion">
-            <summary>
-            The minor version number of the operating system.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.ServicePackMajor">
-            <summary>
-            The major version number of the latest Service Pack installed
-            on the system. For example, for Service Pack 3, the major
-            version number is 3. If no Service Pack has been installed,
-            the value is zero.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Win32.OSVersionHelper.OsEntry.MatchesOrGreater">
-            <summary>
-            Flag indicating if the running OS matches, or is greater
-            than, the OS specified with this entry. Should be initialized
-            with <see cref="M:FirstFloor.ModernUI.Win32.OSVersionHelper.VerifyVersionInfo(FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx@,System.UInt32,System.UInt64)"/> method.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx">
-            <summary>
-            Wrapper for OSVERSIONINFOEX structure.
-            http://msdn.microsoft.com/library/windows/desktop/ms724833.aspx
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.OSVersionInfoSize">
-            <summary>
-            The size of this data structure, in bytes.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.MajorVersion">
-            <summary>
-            The major version number of the operating system.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.MinorVersion">
-            <summary>
-            The minor version number of the operating system.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.BuildNumber">
-            <summary>
-            The build number of the operating system.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.PlatformId">
-            <summary>
-            The operating system platform.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.CSDVersion">
-            <summary>
-            A null-terminated string, such as "Service Pack 3", that
-            indicates the latest Service Pack installed on the system. If
-            no Service Pack has been installed, the string is empty.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.ServicePackMajor">
-            <summary>
-            The major version number of the latest Service Pack installed
-            on the system. For example, for Service Pack 3, the major
-            version number is 3. If no Service Pack has been installed,
-            the value is zero.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.ServicePackMinor">
-            <summary>
-            The minor version number of the latest Service Pack installed
-            on the system. For example, for Service Pack 3, the minor
-            version number is 0.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.SuiteMask">
-            <summary>
-            A bit mask that identifies the product suites available on the
-            system, e.g., flags indicating if the operating system is
-            Datacenter Server or Windows XP Embedded.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.ProductType">
-            <summary>
-            Any additional information about the system, e.g., flags
-            indicating if the operating system is a domain controller,
-            a server or a workstation.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Win32.OSVersionHelper.OsVersionInfoEx.Reserved">
-            <summary>
-            Reserved for future use.
-            </summary>
-        </member>
         <member name="T:FirstFloor.ModernUI.Windows.CommandDictionary">
             <summary>
             Represents a collection of commands keyed by a uri.
             </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.DataGridComboBoxColumn">
-            <summary>
-            A DataGrid checkbox column using default Modern UI element styles.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DataGridComboBoxColumn.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DataGridComboBoxColumn"/> class.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.DataGridTextColumn">
-            <summary>
-            A DataGrid text column using default Modern UI element styles.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DataGridTextColumn.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DataGridTextColumn"/> class.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.DataGridCheckBoxColumn">
-            <summary>
-            A DataGrid checkbox column using default Modern UI element styles.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DataGridCheckBoxColumn.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DataGridCheckBoxColumn"/> class.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow">
-            <summary>
-            A window instance that is capable of per-monitor DPI awareness when supported.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.OnClosed(System.EventArgs)">
-            <summary>
-            Raises the System.Windows.Window.Closed event.
-            </summary>
-            <param name="e"></param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.RefreshMonitorDpi">
-            <summary>
-            Refreshes the current monitor DPI settings and update the window size and layout scale accordingly.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.OnDpiChanged(System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:DpiChanged"/> event.
-            </summary>
-            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.DpiChanged">
-            <summary>
-            Occurs when the system or monitor DPI for this window has changed.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.DpiInformation">
-            <summary>
-            Gets the DPI information for this window instance.
-            </summary>
-            <remarks>
-            DPI information is available after a window handle has been created.
-            </remarks>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.DpiInformation">
-            <summary>
-            Provides DPI information for a window.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.WpfDpiX">
-            <summary>
-            Gets the horizontal resolution of the WPF rendering DPI.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.WpfDpiY">
-            <summary>
-            Gets the vertical resolution of the WPF rendering DPI.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.MonitorDpiX">
-            <summary>
-            Gets the horizontal resolution of the current monitor DPI.
-            </summary>
-            <remarks>Null when the process is not per monitor DPI aware.</remarks>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.MonitorDpiY">
-            <summary>
-            Gets the vertical resolution of the current monitor DPI.
-            </summary>
-            <remarks>Null when the process is not per monitor DPI aware.</remarks>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.ScaleX">
-            <summary>
-            Gets the x-axis scale factor.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.ScaleY">
-            <summary>
-            Gets the y-axis scale factor.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing">
-            <summary>
-            Represents a control that indicates that an operation is ongoing. 
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.IsActiveProperty">
-            <summary>
-            Identifies the IsActive property.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.OnApplyTemplate">
-            <summary>
-            When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.IsActive">
-            <summary>
-            Gets or sets a value that indicates whether the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing"/> is showing progress.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs">
-            <summary>
-            Provides data for events related to uri sources.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs.#ctor(System.Uri)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs"/> class.
-            </summary>
-            <param name="source"></param>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs.Source">
-            <summary>
-            Gets the source uri.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernButton">
-            <summary>
-            Adds icon content to a standard button.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseDiameterProperty">
-            <summary>
-            Identifies the EllipseDiameter property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseStrokeThicknessProperty">
-            <summary>
-            Identifies the EllipseStrokeThickness property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconDataProperty">
-            <summary>
-            Identifies the IconData property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconHeightProperty">
-            <summary>
-            Identifies the IconHeight property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconWidthProperty">
-            <summary>
-            Identifies the IconWidth property.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernButton.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernButton"/> class.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseDiameter">
-            <summary>
-            Gets or sets the ellipse diameter.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseStrokeThickness">
-            <summary>
-            Gets or sets the ellipse stroke thickness.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconData">
-            <summary>
-            Gets or sets the icon path data.
-            </summary>
-            <value>
-            The icon path data.
-            </value>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconHeight">
-            <summary>
-            Gets or sets the icon height.
-            </summary>
-            <value>
-            The icon height.
-            </value>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconWidth">
-            <summary>
-            Gets or sets the icon width.
-            </summary>
-            <value>
-            The icon width.
-            </value>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCodeBlock">
             <summary>
@@ -1023,6 +806,122 @@
             The BBCode lexer.
             </summary>
         </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenStartTag">
+            <summary>
+            Start tag
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenEndTag">
+            <summary>
+            End tag
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenAttribute">
+            <summary>
+            Attribute
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenText">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenLineBreak">
+            <summary>
+            Line break
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.StateNormal">
+            <summary>
+            Normal state
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.StateTag">
+            <summary>
+            Tag state
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BBCodeLexer"/> class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.DefaultState">
+            <summary>
+            Gets the default state of the lexer.
+            </summary>
+            <value>The state of the default.</value>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.NextToken">
+            <summary>
+            Gets the next token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser">
+            <summary>
+            Represents the BBCode parser.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.ParseContext.CreateRun(System.String)">
+            <summary>
+            Creates a run reflecting the current context settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.#ctor(System.String,System.Windows.FrameworkElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BBCodeParser"/> class.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="source">The framework source element this parser operates in.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.Commands">
+            <summary>
+            Gets or sets the available navigable commands.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.Parse">
+            <summary>
+            Parses the text and returns a Span containing the parsed result.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer">
+            <summary>
+            Represents a character buffer.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CharBuffer"/> class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.LA(System.Int32)">
+            <summary>
+            Performs a look-ahead.
+            </summary>
+            <param name="count">The number of character to look ahead.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.Mark">
+            <summary>
+            Marks the current position.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.GetMark">
+            <summary>
+            Gets the mark.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.Consume">
+            <summary>
+            Consumes the next character.
+            </summary>
+        </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.Lexer">
             <summary>
             Provides basic lexer functionality.
@@ -1038,6 +937,18 @@
             Initializes a new instance of the <see cref="T:Lexer"/> class.
             </summary>
             <param name="value">The value.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.Lexer.DefaultState">
+            <summary>
+            Gets the default state of the lexer.
+            </summary>
+            <value>The state of the default.</value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.Lexer.State">
+            <summary>
+            Gets the current state of the lexer.
+            </summary>
+            <value>The state.</value>
         </member>
         <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.Lexer.PushState(System.Int32)">
             <summary>
@@ -1149,75 +1060,28 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.Lexer.DefaultState">
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException">
             <summary>
-            Gets the default state of the lexer.
-            </summary>
-            <value>The state of the default.</value>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.Lexer.State">
-            <summary>
-            Gets the current state of the lexer.
-            </summary>
-            <value>The state.</value>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenStartTag">
-            <summary>
-            Start tag
+            The exception for parse errors.
             </summary>
         </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenEndTag">
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException.#ctor">
             <summary>
-            End tag
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException"/> class.
             </summary>
         </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenAttribute">
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException.#ctor(System.String)">
             <summary>
-            Attribute
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException"/> class.
             </summary>
+            <param name="message">The message.</param>
         </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenText">
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException.#ctor(System.String,System.Exception)">
             <summary>
-            Text
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException"/> class.
             </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.TokenLineBreak">
-            <summary>
-            Line break
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.StateNormal">
-            <summary>
-            Normal state
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.StateTag">
-            <summary>
-            Tag state
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:BBCodeLexer"/> class.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.NextToken">
-            <summary>
-            Gets the next token.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeLexer.DefaultState">
-            <summary>
-            Gets the default state of the lexer.
-            </summary>
-            <value>The state of the default.</value>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser">
-            <summary>
-            Represents the BBCode parser.
-            </summary>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.Parser`1">
             <summary>
@@ -1277,87 +1141,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.#ctor(System.String,System.Windows.FrameworkElement)">
-            <summary>
-            Initializes a new instance of the <see cref="T:BBCodeParser"/> class.
-            </summary>
-            <param name="value">The value.</param>
-            <param name="source">The framework source element this parser operates in.</param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.Parse">
-            <summary>
-            Parses the text and returns a Span containing the parsed result.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.Commands">
-            <summary>
-            Gets or sets the available navigable commands.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.BBCodeParser.ParseContext.CreateRun(System.String)">
-            <summary>
-            Creates a run reflecting the current context settings.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer">
-            <summary>
-            Represents a character buffer.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:CharBuffer"/> class.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.LA(System.Int32)">
-            <summary>
-            Performs a look-ahead.
-            </summary>
-            <param name="count">The number of character to look ahead.</param>
-            <returns></returns>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.Mark">
-            <summary>
-            Marks the current position.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.GetMark">
-            <summary>
-            Gets the mark.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.CharBuffer.Consume">
-            <summary>
-            Consumes the next character.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException">
-            <summary>
-            The exception for parse errors.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.BBCode.ParseException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-            <param name="innerException">The inner exception.</param>
-        </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.Token">
             <summary>
             Represents a single token.
@@ -1375,14 +1158,6 @@
             <param name="value">The value.</param>
             <param name="tokenType">Type of the token.</param>
         </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.Token.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-            </summary>
-            <returns>
-            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-            </returns>
-        </member>
         <member name="P:FirstFloor.ModernUI.Windows.Controls.BBCode.Token.Value">
             <summary>
             Gets the value.
@@ -1394,6 +1169,14 @@
             Gets the type of the token.
             </summary>
             <value>The type.</value>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.BBCode.Token.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.BBCode.TokenBuffer">
             <summary>
@@ -1418,6 +1201,182 @@
             Consumes the next token.
             </summary>
         </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.DataGridCheckBoxColumn">
+            <summary>
+            A DataGrid checkbox column using default Modern UI element styles.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DataGridCheckBoxColumn.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DataGridCheckBoxColumn"/> class.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.DataGridComboBoxColumn">
+            <summary>
+            A DataGrid checkbox column using default Modern UI element styles.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DataGridComboBoxColumn.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DataGridComboBoxColumn"/> class.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.DataGridTextColumn">
+            <summary>
+            A DataGrid text column using default Modern UI element styles.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DataGridTextColumn.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DataGridTextColumn"/> class.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow">
+            <summary>
+            A window instance that is capable of per-monitor DPI awareness when supported.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.DpiChanged">
+            <summary>
+            Occurs when the system or monitor DPI for this window has changed.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow"/> class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.DpiInformation">
+            <summary>
+            Gets the DPI information for this window instance.
+            </summary>
+            <remarks>
+            DPI information is available after a window handle has been created.
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.OnClosed(System.EventArgs)">
+            <summary>
+            Raises the System.Windows.Window.Closed event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.RefreshMonitorDpi">
+            <summary>
+            Refreshes the current monitor DPI settings and update the window size and layout scale accordingly.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.DpiAwareWindow.OnDpiChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:DpiChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.DpiInformation">
+            <summary>
+            Provides DPI information for a window.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.WpfDpiX">
+            <summary>
+            Gets the horizontal resolution of the WPF rendering DPI.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.WpfDpiY">
+            <summary>
+            Gets the vertical resolution of the WPF rendering DPI.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.MonitorDpiX">
+            <summary>
+            Gets the horizontal resolution of the current monitor DPI.
+            </summary>
+            <remarks>Null when the process is not per monitor DPI aware.</remarks>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.MonitorDpiY">
+            <summary>
+            Gets the vertical resolution of the current monitor DPI.
+            </summary>
+            <remarks>Null when the process is not per monitor DPI aware.</remarks>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.ScaleX">
+            <summary>
+            Gets the x-axis scale factor.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.DpiInformation.ScaleY">
+            <summary>
+            Gets the y-axis scale factor.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernButton">
+            <summary>
+            Adds icon content to a standard button.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseDiameterProperty">
+            <summary>
+            Identifies the EllipseDiameter property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseStrokeThicknessProperty">
+            <summary>
+            Identifies the EllipseStrokeThickness property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconDataProperty">
+            <summary>
+            Identifies the IconData property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconHeightProperty">
+            <summary>
+            Identifies the IconHeight property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconWidthProperty">
+            <summary>
+            Identifies the IconWidth property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernButton.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernButton"/> class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseDiameter">
+            <summary>
+            Gets or sets the ellipse diameter.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.EllipseStrokeThickness">
+            <summary>
+            Gets or sets the ellipse stroke thickness.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconData">
+            <summary>
+            Gets or sets the icon path data.
+            </summary>
+            <value>
+            The icon path data.
+            </value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconHeight">
+            <summary>
+            Gets or sets the icon height.
+            </summary>
+            <value>
+            The icon height.
+            </value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernButton.IconWidth">
+            <summary>
+            Gets or sets the icon width.
+            </summary>
+            <value>
+            The icon width.
+            </value>
+        </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernDialog">
             <summary>
             Represents a Modern UI styled dialog window.
@@ -1437,16 +1396,6 @@
             <summary>
             Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernDialog"/> class.
             </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.Window)">
-            <summary>
-            Displays a messagebox.
-            </summary>
-            <param name="text">The text.</param>
-            <param name="title">The title.</param>
-            <param name="button">The button.</param>
-            <param name="owner">The window owning the messagebox. The messagebox will be located at the center of the owner.</param>
-            <returns></returns>
         </member>
         <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernDialog.CloseCommand">
             <summary>
@@ -1496,6 +1445,123 @@
             The message box result.
             </value>
         </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernDialog.ShowMessage(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.Window)">
+            <summary>
+            Displays a messagebox.
+            </summary>
+            <param name="text">The text.</param>
+            <param name="title">The title.</param>
+            <param name="button">The button.</param>
+            <param name="owner">The window owning the messagebox. The messagebox will be located at the center of the owner.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernFrame">
+            <summary>
+            A simple content frame implementation with navigation support.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.KeepAliveProperty">
+            <summary>
+            Identifies the KeepAlive attached dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.KeepContentAliveProperty">
+            <summary>
+            Identifies the KeepContentAlive dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.ContentLoaderProperty">
+            <summary>
+            Identifies the ContentLoader dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.IsLoadingContentProperty">
+            <summary>
+            Identifies the IsLoadingContent dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.SourceProperty">
+            <summary>
+            Identifies the Source dependency property.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.FragmentNavigation">
+            <summary>
+            Occurs when navigation to a content fragment begins.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Navigating">
+            <summary>
+            Occurs when a new navigation is requested.
+            </summary>
+            <remarks>
+            The navigating event is also raised when a parent frame is navigating. This allows for cancelling parent navigation.
+            </remarks>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Navigated">
+            <summary>
+            Occurs when navigation to new content has completed.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.NavigationFailed">
+            <summary>
+            Occurs when navigation has failed.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernFrame"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.HandleRoutedEvent(System.Windows.Input.CanExecuteRoutedEventArgs)">
+            <summary>
+            Determines whether the routed event args should be handled.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+            <remarks>This method prevents parent frames from handling routed commands.</remarks>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.ShouldKeepContentAlive(System.Object)">
+            <summary>
+            Determines whether the specified content should be kept alive.
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.GetKeepAlive(System.Windows.DependencyObject)">
+            <summary>
+            Gets a value indicating whether to keep specified object alive in a ModernFrame instance.
+            </summary>
+            <param name="o">The target dependency object.</param>
+            <returns>Whether to keep the object alive. Null to leave the decision to the ModernFrame.</returns>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.SetKeepAlive(System.Windows.DependencyObject,System.Nullable{System.Boolean})">
+            <summary>
+            Sets a value indicating whether to keep specified object alive in a ModernFrame instance.
+            </summary>
+            <param name="o">The target dependency object.</param>
+            <param name="value">Whether to keep the object alive. Null to leave the decision to the ModernFrame.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.KeepContentAlive">
+            <summary>
+            Gets or sets a value whether content should be kept in memory.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.ContentLoader">
+            <summary>
+            Gets or sets the content loader.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.IsLoadingContent">
+            <summary>
+            Gets a value indicating whether this instance is currently loading content.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Source">
+            <summary>
+            Gets or sets the source of the current content.
+            </summary>
+        </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernMenu">
             <summary>
             Represents the menu in a Modern UI styled window.
@@ -1526,21 +1592,14 @@
             Defines the VisibleLinkGroups dependency property.
             </summary>
         </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernMenu.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernMenu"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernMenu.GetGroupKey(FirstFloor.ModernUI.Presentation.LinkGroup)">
-            <summary>
-            Gets a non-null key for given group.
-            </summary>
-            <param name="group"></param>
-            <returns></returns>
-        </member>
         <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernMenu.SelectedSourceChanged">
             <summary>
             Occurs when the selected source has changed.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernMenu.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernMenu"/> class.
             </summary>
         </member>
         <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernMenu.LinkGroups">
@@ -1569,6 +1628,38 @@
         <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernMenu.VisibleLinkGroups">
             <summary>
             Gets the collection of link groups that are currently visible.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernMenu.GetGroupKey(FirstFloor.ModernUI.Presentation.LinkGroup)">
+            <summary>
+            Gets a non-null key for given group.
+            </summary>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing">
+            <summary>
+            Represents a control that indicates that an operation is ongoing. 
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.IsActiveProperty">
+            <summary>
+            Identifies the IsActive property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing.IsActive">
+            <summary>
+            Gets or sets a value that indicates whether the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernProgressRing"/> is showing progress.
             </summary>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernTab">
@@ -1601,6 +1692,11 @@
             Identifies the SelectedSource dependency property.
             </summary>
         </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernTab.SelectedSourceChanged">
+            <summary>
+            Occurs when the selected source has changed.
+            </summary>
+        </member>
         <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernTab.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernTab"/> control.
@@ -1609,11 +1705,6 @@
         <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernTab.OnApplyTemplate">
             <summary>
             When overridden in a derived class, is invoked whenever application code or internal processes call System.Windows.FrameworkElement.ApplyTemplate().
-            </summary>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernTab.SelectedSourceChanged">
-            <summary>
-            Occurs when the selected source has changed.
             </summary>
         </member>
         <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernTab.ContentLoader">
@@ -1644,6 +1735,75 @@
             Gets or sets the source URI of the selected link.
             </summary>
             <value>The source URI of the selected link.</value>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton">
+            <summary>
+            Adds icon content to a standard button.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.EllipseDiameterProperty">
+            <summary>
+            Identifies the EllipseDiameter property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.EllipseStrokeThicknessProperty">
+            <summary>
+            Identifies the EllipseStrokeThickness property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.IconDataProperty">
+            <summary>
+            Identifies the IconData property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.IconHeightProperty">
+            <summary>
+            Identifies the IconHeight property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.IconWidthProperty">
+            <summary>
+            Identifies the IconWidth property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton"/> class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.EllipseDiameter">
+            <summary>
+            Gets or sets the ellipse diameter.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.EllipseStrokeThickness">
+            <summary>
+            Gets or sets the ellipse stroke thickness.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.IconData">
+            <summary>
+            Gets or sets the icon path data.
+            </summary>
+            <value>
+            The icon path data.
+            </value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.IconHeight">
+            <summary>
+            Gets or sets the icon height.
+            </summary>
+            <value>
+            The icon height.
+            </value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernToggleButton.IconWidth">
+            <summary>
+            Gets or sets the icon width.
+            </summary>
+            <value>
+            The icon width.
+            </value>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernWindow">
             <summary>
@@ -1837,11 +1997,21 @@
             runtime.
             </summary>
         </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.AnimationValueAdapter.OriginalValue">
+            <summary>
+            Gets or sets the original double value.
+            </summary>
+        </member>
         <member name="M:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.AnimationValueAdapter.#ctor(FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.DoubleAnimationDimension)">
             <summary>
             Initializes a new instance of the AnimationValueAdapter type.
             </summary>
             <param name="dimension">The dimension of interest for updates.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.AnimationValueAdapter.Dimension">
+            <summary>
+            Gets the dimension of interest for the control.
+            </summary>
         </member>
         <member name="M:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.AnimationValueAdapter.UpdateWithNewDimension(System.Double,System.Double)">
             <summary>
@@ -1852,14 +2022,9 @@
             <param name="width">The width of the control.</param>
             <param name="height">The height of the control.</param>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.AnimationValueAdapter.OriginalValue">
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.Instance">
             <summary>
-            Gets or sets the original double value.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.AnimationValueAdapter.Dimension">
-            <summary>
-            Gets the dimension of interest for the control.
+            Stores the animation instance.
             </summary>
         </member>
         <member name="M:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.GetValue">
@@ -1873,6 +2038,12 @@
             Sets the value for the underlying property of interest.
             </summary>
             <param name="newValue">The new value for the property.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.InitialValue">
+            <summary>
+            Gets the initial value (minus the identifying value portion) that the
+            designer stored within the visual state animation property.
+            </summary>
         </member>
         <member name="F:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1._ratio">
             <summary>
@@ -1920,17 +2091,6 @@
             </summary>
             <param name="sizeToUse">The size of interest to use with a ratio
             computation.</param>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.Instance">
-            <summary>
-            Stores the animation instance.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.GeneralAnimationValueAdapter`1.InitialValue">
-            <summary>
-            Gets the initial value (minus the identifying value portion) that the
-            designer stored within the visual state animation property.
-            </summary>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.RelativeAnimatingContentControl.DoubleAnimationToAdapter">
             <summary>
@@ -2006,6 +2166,22 @@
             <param name="dimension">The dimension of interest.</param>
             <param name="frame">The instance of the animation type.</param>
         </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs">
+            <summary>
+            Provides data for events related to uri sources.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs"/> class.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.SourceEventArgs.Source">
+            <summary>
+            Gets the source uri.
+            </summary>
+        </member>
         <member name="T:FirstFloor.ModernUI.Windows.Controls.TabLayout">
             <summary>
             Define the available tab layouts.
@@ -2055,9 +2231,32 @@
             The name of the control that will display the current content.
             </summary>
         </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.CurrentContentPresentationSite">
+            <summary>
+            Gets or sets the current content presentation site.
+            </summary>
+            <value>The current content presentation site.</value>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.PreviousContentPresentationSite">
+            <summary>
+            Gets or sets the previous content presentation site.
+            </summary>
+            <value>The previous content presentation site.</value>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.IsTransitioningChanged">
+            <summary>
+            Occurs when the IsTransitioning value has changed.
+            </summary>
+        </member>
         <member name="F:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl._allowIsTransitioningWrite">
             <summary>
             Indicates whether the control allows writing IsTransitioning.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.IsTransitioning">
+            <summary>
+            Gets a value indicating whether this instance is currently performing
+            a transition.
             </summary>
         </member>
         <member name="F:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.IsTransitioningProperty">
@@ -2077,6 +2276,17 @@
             The storyboard that is used to transition old and new content.
             </summary>
         </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.CurrentTransition">
+            <summary>
+            Gets or sets the storyboard that is used to transition old and new content.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.Transition">
+            <summary>
+            Gets or sets the name of the transition to use. These correspond
+            directly to the VisualStates inside the PresentationStates group.
+            </summary>
+        </member>
         <member name="F:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.TransitionProperty">
             <summary>
             Identifies the Transition dependency property.
@@ -2088,6 +2298,12 @@
             </summary>
             <param name="d">TransitioningContentControl that changed its Transition.</param>
             <param name="e">Event arguments.</param>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.RestartTransitionOnContentChange">
+            <summary>
+            Gets or sets a value indicating whether the current transition
+            will be aborted when setting new content during a transition.
+            </summary>
         </member>
         <member name="F:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.RestartTransitionOnContentChangeProperty">
             <summary>
@@ -2107,6 +2323,11 @@
             </summary>
             <param name="oldValue">The old value of RestartTransitionOnContentChange.</param>
             <param name="newValue">The new value of RestartTransitionOnContentChange.</param>
+        </member>
+        <member name="E:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.TransitionCompleted">
+            <summary>
+            Occurs when the current transition has completed.
+            </summary>
         </member>
         <member name="M:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.#cctor">
             <summary>
@@ -2156,51 +2377,6 @@
             </summary>
             <param name="newTransition">The new transition.</param>
             <returns>A storyboard or null, if no storyboard was found.</returns>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.CurrentContentPresentationSite">
-            <summary>
-            Gets or sets the current content presentation site.
-            </summary>
-            <value>The current content presentation site.</value>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.PreviousContentPresentationSite">
-            <summary>
-            Gets or sets the previous content presentation site.
-            </summary>
-            <value>The previous content presentation site.</value>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.IsTransitioningChanged">
-            <summary>
-            Occurs when the IsTransitioning value has changed.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.IsTransitioning">
-            <summary>
-            Gets a value indicating whether this instance is currently performing
-            a transition.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.CurrentTransition">
-            <summary>
-            Gets or sets the storyboard that is used to transition old and new content.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.Transition">
-            <summary>
-            Gets or sets the name of the transition to use. These correspond
-            directly to the VisualStates inside the PresentationStates group.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.RestartTransitionOnContentChange">
-            <summary>
-            Gets or sets a value indicating whether the current transition
-            will be aborted when setting new content during a transition.
-            </summary>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl.TransitionCompleted">
-            <summary>
-            Occurs when the current transition has completed.
-            </summary>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Converters.BooleanToFontWeightConverter">
             <summary>
@@ -2381,19 +2557,6 @@
             Loads XAML files using Application.LoadComponent.
             </summary>
         </member>
-        <member name="T:FirstFloor.ModernUI.Windows.IContentLoader">
-            <summary>
-            The contract for loading content.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.IContentLoader.LoadContentAsync(System.Uri,System.Threading.CancellationToken)">
-            <summary>
-            Asynchronously loads content from specified uri.
-            </summary>
-            <param name="uri">The content uri.</param>
-            <param name="cancellationToken">The token used to cancel the load content task.</param>
-            <returns>The loaded content.</returns>
-        </member>
         <member name="M:FirstFloor.ModernUI.Windows.DefaultContentLoader.LoadContentAsync(System.Uri,System.Threading.CancellationToken)">
             <summary>
             Asynchronously loads content from specified uri.
@@ -2408,65 +2571,6 @@
             </summary>
             <param name="uri">The content uri</param>
             <returns>The loaded content.</returns>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator">
-            <summary>
-            The default link navigator with support for loading frame content, external link navigation using the default browser and command execution.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Navigation.ILinkNavigator">
-            <summary>
-            The hyperlink navigator contract.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Navigation.ILinkNavigator.Navigate(System.Uri,System.Windows.FrameworkElement,System.String)">
-            <summary>
-            Performs navigation to specified link.
-            </summary>
-            <param name="uri">The uri to navigate to.</param>
-            <param name="source">The source element that triggers the navigation. Required for frame navigation.</param>
-            <param name="parameter">An optional command parameter or navigation target.</param>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.ILinkNavigator.Commands">
-            <summary>
-            Gets or sets the navigable commands.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.Navigate(System.Uri,System.Windows.FrameworkElement,System.String)">
-            <summary>
-            Performs navigation to specified link.
-            </summary>
-            <param name="uri">The uri to navigate to.</param>
-            <param name="source">The source element that triggers the navigation. Required for frame navigation.</param>
-            <param name="parameter">An optional command parameter or navigation target.</param>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.ExternalSchemes">
-            <summary>
-            Gets or sets the schemes for external link navigation.
-            </summary>
-            <remarks>
-            Default schemes are http, https and mailto.
-            </remarks>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.Commands">
-            <summary>
-            Gets or sets the navigable commands.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs">
-            <summary>
-            Provides data for fragment navigation events.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs.Fragment">
-            <summary>
-            Gets the uniform resource identifier (URI) fragment.
-            </summary>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.IContent">
             <summary>
@@ -2497,6 +2601,19 @@
             </summary>
             <param name="e">An object that contains the navigation data.</param>
             <remarks>The method is also invoked when parent frames are about to navigate.</remarks>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.IContentLoader">
+            <summary>
+            The contract for loading content.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.ModernUI.Windows.IContentLoader.LoadContentAsync(System.Uri,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously loads content from specified uri.
+            </summary>
+            <param name="uri">The content uri.</param>
+            <param name="cancellationToken">The token used to cancel the load content task.</param>
+            <returns>The loaded content.</returns>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Media.VisualTreeHelperEx">
             <summary>
@@ -2543,131 +2660,78 @@
             <param name="dependencyObject">The dependency object</param>
             <returns>The parent object or null if there is no parent.</returns>
         </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Controls.ModernFrame">
+        <member name="T:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator">
             <summary>
-            A simple content frame implementation with navigation support.
+            The default link navigator with support for loading frame content, external link navigation using the default browser and command execution.
             </summary>
         </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.KeepAliveProperty">
+        <member name="M:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.#ctor">
             <summary>
-            Identifies the KeepAlive attached dependency property.
+            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator"/> class.
             </summary>
         </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.KeepContentAliveProperty">
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.ExternalSchemes">
             <summary>
-            Identifies the KeepContentAlive dependency property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.ContentLoaderProperty">
-            <summary>
-            Identifies the ContentLoader dependency property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.IsLoadingContentProperty">
-            <summary>
-            Identifies the IsLoadingContent dependency property.
-            </summary>
-        </member>
-        <member name="F:FirstFloor.ModernUI.Windows.Controls.ModernFrame.SourceProperty">
-            <summary>
-            Identifies the Source dependency property.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FirstFloor.ModernUI.Windows.Controls.ModernFrame"/> class.
-            </summary>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.HandleRoutedEvent(System.Windows.Input.CanExecuteRoutedEventArgs)">
-            <summary>
-            Determines whether the routed event args should be handled.
-            </summary>
-            <param name="args"></param>
-            <returns></returns>
-            <remarks>This method prevents parent frames from handling routed commands.</remarks>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.ShouldKeepContentAlive(System.Object)">
-            <summary>
-            Determines whether the specified content should be kept alive.
-            </summary>
-            <param name="content"></param>
-            <returns></returns>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.GetKeepAlive(System.Windows.DependencyObject)">
-            <summary>
-            Gets a value indicating whether to keep specified object alive in a ModernFrame instance.
-            </summary>
-            <param name="o">The target dependency object.</param>
-            <returns>Whether to keep the object alive. Null to leave the decision to the ModernFrame.</returns>
-        </member>
-        <member name="M:FirstFloor.ModernUI.Windows.Controls.ModernFrame.SetKeepAlive(System.Windows.DependencyObject,System.Nullable{System.Boolean})">
-            <summary>
-            Sets a value indicating whether to keep specified object alive in a ModernFrame instance.
-            </summary>
-            <param name="o">The target dependency object.</param>
-            <param name="value">Whether to keep the object alive. Null to leave the decision to the ModernFrame.</param>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.FragmentNavigation">
-            <summary>
-            Occurs when navigation to a content fragment begins.
-            </summary>
-        </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Navigating">
-            <summary>
-            Occurs when a new navigation is requested.
+            Gets or sets the schemes for external link navigation.
             </summary>
             <remarks>
-            The navigating event is also raised when a parent frame is navigating. This allows for cancelling parent navigation.
+            Default schemes are http, https and mailto.
             </remarks>
         </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Navigated">
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.Commands">
             <summary>
-            Occurs when navigation to new content has completed.
+            Gets or sets the navigable commands.
             </summary>
         </member>
-        <member name="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.NavigationFailed">
+        <member name="M:FirstFloor.ModernUI.Windows.Navigation.DefaultLinkNavigator.Navigate(System.Uri,System.Windows.FrameworkElement,System.String)">
             <summary>
-            Occurs when navigation has failed.
+            Performs navigation to specified link.
+            </summary>
+            <param name="uri">The uri to navigate to.</param>
+            <param name="source">The source element that triggers the navigation. Required for frame navigation.</param>
+            <param name="parameter">An optional command parameter or navigation target.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs">
+            <summary>
+            Provides data for fragment navigation events.
             </summary>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.KeepContentAlive">
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs.Fragment">
             <summary>
-            Gets or sets a value whether content should be kept in memory.
+            Gets the uniform resource identifier (URI) fragment.
             </summary>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.ContentLoader">
+        <member name="T:FirstFloor.ModernUI.Windows.Navigation.ILinkNavigator">
             <summary>
-            Gets or sets the content loader.
+            The hyperlink navigator contract.
             </summary>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.IsLoadingContent">
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.ILinkNavigator.Commands">
             <summary>
-            Gets a value indicating whether this instance is currently loading content.
+            Gets or sets the navigable commands.
             </summary>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Source">
+        <member name="M:FirstFloor.ModernUI.Windows.Navigation.ILinkNavigator.Navigate(System.Uri,System.Windows.FrameworkElement,System.String)">
             <summary>
-            Gets or sets the source of the current content.
+            Performs navigation to specified link.
+            </summary>
+            <param name="uri">The uri to navigate to.</param>
+            <param name="source">The source element that triggers the navigation. Required for frame navigation.</param>
+            <param name="parameter">An optional command parameter or navigation target.</param>
+        </member>
+        <member name="T:FirstFloor.ModernUI.Windows.Navigation.LinkCommands">
+            <summary>
+            The routed link commands.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.LinkCommands.NavigateLink">
+            <summary>
+            Gets the navigate link routed command.
             </summary>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs">
             <summary>
-            Provides data for the <see cref="M:FirstFloor.ModernUI.Windows.IContent.OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs)"/> method and the <see cref="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Navigating"/> event.
-            </summary>
-        </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Navigation.NavigationBaseEventArgs">
-            <summary>
-            Defines the base navigation event arguments.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.NavigationBaseEventArgs.Frame">
-            <summary>
-            Gets the frame that raised this event.
-            </summary>
-        </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.NavigationBaseEventArgs.Source">
-            <summary>
-            Gets the source uri for the target being navigated to.
+            Provides data for the <see cref="M:FirstFloor.ModernUI.Windows.IContent.OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs)" /> method and the <see cref="E:FirstFloor.ModernUI.Windows.Controls.ModernFrame.Navigating"/> event.
             </summary>
         </member>
         <member name="P:FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs.IsParentFrameNavigating">
@@ -2685,14 +2749,19 @@
             Gets or sets a value indicating whether the event should be canceled.
             </summary>
         </member>
-        <member name="T:FirstFloor.ModernUI.Windows.Navigation.LinkCommands">
+        <member name="T:FirstFloor.ModernUI.Windows.Navigation.NavigationBaseEventArgs">
             <summary>
-            The routed link commands.
+            Defines the base navigation event arguments.
             </summary>
         </member>
-        <member name="P:FirstFloor.ModernUI.Windows.Navigation.LinkCommands.NavigateLink">
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.NavigationBaseEventArgs.Frame">
             <summary>
-            Gets the navigate link routed command.
+            Gets the frame that raised this event.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.ModernUI.Windows.Navigation.NavigationBaseEventArgs.Source">
+            <summary>
+            Gets the source uri for the target being navigated to.
             </summary>
         </member>
         <member name="T:FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs">
@@ -2816,6 +2885,36 @@
         <member name="F:FirstFloor.ModernUI.Windows.Navigation.NavigationType.Refresh">
             <summary>
             Reloading the current content.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:jobFinder="clr-namespace:CoopCheck.WPF.Content.Payment.JobFinder"
              mc:Ignorable="d" >
     <Grid >
         <Grid.RowDefinitions>
