@@ -8,12 +8,12 @@ namespace CoopCheck.WPF.Services
 {
     public static class ClientSvc   
     {
-        public async static Task<List<client>> GetClients()
+        public async static Task<List<CoopCheckClient>> GetClients()
         {
             using (var ctx = new CoopCheckEntities())
             {
 
-                var x = await(ctx.clients.OrderBy(a => a.ClientName).ToListAsync());
+                var x = await(ctx.CoopCheckClients.OrderBy(a => a.ClientName).ToListAsync());
                 return x;
             }
         }

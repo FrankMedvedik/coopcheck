@@ -89,6 +89,22 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         }
 
+        public static string BadJobName = "JOB NUMBER INVALID PLEASE CORRECT";
+        //public string JobName
+        //{
+        //    get
+        //  {
+        //        string x = string.Empty;
+        //        if (SelectedBatch == null)
+        //            x = BadJobName;
+        //        else
+        //            x =  RptSvc.GetJob(SelectedBatch.JobNum.GetValueOrDefault(0)).Result.First().jobname;
+        //      if (x == BadJobName)
+        //          Status = new StatusInfo {ErrorMessage = x, StatusMessage = "Error in batch details"};
+        //      return x;
+        //    }
+        //}
+
         public StatusInfo Status
         {
             get { return _status; }

@@ -27,7 +27,8 @@ namespace CoopCheck.WPF.Content.BankAccount
         private async void ResetState()
         {
             Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
-            SelectedAccount = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
+            //SelectedAccount = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
+            SelectedAccount = (from l in Accounts where l.account_id == int.Parse(Properties.Settings.Default.SelectedAccountID)  select l).First(); 
         }
 
         private bank_account _selectedAccount;
@@ -38,8 +39,13 @@ namespace CoopCheck.WPF.Content.BankAccount
             {
                 _selectedAccount = value;
                 NotifyPropertyChanged();
-                if( SelectedAccount != null)
-                    Messenger.Default.Send(new NotificationMessage<bank_account>(SelectedAccount, Notifications.SelectedAccountChanged));
+                if (SelectedAccount != null)
+                {
+                    Messenger.Default.Send(new NotificationMessage<bank_account>(SelectedAccount,
+                        Notifications.SelectedAccountChanged));
+                    Properties.Settings.Default.SelectedAccountID = value.account_id.ToString();
+                    Properties.Settings.Default.Save();
+                }
             }
         }
 

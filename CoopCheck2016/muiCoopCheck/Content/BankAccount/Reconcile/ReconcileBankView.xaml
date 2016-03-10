@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:reconcile="clr-namespace:CoopCheck.WPF.Content.BankAccount.Reconcile"
+             xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
              mc:Ignorable="d" >
         <Grid  >
             <Grid.RowDefinitions>
@@ -24,7 +25,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-               <Payment:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0"/>
+               <criteria:PaymentReportCriteriaView x:Name="prcv"  Grid.Column="0"/>
                 <Button x:Name="Payments" Grid.Row="0"  HorizontalAlignment="Left" IsDefault="True" Margin="6" Grid.Column="1"
                 VerticalAlignment="Center" Click="Refresh_Click">Payments</Button>
             </Grid>

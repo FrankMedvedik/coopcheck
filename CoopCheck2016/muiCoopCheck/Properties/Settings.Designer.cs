@@ -133,5 +133,17 @@ namespace CoopCheck.WPF.Properties {
                 this["FontSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public string SelectedAccountID {
+            get {
+                return ((string)(this["SelectedAccountID"]));
+            }
+            set {
+                this["SelectedAccountID"] = value;
+            }
+        }
     }
 }

@@ -26,5 +26,7 @@
         public static string PaymentReportCriteriaCheckNumberChanged => "PaymentReportCriteriaCheckNumberChanged";
         public static string BankAccountReconcileWizardCanFinish => "BankAccountReconcileWizardCanFinish";
         public static string HaveDirtyVouchers => "HaveDirtyVouchers";
+        public static string JobFinderSelectedJobChanged => "JobFinderSelectedJobChanged";
+        public static string JobFinderSelectedBatchChanged => "JobFinderSelectedBatchChanged";
     }
 }

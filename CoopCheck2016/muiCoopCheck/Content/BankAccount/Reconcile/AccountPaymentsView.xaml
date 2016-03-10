@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
              mc:Ignorable="d" MaxHeight="600" MinHeight="450" >
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +15,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-            <Payment:PaymentReportCriteriaView x:Name="prcv" />
+            <criteria:PaymentReportCriteriaView x:Name="prcv" />
             <Button Width="150" HorizontalAlignment="Left" IsDefault="True" Margin="10,6,6,10" VerticalAlignment="Top" x:Name="btnPayments" Click="Refresh_Click">Get Payments</Button>
             </StackPanel>
         <TextBlock Style="{StaticResource Heading2}" Text="Match Details" HorizontalAlignment="Left" Grid.Row="1" />

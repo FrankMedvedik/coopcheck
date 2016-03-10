@@ -72,8 +72,8 @@
           <Property Name="usr" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'CoopCheck.dbo.clients' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="clients">
+warning 6002: The table/view 'CoopCheck.dbo.CoopCheckClients' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CoopCheckClients">
           <Key>
             <PropertyRef Name="ClientID" />
           </Key>
@@ -91,33 +91,34 @@ warning 6002: The table/view 'CoopCheck.dbo.clients' does not have a primary key
           <Property Name="inSolomon" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'CoopCheck.dbo.jobLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="jobLog">
+warning 6002: The table/view 'CoopCheck.dbo.CoopCheckJobLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CoopCheckJobLog">
           <Key>
-            <PropertyRef Name="JobNum" />
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="ACTIVE" />
+            <PropertyRef Name="jobnum" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="clientid" />
           </Key>
-          <Property Name="JobNum" Type="int" Nullable="false" />
-          <Property Name="ClientID" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="JobName" Type="nvarchar" MaxLength="50" />
-          <Property Name="ACTIVE" Type="bit" Nullable="false" />
-          <Property Name="IsMaster" Type="bit" />
-          <Property Name="priMethod" Type="varchar" MaxLength="25" />
-          <Property Name="scdMethod" Type="varchar" MaxLength="25" />
-          <Property Name="Started" Type="datetime" />
-          <Property Name="Ended" Type="datetime" />
-          <Property Name="ProjMgr" Type="varchar" MaxLength="50" />
-          <Property Name="scdPrjMgr" Type="varchar" MaxLength="50" />
-          <Property Name="ProdRate" Type="real" />
-          <Property Name="TOTAL" Type="int" />
-          <Property Name="Location" Type="int" />
-          <Property Name="Client Job #" Type="varchar" MaxLength="50" />
-          <Property Name="PO #" Type="varchar" MaxLength="50" />
-          <Property Name="product" Type="varchar" MaxLength="50" />
-          <Property Name="ref_jobs" Type="varchar" MaxLength="50" />
-          <Property Name="invoice" Type="varchar" MaxLength="50" />
+          <Property Name="jobnum" Type="int" Nullable="false" />
+          <Property Name="jobname" Type="nvarchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="client job #" Type="varchar" MaxLength="50" />
+          <Property Name="clientid" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="clientname" Type="varchar" MaxLength="50" />
           <Property Name="created" Type="smalldatetime" />
+          <Property Name="ended" Type="datetime" />
+          <Property Name="invoice" Type="varchar" MaxLength="50" />
+          <Property Name="ismaster" Type="bit" />
+          <Property Name="location" Type="int" />
+          <Property Name="po #" Type="varchar" MaxLength="50" />
+          <Property Name="primethod" Type="varchar" MaxLength="25" />
+          <Property Name="prodrate" Type="real" />
+          <Property Name="product" Type="varchar" MaxLength="50" />
+          <Property Name="projmgr" Type="varchar" MaxLength="50" />
+          <Property Name="ref_jobs" Type="varchar" MaxLength="50" />
+          <Property Name="scdmethod" Type="varchar" MaxLength="25" />
+          <Property Name="scdprjmgr" Type="varchar" MaxLength="50" />
+          <Property Name="started" Type="datetime" />
+          <Property Name="total" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.voucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -191,16 +192,20 @@ warning 6002: The table/view 'CoopCheck.dbo.vwBatchRpt' does not have a primary 
         <EntityType Name="vwBatchRpt">
           <Key>
             <PropertyRef Name="batch_num" />
-            <PropertyRef Name="payment_type" />
           </Key>
           <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="job_year" Type="varchar" MaxLength="4" />
+          <Property Name="clientid" Type="varchar" MaxLength="8" />
+          <Property Name="clientname" Type="varchar" MaxLength="50" />
+          <Property Name="jobname" Type="nvarchar" MaxLength="50" />
+          <Property Name="projmgr" Type="varchar" MaxLength="50" />
           <Property Name="account_id" Type="int" />
           <Property Name="account_name" Type="nvarchar" MaxLength="50" />
           <Property Name="job_num" Type="int" />
           <Property Name="batch_date" Type="smalldatetime" />
           <Property Name="pay_date" Type="smalldatetime" />
           <Property Name="batch_amount" Type="money" />
-          <Property Name="payment_type" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="payment_type" Type="nvarchar" MaxLength="100" />
           <Property Name="total_cnt" Type="int" />
           <Property Name="open_cnt" Type="int" />
           <Property Name="cleared_cnt" Type="int" />
@@ -244,13 +249,60 @@ warning 6002: The table/view 'CoopCheck.dbo.vwCheck' does not have a primary key
           <Property Name="print_flag" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CoopCheck.dbo.vwClientJobBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwClientJobBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="clientid" />
+            <PropertyRef Name="jobnum" />
+          </Key>
+          <Property Name="batch_num" Type="int" Nullable="false" />
+          <Property Name="batch_amount" Type="money" />
+          <Property Name="batch_date" Type="smalldatetime" />
+          <Property Name="batch_dscr" Type="nvarchar" MaxLength="255" />
+          <Property Name="marketing_research_message" Type="varchar" MaxLength="500" />
+          <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="respondent_batch_id" Type="int" />
+          <Property Name="study_topic" Type="varchar" MaxLength="150" />
+          <Property Name="thank_you_1" Type="varchar" MaxLength="100" />
+          <Property Name="thank_you_2" Type="varchar" MaxLength="150" />
+          <Property Name="updated" Type="smalldatetime" />
+          <Property Name="usr" Type="varchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="client job #" Type="varchar" MaxLength="50" />
+          <Property Name="clientid" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="clientname" Type="varchar" MaxLength="50" />
+          <Property Name="created" Type="smalldatetime" />
+          <Property Name="ended" Type="datetime" />
+          <Property Name="invoice" Type="varchar" MaxLength="50" />
+          <Property Name="ismaster" Type="bit" />
+          <Property Name="jobname" Type="nvarchar" MaxLength="50" />
+          <Property Name="jobnum" Type="int" Nullable="false" />
+          <Property Name="location" Type="int" />
+          <Property Name="po #" Type="varchar" MaxLength="50" />
+          <Property Name="primethod" Type="varchar" MaxLength="25" />
+          <Property Name="prodrate" Type="real" />
+          <Property Name="product" Type="varchar" MaxLength="50" />
+          <Property Name="projmgr" Type="varchar" MaxLength="50" />
+          <Property Name="ref_jobs" Type="varchar" MaxLength="50" />
+          <Property Name="scdmethod" Type="varchar" MaxLength="25" />
+          <Property Name="scdprjmgr" Type="varchar" MaxLength="50" />
+          <Property Name="started" Type="datetime" />
+          <Property Name="total" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwJobRpt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwJobRpt">
           <Key>
             <PropertyRef Name="job_num" />
           </Key>
           <Property Name="job_num" Type="int" Nullable="false" />
-          <Property Name="account_id" Type="int" />
+          <Property Name="job_year" Type="varchar" MaxLength="4" />
+          <Property Name="clientid" Type="varchar" MaxLength="8" />
+          <Property Name="clientname" Type="varchar" MaxLength="50" />
+          <Property Name="jobname" Type="nvarchar" MaxLength="50" />
+          <Property Name="projmgr" Type="varchar" MaxLength="50" />
           <Property Name="batch_cnt" Type="int" />
           <Property Name="first_batch_date" Type="smalldatetime" />
           <Property Name="last_batch_date" Type="smalldatetime" />
@@ -437,45 +489,46 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="batch" EntityType="Self.batch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="check_tran" EntityType="Self.check_tran" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="clients" EntityType="Self.clients" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="CoopCheckClients" EntityType="Self.CoopCheckClients" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [clients].[ClientID] AS [ClientID], 
-    [clients].[ClientName] AS [ClientName], 
-    [clients].[Address] AS [Address], 
-    [clients].[City] AS [City], 
-    [clients].[State] AS [State], 
-    [clients].[Zip] AS [Zip], 
-    [clients].[Attention] AS [Attention], 
-    [clients].[Phone] AS [Phone], 
-    [clients].[Fax] AS [Fax], 
-    [clients].[Email] AS [Email], 
-    [clients].[Country] AS [Country], 
-    [clients].[inSolomon] AS [inSolomon]
-    FROM [dbo].[clients] AS [clients]</DefiningQuery>
+    [CoopCheckClients].[ClientID] AS [ClientID], 
+    [CoopCheckClients].[ClientName] AS [ClientName], 
+    [CoopCheckClients].[Address] AS [Address], 
+    [CoopCheckClients].[City] AS [City], 
+    [CoopCheckClients].[State] AS [State], 
+    [CoopCheckClients].[Zip] AS [Zip], 
+    [CoopCheckClients].[Attention] AS [Attention], 
+    [CoopCheckClients].[Phone] AS [Phone], 
+    [CoopCheckClients].[Fax] AS [Fax], 
+    [CoopCheckClients].[Email] AS [Email], 
+    [CoopCheckClients].[Country] AS [Country], 
+    [CoopCheckClients].[inSolomon] AS [inSolomon]
+    FROM [dbo].[CoopCheckClients] AS [CoopCheckClients]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="jobLog" EntityType="Self.jobLog" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="CoopCheckJobLog" EntityType="Self.CoopCheckJobLog" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [jobLog].[JobNum] AS [JobNum], 
-    [jobLog].[ClientID] AS [ClientID], 
-    [jobLog].[JobName] AS [JobName], 
-    [jobLog].[ACTIVE] AS [ACTIVE], 
-    [jobLog].[IsMaster] AS [IsMaster], 
-    [jobLog].[priMethod] AS [priMethod], 
-    [jobLog].[scdMethod] AS [scdMethod], 
-    [jobLog].[Started] AS [Started], 
-    [jobLog].[Ended] AS [Ended], 
-    [jobLog].[ProjMgr] AS [ProjMgr], 
-    [jobLog].[scdPrjMgr] AS [scdPrjMgr], 
-    [jobLog].[ProdRate] AS [ProdRate], 
-    [jobLog].[TOTAL] AS [TOTAL], 
-    [jobLog].[Location] AS [Location], 
-    [jobLog].[Client Job #] AS [Client Job #], 
-    [jobLog].[PO #] AS [PO #], 
-    [jobLog].[product] AS [product], 
-    [jobLog].[ref_jobs] AS [ref_jobs], 
-    [jobLog].[invoice] AS [invoice], 
-    [jobLog].[created] AS [created]
-    FROM [dbo].[jobLog] AS [jobLog]</DefiningQuery>
+    [CoopCheckJobLog].[jobnum] AS [jobnum], 
+    [CoopCheckJobLog].[jobname] AS [jobname], 
+    [CoopCheckJobLog].[active] AS [active], 
+    [CoopCheckJobLog].[client job #] AS [client job #], 
+    [CoopCheckJobLog].[clientid] AS [clientid], 
+    [CoopCheckJobLog].[clientname] AS [clientname], 
+    [CoopCheckJobLog].[created] AS [created], 
+    [CoopCheckJobLog].[ended] AS [ended], 
+    [CoopCheckJobLog].[invoice] AS [invoice], 
+    [CoopCheckJobLog].[ismaster] AS [ismaster], 
+    [CoopCheckJobLog].[location] AS [location], 
+    [CoopCheckJobLog].[po #] AS [po #], 
+    [CoopCheckJobLog].[primethod] AS [primethod], 
+    [CoopCheckJobLog].[prodrate] AS [prodrate], 
+    [CoopCheckJobLog].[product] AS [product], 
+    [CoopCheckJobLog].[projmgr] AS [projmgr], 
+    [CoopCheckJobLog].[ref_jobs] AS [ref_jobs], 
+    [CoopCheckJobLog].[scdmethod] AS [scdmethod], 
+    [CoopCheckJobLog].[scdprjmgr] AS [scdprjmgr], 
+    [CoopCheckJobLog].[started] AS [started], 
+    [CoopCheckJobLog].[total] AS [total]
+    FROM [dbo].[CoopCheckJobLog] AS [CoopCheckJobLog]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="voucher" EntityType="Self.voucher" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -538,6 +591,11 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwBatchRpt" EntityType="Self.vwBatchRpt" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwBatchRpt].[batch_num] AS [batch_num], 
+    [vwBatchRpt].[job_year] AS [job_year], 
+    [vwBatchRpt].[clientid] AS [clientid], 
+    [vwBatchRpt].[clientname] AS [clientname], 
+    [vwBatchRpt].[jobname] AS [jobname], 
+    [vwBatchRpt].[projmgr] AS [projmgr], 
     [vwBatchRpt].[account_id] AS [account_id], 
     [vwBatchRpt].[account_name] AS [account_name], 
     [vwBatchRpt].[job_num] AS [job_num], 
@@ -584,10 +642,51 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     [vwCheck].[print_flag] AS [print_flag]
     FROM [dbo].[vwCheck] AS [vwCheck]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwClientJobBatch" EntityType="Self.vwClientJobBatch" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwClientJobBatch].[batch_num] AS [batch_num], 
+    [vwClientJobBatch].[batch_amount] AS [batch_amount], 
+    [vwClientJobBatch].[batch_date] AS [batch_date], 
+    [vwClientJobBatch].[batch_dscr] AS [batch_dscr], 
+    [vwClientJobBatch].[marketing_research_message] AS [marketing_research_message], 
+    [vwClientJobBatch].[pay_date] AS [pay_date], 
+    [vwClientJobBatch].[respondent_batch_id] AS [respondent_batch_id], 
+    [vwClientJobBatch].[study_topic] AS [study_topic], 
+    [vwClientJobBatch].[thank_you_1] AS [thank_you_1], 
+    [vwClientJobBatch].[thank_you_2] AS [thank_you_2], 
+    [vwClientJobBatch].[updated] AS [updated], 
+    [vwClientJobBatch].[usr] AS [usr], 
+    [vwClientJobBatch].[active] AS [active], 
+    [vwClientJobBatch].[client job #] AS [client job #], 
+    [vwClientJobBatch].[clientid] AS [clientid], 
+    [vwClientJobBatch].[clientname] AS [clientname], 
+    [vwClientJobBatch].[created] AS [created], 
+    [vwClientJobBatch].[ended] AS [ended], 
+    [vwClientJobBatch].[invoice] AS [invoice], 
+    [vwClientJobBatch].[ismaster] AS [ismaster], 
+    [vwClientJobBatch].[jobname] AS [jobname], 
+    [vwClientJobBatch].[jobnum] AS [jobnum], 
+    [vwClientJobBatch].[location] AS [location], 
+    [vwClientJobBatch].[po #] AS [po #], 
+    [vwClientJobBatch].[primethod] AS [primethod], 
+    [vwClientJobBatch].[prodrate] AS [prodrate], 
+    [vwClientJobBatch].[product] AS [product], 
+    [vwClientJobBatch].[projmgr] AS [projmgr], 
+    [vwClientJobBatch].[ref_jobs] AS [ref_jobs], 
+    [vwClientJobBatch].[scdmethod] AS [scdmethod], 
+    [vwClientJobBatch].[scdprjmgr] AS [scdprjmgr], 
+    [vwClientJobBatch].[started] AS [started], 
+    [vwClientJobBatch].[total] AS [total]
+    FROM [dbo].[vwClientJobBatch] AS [vwClientJobBatch]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwJobRpt" EntityType="Self.vwJobRpt" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwJobRpt].[job_num] AS [job_num], 
-    [vwJobRpt].[account_id] AS [account_id], 
+    [vwJobRpt].[job_year] AS [job_year], 
+    [vwJobRpt].[clientid] AS [clientid], 
+    [vwJobRpt].[clientname] AS [clientname], 
+    [vwJobRpt].[jobname] AS [jobname], 
+    [vwJobRpt].[projmgr] AS [projmgr], 
     [vwJobRpt].[batch_cnt] AS [batch_cnt], 
     [vwJobRpt].[first_batch_date] AS [first_batch_date], 
     [vwJobRpt].[last_batch_date] AS [last_batch_date], 
@@ -833,23 +932,24 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
           <EntitySet Name="vwBasicPayment" EntityType="CoopCheckModel.vwBasicPayment" />
           <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
-          <EntitySet Name="vwJobRpt" EntityType="CoopCheckModel.vwJobRpt" />
           <FunctionImport Name="dal_GetOpenBatch" EntitySet="vwOpenBatches" ReturnType="Collection(CoopCheckModel.vwOpenBatch)" />
           <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
-          <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpt" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
+          <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpts" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
             <Parameter Name="end_date" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="GetBatchPaymentReport" EntitySet="vwBatchRpt" ReturnType="Collection(CoopCheckModel.vwBatchRpt)">
+          <FunctionImport Name="GetBatchPaymentReport" EntitySet="vwBatchRpts" ReturnType="Collection(CoopCheckModel.vwBatchRpt)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
             <Parameter Name="end_date" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="vwBatchRpt" EntityType="CoopCheckModel.vwBatchRpt" />
           <EntitySet Name="vwUnclearedBatch" EntityType="CoopCheckModel.vwUnclearedBatch" />
-          <EntitySet Name="clients" EntityType="CoopCheckModel.client" />
-          <EntitySet Name="jobLogs" EntityType="CoopCheckModel.jobLog" />
+          <EntitySet Name="CoopCheckClients" EntityType="CoopCheckModel.CoopCheckClient" />
+          <EntitySet Name="CoopCheckJobLogs" EntityType="CoopCheckModel.CoopCheckJobLog" />
+          <EntitySet Name="vwBatchRpts" EntityType="CoopCheckModel.vwBatchRpt" />
+          <EntitySet Name="vwClientJobBatches" EntityType="CoopCheckModel.vwClientJobBatch" />
+          <EntitySet Name="vwJobRpts" EntityType="CoopCheckModel.vwJobRpt" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -1213,28 +1313,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="IsDefault" Type="Boolean" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
-        <EntityType Name="vwJobRpt">
-          <Key>
-            <PropertyRef Name="job_num" />
-          </Key>
-          <Property Name="job_num" Type="Int32" Nullable="false" />
-          <Property Name="account_id" Type="Int32" />
-          <Property Name="batch_cnt" Type="Int32" />
-          <Property Name="first_batch_date" Type="DateTime" Precision="0" />
-          <Property Name="last_batch_date" Type="DateTime" Precision="0" />
-          <Property Name="first_pay_date" Type="DateTime" Precision="0" />
-          <Property Name="last_pay_date" Type="DateTime" Precision="0" />
-          <Property Name="total_cnt" Type="Int32" />
-          <Property Name="open_cnt" Type="Int32" />
-          <Property Name="cleared_cnt" Type="Int32" />
-          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="first_check_date" Type="DateTime" Precision="0" />
-          <Property Name="last_check_date" Type="DateTime" Precision="0" />
-        </EntityType>
         <ComplexType Name="dal_GetOpenBatch_Result">
           <Property Type="Int32" Name="job_num" Nullable="true" />
           <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
@@ -1291,28 +1369,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="vwBatchRpt">
-          <Key>
-            <PropertyRef Name="batch_num" />
-            <PropertyRef Name="payment_type" />
-          </Key>
-          <Property Name="batch_num" Type="Int32" Nullable="false" />
-          <Property Name="account_id" Type="Int32" />
-          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="batch_date" Type="DateTime" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="payment_type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="total_cnt" Type="Int32" />
-          <Property Name="open_cnt" Type="Int32" />
-          <Property Name="cleared_cnt" Type="Int32" />
-          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="vwUnclearedBatch">
           <Key>
             <PropertyRef Name="batch_num" />
@@ -1324,7 +1380,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="voucher_cnt" Type="Int32" />
           <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
-        <EntityType Name="client">
+        <EntityType Name="CoopCheckClient">
           <Key>
             <PropertyRef Name="ClientID" />
           </Key>
@@ -1341,32 +1397,126 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="inSolomon" Type="Boolean" />
         </EntityType>
-        <EntityType Name="jobLog">
+        <EntityType Name="CoopCheckJobLog">
           <Key>
-            <PropertyRef Name="JobNum" />
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="ACTIVE" />
+            <PropertyRef Name="jobnum" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="clientid" />
           </Key>
-          <Property Name="JobNum" Type="Int32" Nullable="false" />
-          <Property Name="ClientID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="JobName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ACTIVE" Type="Boolean" Nullable="false" />
-          <Property Name="IsMaster" Type="Boolean" />
-          <Property Name="priMethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="scdMethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Started" Type="DateTime" Precision="3" />
-          <Property Name="Ended" Type="DateTime" Precision="3" />
-          <Property Name="ProjMgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="scdPrjMgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProdRate" Type="Single" />
-          <Property Name="TOTAL" Type="Int32" />
-          <Property Name="Location" Type="Int32" />
-          <Property Name="Client_Job__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PO__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ref_jobs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobnum" Type="Int32" Nullable="false" />
+          <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="client_job__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clientid" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="created" Type="DateTime" Precision="0" />
+          <Property Name="ended" Type="DateTime" Precision="3" />
+          <Property Name="invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ismaster" Type="Boolean" />
+          <Property Name="location" Type="Int32" />
+          <Property Name="po__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="primethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="prodrate" Type="Single" />
+          <Property Name="product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="projmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ref_jobs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="scdmethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="scdprjmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="started" Type="DateTime" Precision="3" />
+          <Property Name="total" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vwBatchRpt">
+          <Key>
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" />
+          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="job_num" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="payment_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="total_cnt" Type="Int32" />
+          <Property Name="open_cnt" Type="Int32" />
+          <Property Name="cleared_cnt" Type="Int32" />
+          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="job_year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="clientid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwClientJobBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+            <PropertyRef Name="active" />
+            <PropertyRef Name="clientid" />
+            <PropertyRef Name="jobnum" />
+          </Key>
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="batch_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="batch_dscr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="marketing_research_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="respondent_batch_id" Type="Int32" />
+          <Property Name="study_topic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="thank_you_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="thank_you_2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="updated" Type="DateTime" Precision="0" />
+          <Property Name="usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="client_job__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clientid" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created" Type="DateTime" Precision="0" />
+          <Property Name="ended" Type="DateTime" Precision="3" />
+          <Property Name="invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ismaster" Type="Boolean" />
+          <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jobnum" Type="Int32" Nullable="false" />
+          <Property Name="location" Type="Int32" />
+          <Property Name="po__" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="primethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="prodrate" Type="Single" />
+          <Property Name="product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="projmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ref_jobs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="scdmethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="scdprjmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="started" Type="DateTime" Precision="3" />
+          <Property Name="total" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vwJobRpt">
+          <Key>
+            <PropertyRef Name="job_num" />
+          </Key>
+          <Property Name="job_num" Type="Int32" Nullable="false" />
+          <Property Name="clientid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="batch_cnt" Type="Int32" />
+          <Property Name="first_batch_date" Type="DateTime" Precision="0" />
+          <Property Name="last_batch_date" Type="DateTime" Precision="0" />
+          <Property Name="first_pay_date" Type="DateTime" Precision="0" />
+          <Property Name="last_pay_date" Type="DateTime" Precision="0" />
+          <Property Name="total_cnt" Type="Int32" />
+          <Property Name="open_cnt" Type="Int32" />
+          <Property Name="cleared_cnt" Type="Int32" />
+          <Property Name="open_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cleared_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="first_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_check_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="first_check_date" Type="DateTime" Precision="0" />
+          <Property Name="last_check_date" Type="DateTime" Precision="0" />
+          <Property Name="job_year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1811,29 +1961,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwJobRpt">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwJobRpt">
-              <MappingFragment StoreEntitySet="vwJobRpt">
-                <ScalarProperty Name="last_check_date" ColumnName="last_check_date" />
-                <ScalarProperty Name="first_check_date" ColumnName="first_check_date" />
-                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
-                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
-                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
-                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
-                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
-                <ScalarProperty Name="last_pay_date" ColumnName="last_pay_date" />
-                <ScalarProperty Name="first_pay_date" ColumnName="first_pay_date" />
-                <ScalarProperty Name="last_batch_date" ColumnName="last_batch_date" />
-                <ScalarProperty Name="first_batch_date" ColumnName="first_batch_date" />
-                <ScalarProperty Name="batch_cnt" ColumnName="batch_cnt" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="dal_GetOpenBatch" FunctionName="CoopCheckModel.Store.dal_GetOpenBatch">
           </FunctionImportMapping>
           <EntitySetMapping Name="vwOpenBatches">
@@ -1851,9 +1978,71 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <FunctionImportMapping FunctionImportName="GetJobPaymentsReport" FunctionName="CoopCheckModel.Store.GetJobPaymentsReport">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetBatchPaymentReport" FunctionName="CoopCheckModel.Store.GetBatchPaymentsReport" />
-          <EntitySetMapping Name="vwBatchRpt">
+          <EntitySetMapping Name="vwUnclearedBatch">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwUnclearedBatch">
+              <MappingFragment StoreEntitySet="vwUnclearedBatch">
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoopCheckClients">
+            <EntityTypeMapping TypeName="CoopCheckModel.CoopCheckClient">
+              <MappingFragment StoreEntitySet="CoopCheckClients">
+                <ScalarProperty Name="inSolomon" ColumnName="inSolomon" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Attention" ColumnName="Attention" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoopCheckJobLogs">
+            <EntityTypeMapping TypeName="CoopCheckModel.CoopCheckJobLog">
+              <MappingFragment StoreEntitySet="CoopCheckJobLog">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="started" ColumnName="started" />
+                <ScalarProperty Name="scdprjmgr" ColumnName="scdprjmgr" />
+                <ScalarProperty Name="scdmethod" ColumnName="scdmethod" />
+                <ScalarProperty Name="ref_jobs" ColumnName="ref_jobs" />
+                <ScalarProperty Name="projmgr" ColumnName="projmgr" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="prodrate" ColumnName="prodrate" />
+                <ScalarProperty Name="primethod" ColumnName="primethod" />
+                <ScalarProperty Name="po__" ColumnName="po #" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="ismaster" ColumnName="ismaster" />
+                <ScalarProperty Name="invoice" ColumnName="invoice" />
+                <ScalarProperty Name="ended" ColumnName="ended" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="client_job__" ColumnName="client job #" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwBatchRpts">
             <EntityTypeMapping TypeName="CoopCheckModel.vwBatchRpt">
               <MappingFragment StoreEntitySet="vwBatchRpt">
+                <ScalarProperty Name="projmgr" ColumnName="projmgr" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="job_year" ColumnName="job_year" />
                 <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
                 <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
                 <ScalarProperty Name="total_amount" ColumnName="total_amount" />
@@ -1873,59 +2062,69 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwUnclearedBatch">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwUnclearedBatch">
-              <MappingFragment StoreEntitySet="vwUnclearedBatch">
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
+          <EntitySetMapping Name="vwClientJobBatches">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwClientJobBatch">
+              <MappingFragment StoreEntitySet="vwClientJobBatch">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="started" ColumnName="started" />
+                <ScalarProperty Name="scdprjmgr" ColumnName="scdprjmgr" />
+                <ScalarProperty Name="scdmethod" ColumnName="scdmethod" />
+                <ScalarProperty Name="ref_jobs" ColumnName="ref_jobs" />
+                <ScalarProperty Name="projmgr" ColumnName="projmgr" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="prodrate" ColumnName="prodrate" />
+                <ScalarProperty Name="primethod" ColumnName="primethod" />
+                <ScalarProperty Name="po__" ColumnName="po #" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="ismaster" ColumnName="ismaster" />
+                <ScalarProperty Name="invoice" ColumnName="invoice" />
+                <ScalarProperty Name="ended" ColumnName="ended" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="client_job__" ColumnName="client job #" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="usr" ColumnName="usr" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="thank_you_2" ColumnName="thank_you_2" />
+                <ScalarProperty Name="thank_you_1" ColumnName="thank_you_1" />
+                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
+                <ScalarProperty Name="respondent_batch_id" ColumnName="respondent_batch_id" />
                 <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="marketing_research_message" ColumnName="marketing_research_message" />
+                <ScalarProperty Name="batch_dscr" ColumnName="batch_dscr" />
                 <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
+                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
                 <ScalarProperty Name="batch_num" ColumnName="batch_num" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="clients">
-            <EntityTypeMapping TypeName="CoopCheckModel.client">
-              <MappingFragment StoreEntitySet="clients">
-                <ScalarProperty Name="inSolomon" ColumnName="inSolomon" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Attention" ColumnName="Attention" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="jobLogs">
-            <EntityTypeMapping TypeName="CoopCheckModel.jobLog">
-              <MappingFragment StoreEntitySet="jobLog">
-                <ScalarProperty Name="created" ColumnName="created" />
-                <ScalarProperty Name="invoice" ColumnName="invoice" />
-                <ScalarProperty Name="ref_jobs" ColumnName="ref_jobs" />
-                <ScalarProperty Name="product" ColumnName="product" />
-                <ScalarProperty Name="PO__" ColumnName="PO #" />
-                <ScalarProperty Name="Client_Job__" ColumnName="Client Job #" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
-                <ScalarProperty Name="ProdRate" ColumnName="ProdRate" />
-                <ScalarProperty Name="scdPrjMgr" ColumnName="scdPrjMgr" />
-                <ScalarProperty Name="ProjMgr" ColumnName="ProjMgr" />
-                <ScalarProperty Name="Ended" ColumnName="Ended" />
-                <ScalarProperty Name="Started" ColumnName="Started" />
-                <ScalarProperty Name="scdMethod" ColumnName="scdMethod" />
-                <ScalarProperty Name="priMethod" ColumnName="priMethod" />
-                <ScalarProperty Name="IsMaster" ColumnName="IsMaster" />
-                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
-                <ScalarProperty Name="JobName" ColumnName="JobName" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+          <EntitySetMapping Name="vwJobRpts">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwJobRpt">
+              <MappingFragment StoreEntitySet="vwJobRpt">
+                <ScalarProperty Name="job_year" ColumnName="job_year" />
+                <ScalarProperty Name="last_check_date" ColumnName="last_check_date" />
+                <ScalarProperty Name="first_check_date" ColumnName="first_check_date" />
+                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
+                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
+                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
+                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
+                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
+                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
+                <ScalarProperty Name="last_pay_date" ColumnName="last_pay_date" />
+                <ScalarProperty Name="first_pay_date" ColumnName="first_pay_date" />
+                <ScalarProperty Name="last_batch_date" ColumnName="last_batch_date" />
+                <ScalarProperty Name="first_batch_date" ColumnName="first_batch_date" />
+                <ScalarProperty Name="batch_cnt" ColumnName="batch_cnt" />
+                <ScalarProperty Name="projmgr" ColumnName="projmgr" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="job_num" ColumnName="job_num" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

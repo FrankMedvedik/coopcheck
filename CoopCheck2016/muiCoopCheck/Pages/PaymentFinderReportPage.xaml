@@ -6,6 +6,7 @@
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
+             xmlns:paymentFinder="clr-namespace:CoopCheck.WPF.Content.Payment.PaymentFinder"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -16,7 +17,7 @@
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                    <payment:PaymentFinderView x:Name="pfv"/>
+                    <paymentFinder:PaymentFinderView x:Name="pfv"/>
                     <content:NoAccessView x:Name="nov" />
                 </StackPanel>
             </ScrollViewer>

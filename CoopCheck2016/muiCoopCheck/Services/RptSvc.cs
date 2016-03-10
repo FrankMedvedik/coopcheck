@@ -151,24 +151,24 @@ namespace CoopCheck.WPF.Services
             }
             return v;
         }
-        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientID)
+        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientId)
         {
             List<vwJobRpt> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwJobRpts
-                           where (b.clientId == clientID)
+                           where (b.clientid == clientId)
                            select b).ToListAsync();
             }
             return v;
         }
-        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientID, string jobYear)
+        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientId, string jobYear)
         {
             List<vwJobRpt> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwJobRpts
-                           where ((b.clientId == clientID) and (b.JobYear == jobYear))
+                           where ((b.clientid == clientId) && (b.job_year == jobYear))
                            select b).ToListAsync();
             }
             return v;

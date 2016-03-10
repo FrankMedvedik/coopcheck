@@ -9,12 +9,10 @@
         <mui:LinkGroup DisplayName="payments">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="find" Source="/Pages/PaymentFinderReportPage.xaml" />
-                <mui:Link DisplayName="clients" Source="/Pages/JobFinderReportPage.xaml" />
-                <mui:Link DisplayName="outstanding" Source="/Pages/OpenPaymentReportPage.xaml" />
+                <mui:Link DisplayName="clients" Source="/Pages/ClientFinderReportPage.xaml" />
                 <mui:Link DisplayName="voided" Source="/Pages/VoidedPaymentReportPage.xaml" />
                 <mui:Link DisplayName="job" Source="/Pages/JobSummaryReportPage.xaml" />
                 <mui:Link DisplayName="batch" Source="/Pages/BatchSummaryReportPage.xaml" />
-                <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayReportPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="vouchers">
@@ -26,6 +24,8 @@
         <mui:LinkGroup DisplayName="accounts">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="list" Source="/Pages/AccountPage.xaml" />
+                <mui:Link DisplayName="outstanding" Source="/Pages/OpenPaymentReportPage.xaml" />
+                <mui:Link DisplayName="positive pay" Source="/Pages/PositivePayReportPage.xaml" />
                 <mui:Link DisplayName="reconcile" Source="/Pages/AccountReconcilePage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>

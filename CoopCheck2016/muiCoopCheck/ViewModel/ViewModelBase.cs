@@ -14,7 +14,7 @@ namespace CoopCheck.WPF.ViewModel
             if (e != null)
             {
                 e(this, new PropertyChangedEventArgs(name));
-                Console.WriteLine(name);
+               // Console.WriteLine(name);
             }
 
         }

@@ -237,28 +237,28 @@
     <Compile Include="Content\BankAccount\Reconcile\ReconcileWindow.xaml.cs">
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobFinder\ClientSuggestionProvider.cs" />
-    <Compile Include="Content\Payment\JobFinder\JobFinderReportView.xaml.cs">
-      <DependentUpon>JobFinderReportView.xaml</DependentUpon>
+    <Compile Include="Content\Payment\Criteria\ClientSuggestionProvider.cs" />
+    <Compile Include="Content\Payment\Client\JobView.xaml.cs">
+      <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobFinder\JobFinderReportViewModel.cs" />
+    <Compile Include="Content\Payment\Client\JobViewModel.cs" />
     <Compile Include="Services\ClientSvc.cs" />
-    <Compile Include="Content\Payment\JobFinder\JobFinderBatchReportView.xaml.cs">
-      <DependentUpon>JobFinderBatchReportView.xaml</DependentUpon>
+    <Compile Include="Content\Payment\Client\BatchView.xaml.cs">
+      <DependentUpon>BatchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobFinder\JobFinderBatchReportViewModel.cs" />
-    <Compile Include="Content\Payment\JobFinder\JobFinderPaymentReportView.xaml.cs">
-      <DependentUpon>JobFinderPaymentReportView.xaml</DependentUpon>
+    <Compile Include="Content\Payment\Client\BatchViewModel.cs" />
+    <Compile Include="Content\Payment\Client\ClientPaymentView.xaml.cs">
+      <DependentUpon>ClientPaymentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobFinder\JobFinderPaymentReportViewModel.cs" />
-    <Compile Include="Content\Payment\JobFinder\JobReportCriteriaView.xaml.cs">
-      <DependentUpon>JobReportCriteriaView.xaml</DependentUpon>
+    <Compile Include="Content\Payment\Client\ClientPaymentViewModel.cs" />
+    <Compile Include="Content\Payment\Criteria\ClientReportCriteriaView.xaml.cs">
+      <DependentUpon>ClientReportCriteriaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobFinder\JobReportCriteriaViewModel.cs" />
-    <Compile Include="Content\Payment\VoidPaymentDialog.xaml.cs">
+    <Compile Include="Content\Payment\Criteria\ClientReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Payment\PaymentFinder\VoidPaymentDialog.xaml.cs">
       <DependentUpon>VoidPaymentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\ClearPaymentDialog.xaml.cs">
+    <Compile Include="Content\Payment\PaymentFinder\ClearPaymentDialog.xaml.cs">
       <DependentUpon>ClearPaymentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Utilities\Unpay\BatchEditView.xaml.cs">
@@ -289,7 +289,7 @@
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
     <Compile Include="Interfaces\IModernNavigationService.cs" />
     <Compile Include="Messages\ExcelVouchersMessage.cs" />
-    <Compile Include="Models\JobReportCriteria.cs" />
+    <Compile Include="Models\ClientReportCriteria.cs" />
     <Compile Include="Models\VoucherExcelExport.cs" />
     <Compile Include="Messages\NavigationMessage.cs" />
     <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
@@ -330,10 +330,10 @@
     <Compile Include="Content\ModernFrame\Sample.xaml.cs">
       <DependentUpon>Sample.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\BatchReportView.xaml.cs">
+    <Compile Include="Content\Payment\Batch\BatchReportView.xaml.cs">
       <DependentUpon>BatchReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\BatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\Batch\BatchReportViewModel.cs" />
     <Compile Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml.cs">
       <DependentUpon>ClosedPaymentsGrid.xaml</DependentUpon>
     </Compile>
@@ -343,32 +343,32 @@
     <Compile Include="Content\Payment\Grids\AllPaymentsGrid.xaml.cs">
       <DependentUpon>AllPaymentsGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobSummaryPaymentReportView.xaml.cs">
+    <Compile Include="Content\Payment\Job\JobSummaryPaymentReportView.xaml.cs">
       <DependentUpon>JobSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\BatchSummaryPaymentReportView.xaml.cs">
+    <Compile Include="Content\Payment\Batch\BatchSummaryPaymentReportView.xaml.cs">
       <DependentUpon>BatchSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobSummaryPaymentReportViewModel.cs" />
-    <Compile Include="Content\Payment\BatchSummaryPaymentReportViewModel.cs" />
-    <Compile Include="Content\Payment\JobReportView.xaml.cs">
+    <Compile Include="Content\Payment\Job\JobSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\Batch\BatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\Job\JobReportView.xaml.cs">
       <DependentUpon>JobReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\JobReportViewModel.cs" />
-    <Compile Include="Content\Payment\VoidedPaymentReportView.xaml.cs">
+    <Compile Include="Content\Payment\Job\JobReportViewModel.cs" />
+    <Compile Include="Content\Payment\Void\VoidedPaymentReportView.xaml.cs">
       <DependentUpon>VoidedPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\OpenPaymentReportView.xaml.cs">
+    <Compile Include="Content\BankAccount\Open\OpenPaymentReportView.xaml.cs">
       <DependentUpon>OpenPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\VoidedPaymentReportViewModel.cs" />
-    <Compile Include="Content\Payment\OpenPaymentReportViewModel.cs" />
-    <Compile Include="Content\Payment\PaymentReportCriteriaView.xaml.cs">
+    <Compile Include="Content\Payment\Void\VoidedPaymentReportViewModel.cs" />
+    <Compile Include="Content\BankAccount\Open\OpenPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\Criteria\PaymentReportCriteriaView.xaml.cs">
       <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\PaymentReportCriteriaViewModel.cs" />
-    <Compile Include="Content\Payment\PositivePayReportViewModel.cs" />
-    <Compile Include="Content\Payment\PositivePayReportView.xaml.cs">
+    <Compile Include="Content\Payment\Criteria\PaymentReportCriteriaViewModel.cs" />
+    <Compile Include="Content\BankAccount\PositivePay\PositivePayReportViewModel.cs" />
+    <Compile Include="Content\BankAccount\PositivePay\PositivePayReportView.xaml.cs">
       <DependentUpon>PositivePayReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Settings\AboutViewModel.cs" />
@@ -408,8 +408,8 @@
     <Compile Include="Pages\AccountReconcilePage.xaml.cs">
       <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\JobFinderReportPage.xaml.cs">
-      <DependentUpon>JobFinderReportPage.xaml</DependentUpon>
+    <Compile Include="Pages\ClientFinderReportPage.xaml.cs">
+      <DependentUpon>ClientFinderReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\JobSummaryReportPage.xaml.cs">
       <DependentUpon>JobSummaryReportPage.xaml</DependentUpon>
@@ -468,13 +468,13 @@
       <DependentUpon>PayVoucherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentReportCriteria.cs" />
-    <Compile Include="Content\Payment\PaymentFinderView.xaml.cs">
+    <Compile Include="Content\Payment\PaymentFinder\PaymentFinderView.xaml.cs">
       <DependentUpon>PaymentFinderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PaymentFinderReportPage.xaml.cs">
       <DependentUpon>PaymentFinderReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\PaymentFinderViewModel.cs" />
+    <Compile Include="Content\Payment\PaymentFinder\PaymentFinderViewModel.cs" />
     <Compile Include="Pages\PositivePayReportPage.xaml.cs">
       <DependentUpon>PositivePayReportPage.xaml</DependentUpon>
     </Compile>
@@ -646,27 +646,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\BatchReportView.xaml">
+    <Page Include="Content\Payment\Batch\BatchReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\JobFinder\JobFinderBatchReportView.xaml">
+    <Page Include="Content\Payment\Client\BatchView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\JobFinder\JobFinderPaymentReportView.xaml">
+    <Page Include="Content\Payment\Client\ClientPaymentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\JobFinder\JobReportCriteriaView.xaml">
+    <Page Include="Content\Payment\Criteria\ClientReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\JobFinder\JobFinderReportView.xaml">
+    <Page Include="Content\Payment\Client\JobView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\VoidPaymentDialog.xaml">
+    <Page Include="Content\Payment\PaymentFinder\VoidPaymentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -682,35 +682,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Payment\JobSummaryPaymentReportView.xaml">
+    <Page Include="Content\Payment\Job\JobSummaryPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\BatchSummaryPaymentReportView.xaml">
+    <Page Include="Content\Payment\Batch\BatchSummaryPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\JobReportView.xaml">
+    <Page Include="Content\Payment\Job\JobReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\VoidedPaymentReportView.xaml">
+    <Page Include="Content\Payment\Void\VoidedPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\OpenPaymentReportView.xaml">
+    <Page Include="Content\BankAccount\Open\OpenPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\PaymentReportCriteriaView.xaml">
+    <Page Include="Content\Payment\Criteria\PaymentReportCriteriaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\PositivePayReportView.xaml">
+    <Page Include="Content\BankAccount\PositivePay\PositivePayReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\ClearPaymentDialog.xaml">
+    <Page Include="Content\Payment\PaymentFinder\ClearPaymentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -797,7 +797,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\JobFinderReportPage.xaml">
+    <Page Include="Pages\ClientFinderReportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -845,7 +845,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Payment\PaymentFinderView.xaml">
+    <Page Include="Content\Payment\PaymentFinder\PaymentFinderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,12 +14,13 @@
         <EntityTypeShape EntityType="CoopCheckModel.vwPayment" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwBasicPayment" Width="1.5" PointX="5.375" PointY="10.75" />
         <EntityTypeShape EntityType="CoopCheckModel.bank_account" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CoopCheckModel.vwJobRpt" Width="1.5" PointX="9.375" PointY="9.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwOpenBatch" Width="1.5" PointX="7.375" PointY="4.75" />
-        <EntityTypeShape EntityType="CoopCheckModel.vwBatchRpt" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwUnclearedBatch" Width="1.5" PointX="13.375" PointY="5.75" />
-        <EntityTypeShape EntityType="CoopCheckModel.client" Width="1.5" PointX="15.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CoopCheckModel.jobLog" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.CoopCheckClient" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.CoopCheckJobLog" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.vwBatchRpt" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.vwClientJobBatch" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CoopCheckModel.vwJobRpt" Width="1.5" PointX="0.75" PointY="15.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

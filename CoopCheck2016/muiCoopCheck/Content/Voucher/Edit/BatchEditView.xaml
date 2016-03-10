@@ -68,7 +68,8 @@
                             <Border BorderThickness="1" BorderBrush="Black">
                                 <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
                         ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
-                            </Border>
+                        </Border>
+                        <TextBlock Width="110" Text="{Binding JobName}" Margin="6"  FontWeight="Bold" />
                         </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,3,0,3" Text="Payment Date" Style="{StaticResource TextBlockStyle}" Width="104"/>

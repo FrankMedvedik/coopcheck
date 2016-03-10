@@ -6,6 +6,7 @@
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
+             xmlns:batch="clr-namespace:CoopCheck.WPF.Content.Payment.Batch"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid>
@@ -16,7 +17,7 @@
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                        <payment:BatchSummaryPaymentReportView x:Name="prv"/>
+                        <batch:BatchSummaryPaymentReportView x:Name="prv"/>
                         <content:NoAccessView x:Name="nov"/>
                     </StackPanel>
             </ScrollViewer>

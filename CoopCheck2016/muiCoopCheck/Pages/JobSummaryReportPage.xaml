@@ -6,6 +6,7 @@
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
+             xmlns:job="clr-namespace:CoopCheck.WPF.Content.Payment.Job"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid>
@@ -16,7 +17,7 @@
         <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                        <payment:JobSummaryPaymentReportView x:Name="prv"/>
+                        <job:JobSummaryPaymentReportView x:Name="prv"/>
                         <content:NoAccessView x:Name="nov"/>
                     </StackPanel>
             </ScrollViewer>

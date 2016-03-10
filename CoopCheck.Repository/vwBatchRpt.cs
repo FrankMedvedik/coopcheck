@@ -30,5 +30,10 @@ namespace CoopCheck.Repository
         public Nullable<decimal> total_amount { get; set; }
         public string first_check_num { get; set; }
         public string last_check_num { get; set; }
+        public string job_year { get; set; }
+        public string clientid { get; set; }
+        public string clientname { get; set; }
+        public string jobname { get; set; }
+        public string projmgr { get; set; }
     }
 }

@@ -35,5 +35,8 @@
     <Setting Name="FontSize" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SelectedAccountID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

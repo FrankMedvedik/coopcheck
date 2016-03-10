@@ -15,7 +15,10 @@ namespace CoopCheck.Repository
     public partial class vwJobRpt
     {
         public int job_num { get; set; }
-        public Nullable<int> account_id { get; set; }
+        public string clientid { get; set; }
+        public string clientname { get; set; }
+        public string jobname { get; set; }
+        public string projmgr { get; set; }
         public Nullable<int> batch_cnt { get; set; }
         public Nullable<System.DateTime> first_batch_date { get; set; }
         public Nullable<System.DateTime> last_batch_date { get; set; }
@@ -31,5 +34,6 @@ namespace CoopCheck.Repository
         public string last_check_num { get; set; }
         public Nullable<System.DateTime> first_check_date { get; set; }
         public Nullable<System.DateTime> last_check_date { get; set; }
+        public string job_year { get; set; }
     }
 }
