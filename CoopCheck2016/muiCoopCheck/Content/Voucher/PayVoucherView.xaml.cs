@@ -33,7 +33,7 @@ namespace CoopCheck.WPF.Content.Voucher
 
         }
 
-        private void PrintChecks(object sender, RoutedEventArgs e)
+        private async void PrintChecks(object sender, RoutedEventArgs e)
         {
             var f = System.AppDomain.CurrentDomain.BaseDirectory + @"\" + @Properties.Settings.Default.CheckTemplate;
             if (!File.Exists(f))

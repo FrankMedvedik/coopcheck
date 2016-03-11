@@ -18,15 +18,15 @@
                     <Setter Property="Margin" Value="6" />
                 </Style>
             </StackPanel.Resources>
-            <TextBlock Text="{Binding HeadingText}" />
+            <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" Margin="10">
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Width="70" >Check Count</TextBlock>
                     <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock Width="70">Checks</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Width="100" >Total Dollars</TextBlock>
                     <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock Width="100">Total</TextBlock>
                 </StackPanel>
                 <Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
             </StackPanel>

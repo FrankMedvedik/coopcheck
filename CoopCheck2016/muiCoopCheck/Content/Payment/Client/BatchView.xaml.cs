@@ -19,7 +19,23 @@ namespace CoopCheck.WPF.Content.Payment.Client
             DataContext = _vm;
         }
 
-   
+        private void ClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            CopyToClipboard();
+
+        }
+
+
+        private void CopyToClipboard()
+        {
+            dgBatches.SelectAllCells();
+            dgBatches.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, dgBatches);
+            //String result = (string)Clipboard.GetData(DataFormats..Text);
+            dgBatches.UnselectAllCells();
+
+        }
+
         private void Excel_Click(object sender, RoutedEventArgs e)
         {
             ExportToExcel();

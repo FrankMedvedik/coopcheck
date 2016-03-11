@@ -16,8 +16,8 @@
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0">
-                <criteria:ClientReportCriteriaView x:Name="jrcv"/>
-                <Button x:Name="Refresh" HorizontalAlignment="Left" IsDefault="True" Width="150" Height="30" Margin="12"
+                <criteria:ClientReportCriteriaView x:Name="jrcv" VerticalAlignment="Center"/>
+                <Button x:Name="Refresh" HorizontalAlignment="Left" IsDefault="True" Width="150" Height="30" Margin="30,6,6,6"
                         VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
             </StackPanel>
          <client:JobView x:Name="jfrv" Margin="10" Grid.Row="1" />

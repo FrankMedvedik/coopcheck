@@ -27,6 +27,7 @@ namespace CoopCheck.WPF.Models
             {
                 _selectedJobNum = value;
                 NotifyPropertyChanged();
+                SetSearchType();
             }
         }
 
@@ -49,6 +50,7 @@ namespace CoopCheck.WPF.Models
                 _selectedClient = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged("SelectedClientID");
+                SetSearchType();
             }
         }
         //private string _selectedClientID;
@@ -62,16 +64,42 @@ namespace CoopCheck.WPF.Models
             //}
         }
 
-        private string _selectedJobYear = "ALL";
+        private string _selectedJobYear;
+        private string _searchType;
+
         public string SelectedJobYear
         {
             get { return _selectedJobYear; }
             set {
                 _selectedJobYear = value;
+                NotifyPropertyChanged();
+                SetSearchType();
+            }
+        }
+
+        private void SetSearchType()
+        {
+            if (SelectedJobNum != null && SelectedJobNum.Length == 8)
+                SearchType = ONEJOB;
+            else if (SelectedJobYear == ALLJOBYEARS && SelectedClient != null)
+                SearchType = ALLCLIENTJOBS;
+            else if(SelectedJobYear != null && SelectedClient != null)
+                SearchType = ALLCLIENTJOBSFORYEAR;
+            else
+                SearchType = "INVALID";
+
+        }
+
+        public string ALLJOBYEARS {get { return "All"; } 
+        }
+
+        public string SearchType    
+        {
+            get { return _searchType; }
+            set { _searchType = value;
                 NotifyPropertyChanged(); }
         }
 
-        public string SearchType { get; set; }
         public string ONEJOB
         {
             get { return "ONEJOB"; }
