@@ -61,8 +61,6 @@
                 <mui:DataGridTextColumn Binding="{Binding first_check_num}"  Header="first check"/>
                 <mui:DataGridTextColumn Binding="{Binding last_check_num}" Header="last check "/>
             </DataGrid.Columns>
-            <ContextMenu>
-            </ContextMenu>
             </DataGrid>
     </Grid>
 </UserControl>

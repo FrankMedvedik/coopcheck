@@ -55,11 +55,15 @@ namespace CoopCheck.WPF.Services
             int checkNum = startingCheckNum;
 
             // WriteCheckBatchCommand works like a begin transaction and 
-            // marks the whole batch as in progress... see commit afterwards
+            // marks the whole batch as in progress... the check number is defined here but the print flag is set at the end. 
+            // see commit afterwards
+
             WriteCheckBatchCommand.Execute(batchNum, accountId, startingCheckNum);
+
+            var app = new Microsoft.Office.Interop.Word.Application();
             foreach (var c in b.Vouchers)
             {
-                status = PaymentPrintSvc.PrintCheck(b, c, checkNum++);
+                status = PaymentPrintSvc.PrintCheck(app,b, c, checkNum++);
                 if (status.ErrorMessage == null)
                 {
                     status.IsBusy = true;
@@ -67,9 +71,11 @@ namespace CoopCheck.WPF.Services
                 }
                 else
                 {
+                    app.Quit();
                     return status;
                 }
             }
+            app.Quit();
             return new StatusInfo() 
             {
                     StatusMessage =

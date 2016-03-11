@@ -18,13 +18,15 @@ namespace CoopCheck.WPF.Services
             return fulllName;
         }
 
-        public static StatusInfo PrintCheck(BatchEdit b, VoucherEdit c,  int checkNum)
+
+
+
+        public static StatusInfo PrintCheck(Microsoft.Office.Interop.Word.Application app, BatchEdit b, VoucherEdit c,  int checkNum)
         {
             var template = System.AppDomain.CurrentDomain.BaseDirectory +  @Properties.Settings.Default.CheckTemplate;
             try
             {
 
-                var app = new Microsoft.Office.Interop.Word.Application();
                 var doc = new Microsoft.Office.Interop.Word.Document();
                 doc = app.Documents.Add(Template: template);
                 
@@ -122,7 +124,6 @@ namespace CoopCheck.WPF.Services
 
                 doc.PrintOut();
                 doc.Close(false);
-                app.Quit();
                 
             }
             catch (Exception e)
