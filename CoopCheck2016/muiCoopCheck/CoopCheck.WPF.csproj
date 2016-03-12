@@ -242,6 +242,7 @@
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\Client\JobViewModel.cs" />
+    <Compile Include="Models\OutstandingBalanceStats.cs" />
     <Compile Include="Services\ClientSvc.cs" />
     <Compile Include="Content\Payment\Client\BatchView.xaml.cs">
       <DependentUpon>BatchView.xaml</DependentUpon>
@@ -430,6 +431,7 @@
     <Compile Include="Services\JobYearSvc.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />
+    <Compile Include="Services\OutstandingBalancePrintSvc.cs" />
     <Compile Include="Services\UnclearedBatchSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
@@ -547,6 +549,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Assets\appbar.excel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Assets\Refresh.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -950,6 +957,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Assets\RecknerCheck.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RecknerOutstandingBalanceReport.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Icons\MakePayment.ico">

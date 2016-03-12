@@ -145,5 +145,14 @@ namespace CoopCheck.WPF.Properties {
                 this["SelectedAccountID"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("RecknerOutstandingBalanceReport.dotx")]
+        public string OutstandingBalanceReportTemplate {
+            get {
+                return ((string)(this["OutstandingBalanceReportTemplate"]));
+            }
+        }
     }
 }

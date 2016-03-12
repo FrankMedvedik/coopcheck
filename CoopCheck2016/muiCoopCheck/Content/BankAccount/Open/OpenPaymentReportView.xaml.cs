@@ -27,13 +27,17 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
             _vm.GetPayments(prcv.PaymentReportCriteria);
         }
 
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.PrintReport(prcv.PaymentReportCriteria);
+
+        }
+
         private void Excel_Click(object sender, RoutedEventArgs e)
         {
             ExportToExcel();
 
         }
-
-       
         private void ExportToExcel()
         {
             dgPayments.SelectAllCells();

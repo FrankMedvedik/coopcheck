@@ -144,5 +144,19 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
 
         private List<vwBasicPayment> p;
 
+        public async void PrintReport(PaymentReportCriteria c)
+        {
+            OutstandingBalanceStats s = new OutstandingBalanceStats
+            {
+                AccountName = c.Account.account_name,
+                AsOfDate = c.EndDate,
+                ItemCount = PaymentsCnt.ToString(),
+                OutstandingBalance = String.Format("{0:c}", PaymentsTotalDollars), 
+                PreparedBy = UserAuth.Instance.UserName
+            };
+
+            await OutstandingBalancePrintSvc.PrintOutstandingBalanceReportAsync(s);
+
+        }
     }
 }

@@ -38,5 +38,8 @@
     <Setting Name="SelectedAccountID" Type="System.String" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="OutstandingBalanceReportTemplate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">RecknerOutstandingBalanceReport.dotx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
