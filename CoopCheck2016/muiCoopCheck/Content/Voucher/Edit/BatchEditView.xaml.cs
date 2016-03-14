@@ -92,6 +92,11 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _vm.CancelNewVoucher();
         }
 
+        private  async void JobNum_LostFocus(object sender, RoutedEventArgs e)
+        {
+            _vm.JobName = await _vm.SetJobName();
+
+        }
     }
     }
 

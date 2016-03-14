@@ -54,28 +54,39 @@
         </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
                 <StackPanel Orientation="Horizontal" >
+                    
                     <Button Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  Width="150"  />
-                    <Button Content="Delete " HorizontalAlignment="Center" Width="150" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"    Margin="6" Click="DeleteSelectedBatch_Click" />
+                    <Button Content="Delete " HorizontalAlignment="Center" Width="150" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"   
+                            Margin="6" Click="DeleteSelectedBatch_Click" />
                 </StackPanel>
             </StackPanel>
-           <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left"  VerticalAlignment="Top" >
-                    <voucher:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" 
+                      IsEnabled="{Binding CanPayBatch}"
+                      HorizontalAlignment="Left"  VerticalAlignment="Top" >
+                    <voucher:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"  IsEnabled="{Binding CanPayBatch}"/>
             </Expander>
-            <Expander Header="Batch Details" Grid.Row="2" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+            <Expander Header="Batch Details" Grid.Row="2"
+                      Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
             <StackPanel Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
                             <Border BorderThickness="1" BorderBrush="Black">
                                 <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
-                        ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6" />
+                        ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6"  LostFocus="JobNum_LostFocus"  />
                         </Border>
-                        <TextBlock Width="110" Text="{Binding JobName}" Margin="6"  FontWeight="Bold" />
+                        <TextBlock Width="Auto" Text="{Binding JobName}" Margin="10,6,6,6"   FontWeight="Bold" />
                         </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,3,0,3" Text="Payment Date" Style="{StaticResource TextBlockStyle}" Width="104"/>
                         <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="6" TabIndex="3" Width="126" />
                         <TextBlock Text="Create Date" Style="{StaticResource TextBlockStyle}" Margin="50,6,6,6" />
                         <TextBlock Text="{Binding SelectedBatch.Date, Mode=OneWay,StringFormat=d}" VerticalAlignment="Center" Margin="6"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Thank You 1" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top" />
+                        <Border BorderThickness="1" BorderBrush="Black">
+                            <TextBox Height="100" MaxLength="75" Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
+                        </Border>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Study Topic"  Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
@@ -84,23 +95,19 @@
                             </Border>
                         </StackPanel>
                     <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="Description" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
-                            <Border BorderThickness="1" BorderBrush="Black">
-                            <TextBox Height="100" MaxLength="75" Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
-                            </Border>
-                        </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="Thank You 1" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
-                            <Border BorderThickness="1" BorderBrush="Black">
-                            <TextBox Height="100" MaxLength="75" Width="500" Text="{Binding SelectedBatch.ThankYou1, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="7" />
-                            </Border>
-                        </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Thank You 2" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
                             <Border BorderThickness="1" BorderBrush="Black">
                             <TextBox Height="100" Width="500" MaxLength="75" Text="{Binding SelectedBatch.ThankYou2, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Margin="6" Style="{StaticResource CellEditStyle}" TabIndex="8" />
                             </Border>
                         </StackPanel>
+          
+                <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="Description" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Top"/>
+                            <Border BorderThickness="1" BorderBrush="Black">
+                            <TextBox Height="100" MaxLength="75" Width="500" Text="{Binding SelectedBatch.Description, Mode=TwoWay,ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}" Margin="6" TabIndex="6" />
+                            </Border>
+                        </StackPanel>
+          
             </StackPanel>
         </Expander>
             <Expander Header="Vouchers" Grid.Row="3" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">

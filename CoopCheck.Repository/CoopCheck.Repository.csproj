@@ -118,6 +118,9 @@
     <Compile Include="GetJobPaymentsReport_Result.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="JobLog.cs">
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="voucher.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>

@@ -43,6 +43,7 @@ namespace CoopCheck.Repository
         public virtual DbSet<vwBatchRpt> vwBatchRpts { get; set; }
         public virtual DbSet<vwClientJobBatch> vwClientJobBatches { get; set; }
         public virtual DbSet<vwJobRpt> vwJobRpts { get; set; }
+        public virtual DbSet<JobLog> JobLogs { get; set; }
     
         public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()
         {

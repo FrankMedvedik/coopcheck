@@ -14,7 +14,7 @@ namespace CoopCheck.WPF.Services
         {
             using (var ctx = new CoopCheckEntities())
             {
-                return await Task.Factory.StartNew(() => 
+                return await Task.Factory.StartNew(() =>
                     ctx.GetJobPaymentsReport(grc.Account.account_id, grc.StartDate,grc.EndDate).ToList());
             }
         }
@@ -151,6 +151,22 @@ namespace CoopCheck.WPF.Services
             }
             return v;
         }
+
+        public static async Task<JobLog> GetJobLog(int jobNumber)
+        {
+            JobLog v;
+                return await  Task.Factory.StartNew(() =>
+                {
+                    using (var ctx = new CoopCheckEntities())
+                    {
+
+                        v = ctx.JobLogs.First(b => b.JobNum == jobNumber);
+                        return v;
+                    }
+                });
+            }
+  
+        
         public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientId)
         {
             List<vwJobRpt> v;

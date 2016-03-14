@@ -32,6 +32,15 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 NotifyPropertyChanged();
             }
         }
+        public Boolean CanPayBatch
+        {
+            get { return _canPayBatch; }
+            set
+            {
+                _canPayBatch = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private Boolean _isNewVoucher;
 
@@ -89,21 +98,20 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         }
 
-        public static string BadJobName = "JOB NUMBER INVALID PLEASE CORRECT";
-        //public string JobName
-        //{
-        //    get
-        //  {
-        //        string x = string.Empty;
-        //        if (SelectedBatch == null)
-        //            x = BadJobName;
-        //        else
-        //            x =  RptSvc.GetJob(SelectedBatch.JobNum.GetValueOrDefault(0)).Result.First().jobname;
-        //      if (x == BadJobName)
-        //          Status = new StatusInfo {ErrorMessage = x, StatusMessage = "Error in batch details"};
-        //      return x;
-        //    }
-        //}
+        public static string BadJobName = "job number is not defined";
+        public string JobName
+        {
+            get
+            {
+                return _jobName;
+            }
+            set
+            {
+                _jobName = value;
+                NotifyPropertyChanged();
+                SelectedBatch.StudyTopic = value;
+            }
+        }
 
         public StatusInfo Status
         {
@@ -126,12 +134,31 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
             {
                 if (message.Content != null)
+                {
                     BatchNum = message.Content.batch_num;
+       }
                 else
                     ShowSelectedBatch = false;
             });
         }
 
+        public async Task<string> SetJobName()
+        {
+            string x = BadJobName;
+            var z = await RptSvc.GetJobLog(SelectedBatch.JobNum.GetValueOrDefault(0));
+            if (z == null)
+            {
+                Status = new StatusInfo {ErrorMessage = x, StatusMessage = "error - cannot pay batch"};
+                CanPayBatch = false;
+            }
+            else
+            {
+                x = z.JobName;
+                CanPayBatch = true;
+            }
+            return x;
+        }
+        
         private bool CanRefreshBatchList()
         {
             return true;
@@ -176,6 +203,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     ShowSelectedBatch = true;
                     HeaderText = string.Format("Batch Number {0} Job Number {1}  Voucher Cnt {2} Total Amount {3:C}",
                         SelectedBatch.Num, SelectedBatch.JobNum, SelectedBatch.Vouchers.Count, SelectedBatch.Amount.GetValueOrDefault(0));
+                    
                     Status = new StatusInfo()
                     {
                         StatusMessage = HeaderText
@@ -235,10 +263,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         private async void GetBatch(int batchNum)
         {
             SelectedBatch =  await BatchSvc.GetBatchEditAsync(batchNum);
+            JobName = await SetJobName();
         }
 
         private string _headerText;
         private VoucherImport _workVoucherImport;
+        private string _jobName;
+        private bool _canPayBatch;
 
         public string HeaderText
         {
