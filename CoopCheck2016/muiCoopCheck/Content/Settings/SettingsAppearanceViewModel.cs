@@ -171,6 +171,7 @@ namespace FirstFloor.ModernUI.App.Content
                     OnPropertyChanged("SelectedAccentColor");
 
                     AppearanceManager.Current.AccentColor = value;
+                    
                     CoopCheck.WPF.Properties.Settings.Default.AccentColor = value.ToString();
                 }
             }

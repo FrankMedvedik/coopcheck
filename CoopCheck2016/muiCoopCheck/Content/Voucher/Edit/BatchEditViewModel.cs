@@ -98,7 +98,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         }
 
-        public static string BadJobName = "job number is not defined";
         public string JobName
         {
             get
@@ -110,6 +109,20 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _jobName = value;
                 NotifyPropertyChanged();
                 SelectedBatch.StudyTopic = value;
+            }
+        }
+
+        public int? JobNum
+        {
+            get
+            {
+                return SelectedBatch.JobNum;
+            }
+            set
+            {
+                SelectedBatch.JobNum = value;
+                SetJobName();
+                NotifyPropertyChanged();
             }
         }
 
@@ -142,23 +155,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             });
         }
 
-        public async Task<string> SetJobName()
-        {
-            string x = BadJobName;
-            var z = await RptSvc.GetJobLog(SelectedBatch.JobNum.GetValueOrDefault(0));
-            if (z == null)
-            {
-                Status = new StatusInfo {ErrorMessage = x, StatusMessage = "error - cannot pay batch"};
-                CanPayBatch = false;
-            }
-            else
-            {
-                x = z.JobName;
-                CanPayBatch = true;
-            }
-            return x;
-        }
-        
         private bool CanRefreshBatchList()
         {
             return true;
@@ -263,8 +259,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         private async void GetBatch(int batchNum)
         {
             SelectedBatch =  await BatchSvc.GetBatchEditAsync(batchNum);
-            JobName = await SetJobName();
+            SetJobName();
         }
+
 
         private string _headerText;
         private VoucherImport _workVoucherImport;
@@ -308,6 +305,20 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
+        public async void AutoSaveSelectedBatch()
+        {
+            if ((SelectedBatch.IsSavable) && UserCanWrite)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "saving...",
+                    IsBusy = true
+                };
+                SelectedBatch = await SelectedBatch.SaveAsync();
+
+            }
+        }
+       
         public async void  SaveSelectedBatch()
         {
             if ((SelectedBatch.IsSavable) && UserCanWrite)
@@ -398,5 +409,20 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 WorkVoucherImport = null; ;
             
         }
+
+        public async void SetJobName()
+        {
+            if (SelectedBatch?.JobNum.GetValueOrDefault(0).ToString().Length == 8)
+            {
+                int b = SelectedBatch.JobNum.GetValueOrDefault(0);
+                JobName = await JobLogSvc.GetJobName(b);
+            }
+            else
+            {
+                JobName = JobLogSvc.BadJobName;
+            }
+            CanPayBatch = (JobName != JobLogSvc.BadJobName);
+        }
+
     }
 }

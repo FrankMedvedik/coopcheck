@@ -41,6 +41,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
 
         public  async void RefreshAll()
         {
+             
             WorkPayments = await RptSvc.GetBatchPayments(PaymentReportCriteria);
 
         }

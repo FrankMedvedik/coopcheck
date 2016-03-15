@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Media;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Payment.Criteria
@@ -18,6 +20,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
     /// </summary>
     public class PaymentReportCriteriaViewModel : ViewModelBase
     {
+        public SolidColorBrush AccentBrush { get { return new SolidColorBrush(AppearanceManager.Current.AccentColor); } }
         /// <summary>
         /// Initializes a new instance of the CheckReportViewModel class.
         /// </summary>
@@ -77,6 +80,14 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             EnableCheckNum = true;
         }
 
+        public bool ShowAllAccountsOption
+        {
+            get { return _showAllAccountsOption; }
+            set { _showAllAccountsOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private Boolean _showGridData;
 
         public Boolean ShowGridData
@@ -113,16 +124,23 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 
 
         private ObservableCollection<bank_account> _accounts;
-        
+        private bool _showAllAccountsOption = false;
+
 
         public ObservableCollection<bank_account> Accounts
         {
-            get { return _accounts; }
+            get
+            {
+                return _accounts;
+            }
             set
             {
                 _accounts = value;
-
+                if (_accounts != null) 
+                    if (ShowAllAccountsOption) /*&& !(Accounts.Any(a => a.account_id == BankAccountSvc.AllAccountsOption.account_id)))*/
+                        _accounts.Add(BankAccountSvc.AllAccountsOption);
                 NotifyPropertyChanged("");
+
             }
         }
 

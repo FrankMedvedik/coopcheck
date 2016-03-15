@@ -53,8 +53,8 @@ namespace CoopCheck.WPF.Services
                     query = query.Where(x => x.check_num == crc.CheckNumber);
 
                 }
-
-                query = query.Where(x => x.account_id == crc.Account.account_id);
+                if(crc.Account.account_id != BankAccountSvc.AllAccountsOption.account_id)
+                    query = query.Where(x => x.account_id == crc.Account.account_id);
 
                 if (!String.IsNullOrWhiteSpace(crc.Email))
                 {
@@ -152,20 +152,7 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<JobLog> GetJobLog(int jobNumber)
-        {
-            JobLog v;
-                return await  Task.Factory.StartNew(() =>
-                {
-                    using (var ctx = new CoopCheckEntities())
-                    {
-
-                        v = ctx.JobLogs.First(b => b.JobNum == jobNumber);
-                        return v;
-                    }
-                });
-            }
-  
+     
         
         public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientId)
         {
@@ -191,7 +178,7 @@ namespace CoopCheck.WPF.Services
         }
 
 
-        public static async Task<List<vwPayment>> GetAllJobPayments(int jobNumber)
+        public static async Task<List<vwPayment>> GetJobPayments(int jobNumber)
         {
             List<vwPayment> v;
             using (var ctx = new CoopCheckEntities())
@@ -203,7 +190,6 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-
         public static async Task<List<vwPayment>> GetBatchPayments(PaymentReportCriteria grc)
         {
             List<vwPayment> v;
@@ -211,7 +197,8 @@ namespace CoopCheck.WPF.Services
             {
                 v = await (from b in ctx.vwPayments
                            where ((b.batch_num == grc.BatchNumber)
-                            && (b.account_id == grc.Account.account_id))
+                           && (b.check_date >= grc.StartDate)
+                           && (b.check_date <= grc.EndDate))
                            select b).ToListAsync();
             }
             return v;
@@ -225,7 +212,6 @@ namespace CoopCheck.WPF.Services
             {
                 v = await (from b in ctx.vwPayments
                            where ((b.job_num.ToString() == grc.JobNumber) 
-                            && (b.account_id == grc.Account.account_id)
                             && (b.check_date >=  grc.StartDate)
                             && (b.check_date <= grc.EndDate))
                            select b).ToListAsync();

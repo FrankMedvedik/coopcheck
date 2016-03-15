@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
@@ -32,14 +33,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             get { return _vm.IsDirty; }
         }
-        //public ObservableCollection<VoucherImport> VoucherImports
-        //{
-        //    get { return _vm.VoucherImports; }
-        //    set { _vm.VoucherImports = value; }
-        //}
-        //public static readonly DependencyProperty VoucherImportsProperty =
-        //DependencyProperty.Register("VoucherImports", typeof(ObservableCollection<VoucherImport>), typeof(BatchEditView), new PropertyMetadata(new ObservableCollection<VoucherImport>()));
-
+      
         private void SaveSelectedBatch_Click(object sender, RoutedEventArgs e)
         {
             _vm.SaveSelectedBatch();
@@ -92,10 +86,14 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _vm.CancelNewVoucher();
         }
 
-        private  async void JobNum_LostFocus(object sender, RoutedEventArgs e)
-        {
-            _vm.JobName = await _vm.SetJobName();
 
+        private void VoucherGrid_LostFocus(object sender, RoutedEventArgs e)
+        {
+            _vm.AutoSaveSelectedBatch();
+        }
+        private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
+        {
+            _vm.AutoSaveSelectedBatch();
         }
     }
     }

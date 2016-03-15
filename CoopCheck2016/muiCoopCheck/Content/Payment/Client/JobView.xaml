@@ -36,7 +36,7 @@
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"
                       ItemsSource="{Binding Path=Jobs, Mode=TwoWay}"  VerticalAlignment="Top" 
                       SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
-                    ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
+                    ToolTipService.ToolTip="jobs with payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                  <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />

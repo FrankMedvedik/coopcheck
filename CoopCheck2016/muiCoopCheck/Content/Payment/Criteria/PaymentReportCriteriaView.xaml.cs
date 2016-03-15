@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Content.Payment.Criteria
@@ -36,6 +37,13 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             _vm.EnableMiscFields = false;
 
         }
+        public bool ShowAllAccountsOption
+        {
+            get { return _vm.ShowAllAccountsOption; }
+            set { _vm.ShowAllAccountsOption = value; }
+        }
+        public static readonly DependencyProperty ShowAllAccountsOptionProperty =
+        DependencyProperty.Register("ShowAllAccountsOption", typeof(bool), typeof(PaymentReportCriteriaView), new PropertyMetadata(false));
 
     }
 }

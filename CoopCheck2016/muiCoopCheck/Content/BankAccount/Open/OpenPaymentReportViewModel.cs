@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.ViewModel;
+using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
+ 
 
 namespace CoopCheck.WPF.Content.BankAccount.Open
 {
     /// <summary>
     public class OpenPaymentReportViewModel : ViewModelBase
     {
+      
         public OpenPaymentReportViewModel()
         {
             ResetState();
@@ -143,6 +147,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
         }
 
         private List<vwBasicPayment> p;
+        private Brush _accentColor;
 
         public async void PrintReport(PaymentReportCriteria c)
         {

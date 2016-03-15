@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
         <Expander Grid.Row="1" IsExpanded="True" Header="Criteria">
-                <criteria:PaymentReportCriteriaView Grid.Column="0" x:Name="prcv" />
+            <criteria:PaymentReportCriteriaView Grid.Column="0" x:Name="prcv"  />
         </Expander>
         <Button Width="150" Margin="120,6,6,6" Grid.Row="2"  HorizontalAlignment="Left" IsDefault="True" 
                 VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>

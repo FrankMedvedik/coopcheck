@@ -67,12 +67,12 @@
             </Expander>
             <Expander Header="Batch Details" Grid.Row="2"
                       Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
-            <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical" LostFocus="BatchDetails_LostFocus">
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
                             <Border BorderThickness="1" BorderBrush="Black">
-                                <TextBox Width="110" Text="{Binding SelectedBatch.JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
-                        ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6"  LostFocus="JobNum_LostFocus"  />
+                                <TextBox Width="110" Text="{Binding JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
+                        ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6"  />
                         </Border>
                         <TextBlock Width="Auto" Text="{Binding JobName}" Margin="10,6,6,6"   FontWeight="Bold" />
                         </StackPanel>
@@ -121,9 +121,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="0"
-                ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800"
-                      ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
-                          VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
+                        ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
+                              LostFocus="VoucherGrid_LostFocus" 
+                              VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">
                         <DataGrid.Columns>
                             <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True,StringFormat={}{0:C}}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}"/>
                             <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
@@ -141,7 +141,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1"  Margin="12" >
-                        <StackPanel Orientation="Vertical" Margin="12"
+                        <StackPanel Orientation="Vertical" Margin="12" 
                             Visibility="{Binding ShowSelectedVoucher, Converter={StaticResource BoolToVisConverter}}">
                             <TextBlock Text="edit voucher" Style="{StaticResource Heading2}" Margin="6" />
                             <StackPanel x:Name="Form" Orientation="Vertical">

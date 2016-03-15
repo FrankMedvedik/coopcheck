@@ -242,6 +242,7 @@
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\Client\JobViewModel.cs" />
+    <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
     <Compile Include="Services\ClientSvc.cs" />
     <Compile Include="Content\Payment\Client\BatchView.xaml.cs">

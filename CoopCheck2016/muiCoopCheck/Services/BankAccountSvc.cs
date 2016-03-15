@@ -24,5 +24,16 @@ namespace CoopCheck.WPF.Services
             return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));
         }
 
+        public static bank_account AllAccountsOption
+        {
+            get
+            {
+                return new bank_account()
+                {
+                    account_id = -999,
+                    account_name = "All Accounts"
+                };
+            }
+        }
     }
 }

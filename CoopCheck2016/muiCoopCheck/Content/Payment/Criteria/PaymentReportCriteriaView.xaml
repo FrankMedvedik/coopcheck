@@ -13,17 +13,18 @@
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Width="100" Text="Account" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     <ComboBox x:Name="ComboAccount" Width="150" Margin="6"  ItemsSource="{Binding Accounts}" VerticalAlignment="Center"
-                          DisplayMemberPath="account_name" SelectedValue="{Binding PaymentReportCriteria.Account}">
+                          DisplayMemberPath="account_name" SelectedValue="{Binding PaymentReportCriteria.Account}" >
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" IsEnabled="{Binding EnableMiscFields}">
                     <StackPanel Orientation="Horizontal"  x:Name="StartDate">
                  <TextBlock Text="Start Date" Width="100"   Margin="6" VerticalAlignment="Center"/>
-                <DatePicker SelectedDate="{Binding PaymentReportCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6"  />
+                <DatePicker SelectedDate="{Binding PaymentReportCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6" BorderBrush="{Binding  AccentBrush}"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal" x:Name="EndDate" >
                     <TextBlock Text="End Date" Width="100"  Margin="6" VerticalAlignment="Center"/>
-                <DatePicker SelectedDate="{Binding PaymentReportCriteria.EndDate, StringFormat=d, Mode=TwoWay}" Margin="6"  />
+                    <DatePicker SelectedDate="{Binding PaymentReportCriteria.EndDate, StringFormat=d, Mode=TwoWay}" 
+                                Margin="6" BorderBrush="{Binding  AccentBrush}"/>
                 </StackPanel>
             <StackPanel Orientation="Vertical" x:Name="DetailedCriteria" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal"  x:Name="spJob">

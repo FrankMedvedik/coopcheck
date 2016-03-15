@@ -18,6 +18,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             DataContext = _vm;
             prcv.DetailedCriteria.Visibility = Visibility.Visible;
             prcv.CheckNumSP.Visibility = Visibility.Visible;
+            prcv.ShowAllAccountsOption = true;
         }
 
         private PaymentFinderViewModel _vm;

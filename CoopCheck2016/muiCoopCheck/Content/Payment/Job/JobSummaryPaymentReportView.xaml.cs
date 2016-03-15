@@ -22,6 +22,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
             DataContext = _vm;
             prcv.PaymentReportCriteria.StartDate = DateTime.Today.AddDays(-1);
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;
+            prcv.ShowAllAccountsOption = true;
             Messenger.Default.Register<NotificationMessage<vwJobRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.SelectedJobChanged)
