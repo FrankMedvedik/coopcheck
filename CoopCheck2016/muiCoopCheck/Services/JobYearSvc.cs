@@ -19,7 +19,7 @@ namespace CoopCheck.WPF.Services
 
             {
                 var x = new List<string>();
-                for(int y = 2002;y < DateTime.Now.Year; y++ )
+                for(int y = 2002;y <= DateTime.Now.Year; y++ )
                     x.Add(y.ToString());
                 x.Add("All");
                 return x;
