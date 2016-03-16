@@ -237,7 +237,6 @@
     <Compile Include="Content\BankAccount\Reconcile\ReconcileWindow.xaml.cs">
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\Criteria\ClientSuggestionProvider.cs" />
     <Compile Include="Content\Payment\Client\JobView.xaml.cs">
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
@@ -987,10 +986,6 @@
     <ProjectReference Include="..\..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WpfControls.CS\WpfControls.CS.csproj">
-      <Project>{bb2abb74-ba58-4812-83aa-ec8171f42df4}</Project>
-      <Name>WpfControls.CS</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
       <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>

@@ -16,13 +16,9 @@ namespace CoopCheck.WPF.Services
         {
             StatusInfo i = new StatusInfo()
             {
-                StatusMessage = String.Format("Batch {0} Submitted for swiftpay ", batchNum)//,ShowMessageBox = true
+                StatusMessage = $"Batch {batchNum} Submitted for swiftpay" 
             };
-            // test code 
-            //i.StatusMessage = "            StatusInfo i = new StatusInfo();
-            //i.StatusMessage = "LETS PRETEND THE BATCH IS GONE TO BE PAID NOW... ";
-            //System.Threading.Thread.Sleep(5000);
-            //return i;
+  
             try
             {
              

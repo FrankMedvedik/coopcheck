@@ -37,13 +37,7 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _selectedBatchEdit = value;
                 NotifyPropertyChanged();
-                //if (SelectedBatchEdit == null)
-                //    BatchInfo = "";
-                //else
-                //    BatchInfo = string.Format("{0} vouchers for job {1}", SelectedBatchEdit.Vouchers.Count,
-                //        SelectedBatchEdit.JobNum);
-                //if (SelectedAccount.account_type == "CHECKING")
-                //    SetCheckNumbers();
+     
             }
         }
 

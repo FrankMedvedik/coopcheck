@@ -18,10 +18,11 @@ namespace CoopCheck.WPF.Services
             //    var x = await ctx.CoopCheckJobLogs.Select(a => a.jobnum.ToString().Substring(0, 4).Distinct()).ToListAsync();
 
             {
-                var x = new List<string>();
-                for(int y = 2002;y <= DateTime.Now.Year; y++ )
+                var x = new List<string> {"All"};
+                for (int y = 2002;y <= DateTime.Now.Year; y++ )
                     x.Add(y.ToString());
-                x.Add("All");
+                x = x.OrderByDescending(a => a).ToList();
+
                 return x;
             }
         }
