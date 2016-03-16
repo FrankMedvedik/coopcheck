@@ -119,6 +119,7 @@ namespace CoopCheck.WPF.Content.Voucher
                     SelectedBatch = message.Content;
             });
             ResetState();
+            
         }
 
         public int StartingCheckNum
@@ -141,7 +142,6 @@ namespace CoopCheck.WPF.Content.Voucher
             }
         }
 
-
         public StatusInfo Status
         {
             get { return _status; }
@@ -153,6 +153,46 @@ namespace CoopCheck.WPF.Content.Voucher
             }
         }
 
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                NotifyPropertyChanged();
+                if (value)
+                {
+                    _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                    _dispatcherTimer.Tick += (dispatcherTimer_Tick);
+                    _dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
+                    _dispatcherTimer.Start();
+                    CanPrintChecks = false;
+                    CanSwiftPay = false;
+                }
+                else
+                {
+                    _dispatcherTimer.Stop();
+                    _dispatcherTimer.Tick -= (dispatcherTimer_Tick);
+                    SetAccountInfo();
+                }
+                
+            }
+        }
+
+
+        private int _remainingPaymentCnt;
+        public int RemainingPaymentCnt
+        {
+            get { return _remainingPaymentCnt; }
+            set
+            {
+                _remainingPaymentCnt = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private StatusInfo _status;
 
         private int _startingCheckNum;
@@ -162,6 +202,21 @@ namespace CoopCheck.WPF.Content.Voucher
         private BatchEdit _selectedBatchEdit;
         private bool _canSwiftPay;
         private bool _canPrintChecks;
+        private System.Windows.Threading.DispatcherTimer _dispatcherTimer;
+
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            int c = 19;
+            if (c == 0)
+            {
+                IsBusy = false;
+            }
+            else
+            {
+                RemainingPaymentCnt = c;
+            }
+        }
 
         public async void ResetState()
         {
@@ -189,6 +244,7 @@ namespace CoopCheck.WPF.Content.Voucher
                 IsBusy = true,
                 StatusMessage = "printing checks..."
             };
+
             try
             {
                 Status =
@@ -230,7 +286,7 @@ namespace CoopCheck.WPF.Content.Voucher
                     StatusMessage = "swift payment failed"
                 };
             }
+        }
 
         }
     }
-}

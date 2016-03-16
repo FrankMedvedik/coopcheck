@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="700">
     <!--<Grid Style="{StaticResource ContentRoot}">-->
@@ -13,15 +15,12 @@
                 <TextBlock Margin="6"  Style="{StaticResource Heading2}" Text="{Binding Status.StatusMessage}"/>
                 <TextBlock Margin="6"  Style="{StaticResource Heading2}" Text="{Binding Status.ErrorMessage}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal"  >
+            <StackPanel Orientation="Vertical" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}">
+                <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Account" Width="150" FontWeight="Bold" HorizontalAlignment="Right" Margin="6"/>
-                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}"  TabIndex="1"
-                            Name="cbAccounts" Width="200" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}" >
-                        <!--<i:Interaction.Triggers >
-                            <i:EventTrigger EventName="SelectionChanged" x:Name="Interactivity1Fix">
-                                <i:InvokeCommandAction Command="{Binding AccountChangedCommand}"  x:Name="InteractivityFix"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>-->
+                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  
+                            SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}"  TabIndex="1"
+                            Name="cbAccounts" Width="200" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -49,6 +48,12 @@
                         <Button Margin="172,6,6,6" Width="150" Content="Swift Pay" HorizontalAlignment="Left" TabIndex="3" IsDefault="True"  Click="SwiftPay" IsEnabled="{Binding CanSwiftPay}"/>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical"  Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisConverter}}">
+                    <TextBlock Text="number of payments left to process - "/>
+                    <TextBlock FontWeight="Bold" Margin="6" Text="{Binding RemainingPaymentCnt}" Width="150" />
+                    <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="100" Height="1000" Style="{StaticResource ChasingDotsProgressRingStyle}" />
+                </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

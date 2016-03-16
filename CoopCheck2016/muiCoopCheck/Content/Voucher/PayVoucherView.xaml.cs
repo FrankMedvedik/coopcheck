@@ -27,9 +27,11 @@ namespace CoopCheck.WPF.Content.Voucher
             //});
         }
 
-        private void SwiftPay(object sender, RoutedEventArgs e)
+        private async void SwiftPay(object sender, RoutedEventArgs e)
         {
+            _vm.IsBusy = true;
             _vm.SwiftPay();
+            _vm.IsBusy = false;
 
         }
 
@@ -42,6 +44,7 @@ namespace CoopCheck.WPF.Content.Voucher
                     "check template missing", MessageBoxButton.OK);
                 return;
             }
+            _vm.IsBusy = true;
             _vm.PrintChecks();
             var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
             var result = cw.ShowDialog();
@@ -50,7 +53,7 @@ namespace CoopCheck.WPF.Content.Voucher
             {
                 _vm.RefreshBatchList();
             }
-
+            _vm.IsBusy = false;
         }
     }
 }

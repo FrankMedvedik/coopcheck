@@ -393,13 +393,24 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 var v = SelectedBatch.Num;
                 if (UserCanWrite)
                 {
-                    await BatchSvc.DeleteBatchEditAsync(v);
-                    Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
-                    Status = new StatusInfo()
+                    try
                     {
-                        StatusMessage = String.Format("{0} Batch has been deleted", v)
-                    };
-                    ResetState();
+                        await BatchSvc.DeleteBatchEditAsync(v);
+                        Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+                        Status = new StatusInfo()
+                        {
+                            StatusMessage = String.Format("{0} Batch has been deleted", v)
+                        };
+                        ResetState();
+                    }
+                    catch (Exception e)
+                    {
+                        Status = new StatusInfo()
+                        {
+                            StatusMessage = String.Format("{0} could not delete batch", v),
+                             ErrorMessage = e.Message
+                        };
+                    }
                 }
             };
         }

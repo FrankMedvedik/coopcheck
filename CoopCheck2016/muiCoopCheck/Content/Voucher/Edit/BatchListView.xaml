@@ -9,7 +9,7 @@
                 IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12" MaxHeight="250"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                 ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
-                VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}">
+                VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
                 <DataGrid.Columns>
                  <DataGridTextColumn Binding="{Binding batch_num }" Header="Batch Number"/>
                 <DataGridTextColumn Binding="{Binding job_num }" Header="Job" />

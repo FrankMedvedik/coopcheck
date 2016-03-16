@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-             mc:Ignorable="d" Width="Auto">
+             mc:Ignorable="d" Width="Auto" Height="Auto">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Margin="6"  Grid.Column="0">
+        <StackPanel Orientation="Vertical" Margin="6" Grid.Column="0" HorizontalAlignment="Left">
             <StackPanel.Resources>
                 <Style TargetType="StackPanel">
                     <Setter Property="Orientation" Value="Horizontal" />
@@ -60,7 +60,8 @@
                         <StackPanel>
                             <Label Content="City" Target="{Binding ElementName=TextCity}"/>
                             <TextBox x:Name="TextCity" Width="250" Text="{Binding SelectedVoucher.Municipality, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                    <clean:ReplacerView  x:Name="rvMunicipality" AlternateValue="{Binding SelectedVoucher.AltMunicipality,Mode=TwoWay}" SourceValue="{Binding SelectedVoucher.Municipality, Mode=TwoWay}" />
+                    <clean:ReplacerView  x:Name="rvMunicipality" AlternateValue="{Binding SelectedVoucher.AltMunicipality,Mode=TwoWay}" 
+                                         SourceValue="{Binding SelectedVoucher.Municipality, Mode=TwoWay}" />
                 </StackPanel>
                         <StackPanel>
                             <Label Content="State" Target="{Binding ElementName=TextState}"/>
@@ -78,6 +79,6 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-        <clean:AltAddressView Grid.Column="1" />
+        <clean:AltAddressView Grid.Column="1"  HorizontalAlignment="Left"/>
     </Grid>
 </UserControl>

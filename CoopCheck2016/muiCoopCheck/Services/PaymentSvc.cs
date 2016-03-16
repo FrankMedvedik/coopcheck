@@ -14,15 +14,13 @@ namespace CoopCheck.WPF.Services
    
         public static async Task<StatusInfo> SwiftFulfillAsync(int accountId, int batchNum)
         {
-            StatusInfo i = new StatusInfo()
-            {
-                StatusMessage = $"Batch {batchNum} Submitted for swiftpay" 
-            };
-  
+            StatusInfo i = new StatusInfo();
             try
             {
-             
-                await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+                
+                i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
+                System.Threading.Thread.Sleep(5000);
+                //await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
                 
             }
             catch (Exception e)

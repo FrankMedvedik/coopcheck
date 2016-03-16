@@ -25,5 +25,10 @@ namespace CoopCheck.WPF.Content.Voucher
         {
             InitializeComponent();
         }
+
+        private void VoucherImportWizardView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

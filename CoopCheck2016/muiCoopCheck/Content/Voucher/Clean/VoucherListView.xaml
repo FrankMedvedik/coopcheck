@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
-             mc:Ignorable="d" MinWidth="1100" >
+             mc:Ignorable="d"  >
     <Control.Resources>
         <Style TargetType="CheckBox" x:Key="CircleCheckbox">
             <Setter Property="Cursor" Value="Hand"></Setter>
@@ -77,7 +77,6 @@
                 </Setter>
             </Style>
 </Control.Resources>
-    <ScrollViewer MinWidth="1000">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -103,11 +102,13 @@
                     <Button Content="Add" Margin="6" Width="100"  Click="AddVoucher_Click"/>
                     <Button Margin="6" x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" IsEnabled="{Binding ShowSelectedVoucher}">Delete</Button>
                 </StackPanel>
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Margin="6"
-                ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="300"  MinWidth="600"
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" 
+                HorizontalAlignment="Left"  Name="dgVouchers" 
+                 VerticalAlignment="Top"  Margin="6"
+                 ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="300"  
                   SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"  
-                  EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Width="Auto">
+                  EnableRowVirtualization="True"  VerticalScrollBarVisibility="Auto"  SelectionMode="Single">
                 <DataGrid.Columns>
                     <!--<mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
                     <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />
@@ -133,5 +134,4 @@
         </StackPanel>
     </Grid>
 </Grid>
-    </ScrollViewer>
 </UserControl>
