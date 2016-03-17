@@ -28,7 +28,7 @@
                     <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
                     <TextBlock Width="100">Total</TextBlock>
                 </StackPanel>
-                <Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>
+                <!--<Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>-->
             </StackPanel>
         </StackPanel>
         <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  

@@ -6,6 +6,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
              xmlns:utilities="clr-namespace:CoopCheck.WPF.Content.Utilities"
+             xmlns:pay="clr-namespace:CoopCheck.WPF.Content.Voucher.Pay"
              mc:Ignorable="d" >
     <Control.Resources>
         <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
@@ -63,7 +64,7 @@
             <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" 
                       IsEnabled="{Binding CanPayBatch}"
                       HorizontalAlignment="Left"  VerticalAlignment="Top" >
-                    <voucher:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"  IsEnabled="{Binding CanPayBatch}"/>
+                    <pay:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"  IsEnabled="{Binding CanPayBatch}"/>
             </Expander>
             <Expander Header="Batch Details" Grid.Row="2"
                       Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Deployment.Application;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
-using CoopCheck.WPF.Models;
 using FirstFloor.ModernUI.Windows.Controls;
-using GalaSoft.MvvmLight.Messaging;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Voucher.Pay
 {
     /// <summary>
     /// Interaction logic for PrintChecksPage.xaml

@@ -439,7 +439,7 @@
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Services\BankAccountSvc.cs" />
     <Compile Include="Services\OpenBatchSvc.cs" />
-    <Compile Include="Content\Voucher\PayVouchersViewModel.cs" />
+    <Compile Include="Content\Voucher\Pay\PayVouchersViewModel.cs" />
     <Compile Include="Converters\NumberConverter.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Messages\Notifications.cs" />
@@ -466,7 +466,7 @@
     <Compile Include="Pages\UtilitiesPage.xaml.cs">
       <DependentUpon>UtilitiesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Voucher\PayVoucherView.xaml.cs">
+    <Compile Include="Content\Voucher\Pay\PayVoucherView.xaml.cs">
       <DependentUpon>PayVoucherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentReportCriteria.cs" />
@@ -866,7 +866,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Voucher\PayVoucherView.xaml">
+    <Page Include="Content\Voucher\Pay\PayVoucherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

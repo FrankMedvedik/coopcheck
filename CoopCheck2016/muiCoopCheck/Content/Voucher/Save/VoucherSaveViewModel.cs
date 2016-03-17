@@ -52,7 +52,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 {
                     ExcelFileInfo = message.Content.ExcelFileInfo;
                     VoucherImportWrappers = message.Content.VoucherImports;
-                    Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
+                   // Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
                     if (GoodVouchers.Any()) CanSave = true;
                     if (BadVouchers.Any()) CanExport = true;
                 }
@@ -151,16 +151,9 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         private ObservableCollection<VoucherImportWrapper> _voucherImportWrappers =
             new ObservableCollection<VoucherImportWrapper>();
 
-        public List<VoucherImportWrapper> BadVouchers
-        {
-            get { return VoucherImportWrappers.Where(x => !x.OkMailingAddress).ToList(); }
-        }
+        public List<VoucherImportWrapper> BadVouchers => VoucherImportWrappers.Where(x => !x.OkMailingAddress).ToList();
 
-        public List<VoucherImportWrapper> GoodVouchers
-        {
-            //get { return VoucherImportWrappers.Where(x => x.OkMailingAddress).ToList(); }
-            get { return VoucherImportWrappers.ToList(); }
-        }
+        public List<VoucherImportWrapper> GoodVouchers => VoucherImportWrappers.ToList();
 
         public ObservableCollection<VoucherImportWrapper> VoucherImportWrappers
         {
@@ -272,6 +265,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         {
             SaveBatchInfoMessage = "Batch " + e.Result + " created ";
             StartEnabled = !_batchCreator.IsBusy;
+            Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
             Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
             Status = new StatusInfo()
             {

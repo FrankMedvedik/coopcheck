@@ -230,6 +230,8 @@ namespace CoopCheck.WPF.Wrappers
 
         [Display(Name = "Address 1", Description = "Address Line 1 ")]
         [Required(ErrorMessage = "Address is required.")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage =
+            "Address line 1 must be between 2 and 50 characters long.")]
         public string AddressLine1
         {
             get { return Model.AddressLine1; }
@@ -262,7 +264,8 @@ namespace CoopCheck.WPF.Wrappers
             }
         }
 
-
+        [StringLength(50, MinimumLength = 0, ErrorMessage =
+            "Address line 1 must be between 0 and 50 characters long.")]
         public string AddressLine2
         {
             get { return Model.AddressLine2; }
@@ -277,6 +280,9 @@ namespace CoopCheck.WPF.Wrappers
 
         [Display(Name = "City", Description = "City or Municipality")]
         [Required(ErrorMessage = "City is required.")]
+        [StringLength(35, MinimumLength = 2, ErrorMessage =
+            "City 1 must be between 2 and 50 characters long.")]
+
         public string Municipality
         {
             get { return Model.Municipality; }
@@ -300,6 +306,8 @@ namespace CoopCheck.WPF.Wrappers
 
         [Display(Name = "State", Description = "State or Region")]
         [Required(ErrorMessage = "State is required.")]
+        [StringLength(35, MinimumLength = 2, ErrorMessage =
+            "State  must be between 2 and 50 characters long.")]
         public string Region
         {
             get { return Model.Region; }

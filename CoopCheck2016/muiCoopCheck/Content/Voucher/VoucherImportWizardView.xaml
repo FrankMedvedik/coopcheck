@@ -34,7 +34,9 @@
                     </xctk:WizardPage>
                     <xctk:WizardPage x:Name="SaveVouchers" PageType="Exterior" 
                                      Title="Save vouchers" 
-                                     CanFinish="{Binding HaveCommittedVouchers}">
+                                     CanFinish="{Binding HaveCommittedVouchers}" 
+                                     CanCancel="{Binding HaveCommittedVouchers, Converter={StaticResource InverseBooleanConverter}}"
+                                     CanSelectPreviousPage="{Binding HaveCommittedVouchers, Converter={StaticResource InverseBooleanConverter}}">
                         <save:VoucherSaveView x:Name="vsv" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     </xctk:WizardPage>
                 </xctk:Wizard>

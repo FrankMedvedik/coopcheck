@@ -17,13 +17,13 @@
             <StackPanel>
             <criteria:PaymentReportCriteriaView x:Name="prcv"/>
             <StackPanel Orientation="Horizontal" >
-                    <Button Width="200" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
-                    <Button Width="200" Margin="6"  HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
+                    <Button Width="150" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
+                    <Button Width="150" Margin="6"  HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
                 </StackPanel>
             </StackPanel>
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" >
-            <Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>
+            <!--<Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>-->
             <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="VoidCheck_Click"  IsEnabled="{Binding CanVoidSelectedCheck}" Content="Void Payment"/>
             <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="ClearCheck_Click" IsEnabled="{Binding CanClearSelectedCheck}" Content="Clear Payment"/>
         </StackPanel>

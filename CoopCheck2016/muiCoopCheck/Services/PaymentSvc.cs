@@ -17,10 +17,9 @@ namespace CoopCheck.WPF.Services
             StatusInfo i = new StatusInfo();
             try
             {
-                
-                i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
-                System.Threading.Thread.Sleep(5000);
-                //await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+                //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
+                //System.Threading.Thread.Sleep(5000);
+                await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
                 
             }
             catch (Exception e)

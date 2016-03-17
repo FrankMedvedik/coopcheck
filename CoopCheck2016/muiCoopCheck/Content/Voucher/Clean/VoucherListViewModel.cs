@@ -37,10 +37,10 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     ExcelFileInfo = message.Content.ExcelFileInfo;
                     _dataCleanCriteria = _dataCleanCriteria ?? new DataCleanCriteria()
                     {
-                        AutoFixAddressLine1 = true,
-                        AutoFixCity = true,
+                        AutoFixAddressLine1 = false,
+                        AutoFixCity = false,
                         AutoFixPostalCode = true,
-                        AutoFixState = true,
+                        AutoFixState = false,
                         ForceValidation = false
                     };
                     Vi = message.Content.VoucherImports;

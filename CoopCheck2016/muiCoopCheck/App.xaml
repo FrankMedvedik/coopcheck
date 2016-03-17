@@ -40,6 +40,7 @@
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="Padding" Value="10 5" />
                 <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="Margin" Value="12" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="{Binding AccentBrush, Source={x:Static Application.Current}}" />

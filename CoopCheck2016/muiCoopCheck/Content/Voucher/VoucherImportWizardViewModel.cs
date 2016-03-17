@@ -19,7 +19,7 @@ namespace CoopCheck.WPF.Content.Voucher
             });
 
             Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
-            {
+            { 
                 if (message.Notification == Notifications.VouchersDataCleaned)
                 {
                     HaveCleanedVouchers = true; HaveReviewedVouchers = true;

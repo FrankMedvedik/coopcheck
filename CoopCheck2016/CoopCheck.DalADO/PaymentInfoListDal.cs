@@ -6,6 +6,7 @@ using Csla;
 using Csla.Data;
 using CoopCheck.DAL;
 using System.Configuration;
+using System.Linq;
 
 namespace CoopCheck.DalADO
 {
@@ -87,6 +88,7 @@ namespace CoopCheck.DalADO
             var issuanceId = ConfigurationManager.AppSettings["SwiftIssuanceProductId"];
             var locId = ConfigurationManager.AppSettings["SwiftLocationId"];
             var srv = new PromoCodeService.PCService_DefClient();
+            ClientJobDto jraClient = GetClientForJob(b.First().JobNum);
 
             foreach (PaymentInfoDto p in b)
             {
@@ -101,9 +103,20 @@ namespace CoopCheck.DalADO
                     request.PaymentReferenceId = p.Id.ToString();
                     request.IssuanceProductId = issuanceId;
                     request.Amount = p.Amount.ToString();
-                    request.ClientData1 = p.BatchNum.ToString();
+
+                    /* ClientData as follow 
+                    1   Client
+                    2   Job
+                    3   Topic
+                    4   Batch
+                    5   Payor
+                    */
+
+                    request.ClientData1 = String.Format("{0} - {1}", jraClient.ClientID, jraClient.JobName);
                     request.ClientData2 = p.JobNum.ToString();
-                    request.ClientData3 = Csla.ApplicationContext.User.Identity.Name;
+                    request.ClientData2 = p.StudyTopic;
+                    request.ClientData4 = p.BatchNum.ToString();
+                    request.ClientData5 = Csla.ApplicationContext.User.Identity.Name;
 
                     var c = new PromoCodeService.Customer();
                     c.Address1 = p.Address1;
@@ -156,6 +169,49 @@ namespace CoopCheck.DalADO
 
 
             
+            }
+        }
+
+        class ClientJobDto
+        {
+            public string ClientID;
+            public string JobName;
+        }
+        private ClientJobDto GetClientForJob(int jobNum)
+        {
+            try
+            {
+                using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
+                {
+                    using (var cmd = new SqlCommand("dbo.dal_GetClientForJob", ctx.Connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@jobNum", jobNum).DbType = DbType.Int32;
+                        cmd.ExecuteNonQuery();
+                        var dr = cmd.ExecuteReader();
+                        var l = new List<ClientJobDto>();
+                        using (var drx = new SafeDataReader(dr))
+                        {
+                            while (drx.Read())
+                            {
+                                l.Add(new ClientJobDto
+                                {
+                                    ClientID = drx.GetString("ClientID"),
+                                    JobName = drx.GetString("JobName")
+                                });
+                            }
+                            return l.First();
+                        }
+                        }
+                    }
+            }
+            catch(Exception e)
+            {
+                return new ClientJobDto
+                {
+                    ClientID = "Client not found",
+                    JobName = "Job not found"
+                };
             }
         }
 
