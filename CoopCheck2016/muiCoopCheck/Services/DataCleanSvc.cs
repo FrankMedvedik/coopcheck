@@ -27,7 +27,8 @@ namespace CoopCheck.WPF.Services
                 {
                     var c = ConfigurationManager.AppSettings;
                     var d = new DataCleanEventFactory(new DataCleaner(c),new DataClean.Repository.Mgr.DataCleanRespository(), criteria);
-                    return d.ValidateAddresses(newVouchers);
+                    var a =d.ValidateAddresses(newVouchers);
+                    return a;
                 });
             }
     catch (Exception e)

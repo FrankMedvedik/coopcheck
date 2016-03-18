@@ -23,6 +23,7 @@ namespace CoopCheck.WPF.Converters
             n.PostalCode = v.PostalCode;
             n.State = v.Region;
             n.ID = v.ID;
+            n.RecordID = v.RecordID;
             return n;
         }
 

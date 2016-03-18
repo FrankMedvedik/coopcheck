@@ -37,7 +37,10 @@ namespace CoopCheck.WPF.Content.Voucher
                 {
                     HaveCommittedVouchers = true;
                 }
-
+                if (message.Notification == Notifications.HaveUncommittedVouchers)
+                {
+                    HaveCommittedVouchers = false;
+                }
                 if (message.Notification == Notifications.HaveDirtyVouchers)
                 {
                     HaveCleanedVouchers = false;

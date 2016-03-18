@@ -24,7 +24,7 @@
                     <TextBox VerticalAlignment="Center" Height="30" Name="txtFilePath" Width="500" Text="{Binding ExcelFilePath, Mode=TwoWay, ValidatesOnDataErrors=True}"  Margin="6" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Voucher Worksheet" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="6"/>
+                    <TextBlock Text="Voucher Worksheet" Width="150"  VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Margin="6"/>
                    <ComboBox Height="30" HorizontalAlignment="Left" Margin="6"  SelectedItem="{Binding SelectedWorksheet, Mode=TwoWay}" VerticalAlignment="Center"  
                             IsEnabled="False" Name="cbSheets" Width="300" ItemsSource="{Binding Path=WorkSheets, Mode=OneWay}"  SelectionChanged="cbSheets_SelectionChanged">
                     </ComboBox>
@@ -61,11 +61,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" >
-                    <TextBlock Style="{StaticResource Heading2}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" Margin="160,6,6,6">Voucher Count</TextBlock>
+                    <TextBlock Style="{StaticResource Heading2}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Margin="160,6,6,6">Voucher Count</TextBlock>
                     <TextBlock Style="{StaticResource Heading2}" Margin="6" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding VoucherCnt}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" >
-                    <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="130" Margin="160,6,6,6">Total $</TextBlock>
+                    <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120" Margin="160,6,6,6">Total $</TextBlock>
                     <TextBlock  Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="6" Width="100" HorizontalAlignment="Left" Text="{Binding VoucherTotalDollars, StringFormat=c }"/>
                 </StackPanel>
                 <Button Content="Import" Width="150" Height="30"  Margin="180,32,12,12"  HorizontalAlignment="Left"

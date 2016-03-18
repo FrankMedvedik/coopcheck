@@ -1,3 +1,4 @@
+using System;
 using CoopCheck.Library;
 
 namespace CoopCheck.WPF.Models
@@ -18,6 +19,7 @@ namespace CoopCheck.WPF.Models
         private string _emailAddress;
         private string _updated;
         private string _jobNumber;
+        public string RecordID { get; set; }
 
         public VoucherImport()
         {

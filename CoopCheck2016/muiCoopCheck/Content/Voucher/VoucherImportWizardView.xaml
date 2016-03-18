@@ -40,7 +40,7 @@
                         <save:VoucherSaveView x:Name="vsv" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     </xctk:WizardPage>
                 </xctk:Wizard>
-                <StatusBar Height="30">
+                <StatusBar MinHeight="35">
                     <StatusBarItem>
                         <status:StatusView />
                     </StatusBarItem>

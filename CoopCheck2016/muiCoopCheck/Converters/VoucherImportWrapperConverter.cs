@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using CoopCheck.Library;
-using CoopCheck.WPF.Models;
+﻿using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Wrappers;
-using DataClean;
 using DataClean.Models;
 
 namespace CoopCheck.WPF.Converters
@@ -56,7 +51,7 @@ namespace CoopCheck.WPF.Converters
             n.Title = v.Title;
             n.JobNumber = v.JobNumber;
             n.Amount = v.Amount;
-
+            n.RecordID = v.RecordID;
             return n;
         }
         public static InputStreetAddress ToInputStreetAddress(VoucherImportWrapper v)
@@ -74,6 +69,7 @@ namespace CoopCheck.WPF.Converters
             n.PostalCode = v.PostalCode;
             n.State = v.Region;
             n.ID = v.ID;
+            n.RecordID = v.RecordID;
             return n;
         }
 

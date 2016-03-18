@@ -108,7 +108,8 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _jobName = value;
                 NotifyPropertyChanged();
-                SelectedBatch.StudyTopic = value;
+                if(string.IsNullOrEmpty(SelectedBatch.StudyTopic))
+                    SelectedBatch.StudyTopic = _jobName;
             }
         }
 
@@ -116,7 +117,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             get
             {
-                return SelectedBatch.JobNum;
+                return SelectedBatch?.JobNum;
             }
             set
             {
@@ -423,17 +424,28 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public async void SetJobName()
         {
-            if (SelectedBatch?.JobNum.GetValueOrDefault(0).ToString().Length == 8)
+            try
             {
-                int b = SelectedBatch.JobNum.GetValueOrDefault(0);
-                JobName = await JobLogSvc.GetJobName(b);
+                if (SelectedBatch?.JobNum.GetValueOrDefault(0).ToString().Length == 8)
+                {
+                    int b = SelectedBatch.JobNum.GetValueOrDefault(0);
+                    JobName = await JobLogSvc.GetJobName(b);
+                }
+                else
+                {
+                    JobName = JobLogSvc.BadJobName;
+                }
+                CanPayBatch = (JobName != JobLogSvc.BadJobName);
+
             }
-            else
+            catch (Exception e)
             {
+
                 JobName = JobLogSvc.BadJobName;
+                CanPayBatch = false;
             }
-            CanPayBatch = (JobName != JobLogSvc.BadJobName);
+            
+        }
         }
 
     }
-}

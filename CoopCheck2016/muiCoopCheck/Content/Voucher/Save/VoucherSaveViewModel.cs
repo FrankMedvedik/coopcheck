@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Library;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -258,12 +259,17 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             foreach (var a in GoodVouchers)
                 x.Add(VoucherImportWrapperConverter.ToVoucherImport(a));
            e.Result = BatchSvc.ImportVouchers(x);
-
+            var b = BatchSvc.GetBatchEditAsync((int) e.Result).Result;
+            b.Description = Path.GetFileName(ExcelFileInfo.ExcelFilePath) + " - " + ExcelFileInfo.SelectedWorksheet;
+            b.PayDate = null;
+            var batch = b.Save();
+           
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SaveBatchInfoMessage = "Batch " + e.Result + " created ";
+            SaveBatchInfoMessage = "Batch " + e.Result + " created for " 
+                + Path.GetFileName(ExcelFileInfo.ExcelFilePath) + " - " + ExcelFileInfo.SelectedWorksheet; 
             StartEnabled = !_batchCreator.IsBusy;
             Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
             Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));

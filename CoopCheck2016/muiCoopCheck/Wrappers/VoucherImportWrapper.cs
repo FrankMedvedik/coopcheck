@@ -56,8 +56,19 @@ namespace CoopCheck.WPF.Wrappers
         private string _altPostalCode;
         private string _altMunicipality;
         private DateTime? _dataCleanDate = null;
-        private int _id;
 
+        public string RecordID
+        {
+            get
+            {
+                return Model.RecordID;
+            }
+            set
+            {
+                Model.RecordID = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public OutputStreetAddress AltAddress
         {

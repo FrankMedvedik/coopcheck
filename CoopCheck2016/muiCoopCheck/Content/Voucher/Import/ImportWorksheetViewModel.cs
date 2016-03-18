@@ -258,13 +258,25 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             if (SelectedWorksheet != DefaultSelectedWorksheet)
             {
-                LoadWorksheetStats();
-                ImportVouchers();
+                try
+                {
+                    LoadWorksheetStats();
+                    ImportVouchers();
+                    //Status = new StatusInfo()
+                    //{
+                    //    StatusMessage = "select import to load this worksheet"
+                    //};
+
+                }
+                catch (Exception e)
+                {
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "Worksheet import failed",
+                         ErrorMessage = e.Message
+                    };
+                }
             }
-            Status = new StatusInfo()
-            {
-                StatusMessage = ""
-            };
         }
 
         public void LoadWorksheetStats()
@@ -404,6 +416,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     var vouchers = from a in ExcelBook.Worksheet<VoucherImport>(SelectedWorksheet) select a;
                     foreach (var a in vouchers.Where(x => x.Last != "").Where(x => x.First != ""))
                     {
+                        a.RecordID = Guid.NewGuid().ToString();
                         if (a.PostalCode != null && a.PostalCode.Length < 5)
                             a.PostalCode = a.PostalCode.PadLeft(5, '0');
                         VoucherImports.Add(a);

@@ -88,8 +88,10 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public void RunBackgroundCleaner()
         {
+            
             if (!_voucherCleaner.IsBusy)
             {
+                Messenger.Default.Send(new NotificationMessage(Notifications.HaveUncommittedVouchers));
                 Messenger.Default.Send(new NotificationMessage(Notifications.HaveDirtyVouchers));
                 Status = new StatusInfo()
                 {
