@@ -34,11 +34,13 @@
         <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"
-                      ItemsSource="{Binding Path=Jobs, Mode=TwoWay}"  VerticalAlignment="Top" 
+                      ItemsSource="{Binding Path=Jobs, Mode=OneWay}"  VerticalAlignment="Top" 
                       SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
                     ToolTipService.ToolTip="jobs with payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
-                <DataGrid.Columns>
-                 <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
+            <DataGrid.Columns>
+                <mui:DataGridTextColumn Binding="{Binding clientid}" Header="client id" />
+                <mui:DataGridTextColumn Binding="{Binding clientname}" Header="client" />
+                <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                 <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
                 <mui:DataGridTextColumn Binding="{Binding batch_cnt}" Header="batch cnt" />

@@ -321,15 +321,6 @@
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ModernFrame\CancelNavigateSample.xaml.cs">
-      <DependentUpon>CancelNavigateSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\ModernFrame\ErrorSample.xaml.cs">
-      <DependentUpon>ErrorSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\ModernFrame\Sample.xaml.cs">
-      <DependentUpon>Sample.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\Payment\Batch\BatchReportView.xaml.cs">
       <DependentUpon>BatchReportView.xaml</DependentUpon>
     </Compile>
@@ -656,18 +647,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\NoAccessView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\ModernFrame\CancelNavigateSample.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\ModernFrame\ErrorSample.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\ModernFrame\Sample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1017,9 +996,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DesignData\Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6">
       <Visible>False</Visible>

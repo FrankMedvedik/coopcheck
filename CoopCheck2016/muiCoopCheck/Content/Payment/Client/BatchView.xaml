@@ -42,7 +42,7 @@
             <DataGrid x:Name="dgBatches" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"   
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   
-                      ItemsSource="{Binding Batches}"  VerticalAlignment="Top"   
+                      ItemsSource="{Binding Batches, Mode=OneWay}"  VerticalAlignment="Top"   
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                       SelectedItem="{Binding SelectedBatch}" MaxHeight="300"
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >

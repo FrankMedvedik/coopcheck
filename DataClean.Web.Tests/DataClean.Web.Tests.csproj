@@ -116,10 +116,6 @@
       <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
       <Name>DataClean</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataClean.Web\DataClean.Web.csproj">
-      <Project>{D1F26558-0ABB-4374-B9D7-658143D8C69A}</Project>
-      <Name>DataClean.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />

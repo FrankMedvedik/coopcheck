@@ -23,10 +23,14 @@
         <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Width="50" Text="Client"/>
-                <ComboBox x:Name="ComboClients" Width="250" Margin="3" ItemsSource="{Binding Clients}" VerticalAlignment="Center" DisplayMemberPath="ClientName" SelectedValue="{Binding ClientReportCriteria.SelectedClient}" ToolTip="clients who have payments" TabIndex="1"/>
+                <ComboBox x:Name="ComboClients" Width="250" Margin="3" ItemsSource="{Binding Clients}" 
+                          VerticalAlignment="Center" 
+                          DisplayMemberPath="ClientDisplayName" 
+                          SelectedValue="{Binding ClientReportCriteria.SelectedClient}" 
+                          ToolTip="clients who have payments" TabIndex="1"/>
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Year" Width="30" ToolTip="limit job list to this calendar year" />
-                    <ComboBox x:Name="ComboYears" Width="100" Margin="3" ItemsSource="{Binding JobYears}"
+                    <ComboBox x:Name="ComboYears" Width="80" Margin="3" ItemsSource="{Binding JobYears}"
                               VerticalAlignment="Center" SelectedValue="{Binding ClientReportCriteria.SelectedJobYear}" TabIndex="2" />
                     <!--<TextBox Width="30" Text="{Binding ClientReportCriteria.SelectedJobYear, Mode=TwoWay}" Margin="6" />-->
                 </StackPanel>
@@ -35,6 +39,7 @@
                 </StackPanel>-->
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <TextBlock Text="- OR - " Width="Auto" Margin="6,3,6,3"  />
                 <TextBlock Text="Job" Width="30" Margin="3" ToolTip="enter all or part of the job number you are looking for" />
                 <TextBox Width="110" MaxLength="8" Text="{Binding ClientReportCriteria.SelectedJobNum, Mode=TwoWay}" TabIndex="3" 
                          ToolTip="enter a specifc job number YYYY-NNNN like - 2015-0001" />
