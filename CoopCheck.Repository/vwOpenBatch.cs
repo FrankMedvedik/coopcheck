@@ -15,9 +15,16 @@ namespace CoopCheck.Repository
     public partial class vwOpenBatch
     {
         public int batch_num { get; set; }
-        public Nullable<int> job_num { get; set; }
+        public Nullable<int> jobnum { get; set; }
         public Nullable<System.DateTime> batch_date { get; set; }
         public Nullable<System.DateTime> pay_date { get; set; }
+        public string batch_dscr { get; set; }
+        public Nullable<System.DateTime> updated { get; set; }
+        public string clientid { get; set; }
+        public string clientname { get; set; }
+        public Nullable<System.DateTime> created { get; set; }
+        public string jobname { get; set; }
+        public string projmgr { get; set; }
         public Nullable<int> voucher_cnt { get; set; }
         public Nullable<decimal> total_amount { get; set; }
     }

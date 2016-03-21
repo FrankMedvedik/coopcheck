@@ -355,9 +355,16 @@ warning 6002: The table/view 'CoopCheck.dbo.vwOpenBatch' does not have a primary
             <PropertyRef Name="batch_num" />
           </Key>
           <Property Name="batch_num" Type="int" Nullable="false" />
-          <Property Name="job_num" Type="int" />
+          <Property Name="jobnum" Type="int" />
           <Property Name="batch_date" Type="smalldatetime" />
           <Property Name="pay_date" Type="smalldatetime" />
+          <Property Name="batch_dscr" Type="nvarchar" MaxLength="255" />
+          <Property Name="updated" Type="smalldatetime" />
+          <Property Name="clientid" Type="varchar" MaxLength="8" />
+          <Property Name="clientname" Type="varchar" MaxLength="50" />
+          <Property Name="created" Type="smalldatetime" />
+          <Property Name="jobname" Type="nvarchar" MaxLength="50" />
+          <Property Name="projmgr" Type="varchar" MaxLength="50" />
           <Property Name="voucher_cnt" Type="int" />
           <Property Name="total_amount" Type="money" />
         </EntityType>
@@ -760,9 +767,16 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwOpenBatch" EntityType="Self.vwOpenBatch" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwOpenBatch].[batch_num] AS [batch_num], 
-    [vwOpenBatch].[job_num] AS [job_num], 
+    [vwOpenBatch].[jobnum] AS [jobnum], 
     [vwOpenBatch].[batch_date] AS [batch_date], 
     [vwOpenBatch].[pay_date] AS [pay_date], 
+    [vwOpenBatch].[batch_dscr] AS [batch_dscr], 
+    [vwOpenBatch].[updated] AS [updated], 
+    [vwOpenBatch].[clientid] AS [clientid], 
+    [vwOpenBatch].[clientname] AS [clientname], 
+    [vwOpenBatch].[created] AS [created], 
+    [vwOpenBatch].[jobname] AS [jobname], 
+    [vwOpenBatch].[projmgr] AS [projmgr], 
     [vwOpenBatch].[voucher_cnt] AS [voucher_cnt], 
     [vwOpenBatch].[total_amount] AS [total_amount]
     FROM [dbo].[vwOpenBatch] AS [vwOpenBatch]</DefiningQuery>
@@ -985,8 +999,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
           <EntitySet Name="vwBasicPayment" EntityType="CoopCheckModel.vwBasicPayment" />
           <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
-          <FunctionImport Name="dal_GetOpenBatch" EntitySet="vwOpenBatches" ReturnType="Collection(CoopCheckModel.vwOpenBatch)" />
-          <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
+          <FunctionImport Name="dal_GetOpenBatch" />
           <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpts" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
@@ -1004,6 +1017,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwClientJobBatches" EntityType="CoopCheckModel.vwClientJobBatch" />
           <EntitySet Name="vwJobRpts" EntityType="CoopCheckModel.vwJobRpt" />
           <EntitySet Name="JobLogs" EntityType="CoopCheckModel.JobLog" />
+          <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
         </EntityContainer>
         <ComplexType Name="dsa_GetCheckingAccounts_Result">
           <Property Type="Int32" Name="account_id" Nullable="false" />
@@ -1375,17 +1389,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Type="Int32" Name="voucher_cnt" Nullable="true" />
           <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
         </ComplexType>
-        <EntityType Name="vwOpenBatch">
-          <Key>
-            <PropertyRef Name="batch_num" />
-          </Key>
-          <Property Name="batch_num" Type="Int32" Nullable="false" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="batch_date" Type="DateTime" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="voucher_cnt" Type="Int32" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
         <ComplexType Name="GetJobPaymentsReport_Result">
           <Property Type="Int32" Name="job_num" Nullable="false" />
           <Property Type="Int32" Name="account_id" Nullable="true" />
@@ -1598,6 +1601,24 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="ref_jobs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="invoice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="created" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="vwOpenBatch">
+          <Key>
+            <PropertyRef Name="batch_num" />
+          </Key>
+          <Property Name="batch_num" Type="Int32" Nullable="false" />
+          <Property Name="jobnum" Type="Int32" />
+          <Property Name="batch_date" Type="DateTime" Precision="0" />
+          <Property Name="pay_date" Type="DateTime" Precision="0" />
+          <Property Name="batch_dscr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="updated" Type="DateTime" Precision="0" />
+          <Property Name="clientid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="clientname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created" Type="DateTime" Precision="0" />
+          <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="projmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="voucher_cnt" Type="Int32" />
+          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2044,18 +2065,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="dal_GetOpenBatch" FunctionName="CoopCheckModel.Store.dal_GetOpenBatch">
           </FunctionImportMapping>
-          <EntitySetMapping Name="vwOpenBatches">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwOpenBatch">
-              <MappingFragment StoreEntitySet="vwOpenBatch">
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetJobPaymentsReport" FunctionName="CoopCheckModel.Store.GetJobPaymentsReport">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetBatchPaymentReport" FunctionName="CoopCheckModel.Store.GetBatchPaymentsReport" />
@@ -2232,6 +2241,25 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
                 <ScalarProperty Name="JobName" ColumnName="JobName" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwOpenBatches">
+            <EntityTypeMapping TypeName="CoopCheckModel.vwOpenBatch">
+              <MappingFragment StoreEntitySet="vwOpenBatch">
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
+                <ScalarProperty Name="projmgr" ColumnName="projmgr" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="clientname" ColumnName="clientname" />
+                <ScalarProperty Name="clientid" ColumnName="clientid" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="batch_dscr" ColumnName="batch_dscr" />
+                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
+                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

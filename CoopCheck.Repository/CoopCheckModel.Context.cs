@@ -36,7 +36,6 @@ namespace CoopCheck.Repository
         public virtual DbSet<vwPayment> vwPayments { get; set; }
         public virtual DbSet<vwBasicPayment> vwBasicPayments { get; set; }
         public virtual DbSet<bank_account> bank_accounts { get; set; }
-        public virtual DbSet<vwOpenBatch> vwOpenBatches { get; set; }
         public virtual DbSet<vwUnclearedBatch> vwUnclearedBatches { get; set; }
         public virtual DbSet<CoopCheckClient> CoopCheckClients { get; set; }
         public virtual DbSet<CoopCheckJobLog> CoopCheckJobLogs { get; set; }
@@ -44,6 +43,7 @@ namespace CoopCheck.Repository
         public virtual DbSet<vwClientJobBatch> vwClientJobBatches { get; set; }
         public virtual DbSet<vwJobRpt> vwJobRpts { get; set; }
         public virtual DbSet<JobLog> JobLogs { get; set; }
+        public virtual DbSet<vwOpenBatch> vwOpenBatches { get; set; }
     
         public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()
         {
@@ -149,14 +149,9 @@ namespace CoopCheck.Repository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getbatchRpt_Result>("getbatchRpt", startDateParameter, endDateParameter);
         }
     
-        public virtual ObjectResult<vwOpenBatch> dal_GetOpenBatch()
+        public virtual int dal_GetOpenBatch()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwOpenBatch>("dal_GetOpenBatch");
-        }
-    
-        public virtual ObjectResult<vwOpenBatch> dal_GetOpenBatch(MergeOption mergeOption)
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwOpenBatch>("dal_GetOpenBatch", mergeOption);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("dal_GetOpenBatch");
         }
     
         public virtual ObjectResult<vwJobRpt> GetJobPaymentsReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)

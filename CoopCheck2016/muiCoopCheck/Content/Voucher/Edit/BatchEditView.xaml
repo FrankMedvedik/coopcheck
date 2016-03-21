@@ -75,7 +75,8 @@
                                 <TextBox Width="110" Text="{Binding JobNum, Mode=TwoWay,ValidatesOnDataErrors=True,  
                         ValidatesOnExceptions=True}" Style="{StaticResource CellEditStyle}"  TabIndex="1" Margin="6"  />
                         </Border>
-                        <TextBlock Width="Auto" Text="{Binding JobName}" Margin="10,6,6,6"   FontWeight="Bold" />
+                        <TextBlock Width="Auto" Text="{Binding JobName}" Margin="10,6,6,6"  Foreground="{Binding JobNameBrush}"
+                                   FontWeight="Bold" />
                         </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,3,0,3" Text="Payment Date" Style="{StaticResource TextBlockStyle}" Width="104"/>

@@ -17,12 +17,13 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" IsEnabled="{Binding EnableMiscFields}">
-                    <StackPanel Orientation="Horizontal"  x:Name="StartDate">
-                 <TextBlock Text="Start Date" Width="100"   Margin="6" VerticalAlignment="Center"/>
+                <TextBlock Text="Date Range for Payment" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal"  x:Name="StartDate">
+                 <TextBlock Text="Start" Width="100"   Margin="6" VerticalAlignment="Center"/>
                 <DatePicker SelectedDate="{Binding PaymentReportCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6" BorderBrush="{Binding  AccentBrush}"  />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" x:Name="EndDate" >
-                    <TextBlock Text="End Date" Width="100"  Margin="6" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" x:Name="EndDate" >
+                    <TextBlock Text="End" Width="100"  Margin="6" VerticalAlignment="Center"/>
                     <DatePicker SelectedDate="{Binding PaymentReportCriteria.EndDate, StringFormat=d, Mode=TwoWay}" 
                                 Margin="6" BorderBrush="{Binding  AccentBrush}"/>
                 </StackPanel>

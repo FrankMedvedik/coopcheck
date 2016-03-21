@@ -368,7 +368,6 @@
     </Compile>
     <Compile Include="Content\Status\StatusViewModel.cs" />
     <Compile Include="Content\UserAuth.cs" />
-    <Compile Include="Content\Voucher\Clean\VoucherCleanViewModel.cs" />
     <Compile Include="Content\Voucher\Edit\BatchListViewModel.cs" />
     <Compile Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml.cs">
       <DependentUpon>VoucherImportAddDialog.xaml</DependentUpon>
@@ -381,9 +380,6 @@
     </Compile>
     <Compile Include="Content\Voucher\Clean\VoucherImportEditView.xaml.cs">
       <DependentUpon>VoucherImportEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Voucher\Clean\VoucherCleanView.xaml.cs">
-      <DependentUpon>VoucherCleanView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Voucher\VoucherImportWizardViewModel.cs" />
     <Compile Include="Content\Voucher\VoucherImportWizardView.xaml.cs">
@@ -747,10 +743,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Voucher\Clean\VoucherImportEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Voucher\Clean\VoucherCleanView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

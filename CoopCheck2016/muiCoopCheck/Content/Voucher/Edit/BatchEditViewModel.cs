@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Converters;
@@ -39,6 +41,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _canPayBatch = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("JobNameBrush");
             }
         }
 
@@ -319,26 +322,38 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
             }
         }
-       
-        public async void  SaveSelectedBatch()
+
+        public async void SaveSelectedBatch()
         {
-            if ((SelectedBatch.IsSavable) && UserCanWrite)
+            //if ((SelectedBatch.IsSavable) && UserCanWrite)
+            if (UserCanWrite)
             {
                 Status = new StatusInfo()
-                { StatusMessage = "saving...", IsBusy = true };
+                {StatusMessage = "saving...", IsBusy = true};
                 SelectedBatch = await SelectedBatch.SaveAsync();
-                Status = new StatusInfo() { StatusMessage = "saved" };
+                Status = new StatusInfo() {StatusMessage = "saved"};
                 RefreshBatchList();
                 Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
             }
-            else
-                if(UserCanWrite)
-                    Status = new StatusInfo()
-                    {
-                        StatusMessage = "Batch cannot be saved until all vouchers are valid",
-                        ErrorMessage = "cannot save"
-                    };
+            else if (UserCanWrite)
+            {
+                List<string> msgs = new List<string>();
+                var a = SelectedBatch.GetBrokenRules();
+                msgs.Add(a.ToString());
+
+                foreach (var v in SelectedBatch.Vouchers)
+                {
+                    msgs.Add(v.BrokenRulesCollection.ToString());
+
+                }
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "Batch cannot be saved until all vouchers are valid",
+                    ErrorMessage = msgs.ToString()
+                };
+            }
         }
+
         public bool UserCanWrite
         {
             get { return _userCanWrite; }
@@ -446,6 +461,15 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
             
         }
+        public  Brush JobNameBrush
+        {
+            get
+            {
+                return CanPayBatch ? Brushes.Black : Brushes.Red;
+            }
         }
+
+
+    }
 
     }

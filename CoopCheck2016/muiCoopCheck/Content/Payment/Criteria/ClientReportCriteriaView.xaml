@@ -25,10 +25,18 @@
                     <TextBlock Width="50" Text="Client"/>
                 <ComboBox x:Name="ComboClients" Width="250" Margin="3" ItemsSource="{Binding Clients}" 
                           VerticalAlignment="Center" 
-                          DisplayMemberPath="ClientDisplayName" 
                           SelectedValue="{Binding ClientReportCriteria.SelectedClient}" 
-                          ToolTip="clients who have payments" TabIndex="1"/>
-                <StackPanel Orientation="Horizontal" >
+                          ToolTip="clients who have payments" TabIndex="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding ClientID}" Width="80" Margin="0,2,5,2" />
+                                <TextBlock Text="{Binding ClientName}" Margin="0,2,0,2"  />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                        <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Year" Width="30" ToolTip="limit job list to this calendar year" />
                     <ComboBox x:Name="ComboYears" Width="80" Margin="3" ItemsSource="{Binding JobYears}"
                               VerticalAlignment="Center" SelectedValue="{Binding ClientReportCriteria.SelectedJobYear}" TabIndex="2" />

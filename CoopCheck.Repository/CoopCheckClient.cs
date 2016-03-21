@@ -14,11 +14,6 @@ namespace CoopCheck.Repository
     
     public partial class CoopCheckClient
     {
-        public string ClientDisplayName
-        {
-            get { return string.Format("{0} - {1}", ClientName, ClientID); }
-        }
-
         public string ClientID { get; set; }
         public string ClientName { get; set; }
         public string Address { get; set; }
