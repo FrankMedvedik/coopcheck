@@ -48,11 +48,11 @@
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                     <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                     <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
-                    <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="created" />
-                    <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" />
-                <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c0}" Header="total $" ElementStyle="{StaticResource RightCell}" />
-                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c0}" Header="cleared $" ElementStyle="{StaticResource RightCell}" />
-                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c0}" Header="outstanding $" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding open_amount, StringFormat='0,0.'}" Header="outstanding $" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding total_cnt}" Header="check count" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding open_cnt }" Header="outstanding" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared " ElementStyle="{StaticResource RightCell}" />

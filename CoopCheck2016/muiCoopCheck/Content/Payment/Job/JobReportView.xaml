@@ -33,18 +33,17 @@
         </StackPanel>
         <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
-                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"
-                      ItemsSource="{Binding Path=Jobs, Mode=TwoWay}"  VerticalAlignment="Top" 
-                      SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
+                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True" ItemsSource="{Binding Path=Jobs, Mode=TwoWay}" VerticalAlignment="Top" 
+                  ClipboardCopyMode="IncludeHeader" SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                 <mui:DataGridTextColumn Binding="{Binding clientname}" Header="client" />
                 <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
-                <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c}" Header="total $" ElementStyle="{StaticResource RightCell}" />
-                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c}" Header="cleared $" ElementStyle="{StaticResource RightCell}"/>
-                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c}" Header="outstanding $" ElementStyle="{StaticResource RightCell}"/>
+                <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $" ElementStyle="{StaticResource RightCell}"/>
+                <mui:DataGridTextColumn Binding="{Binding open_amount, StringFormat='0,0.'}" Header="outstanding $" ElementStyle="{StaticResource RightCell}"/>
                 <mui:DataGridTextColumn Binding="{Binding total_cnt}" Header="check count" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding open_cnt }" Header="outstanding" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared " ElementStyle="{StaticResource RightCell}"/>

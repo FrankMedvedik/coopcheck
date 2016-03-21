@@ -33,9 +33,8 @@
         </StackPanel>
         <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"  
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
-                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True"
-                      ItemsSource="{Binding Path=Jobs, Mode=OneWay}"  VerticalAlignment="Top" 
-                      SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
+                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"  IsReadOnly="True" ItemsSource="{Binding Path=Jobs, Mode=OneWay}" VerticalAlignment="Top" 
+                  ClipboardCopyMode="IncludeHeader" SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}" MaxHeight="300"
                     ToolTipService.ToolTip="jobs with payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
             <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding clientid}" Header="client id" />
@@ -44,14 +43,14 @@
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                 <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
                 <mui:DataGridTextColumn Binding="{Binding batch_cnt}" Header="batch cnt" ElementStyle="{StaticResource RightCell}" />
-                <mui:DataGridTextColumn Binding="{Binding total_amount,  StringFormat=c0}" Header="total $" ElementStyle="{StaticResource RightCell}"/>
-                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat=c0}" Header="cleared $" ElementStyle="{StaticResource RightCell}" />
-                <mui:DataGridTextColumn Binding="{Binding open_amount,  StringFormat=c0}" Header="outstanding $" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}"/>
+                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding open_amount, StringFormat='0,0.'}" Header="outstanding $" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding total_cnt}" Header="check count" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding open_cnt }" Header="outstanding" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared " ElementStyle="{StaticResource RightCell}" />
-                <mui:DataGridTextColumn Binding="{Binding first_pay_date ,StringFormat=d}" Header="first payment date"    />
-                <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}"   Header="last payment  date" />
+                <mui:DataGridTextColumn Binding="{Binding first_pay_date ,StringFormat=d}" Header="first payment date" ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}" Header="last payment  date" ElementStyle="{StaticResource RightCell}" />
             </DataGrid.Columns>
             </DataGrid>
     </Grid>

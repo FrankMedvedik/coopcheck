@@ -14,13 +14,13 @@
                  <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
                 <DataGridTextColumn Binding="{Binding jobnum}" Header="job num" />
                 <DataGridTextColumn Binding="{Binding jobname}" Header="job name" />
-                <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created" />
-                <DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" />
+                <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="count" ElementStyle="{StaticResource RightCell}"/>
-                <DataGridTextColumn Binding="{Binding total_amount,StringFormat=c0}" Header="dollars" ElementStyle="{StaticResource RightCell}"/>
+                <DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="dollars" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" />
                 <DataGridTextColumn Binding="{Binding projmgr}" Header="proj mgr" />
                 <DataGridTextColumn Binding="{Binding clientname}" Header="client" />
+                <DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}"/>
             </DataGrid.Columns>
             </DataGrid>
     </Grid>

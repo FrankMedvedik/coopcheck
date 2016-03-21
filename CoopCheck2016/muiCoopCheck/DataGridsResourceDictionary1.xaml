@@ -101,7 +101,7 @@
         </Style.Triggers>
     </Style>
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAccountDesignator" Binding="{Binding AccountDesignator }"  Header="AccountDesignator " />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFPostDate" Binding="{Binding PostDate, StringFormat=d}" Header="Post Date" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFPostDate" Binding="{Binding PostDate, StringFormat=d}" Header="Post Date" ElementStyle="{StaticResource RightCell}" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFSerialNumber" Binding="{Binding SerialNumber}" Header="Serial Number" ElementStyle="{StaticResource RightCell}" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFDescription" Binding="{Binding Description}" Header="Description" Width="250"/>
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAmount" Binding="{Binding RawAmount}" Header="Amount" ElementStyle="{StaticResource RightCell}" />
@@ -116,10 +116,10 @@
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCity" Binding="{Binding municipality}" Header="city" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPState" Binding="{Binding region}" Header="state" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPZip" Binding="{Binding postal_code}" Header="zip" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPDate" Binding="{Binding check_date, StringFormat=d}" Header="check date" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgClearedDate" Binding="{Binding cleared_date, StringFormat=d}" Header="cleared date" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPDate" Binding="{Binding check_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}"/>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgClearedDate" Binding="{Binding cleared_date, StringFormat=d}" Header="cleared date" ElementStyle="{StaticResource RightCell}"/>
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCheckNum" Binding="{Binding check_num}" Header="check #" ElementStyle="{StaticResource RightCell}" />
-    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAmount" Binding="{Binding tran_amount, StringFormat={} {0:C}}" Header="amount" ElementStyle="{StaticResource RightCell}" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAmount" Binding="{Binding tran_amount, StringFormat='0,0.'}" Header="amount" ElementStyle="{StaticResource RightCell}" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCompany" Binding="{Binding company}" Header="company" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress1" Binding="{Binding address_1}" Header="address 1" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress2" Binding="{Binding address_2}" Header="address 2" />
