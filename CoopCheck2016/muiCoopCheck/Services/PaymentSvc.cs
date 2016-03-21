@@ -31,13 +31,16 @@ namespace CoopCheck.WPF.Services
         }
 
        public static async Task<StatusInfo> PrintChecksAsync(int accountId, int batchNum, int startingCheckNum)
-        {
-            //StatusInfo i = new StatusInfo();
-            //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
-            //System.Threading.Thread.Sleep(5000);
-            //return i;
-             return await Task<StatusInfo>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum));
-        }
+       {
+           //return await Task<StatusInfo>.Factory.StartNew(() =>
+           //{
+           //    StatusInfo i = new StatusInfo();
+           //    i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
+           //    System.Threading.Thread.Sleep(10000);
+           //    return i;
+           //});
+          return await Task<StatusInfo>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum));
+       }
 
         private static StatusInfo PrintChecks(int accountId, int batchNum, int startingCheckNum)
         {
@@ -64,16 +67,15 @@ namespace CoopCheck.WPF.Services
                 }
                 else
                 {
-                    app.Quit();
+                    app.Quit(false);
                     return status;
                 }
             }
-            app.Quit();
+            app.Quit(false);
             return new StatusInfo() 
             {
                     StatusMessage =
-                    String.Format("Batch {0} First Check # {1} Last Check # {2} Printed", batchNum,
-                        startingCheckNum, --checkNum)
+                    String.Format("Batch {0}  Printed", batchNum)
             };
       }
 

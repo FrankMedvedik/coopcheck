@@ -41,15 +41,17 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 return;
             }
             _vm.IsBusy = true;
-            _vm.PrintChecks();
+            _vm.Status = await _vm.PrintChecks();
             var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
             var result = cw.ShowDialog();
             CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
-            if (_vm.EndingCheckNum != 0)
-            {
-                _vm.RefreshBatchList();
-            }
+            _vm.RefreshBatchList();
             _vm.IsBusy = false;
+            _vm.Status = new Models.StatusInfo
+            {
+                StatusMessage = string.Format("batch - {0} last check number printed - {1}",
+                    _vm.SelectedBatch.batch_num, _vm.EndingCheckNum)
+            };
         }
     }
 }

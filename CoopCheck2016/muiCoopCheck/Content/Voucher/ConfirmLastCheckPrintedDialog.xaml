@@ -35,7 +35,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontWeight="Bold" Margin="6" Width="151">Ending Check #</TextBlock>
-                <TextBox FontWeight="Bold" Margin="6" Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150" />
+                <TextBox FontWeight="Bold" Margin="6" Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150" TabIndex="0" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Margin="6" >Enter 0 if no checks printed</TextBlock>

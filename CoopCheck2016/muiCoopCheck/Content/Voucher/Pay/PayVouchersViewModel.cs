@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
@@ -41,18 +42,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
         }
 
-        public string BatchInfo
-        {
-            get { return _batchInfo; }
-            set
-            {
-                _batchInfo = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-
-        public ObservableCollection<bank_account> Accounts
+         public ObservableCollection<bank_account> Accounts
         {
             get { return _accounts; }
             set
@@ -163,34 +153,34 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 NotifyPropertyChanged();
                 if (value)
                 {
-                    _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-                    _dispatcherTimer.Tick += (dispatcherTimer_Tick);
-                    _dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
-                    _dispatcherTimer.Start();
+                    //_dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                    //_dispatcherTimer.Tick += (dispatcherTimer_Tick);
+                    //_dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
+                    //_dispatcherTimer.Start();
                     CanPrintChecks = false;
                     CanSwiftPay = false;
                 }
-                else
-                {
-                    _dispatcherTimer.Stop();
-                    _dispatcherTimer.Tick -= (dispatcherTimer_Tick);
-                    SetAccountInfo();
-                }
+                //else
+                //{
+                //    //_dispatcherTimer.Stop();
+                //    //_dispatcherTimer.Tick -= (dispatcherTimer_Tick);
+                //    SetAccountInfo();
+                //}
                 
             }
         }
 
 
-        private int _remainingPaymentCnt;
-        public int RemainingPaymentCnt
-        {
-            get { return _remainingPaymentCnt; }
-            set
-            {
-                _remainingPaymentCnt = value;
-                NotifyPropertyChanged();
-            }
-        }
+        //private int _remainingPaymentCnt;
+        //public int RemainingPaymentCnt
+        //{
+        //    get { return _remainingPaymentCnt; }
+        //    set
+        //    {
+        //        _remainingPaymentCnt = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
 
 
         private StatusInfo _status;
@@ -198,25 +188,10 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         private int _startingCheckNum;
         private int _endingCheckNum;
         private ObservableCollection<bank_account> _accounts;
-        private string _batchInfo;
         private BatchEdit _selectedBatchEdit;
         private bool _canSwiftPay;
         private bool _canPrintChecks;
-        private System.Windows.Threading.DispatcherTimer _dispatcherTimer;
 
-
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            int c = 19;
-            if (c == 0)
-            {
-                IsBusy = false;
-            }
-            else
-            {
-                RemainingPaymentCnt = c;
-            }
-        }
 
         public async void ResetState()
         {
@@ -236,7 +211,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             set { _canSwiftPay = value; NotifyPropertyChanged(); }
         }
 
-        public async void PrintChecks()
+        public async Task<StatusInfo> PrintChecks()
         {
             Status = new StatusInfo()
             {
@@ -244,23 +219,27 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 IsBusy = true,
                 StatusMessage = "printing checks..."
             };
+            IsBusy = true;
 
-            try
+            Status = await Task.Factory.StartNew( () =>
             {
-                Status =
-                    await
-                        PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
-                            StartingCheckNum);
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
+                try
                 {
-                    ErrorMessage = e.Message,
-                    IsBusy = true,
-                    StatusMessage = "checks failed to print"
-                };
-            }
+                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,StartingCheckNum);
+                     return v.Result;
+                }
+                catch (Exception e)
+                {
+                    return new StatusInfo()
+                    {
+                        ErrorMessage = e.Message,
+                        IsBusy = true,
+                        StatusMessage = "checks failed to print"
+                    };
+                }
+            });
+            IsBusy = false;
+            return Status;
         }
 
 
@@ -272,21 +251,27 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 IsBusy = true,
                 StatusMessage = "executing swiftpay..."
             };
-            try
+            IsBusy = true;
+            Status = await Task<StatusInfo>.Factory.StartNew(() =>
             {
-                Status = await PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);
-                RefreshBatchList();
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
+                try
                 {
-                    ErrorMessage = e.Message,
-                    IsBusy = true,
-                    StatusMessage = "swift payment failed"
-                };
-            }
-        }
+                    var v = PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);
+                    return v.Result;
+                }
+                catch (Exception e)
+                {
+                    Status = new StatusInfo()
+                    {
+                        ErrorMessage = e.Message,
+                        IsBusy = true,
+                        StatusMessage = "swift payment failed"
+                    };
+                    return Status;
+                }
+            });
+            IsBusy = false;
 
         }
+    }
     }

@@ -17,7 +17,7 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" IsEnabled="{Binding EnableMiscFields}">
-                <TextBlock Text="Date Range for Payment" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <!--<TextBlock Text="Date Range for Payment" Margin="6" VerticalAlignment="Center" HorizontalAlignment="Left"/>-->
                 <StackPanel Orientation="Horizontal"  x:Name="StartDate">
                  <TextBlock Text="Start" Width="100"   Margin="6" VerticalAlignment="Center"/>
                 <DatePicker SelectedDate="{Binding PaymentReportCriteria.StartDate,StringFormat=d, Mode=TwoWay}" Margin="6" BorderBrush="{Binding  AccentBrush}"  />
