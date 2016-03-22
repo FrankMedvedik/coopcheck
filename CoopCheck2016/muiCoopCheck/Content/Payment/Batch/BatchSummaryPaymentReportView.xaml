@@ -7,6 +7,7 @@
              xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
              xmlns:batch="clr-namespace:CoopCheck.WPF.Content.Payment.Batch"
              mc:Ignorable="d" >
+    <ScrollViewer>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition  Height="Auto"/>
@@ -30,4 +31,5 @@
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>
+    </ScrollViewer>
 </UserControl>

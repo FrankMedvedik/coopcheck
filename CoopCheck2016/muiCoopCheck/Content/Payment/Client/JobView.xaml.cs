@@ -12,7 +12,7 @@ namespace CoopCheck.WPF.Content.Payment.Client
     public partial class JobView : UserControl
     {
         private JobViewModel _vm = null;
-        
+
         public JobView()
         {
             InitializeComponent();

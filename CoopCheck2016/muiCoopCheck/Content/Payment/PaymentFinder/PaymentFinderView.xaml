@@ -7,52 +7,46 @@
         xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
         xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
         mc:Ignorable="d ignore">
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Expander Header="payment search criteria" Grid.Row="0" IsExpanded="true">
-            <StackPanel>
-            <criteria:PaymentReportCriteriaView x:Name="prcv"/>
-            <StackPanel Orientation="Horizontal" >
-                    <Button Width="150" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
-                    <Button Width="150" Margin="6"  HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Expander Header="payment search criteria" Grid.Row="0" IsExpanded="true">
+                <StackPanel>
+                    <criteria:PaymentReportCriteriaView x:Name="prcv" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="150" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
+                        <Button Width="150" Margin="6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
+                    </StackPanel>
                 </StackPanel>
+            </Expander>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}">
+                <!--<Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>-->
+                <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="VoidCheck_Click" IsEnabled="{Binding CanVoidSelectedCheck}" Content="Void Payment" />
+                <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ClearCheck_Click" IsEnabled="{Binding CanClearSelectedCheck}" Content="Clear Payment" />
             </StackPanel>
-        </Expander>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" >
-            <!--<Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>-->
-            <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="VoidCheck_Click"  IsEnabled="{Binding CanVoidSelectedCheck}" Content="Void Payment"/>
-            <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="ClearCheck_Click" IsEnabled="{Binding CanClearSelectedCheck}" Content="Clear Payment"/>
-        </StackPanel>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
-                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" x:Name="dgPayments"
-                  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
-                      VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}" IsReadOnly="True"
-                     MaxHeight="300" ClipboardCopyMode="IncludeHeader" 
-                  EnableColumnVirtualization="True" EnableRowVirtualization="True"
-                    ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
-            <DataGrid.Columns>
-                <StaticResource ResourceKey="dgPFirst" />
-                <StaticResource ResourceKey="dgPLast" />
-                <StaticResource ResourceKey="dgPAddress1" />
-                <StaticResource ResourceKey="dgPAddress2" />
-                <StaticResource ResourceKey="dgPCity" />
-                <StaticResource ResourceKey="dgPState"  />
-                <StaticResource ResourceKey="dgPZip" />
-                <StaticResource ResourceKey="dgPEmail" />
-                <StaticResource ResourceKey="dgPPhone" />
-                <StaticResource ResourceKey="dgPCompany" />
-                <StaticResource ResourceKey="dgPJob" />
-                <StaticResource ResourceKey="dgPBatch" />
-                <StaticResource ResourceKey="dgPCheckNum" />
-                <StaticResource ResourceKey="dgPDate" />
-                <StaticResource ResourceKey="dgPAmount" />
-                <StaticResource ResourceKey="dgClearedDate"/>
-                <StaticResource ResourceKey="dgPPrintFlag"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+            <DataGrid Grid.Row="2" ItemsSource="{Binding Payments}" AutoGenerateColumns="False" Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="dgPayments" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}" IsReadOnly="True" MaxHeight="300" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended">
+                <DataGrid.Columns>
+                    <StaticResource ResourceKey="dgPJob" />
+                    <StaticResource ResourceKey="dgPBatch" />
+                    <StaticResource ResourceKey="dgPFirst" />
+                    <StaticResource ResourceKey="dgPLast" />
+                    <StaticResource ResourceKey="dgPAddress1" />
+                    <StaticResource ResourceKey="dgPAddress2" />
+                    <StaticResource ResourceKey="dgPCity" />
+                    <StaticResource ResourceKey="dgPState" />
+                    <StaticResource ResourceKey="dgPZip" />
+                    <StaticResource ResourceKey="dgPEmail" />
+                    <StaticResource ResourceKey="dgPPhone" />
+                    <StaticResource ResourceKey="dgPCheckNum" />
+                    <StaticResource ResourceKey="dgPDate" />
+                    <StaticResource ResourceKey="dgPAmount" />
+                    <StaticResource ResourceKey="dgClearedDate" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

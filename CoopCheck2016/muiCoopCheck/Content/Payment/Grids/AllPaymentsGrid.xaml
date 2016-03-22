@@ -6,21 +6,19 @@
             <DataGrid.Columns>
             <StaticResource ResourceKey="dgPJob" />
             <StaticResource ResourceKey="dgPBatch" />
-            <StaticResource ResourceKey="dgPCheckNum"  />
+            <StaticResource ResourceKey="dgPFirst" />
+            <StaticResource ResourceKey="dgPLast" />
+            <StaticResource ResourceKey="dgPAddress1" />
+            <StaticResource ResourceKey="dgPAddress2" />
+            <StaticResource ResourceKey="dgPCity" />
+            <StaticResource ResourceKey="dgPState" />
+            <StaticResource ResourceKey="dgPZip" />
+            <StaticResource ResourceKey="dgPEmail" />
+            <StaticResource ResourceKey="dgPPhone" />
+            <StaticResource ResourceKey="dgPCheckNum" />
             <StaticResource ResourceKey="dgPDate" />
             <StaticResource ResourceKey="dgPAmount" />
-            <StaticResource ResourceKey="dgPEmail"/>
-            <StaticResource ResourceKey="dgPLast"  />
-            <StaticResource ResourceKey="dgPFirst" />
             <StaticResource ResourceKey="dgClearedDate" />
-            <StaticResource ResourceKey="dgPPrintFlag" />
-            <StaticResource ResourceKey="dgPPhone" />
-            <StaticResource ResourceKey="dgPCity" />
-            <StaticResource ResourceKey="dgPState"  />
-            <StaticResource ResourceKey="dgPZip" />
-            <StaticResource ResourceKey="dgPCompany" />
-            <StaticResource ResourceKey="dgPAddress1"  />
-            <StaticResource ResourceKey="dgPAddress2"  />
 
         </DataGrid.Columns>
         </DataGrid>
