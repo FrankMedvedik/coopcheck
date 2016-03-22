@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Csla;
 using Csla.Data;
 using CoopCheck.DAL;
 using System.Configuration;
@@ -157,18 +156,12 @@ namespace CoopCheck.DalADO
                     {
                         var err = new Csla.WcfPortal.WcfErrorInfo();
                         err.ExceptionTypeName = "PromoCodeError";
-                        err.Message = response.ResponseCode + " : " + response.SwiftErrorReason;
-
+                        err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId, response.ResponseCode,response.SwiftErrorReason);
                         throw new Csla.DataPortalException(err);
                     }
 
 
                 }
-           
-
-
-
-            
             }
         }
 
@@ -222,17 +215,6 @@ namespace CoopCheck.DalADO
                 // for now i have implemented this as a service - ClearCheckSvc since I wanted to use bulk load
                 // the call for 7000+ rows was taking over 45 minutes to complete using the csla one row at time code
                 // 
-                // var bulkCopy = new SqlBulkCopy(ctx);
-                //    bulkCopy.DestinationTableName = "clear_check_work";
-                //    bulkCopy.ColumnMappings.Add("tran_id", "tran_id");
-                //    bulkCopy.ColumnMappings.Add("cleared_date", "cleared_date");
-                //    bulkCopy.ColumnMappings.Add("cleared_amount", "cleared_amount");
-                //    ctx.Open();
-                //    using (var dataReader = new ObjectDataReader<CheckInfoDto>(checks))
-                //    {
-                //        bulkCopy.WriteToServer(dataReader);
-                //    }
-                //}
                 using (var cmd = new SqlCommand("dbo.dal_ClearCheckBatch", ctx.Connection))
                 {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -243,32 +225,6 @@ namespace CoopCheck.DalADO
             }
         }
 
-
-
-        //public void ClearCheckBatch(List<CheckInfoDto> checks)
-        //{
-        //    using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
-        //    {
-        //        foreach (var check in checks)
-        //        {
-        //            using (var cmd = new SqlCommand("dbo.dal_AddClearCheckWork", ctx.Connection))
-        //            {
-        //                cmd.CommandType = CommandType.StoredProcedure;
-        //                cmd.Parameters.AddWithValue("@tran_id", check.Id).DbType = DbType.Int32;
-        //                cmd.Parameters.AddWithValue("@cleared_date", check.ClearedDate).DbType = DbType.DateTime;
-        //                cmd.Parameters.AddWithValue("@cleared_amount", check.ClearedAmount).DbType = DbType.Decimal;
-        //                cmd.ExecuteNonQuery();
-        //            }
-        //        }
-        //        using (var cmd = new SqlCommand("dbo.dal_ClearCheckBatch", ctx.Connection))
-        //        {
-        //            cmd.CommandType = CommandType.StoredProcedure;
-        //            cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
-        //                DbType.String;
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
         public void ClearCheck(int tranId, DateTime clearedDate, decimal clearedAmount)
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
