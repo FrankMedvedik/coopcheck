@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
@@ -19,7 +20,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _batchList = value;
                 NotifyPropertyChanged();
-                IsBusy = false;
             }
         }
 
@@ -51,24 +51,21 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             vwOpenBatch v = null; 
             if (SelectedBatch != null) v = SelectedBatch;
             BatchList = new ObservableCollection<vwOpenBatch>(await OpenBatchSvc.GetOpenBatches());
-            if((v != null) && (BatchList.Contains(v)))
-                SelectedBatch = BatchList.First(x => x.batch_num == v.batch_num);
-            SelectedBatch = null;
-            IsBusy = false;
+            //if((v != null) && (BatchList.Contains(v)))
+            if (v != null)
+                try
+                {
+                    SelectedBatch = BatchList.First(x => x.batch_num == v.batch_num);
+                }
+                catch (Exception)
+                {
+                    SelectedBatch = null;
+                }
+          else
+                SelectedBatch = null;
+         IsBusy = false;
         }
-
-        private int _selectedBatchNum = 0;
-
-        public int SelectedBatchNum
-        {
-            get { return _selectedBatchNum; }
-            set
-            {
-                _selectedBatchNum = value;
-                NotifyPropertyChanged();
-            }
-        }
-
+        
         private vwOpenBatch _selectedBatch = new vwOpenBatch();
         private bool _isBusy;
 

@@ -272,7 +272,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 + Path.GetFileName(ExcelFileInfo.ExcelFilePath) + " - " + ExcelFileInfo.SelectedWorksheet; 
             StartEnabled = !_batchCreator.IsBusy;
             Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
-            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+            //Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
             Status = new StatusInfo()
             {
                 StatusMessage = SaveBatchInfoMessage,

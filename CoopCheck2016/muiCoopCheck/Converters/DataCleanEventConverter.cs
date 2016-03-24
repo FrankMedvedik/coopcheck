@@ -25,6 +25,7 @@ namespace CoopCheck.WPF.Converters
             n.PhoneNumber = e.Input.PhoneNumber;
             n.PostalCode = e.Input.PostalCode;
             n.Region = e.Input.State;
+            n.RecordID = e.Input.RecordID;
             n.ID = e.Input.ID;
 
             var v = new VoucherImportWrapper(n);

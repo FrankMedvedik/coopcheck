@@ -91,10 +91,10 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             _vm.AutoSaveSelectedBatch();
         }
-        private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
-        {
-            _vm.AutoSaveSelectedBatch();
-        }
+        //private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    _vm.AutoSaveSelectedBatch();
+        //}
     }
     }
 

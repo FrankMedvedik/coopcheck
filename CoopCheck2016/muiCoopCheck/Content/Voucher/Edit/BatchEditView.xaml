@@ -68,7 +68,7 @@
             </Expander>
             <Expander Header="Batch Details" Grid.Row="2"
                       Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
-                <StackPanel Orientation="Vertical" LostFocus="BatchDetails_LostFocus">
+                <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
                             <Border BorderThickness="1" BorderBrush="Black">
@@ -80,7 +80,8 @@
                         </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,3,0,3" Text="Payment Date" Style="{StaticResource TextBlockStyle}" Width="104"/>
-                        <DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="6" TabIndex="3" Width="126" />
+                        <!--<DatePicker SelectedDate="{Binding SelectedBatch.PayDate, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="6" TabIndex="3" Width="126" />-->
+                        <TextBlock Text="{Binding SelectedBatch.PayDate, Mode=OneWay,StringFormat=d}" VerticalAlignment="Center" Margin="6" />
                         <TextBlock Text="Create Date" Style="{StaticResource TextBlockStyle}" Margin="50,6,6,6" />
                         <TextBlock Text="{Binding SelectedBatch.Date, Mode=OneWay,StringFormat=d}" VerticalAlignment="Center" Margin="6"/>
                     </StackPanel>
