@@ -318,7 +318,21 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     StatusMessage = "saving...",
                     IsBusy = true
                 };
-                SelectedBatch = await SelectedBatch.SaveAsync();
+                try
+                {
+                    SelectedBatch = await SelectedBatch.SaveAsync();
+                }
+                catch (Exception ex)
+                {
+
+                    Status = new StatusInfo()
+                    {
+                        StatusMessage = "error saving",
+                         ErrorMessage = ex.Message,
+                        IsBusy = false
+                    };
+                }
+                
 
             }
         }
@@ -329,18 +343,26 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             if (UserCanWrite)
             {
                 Status = new StatusInfo()
-                {StatusMessage = "saving...", IsBusy = true};
-                SelectedBatch = await SelectedBatch.SaveAsync();
-                Status = new StatusInfo() {StatusMessage = "saved"};
-                RefreshBatchList();
-                Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+                { StatusMessage = "saving...", IsBusy = true };
+
+                try
+                {
+                    SelectedBatch = await SelectedBatch.SaveAsync();
+                    Status = new StatusInfo() { StatusMessage = "saved" };
+                    RefreshBatchList();
+
+                }
+                catch (Exception ex) 
+                {
+                    Status = new StatusInfo() { StatusMessage = "error during save", ErrorMessage=ex.Message };
+                    
+                }
             }
             else if (UserCanWrite)
             {
                 List<string> msgs = new List<string>();
                 var a = SelectedBatch.GetBrokenRules();
                 msgs.Add(a.ToString());
-
                 foreach (var v in SelectedBatch.Vouchers)
                 {
                     msgs.Add(v.BrokenRulesCollection.ToString());

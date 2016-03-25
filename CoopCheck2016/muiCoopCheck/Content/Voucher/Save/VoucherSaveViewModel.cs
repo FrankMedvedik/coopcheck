@@ -255,24 +255,41 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         // Note: This event fires on the background thread.
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<VoucherImport> x = new List<VoucherImport>();
-            foreach (var a in GoodVouchers)
-                x.Add(VoucherImportWrapperConverter.ToVoucherImport(a));
-           e.Result = BatchSvc.ImportVouchers(x);
-            var b = BatchSvc.GetBatchEditAsync((int) e.Result).Result;
-            b.Description = Path.GetFileName(ExcelFileInfo.ExcelFilePath) + " - " + ExcelFileInfo.SelectedWorksheet;
-            b.PayDate = null;
-            var batch = b.Save();
-           
+            try
+            {
+                List<VoucherImport> x = new List<VoucherImport>();
+                foreach (var a in GoodVouchers)
+                    x.Add(VoucherImportWrapperConverter.ToVoucherImport(a));
+                e.Result = BatchSvc.ImportVouchers(x);
+                var b = BatchSvc.GetBatchEditAsync((int)e.Result).Result;
+                b.Description = String.Format("{0} - {1}",  
+                    Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart(),
+                    ExcelFileInfo.SelectedWorksheet.TrimEnd().TrimStart());
+                b.PayDate = null;
+                var batch = b.Save();
+
+            }
+            catch (Exception ex)
+            {
+                Status = new StatusInfo()
+                {
+                    StatusMessage = "there was a problem creating the batch" ,
+                     ErrorMessage = ex.Message,
+                    IsBusy = false
+                };
+
+            }
+
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SaveBatchInfoMessage = "Batch " + e.Result + " created for " 
-                + Path.GetFileName(ExcelFileInfo.ExcelFilePath) + " - " + ExcelFileInfo.SelectedWorksheet; 
+            SaveBatchInfoMessage = String.Format("Batch {0} created for {1} - {2}",
+                e.Result, 
+                (Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart()), 
+                ExcelFileInfo.SelectedWorksheet.TrimEnd().TrimStart());
             StartEnabled = !_batchCreator.IsBusy;
             Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
-            //Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
             Status = new StatusInfo()
             {
                 StatusMessage = SaveBatchInfoMessage,
