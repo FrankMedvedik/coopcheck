@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 using CoopCheck.DAL;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 
 namespace CoopCheck.WPF.Services
 {
@@ -18,13 +16,13 @@ namespace CoopCheck.WPF.Services
         public static void ClearChecks(List<CheckInfoDto> checks)
         {
             using (var ctx = new SqlConnection(
-                System.Configuration.ConfigurationManager.ConnectionStrings["CoopCheck"]
+                ConfigurationManager.ConnectionStrings["CoopCheck"]
                     .ConnectionString))
             {
                 var bulkCopy = new SqlBulkCopy(ctx);
                 bulkCopy.DestinationTableName = "clear_check_work";
-                bulkCopy.ColumnMappings.Add( "Id", "tran_id");
-                bulkCopy.ColumnMappings.Add( "ClearedDate", "cleared_date");
+                bulkCopy.ColumnMappings.Add("Id", "tran_id");
+                bulkCopy.ColumnMappings.Add("ClearedDate", "cleared_date");
                 bulkCopy.ColumnMappings.Add("ClearedAmount", "cleared_amount");
                 ctx.Open();
                 using (var dataReader = new ObjectDataReader<CheckInfoDto>(checks))
@@ -34,37 +32,37 @@ namespace CoopCheck.WPF.Services
             }
             ClearCheckBatchCommand.Execute();
         }
-
     }
+
     public class ObjectDataReader<TData> : IDataReader
     {
         /// <summary>
-        /// The enumerator for the IEnumerable{TData} passed to the constructor for 
-        /// this instance.
+        ///     The lookup of accessor functions for the properties on the TData type.
+        /// </summary>
+        private readonly Func<TData, object>[] accessors;
+
+        /// <summary>
+        ///     The enumerator for the IEnumerable{TData} passed to the constructor for
+        ///     this instance.
         /// </summary>
         private IEnumerator<TData> dataEnumerator;
 
         /// <summary>
-        /// The lookup of accessor functions for the properties on the TData type.
+        ///     The lookup of property names against their ordinal positions.
         /// </summary>
-        private Func<TData, object>[] accessors;
+        private readonly Dictionary<string, int> ordinalLookup;
 
         /// <summary>
-        /// The lookup of property names against their ordinal positions.
-        /// </summary>
-        private Dictionary<string, int> ordinalLookup;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectDataReader<TData>"/> class.
+        ///     Initializes a new instance of the <see cref="ObjectDataReader<TData>"/> class.
         /// </summary>
         /// <param name="data">The data this instance should enumerate through.</param>
         public ObjectDataReader(IEnumerable<TData> data)
         {
-            this.dataEnumerator = data.GetEnumerator();
+            dataEnumerator = data.GetEnumerator();
 
             // Get all the readable properties for the class and
             // compile an expression capable of reading it
-            var propertyAccessors = typeof(TData)
+            var propertyAccessors = typeof (TData)
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(p => p.CanRead)
                 .Select((p, i) => new
@@ -75,28 +73,28 @@ namespace CoopCheck.WPF.Services
                 })
                 .ToArray();
 
-            this.accessors = propertyAccessors.Select(p => p.Accessor).ToArray();
-            this.ordinalLookup = propertyAccessors.ToDictionary(
+            accessors = propertyAccessors.Select(p => p.Accessor).ToArray();
+            ordinalLookup = propertyAccessors.ToDictionary(
                 p => p.Property.Name,
                 p => p.Index,
                 StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
-        /// Creates a property accessor for the given property information.
+        ///     Creates a property accessor for the given property information.
         /// </summary>
         /// <param name="p">The property information to generate the accessor for.</param>
         /// <returns>The generated accessor function.</returns>
         private Func<TData, object> CreatePropertyAccessor(PropertyInfo p)
         {
             // Define the parameter that will be passed - will be the current object
-            var parameter = Expression.Parameter(typeof(TData), "input");
+            var parameter = Expression.Parameter(typeof (TData), "input");
 
             // Define an expression to get the value from the property
             var propertyAccess = Expression.Property(parameter, p.GetGetMethod());
 
             // Make sure the result of the get method is cast as an object
-            var castAsObject = Expression.TypeAs(propertyAccess, typeof(object));
+            var castAsObject = Expression.TypeAs(propertyAccess, typeof (object));
 
             // Create a lambda expression for the property access and compile it
             var lamda = Expression.Lambda<Func<TData, object>>(castAsObject, parameter);
@@ -107,7 +105,7 @@ namespace CoopCheck.WPF.Services
 
         public void Close()
         {
-            this.Dispose();
+            Dispose();
         }
 
         public int Depth
@@ -122,7 +120,7 @@ namespace CoopCheck.WPF.Services
 
         public bool IsClosed
         {
-            get { return this.dataEnumerator == null; }
+            get { return dataEnumerator == null; }
         }
 
         public bool NextResult()
@@ -132,12 +130,12 @@ namespace CoopCheck.WPF.Services
 
         public bool Read()
         {
-            if (this.dataEnumerator == null)
+            if (dataEnumerator == null)
             {
                 throw new ObjectDisposedException("ObjectDataReader");
             }
 
-            return this.dataEnumerator.MoveNext();
+            return dataEnumerator.MoveNext();
         }
 
         public int RecordsAffected
@@ -151,7 +149,7 @@ namespace CoopCheck.WPF.Services
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -159,10 +157,10 @@ namespace CoopCheck.WPF.Services
         {
             if (disposing)
             {
-                if (this.dataEnumerator != null)
+                if (dataEnumerator != null)
                 {
-                    this.dataEnumerator.Dispose();
-                    this.dataEnumerator = null;
+                    dataEnumerator.Dispose();
+                    dataEnumerator = null;
                 }
             }
         }
@@ -173,7 +171,7 @@ namespace CoopCheck.WPF.Services
 
         public int FieldCount
         {
-            get { return this.accessors.Length; }
+            get { return accessors.Length; }
         }
 
         public bool GetBoolean(int i)
@@ -264,7 +262,7 @@ namespace CoopCheck.WPF.Services
         public int GetOrdinal(string name)
         {
             int ordinal;
-            if (!this.ordinalLookup.TryGetValue(name, out ordinal))
+            if (!ordinalLookup.TryGetValue(name, out ordinal))
             {
                 throw new InvalidOperationException("Unknown parameter name " + name);
             }
@@ -279,12 +277,12 @@ namespace CoopCheck.WPF.Services
 
         public object GetValue(int i)
         {
-            if (this.dataEnumerator == null)
+            if (dataEnumerator == null)
             {
                 throw new ObjectDisposedException("ObjectDataReader");
             }
 
-            return this.accessors[i](this.dataEnumerator.Current);
+            return accessors[i](dataEnumerator.Current);
         }
 
         public int GetValues(object[] values)

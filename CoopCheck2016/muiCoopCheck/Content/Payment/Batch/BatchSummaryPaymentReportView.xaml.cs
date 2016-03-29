@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Library;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Content.Voucher;
 using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -80,5 +82,32 @@ namespace CoopCheck.WPF.Content.Payment.Batch
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
             DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<vwPayment>), typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        private void Unprint_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _vm.StartingCheckNum = int.Parse(SelectedvwBatchRpt.first_check_num);
+                var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
+                var result = cw.ShowDialog();
+                CommitCheckCommand.Execute(SelectedvwBatchRpt.batch_num, _vm.EndingCheckNum);
+                _vm.Status = new Models.StatusInfo
+                {
+                    StatusMessage = string.Format("batch - {0} last check number printed - {1}",
+                        SelectedvwBatchRpt.batch_num, _vm.EndingCheckNum)
+                };
+
+            }
+            catch (Exception ex)
+            {
+                _vm.Status = new Models.StatusInfo
+                {
+                    StatusMessage = string.Format("batch - {0} cannot be unprinted",
+                      SelectedvwBatchRpt.batch_num),
+                    ErrorMessage = ex.Message
+                };
+            }
+
+        }
     }
 }

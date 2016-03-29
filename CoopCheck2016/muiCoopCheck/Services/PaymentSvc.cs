@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
 using CoopCheck.WPF.Messages;
@@ -30,7 +31,7 @@ namespace CoopCheck.WPF.Services
             return i;
         }
 
-       public static async Task<StatusInfo> PrintChecksAsync(int accountId, int batchNum, int startingCheckNum)
+       public static async Task<StatusInfo> PrintChecksAsync(int accountId, int batchNum, int startingCheckNum, CancellationToken ctx)
        {
            //return await Task<StatusInfo>.Factory.StartNew(() =>
            //{
@@ -39,7 +40,7 @@ namespace CoopCheck.WPF.Services
            //    System.Threading.Thread.Sleep(10000);
            //    return i;
            //});
-          return await Task<StatusInfo>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum));
+          return await Task<StatusInfo>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum), ctx);
        }
 
         private static StatusInfo PrintChecks(int accountId, int batchNum, int startingCheckNum)

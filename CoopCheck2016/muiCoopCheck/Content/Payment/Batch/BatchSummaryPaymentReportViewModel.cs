@@ -51,7 +51,16 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         private List<vwPayment> _workPayments;
         private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
         private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
-
+        private int _endingCheckNum;
+        private int _startingCheckNum;
+        private bool _canUnprint;
+        public bool CanUnprint
+        {
+            get { return _canUnprint;  }
+            set { _canUnprint = value;
+                NotifyPropertyChanged();
+            }
+        }
         public List<vwPayment> WorkPayments
         {
             get { return _workPayments; }
@@ -107,6 +116,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             {
                 _closedPayments = value;
                 NotifyPropertyChanged();
+                CanUnprint = (ClosedPayments.Count == 0);
             }
         }
 
@@ -118,6 +128,17 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 _openPayments = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public int EndingCheckNum
+        {
+            get { return _endingCheckNum; }
+            set { _endingCheckNum = value; NotifyPropertyChanged(); }
+        }
+        public int StartingCheckNum
+        {
+            get { return _startingCheckNum; }
+            set { _startingCheckNum  = value; NotifyPropertyChanged(); }
         }
     }
 }

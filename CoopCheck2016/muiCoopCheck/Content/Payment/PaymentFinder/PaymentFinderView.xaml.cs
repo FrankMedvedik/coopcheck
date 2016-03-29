@@ -34,11 +34,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             prcv.ResetState();
             _vm.ResetState();
         }
-        private void Excel_Click(object sender, RoutedEventArgs e)
-        {
-            ExportToExcel();
-
-        }
+    
         private void ClearCheck_Click(object sender, RoutedEventArgs e)
         {
             _vm.SelectedPayment.cleared_date = DateTime.Today;
@@ -64,23 +60,6 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             }
         }
 
-        private void ExportToExcel()
-        {
-            dgPayments.SelectAllCells();
-            dgPayments.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
-            ApplicationCommands.Copy.Execute(null, dgPayments);
-            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
-            //String result = (string)Clipboard.GetData(DataFormats.);
-            dgPayments.UnselectAllCells();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = string.Format("Payments{0}.csv", prcv.PaymentReportCriteria.ToFormattedString('.'));
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName);
-                //file.WriteLine(result.Replace(",", " " ));
-                file.WriteLine(result);
-                file.Close();
-            }
-        }
+        
     }
 }

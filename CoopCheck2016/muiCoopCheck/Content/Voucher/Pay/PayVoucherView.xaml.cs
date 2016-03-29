@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
@@ -11,16 +13,13 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
     /// </summary>
     public partial class PayVoucherView : UserControl
     {
+        CancellationTokenSource cts;
         private PayVouchersViewModel _vm;
         public PayVoucherView()
         {
             InitializeComponent();
             _vm = new PayVouchersViewModel();
             DataContext = _vm;
-            //Messenger.Default.Register<NotificationMessage<StatusInfo>>(this, message =>
-            //{
-            //    Status = message.Content;
-            //});
         }
 
         private async void SwiftPay(object sender, RoutedEventArgs e)
@@ -33,26 +32,73 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         private async void PrintChecks(object sender, RoutedEventArgs e)
         {
-            var f = System.AppDomain.CurrentDomain.BaseDirectory + @"\" + @Properties.Settings.Default.CheckTemplate;
-            if (!File.Exists(f))
+            cts = new CancellationTokenSource();
+
+            try
             {
-                ModernDialog.ShowMessage(f + " not found, cannot print checks. ",
-                    "check template missing", MessageBoxButton.OK);
-                return;
+                var f = System.AppDomain.CurrentDomain.BaseDirectory + @"\" + @Properties.Settings.Default.CheckTemplate;
+                if (!File.Exists(f))
+                {
+                    ModernDialog.ShowMessage(f + " not found, cannot print checks. ",
+                        "check template missing", MessageBoxButton.OK);
+                    return;
+                }
+
+                try
+                {
+                    _vm.IsBusy = true;
+                    _vm.Status = await _vm.PrintChecks(cts.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    _vm.Status = new Models.StatusInfo
+                    {
+                        StatusMessage = "printing canceled",
+                        ErrorMessage = "the check run was cancelled"
+                    };
+                }
+                catch (Exception ex)
+                {
+                    _vm.Status = new Models.StatusInfo
+                    {
+                        StatusMessage = "printing failed",
+                        ErrorMessage = ex.Message
+                    };
+                }
+
+                cts = null;
+
+                var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
+                var result = cw.ShowDialog();
+                 CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
+                _vm.RefreshBatchList();
+                _vm.IsBusy = false;
+                _vm.Status = new Models.StatusInfo
+                {
+                    StatusMessage = string.Format("batch - {0} last check number printed - {1}",
+                        _vm.SelectedBatch.batch_num, _vm.EndingCheckNum)
+                };
             }
-            _vm.IsBusy = true;
-            _vm.Status = await _vm.PrintChecks();
-            var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
-            var result = cw.ShowDialog();
-            CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
-            _vm.RefreshBatchList();
-            _vm.IsBusy = false;
-            _vm.Status = new Models.StatusInfo
+            catch (Exception ex)
             {
-                StatusMessage = string.Format("batch - {0} last check number printed - {1}",
-                    _vm.SelectedBatch.batch_num, _vm.EndingCheckNum)
-            };
+
+                _vm.Status = new Models.StatusInfo
+                {
+                    StatusMessage = "error printing batch ",
+                    ErrorMessage = ex.Message
+                };
+            }
+            
         }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (cts != null)
+            {
+                cts.Cancel();
+            }
+        }
+
     }
 }
  

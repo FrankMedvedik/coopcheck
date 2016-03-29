@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
 using CoopCheck.Repository;
@@ -120,6 +121,15 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             if (SelectedPayment == null) return false;
             if (SelectedPayment.cleared_flag) return false;
             return true;
+        }
+        public int PaymentsCnt
+        {
+            get { return Payments.Count(); }
+        }
+
+        public decimal? PaymentsTotalDollars
+        {
+            get { return Payments.Sum(x => x.tran_amount); }
         }
 
         private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();

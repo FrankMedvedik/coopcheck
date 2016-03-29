@@ -52,7 +52,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             }
         }
 
-        private PaymentReportCriteria _paymentReportCriteria;
+        private PaymentReportCriteria _paymentReportCriteria = new PaymentReportCriteria();
 
         public PaymentReportCriteria PaymentReportCriteria
         {

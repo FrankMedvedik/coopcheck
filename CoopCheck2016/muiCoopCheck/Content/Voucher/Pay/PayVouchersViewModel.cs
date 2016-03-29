@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
 using CoopCheck.Repository;
@@ -211,7 +212,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             set { _canSwiftPay = value; NotifyPropertyChanged(); }
         }
 
-        public async Task<StatusInfo> PrintChecks()
+        public async Task<StatusInfo> PrintChecks(CancellationToken ctx)
         {
             Status = new StatusInfo()
             {
@@ -225,7 +226,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 try
                 {
-                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,StartingCheckNum);
+                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,StartingCheckNum, ctx);
                      return v.Result;
                 }
                 catch (Exception e)

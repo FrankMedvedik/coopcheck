@@ -50,8 +50,11 @@
         <StackPanel Orientation="Vertical"  Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisConverter}}">
                     <!--<TextBlock Text="number of payments left to process - "/>
                     <TextBlock FontWeight="Bold" Margin="6" Text="{Binding RemainingPaymentCnt}" Width="150" />-->
-                    <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="400" Height="400" Style="{StaticResource ChasingDotsProgressRingStyle}" />
-                </StackPanel>
+            
+                    <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="20" Height="20" Style="{StaticResource ChasingDotsProgressRingStyle}" />
+                <Button Margin="172,6,6,6" Width="150" Content="Cancel Printing" HorizontalAlignment="Left" TabIndex="3" IsDefault="True" Click="cancelButton_Click"  />
+
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

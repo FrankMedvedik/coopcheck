@@ -23,10 +23,17 @@
                     </StackPanel>
                 </StackPanel>
             </Expander>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}">
-                <!--<Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>-->
+            <StackPanel Orientation="Vertical" Grid.Row="1" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}">
+            <StackPanel Orientation="Horizontal" >
                 <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="VoidCheck_Click" IsEnabled="{Binding CanVoidSelectedCheck}" Content="Void Payment" />
                 <Button Width="150" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ClearCheck_Click" IsEnabled="{Binding CanClearSelectedCheck}" Content="Clear Payment" />
+            </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock FontSize="14" FontWeight="Bold" Margin="6" >Check Count</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Bold" Margin="6,6,30,6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}"  />
+                    <TextBlock FontSize="14" FontWeight="Bold" Margin="30,6,6,6" >Total Dollars</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Bold" Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" />
+                </StackPanel>
             </StackPanel>
             <DataGrid Grid.Row="2" ItemsSource="{Binding Payments}" AutoGenerateColumns="False" Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="dgPayments" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}" IsReadOnly="True" MaxHeight="300" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended">
                 <DataGrid.Columns>

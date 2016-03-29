@@ -44,73 +44,62 @@ namespace CoopCheck.WPF.Services
             List<vwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
-                query =
-                    ctx.vwPayments.Where(
-                        x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate);
-
                 if (!String.IsNullOrEmpty(crc.CheckNumber))
                 {
-                    query = query.Where(x => x.check_num == crc.CheckNumber);
+                    query = ctx.vwPayments.Where(x => x.check_num == crc.CheckNumber);
 
                 }
-                if(crc.Account.account_id != BankAccountSvc.AllAccountsOption.account_id)
-                    query = query.Where(x => x.account_id == crc.Account.account_id);
-
-                if (!String.IsNullOrWhiteSpace(crc.Email))
-                {
-                    query = query.Where(x => x.email.Contains(crc.Email));
-
-                }
-
-                if (!String.IsNullOrWhiteSpace(crc.PhoneNumber))
-                {
-                    query = query.Where(x => x.phone_number.Contains(crc.PhoneNumber));
-
-                }
-
-                if (!String.IsNullOrEmpty(crc.LastName))
-                {
-                    query = query.Where(x => x.last_name.Contains(crc.LastName));
-                }
-
-                if (!String.IsNullOrEmpty(crc.FirstName))
-                {
-                    query = query.Where(x => x.first_name.Contains(crc.FirstName));
-                }
-
-                if (crc.IsCleared)
-                {
-                   query = query.Where(x => x.cleared_flag == true);
-                }
-
-                if (crc.IsPrinted)
-                {
-                    query = query.Where(x => x.print_flag == true);
-                }
-
-                if (crc.BatchNumber != null)
+                else
                 {
                     query =
-                        query.Where(
-                            x => x.batch_num == crc.BatchNumber);
+                        ctx.vwPayments.Where(
+                            x => x.check_date >= crc.StartDate && x.check_date <= crc.EndDate);
+
+                    if (crc.Account.account_id != BankAccountSvc.AllAccountsOption.account_id)
+                        query = query.Where(x => x.account_id == crc.Account.account_id);
+
+                    if (!String.IsNullOrWhiteSpace(crc.Email))
+                    {
+                        query = query.Where(x => x.email.Contains(crc.Email));
+
+                    }
+
+                    if (!String.IsNullOrWhiteSpace(crc.PhoneNumber))
+                    {
+                        query = query.Where(x => x.phone_number.Contains(crc.PhoneNumber));
+
+                    }
+
+                    if (!String.IsNullOrEmpty(crc.LastName))
+                    {
+                        query = query.Where(x => x.last_name.Contains(crc.LastName));
+                    }
+
+                    if (!String.IsNullOrEmpty(crc.FirstName))
+                    {
+                        query = query.Where(x => x.first_name.Contains(crc.FirstName));
+                    }
+
+
+                    if (crc.BatchNumber != null)
+                    {
+                        query =
+                            query.Where(
+                                x => x.batch_num == crc.BatchNumber);
+                    }
+
+                    if (!String.IsNullOrEmpty(crc.JobNumber))
+                    {
+                        query =
+                            query.Where(
+                                x =>
+                                    System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double) x.job_num)
+                                        .Contains(crc.JobNumber));
+                    }
+                    //string ob = String.IsNullOrEmpty(b.last_name) ? b.company : b.last_name;
                 }
-
-                if (!String.IsNullOrEmpty(crc.JobNumber))
-                {
-                    //int filter;
-                    //if (int.TryParse(crc.JobNumber, out filter))
-                        //query = query.Where(x => x.job_num == n);
-                    query =
-                        query.Where(
-                            x =>
-                                System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double) x.job_num)
-                                    .Contains(crc.JobNumber));
-                }
-
-                //string ob = String.IsNullOrEmpty(b.last_name) ? b.company : b.last_name;
-
                 v = await (from b in query
-                           select b).Take(PaymentSvc.MAX_PAYMENT_COUNT).ToListAsync();
+                           select b).ToListAsync();
             }
             return v;
         }
