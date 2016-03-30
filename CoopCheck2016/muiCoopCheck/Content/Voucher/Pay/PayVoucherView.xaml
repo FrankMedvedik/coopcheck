@@ -48,8 +48,10 @@
                 </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical"  Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisConverter}}">
-                    <!--<TextBlock Text="number of payments left to process - "/>
-                    <TextBlock FontWeight="Bold" Margin="6" Text="{Binding RemainingPaymentCnt}" Width="150" />-->
+                <StackPanel Orientation="Horizontal" Margin="150,6,6,6">
+                    <TextBlock FontWeight="Bold" Margin="6" Text="{Binding CurrentPrintCount}" />
+                    <TextBlock Text="payments printed" Margin="6" />
+                </StackPanel>
                 <ProgressBar Minimum="0" Maximum="100" Value="{Binding PercentComplete}" Height="100" Width="300"/>
                     <!--<mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="20" Height="20" Style="{StaticResource ChasingDotsProgressRingStyle}" />-->
                 <Button Margin="172,6,6,6" Width="150" Content="Cancel Printing" HorizontalAlignment="Left" TabIndex="3" IsDefault="True" Click="cancelButton_Click"  />

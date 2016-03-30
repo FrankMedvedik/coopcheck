@@ -130,6 +130,17 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 _endingCheckNum = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("CurrentPrintCount");
+            }
+        }
+        public int CurrentPrintCount
+        {
+            get { return _currentPrintCount; }
+
+            set
+            {
+                _currentPrintCount = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -154,38 +165,14 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 NotifyPropertyChanged();
                 if (value)
                 {
-                    //_dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-                    //_dispatcherTimer.Tick += (dispatcherTimer_Tick);
-                    //_dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
-                    //_dispatcherTimer.Start();
                     CanPrintChecks = false;
                     CanSwiftPay = false;
                 }
-                //else
-                //{
-                //    //_dispatcherTimer.Stop();
-                //    //_dispatcherTimer.Tick -= (dispatcherTimer_Tick);
-                //    SetAccountInfo();
-                //}
-                
             }
         }
 
 
-        //private int _remainingPaymentCnt;
-        //public int RemainingPaymentCnt
-        //{
-        //    get { return _remainingPaymentCnt; }
-        //    set
-        //    {
-        //        _remainingPaymentCnt = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
-
         private StatusInfo _status;
-
         private int _startingCheckNum;
         private int _endingCheckNum;
         private ObservableCollection<bank_account> _accounts;
@@ -193,12 +180,14 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         private bool _canSwiftPay;
         private bool _canPrintChecks;
         private decimal _percentComplete;
+        private int _currentPrintCount;
 
 
         public async void ResetState()
         {
             Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
-
+            CurrentPrintCount = 0;
+            PercentComplete = 0;
         }
 
         public Boolean CanPrintChecks
@@ -222,7 +211,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         public async Task<PrintCheckProgress> PrintChecks(CancellationToken ctx)
         {
             PercentComplete = 0;
-
+            CurrentPrintCount = 0;
             Status = new StatusInfo()
             {
                 ErrorMessage = "",
@@ -238,6 +227,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 PercentComplete = (int) e.ProgressPercentage;
                 Status = e.Status;
                 EndingCheckNum = e.CurrentCheckNum;
+                CurrentPrintCount = EndingCheckNum - StartingCheckNum;
             };
 
             PrintCheckProgress result = await Task<PrintCheckProgress>.Factory.StartNew(() =>
