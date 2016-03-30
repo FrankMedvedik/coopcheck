@@ -47,7 +47,10 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 try
                 {
                     _vm.IsBusy = true;
-                    _vm.Status = await _vm.PrintChecks(cts.Token);
+                    var c = await _vm.PrintChecks(cts.Token);
+                    _vm.Status = c.Status;
+                    _vm.EndingCheckNum = c.CurrentCheckNum;
+                    _vm.PercentComplete = c.ProgressPercentage;
                 }
                 catch (OperationCanceledException)
                 {

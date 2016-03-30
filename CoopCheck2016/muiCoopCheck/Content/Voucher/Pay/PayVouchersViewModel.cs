@@ -192,6 +192,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         private BatchEdit _selectedBatchEdit;
         private bool _canSwiftPay;
         private bool _canPrintChecks;
+        private decimal _percentComplete;
 
 
         public async void ResetState()
@@ -205,6 +206,12 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             get { return _canPrintChecks; }
             set { _canPrintChecks = value; NotifyPropertyChanged(); }
         }
+        public decimal PercentComplete
+        {
+            get { return _percentComplete; }
+            set { _percentComplete = value;
+                NotifyPropertyChanged(); }
+        }
 
         public Boolean CanSwiftPay
         {
@@ -212,8 +219,10 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             set { _canSwiftPay = value; NotifyPropertyChanged(); }
         }
 
-        public async Task<StatusInfo> PrintChecks(CancellationToken ctx)
+        public async Task<PrintCheckProgress> PrintChecks(CancellationToken ctx)
         {
+            PercentComplete = 0;
+
             Status = new StatusInfo()
             {
                 ErrorMessage = "",
@@ -222,25 +231,41 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             };
             IsBusy = true;
 
-            Status = await Task.Factory.StartNew( () =>
+            var progress = new Progress<PrintCheckProgress>();
+
+            progress.ProgressChanged += (s, e) =>
+            {
+                PercentComplete = (int) e.ProgressPercentage;
+                Status = e.Status;
+                EndingCheckNum = e.CurrentCheckNum;
+            };
+
+            PrintCheckProgress result = await Task<PrintCheckProgress>.Factory.StartNew(() =>
             {
                 try
                 {
-                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,StartingCheckNum, ctx);
-                     return v.Result;
+                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
+                        StartingCheckNum, ctx, progress);
+                    return v.Result;
                 }
                 catch (Exception e)
                 {
-                    return new StatusInfo()
+                    return new PrintCheckProgress
                     {
-                        ErrorMessage = e.Message,
-                        IsBusy = true,
-                        StatusMessage = "checks failed to print"
+                        Status = new StatusInfo()
+                        {
+                            ErrorMessage = e.Message,
+                            IsBusy = true,
+                            StatusMessage = "checks failed to print"
+                        },
+                        CurrentCheckNum = 0,
+                        ProgressPercentage = 100
                     };
                 }
+
             });
-            IsBusy = false;
-            return Status;
+           result.Status.IsBusy = false;
+           return result;
         }
 
 
@@ -272,7 +297,6 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 }
             });
             IsBusy = false;
-
         }
     }
-    }
+}

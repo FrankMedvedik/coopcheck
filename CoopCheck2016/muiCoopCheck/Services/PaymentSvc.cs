@@ -2,9 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
-using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Content.Voucher.Pay;
 using CoopCheck.WPF.Models;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Services
 {
@@ -31,7 +30,7 @@ namespace CoopCheck.WPF.Services
             return i;
         }
 
-       public static async Task<StatusInfo> PrintChecksAsync(int accountId, int batchNum, int startingCheckNum, CancellationToken ctx)
+       public static async Task<PrintCheckProgress> PrintChecksAsync(int accountId, int batchNum, int startingCheckNum, CancellationToken ctx, Progress<PrintCheckProgress> progress)
        {
            //return await Task<StatusInfo>.Factory.StartNew(() =>
            //{
@@ -40,16 +39,18 @@ namespace CoopCheck.WPF.Services
            //    System.Threading.Thread.Sleep(10000);
            //    return i;
            //});
-          return await Task<StatusInfo>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum), ctx);
+          return await Task<PrintCheckProgress>.Factory.StartNew(() => PrintChecks(accountId, batchNum, startingCheckNum, ctx,  progress));
        }
 
-        private static StatusInfo PrintChecks(int accountId, int batchNum, int startingCheckNum)
+        private static PrintCheckProgress PrintChecks(int accountId, int batchNum, int startingCheckNum, CancellationToken ctx, IProgress<PrintCheckProgress> progress)
         {
             //return 
-            var status = new StatusInfo();
+            var retVal = new PrintCheckProgress();
 
             var b = BatchEdit.GetBatchEdit(batchNum);
             int checkNum = startingCheckNum;
+            int currentCheckPct = 0;
+                
 
             // WriteCheckBatchCommand works like a begin transaction and 
             // marks the whole batch as in progress... the check number is defined here but the print flag is set at the end. 
@@ -60,23 +61,34 @@ namespace CoopCheck.WPF.Services
             var app = new Microsoft.Office.Interop.Word.Application();
             foreach (var c in b.Vouchers)
             {
-                status = PaymentPrintSvc.PrintCheck(app,b, c, checkNum++);
-                if (status.ErrorMessage == null)
-                {
+                var status = PaymentPrintSvc.PrintCheck(app,b, c, checkNum++);
                     status.IsBusy = true;
-                    Messenger.Default.Send(new NotificationMessage<StatusInfo>(status, Notifications.StatusInfoChanged));
-                }
-                else
+                ++currentCheckPct;
+                var z = currentCheckPct / b.Vouchers.Count * 100;
+                retVal.ProgressPercentage = ((decimal) currentCheckPct / (decimal) b.Vouchers.Count * 100);
+                retVal.CurrentCheckNum = checkNum;
+                    retVal.Status = status;
+                progress?.Report(retVal); // calls SynchronizationContext.Post
+                if (retVal.Status.ErrorMessage != null)
                 {
                     app.Quit(false);
-                    return status;
+                    return retVal;
                 }
+                if(ctx.IsCancellationRequested)
+                    app.Quit(false);
+                ctx.ThrowIfCancellationRequested();
             }
             app.Quit(false);
-            return new StatusInfo() 
+            return new PrintCheckProgress
             {
+                 ProgressPercentage =  ((decimal)currentCheckPct / (decimal)b.Vouchers.Count * 100),
+            Status = new StatusInfo()
+                {
                     StatusMessage =
-                    String.Format("Batch {0}  Printed", batchNum)
+                        String.Format("Batch {0}  Printed", batchNum)
+                },
+                CurrentCheckNum = checkNum
+
             };
       }
 
