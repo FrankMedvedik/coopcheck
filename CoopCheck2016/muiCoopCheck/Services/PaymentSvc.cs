@@ -9,7 +9,7 @@ namespace CoopCheck.WPF.Services
 {
     public static class PaymentSvc 
     {
-        public static int MAX_PAYMENT_COUNT = 3000;
+        public static int MAX_PAYMENT_COUNT = 10000;
 
    
         public static async Task<StatusInfo> SwiftFulfillAsync(int accountId, int batchNum)
@@ -87,8 +87,7 @@ namespace CoopCheck.WPF.Services
                     StatusMessage =
                         String.Format("Batch {0}  Printed", batchNum)
                 },
-                CurrentCheckNum = checkNum
-
+                CurrentCheckNum = --checkNum
             };
       }
 

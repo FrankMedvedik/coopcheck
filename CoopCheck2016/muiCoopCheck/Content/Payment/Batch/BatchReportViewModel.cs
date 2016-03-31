@@ -103,11 +103,11 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         }
 
 
-        private string _headingText;
+        
         private bool _showGridData;
         private StatusInfo _status;
         private PaymentReportCriteria _paymentReportCriteria;
-
+        private string _headingText;
         public string HeadingText
         {
             get { return _headingText; }

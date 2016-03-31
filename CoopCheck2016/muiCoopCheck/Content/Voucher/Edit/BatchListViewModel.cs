@@ -12,7 +12,27 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
     public class BatchListViewModel : ViewModelBase
     {
         private ObservableCollection<vwOpenBatch> _batchList;
+        private string _headingText;
 
+        public string HeadingText
+        {
+            get { return _headingText; }
+            set
+            {
+                _headingText = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+    
+        public int PaymentsCnt
+        {
+            get { return BatchList.Sum(x => x.voucher_cnt.GetValueOrDefault(0)); }
+        }
+        public decimal? PaymentsTotalDollars
+        {
+            get { return BatchList.Sum(x => x.total_amount); }
+        }
         public ObservableCollection<vwOpenBatch> BatchList
         {
             get { return _batchList; }
@@ -20,6 +40,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _batchList = value;
                 NotifyPropertyChanged();
+                HeadingText = String.Format("{0} batches",BatchList.Count);
+                NotifyPropertyChanged("PaymentsTotalDollars");
+                NotifyPropertyChanged("PaymentsCnt");
             }
         }
 

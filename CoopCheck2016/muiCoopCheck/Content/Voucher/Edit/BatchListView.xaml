@@ -5,19 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" >
     <Grid >
-        <DataGrid AutoGenerateColumns="False" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="6" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding HeadingText}" />
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Width="70">Check Count</TextBlock>
+                    <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Width="100">Total Dollars</TextBlock>
+                    <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                </StackPanel>
+                <!--<Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>-->
+            </StackPanel>
+        </StackPanel>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
                 IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12" MaxHeight="250"
                   ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                 ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
                 VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
                 <DataGrid.Columns>
                  <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
-                <DataGridTextColumn Binding="{Binding jobnum}" Header="job num" />
+                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" />
+                 <DataGridTextColumn Binding="{Binding jobnum}" Header="job num" />
                 <DataGridTextColumn Binding="{Binding jobname}" Header="job name" />
                 <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="count" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="dollars" ElementStyle="{StaticResource RightCell}"/>
-                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" />
                 <DataGridTextColumn Binding="{Binding projmgr}" Header="proj mgr" />
                 <DataGridTextColumn Binding="{Binding clientname}" Header="client" />
                 <DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}"/>
