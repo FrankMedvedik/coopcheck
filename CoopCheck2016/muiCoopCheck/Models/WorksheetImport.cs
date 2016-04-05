@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using CoopCheck.WPF.Models;
 
-namespace CoopCheck.WPF
+namespace CoopCheck.WPF.Models
 {
     public class WorksheetImport
     {

@@ -123,7 +123,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="0"
+                   <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top"  Grid.Row="0"  Grid.Column="0"
                         ItemsSource="{Binding SelectedBatch.Vouchers}" HorizontalScrollBarVisibility="Auto" MaxHeight="400" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" MaxWidth="800" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                               LostFocus="VoucherGrid_LostFocus" 
                               VerticalScrollBarVisibility="Auto"  SelectionMode="Single" Margin="12">

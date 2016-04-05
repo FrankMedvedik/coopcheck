@@ -62,14 +62,27 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 _batchTotalDollars = value; NotifyPropertyChanged();
             }
         }
-        public int PaymentsCnt
+        public int? PaymentsCnt
         {
-            get { return Batches.ToList().Sum(x => x.total_cnt.GetValueOrDefault(0)); }
+            get { return Batches?.Where(x => x.total_amount > 0).Sum(x => x.total_cnt.GetValueOrDefault(0)); }
+        }
+
+        public decimal? VoidsTotalDollars
+        {
+            get { return Batches?.Where(x => x.total_amount < 0).Sum(x => x.total_amount);
+            }
+        }
+        public int? VoidsCnt
+        {
+            get { return Batches?.Where(x => x.total_amount < 0).Sum(x => x.total_cnt.GetValueOrDefault(0)); }
         }
 
         public decimal? PaymentsTotalDollars
         {
-            get { return Batches.Sum(x => x.total_amount); }
+            get
+            {
+                return Batches?.Where(x=>x.total_amount > 0).Sum(x => x.total_amount);
+            }
         }
         private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
         public ObservableCollection<vwBatchRpt> Batches
@@ -88,7 +101,8 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                                       Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
                 NotifyPropertyChanged("PaymentsTotalDollars");
                 NotifyPropertyChanged("PaymentsCnt");
-
+                NotifyPropertyChanged("VoidsTotalDollars");
+                NotifyPropertyChanged("VoidsCnt");
                 Status = new StatusInfo()
                 {
                     ErrorMessage = "",

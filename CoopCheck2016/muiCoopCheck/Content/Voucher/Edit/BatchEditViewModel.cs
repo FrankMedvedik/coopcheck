@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media;
 using CoopCheck.Library;
 using CoopCheck.Repository;
@@ -148,12 +146,14 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             RefreshBatchListCommand = new RelayCommand(RefreshBatchList, CanRefreshBatchList);
             ResetState();
-            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, async message =>
             {
                 if (message.Content != null)
                 {
-                    BatchNum = message.Content.batch_num;
-       }
+                    //BatchNum = message.Content.batch_num;
+                     SelectedBatch = await GetBatch(message.Content.batch_num);
+                    SetJobName();
+                }
                 else
                     ShowSelectedBatch = false;
             });
@@ -201,8 +201,8 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 if (SelectedBatch != null)
                 {
                     ShowSelectedBatch = true;
-                    HeaderText = string.Format("Batch Number {0} Job Number {1}  Voucher Cnt {2} Total Amount {3:C}",
-                        SelectedBatch.Num, SelectedBatch.JobNum, SelectedBatch.Vouchers.Count, SelectedBatch.Amount.GetValueOrDefault(0));
+                    //HeaderText = string.Format("Batch Number {0} Job Number {1}  Voucher Cnt {2} Total Amount {3:C}",
+                    //    SelectedBatch?.Num, SelectedBatch?.JobNum, SelectedBatch?.Vouchers.Count, SelectedBatch?.Amount.GetValueOrDefault(0));
                     
                     Status = new StatusInfo()
                     {
@@ -248,22 +248,31 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public int BatchNum
         {
             get { return SelectedBatch != null ? SelectedBatch.Num : 0; }
-            set
-            {
-                Status = new StatusInfo()
-                { StatusMessage = "loading.." , IsBusy=true };
-                if (BatchNum == -1) // shorthand for make a  new one ! 
-                    SelectedBatch = BatchEdit.NewBatchEdit();
-                else
-                    GetBatch(value);
-                NotifyPropertyChanged();
-            }
+            //set
+            //{
+            //    Status = new StatusInfo()
+            //    //{ StatusMessage = "loading.." , IsBusy=true };
+            //    //try
+            //    //{
+            //    //    if (BatchNum == -1) // shorthand for make a  new one ! 
+            //    //        SelectedBatch = BatchEdit.NewBatchEdit();
+            //    //    else
+            //    //        await GetBatch(value);
+            //    //    NotifyPropertyChanged();
+
+            //    //}
+            //    //catch (Exception ex)
+            //    //{
+            //    //    Status = new StatusInfo()
+            //    //    { StatusMessage = "error loading..", ErrorMessage=ex.Message};
+            //    //}
+            //}
         }
 
-        private async void GetBatch(int batchNum)
+        private async Task<BatchEdit> GetBatch(int batchNum)
         {
-            SelectedBatch =  await BatchSvc.GetBatchEditAsync(batchNum);
-            SetJobName();
+            return await BatchSvc.GetBatchEditAsync(batchNum);
+          //  return BatchSvc.GetBatchEdit(batchNum);
         }
 
 

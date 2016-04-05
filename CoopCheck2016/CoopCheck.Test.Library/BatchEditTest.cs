@@ -11,7 +11,7 @@ namespace CoopCheck.Test.Library
         [TestMethod]
         public void GetBatch()
         {
-            var obj = BatchEdit.GetBatchEdit(100);
+            var obj = BatchEdit.GetBatchEdit(26158);
             Assert.IsNotNull(obj);
             Assert.AreEqual(100, obj.Num);
         }

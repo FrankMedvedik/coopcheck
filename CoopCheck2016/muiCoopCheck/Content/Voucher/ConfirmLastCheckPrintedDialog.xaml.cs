@@ -26,7 +26,7 @@ namespace CoopCheck.WPF.Content.Voucher
             InitializeComponent();
 
             // define the dialog buttons
-            this.Buttons = new Button[] {this.OkButton};
+            this.Buttons = new Button[] {this.OkButton, this.CancelButton};
             Buttons.First().IsDefault = false;
         }
     }

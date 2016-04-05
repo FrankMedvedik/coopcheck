@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.WPF.Content;
 
-namespace CoopCheck.WPF.Content
+namespace CoopCheck.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for AccountsPage.xaml

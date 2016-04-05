@@ -18,20 +18,28 @@
                     <Setter Property="Margin" Value="6" />
                 </Style>
             </StackPanel.Resources>
-            <TextBlock Text="{Binding HeadingText}" />
-            <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Text="{Binding HeadingText}" FontWeight="Bold"  />
+            <StackPanel Orientation="Horizontal" >
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Width="70">Check Count</TextBlock>
                     <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock>Checks</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Width="100">Total Dollars</TextBlock>
                     <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock>Dollars</TextBlock>
                 </StackPanel>
-                <!--<Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>-->
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal" Margin="6">
+                        <TextBlock Text="{Binding VoidsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock>Voids</TextBlock>
+                </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="6">
+                        <TextBlock Text="{Binding VoidsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock>Voided Dollars</TextBlock>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
-
         <!--<StackPanel Orientation="Horizontal" Grid.Row="0">
             <TextBlock Text="{Binding HeadingText}"  HorizontalAlignment="Left" Margin="6"/>
             <Button Width="Auto" Margin="12" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>

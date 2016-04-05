@@ -107,6 +107,7 @@ namespace CoopCheck.WPF.Content.Utilities.Unpay
             if (SelectedBatch != null)
             {
                 SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
+                //SelectedBatchEdit = BatchSvc.GetBatchEdit(SelectedBatch.batch_num);
                 SetAccountInfo();
             }
             else

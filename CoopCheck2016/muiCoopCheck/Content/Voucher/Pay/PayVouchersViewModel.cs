@@ -84,7 +84,8 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         }
         private async void SetCheckNumbers()
         {
-            StartingCheckNum = await BatchSvc.NextCheckNum(SelectedAccount.account_id);
+            if (SelectedAccount.account_type == "CHECKING")
+                StartingCheckNum = await BatchSvc.NextCheckNum(SelectedAccount.account_id);
         }
 
         private async void SetSelectedBatchEdit()
@@ -92,6 +93,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             if (SelectedBatch != null)
             {
                 SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
+                //SelectedBatchEdit = BatchSvc.GetBatchEdit(SelectedBatch.batch_num);
                 SetAccountInfo();
             }
             else
@@ -193,7 +195,8 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         public Boolean CanPrintChecks
         {
             get { return _canPrintChecks; }
-            set { _canPrintChecks = value; NotifyPropertyChanged(); }
+            set { _canPrintChecks = value;
+                NotifyPropertyChanged(); }
         }
         public decimal PercentComplete
         {

@@ -37,8 +37,8 @@
                 VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
                 <DataGrid.Columns>
                  <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
+                <DataGridTextColumn Binding="{Binding jobnum}" Header="job num" />
                 <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" />
-                 <DataGridTextColumn Binding="{Binding jobnum}" Header="job num" />
                 <DataGridTextColumn Binding="{Binding jobname}" Header="job name" />
                 <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="count" ElementStyle="{StaticResource RightCell}"/>

@@ -25,13 +25,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         }
 
     
-        public int PaymentsCnt
+        public int? PaymentsCnt
         {
-            get { return BatchList.Sum(x => x.voucher_cnt.GetValueOrDefault(0)); }
+            get { return BatchList?.Sum(x => x.voucher_cnt.GetValueOrDefault(0)); }
         }
         public decimal? PaymentsTotalDollars
         {
-            get { return BatchList.Sum(x => x.total_amount); }
+            get { return BatchList?.Sum(x => x.total_amount); }
         }
         public ObservableCollection<vwOpenBatch> BatchList
         {

@@ -216,6 +216,7 @@ namespace CoopCheck.WPF.Content.Utilities.Unpay
         private async void GetBatch(int batchNum)
         {
             SelectedBatch =  await BatchSvc.GetBatchEditAsync(batchNum);
+            //SelectedBatch = BatchSvc.GetBatchEdit(batchNum);
         }
 
         private string _headerText;

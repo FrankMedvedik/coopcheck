@@ -28,7 +28,7 @@ namespace CoopCheck.WPF.Models
         public DateTime EndDate
         {
             get { return _endDate; }
-            set { _endDate = value; NotifyPropertyChanged(); }
+            set { _endDate = value.AddDays(1).AddSeconds(-1); NotifyPropertyChanged(); }
         }
 
         private string _checkNumber;

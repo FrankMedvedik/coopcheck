@@ -156,7 +156,7 @@ namespace CoopCheck.DalADO
                     {
                         var err = new Csla.WcfPortal.WcfErrorInfo();
                         err.ExceptionTypeName = "PromoCodeError";
-                        err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId, response.ResponseCode,response.SwiftErrorReason);
+                        err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId, response.ResponseCode,response.ResponseMessage);
                         throw new Csla.DataPortalException(err);
                     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Repository;
@@ -97,6 +98,11 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
         }
 
+        private void SetCanUnPrint()
+        {
+            DateTime pdate = AllPayments.Max(x => x.check_date).GetValueOrDefault();
+            CanUnprint = (ClosedPayments.Count == 0) && (pdate.AddDays(7) > DateTime.Now);
+        }
         public ObservableCollection<vwPayment> AllPayments
         {
             get { return _allPayments; }
@@ -116,9 +122,10 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             {
                 _closedPayments = value;
                 NotifyPropertyChanged();
-                CanUnprint = (ClosedPayments.Count == 0);
+                SetCanUnPrint();
             }
         }
+
 
         public ObservableCollection<vwPayment> OpenPayments
         {

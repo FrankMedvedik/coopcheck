@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace FirstFloor.ModernUI.App.Content
+namespace CoopCheck.WPF.Content.Settings
 {
     /// <summary>
     /// Interaction logic for SettingsAppearance.xaml

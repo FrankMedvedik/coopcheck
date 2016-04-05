@@ -1,14 +1,10 @@
-﻿using FirstFloor.ModernUI.Presentation;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
-using Remotion.Reflection;
+using FirstFloor.ModernUI.Presentation;
 
-namespace FirstFloor.ModernUI.App.Content
+namespace CoopCheck.WPF.Content.Settings
 {
     /// <summary>
     /// A simple view model for configuring theme, font and accent colors.

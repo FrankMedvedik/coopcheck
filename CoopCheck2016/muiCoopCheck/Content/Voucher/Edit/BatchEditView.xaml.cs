@@ -23,7 +23,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public int BatchNum
         {
             get { return _vm.SelectedBatch.Num; }
-            set { _vm.BatchNum = value; }
         }
         public void ResetState()
         {
