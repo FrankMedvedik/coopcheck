@@ -21,12 +21,12 @@
             <TextBlock Text="{Binding HeadingText}" />
             <StackPanel Orientation="Horizontal" Margin="10">
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Width="70" >Check Count</TextBlock>
                     <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock>Payments</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Width="100" >Total Dollars</TextBlock>
                     <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock>Dollars</TextBlock>
                 </StackPanel>
                 <!--<Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>-->
             </StackPanel>

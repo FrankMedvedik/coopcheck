@@ -20,13 +20,13 @@
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
                 <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="6" />
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right">Payment Count</TextBlock>
                     <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
-                </StackPanel>
+                        <TextBlock Margin="6" HorizontalAlignment="Right">Count</TextBlock>
+                    </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right">Total Dollars</TextBlock>
                     <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
-                </StackPanel>
+                        <TextBlock Margin="6" HorizontalAlignment="Right">Dollars</TextBlock>
+                    </StackPanel>
             </StackPanel>
         </Grid>
         <DataGrid x:Name="dgPositivePay" AutoGenerateColumns="False" Grid.Row="1" Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Path=PositivePays, Mode=TwoWay}" VerticalAlignment="Top" SelectedItem="{Binding Path=SelectedPositivePay, Mode=TwoWay,IsAsync=True}" MaxHeight="600" IsReadOnly="True" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" ToolTipService.ToolTip="Positive Payment Report" Margin="6" HorizontalAlignment="Left" SelectionMode="Single">
