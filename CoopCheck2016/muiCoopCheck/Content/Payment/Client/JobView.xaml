@@ -43,7 +43,7 @@
                 <mui:DataGridTextColumn Binding="{Binding clientname}" Header="client" />
                 <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
-                <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
+                <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
                 <mui:DataGridTextColumn Binding="{Binding batch_cnt}" Header="batch cnt" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}"/>
                 <mui:DataGridTextColumn ClipboardContentBinding="{Binding cleared_amount, StringFormat='0,0.'}" Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $" ElementStyle="{StaticResource RightCell}" />
@@ -54,14 +54,11 @@
                  <mui:DataGridTextColumn ClipboardContentBinding="{Binding first_pay_date ,StringFormat=d}"   Binding="{Binding first_pay_date ,StringFormat=d}" Header="first payment date" ElementStyle="{StaticResource RightCell}" />
                  <mui:DataGridTextColumn ClipboardContentBinding="{Binding last_pay_date,StringFormat=d}"  Binding="{Binding last_pay_date,StringFormat=d}" Header="last payment  date" ElementStyle="{StaticResource RightCell}" />
             </DataGrid.Columns>
-                <!--<DataGrid.CommandBindings>
-                    <CommandBinding Command="{x:Static ApplicationCommands.Copy}" CanExecute="CanCopy" Executed="Copy" />
-                </DataGrid.CommandBindings>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>-->
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -61,6 +61,12 @@
                 <mui:DataGridTextColumn Binding="{Binding first_check_num}" Header="first check" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding last_check_num}" Header="last check " ElementStyle="{StaticResource RightCell}"/>
             </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
+        </DataGrid>
     </Grid>
 </UserControl>

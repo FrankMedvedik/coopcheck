@@ -36,6 +36,7 @@
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Control.Resources>
+    <ScrollViewer>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -199,4 +200,5 @@
             </Expander>
         </Grid>
     </Grid>
+    </ScrollViewer>
 </UserControl>

@@ -32,6 +32,12 @@
                     </mui:DataGridTextColumn.CellStyle>
                 </mui:DataGridTextColumn>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
             <Button Width="150" HorizontalAlignment="Center" Margin="6" VerticalAlignment="Center" Click="Excel_Click">Excel</Button>

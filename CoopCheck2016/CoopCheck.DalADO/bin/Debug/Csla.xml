@@ -978,15 +978,15 @@
             to be inserted, updated or deleted within the database based on the
             object's current state.
             </para><para>
-            If <see cref="P:Csla.Core.BusinessBase.IsDeleted" /> is <see langword="true"/>
+            If <see cref="P:Csla.Core.BusinessBase.IsDeleted" /> is true
             the object will be deleted. Otherwise, if <see cref="P:Csla.Core.BusinessBase.IsNew" /> 
-            is <see langword="true"/> the object will be inserted. 
+            is true the object will be inserted. 
             Otherwise the object's data will be updated in the database.
             </para><para>
             All this is contingent on <see cref="P:Csla.Core.BusinessBase.IsDirty" />. If
-            this value is <see langword="false"/>, no data operation occurs. 
+            this value is false, no data operation occurs. 
             It is also contingent on <see cref="P:Csla.Core.BusinessBase.IsValid" />. 
-            If this value is <see langword="false"/> an
+            If this value is false an
             exception will be thrown to indicate that the UI attempted to save an
             invalid object.
             </para><para>
@@ -1013,8 +1013,8 @@
             Saves the object to the database.
             </summary>
             <param name="forceUpdate">
-            If <see langword="true"/>, triggers overriding IsNew and IsDirty. 
-            If <see langword="false"/> then it is the same as calling Save().
+            If true, triggers overriding IsNew and IsDirty. 
+            If false then it is the same as calling Save().
             </param>
         </member>
         <member name="M:Csla.BusinessBase`1.SaveAsync(System.Boolean,System.Object,System.Boolean)">
@@ -1022,8 +1022,8 @@
             Saves the object to the database.
             </summary>
             <param name="forceUpdate">
-            If <see langword="true"/>, triggers overriding IsNew and IsDirty. 
-            If <see langword="false"/> then it is the same as calling Save().
+            If true, triggers overriding IsNew and IsDirty. 
+            If false then it is the same as calling Save().
             </param>
             <param name="userState">User state data.</param>
             <param name="isSync">True if the save operation should be synchronous.</param>
@@ -1031,11 +1031,11 @@
         <member name="M:Csla.BusinessBase`1.Save(System.Boolean)">
             <summary>
             Saves the object to the database, forcing
-            IsNew to <see langword="false"/> and IsDirty to True.
+            IsNew to false and IsDirty to True.
             </summary>
             <param name="forceUpdate">
-            If <see langword="true"/>, triggers overriding IsNew and IsDirty. 
-            If <see langword="false"/> then it is the same as calling Save().
+            If true, triggers overriding IsNew and IsDirty. 
+            If false then it is the same as calling Save().
             </param>
             <returns>A new object containing the saved values.</returns>
             <remarks>
@@ -1068,8 +1068,8 @@
             Starts an async operation to save the object to the database.
             </summary>
             <param name="forceUpdate">
-            If <see langword="true"/>, triggers overriding IsNew and IsDirty. 
-            If <see langword="false"/> then it is the same as calling Save().
+            If true, triggers overriding IsNew and IsDirty. 
+            If false then it is the same as calling Save().
             </param>
             <param name="handler">
             Method called when the operation is complete.
@@ -1081,8 +1081,8 @@
             Starts an async operation to save the object to the database.
             </summary>
             <param name="forceUpdate">
-            If <see langword="true"/>, triggers overriding IsNew and IsDirty. 
-            If <see langword="false"/> then it is the same as calling Save().
+            If true, triggers overriding IsNew and IsDirty. 
+            If false then it is the same as calling Save().
             </param>
             <remarks>
             This overload is designed for use in web applications
@@ -1095,8 +1095,8 @@
             Starts an async operation to save the object to the database.
             </summary>
             <param name="forceUpdate">
-            If <see langword="true"/>, triggers overriding IsNew and IsDirty. 
-            If <see langword="false"/> then it is the same as calling Save().
+            If true, triggers overriding IsNew and IsDirty. 
+            If false then it is the same as calling Save().
             </param>
             <param name="handler">
             Delegate reference to a callback handler that will
@@ -1111,7 +1111,7 @@
         <member name="M:Csla.BusinessBase`1.BeginSave(System.EventHandler{Csla.Core.SavedEventArgs},System.Object)">
             <summary>
             Saves the object to the database, forcing
-            IsNew to <see langword="false"/> and IsDirty to True.
+            IsNew to false and IsDirty to True.
             </summary>
             <param name="handler">
             Delegate reference to a callback handler that will
@@ -1271,7 +1271,7 @@
         </member>
         <member name="P:Csla.BusinessBindingListBase`2.IsSavable">
             <summary>
-            Returns <see langword="true" /> if this object is both dirty and valid.
+            Returns true if this object is both dirty and valid.
             </summary>
             <returns>A value indicating if this object is both dirty and valid.</returns>
         </member>
@@ -1343,7 +1343,7 @@
         </member>
         <member name="M:Csla.BusinessBindingListBase`2.ContainsDeleted(`1)">
             <summary>
-            Returns <see langword="true"/> if the internal deleted list
+            Returns true if the internal deleted list
             contains the specified child object.
             </summary>
             <param name="item">Child object to check.</param>
@@ -1484,9 +1484,9 @@
             each object's current state.
             </para><para>
             All this is contingent on <see cref="P:Csla.BusinessBindingListBase`2.IsDirty" />. If
-            this value is <see langword="false"/>, no data operation occurs. 
+            this value is false, no data operation occurs. 
             It is also contingent on <see cref="P:Csla.BusinessBindingListBase`2.IsValid" />. If this value is 
-            <see langword="false"/> an exception will be thrown to 
+            false an exception will be thrown to 
             indicate that the UI attempted to save an invalid object.
             </para><para>
             It is important to note that this method returns a new version of the
@@ -1743,7 +1743,7 @@
         </member>
         <member name="M:Csla.BusinessListBase`2.ContainsDeleted(`1)">
             <summary>
-            Returns <see langword="true"/> if the internal deleted list
+            Returns true if the internal deleted list
             contains the specified child object.
             </summary>
             <param name="item">Child object to check.</param>
@@ -1961,7 +1961,7 @@
         </member>
         <member name="P:Csla.BusinessListBase`2.IsSavable">
             <summary>
-            Returns <see langword="true" /> if this object has changes, is valid,
+            Returns true if this object has changes, is valid,
             the user is authorized and the object is not busy.
             </summary>
         </member>
@@ -2003,9 +2003,9 @@
             each object's current state.
             </para><para>
             All this is contingent on <see cref="P:Csla.BusinessListBase`2.IsDirty" />. If
-            this value is <see langword="false"/>, no data operation occurs. 
+            this value is false, no data operation occurs. 
             It is also contingent on <see cref="P:Csla.BusinessListBase`2.IsValid" />. If this value is 
-            <see langword="false"/> an exception will be thrown to 
+            false an exception will be thrown to 
             indicate that the UI attempted to save an invalid object.
             </para><para>
             It is important to note that this method returns a new version of the
@@ -2537,8 +2537,8 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsNew">
             <summary>
-            Returns <see langword="true" /> if this is a new object, 
-            <see langword="false" /> if it is a pre-existing object.
+            Returns true if this is a new object, 
+            false if it is a pre-existing object.
             </summary>
             <remarks>
             An object is considered to be new if its primary identifying (key) value 
@@ -2552,14 +2552,14 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsDeleted">
             <summary>
-            Returns <see langword="true" /> if this object is marked for deletion.
+            Returns true if this object is marked for deletion.
             </summary>
             <remarks>
             CSLA .NET supports both immediate and deferred deletion of objects. This
             property is part of the support for deferred deletion, where an object
             can be marked for deletion, but isn't actually deleted until the object
             is saved to the database. This property indicates whether or not the
-            current object has been marked for deletion. If it is <see langword="true" />
+            current object has been marked for deletion. If it is true
             , the object will
             be deleted when it is saved to the database, otherwise it will be inserted
             or updated by the save operation.
@@ -2568,7 +2568,7 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsDirty">
             <summary>
-            Returns <see langword="true" /> if this object's 
+            Returns true if this object's 
             data, or any of its fields or child objects data, 
             has been changed.
             </summary>
@@ -2589,7 +2589,7 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsSelfDirty">
             <summary>
-            Returns <see langword="true" /> if this object's data has been changed.
+            Returns true if this object's data has been changed.
             </summary>
             <remarks>
             <para>
@@ -2678,7 +2678,7 @@
             Marks an object as being dirty, or changed.
             </summary>
             <param name="suppressEvent">
-            <see langword="true" /> to supress the PropertyChanged event that is otherwise
+            true to supress the PropertyChanged event that is otherwise
             raised to indicate that the object's state has changed.
             </param>
         </member>
@@ -2715,7 +2715,7 @@
         </member>
         <member name="M:Csla.Core.BusinessBase.MarkClean">
             <summary>
-            Forces the object's IsDirty flag to <see langword="false" />.
+            Forces the object's IsDirty flag to false.
             </summary>
             <remarks>
             This method is normally called automatically and is
@@ -2724,44 +2724,44 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsSavable">
             <summary>
-            Returns <see langword="true" /> if this object is both dirty and valid.
+            Returns true if this object is both dirty and valid.
             </summary>
             <remarks>
             An object is considered dirty (changed) if 
-            <see cref="P:Csla.BusinessBase.IsDirty" /> returns <see langword="true" />. It is
+            <see cref="P:Csla.BusinessBase.IsDirty" /> returns true. It is
             considered valid if IsValid
-            returns <see langword="true" />. The IsSavable property is
+            returns true. The IsSavable property is
             a combination of these two properties. 
             </remarks>
             <returns>A value indicating if this object is both dirty and valid.</returns>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanReadProperty(Csla.Core.IPropertyInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             calling property.
             </summary>
             <param name="property">Property to check.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanReadProperty(Csla.Core.IPropertyInfo,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             calling property.
             </summary>
-            <returns><see langword="true" /> if read is allowed.</returns>
+            <returns>true if read is allowed.</returns>
             <param name="property">Property to read.</param>
             <param name="throwOnFalse">Indicates whether a negative
             result should cause an exception.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanReadProperty(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             specified property.
             </summary>
             <param name="propertyName">Name of the property to read.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanReadProperty(System.String,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             specified property.
             </summary>
             <param name="propertyName">Name of the property to read.</param>
@@ -2770,31 +2770,31 @@
         </member>
         <member name="M:Csla.Core.BusinessBase.CanWriteProperty(Csla.Core.IPropertyInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to write the
+            Returns true if the user is allowed to write the
             specified property.
             </summary>
             <param name="property">Property to write.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanWriteProperty(Csla.Core.IPropertyInfo,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to write the
+            Returns true if the user is allowed to write the
             calling property.
             </summary>
-            <returns><see langword="true" /> if write is allowed.</returns>
+            <returns>true if write is allowed.</returns>
             <param name="property">Property to write.</param>
             <param name="throwOnFalse">Indicates whether a negative
             result should cause an exception.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanWriteProperty(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to write the
+            Returns true if the user is allowed to write the
             specified property.
             </summary>
             <param name="propertyName">Name of the property to write.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanWriteProperty(System.String,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to write the
+            Returns true if the user is allowed to write the
             specified property.
             </summary>
             <param name="propertyName">Name of the property to write.</param>
@@ -2803,29 +2803,29 @@
         </member>
         <member name="M:Csla.Core.BusinessBase.CanExecuteMethod(Csla.Core.IMemberInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute
+            Returns true if the user is allowed to execute
             the specified method.
             </summary>
             <param name="method">Method to execute.</param>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanExecuteMethod(Csla.Core.IMemberInfo,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute
+            Returns true if the user is allowed to execute
             the specified method.
             </summary>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
             <param name="method">Method to execute.</param>
             <param name="throwOnFalse">Indicates whether a negative
             result should cause an exception.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.CanExecuteMethod(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute
+            Returns true if the user is allowed to execute
             the specified method.
             </summary>
             <param name="methodName">Name of the method to execute.</param>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
         </member>
         <member name="P:Csla.Core.BusinessBase.DisableIEditableObject">
             <summary>
@@ -2938,7 +2938,7 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsChild">
             <summary>
-            Returns <see langword="true" /> if this is a child (non-root) object.
+            Returns true if this is a child (non-root) object.
             </summary>
         </member>
         <member name="M:Csla.Core.BusinessBase.MarkAsChild">
@@ -3027,9 +3027,9 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsValid">
             <summary>
-            Returns <see langword="true" /> if the object 
+            Returns true if the object 
             and its child objects are currently valid, 
-            <see langword="false" /> if the
+            false if the
             object or any of its child objects have broken 
             rules or are otherwise invalid.
             </summary>
@@ -3048,8 +3048,8 @@
         </member>
         <member name="P:Csla.Core.BusinessBase.IsSelfValid">
             <summary>
-            Returns <see langword="true" /> if the object is currently 
-            valid, <see langword="false" /> if the
+            Returns true if the object is currently 
+            valid, false if the
             object has broken rules or is otherwise invalid.
             </summary>
             <remarks>
@@ -3455,6 +3455,43 @@
             result.
             </remarks>
         </member>
+        <member name="M:Csla.Core.BusinessBase.LazyGetProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </remarks>
+        </member>
+        <member name="M:Csla.Core.BusinessBase.LazyGetPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            <para>
+            Note that the first value returned is almost certainly
+            the defaultValue because the value is initialized asynchronously.
+            The real value is provided later along with a PropertyChanged
+            event to indicate the value has changed.
+            </para><para>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </para>
+            </remarks>
+        </member>
         <member name="M:Csla.Core.BusinessBase.ReadPropertyConvert``2(Csla.PropertyInfo{``0})">
             <summary>
             Gets a property's value from the list of 
@@ -3486,6 +3523,28 @@
             </summary>
             <param name="propertyInfo">
             PropertyInfo object containing property metadata.</param>
+        </member>
+        <member name="M:Csla.Core.BusinessBase.LazyReadProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+        </member>
+        <member name="M:Csla.Core.BusinessBase.LazyReadPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
         </member>
         <member name="M:Csla.Core.BusinessBase.SetProperty``1(Csla.PropertyInfo{``0},``0@,``0)">
             <summary>
@@ -5322,7 +5381,7 @@
         </member>
         <member name="M:Csla.Core.IReadOnlyObject.CanReadProperty(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             calling property.
             </summary>
             <param name="propertyName">Name of the property to read.</param>
@@ -5531,9 +5590,9 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsValid">
             <summary>
-            Returns <see langword="true" /> if the object 
+            Returns true if the object 
             and its child objects are currently valid, 
-            <see langword="false" /> if the
+            false if the
             object or any of its child objects have broken 
             rules or are otherwise invalid.
             </summary>
@@ -5552,8 +5611,8 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsSelfValid">
             <summary>
-            Returns <see langword="true" /> if the object is currently 
-            valid, <see langword="false" /> if the
+            Returns true if the object is currently 
+            valid, false if the
             object has broken rules or is otherwise invalid.
             </summary>
             <remarks>
@@ -5569,7 +5628,7 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsDirty">
             <summary>
-            Returns <see langword="true" /> if this object's 
+            Returns true if this object's 
             data, or any of its fields or child objects data, 
             has been changed.
             </summary>
@@ -5590,7 +5649,7 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsSelfDirty">
             <summary>
-            Returns <see langword="true" /> if this object's data has been changed.
+            Returns true if this object's data has been changed.
             </summary>
             <remarks>
             <para>
@@ -5609,14 +5668,14 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsDeleted">
             <summary>
-            Returns <see langword="true" /> if this object is marked for deletion.
+            Returns true if this object is marked for deletion.
             </summary>
             <remarks>
             CSLA .NET supports both immediate and deferred deletion of objects. This
             property is part of the support for deferred deletion, where an object
             can be marked for deletion, but isn't actually deleted until the object
             is saved to the database. This property indicates whether or not the
-            current object has been marked for deletion. If it is <see langword="true" />
+            current object has been marked for deletion. If it is true
             , the object will
             be deleted when it is saved to the database, otherwise it will be inserted
             or updated by the save operation.
@@ -5625,8 +5684,8 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsNew">
             <summary>
-            Returns <see langword="true" /> if this is a new object, 
-            <see langword="false" /> if it is a pre-existing object.
+            Returns true if this is a new object, 
+            false if it is a pre-existing object.
             </summary>
             <remarks>
             An object is considered to be new if its primary identifying (key) value 
@@ -5640,21 +5699,21 @@
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsSavable">
             <summary>
-            Returns <see langword="true" /> if this object is both dirty and valid.
+            Returns true if this object is both dirty and valid.
             </summary>
             <remarks>
             An object is considered dirty (changed) if 
-            <see cref="P:Csla.BusinessBase.IsDirty" /> returns <see langword="true" />. It is
+            <see cref="P:Csla.BusinessBase.IsDirty" /> returns true. It is
             considered valid if IsValid
-            returns <see langword="true" />. The IsSavable property is
+            returns true. The IsSavable property is
             a combination of these two properties. 
             </remarks>
             <returns>A value indicating if this object is both dirty and valid.</returns>
         </member>
         <member name="P:Csla.Core.ITrackStatus.IsChild">
             <summary>
-            Returns <see langword="true" /> if this is a child object, 
-            <see langword="false" /> if it is a root object.
+            Returns true if this is a child object, 
+            false if it is a root object.
             </summary>
             <remarks>
             An object should be marked as a child object unless it is the
@@ -8150,7 +8209,7 @@
         </member>
         <member name="T:Csla.DataPortalException">
             <summary>
-            This exception is returned for any errors occuring
+            This exception is returned for any errors occurring
             during the server-side DataPortal invocation.
             </summary>
         </member>
@@ -9117,7 +9176,7 @@
             <param name="target">An object with properties to be set from the dictionary.</param>
             <param name="ignoreList">A list of property names to ignore. 
             These properties will not be set on the target object.</param>
-            <param name="suppressExceptions">If <see langword="true" />, any exceptions will be supressed.</param>
+            <param name="suppressExceptions">If true, any exceptions will be supressed.</param>
             <remarks>
             The key names in the dictionary must match the property names on the target
             object. Target properties may not be readonly or indexed.
@@ -9147,7 +9206,7 @@
             <param name="target">A name/value dictionary containing the source values.</param>
             <param name="ignoreList">A list of property names to ignore. 
             These properties will not be set on the target object.</param>
-            <param name="suppressExceptions">If <see langword="true" />, any exceptions will be supressed.</param>
+            <param name="suppressExceptions">If true, any exceptions will be supressed.</param>
         </member>
         <member name="M:Csla.Data.DataMapper.Map(System.Object,System.Object)">
             <summary>
@@ -9186,7 +9245,7 @@
             <param name="target">An object with properties to be set from the dictionary.</param>
             <param name="ignoreList">A list of property names to ignore. 
             These properties will not be set on the target object.</param>
-            <param name="suppressExceptions">If <see langword="true" />, any exceptions will be supressed.</param>
+            <param name="suppressExceptions">If true, any exceptions will be supressed.</param>
             <remarks>
             <para>
             The property names and types of the source object must match the property names and types
@@ -9220,7 +9279,7 @@
             </summary>
             <param name="source">An object containing the source values.</param>
             <param name="target">An object with properties to be set from the dictionary.</param>
-            <param name="suppressExceptions">If <see langword="true" />, any exceptions will be supressed.</param>
+            <param name="suppressExceptions">If true, any exceptions will be supressed.</param>
             <param name="map">A DataMap object containing the mappings to use during the copy process.</param>
             <remarks>
             The property names and types of the source object must match the property names and types
@@ -9702,7 +9761,7 @@
             Gets a boolean value from the datareader.
             </summary>
             <remarks>
-            Returns <see langword="false" /> for null.
+            Returns false for null.
             </remarks>
             <param name="name">Name of the column containing the value.</param>
         </member>
@@ -9711,7 +9770,7 @@
             Gets a boolean value from the datareader.
             </summary>
             <remarks>
-            Returns <see langword="false" /> for null.
+            Returns false for null.
             </remarks>
             <param name="i">Ordinal column position of the value.</param>
         </member>
@@ -10706,7 +10765,7 @@
             item is contained in the list.
             </summary>
             <param name="item">Item to find.</param>
-            <returns><see langword="true"/> if the item is
+            <returns>true if the item is
             contained in the list.</returns>
         </member>
         <member name="M:Csla.FilteredBindingList`1.IndexOf(`0)">
@@ -10737,7 +10796,7 @@
             Removes an item from the list.
             </summary>
             <param name="item">Item to remove.</param>
-            <returns><see langword="true"/> if the 
+            <returns>true if the 
             remove succeeds.</returns>
         </member>
         <member name="M:Csla.FilteredBindingList`1.RemoveAt(System.Int32)">
@@ -10845,7 +10904,7 @@
             </summary>
             <param name="item">The object to be filtered.</param>
             <param name="filter">The filter criteria.</param>
-            <returns><see langword="true"/> if the item matches the filter.</returns>
+            <returns>true if the item matches the filter.</returns>
         </member>
         <member name="T:Csla.IBusinessBase">
             <summary>
@@ -10859,16 +10918,6 @@
             or lists will be derived.
             </summary>
             <typeparam name="C">Type of the child objects contained in the list.</typeparam>
-        </member>
-        <member name="T:Csla.ICloneable">
-            <summary>
-            Defines a cloneable object.
-            </summary>
-        </member>
-        <member name="M:Csla.ICloneable.Clone">
-            <summary>
-            Gets a clone of the object.
-            </summary>
         </member>
         <member name="T:Csla.ICommandBase">
             <summary>
@@ -11891,31 +11940,31 @@
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanReadProperty(Csla.Core.IPropertyInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             calling property.
             </summary>
             <param name="property">Property to check.</param>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanReadProperty(Csla.Core.IPropertyInfo,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             calling property.
             </summary>
-            <returns><see langword="true" /> if read is allowed.</returns>
+            <returns>true if read is allowed.</returns>
             <param name="property">Property to read.</param>
             <param name="throwOnFalse">Indicates whether a negative
             result should cause an exception.</param>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanReadProperty(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             specified property.
             </summary>
             <param name="propertyName">Name of the property to read.</param>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanReadProperty(System.String,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             specified property.
             </summary>
             <param name="propertyName">Name of the property to read.</param>
@@ -11924,29 +11973,29 @@
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanExecuteMethod(Csla.Core.IMemberInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute
+            Returns true if the user is allowed to execute
             the specified method.
             </summary>
             <param name="method">Method to execute.</param>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanExecuteMethod(Csla.Core.IMemberInfo,System.Boolean)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute
+            Returns true if the user is allowed to execute
             the specified method.
             </summary>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
             <param name="method">Method to execute.</param>
             <param name="throwOnFalse">Indicates whether a negative
             result should cause an exception.</param>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.CanExecuteMethod(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute
+            Returns true if the user is allowed to execute
             the specified method.
             </summary>
             <param name="methodName">Name of the method to execute.</param>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.GetClone">
             <summary>
@@ -12209,6 +12258,43 @@
             True if an exception should be thrown when the
             user is not authorized to read this property.</param>
         </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyGetProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </remarks>
+        </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyGetPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Lazily initializes a property and returns
+            the resulting value.
+            </summary>
+            <typeparam name="P">Type of the property.</typeparam>
+            <param name="property">PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
+            <returns></returns>
+            <remarks>
+            <para>
+            Note that the first value returned is almost certainly
+            the defaultValue because the value is initialized asynchronously.
+            The real value is provided later along with a PropertyChanged
+            event to indicate the value has changed.
+            </para><para>
+            If the user is not authorized to read the property
+            value, the defaultValue value is returned as a
+            result.
+            </para>
+            </remarks>
+        </member>
         <member name="M:Csla.ReadOnlyBase`1.GetPropertyConvert``2(Csla.PropertyInfo{``0},``0)">
             <summary>
             Gets a property's value as 
@@ -12375,6 +12461,28 @@
             </summary>
             <param name="propertyInfo">
             PropertyInfo object containing property metadata.</param>
+        </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyReadProperty``1(Csla.PropertyInfo{``0},System.Func{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="valueGenerator">Method returning the new value.</param>
+        </member>
+        <member name="M:Csla.ReadOnlyBase`1.LazyReadPropertyAsync``1(Csla.PropertyInfo{``0},System.Threading.Tasks.Task{``0})">
+            <summary>
+            Gets a property's value as a specified type.
+            </summary>
+            <typeparam name="P">
+            Type of the property.
+            </typeparam>
+            <param name="property">
+            PropertyInfo object containing property metadata.</param>
+            <param name="factory">Async method returning the new value.</param>
         </member>
         <member name="M:Csla.ReadOnlyBase`1.LoadPropertyConvert``2(Csla.PropertyInfo{``0},``1)">
             <summary>
@@ -13262,7 +13370,7 @@
             Gets a value indicating whether this
             type is marked as Serializable.
             </summary>
-            <param name="type">Type to check.</param>
+            <param name="objectType">Type to check.</param>
             <returns>True if the type is Serializable.</returns>
         </member>
         <member name="T:Csla.RelationshipTypes">
@@ -15766,50 +15874,50 @@
         </member>
         <member name="M:Csla.Security.IAuthorizeReadWrite.CanWriteProperty(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to write the
+            Returns true if the user is allowed to write the
             to the specified property.
             </summary>
-            <returns><see langword="true" /> if write is allowed.</returns>
+            <returns>true if write is allowed.</returns>
             <param name="propertyName">Name of the property to write.</param>
         </member>
         <member name="M:Csla.Security.IAuthorizeReadWrite.CanWriteProperty(Csla.Core.IPropertyInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to write the
+            Returns true if the user is allowed to write the
             to the specified property.
             </summary>
-            <returns><see langword="true" /> if write is allowed.</returns>
+            <returns>true if write is allowed.</returns>
             <param name="property">Property to write.</param>
         </member>
         <member name="M:Csla.Security.IAuthorizeReadWrite.CanReadProperty(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             specified property.
             </summary>
-            <returns><see langword="true" /> if read is allowed.</returns>
+            <returns>true if read is allowed.</returns>
             <param name="propertyName">Name of the property to read.</param>
         </member>
         <member name="M:Csla.Security.IAuthorizeReadWrite.CanReadProperty(Csla.Core.IPropertyInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to read the
+            Returns true if the user is allowed to read the
             specified property.
             </summary>
-            <returns><see langword="true" /> if read is allowed.</returns>
+            <returns>true if read is allowed.</returns>
             <param name="property">Property to read.</param>
         </member>
         <member name="M:Csla.Security.IAuthorizeReadWrite.CanExecuteMethod(System.String)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute 
+            Returns true if the user is allowed to execute 
             the specified method.
             </summary>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
             <param name="methodName">Name of the method to execute.</param>
         </member>
         <member name="M:Csla.Security.IAuthorizeReadWrite.CanExecuteMethod(Csla.Core.IMemberInfo)">
             <summary>
-            Returns <see langword="true" /> if the user is allowed to execute 
+            Returns true if the user is allowed to execute 
             the specified method.
             </summary>
-            <returns><see langword="true" /> if execute is allowed.</returns>
+            <returns>true if execute is allowed.</returns>
             <param name="method">Method to execute.</param>
         </member>
         <member name="T:Csla.Security.ICheckRoles">
@@ -16180,6 +16288,30 @@
             <param name="serializationStream">
             Stream that will contain the the serialized data.</param>
             <param name="graph">Object graph to be serialized.</param>
+        </member>
+        <member name="T:Csla.Serialization.Mobile.AssemblyNameTranslator">
+            <summary>
+            Translates assembly names to and from short
+            code values for serialization in MobileFormatter
+            </summary>
+        </member>
+        <member name="M:Csla.Serialization.Mobile.AssemblyNameTranslator.GetAssemblyQualifiedName(System.Type)">
+            <summary>
+            Gets the assembly qualified type name with any use
+            of common assemblies translated to
+            a short code.
+            </summary>
+            <param name="type">Original type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Csla.Serialization.Mobile.AssemblyNameTranslator.GetAssemblyQualifiedName(System.String)">
+            <summary>
+            Gets the assembly qualified type name after
+            translating the assembly name codes to the platform-
+            specific assembly name.
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
         </member>
         <member name="T:Csla.Serialization.Mobile.CslaBinaryReader">
             <summary>
@@ -17308,7 +17440,7 @@
         </member>
         <member name="P:Csla.Server.DataPortalContext.IsRemotePortal">
             <summary>
-            Returns <see langword="true" /> if the 
+            Returns true if the 
             server-side DataPortal is running
             on a remote server via remoting.
             </summary>
@@ -20414,7 +20546,7 @@
             <param name="value">String containing the date value.</param>
             <returns>A new SmartDate containing the date value.</returns>
             <remarks>
-            EmptyIsMin will default to <see langword="true"/>.
+            EmptyIsMin will default to true.
             </remarks>
         </member>
         <member name="M:Csla.SmartDate.Parse(System.String,Csla.SmartDate.EmptyValue)">
@@ -20953,7 +21085,7 @@
         </member>
         <member name="P:Csla.SortedBindingList`1.SupportsChangeNotification">
             <summary>
-            Returns <see langword="true"/> since this object does raise the
+            Returns true since this object does raise the
             ListChanged event.
             </summary>
         </member>
@@ -20964,7 +21096,7 @@
         </member>
         <member name="P:Csla.SortedBindingList`1.SupportsSorting">
             <summary>
-            Returns <see langword="true"/>. Sorting is supported.
+            Returns true. Sorting is supported.
             </summary>
         </member>
         <member name="M:Csla.SortedBindingList`1.CopyTo(`0[],System.Int32)">

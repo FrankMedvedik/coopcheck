@@ -20,11 +20,12 @@ namespace CoopCheck.WPF.Services
                 //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
                 //System.Threading.Thread.Sleep(5000);
                 await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
-                
+                i.StatusMessage = "Swiftpay processing complete";
+                i.IsBusy = false;
             }
             catch (Exception e)
             {
-                i.StatusMessage = "Swift Pay processing error";
+                i.StatusMessage = "Swift Pay processing error for batch {0}";
                 i.ErrorMessage = e.Message;
             }
             return i;

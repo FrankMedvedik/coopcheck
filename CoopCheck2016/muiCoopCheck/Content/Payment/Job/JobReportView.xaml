@@ -18,7 +18,7 @@
                     <Setter Property="Margin" Value="6" />
                 </Style>
             </StackPanel.Resources>
-            <TextBlock Text="{Binding HeadingText}" />
+            <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" Margin="10">
                 <StackPanel Orientation="Horizontal" Margin="6">
                     <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
@@ -40,7 +40,7 @@
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                 <mui:DataGridTextColumn Binding="{Binding clientname}" Header="client" />
-                <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
+                <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
                 <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $" ElementStyle="{StaticResource RightCell}"/>
                 <mui:DataGridTextColumn Binding="{Binding open_amount, StringFormat='0,0.'}" Header="outstanding $" ElementStyle="{StaticResource RightCell}"/>
@@ -50,6 +50,11 @@
                 <mui:DataGridTextColumn Binding="{Binding first_pay_date ,StringFormat=d}" Header="first payment date" ElementStyle="{StaticResource RightCell}"/>
                 <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}" Header="last payment  date" ElementStyle="{StaticResource RightCell}"/>
             </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </UserControl>

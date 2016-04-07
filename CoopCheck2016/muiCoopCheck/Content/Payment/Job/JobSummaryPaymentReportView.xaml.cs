@@ -27,7 +27,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
             {
                 if (message.Notification == Notifications.SelectedJobChanged)
                 {
-                    RefreshChildren(message.Content);
+                     RefreshChildren(message.Content);
                 }
             });
         }

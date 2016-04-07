@@ -50,6 +50,12 @@
                 <StaticResource ResourceKey="dgClearedDate" />
                 <StaticResource ResourceKey="dgPPrintFlag"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
         </DataGrid>
     </Grid>
 </UserControl>

@@ -42,6 +42,7 @@ namespace CoopCheck.WPF.Content.Status
 
         }
         private StatusInfo _status;
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -49,8 +50,14 @@ namespace CoopCheck.WPF.Content.Status
             {
                 _status = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("ShowError");
             }
         }
 
+        public Visibility ShowError
+        {
+            get { return Status?.ErrorMessage?.Trim().Length > 0
+                    ? Visibility.Visible: Visibility.Hidden; }
+        }
     }
 }

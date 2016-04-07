@@ -24,7 +24,12 @@
                 <StaticResource ResourceKey="dgBFDescription"  />
                 <StaticResource ResourceKey="dgBFAmount" />
             </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <Button Width="100" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left"  Click="Excel_Click">Excel</Button>
         </StackPanel>

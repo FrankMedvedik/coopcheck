@@ -89,14 +89,17 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             {
                 _vm.StartingCheckNum = int.Parse(SelectedvwBatchRpt.first_check_num);
                 var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
-                var result = cw.ShowDialog();
-                CommitCheckCommand.Execute(SelectedvwBatchRpt.batch_num, _vm.EndingCheckNum);
-                _vm.Status = new Models.StatusInfo
-                {
-                    StatusMessage = string.Format("batch - {0} last check number printed - {1}",
-                        SelectedvwBatchRpt.batch_num, _vm.EndingCheckNum)
-                };
 
+                var result = cw.ShowDialog();
+                if (result == true)
+                {
+                    CommitCheckCommand.Execute(SelectedvwBatchRpt.batch_num, _vm.EndingCheckNum);
+                    _vm.Status = new Models.StatusInfo
+                    {
+                        StatusMessage = string.Format("batch - {0} last check number printed - {1}",
+                            SelectedvwBatchRpt.batch_num, _vm.EndingCheckNum)
+                    };
+                }
             }
             catch (Exception ex)
             {

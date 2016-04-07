@@ -46,16 +46,15 @@
         </StackPanel>-->
             <DataGrid x:Name="dgBatches" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"   
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
-                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto"   
-                      ItemsSource="{Binding Batches}"  VerticalAlignment="Top"   
-                      ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Batches}" VerticalAlignment="Top"
+                     ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                       SelectedItem="{Binding SelectedBatch}" MaxHeight="300"
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding batch_num}"  Header="batch"/>
                     <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
                     <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
-                    <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="projmgr" />
+                    <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
                 <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}" />
@@ -67,6 +66,11 @@
                 <mui:DataGridTextColumn Binding="{Binding first_check_num}" Header="first check" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding last_check_num}" Header="last check " ElementStyle="{StaticResource RightCell}"/>
             </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </UserControl>

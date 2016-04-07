@@ -9,19 +9,18 @@
     <!--Margin="{StaticResource StatusMargin}"-->
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" 
-                              MaxWidth="400"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="200" MaxWidth="400"/>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" 
-              Margin="6" Text="{Binding Status.ErrorMessage}" Foreground="Red"/>
-        <TextBlock Grid.Column="1" VerticalAlignment="Top" TextWrapping="Wrap" 
-                   HorizontalAlignment="Left" Margin="6" 
-                       Text="{Binding Status.StatusMessage}" Foreground="Black"/>
-        <mui:ModernProgressRing Grid.Column="2" IsActive="{Binding Status.IsBusy}" Width="10" Height="10" 
+        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="!" Visibility="{Binding ShowError}" Foreground="Red" FontWeight="ExtraBold"  FontSize="32" />
+        <TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" 
+              Margin="6" Text="{Binding Status.ErrorMessage}" Foreground="Red" FontWeight="Bold" FontSize="14"/>
+        <TextBlock Grid.Column="2" VerticalAlignment="Top" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="6" FontSize="14" Text="{Binding Status.StatusMessage}" Foreground="Black"/>
+        <mui:ModernProgressRing Grid.Column="3" IsActive="{Binding Status.IsBusy}" Width="10" Height="10" 
                                     Style="{StaticResource ChasingDotsProgressRingStyle}" />
-        <TextBlock Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="6" Text="{Binding Status.whoami}" Foreground="Black"/>
+        <TextBlock Grid.Column="4" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="6" Text="{Binding Status.whoami}" Foreground="Black" />
     </Grid>
 </UserControl>

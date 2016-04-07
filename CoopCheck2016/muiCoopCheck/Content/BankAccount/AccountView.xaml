@@ -13,6 +13,11 @@
                     <mui:DataGridTextColumn Binding="{Binding account_number}" Header="number" />
                     <mui:DataGridTextColumn Binding="{Binding account_type}" Header="type" />
                 </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
      </Grid>
 </UserControl>

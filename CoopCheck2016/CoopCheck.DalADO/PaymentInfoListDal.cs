@@ -113,7 +113,7 @@ namespace CoopCheck.DalADO
 
                     request.ClientData1 = String.Format("{0} - {1}", jraClient.ClientID, jraClient.JobName);
                     request.ClientData2 = p.JobNum.ToString();
-                    request.ClientData2 = p.StudyTopic;
+                    request.ClientData3 = p.StudyTopic;
                     request.ClientData4 = p.BatchNum.ToString();
                     request.ClientData5 = Csla.ApplicationContext.User.Identity.Name;
 
@@ -163,6 +163,7 @@ namespace CoopCheck.DalADO
 
                 }
             }
+            ClearPromoCodeBatch(batch_num);
         }
 
         class ClientJobDto
@@ -225,6 +226,22 @@ namespace CoopCheck.DalADO
             }
         }
 
+        public void ClearPromoCodeBatch(int batch_num)
+        {
+            using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
+            {
+                // for now i have implemented this as a service - ClearCheckSvc since I wanted to use bulk load
+                // the call for 7000+ rows was taking over 45 minutes to complete using the csla one row at time code
+                // 
+                using (var cmd = new SqlCommand("dbo.dal_ClearPromoCodeBatch", ctx.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@batch_num", batch_num).DbType = DbType.Int32;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public void ClearCheck(int tranId, DateTime clearedDate, decimal clearedAmount)
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))

@@ -38,7 +38,12 @@
                 <mui:DataGridTextColumn Binding="{Binding payee}" Header="Payee" />
                 <!--<mui:DataGridTextColumn Binding="{Binding rpt}"  Header="bank data"/>-->
             </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
     </Grid>
     </ScrollViewer>
 </UserControl>

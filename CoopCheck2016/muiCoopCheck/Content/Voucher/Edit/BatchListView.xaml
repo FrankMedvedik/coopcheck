@@ -43,7 +43,7 @@
                 <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="count" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="dollars" ElementStyle="{StaticResource RightCell}"/>
-                <DataGridTextColumn Binding="{Binding projmgr}" Header="proj mgr" />
+                <DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
                 <DataGridTextColumn Binding="{Binding clientname}" Header="client" />
                 <DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}"/>
             </DataGrid.Columns>

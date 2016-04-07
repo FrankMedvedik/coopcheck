@@ -291,5 +291,5 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             });
             IsBusy = false;
         }
-    }
+}
 }

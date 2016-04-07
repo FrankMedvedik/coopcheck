@@ -53,6 +53,11 @@
                     <StaticResource ResourceKey="dgPAmount" />
                     <StaticResource ResourceKey="dgClearedDate" />
                 </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
         </Grid>
     </ScrollViewer>

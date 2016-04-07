@@ -3,17 +3,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mui="http://firstfloorsoftware.com/ModernUI"
 	xmlns:converters="clr-namespace:CoopCheck.WPF.Converters">
-    <!--<Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
-        <Style.Triggers>
-            <Trigger Property="Validation.HasError" Value="true">
-                <Setter Property="ToolTip"
-                            Value="{Binding RelativeSource={RelativeSource Self},
-                                    Path=(Validation.Errors)[0].ErrorContent}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>-->
     <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     <converters:BooleanToVisibility x:Key="BoolToVisConverter" />
     <converters:NotBooleanToVisibility x:Key="NotBoolToVisConverter" />
@@ -26,7 +15,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
         <Setter Property="Background" Value="#EEEEEEEE" />
@@ -124,5 +112,6 @@
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress1" Binding="{Binding address_1}" Header="address 1" />
     <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress2" Binding="{Binding address_2}" Header="address 2" />
     <mui:DataGridCheckBoxColumn x:Shared="False" x:Key="dgPPrintFlag" Binding="{Binding print_flag}" Header="printed?" />
+
 
 </ResourceDictionary>
