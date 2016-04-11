@@ -4,8 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:voucher="clr-namespace:CoopCheck.WPF.Content.Voucher"
-             xmlns:utilities="clr-namespace:CoopCheck.WPF.Content.Utilities"
              xmlns:pay="clr-namespace:CoopCheck.WPF.Content.Voucher.Pay"
              mc:Ignorable="d" >
     <Control.Resources>

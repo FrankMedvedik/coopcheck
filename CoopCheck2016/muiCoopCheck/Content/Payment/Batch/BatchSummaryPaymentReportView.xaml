@@ -17,17 +17,17 @@
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
         <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
-        <Expander Grid.Row="1" IsExpanded="True">
+            <StackPanel Orientation="Horizontal">
         <criteria:PaymentReportCriteriaView x:Name="prcv" />
-        </Expander>
-            <StackPanel Grid.Row="2"  Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
                 <Button x:Name="Refresh" HorizontalAlignment="Left" IsDefault="True"  Margin="6"
                     VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
-                <Button x:Name="Unprint" Margin="100,6,6,6" IsEnabled="{Binding CanUnprint}"
+                <Button x:Name="Unprint" Margin="20,6,6,6" IsEnabled="{Binding CanUnprint}"
                         Click="Unprint_Click" HorizontalAlignment="Left"  VerticalAlignment="Center" >Unprint</Button>
             </StackPanel>
-            <batch:BatchReportView  x:Name="brv" Margin="12" Grid.Row="3"/>
-        <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  Grid.Row="4" Margin="12"  Layout="Tab">
+            </StackPanel>
+            <batch:BatchReportView  x:Name="brv"  Grid.Row="3"/>
+        <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  Grid.Row="4" Layout="Tab">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
                 <mui:Link DisplayName="Cleared" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoopCheck.WPF.Test", "coopC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClean.Repository", "..\JRADataCleaner\DataClean.Repository\DataClean.Repository.csproj", "{05984E8E-CF26-4200-A15B-F45E0EF4CE76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email1099.WPF", "ModernUINavigationApp1\Email1099.WPF.csproj", "{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,24 @@ Global
 		{05984E8E-CF26-4200-A15B-F45E0EF4CE76}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{05984E8E-CF26-4200-A15B-F45E0EF4CE76}.Release|x86.ActiveCfg = Release|Any CPU
 		{05984E8E-CF26-4200-A15B-F45E0EF4CE76}.Release|x86.Build.0 = Release|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Debug|x86.Build.0 = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.DEBUGLOCAL|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.DEBUGLOCAL|Any CPU.Build.0 = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.DEBUGLOCAL|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.DEBUGLOCAL|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.DEBUGLOCAL|x86.ActiveCfg = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.DEBUGLOCAL|x86.Build.0 = Debug|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Release|x86.ActiveCfg = Release|Any CPU
+		{B79BCCF0-1DC0-4C0E-BF06-C1A0CCA26858}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

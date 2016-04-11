@@ -18,8 +18,8 @@
                     <Setter Property="Margin" Value="6" />
                 </Style>
             </StackPanel.Resources>
-            <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" />
-            <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" Margin="6"/>
+            <StackPanel Orientation="Horizontal" >
                 <StackPanel Orientation="Horizontal" Margin="6">
                     <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
                     <TextBlock>Payments</TextBlock>

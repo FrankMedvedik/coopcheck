@@ -6,29 +6,26 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
                 <criteria:PaymentReportCriteriaView x:Name="prcv" TabIndex="0" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="12" HorizontalAlignment="Left" Click="Refresh_Click" TabIndex="1" >refresh</Button>
-                    <Button Margin="12" HorizontalAlignment="Left" Click="Print_Click" TabIndex="2" >print</Button>
+                    <Button Margin="6" HorizontalAlignment="Left" Click="Refresh_Click" TabIndex="1" >refresh</Button>
+                    <Button Margin="6" HorizontalAlignment="Left" Click="Print_Click" TabIndex="2" >print</Button>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
-                <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="6" />
-                <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right">Check Count</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="{Binding HeadingText}" HorizontalAlignment="Left" Margin="6,6,12,6" />
+                <StackPanel Orientation="Horizontal" >
                     <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="6">
-                    <TextBlock Margin="6" Width="100" HorizontalAlignment="Right">Total Dollars</TextBlock>
+                        <TextBlock Margin="6"  HorizontalAlignment="Right">Checks</TextBlock>
+                    </StackPanel>
+                <StackPanel Orientation="Horizontal" >
                     <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
-                </StackPanel>
+                     <TextBlock Margin="6"  HorizontalAlignment="Right">Dollars</TextBlock>
+                    </StackPanel>
             </StackPanel>
-
+            </StackPanel>
         </Grid>
         <DataGrid Grid.Row="2" ItemsSource="{Binding Payments, IsAsync=True}" AutoGenerateColumns="False" Width="Auto" SelectionMode="Extended" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="dgPayments" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" MaxHeight="600" ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top" EnableColumnVirtualization="True" IsReadOnly="True" EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left">
             <DataGrid.Columns>

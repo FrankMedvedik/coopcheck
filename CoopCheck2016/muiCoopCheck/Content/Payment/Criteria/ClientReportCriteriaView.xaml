@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:ignore="http://www.ignore.com"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:s="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d ignore">
     <Grid >
         <Grid.Resources>
@@ -13,8 +11,7 @@
                 <Setter Property="HorizontalAlignment" Value="Right" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Margin" Value="3" />
-                <Setter Property="FontSize" Value="15"/>
-                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="12"/>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -23,7 +20,7 @@
         <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Width="50" Text="Client"/>
-                <ComboBox x:Name="ComboClients" Width="250" Margin="3" ItemsSource="{Binding Clients}" 
+                <ComboBox x:Name="ComboClients" Width="350" FontSize="12" FontWeight="Bold" Margin="3" ItemsSource="{Binding Clients}" 
                           VerticalAlignment="Center" 
                           SelectedValue="{Binding ClientReportCriteria.SelectedClient}" 
                           ToolTip="clients who have payments" TabIndex="1">
@@ -38,7 +35,7 @@
                 </ComboBox>
                         <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Year" Width="30" ToolTip="limit job list to this calendar year" />
-                    <ComboBox x:Name="ComboYears" Width="80" Margin="3" ItemsSource="{Binding JobYears}"
+                    <ComboBox x:Name="ComboYears" Width="80" Margin="3" ItemsSource="{Binding JobYears}" FontSize="12" FontWeight="Bold" 
                               VerticalAlignment="Center" SelectedValue="{Binding ClientReportCriteria.SelectedJobYear}" TabIndex="2" />
                     <!--<TextBox Width="30" Text="{Binding ClientReportCriteria.SelectedJobYear, Mode=TwoWay}" Margin="6" />-->
                 </StackPanel>
@@ -49,7 +46,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="- OR - " Width="Auto" Margin="6,3,6,3"  />
                 <TextBlock Text="Job" Width="30" Margin="3" ToolTip="enter all or part of the job number you are looking for" />
-                <TextBox Width="110" MaxLength="8" Text="{Binding ClientReportCriteria.SelectedJobNum, Mode=TwoWay}" TabIndex="3" 
+                <TextBox Width="110" FontSize="12" FontWeight="Bold" MaxLength="8" Text="{Binding ClientReportCriteria.SelectedJobNum, Mode=TwoWay}" TabIndex="3" 
                          ToolTip="enter a specifc job number YYYY-NNNN like - 2015-0001" />
                 <!--<xctk:MaskedTextBox FontWeight="Bold" FontSize="15" Margin="3" 
                                     Mask="0000-0000" CaretIndex="0" 
@@ -61,19 +58,5 @@
 
             </StackPanel>
         </StackPanel>
-
-        <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
-        <!--<StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" x:Name="spJob">
-                    <TextBlock Text="Job" Width="20" Margin="6,6,3,6" ToolTip="enter the job number you are looking for"    />
-                <xctk:MaskedTextBox Mask="0000-0000"   CaretIndex="0" ValueDataType="{x:Type s:String}" Text="{Binding JobNumber, Mode=TwoWay}"
-                                    Margin="3,6,6,6" TabIndex="1">
-                </xctk:MaskedTextBox>
-                -->
-        <!--<TextBox Width="60" Text="{Binding JobNumber, Mode=TwoWay}" Margin="3,6,6,6"  TabIndex="1"/>-->
-        <!--
-                    <TextBlock Text="Batch" Width="30" Margin="6" ToolTip="enter the batch number you are looking for" />
-                <TextBox Width="50" Text="{Binding BatchNumber, Mode=TwoWay}" Margin="6,6,3,6" TabIndex="2"/>
-       -->
     </Grid>
 </UserControl>

@@ -13,17 +13,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Expander Header="payment search criteria" Grid.Row="0" IsExpanded="true">
-            <StackPanel>
+            <StackPanel Orientation="Vertical">
                 <criteria:PaymentReportCriteriaView x:Name="prcv"/>
-                
-                <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal" Margin="55,0,0,0"  >
                     <Button Width="150" Margin="6" HorizontalAlignment="Left" IsDefault="True" Click="Refresh_Click">Refresh</Button>
                     <Button Width="150" Margin="6" HorizontalAlignment="Left" Click="Clear_Click">Clear Criteria</Button>
-                    <Button Width="150" Margin="6" HorizontalAlignment="Left" Click="Excel_Click">Excel</Button>
                 </StackPanel>
             </StackPanel>
-        </Expander>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Payments}"  AutoGenerateColumns="False"  Width="Auto"
                     VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" 
@@ -55,7 +51,6 @@
                     <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
-
         </DataGrid>
     </Grid>
 </UserControl>

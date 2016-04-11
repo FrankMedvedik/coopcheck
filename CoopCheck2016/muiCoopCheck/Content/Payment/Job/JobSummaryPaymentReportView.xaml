@@ -18,12 +18,12 @@
             <RowDefinition  Height="Auto"/>
         </Grid.RowDefinitions>
         <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
-        <Expander Grid.Row="1" IsExpanded="True" Header="Criteria">
-            <criteria:PaymentReportCriteriaView Grid.Column="0" x:Name="prcv"  />
-        </Expander>
-        <Button Width="150" Margin="120,6,6,6" Grid.Row="2"  HorizontalAlignment="Left" IsDefault="True" 
-                VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
-         <job:JobReportView  x:Name="brv" Margin="12" Grid.Row="3" Loaded="brv_Loaded" />
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+            <criteria:PaymentReportCriteriaView x:Name="prcv"  />
+                <Button Width="150"  IsDefault="True" 
+                VerticalAlignment="Center" Margin="3" Click="Refresh_Click">Refresh</Button>
+            </StackPanel>
+            <job:JobReportView  x:Name="brv" Margin="12" Grid.Row="3" Loaded="brv_Loaded" />
         <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml" Grid.Row="4" Layout="Tab" Margin="12" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
