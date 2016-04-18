@@ -1,0 +1,117 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+	xmlns:converters="clr-namespace:Reckner.WPF.Converters;assembly=Reckner.WPF">
+    <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    <converters:BooleanToVisibility x:Key="BoolToVisConverter" />
+    <converters:NotBooleanToVisibility x:Key="NotBoolToVisConverter" />
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+        <Setter Property="Background" Value="#EEEEEEEE" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="12" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="OpacityMask" Value="#AA888888" />
+                            <Setter Property="Margin" Value="2 1" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <!--<Setter Property="Background" Value="DimGray" />-->
+                            <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="CellRightAlign">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="RightCell">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+<Style BasedOn="{StaticResource {x:Type TextBox}}" x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <Border BorderThickness="2" BorderBrush="DarkRed">
+                            <StackPanel>
+                                <AdornedElementPlaceholder    
+                                x:Name="errorControl" />
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Text="{Binding AdornedElement.ToolTip    
+                        , ElementName=errorControl}" Foreground="Red" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="BorderBrush" Value="Red" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="ToolTip"    
+                Value="{Binding RelativeSource={RelativeSource Self}    
+                    , Path=(Validation.Errors)[0].ErrorContent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAccountDesignator" Binding="{Binding AccountDesignator }"  Header="AccountDesignator " />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFPostDate" Binding="{Binding PostDate, StringFormat=d}" Header="Post Date" ElementStyle="{StaticResource RightCell}" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFSerialNumber" Binding="{Binding SerialNumber}" Header="Serial Number" ElementStyle="{StaticResource RightCell}" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFDescription" Binding="{Binding Description}" Header="Description" Width="250"/>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFAmount" Binding="{Binding RawAmount}" Header="Amount" ElementStyle="{StaticResource RightCell}" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgBFCRDR" Binding="{Binding CRDR}"  Header="Cr/Dr " />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPJob" Binding="{Binding job_num}" Header="job" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPBatch" Binding="{Binding batch_num}" Header="batch" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPEmail" Binding="{Binding email}" Header="email" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPLast" Binding="{Binding last_name}" Header="last" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPFirst" Binding="{Binding first_name}" Header="first" />
+    <mui:DataGridCheckBoxColumn x:Shared="False" x:Key="dgPCleared" Binding="{Binding cleared_flag}" Header="cleared?" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPPhone" Binding="{Binding phone_number_exp}" Header="phone" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCity" Binding="{Binding municipality}" Header="city" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPState" Binding="{Binding region}" Header="state" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPZip" Binding="{Binding postal_code}" Header="zip" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPDate" ClipboardContentBinding="{Binding pay_date_exp}"  Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}"/>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgClearedDate" ClipboardContentBinding="{Binding cleared_date_exp}"  Binding="{Binding cleared_date, StringFormat=d}" Header="cleared date" ElementStyle="{StaticResource RightCell}"/>
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCheckNum" Binding="{Binding check_num}" Header="check #" ElementStyle="{StaticResource RightCell}" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAmount" ClipboardContentBinding="{Binding tran_amount_exp}"  Binding="{Binding tran_amount, StringFormat='0,0.'}" Header="amount" ElementStyle="{StaticResource RightCell}" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPCompany" Binding="{Binding company}" Header="company" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress1" Binding="{Binding address_1}" Header="address 1" />
+    <mui:DataGridTextColumn x:Shared="False" x:Key="dgPAddress2" Binding="{Binding address_2}" Header="address 2" />
+    <mui:DataGridCheckBoxColumn x:Shared="False" x:Key="dgPPrintFlag" Binding="{Binding print_flag}" Header="printed?" />
+
+
+</ResourceDictionary>

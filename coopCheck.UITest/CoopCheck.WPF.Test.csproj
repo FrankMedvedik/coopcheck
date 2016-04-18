@@ -61,7 +61,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="EmailSvcTest.cs" />
     <Compile Include="ExcelExportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BankAccountSvcTests.cs" />
@@ -90,8 +89,8 @@
       <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
       <Name>CoopCheck.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoopCheck2016\muiCoopCheck\CoopCheck.WPF.csproj">
-      <Project>{AABD6CF8-BDB2-494C-B8AE-874581154800}</Project>
+    <ProjectReference Include="..\CoopCheck2016\CoopCheck.WPF\CoopCheck.WPF.csproj">
+      <Project>{aabd6cf8-bdb2-494c-b8ae-874581154800}</Project>
       <Name>CoopCheck.WPF</Name>
     </ProjectReference>
   </ItemGroup>
