@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="CoopCheck.WPF.Pages.BatchSummaryReportPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
+             xmlns:content="clr-namespace:CoopCheck.WPF.Content"
+             xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
+             xmlns:batch="clr-namespace:CoopCheck.WPF.Content.Payment.Batch"
+             mc:Ignorable="d"
+             d:DesignHeight="1000" d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource ContentRoot}" Grid.Row="0">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                        <batch:BatchSummaryPaymentReportView x:Name="prv"/>
+                        <content:NoAccessView x:Name="nov"/>
+                    </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid  Grid.Row="1">
+            <status:StatusView />
+        </Grid>
+    </Grid>
+    
+</UserControl>

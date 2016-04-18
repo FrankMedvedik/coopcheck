@@ -1,0 +1,21 @@
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" VerticalAlignment="Top"
+              Grid.Column="0"
+              ItemsSource="{Binding BankFileViewModel.BankClearTransactions, IsAsync=True}"
+              HorizontalScrollBarVisibility="Auto"
+              Height="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
+              ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True">
+        <DataGrid.Columns>
+            <StaticResource ResourceKey="dgBFAccountDesignator" />
+            <StaticResource ResourceKey="dgBFPostDate" />
+            <StaticResource ResourceKey="dgBFSerialNumber" />
+            <StaticResource ResourceKey="dgBFDescription" />
+            <StaticResource ResourceKey="dgBFSerialNumber" />
+            <StaticResource ResourceKey="dgBFAmount" />
+        </DataGrid.Columns>
+    </DataGrid>
+</Grid>
