@@ -124,12 +124,6 @@
       <HintPath>..\..\packages\LinqToExcel_x64.1.10.1\lib\LinqToExcel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -212,7 +206,6 @@
     </Compile>
     <Compile Include="Content\Payment\Client\JobViewModel.cs" />
     <Compile Include="Content\Voucher\Pay\PrintCheckProgress.cs" />
-    <Compile Include="Services\EmailSvc.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
     <Compile Include="Services\ClientSvc.cs" />

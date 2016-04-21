@@ -103,6 +103,10 @@
     <Compile Include="Content\PaymentFinder\PaymentFinderViewModel.cs" />
     <Compile Include="RepositoryExtentions\vwPayment.cs" />
     <Compile Include="Services\JobSvc.cs" />
+    <Compile Include="Services\EmailSvc.cs" />
+    <Compile Include="Services\ExportToExcel.cs" />
+    <Compile Include="Services\PhoneNumberFormattingSvc.cs" />
+    <Compile Include="Services\PhoneSvc.cs" />
     <Page Include="Content\Status\StatusView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

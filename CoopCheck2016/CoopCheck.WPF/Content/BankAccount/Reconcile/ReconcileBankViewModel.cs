@@ -9,7 +9,6 @@ using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Reckner.WPF.Services;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
@@ -23,8 +22,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         {
             ClearMatchedChecksCommand = new RelayCommand(ClearMatchedChecks, CanClearChecksFunc);
             MatchCheckCommand = new RelayCommand(MatchCheck, CanMatchCheck);
-            SaveReconciliationToExcelCommand = new RelayCommand(SaveReconciliationRptToExcel, CanClearChecksFunc);
-            ResetState();
+            //SaveReconciliationToExcelCommand = new RelayCommand(SaveReconciliationRptToExcel, CanClearChecksFunc);
+            //ResetState();
         }
 
         private bool CanMatchCheck()
@@ -286,58 +285,58 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         }
 
-        public async void SaveReconciliationRptToExcel()
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                var dtFmt = string.Format("{0:g}", DateTime.Now).Replace('/', '.');
-                dtFmt = dtFmt.Replace(':', '.');
-                dtFmt = dtFmt.Replace(' ', '.');
+        //    public async void SaveReconciliationRptToExcel()
+        //    {
+        //        await Task.Factory.StartNew(() =>
+        //        {
+        //            var dtFmt = string.Format("{0:g}", DateTime.Now).Replace('/', '.');
+        //            dtFmt = dtFmt.Replace(':', '.');
+        //            dtFmt = dtFmt.Replace(' ', '.');
 
-                try
-                {
-                    if (AccountPayments.Stats.Count > 0)
-                    {
-                        var statList = new StatsList();
-                        foreach (var stat in AccountPayments.Stats)
-                            statList.Add(new StatsType
-                            {
-                                Label = stat.Key,
-                                Val = stat.Value
-                            });
+        //            try
+        //            {
+        //                if (AccountPayments.Stats.Count > 0)
+        //                {
+        //                    var statList = new StatsList();
+        //                    foreach (var stat in AccountPayments.Stats)
+        //                        statList.Add(new StatsType
+        //                        {
+        //                            Label = stat.Key,
+        //                            Val = stat.Value
+        //                        });
 
-                        var s = new ExportToExcel<StatsType, StatsList>
-                        {
-                            ExcelSourceWorkbook = BankFile.FilePath + ".Reconcile",
-                            ExcelWorksheetName = "Summary",
-                            dataToPrint = statList
-                        };
-                        s.GenerateReport();
+        //                    var s = new ExportToExcel<StatsType, StatsList>
+        //                    {
+        //                        ExcelSourceWorkbook = BankFile.FilePath + ".Reconcile",
+        //                        ExcelWorksheetName = "Summary",
+        //                        dataToPrint = statList
+        //                    };
+        //                    s.GenerateReport();
 
 
-                        if (BankFile.UnmatchedBankClearTransactions.Count > 0)
-                        {
-                            var unmatchedSheet =
-                                new ExportToExcel<BankClearTransaction, BankClearTransactionList>
-                                {
-                                    ExcelSourceWorkbook = BankFile.FilePath + ".Reconcile",
-                                    ExcelWorksheetName = string.Format("Processed.{0}", dtFmt),
-                                    dataToPrint = BankFile.UnmatchedBankClearTransactions.ToList()
-                                };
-                            unmatchedSheet.GenerateReport();
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Status = new StatusInfo
-                    {
-                        StatusMessage = "export to excel failed",
-                        ErrorMessage = e.Message //,ShowMessageBox = true
-                    };
-                }
-            });
-        }
+        //                    if (BankFile.UnmatchedBankClearTransactions.Count > 0)
+        //                    {
+        //                        var unmatchedSheet =
+        //                            new ExportToExcel<BankClearTransaction, BankClearTransactionList>
+        //                            {
+        //                                ExcelSourceWorkbook = BankFile.FilePath + ".Reconcile",
+        //                                ExcelWorksheetName = string.Format("Processed.{0}", dtFmt),
+        //                                dataToPrint = BankFile.UnmatchedBankClearTransactions.ToList()
+        //                            };
+        //                        unmatchedSheet.GenerateReport();
+        //                    }
+        //                }
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                Status = new StatusInfo
+        //                {
+        //                    StatusMessage = "export to excel failed",
+        //                    ErrorMessage = e.Message //,ShowMessageBox = true
+        //                };
+        //            }
+        //        });
+        //    }
 
         #region DisplayState
 
@@ -352,6 +351,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         private bool _showDetails;
 
         #endregion
+
     }
 
     public class BankClearTransactionList : List<BankClearTransaction>

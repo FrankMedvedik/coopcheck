@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -13,7 +12,6 @@ using Reckner.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Reckner.WPF.Services;
 
 namespace CoopCheck.WPF.Content.Voucher.Save
 {
@@ -37,7 +35,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             CanExport = false;
 
             SaveVouchersCommand = new RelayCommand(CreateBatchEditAndImportVouchers, CanSaveVouchers);
-            ExportVouchersCommand = new RelayCommand(ExportVouchers, CanSaveVouchers);
+            //ExportVouchersCommand = new RelayCommand(ExportVouchers, CanSaveVouchers);
 
             _batchCreator = new BackgroundWorker()
             {
@@ -73,58 +71,58 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             CanSave = false;
         }
 
-        public async void  ExportVouchers()
-        {
-            Status = new StatusInfo()
-            {
-                StatusMessage = "exporting vouchers to Excel",
-                IsBusy = true
-            };
+        //public async void  ExportVouchers()
+        //{
+        //    Status = new StatusInfo()
+        //    {
+        //        StatusMessage = "exporting vouchers to Excel",
+        //        IsBusy = true
+        //    };
 
-            await Task.Factory.StartNew(() =>
-            {
-                string dtFmt = String.Format("{0:g}", DateTime.Now).Replace('/', '.');
-                dtFmt = dtFmt.Replace(':', '.');
-                dtFmt = dtFmt.Replace(' ', '.');
+        //    await Task.Factory.StartNew(() =>
+        //    {
+        //        string dtFmt = String.Format("{0:g}", DateTime.Now).Replace('/', '.');
+        //        dtFmt = dtFmt.Replace(':', '.');
+        //        dtFmt = dtFmt.Replace(' ', '.');
 
-                try
-                {
-                    if (BadVoucherExports.Count > 0)
-                    {
-                        ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>
-                        {
-                            ExcelSourceWorkbook = ExcelFileInfo.ExcelFilePath,
-                            ExcelWorksheetName = String.Format("Errors.{0}", dtFmt),
-                            dataToPrint = BadVoucherExports
-                        };
-                        s.GenerateReport();
+        //        try
+        //        {
+        //            if (BadVoucherExports.Count > 0)
+        //            {
+        //                ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>
+        //                {
+        //                    ExcelSourceWorkbook = ExcelFileInfo.ExcelFilePath,
+        //                    ExcelWorksheetName = String.Format("Errors.{0}", dtFmt),
+        //                    dataToPrint = BadVoucherExports
+        //                };
+        //                s.GenerateReport();
 
-                        if (GoodVoucherExports.Count > 0)
-                        {
-                            s.ExcelWorksheetName = String.Format("Processed.{0}", dtFmt);
-                            s.dataToPrint = GoodVoucherExports;
-                            s.GenerateReport();
-                            CanExport = false;
-                        }
-                        ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}",
-                            Path.GetFileName(ExcelFileInfo.ExcelFilePath));
-                    }
-                }
-                catch (Exception e)
-                {
-                    Status = new StatusInfo()
-                    {
-                        StatusMessage = "export to excel failed",
-                        ErrorMessage = e.Message //,ShowMessageBox = true
-                    };
-                }
-            });
+        //                if (GoodVoucherExports.Count > 0)
+        //                {
+        //                    s.ExcelWorksheetName = String.Format("Processed.{0}", dtFmt);
+        //                    s.dataToPrint = GoodVoucherExports;
+        //                    s.GenerateReport();
+        //                    CanExport = false;
+        //                }
+        //                ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}",
+        //                    Path.GetFileName(ExcelFileInfo.ExcelFilePath));
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Status = new StatusInfo()
+        //            {
+        //                StatusMessage = "export to excel failed",
+        //                ErrorMessage = e.Message //,ShowMessageBox = true
+        //            };
+        //        }
+        //    });
 
-            Status = new StatusInfo()
-            {
-                StatusMessage = "export complete",
-            };
-        }
+        //    Status = new StatusInfo()
+        //    {
+        //        StatusMessage = "export complete",
+        //    };
+        //}
 
         private ExcelFileInfoMessage _excelVoucherInfo;
 
