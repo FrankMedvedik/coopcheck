@@ -5,4 +5,6 @@
   &lt;Assembly Path="D:\Reckner.Work\Phonelogic.Alert\packages\MvvmLightLibs.5.2.0.0\lib\net40\System.Windows.Interactivity.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Controls.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.WPF\bin\Debug\Microsoft.Practices.ServiceLocation.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

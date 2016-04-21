@@ -53,8 +53,12 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 }
             }
         }
+        public BankClearTransaction SelectedUnmatchedBankClearTransaction
+        {
+            get { return _selectedUnmatchedBankClearTransaction; }
+            set { _selectedUnmatchedBankClearTransaction = value; NotifyPropertyChanged(); }
+        }
 
-     
         public ObservableCollection<BankClearTransaction> UnmatchedBankClearTransactions
         {
             get { return _unmatchedBankClearTransactions; }
@@ -298,7 +302,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         private decimal _unmatchedCreditTransactionTotalDollars;
         private int _unmatchedDebitTransactionCnt;
         private decimal _unmatchedDebitTransactionTotalDollars;
-        
+        private BankClearTransaction _selectedUnmatchedBankClearTransaction;
+
         public decimal CreditTransactionTotalDollars
         {
             get { return _creditTransactionTotalDollars; }

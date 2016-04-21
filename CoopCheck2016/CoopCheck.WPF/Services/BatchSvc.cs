@@ -44,16 +44,18 @@ namespace CoopCheck.WPF.Services
             }
             sb.Amount = vouchers.Select(x => x.Amount).Sum().GetValueOrDefault(0);
             sb.Date = DateTime.Today.ToShortDateString();
-            sb = sb.Save();
-
+    
+           
             try
             {
-                foreach (var v in vouchers)
+                sb = sb.Save();
+                foreach(var v in vouchers)
                 {
                     currentVoucher = v;
                     sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
-                    sb = sb.Save();
+                  
                 }
+                sb = sb.Save();
             }
             catch (Exception e)
             {

@@ -247,14 +247,14 @@ namespace CoopCheck.WPF.Services
             }
         }
 
-        public static async Task<List<vwBasicPayment>> GetOpenPayments(PaymentReportCriteria prc)
+        public static async Task<List<vwPayment>> GetOpenPayments(PaymentReportCriteria prc)
         {
-            IQueryable<vwBasicPayment> query;
-            List<vwBasicPayment> v;
+            IQueryable<vwPayment> query;
+            List<vwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 query =
-                    ctx.vwBasicPayments.Where(
+                    ctx.vwPayments.Where(
                         x => x.check_date <= prc.EndDate
                              && x.account_id == prc.Account.account_id
                              && x.cleared_flag == false);

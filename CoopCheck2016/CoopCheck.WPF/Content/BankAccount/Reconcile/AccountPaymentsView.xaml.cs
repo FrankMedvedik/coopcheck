@@ -49,15 +49,23 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             DgStats.SelectAllCells();
             DgStats.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, DgStats);
-            var result = (string) Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            var stats = (string) Clipboard.GetData(DataFormats.CommaSeparatedValue);
             //String result = (string)Clipboard.GetData(DataFormats..Text);
             DgStats.UnselectAllCells();
+
+            DgUnmatched.SelectAllCells();
+            DgUnmatched.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, DgUnmatched);
+            var unmatched = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            DgUnmatched.UnselectAllCells();
             var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = string.Format("{0}.Reconcile", Path.GetFileName(_vm.BankFile.FilePath));
+            saveFileDialog.FileName = string.Format("{0}.Reconcile.csv", Path.GetFileName(_vm.BankFile.FilePath));
             if (saveFileDialog.ShowDialog() == true)
             {
                 var file = new StreamWriter(saveFileDialog.FileName);
-                file.WriteLine(result);
+                file.WriteLine(stats);
+                file.WriteLine("");
+                file.WriteLine(unmatched);
                 file.Close();
             }
         }

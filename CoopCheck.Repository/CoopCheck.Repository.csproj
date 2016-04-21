@@ -122,14 +122,10 @@
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryExtentions\vwBasicPayment.cs" />
     <Compile Include="RepositoryExtentions\vwVoidedPayment.cs" />
     <Compile Include="RepositoryExtentions\vwPayment.cs" />
     <Compile Include="Services\PhoneNumberFormattingSvc.cs" />
     <Compile Include="voucher.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vwBasicPayment.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vwBatchRpt.cs">

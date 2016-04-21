@@ -15,7 +15,6 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.BankAccount.Open
 {
-    /// <summary>
     public class OpenPaymentReportViewModel : ViewModelBase
     {
       
@@ -44,8 +43,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
             get { return Payments.Sum(x => x.tran_amount ); }
         }
 
-        private ObservableCollection<vwBasicPayment> _payments = new ObservableCollection<vwBasicPayment>();
-        public ObservableCollection<vwBasicPayment> Payments
+        private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
+        public ObservableCollection<vwPayment> Payments
         {
             get { return _payments; }
             set
@@ -69,7 +68,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
         public void ResetState()
         {
 
-            _payments = new ObservableCollection<vwBasicPayment>();
+            _payments = new ObservableCollection<vwPayment>();
             ShowGridData = false;
 
         }
@@ -101,8 +100,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
 
         #region collection and selected
 
-        private vwBasicPayment _selectedPayment;
-        public vwBasicPayment SelectedPayment
+        private vwPayment _selectedPayment;
+        public vwPayment SelectedPayment
         {
             get { return _selectedPayment; }
             set
@@ -125,10 +124,10 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
             try
             {
                 ShowGridData = false;
-                Payments = await Task<ObservableCollection<vwBasicPayment>>.Factory.StartNew(() =>
+                Payments = await Task<ObservableCollection<vwPayment>>.Factory.StartNew(() =>
                 {
                     var task =  RptSvc.GetOpenPayments(p);
-                    var v = new ObservableCollection<vwBasicPayment>(task.Result);
+                    var v = new ObservableCollection<vwPayment>(task.Result);
                     return v;
                 });
                 HeadingText = String.Format("{0} Account Open Payment Report for Payments as of {1:ddd, MMM d, yyyy}",
@@ -146,9 +145,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
             }
         }
 
-        private List<vwBasicPayment> p;
-        private Brush _accentColor;
-
+      
+        
         public async void PrintReport(PaymentReportCriteria c)
         {
             OutstandingBalanceStats s = new OutstandingBalanceStats

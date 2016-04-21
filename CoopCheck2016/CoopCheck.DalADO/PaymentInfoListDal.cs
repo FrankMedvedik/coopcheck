@@ -6,6 +6,7 @@ using Csla.Data;
 using CoopCheck.DAL;
 using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoopCheck.DalADO
 {
@@ -77,6 +78,7 @@ namespace CoopCheck.DalADO
                 }
             }
         }
+
         public void FulfillSwift(int batch_num)
         {
             var b = FetchBatch(batch_num);
@@ -89,7 +91,7 @@ namespace CoopCheck.DalADO
             var srv = new PromoCodeService.PCService_DefClient();
             ClientJobDto jraClient = GetClientForJob(b.First().JobNum);
 
-            foreach (PaymentInfoDto p in b)
+            Parallel.ForEach (b,(p) =>
             {
                 if (!p.Completed && !string.IsNullOrEmpty(p.Email))
                 {
@@ -132,7 +134,7 @@ namespace CoopCheck.DalADO
 
                     request.Customer = c;
                     request.RedemptionMessage = p.StudyTopic;
-                    request.EmailMessage = p.StudyTopic; 
+                    request.EmailMessage = p.StudyTopic;
 
                     PromoCodeService.GetPromocodeResponse response = srv.GetPromocode(request);
 
@@ -143,10 +145,12 @@ namespace CoopCheck.DalADO
                             using (var cmd = new SqlCommand("dbo.dal_WritePromoCode", ctx.Connection))
                             {
                                 cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@tran_id", request.PaymentReferenceId).DbType = DbType.Int32;
+                                cmd.Parameters.AddWithValue("@tran_id", request.PaymentReferenceId).DbType =
+                                    DbType.Int32;
                                 cmd.Parameters.AddWithValue("@promo_code", response.Promocode).DbType = DbType.String;
                                 cmd.Parameters.AddWithValue("@paid_amount", response.Amount).DbType = DbType.Decimal;
-                                cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
+                                cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
+                                    DbType.String;
                                 cmd.ExecuteNonQuery();
                             }
                         }
@@ -156,13 +160,15 @@ namespace CoopCheck.DalADO
                     {
                         var err = new Csla.WcfPortal.WcfErrorInfo();
                         err.ExceptionTypeName = "PromoCodeError";
-                        err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId, response.ResponseCode,response.ResponseMessage);
+                        err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId,
+                            response.ResponseCode, response.ResponseMessage);
                         throw new Csla.DataPortalException(err);
                     }
 
 
                 }
             }
+    );
             ClearPromoCodeBatch(batch_num);
         }
 
