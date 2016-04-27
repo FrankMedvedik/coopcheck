@@ -31,7 +31,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>93</ApplicationRevision>
+    <ApplicationRevision>94</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -348,7 +348,6 @@
     <Compile Include="Models\ObjectCopier.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
     <Compile Include="Models\ExcelVoucher.cs" />
-    <Compile Include="NotifyIconViewModel.cs" />
     <Compile Include="Pages\AccountReconcilePage.xaml.cs">
       <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
     </Compile>
@@ -717,10 +716,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Content\BankAccount\AccountView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NotifyIconResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

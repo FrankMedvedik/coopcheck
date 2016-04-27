@@ -5,8 +5,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml">
                 </ResourceDictionary>
-                <ResourceDictionary Source="NotifyIconResources.xaml">
-                </ResourceDictionary>
                 <ResourceDictionary Source="/Assets/ModernUI.Reckner.xaml">
                 </ResourceDictionary>
                 <ResourceDictionary Source="DataGridsResourceDictionary1.xaml"/>

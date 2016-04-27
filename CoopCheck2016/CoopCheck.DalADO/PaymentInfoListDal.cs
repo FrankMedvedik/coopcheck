@@ -6,12 +6,17 @@ using Csla.Data;
 using CoopCheck.DAL;
 using System.Configuration;
 using System.Linq;
+using System.Security.Principal;
+using System.ServiceModel.Channels;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CoopCheck.DalADO
 {
     public class PaymentInfoListDal :   IPaymentInfoListDal
     {
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public List<PaymentInfoDto> FetchBatch(int batchNum)
         {
@@ -22,6 +27,7 @@ namespace CoopCheck.DalADO
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@batch_num", batchNum).DbType = DbType.Int32;
                     var dr = cmd.ExecuteReader();
+                    log.Info(String.Format("FetchBatch called batchNum {0}",batchNum));
                     return LoadCollection(dr);
                 }
             }
@@ -82,7 +88,7 @@ namespace CoopCheck.DalADO
         public void FulfillSwift(int batch_num)
         {
             var b = FetchBatch(batch_num);
-
+            log.Info(String.Format("FulfillSwift called batchNum {0}", batch_num));
             var userId = ConfigurationManager.AppSettings["SwiftUserId"];
             var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
             var progId = ConfigurationManager.AppSettings["SwiftProgramId"];
@@ -91,7 +97,7 @@ namespace CoopCheck.DalADO
             var srv = new PromoCodeService.PCService_DefClient();
             ClientJobDto jraClient = GetClientForJob(b.First().JobNum);
 
-            Parallel.ForEach (b,(p) =>
+            foreach (var p in b )
             {
                 if (!p.Completed && !string.IsNullOrEmpty(p.Email))
                 {
@@ -112,13 +118,13 @@ namespace CoopCheck.DalADO
                     4   Batch
                     5   Payor
                     */
-
+                 //   WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
                     request.ClientData1 = String.Format("{0} - {1}", jraClient.ClientID, jraClient.JobName);
                     request.ClientData2 = p.JobNum.ToString();
                     request.ClientData3 = p.StudyTopic;
                     request.ClientData4 = p.BatchNum.ToString();
                     request.ClientData5 = Csla.ApplicationContext.User.Identity.Name;
-
+                    
                     var c = new PromoCodeService.Customer();
                     c.Address1 = p.Address1;
                     c.Address2 = p.Address2;
@@ -140,6 +146,7 @@ namespace CoopCheck.DalADO
 
                     if (response.Status == "Valid")
                     {
+                        log.Info(String.Format("FulfillSwift succeeded email {0} tran_id {1}", c.EmailAddress, request.PaymentReferenceId));
                         using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
                         {
                             using (var cmd = new SqlCommand("dbo.dal_WritePromoCode", ctx.Connection))
@@ -162,13 +169,13 @@ namespace CoopCheck.DalADO
                         err.ExceptionTypeName = "PromoCodeError";
                         err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId,
                             response.ResponseCode, response.ResponseMessage);
+                        log.Info(String.Format("FulfillSwift FAILED: email {0} tran_id {1} reason {2} ", c.EmailAddress, request.PaymentReferenceId, response.ResponseMessage));
                         throw new Csla.DataPortalException(err);
                     }
 
 
                 }
             }
-    );
             ClearPromoCodeBatch(batch_num);
         }
 

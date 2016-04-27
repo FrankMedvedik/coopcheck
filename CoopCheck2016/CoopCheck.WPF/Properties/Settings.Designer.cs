@@ -154,5 +154,26 @@ namespace CoopCheck.WPF.Properties {
                 return ((string)(this["OutstandingBalanceReportTemplate"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://app2012.reckner.com/CoopCheck/")]
+        public string SwiftPaySite {
+            get {
+                return ((string)(this["SwiftPaySite"]));
+            }
+            set {
+                this["SwiftPaySite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Setting1 {
+            get {
+                return ((string)(this["Setting1"]));
+            }
+        }
     }
 }
