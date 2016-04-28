@@ -50,15 +50,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Csla, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-Core.4.6.300\lib\net45\Csla.dll</HintPath>
+      <HintPath>..\packages\CSLA-Core.4.6.300\lib\net46\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Csla.Web, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-ASP.NET.4.6.300\lib\net45\Csla.Web.dll</HintPath>
+      <HintPath>..\packages\CSLA-ASP.NET.4.6.300\lib\net46\Csla.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Csla.Web.Mvc5, Version=4.6.300.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-ASP.NET-MVC5.4.6.300\lib\net45\Csla.Web.Mvc5.dll</HintPath>
+    <Reference Include="Csla.Web.Mvc5, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSLA-ASP.NET-MVC5.4.6.300\lib\net46\Csla.Web.Mvc5.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -269,9 +269,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
@@ -297,6 +294,9 @@
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
