@@ -81,15 +81,23 @@
       <Project>{0E725976-76C4-4C29-AA8A-28D020C0F2BF}</Project>
       <Name>DataClean</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
+      <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
+      <Name>CoopCheck.DalADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DAL\CoopCheck.DAL.csproj">
+      <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
+      <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
+      <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
+      <Name>CoopCheck.Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
-      <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
-      <Name>CoopCheck.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CoopCheck2016\CoopCheck.WPF\CoopCheck.WPF.csproj">
+    <ProjectReference Include="..\CoopCheck.WPF\CoopCheck.WPF.csproj">
       <Project>{aabd6cf8-bdb2-494c-b8ae-874581154800}</Project>
       <Name>CoopCheck.WPF</Name>
     </ProjectReference>
