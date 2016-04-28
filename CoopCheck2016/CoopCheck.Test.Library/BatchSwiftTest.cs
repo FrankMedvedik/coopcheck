@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CoopCheck.Library;
 
@@ -11,7 +7,7 @@ namespace CoopCheck.Test.Library
 {
     [TestClass]
     public class BatchSwiftTest
-    {
+    {//
         [TestMethod]
         public void CreatePromoBatch()
         {

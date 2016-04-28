@@ -10,7 +10,7 @@ namespace CoopCheck.Test.Library
 {
     [TestClass]
     public class BatchWriteCheckTest
-    {
+    {  
         [TestMethod]
         public void WriteCheckBatch()
         {

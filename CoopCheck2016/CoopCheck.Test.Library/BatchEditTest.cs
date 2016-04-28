@@ -7,7 +7,7 @@ namespace CoopCheck.Test.Library
 {
     [TestClass]
     public class BatchEditTest
-    {
+    {//
         [TestMethod]
         public void GetBatch()
         {
