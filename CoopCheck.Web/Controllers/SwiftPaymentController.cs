@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Web.Hosting;
 using System.Web.Http;
 using CoopCheck.Library;
 using CoopCheck.Repository;
+using CoopCheck.Web.Services;
 
 namespace CoopCheck.Web.Controllers
 {
@@ -33,13 +35,10 @@ namespace CoopCheck.Web.Controllers
         {
             try
             {
-                //System.Threading.Thread.Sleep(5000);
-                //return Ok();
                 WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
-                log.Info(String.Format("SwiftPay called user {0}  account {1} batchNum {2}", user.Identity.Name, accountId, batchNum));
-                await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+                log.Info(String.Format("SwiftPay called user {0}  account {1} batch {2}", user.Identity.Name, accountId,batchNum));
+                HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user));
                 return Ok();
-
             }
             catch (Exception e)
             {

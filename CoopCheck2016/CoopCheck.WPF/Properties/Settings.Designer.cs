@@ -155,24 +155,21 @@ namespace CoopCheck.WPF.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://app2012.reckner.com/CoopCheck/")]
         public string SwiftPaySite {
             get {
                 return ((string)(this["SwiftPaySite"]));
             }
-            set {
-                this["SwiftPaySite"] = value;
-            }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:37342/")]
+        public string SwiftPaySiteLocal {
             get {
-                return ((string)(this["Setting1"]));
+                return ((string)(this["SwiftPaySiteLocal"]));
             }
         }
     }

@@ -29,31 +29,30 @@ namespace CoopCheck.WPF.Services
 
                 using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
                 {
-                    //client.BaseAddress = new Uri("http://localhost:37432/");
-                    client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
+                    client.BaseAddress = new Uri("http://localhost:37432/");
+                    //client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    // HTTP GET
-                    HttpResponseMessage response = await client.GetAsync(String.Format("api/Swiftpayment?batchNum={0}",batchNum));
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var a = await response.Content.ReadAsAsync<List<vwPayment>>();
-                        foreach (var r in a)
-                            Console.WriteLine("{0}\t${1}\t{2}", r.last_name, r.check_num, r.tran_amount);
-                    }
+                    //// HTTP GET
+                    //HttpResponseMessage response = await client.GetAsync(String.Format("api/Swiftpayment?batchNum={0}",batchNum));
+                    //if (response.IsSuccessStatusCode)
+                    //{
+                    //    var a = await response.Content.ReadAsAsync<List<vwPayment>>();
+                    //    foreach (var r in a)
+                    //        Console.WriteLine("{0}\t${1}\t{2}", r.last_name, r.check_num, r.tran_amount);
+                    //}
 
                     // HTTP POST
-                    response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?accountId={0}&batchNum={1}",accountId,batchNum), null);
+                    var response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?accountId={0}&batchNum={1}",accountId,batchNum), null);
                     if (response.IsSuccessStatusCode)
-
-                        i.StatusMessage = "Swiftpay processing complete";
-                    i.IsBusy = false;
+                        i.StatusMessage = "Swiftpay processing started";
+                        i.IsBusy = false;
                 }
             }
             catch (Exception e)
             {
-                i.StatusMessage = "Swift Pay processing error for batch {0}";
+                i.StatusMessage = String.Format("Swiftpay processing error for batch {0}",batchNum);
                 i.ErrorMessage = e.Message;
             }
             return i;
