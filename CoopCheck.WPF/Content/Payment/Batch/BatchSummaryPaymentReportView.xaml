@@ -22,11 +22,11 @@
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="Refresh" HorizontalAlignment="Left" IsDefault="True"  Margin="6"
                     VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
-                <Button x:Name="Unprint" Margin="20,6,6,6" IsEnabled="{Binding CanUnprint}"
+                <Button x:Name="Unprint" Margin="50,6,6,6" IsEnabled="{Binding CanUnprint}"
                         Click="Unprint_Click" HorizontalAlignment="Left"  VerticalAlignment="Center" >Unprint</Button>
             </StackPanel>
             </StackPanel>
-            <batch:BatchReportView  x:Name="brv"  Grid.Row="3"/>
+            <batch:BatchReportView  x:Name="brv"  Grid.Row="3" Margin="6"/>
         <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  Grid.Row="4" Layout="Tab">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />

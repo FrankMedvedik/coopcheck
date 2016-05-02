@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 using CoopCheck.Library;
@@ -13,7 +14,7 @@ using CoopCheck.Web.Services;
 
 namespace CoopCheck.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/SwiftPayment")]
     public class SwiftPaymentController : ApiController
     {
@@ -31,13 +32,15 @@ namespace CoopCheck.Web.Controllers
 
         // POST api/SwiftPayment/SwiftPay?accountId&batchNum=1
         [Route("SwiftPay")]
-        public async Task<IHttpActionResult> SwiftPay(int accountId, int batchNum)
+        public async Task<IHttpActionResult> SwiftPay( int accountId, int batchNum)
         {
             try
             {
                 WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
-                log.Info(String.Format("SwiftPay called user {0}  account {1} batch {2}", user.Identity.Name, accountId,batchNum));
-                HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user));
+                var email = SendMailSvc.uEmail(HttpContext.Current.User.Identity.Name.Replace(@"reckner\", ""));
+                log.Info(String.Format("Email address {0}", email));
+                log.Info(String.Format("SwiftPay called user {0}  account {1} batch {2} email {3}", user.Identity.Name, accountId,batchNum, email));
+                HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
                 return Ok();
             }
             catch (Exception e)

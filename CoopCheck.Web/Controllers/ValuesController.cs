@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
+using System.Web;
 using System.Web.Http;
+using CoopCheck.Web.Services;
 
 namespace CoopCheck.Web.Controllers
 {
@@ -19,7 +21,8 @@ namespace CoopCheck.Web.Controllers
         {
             WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
             log.Info("get values called");
-            return new string[] { "value1", "value2",user?.Identity.Name };
+            return new string[]
+            {"value1", "value2",user?.Identity.Name,SendMailSvc.uEmail(HttpContext.Current.User.Identity.Name.Replace(@"reckner\", ""))};
         }
 
         // GET api/values/5

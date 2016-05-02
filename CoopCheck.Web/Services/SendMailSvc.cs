@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Net;
+using System.DirectoryServices.AccountManagement;
 using System.Net.Mail;
-using System.Runtime.Serialization;
-using System.Web;
 
 namespace CoopCheck.Web.Services
 {
@@ -19,7 +14,7 @@ namespace CoopCheck.Web.Services
             try
             {
 
-                string from = "Fmedvedik@reckner.com";
+                string from = "fmedvedik@reckner.com";
                 string _ms = "email.reckner.com";
                 MailMessage msg = new MailMessage(from, to, subject, body);
                 SmtpClient sc = new SmtpClient(_ms);
@@ -29,6 +24,17 @@ namespace CoopCheck.Web.Services
             {
                 log.Error(String.Format("EMAIL FAILED TO SEND Error: {0}", e.Message));
             }
+        }
+
+        public static string uEmail(string username)
+        {
+                //PrincipalContext pctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
+                PrincipalContext pctx = new PrincipalContext(ContextType.Domain);
+                using (UserPrincipal up = UserPrincipal.FindByIdentity(pctx, username))
+                {
+                    return up != null && !String.IsNullOrEmpty(up.EmailAddress) ? up.EmailAddress : string.Empty;
+                }
+            
         }
 
 

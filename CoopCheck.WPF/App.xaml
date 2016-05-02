@@ -7,7 +7,6 @@
         <ResourceDictionary Source="/Assets/ModernUI.Reckner.xaml">
         </ResourceDictionary>
         <ResourceDictionary Source="DataGridsResourceDictionary1.xaml">
-          <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:CoopCheck.WPF.ViewModel" />
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
