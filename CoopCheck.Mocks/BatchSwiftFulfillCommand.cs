@@ -12,7 +12,7 @@ namespace CoopCheck.Mocks
         public static void BatchSwiftFulfill(int batchNum , bool pass)
         {
                 log.Info(String.Format("SwiftPay called user {0}  batch {1}", Environment.UserName, batchNum));
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(30000);
                 if (!pass) throw new Exception("Swiftpay failed");
                 log.Info(String.Format("SwiftPay completed {0}  batch {1} completed ok {2} ", Environment.UserName,
                     batchNum, pass));

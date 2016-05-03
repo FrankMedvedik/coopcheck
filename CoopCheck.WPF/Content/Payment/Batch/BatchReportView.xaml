@@ -52,8 +52,31 @@
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding batch_num}"  Header="batch"/>
-                    <mui:DataGridTextColumn Binding="{Binding job_num}"  Header="job num"/>
-                    <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
+                <DataGridTextColumn Binding="{Binding job_num}" Header="job num">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                     <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
                 <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}" />

@@ -29,15 +29,40 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
-                IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="12" MaxHeight="250"
-                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
-                ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" Height="Auto" 
-                VerticalScrollBarVisibility="Auto" SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
-                <DataGrid.Columns>
-                 <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
-                <DataGridTextColumn Binding="{Binding jobnum}" Header="job num" />
-                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" />
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" Grid.Column="0" 
+                  Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
+                  IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" MaxHeight="250" 
+                  ClipboardCopyMode="IncludeHeader" 
+                  EnableColumnVirtualization="True" EnableRowVirtualization="True" 
+                  ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" 
+                  Height="Auto"  VerticalScrollBarVisibility="Auto" 
+                  SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
+                <DataGridTextColumn Binding="{Binding jobnum}" Header="job num">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding jobname}" Header="job name" />
                 <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}"/>
                 <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="count" ElementStyle="{StaticResource RightCell}"/>

@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using CoopCheck.Repository;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.Payment.Client
@@ -25,7 +27,7 @@ namespace CoopCheck.WPF.Content.Payment.Client
 
         }
 
-
+    
         private void CopyToClipboard()
         {
             dgBatches.SelectAllCells();

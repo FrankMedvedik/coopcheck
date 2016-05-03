@@ -15,6 +15,12 @@ namespace CoopCheck.Repository
     public partial class vwBatchRpt
     {
         public int batch_num { get; set; }
+        public string batch_dscr { get; set; }
+        public string job_year { get; set; }
+        public string clientid { get; set; }
+        public string clientname { get; set; }
+        public string jobname { get; set; }
+        public string projmgr { get; set; }
         public Nullable<int> account_id { get; set; }
         public string account_name { get; set; }
         public Nullable<int> job_num { get; set; }
@@ -30,10 +36,5 @@ namespace CoopCheck.Repository
         public Nullable<decimal> total_amount { get; set; }
         public string first_check_num { get; set; }
         public string last_check_num { get; set; }
-        public string job_year { get; set; }
-        public string clientid { get; set; }
-        public string clientname { get; set; }
-        public string jobname { get; set; }
-        public string projmgr { get; set; }
     }
 }

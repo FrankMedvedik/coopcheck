@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using CoopCheck.Repository;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
@@ -20,5 +24,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             _vm.ResetState();
         }
+
+    
     }
 }

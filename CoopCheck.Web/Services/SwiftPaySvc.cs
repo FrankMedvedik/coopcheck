@@ -12,16 +12,15 @@ namespace CoopCheck.Web.Services
         private static readonly log4net.ILog log
        = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static async Task PayBatch(int accountId, int batchNum, WindowsPrincipal user, string email)
+        public static void PayBatch(int accountId, int batchNum,  string email)
         {
           
-            log.Info(String.Format("inside service - SwiftPay called user {0}  account {1} batchNum {2} email {3}", user.Identity.Name, accountId, batchNum, email));
-                await Task.Factory.StartNew(() =>
-                {
+                 log.Info(String.Format("inside service - SwiftPay called user {0}  account {1} batchNum {2}", email, accountId, batchNum));
                     try
                     {
-                        // CoopCheck.Mocks.BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum, true);
-                        SendMailSvc.SendEmail(email,
+                        //CoopCheck.Mocks.BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum, true);
+                        BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum);
+                SendMailSvc.SendEmail(email,
                             String.Format("Swiftpay complete for batch {0}", batchNum), "processing complete");
                     }
                     catch (Exception e)
@@ -29,7 +28,6 @@ namespace CoopCheck.Web.Services
                         log.Error(String.Format("SwiftPay failed  account {0} batchNum {1} error {2}",accountId, batchNum, e.Message));
                         SendMailSvc.SendEmail(email,String.Format("Swiftpay Error for batch {0}", batchNum), e.Message);
                     }
-                });
+                }
         }
     }
-}

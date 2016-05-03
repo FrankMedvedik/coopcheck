@@ -22,7 +22,7 @@ namespace CoopCheck.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             log.Info("Coopcheck.Web Started");
-            Console.WriteLine("Coopcheck.Web Started");
+        
         }
     }
 }

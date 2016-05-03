@@ -47,15 +47,15 @@ namespace CoopCheck.WPF.Services
         //            //}
 
         //            // HTTP POST
-        //            var response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?accountId={0}&batchNum={1}",accountId,batchNum), null);
+        //            var response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?accountId={0}&batchNum={1}", accountId, batchNum), null);
         //            if (response.IsSuccessStatusCode)
         //                i.StatusMessage = "Swiftpay processing started";
-        //                i.IsBusy = false;
+        //            i.IsBusy = false;
         //        }
         //    }
         //    catch (Exception e)
         //    {
-        //        i.StatusMessage = String.Format("Swiftpay processing error for batch {0}",batchNum);
+        //        i.StatusMessage = String.Format("Swiftpay processing error for batch {0}", batchNum);
         //        i.ErrorMessage = e.Message;
         //    }
         //    return i;

@@ -11,6 +11,7 @@ using System.Web.Http;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.Web.Services;
+using Hangfire;
 
 namespace CoopCheck.Web.Controllers
 {
@@ -40,7 +41,9 @@ namespace CoopCheck.Web.Controllers
                 var email = SendMailSvc.uEmail(HttpContext.Current.User.Identity.Name.Replace(@"reckner\", ""));
                 log.Info(String.Format("Email address {0}", email));
                 log.Info(String.Format("SwiftPay called user {0}  account {1} batch {2} email {3}", user.Identity.Name, accountId,batchNum, email));
-                HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
+                //HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
+                //Task.Run(() => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
+                BackgroundJob.Enqueue(() => SwiftPaySvc.PayBatch(accountId, batchNum,  email));
                 return Ok();
             }
             catch (Exception e)

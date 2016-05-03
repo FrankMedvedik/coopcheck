@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
 using Microsoft.Win32;
 
@@ -34,7 +36,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             ExportToExcel();
 
         }
-
+   
 
         private void ExportToExcel()
         {
