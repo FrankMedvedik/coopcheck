@@ -484,7 +484,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 CanPayBatch = (JobName != JobLogSvc.BadJobName);
 
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 JobName = JobLogSvc.BadJobName;

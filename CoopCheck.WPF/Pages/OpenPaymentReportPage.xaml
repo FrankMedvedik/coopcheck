@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
-             xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
-             xmlns:open="clr-namespace:CoopCheck.WPF.Content.BankAccount.Open"
+            xmlns:open="clr-namespace:CoopCheck.WPF.Content.BankAccount.Open"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>

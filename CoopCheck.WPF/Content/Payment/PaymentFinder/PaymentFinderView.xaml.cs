@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,7 +36,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             _vm.ResetState();
         }
     
-        private void ClearCheck_Click(object sender, RoutedEventArgs e)
+        private async void ClearCheck_Click(object sender, RoutedEventArgs e)
         {
             _vm.SelectedPayment.cleared_date = DateTime.Today;
             _vm.SelectedPayment.cleared_amount = _vm.SelectedPayment.tran_amount;
@@ -43,9 +44,20 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             var result = cw.ShowDialog();
             if (result == true)
             {
-                _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
-                _vm.ClearCheck();
-                _vm.GetPayments();
+                try
+                {
+                    _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
+                    await Task.Run(() =>
+                    {
+                        _vm.ClearCheck();
+                        _vm.GetPayments();
+                    });
+                    
+                }
+                catch (Exception ex)
+                {
+                    _vm.Status = new Models.StatusInfo {ErrorMessage = ex.Message, StatusMessage = "clear payment failed"};
+                }
             }
         }
 
@@ -55,9 +67,18 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             var result = cw.ShowDialog();
             if (result == true)
             {
-                _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
-                _vm.VoidCheck();
-            }
+                try
+                {
+                    _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
+                    await Task.Run(() => 
+                    { _vm.VoidCheck();
+                    _vm.GetPayments();});
+                }
+                    catch (Exception ex)
+                {
+                    _vm.Status = new Models.StatusInfo { ErrorMessage = ex.Message, StatusMessage = "void payment failed" };
+                }
+        }
         }
 
         

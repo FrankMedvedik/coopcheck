@@ -124,8 +124,8 @@ namespace CoopCheck.WPF.Models
                 v.Add(new KeyValuePair<string, string>("ClientId", SelectedClient.ClientID));
             //if (SelectedJobYear != 0)
             //    v.Add(new KeyValuePair<string, string>("JobYear", SelectedJobYear));
-            if (SelectedJob.jobnum != null)
-                v.Add(new KeyValuePair<string, string>("JobNum", SelectedJob.jobnum.ToString()));
+            //if (SelectedJob.jobnum != null)
+            v.Add(new KeyValuePair<string, string>("JobNum", SelectedJob.jobnum.ToString()));
             foreach (var a  in v)
             {
                 s = string.Concat(s, token, a.Key, token, a.Value);

@@ -14,7 +14,7 @@ namespace CoopCheck.DAL
 
         void FulfillSwift(int batch_num);
         void VoidSwiftBatch(int batch_num);
-        void VoidSwiftCode(int tran_id);
+        void VoidSwiftPromoCode(int tran_id);
 
         List<PaymentInfoDto> WriteCheckBatch(int batchNum, int accountId, int firstCheckNum);
         void CommitChecks(int batchNum, int lastCheckNum);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,9 +13,9 @@ using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.Web.Services;
 using Hangfire;
-
 namespace CoopCheck.Web.Controllers
 {
+ 
     [Authorize]
     [RoutePrefix("api/SwiftPayment")]
     public class SwiftPaymentController : ApiController
@@ -29,22 +30,32 @@ namespace CoopCheck.Web.Controllers
             return _ctx.vwPayments.Where(x => x.batch_num == batchNum).ToList();
         }
 
+        [DllImport("advapi32.dll", SetLastError = true)]
+        public extern static bool DuplicateToken(IntPtr ExistingTokenHandle, int
+        SECURITY_IMPERSONATION_LEVEL, out IntPtr DuplicateTokenHandle);
 
 
         // POST api/SwiftPayment/SwiftPay?accountId&batchNum=1
         [Route("SwiftPay")]
         public async Task<IHttpActionResult> SwiftPay( int accountId, int batchNum)
         {
+            string emailAddress;
             try
             {
                 WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
-                var email = SendMailSvc.uEmail(HttpContext.Current.User.Identity.Name.Replace(@"reckner\", ""));
-                log.Info(String.Format("Email address {0}", email));
-                log.Info(String.Format("SwiftPay called user {0}  account {1} batch {2} email {3}", user.Identity.Name, accountId,batchNum, email));
-                //HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
-                //Task.Run(() => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
-                BackgroundJob.Enqueue(() => SwiftPaySvc.PayBatch(accountId, batchNum,  email));
-                return Ok();
+                if (user != null && UserAuthSvc.CanWrite(user.Identity.Name))
+                {
+                    emailAddress = SendMailSvc.uEmail(user.Identity.Name.Replace(@"reckner\", ""));
+
+                    log.Info(String.Format("Email address {0}", emailAddress));
+                    log.Info(String.Format("SwiftPay called user {0}  account {1} batch {2} email {3}",
+                        user.Identity.Name, accountId, batchNum, emailAddress));
+                    //HostingEnvironment.QueueBackgroundWorkItem(clt => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
+                    //Task.Run(() => SwiftPaySvc.PayBatch(accountId, batchNum, user, email));
+                    BackgroundJob.Enqueue(() => SwiftPaySvc.PayBatch(accountId, batchNum, emailAddress));
+                    return Ok();
+                }
+                return Unauthorized();
             }
             catch (Exception e)
             {

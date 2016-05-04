@@ -74,7 +74,9 @@
     <Compile Include="BatchEdit.designer.cs">
       <DependentUpon>BatchEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="BatchSwiftCommand.cs" />
+    <Compile Include="VoidSwiftPromoCodeCommand.cs" />
+    <Compile Include="BatchSwiftVoidCommand.cs" />
+    <Compile Include="BatchSwiftFulfillCommand.cs" />
     <Compile Include="CheckInfo.cs" />
     <Compile Include="CheckInfo.designer.cs">
       <DependentUpon>CheckInfo.cs</DependentUpon>
@@ -85,7 +87,7 @@
     </Compile>
     <Compile Include="ClearCheckBatchCommand.cs" />
     <Compile Include="VoidCheckCommand.cs" />
-    <Compile Include="ClearChecksCommand.cs" />
+    <Compile Include="ClearCheckCommand.cs" />
     <Compile Include="CommitCheckCommand.cs" />
     <Compile Include="DataPortalHookArgs.cs" />
     <Compile Include="data\PersonatorErrorCodes.cs" />
@@ -132,9 +134,6 @@
       <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
       <Name>CoopCheck.DAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

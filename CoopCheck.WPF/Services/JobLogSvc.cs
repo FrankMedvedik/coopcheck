@@ -15,15 +15,15 @@ namespace CoopCheck.WPF.Services
             {
                 var x = new JobLog();
                 if (jobNum != 0)
-                    try
-                    {
-                        x = ctx.JobLogs.First(j => j.JobNum == jobNum);
-                    }
-                    catch (Exception e)
-                    {
-                        x = new JobLog();
-                        Console.Out.Write(e + jobNum.ToString());
-                    }
+                try
+                {
+                    x = ctx.JobLogs.First(j => j.JobNum == jobNum);
+                }
+                catch (Exception e)
+                {
+                    x = new JobLog();
+                    Console.Out.Write(e + jobNum.ToString());
+                }
                 return x;
             }
         }

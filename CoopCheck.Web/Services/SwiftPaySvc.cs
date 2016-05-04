@@ -18,8 +18,8 @@ namespace CoopCheck.Web.Services
                  log.Info(String.Format("inside service - SwiftPay called user {0}  account {1} batchNum {2}", email, accountId, batchNum));
                     try
                     {
-                        //CoopCheck.Mocks.BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum, true);
-                        BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum);
+                        CoopCheck.Mocks.BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum, true);
+                        //BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum);
                 SendMailSvc.SendEmail(email,
                             String.Format("Swiftpay complete for batch {0}", batchNum), "processing complete");
                     }

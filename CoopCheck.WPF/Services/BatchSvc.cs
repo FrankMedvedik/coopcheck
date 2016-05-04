@@ -38,7 +38,7 @@ namespace CoopCheck.WPF.Services
             {
                 sb.JobNum = int.Parse(vouchers.Select(x => x.JobNumber).First());
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 sb.JobNum = -1;
             }

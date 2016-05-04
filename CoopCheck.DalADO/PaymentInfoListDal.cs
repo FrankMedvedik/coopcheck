@@ -6,10 +6,7 @@ using Csla.Data;
 using CoopCheck.DAL;
 using System.Configuration;
 using System.Linq;
-using System.Security.Principal;
-using System.ServiceModel.Channels;
-using System.Threading;
-using System.Threading.Tasks;
+using CoopCheck.DalADO.PromoCodeService;
 
 namespace CoopCheck.DalADO
 {
@@ -62,7 +59,7 @@ namespace CoopCheck.DalADO
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
             {
-                using (var cmd = new SqlCommand("dbo.dal_GetPaymentByIdn", ctx.Connection))
+                using (var cmd = new SqlCommand("dbo.dal_GetPaymentById", ctx.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@tran_id", tranId).DbType = DbType.Int32;
@@ -212,7 +209,7 @@ namespace CoopCheck.DalADO
                         }
                     }
             }
-            catch(Exception e)
+            catch(Exception )
             {
                 return new ClientJobDto
                 {
@@ -290,71 +287,13 @@ namespace CoopCheck.DalADO
         public void VoidSwiftBatch(int batch_num)
         {
             var b = FetchBatch(batch_num);
-
-            var userId = ConfigurationManager.AppSettings["SwiftUserId"];
-            var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
-            var progId = ConfigurationManager.AppSettings["SwiftProgramId"];
-            var issuanceId = ConfigurationManager.AppSettings["SwiftIssuanceProductId"];
-            var locId = ConfigurationManager.AppSettings["SwiftLocationId"];
-            var srv = new PromoCodeService.PCService_DefClient();
-
             foreach (PaymentInfoDto p in b)
             {
-                if (!p.Completed && !string.IsNullOrEmpty(p.Email))
-                {
-                    var request = new PromoCodeService.UpdatePromocodeRequest();
-                    request.UserId = userId;
-                    request.Password = pwd;
-                    request.ClientId = userId;
-                    request.PromocodeProgramId = progId;
-                    request.LocationId = locId;
-                    
-                    request.IssuanceProductId = issuanceId;
-                    request.Amount = "0";
-                    request.NewStatus = "Suspend";
-                    request.NewStatusReasonCode = "BI";
-
-                    request.Customer.FirstName = p.FirstName;
-                    request.Customer.LastName = p.LastName;
-                    
-                    request.Customer.Address1 = p.Address1;
-                    request.Customer.Address2 = p.Address2;
-                    request.Customer.City = p.Municipality;
-                    request.Customer.City = p.Region;
-                    request.Customer.PostalCode = p.PostalCode;
-                    request.Customer.CountryCode = p.Country;
-
-                    request.RedemptionMessage = p.StudyTopic;
-                    
-
-                    PromoCodeService.UpdatePromocodeResponse response = srv.UpdatePromocode(request);
-
-                    if (response.Status == "Valid")
-                    {
-                        using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
-                        {
-                            using (var cmd = new SqlCommand("dbo.dal_VoidPromoCode", ctx.Connection))
-                            {
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@tran_id", p.Id).DbType = DbType.Int32;
-                                cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        var err = new Csla.WcfPortal.WcfErrorInfo();
-                        err.ExceptionTypeName = "PromoCodeError";
-                        err.Message = response.ResponseCode + " : " + response.SwiftErrorReason;
-
-                        throw new Csla.DataPortalException(err);
-                    }
-                }
+                VoidSwiftPromoCode(p.Id);
             }
         }
-        public void VoidSwiftCode(int tran_id)
+
+        public void VoidSwiftPromoCode(int tran_id)
         {
             var userId = ConfigurationManager.AppSettings["SwiftUserId"];
             var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
@@ -363,9 +302,8 @@ namespace CoopCheck.DalADO
             var locId = ConfigurationManager.AppSettings["SwiftLocationId"];
             var srv = new PromoCodeService.PCService_DefClient();
 
-            var dal = new VoucherEditDal();
-
-            var p = dal.Fetch(tran_id);
+            
+            var p = FetchById(tran_id).First();
 
             var request = new PromoCodeService.UpdatePromocodeRequest();
             request.UserId = userId;
@@ -373,24 +311,28 @@ namespace CoopCheck.DalADO
             request.ClientId = userId;
             request.PromocodeProgramId = progId;
             request.LocationId = locId;
-
+           
+            request.Promocode = p.CheckNum;
             request.IssuanceProductId = issuanceId;
-            request.Amount = "0";
-            request.NewStatus = "Suspend";
+            request.NewStatus = "Cancel";
             request.NewStatusReasonCode = "BI";
+            request.RedemptionMessage = "we have canceled this promo card.";
+            var c = new PromoCodeService.Customer
+            {
+                Address1 = p.Address1,
+                Address2 = p.Address2,
+                City = p.Municipality,
+                CountryCode = "USA",
+                EmailAddress = p.Email,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                PhoneNumber = p.PhoneNumber,
+                PostalCode = p.PostalCode,
+                State = p.Region,
+                UserName = p.Email
+            };
 
-            request.Customer.FirstName = p.First;
-            request.Customer.LastName = p.Last;
-
-            request.Customer.Address1 = p.AddressLine1;
-            request.Customer.Address2 = p.AddressLine2;
-            request.Customer.City = p.Municipality;
-            request.Customer.City = p.Region;
-            request.Customer.PostalCode = p.PostalCode;
-            request.Customer.CountryCode = p.Country;
-
-            request.RedemptionMessage = "we have voided this promo card.";
-
+            request.Customer = c;
 
             PromoCodeService.UpdatePromocodeResponse response = srv.UpdatePromocode(request);
 

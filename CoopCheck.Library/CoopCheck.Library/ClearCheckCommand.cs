@@ -7,7 +7,7 @@ using CoopCheck.DAL;
 namespace CoopCheck.Library
 {
     [Serializable]
-    public class ClearChecksCommand : CommandBase<ClearChecksCommand>
+    public class ClearCheckCommand : CommandBase<ClearCheckCommand>
     {
         private int _tranId;
         private DateTime _clearedDate;
@@ -27,9 +27,9 @@ namespace CoopCheck.Library
         public static void Execute(int tranId, DateTime clearedDate, decimal clearedAmount)
         {
             if (!CanExecuteCommand()) throw new System.Security.SecurityException("Not authorized to execute clear check command.");
-            DataPortal.Execute<ClearChecksCommand>(new ClearChecksCommand(tranId, clearedDate, clearedAmount));
+            DataPortal.Execute<ClearCheckCommand>(new ClearCheckCommand(tranId, clearedDate, clearedAmount));
         }
-        private ClearChecksCommand(int tranId, DateTime clearedDate, decimal clearedAmount)
+        private ClearCheckCommand(int tranId, DateTime clearedDate, decimal clearedAmount)
         {
             _tranId = tranId;
             _clearedDate = clearedDate;

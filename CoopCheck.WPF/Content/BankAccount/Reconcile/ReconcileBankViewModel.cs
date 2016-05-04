@@ -150,8 +150,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                         Status = new StatusInfo
                         {
                             StatusMessage =
-                                string.Format(" a matching payment was not found"),
-                            ErrorMessage = "No match found"
+                                string.Format("a matching payment was not found"),
+                            ErrorMessage = e.Message
 
                         };
                     }

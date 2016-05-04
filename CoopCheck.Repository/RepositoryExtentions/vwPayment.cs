@@ -29,5 +29,14 @@ namespace CoopCheck.Repository
                 return string.Format("{0:C0}", tran_amount);
             }
         }
+
+        public bool IsSwiftPayment
+        {
+            get { return account_id == 8; }
+        }
+        public bool IsCheck
+        {
+            get { return account_id != 8; }
+        }
     }
 }

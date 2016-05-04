@@ -439,7 +439,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         private decimal _voucherTotalDollars;
         private StatusInfo _status;
         private bool _canImport;
-        private bool _isBusy;
+        //private bool _isBusy;
 
         public decimal VoucherTotalDollars
         {

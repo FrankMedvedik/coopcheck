@@ -94,10 +94,10 @@ namespace CoopCheck.WPF.Services
             //   doc.SaveAs(string.Format("check.{0}.{1}.doc", b.Num, c.Id));
             // doc = new Microsoft.Office.Interop.Word.Document();
             //doc = app.Documents.Add(Template: @Properties.Settings.Default.CheckTemplate);
-            return new StatusInfo
-            {
-                StatusMessage = "printed"
-            };
+            //return new StatusInfo
+            //{
+            //    StatusMessage = "printed"
+            //};
         }
     }
 }

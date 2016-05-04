@@ -80,24 +80,6 @@ namespace CoopCheck.WPF.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Reckner\\\\CoopCheckReader")]
-        public string ReadAuth {
-            get {
-                return ((string)(this["ReadAuth"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Reckner\\\\CoopCheckAdmin")]
-        public string WriteAuth {
-            get {
-                return ((string)(this["WriteAuth"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -170,6 +152,24 @@ namespace CoopCheck.WPF.Properties {
         public string SwiftPaySiteLocal {
             get {
                 return ((string)(this["SwiftPaySiteLocal"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CoopCheckread")]
+        public string ReadAuth {
+            get {
+                return ((string)(this["ReadAuth"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CoopCheckAdmin")]
+        public string WriteAuth {
+            get {
+                return ((string)(this["WriteAuth"]));
             }
         }
     }

@@ -1,40 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
-using System.Threading;
-using CoopCheck.WPF.Properties;
 
-namespace CoopCheck.WPF.Services
+namespace CoopCheck.Web.Services
 {
     public static class UserAuthSvc
     {
         public static bool CanRead(string userName)
         {
-            return true;
-            //return IsGroupMember(userName, Settings.Default.ReadAuth);
-            //return IsGroupMember(userName, Settings.Default.WriteAuth);
+            //return true;
+            return IsGroupMember(userName, "CoopCheckread");
         }
 
         public static bool CanWrite(string userName)
         {
             // return true;
-            return IsGroupMember(userName, Settings.Default.WriteAuth);
+            return IsGroupMember(userName, "CoopCheckAdmin");
         }
 
         private static bool IsGroupMember(string userName, string Group)
         {
-            //return true;
-         
-
-#if DEBUG
-         //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
-            //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "10.0.0.2", "fmedvedik", "(manos)3k");
-            //  PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
-#else
-            //PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
-#endif
-
             var findByIdentity = UserPrincipal.FindByIdentity(ctx, userName);
             bool retVal = false;
             if (findByIdentity != null)

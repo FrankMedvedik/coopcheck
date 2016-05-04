@@ -7,7 +7,7 @@ using CoopCheck.DAL;
 namespace CoopCheck.Library
 {
     [Serializable]
-    public class VoidCheckCommand : CommandBase<ClearChecksCommand>
+    public class VoidCheckCommand : CommandBase<ClearCheckCommand>
     {
         private int _tranId;
 

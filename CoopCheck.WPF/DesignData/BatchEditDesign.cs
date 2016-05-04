@@ -12,7 +12,7 @@ namespace CoopCheck.WPF.DesignData
         public static BatchEditImport LoadTestData()
         {
             // holds id of batch we will create, update and delete
-            int tBatchNum = 0;
+       
 
             // insert values
             int tAmount = 100;

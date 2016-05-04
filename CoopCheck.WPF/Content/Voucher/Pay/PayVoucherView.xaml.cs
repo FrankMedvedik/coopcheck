@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
@@ -25,7 +26,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         private async void SwiftPay(object sender, RoutedEventArgs e)
         {
             _vm.IsBusy = true;
-            _vm.SwiftPay();
+            await Task.Run(() => _vm.SwiftPay());
             _vm.IsBusy = false;
 
         }

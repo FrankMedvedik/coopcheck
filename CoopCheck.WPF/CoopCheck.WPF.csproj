@@ -31,7 +31,7 @@
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>99</ApplicationRevision>
+    <ApplicationRevision>107</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

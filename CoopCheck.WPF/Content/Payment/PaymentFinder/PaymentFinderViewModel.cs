@@ -45,7 +45,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             {
                 try
                 {
-                    ClearChecksCommand.Execute(SelectedPayment.tran_id,DateTime.Today, SelectedPayment.tran_amount.GetValueOrDefault(0));
+                    ClearCheckCommand.Execute(SelectedPayment.tran_id,DateTime.Today, SelectedPayment.tran_amount.GetValueOrDefault(0));
                     GetPayments();
                 }
                 catch (Exception ex)
@@ -83,14 +83,18 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
         {
             Status = new StatusInfo()
             {
-                StatusMessage = "voiding check",
+                StatusMessage = "voiding payment",
                 IsBusy = true
             };
             await Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    VoidCheckCommand.Execute(SelectedPayment.tran_id);
+                    // if its a character check number then it is a swiftpayment 
+                    if(SelectedPayment.IsSwiftPayment)
+                        VoidSwiftPromoCodeCommand.Execute(SelectedPayment.tran_id);
+                    else
+                        VoidCheckCommand.Execute(SelectedPayment.tran_id);
                     GetPayments();
                 }
                 catch (Exception ex)
@@ -111,15 +115,15 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
         }
 
         public bool CanVoidCheck()
-        {
+        {   
             if (SelectedPayment == null ) return false;
-            if (SelectedPayment.cleared_flag) return false;
+            if (SelectedPayment.cleared_flag && SelectedPayment.IsCheck) return false;
             return true;
         }
         public bool CanClearCheck()
         {
             if (SelectedPayment == null) return false;
-            if (SelectedPayment.cleared_flag) return false;
+            if (SelectedPayment.cleared_flag ) return false;
             return true;
         }
         public int PaymentsCnt
