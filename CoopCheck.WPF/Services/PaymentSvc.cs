@@ -21,18 +21,18 @@ namespace CoopCheck.WPF.Services
         public static int MAX_PAYMENT_COUNT = 10000;
 
 
-        public static async Task<StatusInfo> SwiftFulfillAsync(int accountId, int batchNum)
+        public static async Task<StatusInfo> SwiftFulfillAsync(int batchNum)
         {
             var i = new StatusInfo();
             try
             {
                 //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
                 //System.Threading.Thread.Sleep(5000);
-                //var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
-                //var client = new HttpClient(new HttpClientHandler { Credentials = credentials });
-                //{ 
-                using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
+                var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
+                var client = new HttpClient(new HttpClientHandler { Credentials = credentials });
                 {
+                //    using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
+                //{
                     //client.BaseAddress = new Uri("http://localhost:37432/");
                     client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
                     client.DefaultRequestHeaders.Accept.Clear();
@@ -47,7 +47,46 @@ namespace CoopCheck.WPF.Services
                     //}
 
                     // HTTP POST
-                    var response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?accountId={0}&batchNum={1}", accountId, batchNum), null);
+                    var response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?batchNum={0}", batchNum), null);
+                    if (response.IsSuccessStatusCode)
+                        i.StatusMessage = "Swiftpay processing started. An email will be sent to you when it completes";
+                    i.IsBusy = false;
+                }
+            }
+            catch (Exception e)
+            {
+                i.StatusMessage = String.Format("Swiftpay processing error for batch {0}", batchNum);
+                i.ErrorMessage = e.Message;
+            }
+            return i;
+        }
+        public static async Task<StatusInfo> SwiftVoidAsync(int batchNum)
+        {
+            var i = new StatusInfo();
+            try
+            {
+                //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
+                //System.Threading.Thread.Sleep(5000);
+                var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
+                var client = new HttpClient(new HttpClientHandler { Credentials = credentials });
+                {
+                    //    using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
+                    //{
+                    //client.BaseAddress = new Uri("http://localhost:37432/");
+                    client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //// HTTP GET
+                    //HttpResponseMessage response = await client.GetAsync(String.Format("api/Swiftpayment?batchNum={0}",batchNum));
+                    //if (response.IsSuccessStatusCode)
+                    //{
+                    //    var a = await response.Content.ReadAsAsync<List<vwPayment>>();
+                    //    foreach (var r in a)
+                    //        Console.WriteLine("{0}\t${1}\t{2}", r.last_name, r.check_num, r.tran_amount);
+                    //}
+
+                    // HTTP POST
+                    var response = await client.PostAsync(String.Format("api/swiftpayment/swiftvoid?batchNum={0}", batchNum), null);
                     if (response.IsSuccessStatusCode)
                         i.StatusMessage = "Swiftpay processing started";
                     i.IsBusy = false;
@@ -145,15 +184,6 @@ namespace CoopCheck.WPF.Services
                 CurrentCheckNum = --checkNum
             };
         }
-
-        public static Task<StatusInfo> UnprintChecksAsync(int accountId, int batchNum, int startingCheckNum)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static Task<StatusInfo> CancelSwiftFulfillAsync(int accountId, int batchNum)
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 }

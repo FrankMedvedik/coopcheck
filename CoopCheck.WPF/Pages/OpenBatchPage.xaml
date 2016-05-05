@@ -5,8 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:edit="clr-namespace:CoopCheck.WPF.Content.Voucher.Edit"
-             xmlns:utilities="clr-namespace:CoopCheck.WPF.Content.Utilities"
-             xmlns:unpay="clr-namespace:CoopCheck.WPF.Content.Utilities.Unpay"
              mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>

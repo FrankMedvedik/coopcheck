@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+using log4net;
+using log4net.Config;
+
+[assembly: XmlConfigurator(Watch = true)]
+
 namespace CoopCheck.Web
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
-        private static readonly log4net.ILog log =
-               log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log =
+            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         protected void Application_Start()
         {
@@ -22,7 +24,6 @@ namespace CoopCheck.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             log.Info("Coopcheck.Web Started");
-        
         }
     }
 }

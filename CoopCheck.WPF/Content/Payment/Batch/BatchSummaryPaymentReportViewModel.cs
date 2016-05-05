@@ -55,6 +55,16 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         private int _endingCheckNum;
         private int _startingCheckNum;
         private bool _canUnprint;
+        private bool _canVoid;
+        public bool CanVoid
+        {
+            get { return _canVoid; }
+            set
+            {
+                _canVoid = value;
+                NotifyPropertyChanged();
+            }
+        }
         public bool CanUnprint
         {
             get { return _canUnprint;  }
@@ -98,6 +108,14 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
         }
 
+        private void SetCanVoid()
+        {
+            CanVoid = false;
+            if (AllPayments.First().IsSwiftPayment)
+                CanVoid = true;
+
+        }
+
         private void SetCanUnPrint()
         {
             DateTime pdate = AllPayments.Max(x => x.check_date).GetValueOrDefault();
@@ -123,6 +141,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 _closedPayments = value;
                 NotifyPropertyChanged();
                 SetCanUnPrint();
+                SetCanVoid();
             }
         }
 

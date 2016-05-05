@@ -74,6 +74,8 @@
     <Compile Include="BatchEdit.designer.cs">
       <DependentUpon>BatchEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="SvrBatchSwiftVoidCommand.cs" />
+    <Compile Include="SvrBatchSwiftFulfillCommand.cs" />
     <Compile Include="VoidSwiftPromoCodeCommand.cs" />
     <Compile Include="BatchSwiftVoidCommand.cs" />
     <Compile Include="BatchSwiftFulfillCommand.cs" />

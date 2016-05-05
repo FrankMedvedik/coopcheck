@@ -20,9 +20,9 @@ namespace CoopCheck.Web.Services
 
         private static bool IsGroupMember(string userName, string Group)
         {
-           PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
+            var ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
             var findByIdentity = UserPrincipal.FindByIdentity(ctx, userName);
-            bool retVal = false;
+            var retVal = false;
             if (findByIdentity != null)
             {
                 List<string> result;

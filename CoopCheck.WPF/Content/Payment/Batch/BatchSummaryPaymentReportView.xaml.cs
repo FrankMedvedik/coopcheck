@@ -2,12 +2,15 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Content.Voucher;
 using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Services;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace CoopCheck.WPF.Content.Payment.Batch
 {
@@ -112,5 +115,33 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
 
         }
+
+
+        private async void  Void_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var result  = ModernDialog.ShowMessage(string.Format(" Void Swift Payments for batch {0}", _vm.PaymentReportCriteria.BatchNumber), "Coop Check", MessageBoxButton.OKCancel); 
+                if (result == MessageBoxResult.OK)
+                {
+                    await PaymentSvc.SwiftVoidAsync(SelectedvwBatchRpt.batch_num);
+                    _vm.Status = new Models.StatusInfo
+                    {
+                        StatusMessage = string.Format("batch - {0} submitted for void. You will receive an email when it is completed. ",
+                            SelectedvwBatchRpt.batch_num)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                _vm.Status = new Models.StatusInfo
+                {
+                    StatusMessage = string.Format("batch - {0} cannot be voided",SelectedvwBatchRpt.batch_num),
+                    ErrorMessage = ex.Message
+                };
+            }
+
+        }
+
     }
 }

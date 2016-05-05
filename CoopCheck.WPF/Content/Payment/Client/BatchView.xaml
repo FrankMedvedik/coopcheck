@@ -45,7 +45,7 @@
                       ItemsSource="{Binding Batches, Mode=OneWay}"  VerticalAlignment="Top"   
                       ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" 
                       EnableRowVirtualization="True" SelectedItem="{Binding SelectedBatch}" MaxHeight="300" 
-                     ToolTipService.ToolTip="Payment Batches" 
+                     ToolTipService.ToolTip="Payment Batches"   CanUserAddRows="False"
                       Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding batch_num}"  Header="batch" />
@@ -55,7 +55,8 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+                                    <Setter Property="ToolTip" Value="Job number and source file name do not match" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -67,7 +68,8 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+                                    <Setter Property="ToolTip" Value="Job number and source file name do not match" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

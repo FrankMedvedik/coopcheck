@@ -275,7 +275,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 try
                 {
-                    var v = PaymentSvc.SwiftFulfillAsync(SelectedAccount.account_id, SelectedBatch.batch_num);
+                    var v = PaymentSvc.SwiftFulfillAsync(SelectedBatch.batch_num);
                     return v.Result;
                 }
                 catch (Exception e)

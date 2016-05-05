@@ -31,9 +31,8 @@
         </StackPanel>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" Grid.Column="0" 
                   Visibility="{Binding IsBusy, Converter={StaticResource NotBoolToVisConverter}}" 
-                  IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" MaxHeight="250" 
-                  ClipboardCopyMode="IncludeHeader" 
-                  EnableColumnVirtualization="True" EnableRowVirtualization="True" 
+                  IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" MaxHeight="250" ClipboardCopyMode="IncludeHeader" 
+                  CanUserAddRows="False" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                   ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" 
                   Height="Auto"  VerticalScrollBarVisibility="Auto" 
                   SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
@@ -45,7 +44,7 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -57,7 +56,7 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

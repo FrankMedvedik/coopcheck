@@ -24,10 +24,13 @@
                     VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
                 <Button x:Name="Unprint" Margin="50,6,6,6" IsEnabled="{Binding CanUnprint}"
                         Click="Unprint_Click" HorizontalAlignment="Left"  VerticalAlignment="Center" >Unprint</Button>
-            </StackPanel>
+                    <Button x:Name="VoidSwiftPayments" Margin="30,6,6,6" IsEnabled="{Binding CanVoid}" 
+                            Click="Void_Click" HorizontalAlignment="Left" 
+                            VerticalAlignment="Center">Void Swift Payments</Button>
+                </StackPanel>
             </StackPanel>
             <batch:BatchReportView  x:Name="brv"  Grid.Row="3" Margin="6"/>
-        <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml"  Grid.Row="4" Layout="Tab">
+            <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml" Margin="6" Grid.Row="4" Layout="Tab">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
                 <mui:Link DisplayName="Cleared" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />

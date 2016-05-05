@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using log4net.Config;
 
 namespace CoopCheck.Web
 {
@@ -10,15 +8,12 @@ namespace CoopCheck.Web
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            log4net.Config.XmlConfigurator.Configure();
+            XmlConfigurator.Configure();
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional}
+                );
         }
     }
 }

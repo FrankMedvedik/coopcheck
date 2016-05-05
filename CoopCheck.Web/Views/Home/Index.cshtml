@@ -1,26 +1,24 @@
 ﻿@using CoopCheck.Web.Services
 <div class="jumbotron">
-    <h1>CoopCheck</h1>
+    <h1>Coop Check</h1>
 </div>
 <div class="row">
     <div class="col-md-4">
-        <h2>Install coopcheck on your pc</h2>
-        <p><a class="btn btn-default" type="application/octet-stream" href="\\app2012.reckner.com\coopcheckpub$\setup.exe">Setup</a>
-        </p>
+        <h2><a class="btn btn-default" type="application/octet-stream" HREF="setup.exe">Setup</a> on your PC</h2>
+            
         <h2>Your Access Level</h2>
-        <p>@System.Web.HttpContext.Current.User.Identity.Name;</p>
-        @if (UserAuthSvc.CanRead(System.Web.HttpContext.Current.User.Identity.Name))
+        <p>@HttpContext.Current.User.Identity.Name;</p>
+        @if (UserAuthSvc.CanRead(HttpContext.Current.User.Identity.Name))
         {
-            <p>"CoopCheckread"; </p>
-            if (UserAuthSvc.CanWrite(System.Web.HttpContext.Current.User.Identity.Name))
+            <p>CoopCheckread</p>
+            if (UserAuthSvc.CanWrite(HttpContext.Current.User.Identity.Name))
             {
-                <p> "CoopCheckAdmin"; </p>
+                <p>CoopCheckAdmin</p>
             }
-
         }
         else
         {
-            <p>No Access to coopcheck; </p>
+            <p>No Access to coopcheck</p>
         }
     </div>
 </div>

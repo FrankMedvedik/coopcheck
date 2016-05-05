@@ -11,7 +11,8 @@ namespace CoopCheck.DAL
         List<PaymentInfoDto> FetchPerson(string personId);
         List<PaymentInfoDto> FetchById(int tranId);
         List<PaymentInfoDto> FetchByNum(string paymentNumber);
-
+        void SvrFulfillSwift(int batch_num, string email);
+        void SvrVoidSwiftBatch(int batch_num, string email);
         void FulfillSwift(int batch_num);
         void VoidSwiftBatch(int batch_num);
         void VoidSwiftPromoCode(int tran_id);

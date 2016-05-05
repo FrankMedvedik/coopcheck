@@ -3,7 +3,7 @@ using Hangfire;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Startup))]
+[assembly: OwinStartup(typeof (Startup))]
 
 namespace CoopCheck.Web
 {
@@ -11,7 +11,7 @@ namespace CoopCheck.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            GlobalConfiguration.Configuration 
+            GlobalConfiguration.Configuration
                 .UseSqlServerStorage("CoopCheck");
 
             app.UseHangfireDashboard();

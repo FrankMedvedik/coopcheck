@@ -46,8 +46,8 @@
         </StackPanel>-->
             <DataGrid x:Name="dgBatches" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"   
                       Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" 
-                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Batches}" VerticalAlignment="Top"
-                     ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+                    VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Batches}" VerticalAlignment="Top" 
+                      CanUserAddRows="false" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                       SelectedItem="{Binding SelectedBatch}" MaxHeight="300"
                     ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
@@ -58,7 +58,8 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+                                    <Setter Property="ToolTip" Value="Job number and source file name do not match"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -70,7 +71,8 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="Red" />
+                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+                                    <Setter Property="ToolTip" Value="Job number and source file name do not match" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
