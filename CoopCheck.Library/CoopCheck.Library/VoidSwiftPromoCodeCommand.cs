@@ -20,7 +20,7 @@ namespace CoopCheck.Library
 #endif
         {
 #if !DEBUG
-            BusinessRules.AddRule(typeof(VoidSwiftCodeCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
+            BusinessRules.AddRule(typeof(VoidSwiftPromoCodeCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
 #endif
         }
 

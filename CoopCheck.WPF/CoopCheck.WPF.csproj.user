@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PublishUrlHistory>C:\coopcheckpub\|c:\coopcheckpub\</PublishUrlHistory>
-    <InstallUrlHistory>\\app2012.reckner.com\coopcheckpub%24\|\\app2012\coopcheckpub%24\</InstallUrlHistory>
+    <InstallUrlHistory>http://app2012.reckner.com/CoopCheck/|\\app2012.reckner.com\coopcheckpub%24\|\\app2012\coopcheckpub%24\</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory>\\app2012.reckner.com\coopcheckpub%24\|\\app2012\coopcheckpub%24\|\\cc-prod.reckner.com\c%24\coopcheckpub\</UpdateUrlHistory>
     <BootstrapperUrlHistory />

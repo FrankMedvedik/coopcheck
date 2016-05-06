@@ -38,18 +38,7 @@
                   SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
-                <DataGridTextColumn Binding="{Binding jobnum}" Header="job num">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding jobnum}" Header="job num"/>
                 <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -57,6 +46,7 @@
                                 <DataTrigger Binding="{Binding BadBatch}" Value="True">
                                     <Setter Property="FontWeight" Value="Bold" />
                                     <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}"/>
+                                    <Setter Property="ToolTip" Value="Job number and source file name do not match" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

@@ -49,32 +49,8 @@
                       Margin="6" HorizontalAlignment="Left" SelectionMode="Extended" >
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding batch_num}"  Header="batch" />
-                <DataGridTextColumn Binding="{Binding job_num}" Header="job num">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
-                                    <Setter Property="ToolTip" Value="Job number and source file name do not match" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding BadBatch}" Value="True">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
-                                    <Setter Property="ToolTip" Value="Job number and source file name do not match" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding job_num}" Header="job num"/>
+                <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc"/>
                 <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
                 <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}" />
                 <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}" />
