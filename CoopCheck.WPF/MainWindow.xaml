@@ -14,7 +14,7 @@
                 <mui:Link DisplayName="find" Source="/Pages/PaymentFinderReportPage.xaml" />
                 <mui:Link DisplayName="batch" Source="/Pages/BatchSummaryReportPage.xaml" />
                 <mui:Link DisplayName="job" Source="/Pages/JobSummaryReportPage.xaml" />
-                <mui:Link DisplayName="summary" Source="/Pages/ClientFinderReportPage.xaml" />
+                <mui:Link DisplayName="summary" Source="/Pages/PaymentSummaryReportPage.xaml" />
                 <mui:Link DisplayName="voided" Source="/Pages/VoidedPaymentReportPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>

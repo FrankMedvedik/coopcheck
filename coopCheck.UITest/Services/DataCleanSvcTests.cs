@@ -16,7 +16,7 @@ namespace CoopCheck.WPF.Services.Tests
         public void ValidateAddressesTest()
         {
 
-            var a = DataCleanSvc.ValidateAddressesAsync(new List<InputStreetAddress>(), new DataCleanCriteria());
+            var a = DataCleanSvc.ValidateAddresses(new List<InputStreetAddress>());
         }
     }
 }

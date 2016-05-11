@@ -23,7 +23,7 @@ namespace CoopCheck.WPF.Services
         private static bool IsGroupMember(string userName, string Group)
         {
             //return true;
-         
+
 
 #if DEBUG
          //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
@@ -31,7 +31,8 @@ namespace CoopCheck.WPF.Services
             //  PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
 #else
-            //PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
+            
 #endif
 
             var findByIdentity = UserPrincipal.FindByIdentity(ctx, userName);

@@ -316,11 +316,11 @@ namespace CoopCheck.Library
 #endif
         {
 #if !DEBUG
-            BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
-            BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckAdmin"));
-            BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
-            BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
-            AddObjectAuthorizationRulesExtend();
+            //BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
+            //BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckAdmin"));
+            //BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
+            //BusinessRules.AddRule(typeof(BatchEdit), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
+            //AddObjectAuthorizationRulesExtend();
 #endif
 
         }

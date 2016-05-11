@@ -49,12 +49,47 @@ namespace CoopCheck.WPF.Services
             try
             {
                 sb = sb.Save();
-                foreach (var v in vouchers)
-                {
-                    currentVoucher = v;
-                    sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
-                }
+                //using (var ctx = new CoopCheckEntities())
+                //{
+                    Console.WriteLine(DateTime.Now.ToLongTimeString() + " before records added");
+                    //foreach (var v in vouchers)
+                    //    {
+                    //        ctx.check_tran.Add(new check_tran
+                    //        {
+                    //            address_1 = v.AddressLine1,
+                    //            address_2 = v.AddressLine2,
+                    //            batch_num = sb.Num,
+                    //            company = v.Company,
+                    //            country = v.Country,
+                    //            email = v.EmailAddress,
+                    //            first_name = v.First,
+                    //            last_name = v.Last,
+                    //            middle_name = v.Middle,
+                    //            municipality = v.Municipality,
+                    //            name_prefix = v.NamePrefix,
+                    //            name_suffix = v.Suffix,
+                    //            phone_number = v.PhoneNumber,
+                    //            postal_code = v.PostalCode,
+                    //            region = v.Region,
+                    //            title = v.Title,
+                    //            tran_amount = v.Amount
+                    //        });
+                    //        currentVoucher = v;
+                    //    }
+                    //    Console.WriteLine(DateTime.Now.ToLongTimeString() + " after add");
+                    //    ctx.SaveChanges();
+                    //    Console.WriteLine(DateTime.Now.ToLongTimeString() + " after save");
+                    //}
+            foreach (var v in vouchers)
+            {
+                sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
+                //sb.Vouchers.AddVoucher(v.Amount.GetValueOrDefault(), v.RecordID, v.NamePrefix, v.First,
+                //    v.Middle, v.Last, v.Suffix,
+                //    v.Title, v.Company, v.AddressLine1, v.AddressLine2,
+                //    v.Municipality, v.Region, v.PostalCode, v.Country, v.PhoneNumber, v.EmailAddress);
+            }
                 sb = sb.Save();
+                Console.WriteLine(DateTime.Now.ToLongTimeString() + " batch saved");
             }
             catch (Exception e)
             {

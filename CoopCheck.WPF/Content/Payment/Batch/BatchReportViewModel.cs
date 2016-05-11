@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using CoopCheck.Library;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
+using GalaSoft.MvvmLight.Command;
 using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -12,6 +15,8 @@ namespace CoopCheck.WPF.Content.Payment.Batch
 {
     public class BatchReportViewModel : ViewModelBase
     {
+
+
         public bool ShowGridData
         {
             get { return _showGridData; }
@@ -122,6 +127,8 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         private StatusInfo _status;
         private PaymentReportCriteria _paymentReportCriteria;
         private string _headingText;
+        
+
         public string HeadingText
         {
             get { return _headingText; }

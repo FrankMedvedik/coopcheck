@@ -61,7 +61,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             }
         }
 
-        private async void VoidCheck_Click(object sender, RoutedEventArgs e)
+        private void VoidCheck_Click(object sender, RoutedEventArgs e)
         {
             var cw = new VoidPaymentDialog() {DataContext = _vm};
             var result = cw.ShowDialog();
@@ -70,9 +70,8 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
                 try
                 {
                     _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
-                    await Task.Run(() => 
-                    { _vm.VoidCheck();
-                    _vm.GetPayments();});
+                
+                     _vm.VoidCheck();
                 }
                     catch (Exception ex)
                 {

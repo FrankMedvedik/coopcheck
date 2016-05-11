@@ -351,6 +351,8 @@ namespace CoopCheck.DalADO
                 }
             }
         }
+
+
         public void ClearCheck(int tranId, DateTime clearedDate, decimal clearedAmount)
         {
             using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))

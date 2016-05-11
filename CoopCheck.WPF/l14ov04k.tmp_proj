@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AABD6CF8-BDB2-494C-B8AE-874581154800}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoopCheck.WPF</RootNamespace>
+    <AssemblyName>CoopCheck.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ExpressionBlendVersion>12.0.60617.0</ExpressionBlendVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>c:\coopcheckpub\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\app2012.reckner.com\coopcheckpub%24\</InstallUrl>
+    <UpdateUrl>\\app2012.reckner.com\coopcheckpub%24\</UpdateUrl>
+    <ProductName>Co-opCheck</ProductName>
+    <PublisherName>Reckner</PublisherName>
+    <SuiteName>office support</SuiteName>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>46</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEBUGLOCAL|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DEBUGLOCAL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>271CE4C502872831D1BDCA822C0FB3A190D86AAC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CoopCheck.WPF_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CoopCheck.WPF.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons\coop.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\AccountPaymentsView.xaml.cs">
+      <DependentUpon>AccountPaymentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\AccountPaymentsViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileWizardView.xaml.cs">
+      <DependentUpon>ReconcileWizardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileWizardViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileWindow.xaml.cs">
+      <DependentUpon>ReconcileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\VoucherWorkbookMessage.cs" />
+    <Compile Include="Content\Voucher\Save\VoucherSaveView.xaml.cs">
+      <DependentUpon>VoucherSaveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Save\VoucherSaveViewModel.cs" />
+    <Compile Include="Content\Voucher\VouchersWindow.xaml.cs">
+      <DependentUpon>VouchersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
+    <Compile Include="Interfaces\IModernNavigationService.cs" />
+    <Compile Include="Messages\ExcelVouchersMessage.cs" />
+    <Compile Include="Models\VoucherExcelExport.cs" />
+    <Compile Include="Messages\NavigationMessage.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\Grids\UnmatchedBankTransactionsGrid.xaml.cs">
+      <DependentUpon>UnmatchedBankTransactionsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\Grids\AllBankTransactionsGrid.xaml.cs">
+      <DependentUpon>AllBankTransactionsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\BankFileView.xaml.cs">
+      <DependentUpon>BankFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileBankView.xaml.cs">
+      <DependentUpon>ReconcileBankView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\BankFileViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\ReconcileBankViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionsView.xaml.cs">
+      <DependentUpon>BankClearTransactionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\Reconcile\BankClearTransactionViewModel.cs" />
+    <Compile Include="Content\DataClean\DataCleanFeedbackViewModel.cs" />
+    <Compile Include="Content\DataClean\DataCleanFeedbackView.xaml.cs">
+      <DependentUpon>DataCleanFeedbackView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DataClean\DataCleanCriteriaView.xaml.cs">
+      <DependentUpon>DataCleanCriteriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DataClean\DataCleanCriteriaViewModel.cs" />
+    <Compile Include="Content\NoAccessView.xaml.cs">
+      <DependentUpon>NoAccessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ModernFrame\CancelNavigateSample.xaml.cs">
+      <DependentUpon>CancelNavigateSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ModernFrame\ErrorSample.xaml.cs">
+      <DependentUpon>ErrorSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ModernFrame\Sample.xaml.cs">
+      <DependentUpon>Sample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\BatchReportView.xaml.cs">
+      <DependentUpon>BatchReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\BatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml.cs">
+      <DependentUpon>ClosedPaymentsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\Grids\OpenPaymentsGrid.xaml.cs">
+      <DependentUpon>OpenPaymentsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\Grids\AllPaymentsGrid.xaml.cs">
+      <DependentUpon>AllPaymentsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\JobSummaryPaymentReportView.xaml.cs">
+      <DependentUpon>JobSummaryPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\BatchSummaryPaymentReportView.xaml.cs">
+      <DependentUpon>BatchSummaryPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\JobSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\BatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\JobReportView.xaml.cs">
+      <DependentUpon>JobReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\JobReportViewModel.cs" />
+    <Compile Include="Content\Payment\VoidedPaymentReportView.xaml.cs">
+      <DependentUpon>VoidedPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\OpenPaymentReportView.xaml.cs">
+      <DependentUpon>OpenPaymentReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\VoidedPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\OpenPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\PaymentReportCriteriaView.xaml.cs">
+      <DependentUpon>PaymentReportCriteriaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\PaymentReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Payment\PositivePayReportViewModel.cs" />
+    <Compile Include="Content\Payment\PositivePayReportView.xaml.cs">
+      <DependentUpon>PositivePayReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\AboutViewModel.cs" />
+    <Compile Include="Content\Status\StatusView.xaml.cs">
+      <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Status\StatusViewModel.cs" />
+    <Compile Include="Content\UserAuth.cs" />
+    <Compile Include="Content\Voucher\Clean\VoucherCleanViewModel.cs" />
+    <Compile Include="Content\Voucher\Edit\BatchListViewModel.cs" />
+    <Compile Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml.cs">
+      <DependentUpon>VoucherImportAddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\ReplacerView.xaml.cs">
+      <DependentUpon>ReplacerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\AltAddressView.xaml.cs">
+      <DependentUpon>AltAddressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\VoucherImportEditView.xaml.cs">
+      <DependentUpon>VoucherImportEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\VoucherCleanView.xaml.cs">
+      <DependentUpon>VoucherCleanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\VoucherViewModel.cs" />
+    <Compile Include="Content\Voucher\VoucherView.xaml.cs">
+      <DependentUpon>VoucherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DataCleanEventConverter.cs" />
+    <Compile Include="Converters\VoucherImportConverter.cs" />
+    <Compile Include="Models\BankClearTransaction.cs" />
+    <Compile Include="Models\ObjectCopier.cs" />
+    <Compile Include="Models\UserSecurityProfile.cs" />
+    <Compile Include="Models\ExcelVoucher.cs" />
+    <Compile Include="NotifyIconViewModel.cs" />
+    <Compile Include="Pages\AccountReconcilePage.xaml.cs">
+      <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\JobSummaryReportPage.xaml.cs">
+      <DependentUpon>JobSummaryReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BatchSummaryReportPage.xaml.cs">
+      <DependentUpon>BatchSummaryReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OpenPaymentReportPage.xaml.cs">
+      <DependentUpon>OpenPaymentReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\VoidedPaymentReportPage.xaml.cs">
+      <DependentUpon>VoidedPaymentReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\DataCleanVoucherImportSvc.cs" />
+    <Compile Include="Services\ExcelExportSvc.cs" />
+    <Compile Include="Services\ExportToExcel.cs" />
+    <Compile Include="Services\DataCleanSvc.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\ClearCheckSvc.cs" />
+    <Compile Include="Services\PaymentPrintSvc.cs" />
+    <Compile Include="Services\UserAuthSvc.cs" />
+    <Compile Include="Services\RptSvc.cs" />
+    <Compile Include="Services\BatchSvc.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
+    <Compile Include="Services\BankAccountSvc.cs" />
+    <Compile Include="Services\OpenBatchSvc.cs" />
+    <Compile Include="Content\Voucher\PayVouchersViewModel.cs" />
+    <Compile Include="Converters\NumberConverter.cs" />
+    <Compile Include="Models\StatusInfo.cs" />
+    <Compile Include="Messages\Notifications.cs" />
+    <Compile Include="Content\BankAccount\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\BankAccount\AccountViewModel.cs" />
+    <Compile Include="Pages\ImportVouchersPage.xaml.cs">
+      <DependentUpon>ImportVouchersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\NewBatchPage.xaml.cs">
+      <DependentUpon>NewBatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\SettingsAppearance.xaml.cs">
+      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\SettingsAppearanceViewModel.cs" />
+    <Compile Include="Pages\OpenBatchPage.xaml.cs">
+      <DependentUpon>OpenBatchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Edit\BatchListView.xaml.cs">
+      <DependentUpon>BatchListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PayPage.xaml.cs">
+      <DependentUpon>PayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\PayVoucherView.xaml.cs">
+      <DependentUpon>PayVoucherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentReportCriteria.cs" />
+    <Compile Include="Content\Payment\PaymentFinderView.xaml.cs">
+      <DependentUpon>PaymentFinderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PaymentFinderReportPage.xaml.cs">
+      <DependentUpon>PaymentFinderReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Payment\PaymentFinderViewModel.cs" />
+    <Compile Include="Pages\PositivePayReportPage.xaml.cs">
+      <DependentUpon>PositivePayReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\VoucherListViewModel.cs" />
+    <Compile Include="Content\Voucher\Clean\VoucherListView.xaml.cs">
+      <DependentUpon>VoucherListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Services\PaymentSvc.cs" />
+    <Compile Include="Models\WorksheetImport.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TrulyObservableCollection.cs" />
+    <Compile Include="Wrappers\ModelWrappper.cs" />
+    <Compile Include="Wrappers\NotifyDataErrorInfoBase.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Wrappers\VoucherImportWrapper.cs" />
+    <Compile Include="Converters\BooleanToVisibility.cs" />
+    <Compile Include="Converters\NotBooleanToVisibility.cs" />
+    <Compile Include="DesignData\BatchEditDesign.cs" />
+    <Compile Include="Interfaces\IAccount.cs" />
+    <Compile Include="Interfaces\IBatchEdit.cs" />
+    <Compile Include="Interfaces\ICheckInfo.cs" />
+    <Compile Include="Interfaces\IVoucherEdit.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\BatchEditImport.cs" />
+    <Compile Include="Pages\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Content\Voucher\Edit\BatchEditView.xaml.cs">
+      <DependentUpon>BatchEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VoucherImport.cs" />
+    <Compile Include="Models\ColumnPropertyMap.cs" />
+    <Compile Include="Content\Voucher\Edit\BatchEditViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ImportWorksheetViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\ImportWorksheetView.xaml.cs">
+      <DependentUpon>ImportWorksheetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\Appearance.xaml.cs">
+      <DependentUpon>Appearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\AppearanceViewModel.cs" />
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CoopCheck.WPF_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Assets\RecknerCheck.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RecknerCheckTemplate.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\JRADataCleaner\DataClean.Repository\DataClean.Repository.csproj">
+      <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
+      <Name>DataClean.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\jradatacleaner\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CoopCheck.Repository\CoopCheck.Repository.csproj">
+      <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
+      <Name>CoopCheck.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
+      <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
+      <Name>CoopCheck.DalADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DAL\CoopCheck.DAL.csproj">
+      <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
+      <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
+      <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
+      <Name>CoopCheck.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\background.love.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\background.snowflakes.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DesignData\Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Assets\RecknerCheck.dotx">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\CSLA-Core.4.6.200\analyzers\c#\Csla.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WPF.targets" Condition="'$(XamlSpyInstallPath)' != '' and ('$(Configuration)' == 'DEBUGPROD' or '$(Configuration)' == 'DEBUGLOCAL' or '$(Configuration)' == 'DEBUGTEST')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DAL\bin\Debug\CoopCheck.DAL.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.DalADO\bin\Debug\CoopCheck.DalADO.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\CoopCheck.Library\CoopCheck.Library\bin\Debug\CoopCheck.Library.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck.Repository\bin\Debug\CoopCheck.Repository.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\CSLA-Core.4.6.200\lib\net46\Csla.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\CSLA-WPF.4.6.200\lib\net46\Csla.Xaml.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\jradatacleaner\DataCleaner\bin\Debug\DataClean.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\JRADataCleaner\DataClean.Repository\bin\Debug\DataClean.Repository.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\bin\Debug\FirstFloor.ModernUI.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\LinqToExcel_x64.1.10.1\lib\LinqToExcel.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\log4net.2.0.5\lib\net45-full\log4net.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll" />
+    <ReferencePath Include="C:\Program Files\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Controls.dll" />
+    <ReferencePath Include="C:\Program Files\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Controls.Framework.dll" />
+    <ReferencePath Include="C:\Program Files\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Utilities.dll" />
+    <ReferencePath Include="C:\WINDOWS\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="C:\WINDOWS\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\mscorlib.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\LinqToExcel_x64.1.10.1\lib\Remotion.Data.Linq.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\LinqToExcel_x64.1.10.1\lib\Remotion.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\LinqToExcel_x64.1.10.1\lib\Remotion.Interfaces.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Configuration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Deployment.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.DirectoryServices.AccountManagement.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.DirectoryServices.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.ServiceModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Web.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\UIAutomationTypes.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\WindowsBase.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.DataGrid.dll" />
+    <ReferencePath Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\packages\Extended.Wpf.Toolkit.2.5\lib\net40\Xceed.Wpf.Toolkit.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Collections.Concurrent.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Collections.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ComponentModel.Annotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ComponentModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ComponentModel.EventBasedAsync.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Diagnostics.Contracts.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Diagnostics.Debug.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Diagnostics.Tools.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Diagnostics.Tracing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Dynamic.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Globalization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.IO.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Linq.Expressions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Linq.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Linq.Queryable.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Net.NetworkInformation.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Net.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Net.Requests.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Net.WebHeaderCollection.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ObjectModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Reflection.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Reflection.Emit.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Reflection.Emit.ILGeneration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Reflection.Emit.Lightweight.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Reflection.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Reflection.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Resources.ResourceManager.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.Handles.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.InteropServices.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.InteropServices.WindowsRuntime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.Numerics.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.Serialization.Json.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.Serialization.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Runtime.Serialization.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Security.Principal.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ServiceModel.Duplex.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ServiceModel.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ServiceModel.NetTcp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ServiceModel.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.ServiceModel.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Text.Encoding.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Text.Encoding.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Text.RegularExpressions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Threading.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Threading.Tasks.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Threading.Tasks.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Threading.Timer.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Xml.ReaderWriter.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Xml.XDocument.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades\System.Xml.XmlSerializer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\Reconcile\BankFileView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\Reconcile\AccountPaymentsView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\Reconcile\ReconcileBankView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\Reconcile\BankClearTransactionsView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\Reconcile\ReconcileWizardView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\Reconcile\ReconcileWindow.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\DataClean\DataCleanFeedbackView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\DataClean\DataCleanCriteriaView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\NoAccessView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\ModernFrame\CancelNavigateSample.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\ModernFrame\ErrorSample.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\ModernFrame\Sample.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\BatchReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\JobSummaryPaymentReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\BatchSummaryPaymentReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\JobReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\VoidedPaymentReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\OpenPaymentReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\PaymentReportCriteriaView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\PositivePayReportView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Status\StatusView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Edit\VoucherImportAddDialog.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Clean\ReplacerView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Clean\AltAddressView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Clean\VoucherImportEditView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Clean\VoucherCleanView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Save\VoucherSaveView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\VouchersWindow.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\VoucherView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\BankAccount\AccountView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\AccountReconcilePage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\JobSummaryReportPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\BatchSummaryReportPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\ImportVouchersPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\NewBatchPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Settings\SettingsAppearance.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\OpenBatchPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Edit\BatchListView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\OpenPaymentReportPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\VoidedPaymentReportPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\PayPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\PayVoucherView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Payment\PaymentFinderView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\PaymentFinderReportPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\PositivePayReportPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\AccountPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Clean\VoucherListView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Edit\BatchEditView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Voucher\Import\ImportWorksheetView.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Settings\About.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Content\Settings\Appearance.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\Home.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\Pages\SettingsPage.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\CoopCheck.WPF_Content.g.cs" />
+    <Compile Include="C:\Users\CleanCustomers01\Source\Repos\coopcheck\CoopCheck2016\muiCoopCheck\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

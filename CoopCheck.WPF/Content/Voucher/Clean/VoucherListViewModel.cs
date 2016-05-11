@@ -18,7 +18,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     public class VoucherListViewModel : ViewModelBase
     {
         private DataCleanCriteria _dataCleanCriteria;
-        public RelayCommand CleanAndPostVouchersCommand { get; private set; }
+    public RelayCommand CleanAndPostVouchersCommand { get; private set; }
         public VoucherListViewModel()
         {
             _voucherCleaner = new BackgroundWorker()
@@ -35,14 +35,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 if (message.Notification == Notifications.ImportWorksheetReady && message.Content.VoucherImports.Any())
                 {
                     ExcelFileInfo = message.Content.ExcelFileInfo;
-                    _dataCleanCriteria = _dataCleanCriteria ?? new DataCleanCriteria()
-                    {
-                        AutoFixAddressLine1 = false,
-                        AutoFixCity = false,
-                        AutoFixPostalCode = true,
-                        AutoFixState = false,
-                        ForceValidation = false
-                    };
                     Vi = message.Content.VoucherImports;
                     RunBackgroundCleaner();
                 }
@@ -86,7 +78,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             this.CleanAndPostVouchersCommand = new RelayCommand(RunBackgroundCleaner, CanRunBackgroundCleaner);
         }
 
-        public void RunBackgroundCleaner()
+        public async void RunBackgroundCleaner()
         {
             
             if (!_voucherCleaner.IsBusy)
@@ -177,11 +169,11 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         }
 
 
-        public void CleanTheVouchers()
+        public async void CleanTheVouchers()
         {
             try
             {
-                VoucherImports = new ObservableCollection<VoucherImportWrapper>(DataCleanVoucherImportSvc.CleanVouchers(VoucherImports.ToList(), _dataCleanCriteria));
+                VoucherImports =  await DataCleanVoucherImportSvc.CleanVouchers(VoucherImports.ToList());
             }
             catch (Exception e)
             {

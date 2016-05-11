@@ -29,5 +29,6 @@
         public static string JobFinderSelectedJobChanged => "JobFinderSelectedJobChanged";
         public static string JobFinderSelectedBatchChanged => "JobFinderSelectedBatchChanged";
         public static string HaveUncommittedVouchers => "HaveUncommittedVouchers";
+        public static string RefreshPaymentSummaryJobs => "RefreshPaymentSummaryJobs";
     }
 }

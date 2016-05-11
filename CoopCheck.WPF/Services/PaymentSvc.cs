@@ -64,7 +64,7 @@ namespace CoopCheck.WPF.Services
                 //{
                 using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
                 {
-                    client.BaseAddress = new Uri("http://localhost:37432/");
+                    //client.BaseAddress = new Uri("http://localhost:37432/");
                     client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
