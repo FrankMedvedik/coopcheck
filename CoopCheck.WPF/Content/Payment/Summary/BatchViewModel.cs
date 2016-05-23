@@ -18,7 +18,37 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         public int NewJobNum
         {
             get { return _newJobNum; }
-            set { _newJobNum = value; NotifyPropertyChanged(); }
+            set
+            {
+                _newJobNum = value; NotifyPropertyChanged();
+                //ValidateJobNumber();
+            }
+        }
+
+        private string _newJobNumError;
+        public string NewJobNumError
+        {
+            get { return _newJobNumError; }
+            set { _newJobNumError = value; NotifyPropertyChanged(); }
+        }
+
+        public void  ValidateJobNumber(string JobNum)
+        {
+            bool retVal = false;
+            NewJobNumError = "";
+            if ((JobNum.Length != 8))
+                NewJobNumError = "Supplied Job Number Invalid";
+            else
+            {
+                 retVal = true;
+            }
+            HaveGoodNewJobNumber = retVal;
+        }
+
+        public bool HaveGoodNewJobNumber
+        {
+            get { return _haveGoodNewJobNumber; }
+            set { _haveGoodNewJobNumber = value; NotifyPropertyChanged(); }
         }
 
         public async void UpdateBatchJob(int batchNum, int jobNum)
@@ -95,6 +125,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 if (value != null)
                 {
                     _selectedBatch = value;
+                    NewJobNum = _selectedBatch.job_num.GetValueOrDefault();
                     Messenger.Default.Send(new NotificationMessage<vwBatchRpt>(SelectedBatch,
                         Notifications.JobFinderSelectedBatchChanged));
                     Status = new StatusInfo()
@@ -171,6 +202,8 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         private bool _showGridData;
         private StatusInfo _status;
         private vwJobRpt _parentJob;
+        private bool _haveGoodNewJobNumber;
+
         public vwJobRpt ParentJob 
         {
             get { return _parentJob; }

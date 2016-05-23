@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using DataClean.DataCleaner;
 using DataClean.Models;
 using DataClean.Repository.Mgr;
@@ -16,7 +9,7 @@ namespace CoopCheck.WPF.Content
 {
         public sealed class AddressCleaner : ViewModelBase
         {
-            private static volatile AddressCleaner instance;
+            private static volatile AddressCleaner _instance;
             private static object syncRoot = new Object();
 
             private AddressCleaner()
@@ -37,25 +30,25 @@ namespace CoopCheck.WPF.Content
             {
                 get
                 {
-                    if (instance == null)
+                    if (_instance == null)
                     {
                         lock (syncRoot)
                         {
-                            if (instance == null)
-                                instance = new AddressCleaner();
+                            if (_instance == null)
+                                _instance = new AddressCleaner();
                         }
                     }
 
-                    return instance;
+                    return _instance;
                 }
             }
 
             public  DataCleanEventFactory DataCleanEventFactory
         {
-                get { return instance._dataCleanEventFactory; }
+                get { return _instance._dataCleanEventFactory; }
                 set
                 {
-                    instance._dataCleanEventFactory = value;
+                    _instance._dataCleanEventFactory = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -10,30 +10,30 @@ namespace CoopCheck.WPF.Services
     {
         public static bool CanRead(string userName)
         {
-            //return true;
             return IsGroupMember(userName, Settings.Default.WriteAuth);
+            return true;
+            
         }
 
         public static bool CanWrite(string userName)
         {
-            //return true;
             return IsGroupMember(userName, Settings.Default.WriteAuth);
+            return true;
+           
         }
 
         private static bool IsGroupMember(string userName, string Group)
         {
-            //return true;
-
-
 #if DEBUG
-         //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
+            return true;
+            //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com", "fmedvedik", "(manos)3k");
             //PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "10.0.0.2", "fmedvedik", "(manos)3k");
             //  PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
-           PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
+            //  PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
 #else
             PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com");
             
-#endif
+
 
             var findByIdentity = UserPrincipal.FindByIdentity(ctx, userName);
             bool retVal = false;
@@ -50,6 +50,7 @@ namespace CoopCheck.WPF.Services
             }
             ctx.Dispose();
             return retVal;
+#endif
         }
     }
 }

@@ -1,42 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
+using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using Reckner.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
+using DataClean.DataCleaner;
 using DataClean.Models;
+using DataClean.Repository.Mgr;
+using DataClean.Services;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
 
     public class VoucherListViewModel : ViewModelBase
     {
-        private DataCleanCriteria _dataCleanCriteria;
-    public RelayCommand CleanAndPostVouchersCommand { get; private set; }
+     private DataCleanCriteria _dataCleanCriteria;
+
+        private DataCleanEventFactory _dataCleanEventFactory;
+        public RelayCommand CleanAndPostVouchersCommand { get; private set; }
         public VoucherListViewModel()
         {
-            _voucherCleaner = new BackgroundWorker()
-            {
-                WorkerReportsProgress = false,
-                WorkerSupportsCancellation = false
-            };
-            _voucherCleaner.DoWork += worker_DoWork;
-            _voucherCleaner.RunWorkerCompleted += worker_RunWorkerCompleted;
+                var c = ConfigurationManager.AppSettings;
+                var dataCleanCriteria = new DataCleanCriteria
+                {
+                    AutoFixAddressLine1 = false,
+                    AutoFixCity = false,
+                    AutoFixPostalCode = true,
+                    AutoFixState = false,
+                    ForceValidation = false
+                };
+                _dataCleanEventFactory = new DataCleanEventFactory(new DataCleaner(c), new DataCleanRespository(), dataCleanCriteria);
 
-            // caled when the vouchers come out of the excel import process
-            Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
+
+                // called when the vouchers come out of the excel import process
+                Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
             {
                 if (message.Notification == Notifications.ImportWorksheetReady && message.Content.VoucherImports.Any())
                 {
                     ExcelFileInfo = message.Content.ExcelFileInfo;
-                    Vi = message.Content.VoucherImports;
-                    RunBackgroundCleaner();
+                    var a = message.Content.VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
+                   CleanVouchers(a);
                 }
             });
 
@@ -44,57 +56,82 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 {
                     if (message.Notification == Notifications.VouchersDataCleaned)
                     {
-                        var v =
-                            message.Content.VoucherImports.OrderBy(x => x.OkMailingAddress)
-                                .ThenBy(x => x.OkPhone)
-                                .ThenBy(x => x.OkEmailAddress)
-                                .ToList();
-                        VoucherImports = new ObservableCollection<VoucherImportWrapper>(v);
-                        ExcelFileInfo = message.Content.ExcelFileInfo;
-                        CanPost = true;
-                        IsCleaning = false;
-                        FilterVoucherImports();
-                         
-                        StartEnabled = !_voucherCleaner.IsBusy;
-                        Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
-                        //Messenger.Default.Send(new NotificationMessage(Notifications.HaveReviewedVouchers));
-                        Status = new StatusInfo()
-                        {
-                            StatusMessage = "voucher checking is complete",
-                            IsBusy = false
-                        };
 
                     }
                 });
 
             Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
             {
-
                 if (message.Notification == Notifications.DataCleanCriteriaUpdated)
                 {
                     _dataCleanCriteria = message.Content;
                 }
             });
-            this.CleanAndPostVouchersCommand = new RelayCommand(RunBackgroundCleaner, CanRunBackgroundCleaner);
+            this.CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
         }
 
-        public async void RunBackgroundCleaner()
+        private void CleanVouchersStub()
         {
-            
-            if (!_voucherCleaner.IsBusy)
-            {
-                Messenger.Default.Send(new NotificationMessage(Notifications.HaveUncommittedVouchers));
+           CleanVouchers(VoucherImports.ToList());
+        }
+
+        public async void CleanVouchers(List<VoucherImportWrapper> vouchers  )
+        {
+               Messenger.Default.Send(new NotificationMessage(Notifications.HaveUncommittedVouchers));
                 Messenger.Default.Send(new NotificationMessage(Notifications.HaveDirtyVouchers));
                 Status = new StatusInfo()
                 {
                     StatusMessage = "please wait  - checking the street addresses, email and phone numbers of the vouchers...",
                     IsBusy = true
                 };
-                StartEnabled = false;
                 IsCleaning = true;
                 CanPost = false;
-                _voucherCleaner.RunWorkerAsync(); // runs in background
-            }
+            var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
+            VoucherImports = new ObservableCollection<VoucherImportWrapper>(results.OrderBy(x => x.OkMailingAddress).ThenBy(x => x.OkPhone).ThenBy(x => x.OkEmailAddress).ToList());
+            FilterVoucherImports();
+            Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
+               new VoucherWrappersMessage { ExcelFileInfo = this.ExcelFileInfo, VoucherImports = this.VoucherImports },
+            Notifications.VouchersDataCleaned));
+            CanPost = true;
+            IsCleaning = false;
+           
+        }
+
+        public async Task<ObservableCollection<VoucherImportWrapper>> DoCleanVouchers(List<VoucherImportWrapper> vouchers)
+        {
+            var l = await Task<ObservableCollection<VoucherImportWrapper>>.Factory.StartNew(() =>
+            {
+                var cleanVouchers = new ObservableCollection<VoucherImportWrapper>();
+                foreach (var v in vouchers)
+                {
+                    v.ID = HashHelperSvc.GetHashCode(v.Region, v.Municipality, v.PostalCode, v.AddressLine1,
+                        v.AddressLine2, v.EmailAddress, v.PhoneNumber, v.Last, v.First);
+                }
+                var inputAddresses = vouchers.Select(v => VoucherImportWrapperConverter.ToInputStreetAddress(v)).ToList();
+                List<DataCleanEvent> dataCleanEvents = new List<DataCleanEvent>();
+                var json = JsonConvert.SerializeObject(inputAddresses);
+                Console.Write(json);
+                try
+                {
+                    dataCleanEvents = _dataCleanEventFactory.ValidateAddresses(inputAddresses);
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine("DataCleaner failed" + e.Message);
+                }
+              
+                var ilist = new List<VoucherImportWrapper>();
+                foreach (var e in dataCleanEvents)
+                {
+                    var i = DataCleanEventConverter.ToVoucherImportWrapper(e,
+                        vouchers.First(x => x.RecordID == e.RecordID));
+                    // we want to join the row to get the data we did not send to the cleaner
+                    ilist.Add(i);
+                }
+                return new ObservableCollection<VoucherImportWrapper>(ilist);
+            });
+            return l;
         }
 
         public bool CanRunBackgroundCleaner()
@@ -130,18 +167,23 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         private ObservableCollection<VoucherImportWrapper> _filteredVoucherImports;
 
-        public ObservableCollection<VoucherImportWrapper> FilteredVoucherImports
+        public  ObservableCollection<VoucherImportWrapper> FilteredVoucherImports
         {
             get { return _filteredVoucherImports; }
             set
             {
                 _filteredVoucherImports = value;
                 NotifyPropertyChanged();
-                var s = new StatusInfo()
+                //var s = new StatusInfo()
+                //{
+                //    StatusMessage = string.Format("{0} Vouchers Loaded", FilteredVoucherImports.Count)
+                //};
+                //Status = s;
+                Status = new StatusInfo()
                 {
-                    StatusMessage = string.Format("{0} Vouchers Loaded", FilteredVoucherImports.Count)
+                    StatusMessage = "voucher checking is complete",
+                    IsBusy = false
                 };
-                Status = s;
             }
         }
 
@@ -153,8 +195,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             {
                 _voucherImports = value;
                 NotifyPropertyChanged();
-                FilterVoucherImports();
-            }
+   }
         }
 
         public StatusInfo Status
@@ -167,26 +208,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
-
-
-        public async void CleanTheVouchers()
-        {
-            try
-            {
-                VoucherImports =  await DataCleanVoucherImportSvc.CleanVouchers(VoucherImports.ToList());
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
-                {
-                    StatusMessage = String.Format("Error during validation"),
-                    ErrorMessage = e.Message
-                };
-            }
-
-        }
-
-
+     
         public ExcelFileInfoMessage ExcelFileInfo { get; set; }
 
         #region DisplayState
@@ -273,52 +295,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             FilteredVoucherImports = (FilterRows) ?
                 new ObservableCollection<VoucherImportWrapper>(VoucherImports.Where(x => x.HasErrors || !x.OkEmailAddress || !x.OkMailingAddress || !x.OkPhone)) : VoucherImports;
         }
-        #region BackgroundWorker Events
-
-        // Note: This event fires on the background thread.
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            CleanTheVouchers();
-        }
-
-        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-            Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>
-                (new VoucherWrappersMessage { VoucherImports = this.VoucherImports, ExcelFileInfo = this.ExcelFileInfo }
-                    , Notifications.VouchersDataCleaned));
-        }
-
-        //private void LoadWorksheetData()
-        //{
-
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "loading vouchers and checking addresses...",
-        //        IsBusy = true
-        //    };
-        //    if (!_voucherCleaner.IsBusy)
-        //        _voucherCleaner.RunWorkerAsync();
-        //    StartEnabled = !_voucherCleaner.IsBusy;
-        //}
-        #endregion
-        #region backgroundworker
-        private BackgroundWorker _voucherCleaner;
-
-        private bool _startEnabled = true;
-
-        public bool StartEnabled
-        {
-            get { return _startEnabled; }
-            set
-            {
-                if (_startEnabled != value)
-                {
-                    _startEnabled = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
 
         private bool _isCleaning = false;
         public bool IsCleaning
@@ -334,7 +310,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             }
         }
 
-        #endregion
     }
 }
 

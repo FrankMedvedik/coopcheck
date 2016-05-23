@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:ignore="http://www.ignore.com"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
              mc:Ignorable="d ignore">
     <Grid >
         <Grid.Resources>
@@ -17,7 +21,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Width="50" Text="Client"/>
                 <ComboBox x:Name="ComboClients" Width="350" FontSize="12" FontWeight="Bold" Margin="3" ItemsSource="{Binding Clients}" 
@@ -45,18 +50,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="- OR - " Width="Auto" Margin="6,3,6,3"  />
-                <TextBlock Text="Job" Width="30" Margin="3" ToolTip="enter all or part of the job number you are looking for" />
-                <TextBox Width="110" FontSize="12" FontWeight="Bold" MaxLength="8" Text="{Binding ClientReportCriteria.SelectedJobNum, Mode=TwoWay}" TabIndex="3" 
-                         ToolTip="enter a specifc job number YYYY-NNNN like - 2015-0001" />
-                <!--<xctk:MaskedTextBox FontWeight="Bold" FontSize="15" Margin="3" 
-                                    Mask="0000-0000" CaretIndex="0" 
-                                    ValueDataType="{x:Type s:String}" 
-                                    Text="Binding ClientReportCriteria.SelectedJobNum, Mode=TwoWay}"  
-                                    TabIndex="3" Cursor="IBeam" 
-                                    ToolTip="enter a specifc job number YYYY-NNNN like - 2015-0001" 
-                                    AutoMoveFocus="True"  />-->
+                    <TextBlock VerticalAlignment="Center"  Text="Job" Width="30" Margin="3" ToolTip="enter all or part of the job number you are looking for" />
+                <TextBox  Name="JobNumTxt" Width="110" FontSize="12" FontWeight="Bold"  MaxLength="8" TabIndex="3" ToolTip="enter a specifc job number YYYYNNNN ie - 20150001"
+                         VerticalAlignment="Center"  LostFocus="JobNumTxt_LostFocus"/>
+                    <TextBlock Text="{Binding JobNumError}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Margin="6" FontSize="12" />
 
+          
             </StackPanel>
+            
+        </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

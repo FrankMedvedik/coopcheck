@@ -40,6 +40,29 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             }
         }
 
+        public string JobNumError
+        {
+            get { return _jobNumError; }
+            set
+            {
+                _jobNumError = value; NotifyPropertyChanged();
+            
+            }
+        }
+
+        public bool ValidateJobNumber(string JobNum)
+        {
+            JobNumError = "";
+            bool retVal =false;
+            if (String.IsNullOrWhiteSpace(JobNum))
+                JobNumError = "New Job Number Required";
+            else if ((JobNum.Length != 8))
+                JobNumError = "Supplied Job number invalid";
+            else
+                retVal = true;
+            return retVal;
+
+        }
         #region DisplayState
 
         public async void ResetState()
@@ -83,6 +106,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
         private ObservableCollection<CoopCheckClient> _clients;
         private ObservableCollection<string> _jobYears;
         private StatusInfo _status;
+        private string _jobNumError;
 
         public ObservableCollection<string> JobYears
         {

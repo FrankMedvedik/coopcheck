@@ -20,7 +20,6 @@ namespace CoopCheck.WPF.Services
     {
         public static int MAX_PAYMENT_COUNT = 10000;
 
-
         public static async Task<StatusInfo> SwiftFulfillAsync(int batchNum)
         {
             var i = new StatusInfo();
@@ -28,12 +27,15 @@ namespace CoopCheck.WPF.Services
             {
                 //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
                 //System.Threading.Thread.Sleep(5000);
-                //var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
-                //var client = new HttpClient(new HttpClientHandler { Credentials = credentials });
-                //{
-                    using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
-                    {
-                   
+#if DEBUG
+
+                var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
+                using (var client = new HttpClient(new HttpClientHandler { Credentials = credentials }))
+                {
+#else
+                using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
+                {
+#endif
                     client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -59,12 +61,17 @@ namespace CoopCheck.WPF.Services
             {
                 //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
                 //System.Threading.Thread.Sleep(5000);
-                //var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
-                //var client = new HttpClient(new HttpClientHandler { Credentials = credentials });
-                //{
+                //  client.BaseAddress = new Uri("http://localhost:37432/");
+#if DEBUG
+
+                var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
+                using (var client = new HttpClient(new HttpClientHandler { Credentials = credentials }))
+                {
+#else
                 using (var client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
                 {
-                    //client.BaseAddress = new Uri("http://localhost:37432/");
+#endif
+                  
                     client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -83,14 +90,14 @@ namespace CoopCheck.WPF.Services
             return i;
         }
 
-        //public static async Task<StatusInfo> SwiftFulfillAsync(int accountId, int batchNum)
+        //public static async Task<StatusInfo> SwiftFulfillAsync( int batchNum)
         //{
         //    var i = new StatusInfo();
         //    try
         //    {
         //        //i.StatusMessage = "LETS PRETEND THE CHECKS ARE PRINTED NOW... ";
         //        //System.Threading.Thread.Sleep(5000);
-        //        await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum));
+        //        await Task.Factory.StartNew(() => BatchSwiftFulfillCommand.Execute(batchNum));
         //        i.StatusMessage = "Swiftpay processing complete";
         //        i.IsBusy = false;
         //    }

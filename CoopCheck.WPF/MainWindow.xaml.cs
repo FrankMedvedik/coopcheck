@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using CoopCheck.WPF.Content;
 using CoopCheck.WPF.Content.Settings;
 using CoopCheck.WPF.Messages;
 using FirstFloor.ModernUI.Presentation;
@@ -20,6 +21,7 @@ namespace CoopCheck.WPF
             LoadThemeAndColor();
             RegisterNavigation();
             //ContentSource = MenuLinkGroups.First().Links.First().Source;
+            var c = AddressCleaner.Instance.DataCleanEventFactory;
 
         }
        

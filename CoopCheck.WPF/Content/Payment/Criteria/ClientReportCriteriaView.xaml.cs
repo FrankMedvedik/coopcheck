@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Content.Payment.Criteria
@@ -30,6 +31,10 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             _vm.ResetState();
         }
 
- 
+        private void JobNumTxt_LostFocus(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if(_vm.ValidateJobNumber(JobNumTxt.Text))
+                _vm.ClientReportCriteria.SelectedJobNum = JobNumTxt.Text;
+        }
     }
 }

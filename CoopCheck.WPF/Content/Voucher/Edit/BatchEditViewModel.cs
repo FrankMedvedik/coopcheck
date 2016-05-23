@@ -402,6 +402,10 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _userCanRead = value;
             }
         }
+        public bool HaveSelectedVoucher
+        {
+            get { return SelectedBatch != null; }
+        }
 
         public async void DeleteSelectedVoucher()
         {
@@ -421,6 +425,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     SelectedBatch = await SelectedBatch.SaveAsync();
             }
         }
+
 
         public void CreateNewVoucher()
         {

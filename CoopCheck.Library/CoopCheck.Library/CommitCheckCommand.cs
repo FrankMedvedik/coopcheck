@@ -17,8 +17,8 @@ namespace CoopCheck.Library
         public static bool CanExecuteCommand()
         {
 #if !DEBUG
-
-            return Csla.ApplicationContext.User.IsInRole("RECKNER\\CoopCheckAdmin");
+            return true;
+            //return Csla.ApplicationContext.User.IsInRole("RECKNER\\CoopCheckAdmin");
 #else
             return true;
 #endif

@@ -41,8 +41,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button Content="Refresh Batch List" HorizontalAlignment="Center" Command="{Binding RefreshBatchListCommand}" Margin="6" Width="150" VerticalAlignment="Center" />
-        </StackPanel>
+            <Button Content="Refresh List" HorizontalAlignment="Left" Command="{Binding RefreshBatchListCommand}" Margin="10,6,40,6" Width="150" VerticalAlignment="Center" />
+                <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,6,10,6" IsEnabled="{Binding HaveSelectedVoucher}"  Click="SaveSelectedBatch_Click" Width="150" />
+                <Button Content="Delete" HorizontalAlignment="Left" Width="150" VerticalAlignment="Center" IsEnabled="{Binding HaveSelectedVoucher}" Margin="10,6,6,6" Click="DeleteSelectedBatch_Click" />
+            </StackPanel>
         <mui:ModernProgressRing IsActive="{Binding IsBusy}" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" 
                             Visibility="{Binding ShowSelectedBatch, Converter={StaticResource NotBoolToVisConverter}}" Grid.Row="1"/>
             <Grid Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" Grid.Row="1">
@@ -50,22 +52,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" Grid.Row="0">
-                <StackPanel Orientation="Horizontal" >
-                    
-                    <Button Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="6" Click="SaveSelectedBatch_Click"  Width="150"  />
-                    <Button Content="Delete " HorizontalAlignment="Center" Width="150" VerticalAlignment="Center" IsEnabled="{Binding UserCanWrite}"   
-                            Margin="6" Click="DeleteSelectedBatch_Click" />
-                </StackPanel>
-            </StackPanel>
-            <Expander Header="Pay Batch" Grid.Row="1" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" 
+            <Expander Header="Pay Batch" Grid.Row="0" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" 
                       IsEnabled="{Binding CanPayBatch}"
                       HorizontalAlignment="Left"  VerticalAlignment="Top" >
                     <pay:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"  IsEnabled="{Binding CanPayBatch}"/>
             </Expander>
-            <Expander Header="Batch Details" Grid.Row="2"
+            <Expander Header="Batch Details" Grid.Row="1"
                       Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" >
@@ -112,7 +105,7 @@
           
             </StackPanel>
         </Expander>
-            <Expander Header="Vouchers" Grid.Row="3" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+            <Expander Header="Vouchers" Grid.Row="2" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

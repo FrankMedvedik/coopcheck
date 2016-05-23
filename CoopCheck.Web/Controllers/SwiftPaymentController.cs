@@ -14,7 +14,7 @@ using log4net;
 
 namespace CoopCheck.Web.Controllers
 {
-    //[System.Web.Http.Authorize]
+    [System.Web.Http.Authorize]
     [System.Web.Http.RoutePrefix("api/SwiftPayment")]
     public class SwiftPaymentController : ApiController
     {

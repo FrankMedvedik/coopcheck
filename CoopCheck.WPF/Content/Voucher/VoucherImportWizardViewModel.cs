@@ -45,10 +45,6 @@ namespace CoopCheck.WPF.Content.Voucher
                 {
                     HaveCleanedVouchers = false;
                 }
-                //if (message.Notification == Notifications.HaveReviewedVouchers)
-                //{
-                //    HaveReviewedVouchers = true;
-                //}
             });
 
 

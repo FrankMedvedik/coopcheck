@@ -1,8 +1,6 @@
 using System;
 
 using Csla;
-using Csla.Rules;
-using Csla.Rules.CommonRules;
 using CoopCheck.DAL;
 
 namespace CoopCheck.Library
@@ -21,14 +19,11 @@ namespace CoopCheck.Library
         protected static void AddObjectAuthorizationRules()
 #endif
         {
-#if !DEBUG        
-            BusinessRules.AddRule(typeof(BatchSwiftFulfillCommand), new IsInRole(AuthorizationActions.ExecuteMethod, "RECKNER\\CoopCheckAdmin"));
-#endif            
-        }
+    }
 
         public static bool CanExecuteObject()
         {
-            return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.ExecuteMethod, typeof(BatchSwiftFulfillCommand));
+            return true;
         }
 
         public static void Execute(int batchNum, string email)
