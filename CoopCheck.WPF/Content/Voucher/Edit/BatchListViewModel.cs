@@ -24,14 +24,21 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-    
-        public int? PaymentsCnt
+        public int? SwiftPaymentsCnt
         {
-            get { return BatchList?.Sum(x => x.voucher_cnt.GetValueOrDefault(0)); }
+            get { return BatchList?.Where(x=>x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
         }
-        public decimal? PaymentsTotalDollars
+        public decimal? SwiftPaymentsTotalDollars
         {
-            get { return BatchList?.Sum(x => x.total_amount); }
+            get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.total_amount); }
+        }
+        public int? CheckPaymentsCnt
+        {
+            get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
+        }
+        public decimal? CheckPaymentsTotalDollars
+        {
+            get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.total_amount); }
         }
         public ObservableCollection<vwOpenBatch> BatchList
         {

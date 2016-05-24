@@ -11,5 +11,10 @@ namespace CoopCheck.Repository
         {
             get { return batch_dscr.Substring(0, 8) != jobnum.ToString(); }
         }
+
+        public bool IsSwiftBatch
+        {
+            get { return batch_dscr.Contains("Swift"); }
+        }
     }
 }

@@ -26,14 +26,6 @@ namespace CoopCheck.WPF.Services
                 return await Task.Factory.StartNew(() =>
                     ctx.GetBatchPaymentReport(grc.Account.account_id, grc.StartDate, grc.EndDate).ToList());
 
-                //var x = await (
-                //    from l in ctx.vwBatchRpts
-                //    where ((l.batch_date >= grc.StartDate)
-                //        && (l.batch_date <= grc.EndDate)
-                //        && l.account_id == grc.Account.account_id)
-                //    orderby l.batch_num
-                //    select l).ToListAsync();
-                //return x;
             }
         }
 
@@ -100,6 +92,21 @@ namespace CoopCheck.WPF.Services
             }
             return v;
         }
+
+        public static async Task<List<vwPayment>> GetPayeePayments(string lastName, string firstName)
+        {
+            IQueryable<vwPayment> query;
+            List<vwPayment> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                query = ctx.vwPayments.Where(x => x.last_name == lastName).Where(x=>x.first_name == firstName);
+                v = await (from b in query
+                           orderby b.check_date descending
+                           select b).ToListAsync();
+            }
+            return v;
+        }
+
 
         public static async Task<List<vwBatchRpt>> GetJobBatchRpt(int jobNumber)
         {
@@ -228,19 +235,6 @@ namespace CoopCheck.WPF.Services
                 var x = await (
                     from l in ctx.vwPayments
                     where (l.account_id == grc.Account.account_id && !l.cleared_flag)
-                    orderby l.check_date
-                    select l).ToListAsync();
-                return x;
-            }
-        }
-
-        public static async Task<List<vwPayment>> GetUnclearedCheckReport(PaymentReportCriteria grc)
-        {
-            using (var ctx = new CoopCheckEntities())
-            {
-                var x = await (
-                    from l in ctx.vwPayments
-                    where (l.account_id == grc.Account.account_id && !l.cleared_flag && l.check_num == grc.CheckNumber)
                     orderby l.check_date
                     select l).ToListAsync();
                 return x;

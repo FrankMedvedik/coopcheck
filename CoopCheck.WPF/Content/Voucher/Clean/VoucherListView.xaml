@@ -130,8 +130,15 @@
             </DataGrid>
             </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="6" >
-            <clean:VoucherImportEditView x:Name="ve"/>
-        </StackPanel>
+                <TabControl>
+                    <TabItem Header="Details">
+                        <clean:VoucherImportEditView x:Name="ve" />
+                    </TabItem>
+                    <TabItem Header="History">
+                        <clean:PaymentHistoryView />
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
     </Grid>
 </Grid>
 </UserControl>

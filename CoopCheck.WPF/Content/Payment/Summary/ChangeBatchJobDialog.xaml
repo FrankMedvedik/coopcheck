@@ -3,8 +3,9 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-                  mc:Ignorable="d" Title="change job number" Width="563.517" Height="205.769">
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI" 
+                  mc:Ignorable="d" Title="change job number" Height="Auto" Width="600" 
+                  ContentRendered="Window_ContentRendered">
     <StackPanel Orientation="Vertical" Margin="10">
         <StackPanel.Resources>
             <Style TargetType="StackPanel">
@@ -25,22 +26,25 @@
         </StackPanel.Resources>
         <StackPanel>
             <Label Content="Batch Number" Target="{Binding ElementName=VIBatchNum}" />
-            <TextBlock x:Name="VIBatchNum" Text="{Binding SelectedBatch.batch_num, Mode=OneTime}" />
+            <TextBlock FontWeight="Bold" x:Name="VIBatchNum" Text="{Binding SelectedBatch.batch_num, Mode=OneTime}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" x:Name="OldJob">
             <Label Content="Current Job Number" Target="{Binding ElementName=VIJobNum}" />
-            <TextBlock x:Name="VIJobNum" Text="{Binding SelectedBatch.job_num, Mode=OneTime}" />
+            <TextBlock FontWeight="Bold" x:Name="VIJobNum" Text="{Binding SelectedBatch.job_num, Mode=OneTime}" />
         </StackPanel>
         <StackPanel>
-            <Label FontWeight="Bold" Content="New Job Number" ToolTip="enter all or part of the job number you are looking for" />
-            <TextBox Text="{Binding NewJobNum, Mode=TwoWay}" Width="110" FontSize="12" FontWeight="Bold" MaxLength="8" TabIndex="3" ToolTip="enter a specifc job number YYYYNNNN ie - 20150001" VerticalAlignment="Center" />
+            <Label FontWeight="Bold" Content="New Job Number" ToolTip="enter a valid job number ie - 200010001 " />
+            <TextBox x:Name="txtNewJob" Text="{Binding NewJobNum, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" 
+                     Width="110" FontSize="12" FontWeight="Bold" MaxLength="8" TabIndex="3" ToolTip="enter a job number YYYYNNNN ie - 20150001" VerticalAlignment="Center" />
             <TextBlock Text="{Binding NewJobNumError, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Margin="6" FontSize="12" />
         </StackPanel>
-        <StackPanel>
-            <!--<Button Name="OKButton" Content="OK" Height="23" IsEnabled="{Binding HaveGoodNewJobNumber}" HorizontalAlignment="Right" Margin="0,0,93,12" 
-                    VerticalAlignment="Bottom" Width="75" Click="OKButton_Click" IsDefault="True" 
-                    Command="{Binding OKButtonCommand}" />
-            <Button Name="CancelButton" Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" VerticalAlignment="Bottom" Width="75" IsCancel="True" />-->
+        <StackPanel Margin="10">
+            <Button Name="OKButton" Content="OK" Height="30" 
+                    HorizontalAlignment="Center" Margin="30,10,40,10" 
+                VerticalAlignment="Center" Width="75" Click="OKButton_Click"  IsDefault="True" Command="{Binding OKButtonCommand}" 
+                    IsEnabled="{Binding HaHaveGoodNewJobNumber}"/>
+            <Button Name="CancelButton" Content="Cancel" Height="30" HorizontalAlignment="Center" Margin="20,10,1,10" 
+                    VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="CancelButton_Click"/>
         </StackPanel>
     </StackPanel>
 </mui:ModernDialog>

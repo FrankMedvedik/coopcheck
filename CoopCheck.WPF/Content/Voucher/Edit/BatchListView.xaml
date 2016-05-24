@@ -18,14 +18,23 @@
                 </Style>
             </StackPanel.Resources>
             <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" />
+            <TextBlock Text=" with "/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
-                    <TextBlock>Vouchers</TextBlock>
+                    <TextBlock Text="{Binding CheckPaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock>Check Vouchers</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
-                    <TextBlock>Dollars</TextBlock>
+                    <TextBlock Text="{Binding CheckPaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock>Check Dollars</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding SwiftPaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock>Swift Vouchers</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding SwiftPaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock>Swift Dollars</TextBlock>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

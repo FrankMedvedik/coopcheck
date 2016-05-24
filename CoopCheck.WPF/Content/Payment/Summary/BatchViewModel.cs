@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
@@ -12,10 +14,12 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Summary
 {
-    public class BatchViewModel : ViewModelBase
+    public class BatchViewModel : ViewModelBase, IDataErrorInfo
     {
-        private int _newJobNum = 0; 
-        public int NewJobNum
+        private string _newJobNum;
+
+        [StringLength(8, MinimumLength = 8)]
+        public string NewJobNum
         {
             get { return _newJobNum; }
             set
@@ -23,26 +27,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 _newJobNum = value; NotifyPropertyChanged();
                 //ValidateJobNumber();
             }
-        }
-
-        private string _newJobNumError;
-        public string NewJobNumError
-        {
-            get { return _newJobNumError; }
-            set { _newJobNumError = value; NotifyPropertyChanged(); }
-        }
-
-        public void  ValidateJobNumber(string JobNum)
-        {
-            bool retVal = false;
-            NewJobNumError = "";
-            if ((JobNum.Length != 8))
-                NewJobNumError = "Supplied Job Number Invalid";
-            else
-            {
-                 retVal = true;
-            }
-            HaveGoodNewJobNumber = retVal;
         }
 
         public bool HaveGoodNewJobNumber
@@ -81,14 +65,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             };
         }
 
-        public bool CanUpdateBatchJob
-        {
-            get
-            {
-                return SelectedBatch != null;
-
-            }
-        }
         public bool ShowGridData
         {
             get { return _showGridData; }
@@ -125,7 +101,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 if (value != null)
                 {
                     _selectedBatch = value;
-                    NewJobNum = _selectedBatch.job_num.GetValueOrDefault();
+                    NewJobNum = SelectedBatch.job_num.GetValueOrDefault().ToString();
                     Messenger.Default.Send(new NotificationMessage<vwBatchRpt>(SelectedBatch,
                         Notifications.JobFinderSelectedBatchChanged));
                     Status = new StatusInfo()
@@ -140,14 +116,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
 
             }
         }
-
-        private bool _canRefresh = true;
-        public Boolean CanRefresh
-        {
-            get { return _canRefresh; }
-            set { _canRefresh = value; NotifyPropertyChanged(); }
-        }
-
 
         private decimal _batchTotalDollars = 0;
         public decimal BatchTotalDollars
@@ -176,10 +144,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 _batches = value;
                 NotifyPropertyChanged();
                 ShowGridData = true;
-
-                //HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}  Total = {3:c}",
-                //                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate, BatchTotalDollars);
-
                 HeadingText = String.Format("{0} batches paid between",Batches.Count);
                 NotifyPropertyChanged("PaymentsTotalDollars");
                 NotifyPropertyChanged("PaymentsCnt");
@@ -196,7 +160,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         {
             GetBatches();
         }
-
 
         private string _headingText;
         private bool _showGridData;
@@ -266,5 +229,46 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
+        public string this[string columnName]
+        {
+           get
+            {
+                if (columnName == "NewJobNum")
+                {
+
+                    return ValidateNewJobNum();
+                }
+                return null;
+            }
+    }
+
+        public string ValidateNewJobNum()
+        {
+            int x;
+            if (string.IsNullOrEmpty(NewJobNum)) { return "required"; }
+            if (NewJobNum.Length != 8) { return "8 chars required"; }
+            if (!int.TryParse(NewJobNum, out x)) { return "must be numeric"; }
+            if (int.TryParse(NewJobNum, out x))
+            {
+                var job = JobLogSvc.GetJobLog(x).Result;
+                if(job.JobName == null)
+                    return "Job number not on file";
+            }
+            return null;
+        }
+
+        public string Error
+        {
+            get { return Status.ErrorMessage; }
+            set
+            {
+                StatusInfo s = new StatusInfo()
+                {
+                    ErrorMessage = value,
+                    StatusMessage = "Error"
+                };
+                Status = s;
+            }
+        }
     }
 }

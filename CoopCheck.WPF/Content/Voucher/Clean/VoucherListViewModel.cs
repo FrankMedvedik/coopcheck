@@ -25,21 +25,9 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     {
      private DataCleanCriteria _dataCleanCriteria;
 
-        private DataCleanEventFactory _dataCleanEventFactory;
         public RelayCommand CleanAndPostVouchersCommand { get; private set; }
         public VoucherListViewModel()
         {
-                var c = ConfigurationManager.AppSettings;
-                var dataCleanCriteria = new DataCleanCriteria
-                {
-                    AutoFixAddressLine1 = false,
-                    AutoFixCity = false,
-                    AutoFixPostalCode = true,
-                    AutoFixState = false,
-                    ForceValidation = false
-                };
-                _dataCleanEventFactory = new DataCleanEventFactory(new DataCleaner(c), new DataCleanRespository(), dataCleanCriteria);
-
 
                 // called when the vouchers come out of the excel import process
                 Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
@@ -97,43 +85,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
            
         }
 
-        public async Task<ObservableCollection<VoucherImportWrapper>> DoCleanVouchers(List<VoucherImportWrapper> vouchers)
-        {
-            var l = await Task<ObservableCollection<VoucherImportWrapper>>.Factory.StartNew(() =>
-            {
-                var cleanVouchers = new ObservableCollection<VoucherImportWrapper>();
-                foreach (var v in vouchers)
-                {
-                    v.ID = HashHelperSvc.GetHashCode(v.Region, v.Municipality, v.PostalCode, v.AddressLine1,
-                        v.AddressLine2, v.EmailAddress, v.PhoneNumber, v.Last, v.First);
-                }
-                var inputAddresses = vouchers.Select(v => VoucherImportWrapperConverter.ToInputStreetAddress(v)).ToList();
-                List<DataCleanEvent> dataCleanEvents = new List<DataCleanEvent>();
-                var json = JsonConvert.SerializeObject(inputAddresses);
-                Console.Write(json);
-                try
-                {
-                    dataCleanEvents = _dataCleanEventFactory.ValidateAddresses(inputAddresses);
-                }
-                catch (Exception e)
-                {
-
-                    Console.WriteLine("DataCleaner failed" + e.Message);
-                }
-              
-                var ilist = new List<VoucherImportWrapper>();
-                foreach (var e in dataCleanEvents)
-                {
-                    var i = DataCleanEventConverter.ToVoucherImportWrapper(e,
-                        vouchers.First(x => x.RecordID == e.RecordID));
-                    // we want to join the row to get the data we did not send to the cleaner
-                    ilist.Add(i);
-                }
-                return new ObservableCollection<VoucherImportWrapper>(ilist);
-            });
-            return l;
-        }
-
+      
         public bool CanRunBackgroundCleaner()
         {
             return CanPost;
@@ -244,6 +196,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 _selectedVoucher = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged("ShowSelectedVoucher");
+                Messenger.Default.Send(new NotificationMessage<PaymentReportCriteria>(new PaymentReportCriteria
+                { LastName = SelectedVoucher.Last, FirstName=SelectedVoucher.First}, Notifications.FindPayeePayments));
             }
         }
 

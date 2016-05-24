@@ -278,6 +278,10 @@
     <Compile Include="Content\Payment\Summary\ChangeBatchJobDialog.xaml.cs">
       <DependentUpon>ChangeBatchJobDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Voucher\Clean\PaymentHistoryViewModel.cs" />
+    <Compile Include="Content\Voucher\Clean\PaymentHistoryView.xaml.cs">
+      <DependentUpon>PaymentHistoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Voucher\Pay\PrintCheckProgress.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
@@ -721,6 +725,10 @@
     <Page Include="Content\Status\StatusView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Voucher\Clean\PaymentHistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml">
       <SubType>Designer</SubType>

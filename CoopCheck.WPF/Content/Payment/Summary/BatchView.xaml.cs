@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 
@@ -25,22 +26,32 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         {
             var cw = new ChangeBatchJobDialog() { DataContext = _vm };
             var result = cw.ShowDialog();
-            if (result == true)
+            if ((_vm.ValidateNewJobNum() == null) && (result == true) && 
+                (int.Parse(_vm.NewJobNum) != _vm.SelectedBatch.job_num))
             {
                 try
                 {
                     await Task.Run(() =>
                     {
-                        _vm.UpdateBatchJob(_vm.SelectedBatch.batch_num, _vm.NewJobNum);
+                        _vm.UpdateBatchJob(_vm.SelectedBatch.batch_num, int.Parse(_vm.NewJobNum));
 
                     });
                     Messenger.Default.Send(new NotificationMessage(Notifications.RefreshPaymentSummaryJobs));
                 }
                 catch (Exception ex)
                 {
-                    _vm.Status = new Models.StatusInfo { ErrorMessage = ex.Message, StatusMessage = "change job failed" };
+                    _vm.Status = new Models.StatusInfo {ErrorMessage = ex.Message, StatusMessage = "change job failed"};
                 }
             }
+            if ((_vm.ValidateNewJobNum() != null) && (result == true))
+            {
+                _vm.Status = new StatusInfo
+                {
+                    ErrorMessage = "Invalid Job Number " + _vm.NewJobNum,
+                    StatusMessage = "No Change Made"
+                };
+            }
+
         }
 
 
