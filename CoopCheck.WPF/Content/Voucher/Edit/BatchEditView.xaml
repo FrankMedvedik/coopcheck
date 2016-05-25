@@ -53,13 +53,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-            <Expander Header="Pay Batch" Grid.Row="0" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}" 
-                      IsEnabled="{Binding CanPayBatch}"
-                      HorizontalAlignment="Left"  VerticalAlignment="Top" >
-                    <pay:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"  IsEnabled="{Binding CanPayBatch}"/>
-            </Expander>
-            <Expander Header="Batch Details" Grid.Row="1"
-                      Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+       <TabControl Margin="5,10,5,5" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+                    <TabItem Header="Batch Details" >
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="Job" Style="{StaticResource TextBlockStyle}"/>
@@ -104,8 +99,11 @@
                         </StackPanel>
           
             </StackPanel>
-        </Expander>
-            <Expander Header="Vouchers" Grid.Row="2" Visibility="{Binding ShowSelectedBatch, Converter={StaticResource BoolToVisConverter}}">
+        </TabItem >
+                    <TabItem Header="Pay Batch" >
+                        <pay:PayVoucherView Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="{Binding CanPayBatch}" />
+                    </TabItem>
+                    <TabItem Header="Vouchers" >
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -188,7 +186,8 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-            </Expander>
+            </TabItem >
+        </TabControl>
         </Grid>
     </Grid>
     </ScrollViewer>

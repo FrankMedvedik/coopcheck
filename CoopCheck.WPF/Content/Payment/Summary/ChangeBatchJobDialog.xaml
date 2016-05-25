@@ -43,7 +43,7 @@
                     HorizontalAlignment="Center" Margin="30,10,40,10" 
                 VerticalAlignment="Center" Width="75" Click="OKButton_Click"  IsDefault="True" Command="{Binding OKButtonCommand}" 
                     IsEnabled="{Binding HaHaveGoodNewJobNumber}"/>
-            <Button Name="CancelButton" Content="Cancel" Height="30" HorizontalAlignment="Center" Margin="20,10,1,10" 
+            <Button Name="CancelButton" Content="Cancel" Height="30" HorizontalAlignment="Center" Margin="20,10,1,10"  
                     VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="CancelButton_Click"/>
         </StackPanel>
     </StackPanel>

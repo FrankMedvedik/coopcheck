@@ -44,7 +44,7 @@
                   CanUserAddRows="False" EnableColumnVirtualization="True" EnableRowVirtualization="True" 
                   ItemsSource="{Binding BatchList}" HorizontalScrollBarVisibility="Auto" 
                   Height="Auto"  VerticalScrollBarVisibility="Auto" 
-                  SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Single">
+                  SelectedItem="{Binding SelectedBatch, Mode=TwoWay}" SelectionMode="Extended">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding batch_num }" Header="batch"/>
                 <DataGridTextColumn Binding="{Binding jobnum}" Header="job num"/>
@@ -69,6 +69,11 @@
                 <DataGridTextColumn Binding="{Binding clientname}" Header="client" />
                 <DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}"/>
             </DataGrid.Columns>
-            </DataGrid>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </UserControl>

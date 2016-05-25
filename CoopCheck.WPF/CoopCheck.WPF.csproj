@@ -32,7 +32,7 @@
     <SuiteName>office support</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>120</ApplicationRevision>
+    <ApplicationRevision>123</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -274,7 +274,6 @@
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\Summary\JobViewModel.cs" />
-    <Compile Include="Content\AddressCleaner.cs" />
     <Compile Include="Content\Payment\Summary\ChangeBatchJobDialog.xaml.cs">
       <DependentUpon>ChangeBatchJobDialog.xaml</DependentUpon>
     </Compile>
@@ -965,9 +964,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Assets\background.love.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -997,17 +993,16 @@
   <ItemGroup>
     <PublishFile Include="Assets\RecknerCheck.dotx">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Content\Utilities\" />
   </ItemGroup>
   <ItemGroup>

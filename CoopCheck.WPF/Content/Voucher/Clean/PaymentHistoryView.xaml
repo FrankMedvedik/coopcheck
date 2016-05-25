@@ -10,7 +10,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-     <DataGrid ItemsSource="{Binding Payments}" AutoGenerateColumns="False" Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="dgPayments" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}" IsReadOnly="True" MaxHeight="300" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended">
+     <DataGrid ItemsSource="{Binding Payments}" AutoGenerateColumns="False" Width="Auto" IsReadOnly="False"
+               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="dgPayments" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" VerticalAlignment="Top" SelectedItem="{Binding SelectedPayment}"
+               MaxHeight="300" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended">
                 <DataGrid.Columns>
                     <StaticResource ResourceKey="dgPJob" />
                     <StaticResource ResourceKey="dgPBatch" />

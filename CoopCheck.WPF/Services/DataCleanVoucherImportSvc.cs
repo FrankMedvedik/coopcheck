@@ -17,36 +17,6 @@ namespace CoopCheck.WPF.Services
 {
     public static class DataCleanVoucherImportSvc
     {
-        //public async static Task<ObservableCollection<VoucherImportWrapper>> CleanVouchers(List<VoucherImportWrapper> vouchers)
-        //{
-        //    var l = await Task<ObservableCollection<VoucherImportWrapper>>.Factory.StartNew(() =>
-        //    {
-        //        var cleanVouchers = new ObservableCollection<VoucherImportWrapper>();
-        //        foreach (var v in vouchers)
-        //        {
-        //            v.ID = HashHelperSvc.GetHashCode(v.Region, v.Municipality, v.PostalCode, v.AddressLine1,
-        //                v.AddressLine2, v.EmailAddress, v.PhoneNumber, v.Last, v.First);
-        //        }
-        //        var inputAddresses = vouchers.Select(v => VoucherImportWrapperConverter.ToInputStreetAddress(v)).ToList();
-        //        var dataCleanEvents = DataCleanSvc.TestValidateAddresses(inputAddresses);
-
-
-        //        //var dataCleanEvents = DataCleanSvc.ValidateAddresses(inputAddresses).Result;
-        //        var ilist = new List<VoucherImportWrapper>();
-        //        foreach (var e in dataCleanEvents)
-        //        {
-        //            var i = DataCleanEventConverter.ToVoucherImportWrapper(e,
-        //                vouchers.First(x => x.RecordID == e.RecordID));
-        //            // we want to join the row to get the data we did not send to the cleaner
-        //            ilist.Add(i);
-        //        }
-        //        return new ObservableCollection<VoucherImportWrapper>(ilist);
-        //    });
-        //    return l;
-        //}
-
-
-
         public static async Task<ObservableCollection<VoucherImportWrapper>> CleanVouchers(
             List<VoucherImportWrapper> vouchers)
         {
@@ -58,7 +28,7 @@ namespace CoopCheck.WPF.Services
             }
 
             var inputAddresses = vouchers.Select(VoucherImportWrapperConverter.ToInputStreetAddress).ToList();
-            var dataCleanEvents = await TestValidateAddresses(inputAddresses);
+            var dataCleanEvents = await ValidateAddresses(inputAddresses);
 
             var ilist = new List<VoucherImportWrapper>();
             foreach (var e in dataCleanEvents)
@@ -71,7 +41,7 @@ namespace CoopCheck.WPF.Services
             return new ObservableCollection<VoucherImportWrapper>(ilist);
         }
 
-        public static async Task<List<DataCleanEvent>> TestValidateAddresses(List<InputStreetAddress> newVouchers)
+        public static async Task<List<DataCleanEvent>> ValidateAddresses(List<InputStreetAddress> newVouchers)
         {
             HttpResponseMessage response;
             List<DataCleanEvent> retVal = new List<DataCleanEvent>();
@@ -87,7 +57,7 @@ namespace CoopCheck.WPF.Services
                     new System.Net.Http.HttpClient(new System.Net.Http.HttpClientHandler()
                     {
                         UseDefaultCredentials = true
-                    })
+                    }))
 #endif        
 
             {

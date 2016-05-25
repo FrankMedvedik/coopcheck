@@ -20,9 +20,7 @@ namespace CoopCheck.WPF
             InitializeComponent();
             LoadThemeAndColor();
             RegisterNavigation();
-            //ContentSource = MenuLinkGroups.First().Links.First().Source;
-            var c = AddressCleaner.Instance.DataCleanEventFactory;
-
+   
         }
        
 
