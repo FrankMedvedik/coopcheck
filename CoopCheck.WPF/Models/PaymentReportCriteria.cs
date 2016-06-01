@@ -14,7 +14,7 @@ namespace CoopCheck.WPF.Models
         public string JobNumber
         {
             get { return _jobNumber; }
-            set { _jobNumber = value; NotifyPropertyChanged(); }
+            set { _jobNumber = value.Trim(); NotifyPropertyChanged(); }
         }
 
         private DateTime _startDate;
@@ -36,7 +36,7 @@ namespace CoopCheck.WPF.Models
         {
             get { return _checkNumber; }
             set {
-                _checkNumber = value; 
+                _checkNumber = value.Trim(); 
                 NotifyPropertyChanged();
                 Messenger.Default.Send(new NotificationMessage(Notifications.PaymentReportCriteriaCheckNumberChanged));
             }
@@ -47,7 +47,7 @@ namespace CoopCheck.WPF.Models
             get { return _phoneNumber; }
             set
             {
-                _phoneNumber = value;
+                _phoneNumber = value.Trim();
                 NotifyPropertyChanged();
             }
         }
@@ -58,7 +58,7 @@ namespace CoopCheck.WPF.Models
             get { return _email; }
             set
             {
-                _email = value;
+                _email = value.Trim();
                 NotifyPropertyChanged();
             }
         }
@@ -68,7 +68,7 @@ namespace CoopCheck.WPF.Models
             get { return _lastName; }
             set
             {
-                _lastName  = value;
+                _lastName  = value.Trim();
                 NotifyPropertyChanged();
             }
         }
@@ -118,7 +118,7 @@ namespace CoopCheck.WPF.Models
             get { return _firstName; }
             set
             {
-                _firstName = value;
+                _firstName = value.Trim();
                 NotifyPropertyChanged();
             }
         }

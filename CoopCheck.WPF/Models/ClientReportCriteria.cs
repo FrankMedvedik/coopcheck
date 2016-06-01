@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Content;
 using CoopCheck.WPF.Messages;
@@ -25,7 +26,7 @@ namespace CoopCheck.WPF.Models
             get { return _selectedJobNum; }
             set
             {
-                _selectedJobNum = value;
+                _selectedJobNum = value.Trim();
                 NotifyPropertyChanged();
                 SetSearchType();
             }
@@ -53,15 +54,10 @@ namespace CoopCheck.WPF.Models
                 SetSearchType();
             }
         }
-        //private string _selectedClientID;
         public string SelectedClientID
         {
             get { return _selectedClient.ClientID; }
-            //set
-            //{
-            //    _selectedClientID = value;
-            //    NotifyPropertyChanged();
-            //}
+
         }
 
         private string _selectedJobYear;
@@ -71,7 +67,7 @@ namespace CoopCheck.WPF.Models
         {
             get { return _selectedJobYear; }
             set {
-                _selectedJobYear = value;
+                _selectedJobYear = value.Trim();
                 NotifyPropertyChanged();
                 SetSearchType();
             }
@@ -122,15 +118,8 @@ namespace CoopCheck.WPF.Models
             string s = string.Empty;
             if (SelectedClient.ClientID!= null)
                 v.Add(new KeyValuePair<string, string>("ClientId", SelectedClient.ClientID));
-            //if (SelectedJobYear != 0)
-            //    v.Add(new KeyValuePair<string, string>("JobYear", SelectedJobYear));
-            //if (SelectedJob.jobnum != null)
             v.Add(new KeyValuePair<string, string>("JobNum", SelectedJob.jobnum.ToString()));
-            foreach (var a  in v)
-            {
-                s = string.Concat(s, token, a.Key, token, a.Value);
-            }
-            return s;
+            return v.Aggregate(s, (current, a) => string.Concat(current, token, a.Key, token, a.Value));
         }
 
     }

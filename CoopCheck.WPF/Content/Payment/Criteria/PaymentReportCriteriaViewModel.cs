@@ -70,8 +70,8 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
         public async void ResetState()
         {
 
-            PaymentReportCriteria = new PaymentReportCriteria();
-            PaymentReportCriteria.StartDate = DateTime.Today.Add(new TimeSpan(-30, 0, 0, 0));
+            PaymentReportCriteria = new PaymentReportCriteria(); 
+            PaymentReportCriteria.StartDate = new DateTime(DateTime.Now.Year, 1, 1);
             PaymentReportCriteria.EndDate = DateTime.Today.AddDays(1);
             Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
             PaymentReportCriteria.Account = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();

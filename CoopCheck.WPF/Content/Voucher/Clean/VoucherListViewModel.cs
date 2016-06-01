@@ -193,11 +193,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             get { return _selectedVoucher; }
             set
             {
-                _selectedVoucher = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged("ShowSelectedVoucher");
-                Messenger.Default.Send(new NotificationMessage<PaymentReportCriteria>(new PaymentReportCriteria
-                { LastName = SelectedVoucher.Last, FirstName=SelectedVoucher.First}, Notifications.FindPayeePayments));
+                if (value != null)
+                {
+                    _selectedVoucher = value;
+                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("ShowSelectedVoucher");
+                    Messenger.Default.Send(new NotificationMessage<PaymentReportCriteria>(new PaymentReportCriteria
+                    {LastName = SelectedVoucher.Last, FirstName = SelectedVoucher.First},
+                        Notifications.FindPayeePayments));
+                }
             }
         }
 
