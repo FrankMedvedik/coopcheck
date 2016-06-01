@@ -3,16 +3,14 @@ using DataClean.Models;
 
 namespace CoopCheck.WPF.Content.DataClean
 {
-
     public partial class DataCleanCriteriaView : UserControl
     {
-        DataCleanCriteriaViewModel _vm;
+        private readonly DataCleanCriteriaViewModel _vm;
 
         public DataCleanCriteriaView()
         {
-
             InitializeComponent();
-            _vm = new DataCleanCriteriaViewModel(new DataCleanCriteria()
+            _vm = new DataCleanCriteriaViewModel(new DataCleanCriteria
 
             {
                 AutoFixAddressLine1 = true,
@@ -25,7 +23,9 @@ namespace CoopCheck.WPF.Content.DataClean
             DataContext = _vm;
         }
 
-        public DataCleanCriteria Criteria { get { return _vm.Model; }  }
-
+        public DataCleanCriteria Criteria
+        {
+            get { return _vm.Model; }
+        }
     }
 }

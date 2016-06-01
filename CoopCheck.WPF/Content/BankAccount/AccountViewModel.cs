@@ -8,31 +8,28 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount
 {
-    public class AccountViewModel : ViewModelBase {
-        private ObservableCollection<bank_account>  _accounts;
+    public class AccountViewModel : ViewModelBase
+    {
+        private ObservableCollection<bank_account> _accounts;
+
+        private bank_account _selectedAccount;
+
+        public AccountViewModel()
+        {
+            ResetState();
+        }
+
         public ObservableCollection<bank_account> Accounts
         {
             get { return _accounts; }
             set
             {
                 _accounts = value;
-                 
+
                 NotifyPropertyChanged("");
             }
         }
 
-        public  AccountViewModel()
-        {
-            ResetState();
-        }
-        private async void ResetState()
-        {
-            Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
-            //SelectedAccount = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
-            SelectedAccount = (from l in Accounts where l.account_id == int.Parse(Properties.Settings.Default.SelectedAccountID)  select l).First(); 
-        }
-
-        private bank_account _selectedAccount;
         public bank_account SelectedAccount
         {
             get { return _selectedAccount; }
@@ -50,6 +47,14 @@ namespace CoopCheck.WPF.Content.BankAccount
             }
         }
 
+        private async void ResetState()
+        {
+            Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
+            //SelectedAccount = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
+            SelectedAccount =
+                (from l in Accounts
+                    where l.account_id == int.Parse(Properties.Settings.Default.SelectedAccountID)
+                    select l).First();
+        }
     }
-
 }

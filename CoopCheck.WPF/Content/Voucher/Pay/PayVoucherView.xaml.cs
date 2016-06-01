@@ -5,17 +5,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
+using CoopCheck.WPF.Models;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher.Pay
 {
     /// <summary>
-    /// Interaction logic for PrintChecksPage.xaml
+    ///     Interaction logic for PrintChecksPage.xaml
     /// </summary>
     public partial class PayVoucherView : UserControl
     {
-        CancellationTokenSource cts;
-        private PayVouchersViewModel _vm;
+        private readonly PayVouchersViewModel _vm;
+        private CancellationTokenSource cts;
+
         public PayVoucherView()
         {
             InitializeComponent();
@@ -28,7 +30,6 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             _vm.IsBusy = true;
             await Task.Run(() => _vm.SwiftPay());
             _vm.IsBusy = false;
-
         }
 
         private async void PrintChecks(object sender, RoutedEventArgs e)
@@ -37,7 +38,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
             try
             {
-                var f = System.AppDomain.CurrentDomain.BaseDirectory + @"\" + @Properties.Settings.Default.CheckTemplate;
+                var f = AppDomain.CurrentDomain.BaseDirectory + @"\" + Properties.Settings.Default.CheckTemplate;
                 if (!File.Exists(f))
                 {
                     ModernDialog.ShowMessage(f + " not found, cannot print checks. ",
@@ -55,7 +56,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 }
                 catch (OperationCanceledException)
                 {
-                    _vm.Status = new Models.StatusInfo
+                    _vm.Status = new StatusInfo
                     {
                         StatusMessage = "printing canceled",
                         ErrorMessage = "the check run was cancelled"
@@ -63,7 +64,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 }
                 catch (Exception ex)
                 {
-                    _vm.Status = new Models.StatusInfo
+                    _vm.Status = new StatusInfo
                     {
                         StatusMessage = "printing failed",
                         ErrorMessage = ex.Message
@@ -72,12 +73,12 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
                 cts = null;
 
-                var cw = new ConfirmLastCheckPrintedDialog() { DataContext = _vm };
+                var cw = new ConfirmLastCheckPrintedDialog {DataContext = _vm};
                 var result = cw.ShowDialog();
-                 CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
+                CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
                 _vm.RefreshBatchList();
                 _vm.IsBusy = false;
-                _vm.Status = new Models.StatusInfo
+                _vm.Status = new StatusInfo
                 {
                     StatusMessage = string.Format("batch - {0} last check number printed - {1}",
                         _vm.SelectedBatch.batch_num, _vm.EndingCheckNum)
@@ -85,14 +86,12 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
             catch (Exception ex)
             {
-
-                _vm.Status = new Models.StatusInfo
+                _vm.Status = new StatusInfo
                 {
                     StatusMessage = "error printing batch ",
                     ErrorMessage = ex.Message
                 };
             }
-            
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
@@ -102,7 +101,5 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 cts.Cancel();
             }
         }
-
     }
 }
- 

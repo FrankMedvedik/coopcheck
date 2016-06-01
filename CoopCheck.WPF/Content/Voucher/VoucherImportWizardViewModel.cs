@@ -1,12 +1,22 @@
 ﻿using CoopCheck.WPF.Messages;
-using GalaSoft.MvvmLight.Messaging;
 using CoopCheck.WPF.Models;
+using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher
 {
     public class VoucherImportWizardViewModel : ViewModelBase
     {
+        private bool _haveCleanedVouchers;
+
+        private bool _haveCommittedVouchers;
+
+        private bool _haveReviewedVouchers;
+
+        private bool _haveValidWorkbook;
+
+        private StatusInfo _status;
+
         public VoucherImportWizardViewModel()
         {
             ResetAll();
@@ -19,10 +29,11 @@ namespace CoopCheck.WPF.Content.Voucher
             });
 
             Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
-            { 
+            {
                 if (message.Notification == Notifications.VouchersDataCleaned)
                 {
-                    HaveCleanedVouchers = true; HaveReviewedVouchers = true;
+                    HaveCleanedVouchers = true;
+                    HaveReviewedVouchers = true;
                 }
 
                 //if (message.Notification == Notifications.HaveReviewedVouchers)
@@ -46,38 +57,28 @@ namespace CoopCheck.WPF.Content.Voucher
                     HaveCleanedVouchers = false;
                 }
             });
-
-
         }
-
-        private void ResetAll()
-        {
-            HaveValidWorkbook = false;
-            HaveCleanedVouchers = false;
-            HaveReviewedVouchers = false;
-            HaveCommittedVouchers = false;
-        }
-        
-        private StatusInfo _status;
-        
-        private bool _haveValidWorkbook;
 
         public bool HaveValidWorkbook
         {
             get { return _haveValidWorkbook; }
-            set { _haveValidWorkbook = value; NotifyPropertyChanged(); }
-        }
-        private bool _haveCleanedVouchers;
-
-        public bool HaveCleanedVouchers
-        {
-            get { return _haveCleanedVouchers; }
-            set { _haveCleanedVouchers = value;
+            set
+            {
+                _haveValidWorkbook = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private bool _haveReviewedVouchers;
+        public bool HaveCleanedVouchers
+        {
+            get { return _haveCleanedVouchers; }
+            set
+            {
+                _haveCleanedVouchers = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public bool HaveReviewedVouchers
         {
             get { return _haveReviewedVouchers; }
@@ -88,7 +89,6 @@ namespace CoopCheck.WPF.Content.Voucher
             }
         }
 
-        private bool _haveCommittedVouchers;
         public bool HaveCommittedVouchers
         {
             get { return _haveCommittedVouchers; }
@@ -110,8 +110,12 @@ namespace CoopCheck.WPF.Content.Voucher
             }
         }
 
-
+        private void ResetAll()
+        {
+            HaveValidWorkbook = false;
+            HaveCleanedVouchers = false;
+            HaveReviewedVouchers = false;
+            HaveCommittedVouchers = false;
+        }
     }
-
- 
 }

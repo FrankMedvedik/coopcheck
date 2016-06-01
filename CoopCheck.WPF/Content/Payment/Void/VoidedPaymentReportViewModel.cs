@@ -5,22 +5,21 @@ using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Void
 {
     /// <summary>
     public class VoidedPaymentReportViewModel : ViewModelBase
     {
+        private ObservableCollection<vwVoidedPayment> _payments = new ObservableCollection<vwVoidedPayment>();
+
         public VoidedPaymentReportViewModel()
         {
             ResetState();
-
         }
 
-
-        private ObservableCollection<vwVoidedPayment> _payments = new ObservableCollection<vwVoidedPayment>();
         public ObservableCollection<vwVoidedPayment> Payments
         {
             get { return _payments; }
@@ -28,24 +27,48 @@ namespace CoopCheck.WPF.Content.Payment.Void
             {
                 _payments = value;
                 NotifyPropertyChanged();
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
-                    StatusMessage = String.Format("{0} Payments found", Payments.Count)
+                    StatusMessage = string.Format("{0} Payments found", Payments.Count)
                 };
                 ShowGridData = true;
             }
         }
 
+        public async void GetPayments(PaymentReportCriteria p)
+        {
+            Status = new StatusInfo
+            {
+                ErrorMessage = "",
+                IsBusy = true,
+                StatusMessage = "getting payments..."
+            };
+            try
+            {
+                Payments = await Task<ObservableCollection<vwVoidedPayment>>.Factory.StartNew(() =>
+                {
+                    var task = RptSvc.GetVoidedPayments(p);
+                    return new ObservableCollection<vwVoidedPayment>(task.Result);
+                });
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo
+                {
+                    StatusMessage = "Error loading payments",
+                    ErrorMessage = e.Message
+                };
+            }
+        }
 
         #region DisplayState
+
         private StatusInfo _status;
 
         public void ResetState()
         {
-
             _payments = new ObservableCollection<vwVoidedPayment>();
             ShowGridData = false;
-
         }
 
         public StatusInfo Status
@@ -59,9 +82,9 @@ namespace CoopCheck.WPF.Content.Payment.Void
             }
         }
 
-        private Boolean _showGridData;
+        private bool _showGridData;
 
-        public Boolean ShowGridData
+        public bool ShowGridData
         {
             get { return _showGridData; }
             set
@@ -76,6 +99,7 @@ namespace CoopCheck.WPF.Content.Payment.Void
         #region collection and selected
 
         private vwVoidedPayment _selectedPayment;
+
         public vwVoidedPayment SelectedPayment
         {
             get { return _selectedPayment; }
@@ -87,33 +111,5 @@ namespace CoopCheck.WPF.Content.Payment.Void
         }
 
         #endregion
-
-        public async void GetPayments(PaymentReportCriteria p)
-        {
-            Status = new StatusInfo()
-            {
-                ErrorMessage = "",
-                IsBusy = true,
-                StatusMessage = "getting payments..."
-            };
-            try
-            {
-                Payments = await Task<ObservableCollection<vwVoidedPayment>>.Factory.StartNew(() =>
-                {
-                    var task = RptSvc.GetVoidedPayments(p);
-                    return new ObservableCollection<vwVoidedPayment>(task.Result);
-                });
-
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
-                {
-                    StatusMessage = "Error loading payments",
-                    ErrorMessage = e.Message
-                };
-
-            }
-        }
     }
 }

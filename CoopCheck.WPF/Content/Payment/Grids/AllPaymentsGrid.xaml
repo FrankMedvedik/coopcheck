@@ -1,11 +1,11 @@
-﻿    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-          xmlns:markup="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DataGrid ItemsSource="{Binding AllPayments,IsAsync=True}" AutoGenerateColumns="False"  MaxHeight="600"  
-                  ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"
-              EnableRowVirtualization="True" IsReadOnly="True" Width="Auto" VerticalScrollBarVisibility="Auto" 
-              Margin="6" CanUserAddRows="False" HorizontalScrollBarVisibility="Auto"  SelectionMode="Extended" 
-            VerticalAlignment="Top"  HorizontalAlignment="Left" >
-            <DataGrid.Columns>
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:markup="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataGrid ItemsSource="{Binding AllPayments,IsAsync=True}" AutoGenerateColumns="False" MaxHeight="600"
+              ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True"
+              EnableRowVirtualization="True" IsReadOnly="True" Width="Auto" VerticalScrollBarVisibility="Auto"
+              Margin="6" CanUserAddRows="False" HorizontalScrollBarVisibility="Auto" SelectionMode="Extended"
+              VerticalAlignment="Top" HorizontalAlignment="Left">
+        <DataGrid.Columns>
             <StaticResource ResourceKey="dgPJob" />
             <StaticResource ResourceKey="dgPBatch" />
             <StaticResource ResourceKey="dgPFirst" />
@@ -24,7 +24,7 @@
         </DataGrid.Columns>
         <DataGrid.ContextMenu>
             <ContextMenu>
-            <MenuItem Command="{markup:Static ApplicationCommands.Copy}" Header="Copy" />
+                <MenuItem Command="{markup:Static ApplicationCommands.Copy}" Header="Copy" />
             </ContextMenu>
         </DataGrid.ContextMenu>
     </DataGrid>

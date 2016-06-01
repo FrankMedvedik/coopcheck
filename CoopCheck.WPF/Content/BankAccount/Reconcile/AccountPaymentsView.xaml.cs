@@ -56,7 +56,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             DgUnmatched.SelectAllCells();
             DgUnmatched.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, DgUnmatched);
-            var unmatched = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            var unmatched = (string) Clipboard.GetData(DataFormats.CommaSeparatedValue);
             DgUnmatched.UnselectAllCells();
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = string.Format("{0}.Reconcile.csv", Path.GetFileName(_vm.BankFile.FilePath));

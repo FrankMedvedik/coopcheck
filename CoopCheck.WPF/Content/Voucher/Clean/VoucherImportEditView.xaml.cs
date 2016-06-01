@@ -4,7 +4,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public partial class VoucherImportEditView : UserControl
     {
-
         public VoucherImportEditView()
         {
             InitializeComponent();

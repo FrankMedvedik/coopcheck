@@ -11,14 +11,14 @@ namespace CoopCheck.WPF.Services
         public static bool CanRead(string userName)
         {
             return IsGroupMember(userName, Settings.Default.WriteAuth);
-            return true;
+            //return true;
             
         }
 
         public static bool CanWrite(string userName)
         {
             return IsGroupMember(userName, Settings.Default.WriteAuth);
-            return true;
+            //return true;
            
         }
 

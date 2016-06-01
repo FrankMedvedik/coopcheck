@@ -11,9 +11,22 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
-
-    public partial class ReplacerView : UserControl 
+    public partial class ReplacerView : UserControl
     {
+        public static DependencyProperty AccentColorProperty =
+            DependencyProperty.Register("AccentColor", typeof (SolidColorBrush), typeof (ReplacerView),
+                new PropertyMetadata(new SolidColorBrush()));
+
+        public static DependencyProperty AlternateValueProperty =
+            DependencyProperty.Register("AlternateValue", typeof (string), typeof (ReplacerView),
+                new PropertyMetadata(string.Empty));
+
+        public static DependencyProperty SourceValueProperty =
+            DependencyProperty.Register("SourceValue", typeof (string), typeof (ReplacerView),
+                new PropertyMetadata(string.Empty));
+
+        private StatusInfo _status;
+
         public ReplacerView()
         {
             InitializeComponent();
@@ -24,58 +37,20 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public SolidColorBrush AccentColor
         {
-            get
-            {
-                return new SolidColorBrush(AppearanceManager.Current.AccentColor);
-            }
+            get { return new SolidColorBrush(AppearanceManager.Current.AccentColor); }
         }
-        public static DependencyProperty AccentColorProperty =
-            DependencyProperty.Register("AccentColor", typeof(SolidColorBrush), typeof(ReplacerView), new PropertyMetadata(new SolidColorBrush()));
 
         public string AlternateValue
         {
-            get { return (string)GetValue(AlternateValueProperty); }
+            get { return (string) GetValue(AlternateValueProperty); }
             set { SetValueDp(AlternateValueProperty, value); }
         }
-        public static  DependencyProperty AlternateValueProperty =
-            DependencyProperty.Register("AlternateValue", typeof(string), typeof(ReplacerView), new PropertyMetadata(string.Empty));
 
 
         public string SourceValue
         {
-            get { return (string)GetValue(SourceValueProperty); }
-            set { SetValueDp(SourceValueProperty, value);
-            }
-        }
-        public static DependencyProperty SourceValueProperty =
-            DependencyProperty.Register("SourceValue", typeof(string), typeof(ReplacerView), new PropertyMetadata(string.Empty));
-        private StatusInfo _status;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        void SetValueDp(DependencyProperty property, object value, [CallerMemberName] string p = null)
-        {
-            SetValue(property, value);
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(p));
-        }
-
-        public void SetState(object o, PropertyChangedEventArgs e)
-        {
-
-            Replacer.Visibility = Visibility.Collapsed;
-            if (AlternateValue == null) return;
-            if ((AlternateValue.Trim().Length > 0) && (SourceValue == null))
-            {
-                Replacer.Visibility = Visibility.Visible;
-                return;
-            }
-
-            if ((AlternateValue.Trim().Length > 0) && (!SourceValue.Equals(AlternateValue, StringComparison.OrdinalIgnoreCase)))
-            {
-                Replacer.Visibility = Visibility.Visible;
-            }
+            get { return (string) GetValue(SourceValueProperty); }
+            set { SetValueDp(SourceValueProperty, value); }
         }
 
         public StatusInfo Status
@@ -85,6 +60,33 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             {
                 _status = value;
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        private void SetValueDp(DependencyProperty property, object value, [CallerMemberName] string p = null)
+        {
+            SetValue(property, value);
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(p));
+        }
+
+        public void SetState(object o, PropertyChangedEventArgs e)
+        {
+            Replacer.Visibility = Visibility.Collapsed;
+            if (AlternateValue == null) return;
+            if ((AlternateValue.Trim().Length > 0) && (SourceValue == null))
+            {
+                Replacer.Visibility = Visibility.Visible;
+                return;
+            }
+
+            if ((AlternateValue.Trim().Length > 0) &&
+                (!SourceValue.Equals(AlternateValue, StringComparison.OrdinalIgnoreCase)))
+            {
+                Replacer.Visibility = Visibility.Visible;
             }
         }
 

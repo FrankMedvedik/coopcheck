@@ -1,12 +1,13 @@
 ﻿using System.Windows.Controls;
-using CoopCheck.WPF.Content.Voucher.Edit;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public partial class PaymentHistoryView : UserControl
     {
+        private readonly PaymentHistoryViewModel _vm;
+
         /// <summary>
-        /// Initializes a new instance of the CheckReportCriteriaView class.
+        ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
         public PaymentHistoryView()
         {
@@ -14,9 +15,5 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             _vm = new PaymentHistoryViewModel();
             DataContext = _vm;
         }
-
-        private PaymentHistoryViewModel _vm;
-
-        
     }
 }

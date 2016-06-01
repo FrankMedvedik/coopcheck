@@ -1,42 +1,49 @@
 ﻿<UserControl x:Class="CoopCheck.WPF.Content.Payment.Batch.BatchSummaryPaymentReportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
              xmlns:batch="clr-namespace:CoopCheck.WPF.Content.Payment.Batch"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <ScrollViewer>
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-            <RowDefinition  Height="Auto"/>
-        </Grid.RowDefinitions>
-        <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--<TextBlock Text="{Binding HeadingText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource Heading2}" Margin="6"/>-->
             <StackPanel Orientation="Horizontal">
-        <criteria:PaymentReportCriteriaView x:Name="prcv" />
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="Refresh" HorizontalAlignment="Left" IsDefault="True"  Margin="6"
-                    VerticalAlignment="Center" Click="Refresh_Click">Refresh</Button>
-                <Button x:Name="Unprint" Margin="50,6,6,6" IsEnabled="{Binding CanUnprint}"
-                        Click="Unprint_Click" HorizontalAlignment="Left"  VerticalAlignment="Center" >Unprint</Button>
-                    <Button x:Name="VoidSwiftPayments" Margin="30,6,6,6" IsEnabled="{Binding CanVoid}" 
-                            Click="Void_Click" HorizontalAlignment="Left" 
-                            VerticalAlignment="Center">Void Swift Payments</Button>
+                <criteria:PaymentReportCriteriaView x:Name="prcv" />
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="Refresh" HorizontalAlignment="Left" IsDefault="True" Margin="6"
+                            VerticalAlignment="Center" Click="Refresh_Click">
+                        Refresh
+                    </Button>
+                    <Button x:Name="Unprint" Margin="50,6,6,6" IsEnabled="{Binding CanUnprint}"
+                            Click="Unprint_Click" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        Unprint
+                    </Button>
+                    <Button x:Name="VoidSwiftPayments" Margin="30,6,6,6" IsEnabled="{Binding CanVoid}"
+                            Click="Void_Click" HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
+                        Void Swift Payments
+                    </Button>
                 </StackPanel>
             </StackPanel>
-            <batch:BatchReportView  x:Name="brv"  Grid.Row="3" Margin="6"/>
-            <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml" Margin="6" Grid.Row="4" Layout="Tab">
-            <mui:ModernTab.Links>
-                <mui:Link DisplayName="All"    Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
-                <mui:Link DisplayName="Cleared" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
-                <mui:Link DisplayName="Outstanding" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
-    </Grid>
+            <batch:BatchReportView x:Name="brv" Grid.Row="3" Margin="6" />
+            <mui:ModernTab SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml" Margin="6" Grid.Row="4"
+                           Layout="Tab">
+                <mui:ModernTab.Links>
+                    <mui:Link DisplayName="All" Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="Cleared" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="Outstanding" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
+                </mui:ModernTab.Links>
+            </mui:ModernTab>
+        </Grid>
     </ScrollViewer>
 </UserControl>

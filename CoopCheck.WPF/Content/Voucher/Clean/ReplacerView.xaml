@@ -1,15 +1,19 @@
 ﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Clean.ReplacerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" >
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d">
     <Grid x:Name="Replacer" Margin="1">
-        <Border  BorderBrush="Red" BorderThickness="1">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto" >
-                <Button x:Name="BtnSwapit" Margin="3,0,3,0" Click="BtnSwapit_Click" Width="Auto" Content="Replace" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="tbSourceValue" Visibility="Collapsed" Margin="3,0,3,0" Text="{Binding SourceValue,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Foreground="Red"  />
-                <TextBox x:Name="tbAlternateValue" Margin="3,0,3,0" Text="{Binding AlternateValue, Mode=TwoWay}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Red" />
+        <Border BorderBrush="Red" BorderThickness="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="Auto">
+                <Button x:Name="BtnSwapit" Margin="3,0,3,0" Click="BtnSwapit_Click" Width="Auto" Content="Replace"
+                        HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox x:Name="tbSourceValue" Visibility="Collapsed" Margin="3,0,3,0"
+                         Text="{Binding SourceValue,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                         Width="100" Foreground="Red" />
+                <TextBox x:Name="tbAlternateValue" Margin="3,0,3,0" Text="{Binding AlternateValue, Mode=TwoWay}"
+                         Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Red" />
                 <!--<TextBlock x:Name="NewValue" Margin="3,0,0,0" Width="100" Foreground="{Binding AppearanceManager.Current.AccentColor}" />-->
             </StackPanel>
         </Border>

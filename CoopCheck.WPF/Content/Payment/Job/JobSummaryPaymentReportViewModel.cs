@@ -5,13 +5,28 @@ using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Job
 {
     public class JobSummaryPaymentReportViewModel : ViewModelBase
     {
+        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
+        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
+        private string _headingText;
+        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
+
+        private PaymentReportCriteria _paymentReportCriteria = new PaymentReportCriteria();
+        private bool _showGridData;
+        private StatusInfo _status;
+        private List<vwPayment> _workPayments;
+
+        public JobSummaryPaymentReportViewModel()
+        {
+            ShowGridData = false;
+        }
+
         public bool ShowGridData
         {
             get { return _showGridData; }
@@ -22,13 +37,6 @@ namespace CoopCheck.WPF.Content.Payment.Job
             }
         }
 
-        public JobSummaryPaymentReportViewModel()
-        {
-            ShowGridData = false;
-      
-        }
-
-        private PaymentReportCriteria _paymentReportCriteria = new PaymentReportCriteria();
         public PaymentReportCriteria PaymentReportCriteria
         {
             get { return _paymentReportCriteria; }
@@ -38,7 +46,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 NotifyPropertyChanged();
             }
         }
-        private string _headingText;
+
         public string HeadingText
         {
             get { return _headingText; }
@@ -48,18 +56,6 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 NotifyPropertyChanged();
             }
         }
-   
-        public  async void RefreshAll()
-        {
-            WorkPayments = await RptSvc.GetJobPayments(PaymentReportCriteria);
-
-        }
-        private bool _showGridData;
-        private StatusInfo _status;
-        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
-        private List<vwPayment> _workPayments;
-        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
-        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
 
         public List<vwPayment> WorkPayments
         {
@@ -69,10 +65,10 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 _workPayments = value;
                 AllPayments = new ObservableCollection<vwPayment>(WorkPayments);
                 ClosedPayments = new ObservableCollection<vwPayment>((
-                                    from l in _workPayments
-                                    where l.cleared_flag
-                                    orderby l.check_date
-                                    select l).ToList());
+                    from l in _workPayments
+                    where l.cleared_flag
+                    orderby l.check_date
+                    select l).ToList());
                 OpenPayments = new ObservableCollection<vwPayment>((
                     from l in _workPayments
                     where !l.cleared_flag
@@ -81,7 +77,6 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 ShowGridData = true;
                 //HeadingText = String.Format("{0} Jobs for Account {1} Between {2:ddd, MMM d, yyyy} to {3:ddd, MMM d, yyyy}", a,
                 //         PaymentReportCriteria.Account.account_name, PaymentReportCriteria.StartDate,PaymentReportCriteria.EndDate);
-
             }
         }
 
@@ -106,7 +101,6 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 NotifyPropertyChanged();
                 ShowGridData = true;
             }
-            
         }
 
         public ObservableCollection<vwPayment> ClosedPayments
@@ -127,6 +121,11 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 _openPayments = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public async void RefreshAll()
+        {
+            WorkPayments = await RptSvc.GetJobPayments(PaymentReportCriteria);
         }
     }
 }

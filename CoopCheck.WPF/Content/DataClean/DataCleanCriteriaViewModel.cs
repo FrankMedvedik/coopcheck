@@ -1,34 +1,30 @@
 ﻿using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Wrappers;
 using DataClean.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.DataClean
 {
-
     public class DataCleanCriteriaViewModel : ModelWrappper<DataCleanCriteria>
     {
-   public DataCleanCriteria Criteria
-    {
-        get { return Model; }
-    }
-
-        public  void BroadcastUpdate()
-        {
-            Messenger.Default.Send(new NotificationMessage<DataCleanCriteria>(Model, Notifications.DataCleanCriteriaUpdated));
-        }
-
         public DataCleanCriteriaViewModel(DataCleanCriteria model) : base(model)
         {
-
         }
 
-        public bool AutoFixPostalCode { get { return Model.AutoFixPostalCode; }
-            set { Model.AutoFixPostalCode = value;
+        public DataCleanCriteria Criteria
+        {
+            get { return Model; }
+        }
+
+        public bool AutoFixPostalCode
+        {
+            get { return Model.AutoFixPostalCode; }
+            set
+            {
+                Model.AutoFixPostalCode = value;
                 NotifyPropertyChanged();
-            } }
+            }
+        }
 
         public bool AutoFixState
         {
@@ -39,6 +35,7 @@ namespace CoopCheck.WPF.Content.DataClean
                 NotifyPropertyChanged();
             }
         }
+
         public bool AutoFixCity
         {
             get { return Model.AutoFixCity; }
@@ -48,6 +45,7 @@ namespace CoopCheck.WPF.Content.DataClean
                 NotifyPropertyChanged();
             }
         }
+
         public bool AutoFixAddressLine1
         {
             get { return Model.AutoFixAddressLine1; }
@@ -57,6 +55,7 @@ namespace CoopCheck.WPF.Content.DataClean
                 NotifyPropertyChanged();
             }
         }
+
         public bool ForceValidation
         {
             get { return Model.ForceValidation; }
@@ -67,6 +66,10 @@ namespace CoopCheck.WPF.Content.DataClean
             }
         }
 
-        
+        public void BroadcastUpdate()
+        {
+            Messenger.Default.Send(new NotificationMessage<DataCleanCriteria>(Model,
+                Notifications.DataCleanCriteriaUpdated));
+        }
     }
 }

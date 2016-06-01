@@ -1,62 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
+﻿using CoopCheck.WPF.Models;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content
 {
-        public sealed class UserAuth : ViewModelBase
-        {
-            private static volatile UserAuth instance;
-            private static object syncRoot = new Object();
-            private UserAuth() { }
-
-            public static UserAuth Instance
-            {
-                get
-                {
-                    if (instance == null)
-                    {
-                        lock (syncRoot)
-                        {
-                            if (instance == null)
-                                instance = new UserAuth();
-                        }
-                    }
-
-                    return instance;
-                }
-            }
-
-            public UserSecurityProfile UserSecurityProfile
-        {
-                get { return instance._userSecurityProfile; }
-                set
-                {
-                    instance._userSecurityProfile = value;
-                    NotifyPropertyChanged();
-                }
-            }
+    public sealed class UserAuth : ViewModelBase
+    {
+        private static volatile UserAuth _instance;
+        private static readonly object SyncRoot = new object();
 
         private UserSecurityProfile _userSecurityProfile = new UserSecurityProfile();
-   
-        public String UserName
+
+        private UserAuth()
+        {
+        }
+
+        public static UserAuth Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (SyncRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new UserAuth();
+                    }
+                }
+
+                return _instance;
+            }
+        }
+
+        public UserSecurityProfile UserSecurityProfile
+        {
+            get { return _instance._userSecurityProfile; }
+            set
+            {
+                _instance._userSecurityProfile = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string UserName
         {
             get { return _userSecurityProfile.UserName; }
         }
+
         public bool CanRead
         {
             get { return _userSecurityProfile.CanRead; }
         }
+
         public bool CanWrite
         {
             get { return _userSecurityProfile.CanWrite; }
         }
-
     }
 }

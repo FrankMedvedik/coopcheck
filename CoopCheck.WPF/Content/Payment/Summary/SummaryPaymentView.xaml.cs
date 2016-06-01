@@ -12,8 +12,22 @@ namespace CoopCheck.WPF.Content.Payment.Summary
     /// </summary>
     public partial class PaymentSummaryView : UserControl
     {
-        private ClientPaymentViewModel _vm = null;
-       
+        public static readonly DependencyProperty AllPaymentsProperty =
+            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<vwPayment>),
+                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        public static readonly DependencyProperty OpenPaymentsProperty =
+            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<vwPayment>),
+                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        public static readonly DependencyProperty ClosedPaymentsProperty =
+            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<vwPayment>),
+                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        private readonly ClientPaymentViewModel _vm;
+
+        private vwBatchRpt SelectedvwBatchRpt;
+
         public PaymentSummaryView()
         {
             InitializeComponent();
@@ -24,7 +38,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             {
                 if (message.Notification == Notifications.JobFinderSelectedBatchChanged)
                 {
-
                     _vm.ParentBatch = (message.Content);
                     pgv.Visibility = Visibility.Visible;
                 }
@@ -38,18 +51,31 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                     brv.Visibility = Visibility.Visible;
                     pgv.Visibility = Visibility.Collapsed;
                 }
-                
             });
         }
 
-        private vwBatchRpt SelectedvwBatchRpt = null;
+
+        public ObservableCollection<vwPayment> AllPayments
+        {
+            get { return _vm.AllPayments; }
+        }
+
+        public ObservableCollection<vwPayment> OpenPayments
+        {
+            get { return _vm.OpenPayments; }
+        }
+
+        public ObservableCollection<vwPayment> ClosedPayments
+        {
+            get { return _vm.ClosedPayments; }
+        }
 
         private async Task RefreshChildren(vwBatchRpt vwBatchRpt)
         {
             if (vwBatchRpt == null) return;
-               if((SelectedvwBatchRpt == null) 
+            if ((SelectedvwBatchRpt == null)
                 || (vwBatchRpt != SelectedvwBatchRpt))
-                 await Task.Factory.StartNew(() =>
+                await Task.Factory.StartNew(() =>
                 {
                     _vm.ClientReportCriteria.SelectedBatch.batch_num = vwBatchRpt.batch_num;
                     _vm.RefreshAll();
@@ -65,31 +91,5 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             brv.Visibility = Visibility.Collapsed;
             pgv.Visibility = Visibility.Collapsed;
         }
-
-
-        public ObservableCollection<vwPayment> AllPayments
-        {
-            get { return _vm.AllPayments; }
-        }
-
-        public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<vwPayment>), typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
-
-        public ObservableCollection<vwPayment> OpenPayments
-        {
-            get { return _vm.OpenPayments; }
-            
-        }
-
-        public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<vwPayment>), typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
-
-        public ObservableCollection<vwPayment> ClosedPayments
-        {
-            get { return _vm.ClosedPayments; }
-        }
-
-        public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<vwPayment>), typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
     }
 }

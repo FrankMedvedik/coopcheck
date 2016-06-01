@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Criteria
 {
     public class ClientReportCriteriaViewModel : ViewModelBase
     {
+        private ClientReportCriteria _clientReportCriteria;
+
         public ClientReportCriteriaViewModel()
         {
-          
             ResetState();
         }
 
@@ -27,7 +27,6 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
-        private ClientReportCriteria  _clientReportCriteria;
 
         public ClientReportCriteria ClientReportCriteria
         {
@@ -36,7 +35,6 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             {
                 _clientReportCriteria = value;
                 NotifyPropertyChanged();
-
             }
         }
 
@@ -45,24 +43,24 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             get { return _jobNumError; }
             set
             {
-                _jobNumError = value; NotifyPropertyChanged();
-            
+                _jobNumError = value;
+                NotifyPropertyChanged();
             }
         }
 
         public bool ValidateJobNumber(string JobNum)
         {
             JobNumError = "";
-            bool retVal =false;
-            if (String.IsNullOrWhiteSpace(JobNum))
+            var retVal = false;
+            if (string.IsNullOrWhiteSpace(JobNum))
                 JobNumError = "New Job Number Required";
             else if ((JobNum.Length != 8))
                 JobNumError = "Supplied Job number invalid";
             else
                 retVal = true;
             return retVal;
-
         }
+
         #region DisplayState
 
         public async void ResetState()
@@ -87,13 +85,16 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
         public ObservableCollection<CoopCheckClient> Clients
         {
             get { return _clients; }
-            set { _clients = value;
-                NotifyPropertyChanged(); }
+            set
+            {
+                _clients = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private Boolean _showGridData;
+        private bool _showGridData;
 
-        public Boolean ShowGridData
+        public bool ShowGridData
         {
             get { return _showGridData; }
             set

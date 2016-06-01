@@ -8,68 +8,24 @@ using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using CoopCheck.WPF.Wrappers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Save
 {
+    public class Vouchers : List<VoucherExcelExport>
+    {
+    }
 
-    public class Vouchers : List<VoucherExcelExport> { }
     public class VoucherSaveViewModel : ViewModelBase
     {
-        private StatusInfo _status;
-        public RelayCommand SaveVouchersCommand { get; private set; }
-        public RelayCommand ExportVouchersCommand { get; private set; }
+        private readonly BackgroundWorker _batchCreator;
+        private bool _canExport;
+        private bool _canSave;
 
-        public bool CanSaveVouchers()
-        {
-            return StartEnabled;
-        }
-
-
-        public VoucherSaveViewModel()
-        {
-            CanSave = false;
-            CanExport = false;
-
-            SaveVouchersCommand = new RelayCommand(CreateBatchEditAndImportVouchers, CanSaveVouchers);
-            //ExportVouchersCommand = new RelayCommand(ExportVouchers, CanSaveVouchers);
-
-            _batchCreator = new BackgroundWorker()
-            {
-                WorkerReportsProgress = false,
-                WorkerSupportsCancellation = false
-            };
-            _batchCreator.DoWork += worker_DoWork;
-            _batchCreator.RunWorkerCompleted += worker_RunWorkerCompleted;
-
-            Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
-            {
-                if (message.Notification == Notifications.VouchersDataCleaned)
-                {
-                    ExcelFileInfo = message.Content.ExcelFileInfo;
-                    VoucherImportWrappers = message.Content.VoucherImports;
-                   // Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
-                    if (GoodVouchers.Any()) CanSave = true;
-                    if (BadVouchers.Any()) CanExport = true;
-                }
-            });
-        }
-
-        private void CreateBatchEditAndImportVouchers()
-        {
-            Status = new StatusInfo()
-            {
-                StatusMessage = "Saving vouchers in batch...",
-                IsBusy = true
-            };
-            if (!_batchCreator.IsBusy)
-                _batchCreator.RunWorkerAsync();
-            StartEnabled = !_batchCreator.IsBusy;
-            CanSave = false;
-        }
+        private string _errorBatchInfoMessage;
 
         //public async void  ExportVouchers()
         //{
@@ -126,6 +82,47 @@ namespace CoopCheck.WPF.Content.Voucher.Save
 
         private ExcelFileInfoMessage _excelVoucherInfo;
 
+        private string _saveBatchInfoMessage;
+
+        private bool _startEnabled = true;
+        private StatusInfo _status;
+
+        private ObservableCollection<VoucherImportWrapper> _voucherImportWrappers =
+            new ObservableCollection<VoucherImportWrapper>();
+
+
+        public VoucherSaveViewModel()
+        {
+            CanSave = false;
+            CanExport = false;
+
+            SaveVouchersCommand = new RelayCommand(CreateBatchEditAndImportVouchers, CanSaveVouchers);
+            //ExportVouchersCommand = new RelayCommand(ExportVouchers, CanSaveVouchers);
+
+            _batchCreator = new BackgroundWorker
+            {
+                WorkerReportsProgress = false,
+                WorkerSupportsCancellation = false
+            };
+            _batchCreator.DoWork += worker_DoWork;
+            _batchCreator.RunWorkerCompleted += worker_RunWorkerCompleted;
+
+            Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
+            {
+                if (message.Notification == Notifications.VouchersDataCleaned)
+                {
+                    ExcelFileInfo = message.Content.ExcelFileInfo;
+                    VoucherImportWrappers = message.Content.VoucherImports;
+                    // Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
+                    if (GoodVouchers.Any()) CanSave = true;
+                    if (BadVouchers.Any()) CanExport = true;
+                }
+            });
+        }
+
+        public RelayCommand SaveVouchersCommand { get; private set; }
+        public RelayCommand ExportVouchersCommand { get; private set; }
+
         public ExcelFileInfoMessage ExcelFileInfo
         {
             get { return _excelVoucherInfo; }
@@ -146,9 +143,6 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
-
-        private ObservableCollection<VoucherImportWrapper> _voucherImportWrappers =
-            new ObservableCollection<VoucherImportWrapper>();
 
         public List<VoucherImportWrapper> BadVouchers => VoucherImportWrappers.Where(x => !x.OkMailingAddress).ToList();
 
@@ -185,24 +179,6 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             }
         }
 
-        private void SetupMessages()
-        {
-
-            //SaveBatchInfoMessage = string.Format("8 Vouchers will be posted totalling $900");
-            //ErrorBatchInfoMessage = string.Format("3 Vouchers WITH ERRORS totaling $300 will be saved to the job errors worksheet");
-            //CanSave =true;
-
-            SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1:C}",
-                GoodVouchers.Count,
-                GoodVouchers.Select(x => x.Amount).Sum());
-            ErrorBatchInfoMessage = string.Format("{0} Vouchers with errors totalling {1:C} will be saved to Excel",
-                BadVouchers.Count,
-                BadVouchers.Select(x => x.Amount).Sum());
-
-            CanSave = (GoodVouchers.Any());
-
-        }
-
         public string SaveBatchInfoMessage
         {
             get { return _saveBatchInfoMessage; }
@@ -212,8 +188,6 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 NotifyPropertyChanged();
             }
         }
-
-        private string _saveBatchInfoMessage;
 
         public string ErrorBatchInfoMessage
         {
@@ -225,15 +199,11 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             }
         }
 
-        public List<VoucherExcelExport> GoodVoucherExports => GoodVouchers.Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList();
-        public List<VoucherExcelExport> BadVoucherExports => BadVouchers.Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList();
+        public List<VoucherExcelExport> GoodVoucherExports
+            => GoodVouchers.Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList();
 
-        private string _errorBatchInfoMessage;
-        private bool _canSave;
-        private bool _canExport;
-        private BackgroundWorker _batchCreator;
-
-        private bool _startEnabled = true;
+        public List<VoucherExcelExport> BadVoucherExports
+            => BadVouchers.Select(VoucherImportWrapperConverter.ToVoucherExcelExport).ToList();
 
         public bool StartEnabled
         {
@@ -248,6 +218,40 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             }
         }
 
+        public bool CanSaveVouchers()
+        {
+            return StartEnabled;
+        }
+
+        private void CreateBatchEditAndImportVouchers()
+        {
+            Status = new StatusInfo
+            {
+                StatusMessage = "Saving vouchers in batch...",
+                IsBusy = true
+            };
+            if (!_batchCreator.IsBusy)
+                _batchCreator.RunWorkerAsync();
+            StartEnabled = !_batchCreator.IsBusy;
+            CanSave = false;
+        }
+
+        private void SetupMessages()
+        {
+            //SaveBatchInfoMessage = string.Format("8 Vouchers will be posted totalling $900");
+            //ErrorBatchInfoMessage = string.Format("3 Vouchers WITH ERRORS totaling $300 will be saved to the job errors worksheet");
+            //CanSave =true;
+
+            SaveBatchInfoMessage = string.Format("{0} Vouchers will be posted totalling {1:C}",
+                GoodVouchers.Count,
+                GoodVouchers.Select(x => x.Amount).Sum());
+            ErrorBatchInfoMessage = string.Format("{0} Vouchers with errors totalling {1:C} will be saved to Excel",
+                BadVouchers.Count,
+                BadVouchers.Select(x => x.Amount).Sum());
+
+            CanSave = (GoodVouchers.Any());
+        }
+
         #region BackgroundWorker Events
 
         // Note: This event fires on the background thread.
@@ -255,45 +259,43 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         {
             try
             {
-                List<VoucherImport> x = new List<VoucherImport>();
+                var x = new List<VoucherImport>();
                 foreach (var a in GoodVouchers)
                     x.Add(VoucherImportWrapperConverter.ToVoucherImport(a));
                 e.Result = BatchSvc.ImportVouchers(x);
-                var b = BatchSvc.GetBatchEditAsync((int)e.Result).Result;
-                b.Description = String.Format("{0} - {1}",  
+                var b = BatchSvc.GetBatchEditAsync((int) e.Result).Result;
+                b.Description = string.Format("{0} - {1}",
                     Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart(),
                     ExcelFileInfo.SelectedWorksheet.TrimEnd().TrimStart());
                 b.PayDate = null;
                 var batch = b.Save();
-
             }
             catch (Exception ex)
             {
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
-                    StatusMessage = "there was a problem creating the batch" ,
-                     ErrorMessage = ex.Message,
+                    StatusMessage = "there was a problem creating the batch",
+                    ErrorMessage = ex.Message,
                     IsBusy = false
                 };
-
             }
-
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SaveBatchInfoMessage = String.Format("Batch {0} created for {1} - {2}",
-                e.Result, 
-                (Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart()), 
+            SaveBatchInfoMessage = string.Format("Batch {0} created for {1} - {2}",
+                e.Result,
+                (Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart()),
                 ExcelFileInfo.SelectedWorksheet.TrimEnd().TrimStart());
             StartEnabled = !_batchCreator.IsBusy;
             Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));
-            Status = new StatusInfo()
+            Status = new StatusInfo
             {
                 StatusMessage = SaveBatchInfoMessage,
                 IsBusy = false
             };
         }
+
         #endregion
     }
 }

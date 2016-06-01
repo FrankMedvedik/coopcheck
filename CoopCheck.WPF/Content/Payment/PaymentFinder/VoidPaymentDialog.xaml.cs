@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using FirstFloor.ModernUI.Windows.Controls;
+﻿using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Payment.PaymentFinder
 {
@@ -10,7 +9,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             InitializeComponent();
 
             // define the dialog buttons
-            this.Buttons = new Button[] { this.OkButton, this.CancelButton };
+            Buttons = new[] {OkButton, CancelButton};
         }
     }
 }

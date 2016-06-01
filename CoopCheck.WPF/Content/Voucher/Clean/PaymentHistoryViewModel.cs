@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -13,10 +12,12 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public class PaymentHistoryViewModel : ViewModelBase
     {
+        private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
+
         public PaymentHistoryViewModel()
         {
             ResetState();
-       
+
             Messenger.Default.Register<NotificationMessage<PaymentReportCriteria>>(this, message =>
             {
                 if (message.Notification == Notifications.FindPayeePayments)
@@ -26,19 +27,26 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     GetPayments();
                 }
             });
-
         }
 
         public string LastName
         {
             get { return _lastName; }
-            set { _lastName = value; NotifyPropertyChanged(); }
+            set
+            {
+                _lastName = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public string FirstName
         {
             get { return _firstName; }
-            set { _firstName = value; NotifyPropertyChanged(); }
+            set
+            {
+                _firstName = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public int PaymentsCnt
@@ -51,7 +59,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             get { return Payments.Sum(x => x.tran_amount); }
         }
 
-        private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
         public ObservableCollection<vwPayment> Payments
         {
             get { return _payments; }
@@ -64,21 +71,37 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         }
 
 
+        public async void GetPayments()
+        {
+            try
+            {
+                var pay = await RptSvc.GetPayeePayments(LastName, FirstName);
+                Payments = new ObservableCollection<vwPayment>(pay);
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo
+                {
+                    StatusMessage = "Error loading payments",
+                    ErrorMessage = e.Message
+                };
+            }
+        }
+
         #region DisplayState
+
         private StatusInfo _status;
 
         public void ResetState()
         {
-
             _payments = new ObservableCollection<vwPayment>();
             ShowGridData = false;
-
         }
 
-  
-        private Boolean _showGridData;
 
-        public Boolean ShowGridData
+        private bool _showGridData;
+
+        public bool ShowGridData
         {
             get { return _showGridData; }
             set
@@ -87,6 +110,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 NotifyPropertyChanged();
             }
         }
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -97,6 +121,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
             }
         }
+
         #endregion
 
         #region collection and selected
@@ -116,26 +141,5 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         }
 
         #endregion
-
-
-        public async void GetPayments()
-        {
-            try
-            {
-           
-                    var pay = await RptSvc.GetPayeePayments( LastName, FirstName);
-                    Payments = new ObservableCollection<vwPayment>(pay);
-                
-            }
-            catch (Exception e)
-            {
-                Status = new StatusInfo()
-                {
-                    StatusMessage = "Error loading payments",
-                    ErrorMessage = e.Message
-                };
-
-            }
-        }
     }
 }

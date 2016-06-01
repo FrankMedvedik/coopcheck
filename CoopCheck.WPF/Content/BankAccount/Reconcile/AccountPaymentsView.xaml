@@ -21,9 +21,13 @@
                 Get Payments
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Visibility="{Binding ShowDetails, Converter={StaticResource BoolToVisConverter}}">
+        <StackPanel Orientation="Vertical" Grid.Row="1"
+                    Visibility="{Binding ShowDetails, Converter={StaticResource BoolToVisConverter}}">
             <TextBlock Style="{StaticResource Heading2}" Text="Match Details" HorizontalAlignment="Left" />
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="DgStats" ItemsSource="{Binding AccountPayments.Stats}" HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Extended" ClipboardCopyMode="IncludeHeader" HeadersVisibility="None">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"
+                      x:Name="DgStats" ItemsSource="{Binding AccountPayments.Stats}"
+                      HorizontalScrollBarVisibility="Auto" Height="Auto" VerticalScrollBarVisibility="Auto"
+                      SelectionMode="Extended" ClipboardCopyMode="IncludeHeader" HeadersVisibility="None">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Binding="{Binding Key}" />
                     <mui:DataGridTextColumn Binding="{Binding Value}">
@@ -45,7 +49,12 @@
                 <Button Width="150" Margin="6" VerticalAlignment="Center" Command="{Binding ClearMatchedChecksCommand}">Clear Matched</Button>
             </StackPanel>
             <!--<Expander Header="Unmatched Bank Transactions" Grid.Row="4" IsExpanded="False" FontWeight="Bold">-->
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding BankFile.UnmatchedBankClearTransactions}" x:Name="DgUnmatched" HorizontalScrollBarVisibility="Auto" Height="Auto" FontWeight="Normal" VerticalScrollBarVisibility="Auto" SelectionMode="Extended" SelectedItem="{Binding BankFile.SelectedUnmatchedBankClearTransaction, Mode=TwoWay}" ClipboardCopyMode="IncludeHeader" MaxHeight="300">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="False" Grid.Row="4" HorizontalAlignment="Left"
+                      VerticalAlignment="Top" ItemsSource="{Binding BankFile.UnmatchedBankClearTransactions}"
+                      x:Name="DgUnmatched" HorizontalScrollBarVisibility="Auto" Height="Auto" FontWeight="Normal"
+                      VerticalScrollBarVisibility="Auto" SelectionMode="Extended"
+                      SelectedItem="{Binding BankFile.SelectedUnmatchedBankClearTransaction, Mode=TwoWay}"
+                      ClipboardCopyMode="IncludeHeader" MaxHeight="300">
                 <DataGrid.Columns>
                     <StaticResource ResourceKey="dgBFAccountDesignator" />
                     <StaticResource ResourceKey="dgBFPostDate" />
@@ -64,4 +73,3 @@
     </Grid>
 
 </UserControl>
-

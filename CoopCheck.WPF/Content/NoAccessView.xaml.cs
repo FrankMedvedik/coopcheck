@@ -1,9 +1,7 @@
 ﻿using System.Windows.Controls;
-using CoopCheck.WPF.Content.Settings;
 
 namespace CoopCheck.WPF.Content
 {
-
     public partial class NoAccessView : UserControl
     {
         public NoAccessView()
@@ -12,7 +10,9 @@ namespace CoopCheck.WPF.Content
             DataContext = this;
         }
 
-        public string UserName { get { return UserAuth.Instance.UserName; } }
-        
+        public string UserName
+        {
+            get { return UserAuth.Instance.UserName; }
+        }
     }
 }

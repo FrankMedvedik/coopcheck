@@ -7,20 +7,41 @@ using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Pay
 {
     public class PayVouchersViewModel : ViewModelBase
     {
-    
-        private vwOpenBatch _selectedBatch = new vwOpenBatch();
+        private ObservableCollection<bank_account> _accounts;
+        private bool _canPrintChecks;
+        private bool _canSwiftPay;
+        private int _currentPrintCount;
+        private int _endingCheckNum;
 
-        public void RefreshBatchList()
+        private bool _isBusy;
+        private decimal _percentComplete;
+
+        private bank_account _selectedAccount = new bank_account();
+
+        private vwOpenBatch _selectedBatch = new vwOpenBatch();
+        private BatchEdit _selectedBatchEdit;
+        private int _startingCheckNum;
+
+
+        private StatusInfo _status;
+
+        public PayVouchersViewModel()
         {
-            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
+            {
+                //if (message.Content != null)
+                SelectedBatch = message.Content;
+            });
+            ResetState();
         }
+
         public vwOpenBatch SelectedBatch
         {
             get { return _selectedBatch; }
@@ -39,11 +60,10 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 _selectedBatchEdit = value;
                 NotifyPropertyChanged();
-     
             }
         }
 
-         public ObservableCollection<bank_account> Accounts
+        public ObservableCollection<bank_account> Accounts
         {
             get { return _accounts; }
             set
@@ -52,8 +72,6 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 NotifyPropertyChanged();
             }
         }
-
-        private bank_account _selectedAccount = new bank_account();
 
         public bank_account SelectedAccount
         {
@@ -64,55 +82,6 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 NotifyPropertyChanged();
                 SetAccountInfo();
             }
-
-        }
-
-        private void SetAccountInfo()
-        {
-            if (SelectedAccount.account_type == "CHECKING")
-            {
-                SetCheckNumbers();
-                CanPrintChecks = true;
-                CanSwiftPay = false;
-
-            }
-            else if (SelectedAccount.account_type == "PROMOCODE")
-            {
-                CanPrintChecks = false;
-                CanSwiftPay = true;
-            }
-        }
-        private async void SetCheckNumbers()
-        {
-            if (SelectedAccount.account_type == "CHECKING")
-                StartingCheckNum = await BatchSvc.NextCheckNum(SelectedAccount.account_id);
-        }
-
-        private async void SetSelectedBatchEdit()
-        {
-            if (SelectedBatch != null)
-            {
-                SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
-                //SelectedBatchEdit = BatchSvc.GetBatchEdit(SelectedBatch.batch_num);
-                SetAccountInfo();
-            }
-            else
-            {
-                CanPrintChecks = false;
-                CanSwiftPay = false;
-            }
-        }
-
-        public PayVouchersViewModel()
-        {
-
-            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
-            {
-                //if (message.Content != null)
-                    SelectedBatch = message.Content;
-            });
-            ResetState();
-            
         }
 
         public int StartingCheckNum
@@ -122,9 +91,10 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 _startingCheckNum = value;
                 NotifyPropertyChanged();
-                EndingCheckNum = StartingCheckNum + SelectedBatchEdit.Vouchers.Count-1;
+                EndingCheckNum = StartingCheckNum + SelectedBatchEdit.Vouchers.Count - 1;
             }
         }
+
         public int EndingCheckNum
         {
             get { return _endingCheckNum; }
@@ -135,6 +105,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 NotifyPropertyChanged("CurrentPrintCount");
             }
         }
+
         public int CurrentPrintCount
         {
             get { return _currentPrintCount; }
@@ -157,7 +128,6 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
         }
 
-        private bool _isBusy;
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -173,16 +143,76 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
         }
 
+        public bool CanPrintChecks
+        {
+            get { return _canPrintChecks; }
+            set
+            {
+                _canPrintChecks = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        private StatusInfo _status;
-        private int _startingCheckNum;
-        private int _endingCheckNum;
-        private ObservableCollection<bank_account> _accounts;
-        private BatchEdit _selectedBatchEdit;
-        private bool _canSwiftPay;
-        private bool _canPrintChecks;
-        private decimal _percentComplete;
-        private int _currentPrintCount;
+        public decimal PercentComplete
+        {
+            get { return _percentComplete; }
+            set
+            {
+                _percentComplete = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool CanSwiftPay
+        {
+            get { return _canSwiftPay; }
+            set
+            {
+                _canSwiftPay = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public void RefreshBatchList()
+        {
+            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+        }
+
+        private void SetAccountInfo()
+        {
+            if (SelectedAccount.account_type == "CHECKING")
+            {
+                SetCheckNumbers();
+                CanPrintChecks = true;
+                CanSwiftPay = false;
+            }
+            else if (SelectedAccount.account_type == "PROMOCODE")
+            {
+                CanPrintChecks = false;
+                CanSwiftPay = true;
+            }
+        }
+
+        private async void SetCheckNumbers()
+        {
+            if (SelectedAccount.account_type == "CHECKING")
+                StartingCheckNum = await BatchSvc.NextCheckNum(SelectedAccount.account_id);
+        }
+
+        private async void SetSelectedBatchEdit()
+        {
+            if (SelectedBatch != null)
+            {
+                SelectedBatchEdit = await BatchSvc.GetBatchEditAsync(SelectedBatch.batch_num);
+                //SelectedBatchEdit = BatchSvc.GetBatchEdit(SelectedBatch.batch_num);
+                SetAccountInfo();
+            }
+            else
+            {
+                CanPrintChecks = false;
+                CanSwiftPay = false;
+            }
+        }
 
 
         public async void ResetState()
@@ -192,30 +222,11 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             PercentComplete = 0;
         }
 
-        public Boolean CanPrintChecks
-        {
-            get { return _canPrintChecks; }
-            set { _canPrintChecks = value;
-                NotifyPropertyChanged(); }
-        }
-        public decimal PercentComplete
-        {
-            get { return _percentComplete; }
-            set { _percentComplete = value;
-                NotifyPropertyChanged(); }
-        }
-
-        public Boolean CanSwiftPay
-        {
-            get { return _canSwiftPay; }
-            set { _canSwiftPay = value; NotifyPropertyChanged(); }
-        }
-
         public async Task<PrintCheckProgress> PrintChecks(CancellationToken ctx)
         {
             PercentComplete = 0;
             CurrentPrintCount = 0;
-            Status = new StatusInfo()
+            Status = new StatusInfo
             {
                 ErrorMessage = "",
                 IsBusy = true,
@@ -233,7 +244,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 CurrentPrintCount = EndingCheckNum - StartingCheckNum;
             };
 
-            PrintCheckProgress result = await Task<PrintCheckProgress>.Factory.StartNew(() =>
+            var result = await Task<PrintCheckProgress>.Factory.StartNew(() =>
             {
                 try
                 {
@@ -245,7 +256,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 {
                     return new PrintCheckProgress
                     {
-                        Status = new StatusInfo()
+                        Status = new StatusInfo
                         {
                             ErrorMessage = e.Message,
                             IsBusy = true,
@@ -255,16 +266,15 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                         ProgressPercentage = 100
                     };
                 }
-
             });
-           result.Status.IsBusy = false;
-           return result;
+            result.Status.IsBusy = false;
+            return result;
         }
 
 
         public async void SwiftPay()
         {
-            Status = new StatusInfo()
+            Status = new StatusInfo
             {
                 ErrorMessage = "",
                 IsBusy = true,
@@ -280,7 +290,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 }
                 catch (Exception e)
                 {
-                    Status = new StatusInfo()
+                    Status = new StatusInfo
                     {
                         ErrorMessage = e.Message,
                         IsBusy = true,
@@ -291,5 +301,5 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             });
             IsBusy = false;
         }
-}
+    }
 }

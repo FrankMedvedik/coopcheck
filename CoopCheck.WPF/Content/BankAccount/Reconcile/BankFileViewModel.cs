@@ -14,13 +14,13 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
     public class BankFileViewModel : ViewModelBase, IDataErrorInfo
     {
+        private readonly string DefaultFilePath = "Select a bank file";
+
         private ObservableCollection<BankClearTransaction> _bankClearTransactions =
             new ObservableCollection<BankClearTransaction>();
 
         private ObservableCollection<BankClearTransaction> _unmatchedBankClearTransactions =
             new ObservableCollection<BankClearTransaction>();
-
-        private readonly string DefaultFilePath = "Select a bank file";
 
         public BankFileViewModel()
         {
@@ -53,10 +53,15 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 }
             }
         }
+
         public BankClearTransaction SelectedUnmatchedBankClearTransaction
         {
             get { return _selectedUnmatchedBankClearTransaction; }
-            set { _selectedUnmatchedBankClearTransaction = value; NotifyPropertyChanged(); }
+            set
+            {
+                _selectedUnmatchedBankClearTransaction = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public ObservableCollection<BankClearTransaction> UnmatchedBankClearTransactions

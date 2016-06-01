@@ -13,8 +13,20 @@ namespace CoopCheck.WPF.Content.Payment.Job
     /// </summary>
     public partial class JobSummaryPaymentReportView : UserControl
     {
-        private JobSummaryPaymentReportViewModel _vm = null;
-       
+        public static readonly DependencyProperty AllPaymentsProperty =
+            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<vwPayment>),
+                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        public static readonly DependencyProperty OpenPaymentsProperty =
+            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<vwPayment>),
+                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        public static readonly DependencyProperty ClosedPaymentsProperty =
+            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<vwPayment>),
+                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+
+        private readonly JobSummaryPaymentReportViewModel _vm;
+
         public JobSummaryPaymentReportView()
         {
             InitializeComponent();
@@ -27,9 +39,25 @@ namespace CoopCheck.WPF.Content.Payment.Job
             {
                 if (message.Notification == Notifications.SelectedJobChanged)
                 {
-                     RefreshChildren(message.Content);
+                    RefreshChildren(message.Content);
                 }
             });
+        }
+
+
+        public ObservableCollection<vwPayment> AllPayments
+        {
+            get { return _vm.AllPayments; }
+        }
+
+        public ObservableCollection<vwPayment> OpenPayments
+        {
+            get { return _vm.OpenPayments; }
+        }
+
+        public ObservableCollection<vwPayment> ClosedPayments
+        {
+            get { return _vm.ClosedPayments; }
         }
 
         private async Task RefreshChildren(vwJobRpt vwJobRpt)
@@ -53,38 +81,10 @@ namespace CoopCheck.WPF.Content.Payment.Job
             brv.PaymentReportCriteria = prcv.PaymentReportCriteria;
             _vm.PaymentReportCriteria = prcv.PaymentReportCriteria;
             _vm.ShowGridData = false;
-
         }
-
-
-        public ObservableCollection<vwPayment> AllPayments
-        {
-            get { return _vm.AllPayments; }
-        }
-
-        public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<vwPayment>), typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
-
-        public ObservableCollection<vwPayment> OpenPayments
-        {
-            get { return _vm.OpenPayments; }
-            
-        }
-
-        public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<vwPayment>), typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
-
-        public ObservableCollection<vwPayment> ClosedPayments
-        {
-            get { return _vm.ClosedPayments; }
-        }
-
-        public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<vwPayment>), typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
 
         private void brv_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

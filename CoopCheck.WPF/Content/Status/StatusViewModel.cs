@@ -5,7 +5,6 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Status
 {
-
     public class StatusViewModel : ViewModelBase
     {
         private StatusInfo _status;

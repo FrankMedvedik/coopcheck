@@ -26,11 +26,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             //ResetState();
         }
 
-        private bool CanMatchCheck()
-        {
-            return (BankFile.SelectedUnmatchedBankClearTransaction != null);
-        }
-       
         public BankFileViewModel BankFile
         {
             get { return _bankFile; }
@@ -40,7 +35,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 NotifyPropertyChanged();
             }
         }
-  
+
         public RelayCommand MatchCheckCommand { get; }
         public RelayCommand ClearMatchedChecksCommand { get; }
         public RelayCommand SaveReconciliationToExcelCommand { get; private set; }
@@ -88,6 +83,21 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
+        public bool ShowDetails
+        {
+            get { return _showDetails; }
+            set
+            {
+                _showDetails = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool CanMatchCheck()
+        {
+            return (BankFile.SelectedUnmatchedBankClearTransaction != null);
+        }
+
         public async void ClearMatchedChecks()
         {
             Status = new StatusInfo
@@ -96,7 +106,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 IsBusy = true
             };
 
-            await Task.Factory.StartNew( () =>
+            await Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -120,42 +130,41 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     };
                 }
             });
-
         }
+
         public async void MatchCheck()
         {
             await Task.Factory.StartNew(() =>
             {
-                    // see if the BankFile.SelectedUnmatchedBankClearTransaction exists in unmatched payments if it does then add the payment to matched payments
-                    // remove the transaction from the unmatched payments and transactions
-                    try
-                    {
-                        var match =
-                            (AccountPayments.OpenPayments.First(
-                                s => s.check_num == BankFile.SelectedUnmatchedBankClearTransaction.SerialNumber));
+                // see if the BankFile.SelectedUnmatchedBankClearTransaction exists in unmatched payments if it does then add the payment to matched payments
+                // remove the transaction from the unmatched payments and transactions
+                try
+                {
+                    var match =
+                        (AccountPayments.OpenPayments.First(
+                            s => s.check_num == BankFile.SelectedUnmatchedBankClearTransaction.SerialNumber));
 
-                        AccountPayments.MatchedPayments.Add(match);
-                        AccountPayments.OpenPayments.Remove(match);
-                        Status = new StatusInfo
-                        {
-                            StatusMessage =
-                                string.Format("{0} payment matched",
-                                    BankFile.SelectedUnmatchedBankClearTransaction.SerialNumber)
-                        };
-                        BankFile.UnmatchedBankClearTransactions.Remove(BankFile.SelectedUnmatchedBankClearTransaction);
-                        CalculateMatchStats();
-                    }
-                    catch (Exception e)
+                    AccountPayments.MatchedPayments.Add(match);
+                    AccountPayments.OpenPayments.Remove(match);
+                    Status = new StatusInfo
                     {
-                        Status = new StatusInfo
-                        {
-                            StatusMessage =
-                                string.Format("a matching payment was not found"),
-                            ErrorMessage = e.Message
-
-                        };
-                    }
-                });
+                        StatusMessage =
+                            string.Format("{0} payment matched",
+                                BankFile.SelectedUnmatchedBankClearTransaction.SerialNumber)
+                    };
+                    BankFile.UnmatchedBankClearTransactions.Remove(BankFile.SelectedUnmatchedBankClearTransaction);
+                    CalculateMatchStats();
+                }
+                catch (Exception e)
+                {
+                    Status = new StatusInfo
+                    {
+                        StatusMessage =
+                            "a matching payment was not found",
+                        ErrorMessage = e.Message
+                    };
+                }
+            });
         }
 
         public bool CanClearChecksFunc()
@@ -165,8 +174,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         public async void GetPayments()
         {
-         
-                Status = new StatusInfo
+            Status = new StatusInfo
             {
                 ErrorMessage = "",
                 IsBusy = true,
@@ -183,7 +191,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     AccountPayments.AllPayments.Count,
                     AccountPayments.AllPayments.Sum(x => x.tran_amount))
             };
-            await Task.Factory.StartNew( () =>
+            await Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -223,7 +231,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                             t => (s.SerialNumber == t.CheckNum)))).ToList());
 
                     CalculateMatchStats();
-                   
+
                     Messenger.Default.Send(new NotificationMessage<AccountPaymentsViewModel>(AccountPayments,
                         Notifications.ReconcileAccountPaymentsLoaded));
                     Messenger.Default.Send(new NotificationMessage<BankFileViewModel>(BankFile,
@@ -247,12 +255,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 StatusMessage = string.Format("Matching complete: Matched {0:n0} payments found totalling {1:c}",
                     AccountPayments.MatchedPayments.Count, AccountPayments.MatchedPayments.Sum(x => x.tran_amount))
             };
-        }
-
-        public bool ShowDetails
-        {
-            get { return _showDetails; }
-            set { _showDetails = value; NotifyPropertyChanged(); }
         }
 
         private void CalculateMatchStats()
@@ -281,8 +283,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                     string.Format("{0:n0}", BankFile.UnmatchedDebitTransactionCnt)));
             AccountPayments.Stats.Add(new KeyValuePair<string, string>("Bank File Unmatched Debits",
                 string.Format("{0:c}", BankFile.UnmatchedDebitTransactionTotalDollars)));
-
-
         }
 
         //    public async void SaveReconciliationRptToExcel()
@@ -351,7 +351,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         private bool _showDetails;
 
         #endregion
-
     }
 
     public class BankClearTransactionList : List<BankClearTransaction>

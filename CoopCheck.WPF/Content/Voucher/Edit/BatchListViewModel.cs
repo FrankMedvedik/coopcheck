@@ -4,8 +4,8 @@ using System.Linq;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
@@ -13,6 +13,20 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
     {
         private ObservableCollection<vwOpenBatch> _batchList;
         private string _headingText;
+        private bool _isBusy;
+
+        private vwOpenBatch _selectedBatch = new vwOpenBatch();
+
+        public BatchListViewModel()
+        {
+            ResetState();
+
+            Messenger.Default.Register<NotificationMessage>(this, message =>
+            {
+                if (message.Notification == Notifications.RefreshOpenBatchList)
+                    ResetState();
+            });
+        }
 
         public string HeadingText
         {
@@ -26,20 +40,24 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public int? SwiftPaymentsCnt
         {
-            get { return BatchList?.Where(x=>x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
+            get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
         }
+
         public decimal? SwiftPaymentsTotalDollars
         {
             get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.total_amount); }
         }
+
         public int? CheckPaymentsCnt
         {
             get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
         }
+
         public decimal? CheckPaymentsTotalDollars
         {
             get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.total_amount); }
         }
+
         public ObservableCollection<vwOpenBatch> BatchList
         {
             get { return _batchList; }
@@ -47,7 +65,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _batchList = value;
                 NotifyPropertyChanged();
-                HeadingText = String.Format("{0} batches",BatchList.Count);
+                HeadingText = string.Format("{0} batches", BatchList.Count);
                 NotifyPropertyChanged("PaymentsTotalDollars");
                 NotifyPropertyChanged("PaymentsCnt");
             }
@@ -61,24 +79,24 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _isBusy = value;
                 NotifyPropertyChanged();
             }
-
         }
-        public BatchListViewModel()
+
+        public vwOpenBatch SelectedBatch
         {
-            ResetState();
-
-            Messenger.Default.Register<NotificationMessage>(this, message =>
+            get { return _selectedBatch; }
+            set
             {
-                if(message.Notification == Notifications.RefreshOpenBatchList)
-                    ResetState();
-            });
-
+                _selectedBatch = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<vwOpenBatch>(SelectedBatch,
+                    Notifications.OpenBatchChanged));
+            }
         }
 
         public async void ResetState()
         {
             IsBusy = true;
-            vwOpenBatch v = null; 
+            vwOpenBatch v = null;
             if (SelectedBatch != null) v = SelectedBatch;
             BatchList = new ObservableCollection<vwOpenBatch>(await OpenBatchSvc.GetOpenBatches());
             //if((v != null) && (BatchList.Contains(v)))
@@ -91,24 +109,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 {
                     SelectedBatch = null;
                 }
-          else
+            else
                 SelectedBatch = null;
-         IsBusy = false;
+            IsBusy = false;
         }
-        
-        private vwOpenBatch _selectedBatch = new vwOpenBatch();
-        private bool _isBusy;
-
-        public vwOpenBatch SelectedBatch
-        {
-            get { return _selectedBatch; }
-            set
-            {
-                _selectedBatch = value;
-                NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<vwOpenBatch>(SelectedBatch, Notifications.OpenBatchChanged));
-            }
-        }
-
     }
 }

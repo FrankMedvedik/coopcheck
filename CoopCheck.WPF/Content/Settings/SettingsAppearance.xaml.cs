@@ -6,11 +6,11 @@ using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Content.Settings
 {
     /// <summary>
-    /// Interaction logic for SettingsAppearance.xaml
+    ///     Interaction logic for SettingsAppearance.xaml
     /// </summary>
     public partial class SettingsAppearance : UserControl
     {
-        private SettingsAppearanceViewModel _vm;
+        private readonly SettingsAppearanceViewModel _vm;
 
         public SettingsAppearance()
         {
@@ -25,7 +25,7 @@ namespace CoopCheck.WPF.Content.Settings
         {
             _vm.SaveSettings();
 
-            Messenger.Default.Send(new NavigationMessage()
+            Messenger.Default.Send(new NavigationMessage
             {
                 Page = "/Pages/Home.xaml"
             });

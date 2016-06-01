@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,8 +11,8 @@ namespace CoopCheck.WPF.Content.Payment.Job
     /// </summary>
     public partial class JobReportView : UserControl
     {
-        private JobReportViewModel _vm = null;
-        
+        private readonly JobReportViewModel _vm;
+
         public JobReportView()
         {
             InitializeComponent();
@@ -20,7 +20,8 @@ namespace CoopCheck.WPF.Content.Payment.Job
             DataContext = _vm;
         }
 
-        public PaymentReportCriteria PaymentReportCriteria {
+        public PaymentReportCriteria PaymentReportCriteria
+        {
             get { return _vm.PaymentReportCriteria; }
             set
             {
@@ -28,10 +29,10 @@ namespace CoopCheck.WPF.Content.Payment.Job
                 _vm.RefreshAll();
             }
         }
+
         private void Excel_Click(object sender, RoutedEventArgs e)
         {
             ExportToExcel();
-
         }
 
 
@@ -40,14 +41,14 @@ namespace CoopCheck.WPF.Content.Payment.Job
             dgJobs.SelectAllCells();
             dgJobs.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, dgJobs);
-            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            var result = (string) Clipboard.GetData(DataFormats.CommaSeparatedValue);
             //String result = (string)Clipboard.GetData(DataFormats..Text);
             dgJobs.UnselectAllCells();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            var saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = string.Format("Jobs{0}.csv", PaymentReportCriteria.ToSummaryFormattedString('.'));
             if (saveFileDialog.ShowDialog() == true)
             {
-                System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName);
+                var file = new StreamWriter(saveFileDialog.FileName);
                 //file.WriteLine(result.Replace(",", " " ));
                 file.WriteLine(result);
                 file.Close();

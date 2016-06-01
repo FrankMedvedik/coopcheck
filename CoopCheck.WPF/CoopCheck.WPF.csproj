@@ -267,9 +267,6 @@
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\StatsType.cs" />
-    <Compile Include="Content\Payment\Criteria\DemoView.xaml.cs">
-      <DependentUpon>DemoView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\Payment\Summary\JobView.xaml.cs">
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
@@ -648,10 +645,6 @@
     <Page Include="Content\Payment\Batch\BatchReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\Payment\Criteria\DemoView.xaml">
-      <SubType>Form</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Payment\Summary\BatchView.xaml">
       <Generator>MSBuild:Compile</Generator>

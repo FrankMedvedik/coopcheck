@@ -1,21 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using DataClean.Models;
 
 namespace CoopCheck.WPF.Content.DataClean
 {
-
     public partial class DataCleanFeedbackView : UserControl
     {
-        private DataCleanFeedbackViewModel _vm;
+        private readonly DataCleanFeedbackViewModel _vm;
+
         public DataCleanFeedbackView()
         {
             InitializeComponent();
-             _vm = new DataCleanFeedbackViewModel();
+            _vm = new DataCleanFeedbackViewModel();
             DataContext = _vm;
-
         }
 
         public ObservableCollection<DataCleanEvent> DataCleanEvents
@@ -23,7 +20,5 @@ namespace CoopCheck.WPF.Content.DataClean
             get { return _vm.ValidationResults; }
             set { _vm.ValidationResults = new ObservableCollection<DataCleanEvent>(value); }
         }
-
-
     }
 }

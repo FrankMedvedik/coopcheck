@@ -1,17 +1,14 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using CoopCheck.Repository;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     /// <summary>
-    /// Interaction logic for importing the spreadsheet
+    ///     Interaction logic for importing the spreadsheet
     /// </summary>
     public partial class BatchListView : UserControl
     {
-        private BatchListViewModel _vm;
+        private readonly BatchListViewModel _vm;
 
         public BatchListView()
         {
@@ -20,11 +17,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             DataContext = _vm;
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             _vm.ResetState();
         }
-
-    
     }
 }

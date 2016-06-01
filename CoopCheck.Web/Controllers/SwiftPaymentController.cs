@@ -31,7 +31,7 @@ namespace CoopCheck.Web.Controllers
 
         // POST api/SwiftPayment/SwiftPay?accountId&batchNum=1
         [System.Web.Http.Route("SwiftPay")]
-        public async Task<IHttpActionResult> SwiftPay(int batchNum)
+        public  IHttpActionResult SwiftPay(int batchNum)
         {
             string emailAddress;
             try

@@ -1,18 +1,16 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     /// <summary>
-    /// Interaction logic for BatchEditView.xaml
+    ///     Interaction logic for BatchEditView.xaml
     /// </summary>
     public partial class BatchEditView : UserControl
     {
-        private BatchEditViewModel _vm;
+        private readonly BatchEditViewModel _vm;
+
         public BatchEditView()
         {
             InitializeComponent();
@@ -24,15 +22,17 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             get { return _vm.SelectedBatch.Num; }
         }
-        public void ResetState()
-        {
-            _vm.ResetState(); 
-        }
+
         public bool IsDirty
         {
             get { return _vm.IsDirty; }
         }
-      
+
+        public void ResetState()
+        {
+            _vm.ResetState();
+        }
+
         private void SaveSelectedBatch_Click(object sender, RoutedEventArgs e)
         {
             _vm.SaveSelectedBatch();
@@ -52,29 +52,31 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         private void DeleteSelectedBatch_Click(object sender, RoutedEventArgs e)
         {
             if (_vm.SelectedBatch == null) return;
-            MessageBoxResult result = ModernDialog.ShowMessage("Delete this entire batch of vouchers?", "Confirm", MessageBoxButton.OKCancel);
+            var result = ModernDialog.ShowMessage("Delete this entire batch of vouchers?", "Confirm",
+                MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
             {
-                _vm.DeleteSelectedBatch(); ;
+                _vm.DeleteSelectedBatch();
+                ;
             }
         }
 
         private void DeleteVoucher_Click(object sender, RoutedEventArgs e)
         {
-                // set the status of the callback to closed
-                if (_vm.SelectedVoucher == null) return;
-                MessageBoxResult result = ModernDialog.ShowMessage("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.OK)
-                {
-                    _vm.DeleteSelectedVoucher();
-                }
+            // set the status of the callback to closed
+            if (_vm.SelectedVoucher == null) return;
+            var result = ModernDialog.ShowMessage("Delete this Voucher?", "Confirm", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                _vm.DeleteSelectedVoucher();
             }
+        }
 
         private void AddVoucher_Click(object sender, RoutedEventArgs e)
         {
             _vm.CreateNewVoucher();
-            var cw = new VoucherImportAddDialog() {DataContext = _vm};
+            var cw = new VoucherImportAddDialog {DataContext = _vm};
             var result = cw.ShowDialog();
 
             if (result == true)
@@ -90,10 +92,10 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             _vm.AutoSaveSelectedBatch();
         }
-        //private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    _vm.AutoSaveSelectedBatch();
-        //}
-    }
-    }
 
+        //}
+        //    _vm.AutoSaveSelectedBatch();
+        //{
+        //private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
+    }
+}

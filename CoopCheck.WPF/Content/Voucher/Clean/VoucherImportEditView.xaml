@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Clean.VoucherImportEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:clean="clr-namespace:CoopCheck.WPF.Content.Voucher.Clean"
              mc:Ignorable="d" Width="Auto" Height="Auto">
@@ -29,56 +29,75 @@
                     <Setter Property="Padding" Value="0,3" />
                 </Style>
             </StackPanel.Resources>
-                    <TextBlock Text="edit voucher" Style="{StaticResource Heading2}" Margin="6" />
-                    <StackPanel x:Name="Form" Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Last name" Target="{Binding ElementName=TextLastName}" />
-                            <TextBox x:Name="TextLastName" Width="250" Text="{Binding SelectedVoucher.Last, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="First name" Target="{Binding ElementName=TextFirstName}"/>
-                            <TextBox x:Name="TextFirstName" Width="250" Text="{Binding SelectedVoucher.First, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Email" Target="{Binding ElementName=TextEmail}"/>
-                            <TextBox x:Name="TextEmail" Width="250" Text="{Binding SelectedVoucher.EmailAddress, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Phone" Target="{Binding ElementName=TextPhone}"/>
-                            <TextBox x:Name="TextPhone" Width="250"  Text="{Binding SelectedVoucher.PhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
-                        </StackPanel>
-                     <StackPanel>
-                            <Label Content="Address 1" Target="{Binding ElementName=TextAddress1}"/>
-                            <TextBox x:Name="TextAddress1" Width="250" Text="{Binding SelectedVoucher.AddressLine1, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                            <clean:ReplacerView x:Name="rvAddressLine1" AlternateValue="{Binding SelectedVoucher.AltAddressLine1,Mode=TwoWay}" SourceValue="{Binding SelectedVoucher.AddressLine1, Mode=TwoWay}" />
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Address 2" Target="{Binding ElementName=TextAddress2}"/>
-                            <TextBox x:Name="TextAddress2" Width="250" Text="{Binding SelectedVoucher.AddressLine2, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                    <clean:ReplacerView x:Name="rvAddressLine2" AlternateValue="{Binding SelectedVoucher.AltAddressLine2,Mode=TwoWay}" SourceValue="{Binding SelectedVoucher.AddressLine2, Mode=TwoWay}" />
+            <TextBlock Text="edit voucher" Style="{StaticResource Heading2}" Margin="6" />
+            <StackPanel x:Name="Form" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Last name" Target="{Binding ElementName=TextLastName}" />
+                    <TextBox x:Name="TextLastName" Width="250"
+                             Text="{Binding SelectedVoucher.Last, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
                 </StackPanel>
-                        <StackPanel>
-                            <Label Content="City" Target="{Binding ElementName=TextCity}"/>
-                            <TextBox x:Name="TextCity" Width="250" Text="{Binding SelectedVoucher.Municipality, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                    <clean:ReplacerView  x:Name="rvMunicipality" AlternateValue="{Binding SelectedVoucher.AltMunicipality,Mode=TwoWay}" 
-                                         SourceValue="{Binding SelectedVoucher.Municipality, Mode=TwoWay}" />
+                <StackPanel>
+                    <Label Content="First name" Target="{Binding ElementName=TextFirstName}" />
+                    <TextBox x:Name="TextFirstName" Width="250"
+                             Text="{Binding SelectedVoucher.First, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
                 </StackPanel>
-                        <StackPanel>
-                            <Label Content="State" Target="{Binding ElementName=TextState}"/>
-                            <TextBox x:Name="TextRegion" Width="250" Text="{Binding SelectedVoucher.Region, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                    <clean:ReplacerView x:Name="rvRegion"  AlternateValue="{Binding SelectedVoucher.AltRegion,Mode=TwoWay}" SourceValue="{Binding SelectedVoucher.Region, Mode=TwoWay}" />
+                <StackPanel>
+                    <Label Content="Email" Target="{Binding ElementName=TextEmail}" />
+                    <TextBox x:Name="TextEmail" Width="250"
+                             Text="{Binding SelectedVoucher.EmailAddress, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
                 </StackPanel>
-                        <StackPanel>
-                            <Label Content="Zip code" Target="{Binding ElementName=TextZipCode}"/>
-                            <TextBox x:Name="TextZipCode" Width="250"  Text="{Binding SelectedVoucher.PostalCode, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                    <clean:ReplacerView  x:Name="rvPostalCode"  AlternateValue="{Binding SelectedVoucher.AltPostalCode, Mode=TwoWay}" SourceValue="{Binding SelectedVoucher.PostalCode, Mode=TwoWay}" />
+                <StackPanel>
+                    <Label Content="Phone" Target="{Binding ElementName=TextPhone}" />
+                    <TextBox x:Name="TextPhone" Width="250"
+                             Text="{Binding SelectedVoucher.PhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
                 </StackPanel>
-                        <StackPanel>
-                            <Label Content="Amount" Target="{Binding ElementName=TextAmount}"/>
-                            <TextBox x:Name="TextAmount" Width="250"  Text="{Binding SelectedVoucher.Amount, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}"/>
-                        </StackPanel>
-                    </StackPanel>
+                <StackPanel>
+                    <Label Content="Address 1" Target="{Binding ElementName=TextAddress1}" />
+                    <TextBox x:Name="TextAddress1" Width="250"
+                             Text="{Binding SelectedVoucher.AddressLine1, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                    <clean:ReplacerView x:Name="rvAddressLine1"
+                                        AlternateValue="{Binding SelectedVoucher.AltAddressLine1,Mode=TwoWay}"
+                                        SourceValue="{Binding SelectedVoucher.AddressLine1, Mode=TwoWay}" />
                 </StackPanel>
-        <clean:AltAddressView Grid.Column="1"  HorizontalAlignment="Left"/>
+                <StackPanel>
+                    <Label Content="Address 2" Target="{Binding ElementName=TextAddress2}" />
+                    <TextBox x:Name="TextAddress2" Width="250"
+                             Text="{Binding SelectedVoucher.AddressLine2, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                    <clean:ReplacerView x:Name="rvAddressLine2"
+                                        AlternateValue="{Binding SelectedVoucher.AltAddressLine2,Mode=TwoWay}"
+                                        SourceValue="{Binding SelectedVoucher.AddressLine2, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="City" Target="{Binding ElementName=TextCity}" />
+                    <TextBox x:Name="TextCity" Width="250"
+                             Text="{Binding SelectedVoucher.Municipality, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                    <clean:ReplacerView x:Name="rvMunicipality"
+                                        AlternateValue="{Binding SelectedVoucher.AltMunicipality,Mode=TwoWay}"
+                                        SourceValue="{Binding SelectedVoucher.Municipality, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="State" Target="{Binding ElementName=TextState}" />
+                    <TextBox x:Name="TextRegion" Width="250"
+                             Text="{Binding SelectedVoucher.Region, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                    <clean:ReplacerView x:Name="rvRegion"
+                                        AlternateValue="{Binding SelectedVoucher.AltRegion,Mode=TwoWay}"
+                                        SourceValue="{Binding SelectedVoucher.Region, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Zip code" Target="{Binding ElementName=TextZipCode}" />
+                    <TextBox x:Name="TextZipCode" Width="250"
+                             Text="{Binding SelectedVoucher.PostalCode, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                    <clean:ReplacerView x:Name="rvPostalCode"
+                                        AlternateValue="{Binding SelectedVoucher.AltPostalCode, Mode=TwoWay}"
+                                        SourceValue="{Binding SelectedVoucher.PostalCode, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Amount" Target="{Binding ElementName=TextAmount}" />
+                    <TextBox x:Name="TextAmount" Width="250"
+                             Text="{Binding SelectedVoucher.Amount, Mode=TwoWay, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <clean:AltAddressView Grid.Column="1" HorizontalAlignment="Left" />
     </Grid>
 </UserControl>

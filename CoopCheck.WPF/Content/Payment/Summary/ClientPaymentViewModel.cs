@@ -12,6 +12,23 @@ namespace CoopCheck.WPF.Content.Payment.Summary
 {
     public class ClientPaymentViewModel : ViewModelBase
     {
+        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
+        private ClientReportCriteria _clientReportCriteria;
+        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
+
+        private int _jobNum;
+        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
+
+        private vwBatchRpt _parentBatch;
+        private bool _showGridData;
+        private StatusInfo _status;
+        private List<vwPayment> _workPayments;
+
+        public ClientPaymentViewModel()
+        {
+            ShowGridData = false;
+        }
+
         public bool ShowGridData
         {
             get { return _showGridData; }
@@ -22,13 +39,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
-        public ClientPaymentViewModel()
-        {
-            ShowGridData = false;
-      
-        }
-
-        private int _jobNum;
         public int Job
         {
             get { return _jobNum; }
@@ -39,7 +49,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
-        private vwBatchRpt _parentBatch;
         public vwBatchRpt ParentBatch
         {
             get { return _parentBatch; }
@@ -54,18 +63,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
-        public  async void RefreshAll()
-        {
-            WorkPayments = await RptSvc.GetAllBatchPayments(ParentBatch.batch_num);
-
-        }
-        private bool _showGridData;
-        private StatusInfo _status;
-        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
-        private List<vwPayment> _workPayments;
-        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
-        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
-
         public List<vwPayment> WorkPayments
         {
             get { return _workPayments; }
@@ -74,18 +71,16 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 _workPayments = value;
                 AllPayments = new ObservableCollection<vwPayment>(WorkPayments);
                 ClosedPayments = new ObservableCollection<vwPayment>((
-                                    from l in _workPayments
-                                    where l.cleared_flag
-                                    orderby l.check_date
-                                    select l).ToList());
+                    from l in _workPayments
+                    where l.cleared_flag
+                    orderby l.check_date
+                    select l).ToList());
                 OpenPayments = new ObservableCollection<vwPayment>((
                     from l in _workPayments
                     where !l.cleared_flag
                     orderby l.check_date
                     select l).ToList());
                 ShowGridData = true;
-
-
             }
         }
 
@@ -113,7 +108,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 NotifyPropertyChanged();
                 ShowGridData = true;
             }
-            
         }
 
         public ObservableCollection<vwPayment> ClosedPayments
@@ -125,7 +119,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 NotifyPropertyChanged();
             }
         }
-        private ClientReportCriteria _clientReportCriteria;
+
         public ClientReportCriteria ClientReportCriteria
         {
             get { return _clientReportCriteria; }
@@ -144,6 +138,11 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 _openPayments = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public async void RefreshAll()
+        {
+            WorkPayments = await RptSvc.GetAllBatchPayments(ParentBatch.batch_num);
         }
     }
 }

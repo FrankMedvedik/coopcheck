@@ -1,13 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using CoopCheck.Repository;
-using CoopCheck.WPF.Content.Payment.Summary;
+﻿using System.Windows.Controls;
 using CoopCheck.WPF.Models;
-using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.Payment.Batch
 {
@@ -15,8 +7,8 @@ namespace CoopCheck.WPF.Content.Payment.Batch
     /// </summary>
     public partial class BatchReportView : UserControl
     {
-        private BatchReportViewModel _vm = null;
-   
+        private readonly BatchReportViewModel _vm;
+
 
         public BatchReportView()
         {
@@ -25,7 +17,8 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             DataContext = _vm;
         }
 
-        public PaymentReportCriteria PaymentReportCriteria {
+        public PaymentReportCriteria PaymentReportCriteria
+        {
             get { return _vm.PaymentReportCriteria; }
             set
             {
@@ -33,10 +26,5 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 _vm.RefreshAll();
             }
         }
-
-
-
-
-
     }
 }

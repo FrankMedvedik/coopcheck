@@ -10,20 +10,53 @@ using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
-
-    public class BatchEditViewModel : ViewModelBase , IDataErrorInfo
+    public class BatchEditViewModel : ViewModelBase, IDataErrorInfo
     {
+        private bool _canPayBatch;
 
-        private Boolean _showSelectedBatch;
+
+        private bool _isNewVoucher;
+        private string _jobName;
+        private BatchEdit _selectedBatch;
+        private VoucherEdit _selectedVoucher;
+
+        private bool _showSelectedBatch;
+
+
+        private bool _showSelectedVoucher;
+
+        private StatusInfo _status;
+
+
+        private ObservableCollection<VoucherEdit> _vouchersWithErrors = new ObservableCollection<VoucherEdit>();
+        private VoucherImport _workVoucherImport;
+
+        public BatchEditViewModel()
+        {
+            RefreshBatchListCommand = new RelayCommand(RefreshBatchList, CanRefreshBatchList);
+            ResetState();
+            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, async message =>
+            {
+                if (message.Content != null)
+                {
+                    //BatchNum = message.Content.batch_num;
+                    SelectedBatch = await GetBatch(message.Content.batch_num);
+                    SetJobName();
+                }
+                else
+                    ShowSelectedBatch = false;
+            });
+        }
+
         public RelayCommand RefreshBatchListCommand { get; private set; }
 
-        public Boolean ShowSelectedBatch
+        public bool ShowSelectedBatch
         {
             get { return _showSelectedBatch; }
             set
@@ -32,7 +65,8 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 NotifyPropertyChanged();
             }
         }
-        public Boolean CanPayBatch
+
+        public bool CanPayBatch
         {
             get { return _canPayBatch; }
             set
@@ -43,9 +77,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        private Boolean _isNewVoucher;
-
-        public Boolean IsNewVoucher
+        public bool IsNewVoucher
         {
             get { return _isNewVoucher; }
             set
@@ -55,10 +87,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-      
-        private Boolean _showSelectedVoucher;
-
-        public Boolean ShowSelectedVoucher
+        public bool ShowSelectedVoucher
         {
             get { return _showSelectedVoucher; }
             set
@@ -68,11 +97,12 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        
+
         public bool IsBusy
         {
             get { return Status.IsBusy; }
         }
+
         public bool IsDirty
         {
             get { return SelectedBatch != null && UserCanWrite && SelectedBatch.IsDirty; }
@@ -83,43 +113,31 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             get { return SelectedVoucher != null && UserCanWrite; }
         }
 
-        
-        private ObservableCollection<VoucherEdit> _vouchersWithErrors = new ObservableCollection<VoucherEdit>();
         public ObservableCollection<VoucherEdit> VouchersWithErrors
         {
-            get
-            {
-                return _vouchersWithErrors;  
-            }
+            get { return _vouchersWithErrors; }
             set
             {
                 _vouchersWithErrors = value;
                 NotifyPropertyChanged();
             }
-
         }
 
         public string JobName
         {
-            get
-            {
-                return _jobName;
-            }
+            get { return _jobName; }
             set
             {
                 _jobName = value;
                 NotifyPropertyChanged();
-                if(string.IsNullOrEmpty(SelectedBatch.StudyTopic))
+                if (string.IsNullOrEmpty(SelectedBatch.StudyTopic))
                     SelectedBatch.StudyTopic = _jobName;
             }
         }
 
         public int? JobNum
         {
-            get
-            {
-                return SelectedBatch?.JobNum;
-            }
+            get { return SelectedBatch?.JobNum; }
             set
             {
                 SelectedBatch.JobNum = value;
@@ -142,55 +160,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        public BatchEditViewModel()
-        {
-            RefreshBatchListCommand = new RelayCommand(RefreshBatchList, CanRefreshBatchList);
-            ResetState();
-            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, async message =>
-            {
-                if (message.Content != null)
-                {
-                    //BatchNum = message.Content.batch_num;
-                     SelectedBatch = await GetBatch(message.Content.batch_num);
-                    SetJobName();
-                }
-                else
-                    ShowSelectedBatch = false;
-            });
-        }
-
-        private bool CanRefreshBatchList()
-        {
-            return true;
-        }
-
-      
-
-        private void RefreshBatchList()
-        {
-            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
-        }
-
-        public void ResetState()
-        {
-            ShowSelectedBatch = false;
-            ShowSelectedVoucher = false;
-            Status = new StatusInfo();
-            //{
-            //    StatusMessage = "fill and verify the details about the voucher batch ",
-            //    ErrorMessage = ""
-            //};
-
-            UserCanRead = UserAuth.Instance.CanRead;
-            UserCanWrite = UserAuth.Instance.CanWrite;
-        }
-
-        private StatusInfo _status;
-        private BatchEdit _selectedBatch;
-        private VoucherEdit _selectedVoucher;
-        private bool _userCanWrite;
-        private bool _userCanRead;
-
         public BatchEdit SelectedBatch
         {
             get { return _selectedBatch; }
@@ -203,8 +172,8 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     ShowSelectedBatch = true;
                     //HeaderText = string.Format("Batch Number {0} Job Number {1}  Voucher Cnt {2} Total Amount {3:C}",
                     //    SelectedBatch?.Num, SelectedBatch?.JobNum, SelectedBatch?.Vouchers.Count, SelectedBatch?.Amount.GetValueOrDefault(0));
-                    
-                    Status = new StatusInfo()
+
+                    Status = new StatusInfo
                     {
                         StatusMessage = HeaderText
                     };
@@ -223,16 +192,17 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 NotifyPropertyChanged();
                 if (SelectedVoucher != null)
                 {
-                    Status = new StatusInfo()
+                    Status = new StatusInfo
                     {
                         StatusMessage =
-                            String.Format("{0} amount {1:C}", SelectedVoucher.EmailAddress, SelectedVoucher.Amount.GetValueOrDefault(0))
+                            string.Format("{0} amount {1:C}", SelectedVoucher.EmailAddress,
+                                SelectedVoucher.Amount.GetValueOrDefault(0))
                     };
                     ShowSelectedVoucher = true;
                 }
             }
-
         }
+
         public VoucherImport WorkVoucherImport
         {
             get { return _workVoucherImport; }
@@ -241,7 +211,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _workVoucherImport = value;
                 NotifyPropertyChanged();
             }
-
         }
 
 
@@ -269,31 +238,24 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             //}
         }
 
-        private async Task<BatchEdit> GetBatch(int batchNum)
+        public string HeaderText { get; set; }
+
+        public bool UserCanWrite { get; set; }
+
+        public bool UserCanRead { get; set; }
+
+        public bool HaveSelectedVoucher
         {
-            return await BatchSvc.GetBatchEditAsync(batchNum);
-          //  return BatchSvc.GetBatchEdit(batchNum);
+            get { return SelectedBatch != null; }
         }
 
-
-        private string _headerText;
-        private VoucherImport _workVoucherImport;
-        private string _jobName;
-        private bool _canPayBatch;
-
-        public string HeaderText
+        public Brush JobNameBrush
         {
-            get
-            {
-                return _headerText;
-            }
-            set
-            {
-                _headerText = value;
-            }
+            get { return CanPayBatch ? Brushes.Black : Brushes.Red; }
         }
 
-        public string this[string columnName] { 
+        public string this[string columnName]
+        {
             get
             {
                 if (columnName == "SelectedBatch")
@@ -302,14 +264,14 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 }
                 return null;
             }
-
         }
+
         public string Error
         {
             get { return Status.ErrorMessage; }
             set
             {
-                StatusInfo s = new StatusInfo()
+                var s = new StatusInfo
                 {
                     ErrorMessage = value,
                     StatusMessage = "Error"
@@ -318,11 +280,42 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
+        private bool CanRefreshBatchList()
+        {
+            return true;
+        }
+
+
+        private void RefreshBatchList()
+        {
+            Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+        }
+
+        public void ResetState()
+        {
+            ShowSelectedBatch = false;
+            ShowSelectedVoucher = false;
+            Status = new StatusInfo();
+            //{
+            //    StatusMessage = "fill and verify the details about the voucher batch ",
+            //    ErrorMessage = ""
+            //};
+
+            UserCanRead = UserAuth.Instance.CanRead;
+            UserCanWrite = UserAuth.Instance.CanWrite;
+        }
+
+        private async Task<BatchEdit> GetBatch(int batchNum)
+        {
+            return await BatchSvc.GetBatchEditAsync(batchNum);
+            //  return BatchSvc.GetBatchEdit(batchNum);
+        }
+
         public async void AutoSaveSelectedBatch()
         {
             if ((SelectedBatch.IsSavable) && UserCanWrite)
             {
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
                     StatusMessage = "saving...",
                     IsBusy = true
@@ -333,16 +326,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 }
                 catch (Exception ex)
                 {
-
-                    Status = new StatusInfo()
+                    Status = new StatusInfo
                     {
                         StatusMessage = "error saving",
-                         ErrorMessage = ex.Message,
+                        ErrorMessage = ex.Message,
                         IsBusy = false
                     };
                 }
-                
-
             }
         }
 
@@ -351,60 +341,34 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             //if ((SelectedBatch.IsSavable) && UserCanWrite)
             if (UserCanWrite)
             {
-                Status = new StatusInfo()
-                { StatusMessage = "saving...", IsBusy = true };
+                Status = new StatusInfo {StatusMessage = "saving...", IsBusy = true};
 
                 try
                 {
                     SelectedBatch = await SelectedBatch.SaveAsync();
-                    Status = new StatusInfo() { StatusMessage = "saved" };
+                    Status = new StatusInfo {StatusMessage = "saved"};
                     RefreshBatchList();
-
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
-                    Status = new StatusInfo() { StatusMessage = "error during save", ErrorMessage=ex.Message };
-                    
+                    Status = new StatusInfo {StatusMessage = "error during save", ErrorMessage = ex.Message};
                 }
             }
             else if (UserCanWrite)
             {
-                List<string> msgs = new List<string>();
+                var msgs = new List<string>();
                 var a = SelectedBatch.GetBrokenRules();
                 msgs.Add(a.ToString());
                 foreach (var v in SelectedBatch.Vouchers)
                 {
                     msgs.Add(v.BrokenRulesCollection.ToString());
-
                 }
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
                     StatusMessage = "Batch cannot be saved until all vouchers are valid",
                     ErrorMessage = msgs.ToString()
                 };
             }
-        }
-
-        public bool UserCanWrite
-        {
-            get { return _userCanWrite; }
-            set
-            {
-                _userCanWrite = value;
-            }
-        }
-
-        public bool UserCanRead
-        {
-            get { return _userCanRead; }
-            set
-            {
-                _userCanRead = value;
-            }
-        }
-        public bool HaveSelectedVoucher
-        {
-            get { return SelectedBatch != null; }
         }
 
         public async void DeleteSelectedVoucher()
@@ -421,7 +385,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             if ((SelectedBatch != null) && (WorkVoucherImport != null))
             {
                 SelectedBatch.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(WorkVoucherImport));
-                if(SelectedBatch.IsValid)
+                if (SelectedBatch.IsValid)
                     SelectedBatch = await SelectedBatch.SaveAsync();
             }
         }
@@ -449,28 +413,29 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     {
                         await BatchSvc.DeleteBatchEditAsync(v);
                         Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
-                        Status = new StatusInfo()
+                        Status = new StatusInfo
                         {
-                            StatusMessage = String.Format("{0} Batch has been deleted", v)
+                            StatusMessage = string.Format("{0} Batch has been deleted", v)
                         };
                         ResetState();
                     }
                     catch (Exception e)
                     {
-                        Status = new StatusInfo()
+                        Status = new StatusInfo
                         {
-                            StatusMessage = String.Format("{0} could not delete batch", v),
-                             ErrorMessage = e.Message
+                            StatusMessage = string.Format("{0} could not delete batch", v),
+                            ErrorMessage = e.Message
                         };
                     }
                 }
-            };
+            }
+            ;
         }
 
         public void CancelNewVoucher()
         {
-                WorkVoucherImport = null; ;
-            
+            WorkVoucherImport = null;
+            ;
         }
 
         public async void SetJobName()
@@ -479,7 +444,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 if (SelectedBatch?.JobNum.GetValueOrDefault(0).ToString().Length == 8)
                 {
-                    int b = SelectedBatch.JobNum.GetValueOrDefault(0);
+                    var b = SelectedBatch.JobNum.GetValueOrDefault(0);
                     JobName = await JobLogSvc.GetJobName(b);
                 }
                 else
@@ -487,25 +452,12 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                     JobName = JobLogSvc.BadJobName;
                 }
                 CanPayBatch = (JobName != JobLogSvc.BadJobName);
-
             }
-            catch (Exception )
+            catch (Exception)
             {
-
                 JobName = JobLogSvc.BadJobName;
                 CanPayBatch = false;
             }
-            
         }
-        public  Brush JobNameBrush
-        {
-            get
-            {
-                return CanPayBatch ? Brushes.Black : Brushes.Red;
-            }
-        }
-
-
     }
-
-    }
+}

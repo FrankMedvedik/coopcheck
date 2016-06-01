@@ -3,15 +3,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Models;
-using FirstFloor.ModernUI.Windows;
-using FirstFloor.ModernUI.Windows.Navigation;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
 {
-    public partial class ImportWorksheetView : UserControl 
+    public partial class ImportWorksheetView : UserControl
     {
-        private ImportWorksheetViewModel _vm;
+        private readonly ImportWorksheetViewModel _vm;
 
         public ImportWorksheetView()
         {
@@ -28,12 +26,13 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             var browsefile = openfile.ShowDialog();
             if (browsefile == true)
             {
-                try {
+                try
+                {
                     _vm.ExcelFilePath = openfile.FileName;
                 }
-                catch(Exception x)
+                catch (Exception x)
                 {
-                    MessageBox.Show(String.Format("File Open Error: {0} ", x.Message));
+                    MessageBox.Show(string.Format("File Open Error: {0} ", x.Message));
                 }
                 cbSheets.IsEnabled = true;
             }
@@ -51,10 +50,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     IsBusy = true
                 };
 
-                await Task.Factory.StartNew(() =>
-                {
-                    _vm.LoadWorkSheetData();
-                });
+                await Task.Factory.StartNew(() => { _vm.LoadWorkSheetData(); });
                 cbSheets.IsEnabled = true;
             }
             catch (Exception ex)
@@ -65,7 +61,5 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 _vm.Status = s;
             }
         }
- 
     }
-
 }

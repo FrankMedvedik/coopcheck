@@ -6,13 +6,31 @@ using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
-using Reckner.WPF.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Batch
 {
     public class BatchSummaryPaymentReportViewModel : ViewModelBase
     {
+        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
+        private bool _canUnprint;
+        private bool _canVoid;
+        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
+        private int _endingCheckNum;
+        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
+
+        private PaymentReportCriteria _paymentReportCriteria = new PaymentReportCriteria();
+        private bool _showGridData;
+        private int _startingCheckNum;
+        private StatusInfo _status;
+        private List<vwPayment> _workPayments;
+
+        public BatchSummaryPaymentReportViewModel()
+        {
+            ShowGridData = false;
+        }
+
         public bool ShowGridData
         {
             get { return _showGridData; }
@@ -23,13 +41,6 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
         }
 
-        public BatchSummaryPaymentReportViewModel()
-        {
-            ShowGridData = false;
-      
-        }
-
-        private PaymentReportCriteria _paymentReportCriteria = new PaymentReportCriteria();
         public PaymentReportCriteria PaymentReportCriteria
         {
             get { return _paymentReportCriteria; }
@@ -40,22 +51,6 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
         }
 
-        public  async void RefreshAll()
-        {
-             
-            WorkPayments = await RptSvc.GetBatchPayments(PaymentReportCriteria);
-
-        }
-        private bool _showGridData;
-        private StatusInfo _status;
-        private ObservableCollection<vwPayment> _allPayments = new ObservableCollection<vwPayment>();
-        private List<vwPayment> _workPayments;
-        private ObservableCollection<vwPayment> _closedPayments = new ObservableCollection<vwPayment>();
-        private ObservableCollection<vwPayment> _openPayments = new ObservableCollection<vwPayment>();
-        private int _endingCheckNum;
-        private int _startingCheckNum;
-        private bool _canUnprint;
-        private bool _canVoid;
         public bool CanVoid
         {
             get { return _canVoid; }
@@ -65,13 +60,17 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 NotifyPropertyChanged();
             }
         }
+
         public bool CanUnprint
         {
-            get { return _canUnprint;  }
-            set { _canUnprint = value;
+            get { return _canUnprint; }
+            set
+            {
+                _canUnprint = value;
                 NotifyPropertyChanged();
             }
         }
+
         public List<vwPayment> WorkPayments
         {
             get { return _workPayments; }
@@ -80,17 +79,15 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 _workPayments = value;
                 AllPayments = new ObservableCollection<vwPayment>(WorkPayments);
                 ClosedPayments = new ObservableCollection<vwPayment>((
-                                    from l in _workPayments
-                                    where l.cleared_flag
-                                    orderby l.check_date
-                                    select l).ToList());
+                    from l in _workPayments
+                    where l.cleared_flag
+                    orderby l.check_date
+                    select l).ToList());
                 OpenPayments = new ObservableCollection<vwPayment>((
                     from l in _workPayments
                     where !l.cleared_flag
                     orderby l.check_date
                     select l).ToList());
-
-
             }
         }
 
@@ -108,19 +105,6 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
         }
 
-        private void SetCanVoid()
-        {
-            CanVoid = false;
-            if (AllPayments.First().IsSwiftPayment)
-                CanVoid = true;
-
-        }
-
-        private void SetCanUnPrint()
-        {
-            DateTime pdate = AllPayments.Max(x => x.check_date).GetValueOrDefault();
-            CanUnprint = (ClosedPayments.Count == 0) && (pdate.AddDays(7) > DateTime.Now);
-        }
         public ObservableCollection<vwPayment> AllPayments
         {
             get { return _allPayments; }
@@ -130,7 +114,6 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 NotifyPropertyChanged();
                 ShowGridData = true;
             }
-            
         }
 
         public ObservableCollection<vwPayment> ClosedPayments
@@ -159,12 +142,39 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         public int EndingCheckNum
         {
             get { return _endingCheckNum; }
-            set { _endingCheckNum = value; NotifyPropertyChanged(); }
+            set
+            {
+                _endingCheckNum = value;
+                NotifyPropertyChanged();
+            }
         }
+
         public int StartingCheckNum
         {
             get { return _startingCheckNum; }
-            set { _startingCheckNum  = value; NotifyPropertyChanged(); }
+            set
+            {
+                _startingCheckNum = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public async void RefreshAll()
+        {
+            WorkPayments = await RptSvc.GetBatchPayments(PaymentReportCriteria);
+        }
+
+        private void SetCanVoid()
+        {
+            CanVoid = false;
+            if (AllPayments.First().IsSwiftPayment)
+                CanVoid = true;
+        }
+
+        private void SetCanUnPrint()
+        {
+            var pdate = AllPayments.Max(x => x.check_date).GetValueOrDefault();
+            CanUnprint = (ClosedPayments.Count == 0) && (pdate.AddDays(7) > DateTime.Now);
         }
     }
 }

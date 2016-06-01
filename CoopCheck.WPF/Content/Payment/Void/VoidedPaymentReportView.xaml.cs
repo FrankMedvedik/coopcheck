@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,8 +8,10 @@ namespace CoopCheck.WPF.Content.Payment.Void
 {
     public partial class VoidedPaymentReportView : UserControl
     {
+        private readonly VoidedPaymentReportViewModel _vm;
+
         /// <summary>
-        /// Initializes a new instance of the CheckReportCriteriaView class.
+        ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
         public VoidedPaymentReportView()
         {
@@ -19,8 +21,6 @@ namespace CoopCheck.WPF.Content.Payment.Void
             prcv.DetailedCriteria.Visibility = Visibility.Visible;
             prcv.CheckNumSP.Visibility = Visibility.Visible;
         }
-
-        private VoidedPaymentReportViewModel _vm;
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
@@ -32,10 +32,10 @@ namespace CoopCheck.WPF.Content.Payment.Void
             _vm.ResetState();
             prcv.ResetState();
         }
+
         private void Excel_Click(object sender, RoutedEventArgs e)
         {
             ExportToExcel();
-
         }
 
 
@@ -44,14 +44,15 @@ namespace CoopCheck.WPF.Content.Payment.Void
             dgPayments.SelectAllCells();
             dgPayments.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, dgPayments);
-            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            var result = (string) Clipboard.GetData(DataFormats.CommaSeparatedValue);
             //String result = (string)Clipboard.GetData(DataFormats.);
             dgPayments.UnselectAllCells();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = string.Format("VoidedPayments{0}.csv", prcv.PaymentReportCriteria.ToFormattedString('.'));
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = string.Format("VoidedPayments{0}.csv",
+                prcv.PaymentReportCriteria.ToFormattedString('.'));
             if (saveFileDialog.ShowDialog() == true)
             {
-                System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName);
+                var file = new StreamWriter(saveFileDialog.FileName);
                 //file.WriteLine(result.Replace(",", " " ));
                 file.WriteLine(result);
                 file.Close();

@@ -6,8 +6,14 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 {
     public partial class PaymentReportCriteriaView : UserControl
     {
+        public static readonly DependencyProperty ShowAllAccountsOptionProperty =
+            DependencyProperty.Register("ShowAllAccountsOption", typeof (bool), typeof (PaymentReportCriteriaView),
+                new PropertyMetadata(false));
+
+        private readonly PaymentReportCriteriaViewModel _vm;
+
         /// <summary>
-        /// Initializes a new instance of the CheckReportCriteriaView class.
+        ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
         public PaymentReportCriteriaView()
         {
@@ -15,15 +21,17 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             _vm = new PaymentReportCriteriaViewModel();
             DataContext = _vm;
         }
-        private PaymentReportCriteriaViewModel _vm;
+
         public PaymentReportCriteria PaymentReportCriteria
         {
             get { return _vm.PaymentReportCriteria; }
-            set
-            {
-                _vm.PaymentReportCriteria = value;
-            }
+            set { _vm.PaymentReportCriteria = value; }
+        }
 
+        public bool ShowAllAccountsOption
+        {
+            get { return _vm.ShowAllAccountsOption; }
+            set { _vm.ShowAllAccountsOption = value; }
         }
 
         public void ResetState()
@@ -31,19 +39,10 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             _vm.ResetState();
         }
 
-        private void CheckNumTextBox_GotFocus(object sender, System.Windows.RoutedEventArgs e)
+        private void CheckNumTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             _vm.EnableCheckNum = true;
             _vm.EnableMiscFields = false;
-
         }
-        public bool ShowAllAccountsOption
-        {
-            get { return _vm.ShowAllAccountsOption; }
-            set { _vm.ShowAllAccountsOption = value; }
-        }
-        public static readonly DependencyProperty ShowAllAccountsOptionProperty =
-        DependencyProperty.Register("ShowAllAccountsOption", typeof(bool), typeof(PaymentReportCriteriaView), new PropertyMetadata(false));
-
     }
 }
