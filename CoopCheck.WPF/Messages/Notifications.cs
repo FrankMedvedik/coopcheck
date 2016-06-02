@@ -30,6 +30,5 @@
         public static string JobFinderSelectedBatchChanged => "JobFinderSelectedBatchChanged";
         public static string HaveUncommittedVouchers => "HaveUncommittedVouchers";
         public static string RefreshPaymentSummaryJobs => "RefreshPaymentSummaryJobs";
-        public static string FindPayeePayments => "FindPayeePayments";
     }
 }

@@ -9,12 +9,12 @@ namespace CoopCheck.Repository
     {
         public bool BadBatch
         {
-            get { return batch_dscr.Substring(0, 8) != jobnum.ToString(); }
+            get { return (batch_dscr == null) || batch_dscr.Substring(0, 8) != jobnum.ToString(); }
         }
 
         public bool IsSwiftBatch
         {
-            get { return batch_dscr.Contains("Swift"); }
+            get { return (batch_dscr != null ) && batch_dscr.Contains("Swift"); }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
     /// </summary>
     public partial class BatchListView : UserControl
     {
-        private readonly BatchListViewModel _vm;
+        private BatchListViewModel _vm;
 
         public BatchListView()
         {
@@ -17,9 +17,5 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             DataContext = _vm;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            _vm.ResetState();
-        }
     }
 }

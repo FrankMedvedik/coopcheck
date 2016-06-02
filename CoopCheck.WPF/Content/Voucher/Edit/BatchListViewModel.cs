@@ -40,22 +40,22 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public int? SwiftPaymentsCnt
         {
-            get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
+            get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.voucher_cnt).GetValueOrDefault(0); }
         }
 
         public decimal? SwiftPaymentsTotalDollars
         {
-            get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.total_amount); }
+            get { return BatchList?.Where(x => x.IsSwiftBatch).Sum(x => x.total_amount).GetValueOrDefault(0); }
         }
 
         public int? CheckPaymentsCnt
         {
-            get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.voucher_cnt); }
+            get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.voucher_cnt).GetValueOrDefault(0); }
         }
 
         public decimal? CheckPaymentsTotalDollars
         {
-            get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.total_amount); }
+            get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.total_amount).GetValueOrDefault(0); }
         }
 
         public ObservableCollection<vwOpenBatch> BatchList
@@ -65,9 +65,15 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _batchList = value;
                 NotifyPropertyChanged();
-                HeadingText = string.Format("{0} batches", BatchList.Count);
-                NotifyPropertyChanged("PaymentsTotalDollars");
-                NotifyPropertyChanged("PaymentsCnt");
+                HeadingText = string.Format("{0} batches", BatchList.Count );
+                //HeadingText = string.Format(
+                //    "{0} batches {1} checks totalling {2} and {3} swift payments totalling {4}", BatchList.Count,
+                //    SwiftPaymentsCnt, SwiftPaymentsTotalDollars, CheckPaymentsCnt, CheckPaymentsTotalDollars);
+                NotifyPropertyChanged("SwiftPaymentsCnt");
+                NotifyPropertyChanged("SwiftPaymentsTotalDollars");
+                NotifyPropertyChanged("CheckPaymentsCnt");
+                NotifyPropertyChanged("CheckPaymentsTotalDollars");
+
             }
         }
 
