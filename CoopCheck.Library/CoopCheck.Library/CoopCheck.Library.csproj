@@ -55,8 +55,8 @@
     <CodeAnalysisRuleSet>CoopCheck.Library.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CSLA-Core.4.6.300\lib\net46\Csla.dll</HintPath>
+    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSLA-Core.4.6.400\lib\net46\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -132,10 +132,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\jradatacleaner\DataCleaner\DataClean.csproj">
-      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
-      <Name>DataClean</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
       <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
       <Name>CoopCheck.DalADO</Name>
@@ -144,9 +140,17 @@
       <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
       <Name>CoopCheck.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataClean.Repository\DataClean.Repository.csproj">
+      <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
+      <Name>DataClean.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\CSLA-Core.4.6.400\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

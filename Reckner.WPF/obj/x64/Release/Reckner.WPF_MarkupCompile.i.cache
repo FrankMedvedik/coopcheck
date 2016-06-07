@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\CleanCustomers01\Source\Repos\coopcheck\Reckner.WPF\obj\x64\Release\
+C:\Users\fmedv\Source\Repos\coopcheck\Reckner.WPF\obj\x64\Release\
 Reckner.WPF
 none
 false
@@ -12,9 +12,9 @@ TRACE
 
 4-1703196043
 
-18483576502
-16-1273298
+18-1152739525
+21-614594115
 Pages\SettingsPage.xaml;Content\Settings\About.xaml;Content\Settings\Appearance.xaml;Style\MyDictionary.xaml;
 
-False
+True
 

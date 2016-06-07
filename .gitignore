@@ -3,3 +3,25 @@
 ################################################################################
 
 /CoopCheck.DAL/obj/x64/Debug
+/CoopCheck.DAL/obj/x64/Release
+/CoopCheck.DalADO/obj/x64
+/CoopCheck.Library/CoopCheck.Library/obj/x64/Release
+/CoopCheck.Library/CoopCheck.Library/obj/x64/Debug
+/CoopCheck.Library.Tests/obj/x64
+/CoopCheck.Mocks/obj/x64/Debug
+/CoopCheck.Mocks/obj/x64/Release
+/CoopCheck.Repository/obj/x64
+/CoopCheck.Web/obj/x64
+/CoopCheck.WPF/bin/x64/Debug
+/CoopCheck.WPF/bin/x64/Release/CoopCheck.WPF.vshost.exe.manifest
+/CoopCheck.WPF/bin/x64/Release/CoopCheck.WPF.vshost.exe.config
+/CoopCheck.WPF/bin/x64/Release/CoopCheck.WPF.vshost.exe
+/CoopCheck.WPF/bin/x64/Release/CoopCheck.WPF.vshost.application
+/CoopCheck.WPF/obj/x64
+/DataClean.Repository/bin/Debug
+/DataClean.Repository/obj
+/DataClean.Test/bin/Debug
+/DataClean.Test/obj
+/DataCleaner/bin/Debug
+/DataCleaner/obj
+/Reckner.WPF/obj/x64/Debug

@@ -324,5 +324,17 @@ namespace CoopCheck.WPF.Services
             }
             return v;
         }
+
+        public static async Task<List<vwPayment>> GetPayeePayments(string lastName, string firstName)
+        {
+            List<vwPayment> v;
+            using (var ctx = new CoopCheckEntities())
+            {
+                var query = ctx.vwPayments.Where(x => x.last_name == lastName).Where(x=> x.first_name== firstName).OrderByDescending(x=>x.check_date) ;
+                v = await(from b in query select b).ToListAsync();
+            }
+            return v;
+        }
+
     }
 }

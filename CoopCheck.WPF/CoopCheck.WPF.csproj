@@ -12,12 +12,12 @@
     <AssemblyName>CoopCheck.WPF</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <ExpressionBlendVersion>12.0.60617.0</ExpressionBlendVersion>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\coopcheckpub\</PublishUrl>
+    <PublishUrl>\\app2012.reckner.com\coopcheckpub%24\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -25,14 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://app2012.reckner.com/CoopCheck/</InstallUrl>
     <UpdateUrl>\\app2012.reckner.com\coopcheckpub%24\</UpdateUrl>
     <ProductName>Co-opCheck</ProductName>
     <PublisherName>Reckner</PublisherName>
     <SuiteName>office support</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>127</ApplicationRevision>
+    <ApplicationRevision>129</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -128,8 +127,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=4.6.300.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-Core.4.6.300\lib\net46\Csla.dll</HintPath>
+    <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSLA-Core.4.6.400\lib\net46\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
@@ -274,6 +273,10 @@
     <Compile Include="Content\Payment\Summary\ChangeBatchJobDialog.xaml.cs">
       <DependentUpon>ChangeBatchJobDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Voucher\Clean\PaymentHistoryView.xaml.cs">
+      <DependentUpon>PaymentHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Clean\PaymentHistoryViewModel.cs" />
     <Compile Include="Content\Voucher\Pay\PrintCheckProgress.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
@@ -714,6 +717,10 @@
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Voucher\Clean\PaymentHistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Voucher\Edit\VoucherImportAddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -923,13 +930,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\jradatacleaner\DataCleaner\DataClean.csproj">
-      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
-      <Name>DataClean</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataCleaner\DataClean.csproj">
+      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
+      <Name>DataClean</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reckner.WPF\Reckner.WPF.csproj">
       <Project>{205893f2-f604-4451-b2e0-c4be475fa592}</Project>
@@ -991,7 +998,7 @@
     <Folder Include="Content\Utilities\" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\CSLA-Core.4.6.300\analyzers\c#\Csla.Analyzers.dll" />
+    <Analyzer Include="..\packages\CSLA-Core.4.6.400\analyzers\c#\Csla.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WPF.targets" Condition="'$(XamlSpyInstallPath)' != '' and ('$(Configuration)' == 'DEBUGPROD' or '$(Configuration)' == 'DEBUGLOCAL' or '$(Configuration)' == 'DEBUGTEST')" />
