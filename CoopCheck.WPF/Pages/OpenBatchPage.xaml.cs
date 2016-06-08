@@ -1,12 +1,16 @@
 ﻿using System.Windows.Controls;
 using CoopCheck.WPF.Content;
+using CoopCheck.WPF.Messages;
+using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for EditBatchPage.xaml
     /// </summary>
-    public partial class OpenBatchPage : UserControl
+    public partial class OpenBatchPage : UserControl, IContent
     {
         public OpenBatchPage()
         {
@@ -22,6 +26,27 @@ namespace CoopCheck.WPF.Pages
                 cv.Visibility = System.Windows.Visibility.Collapsed;
                 nov.Visibility = System.Windows.Visibility.Visible;
             }
+        }
+
+        public void OnFragmentNavigation(FragmentNavigationEventArgs e)
+        {
+
+        }
+
+        public void OnNavigatedFrom(NavigationEventArgs e)
+        {
+
+        }
+
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (UserAuth.Instance.CanRead)
+                Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+        }
+
+        public void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+
         }
     }
 }
