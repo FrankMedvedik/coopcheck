@@ -36,6 +36,8 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         {
             cts = new CancellationTokenSource();
 
+            int printedBatchNum = _vm.SelectedBatch.batch_num;
+
             try
             {
                 var f = AppDomain.CurrentDomain.BaseDirectory + @"\" + Properties.Settings.Default.CheckTemplate;
@@ -75,13 +77,13 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
                 var cw = new ConfirmLastCheckPrintedDialog {DataContext = _vm};
                 var result = cw.ShowDialog();
-                CommitCheckCommand.Execute(_vm.SelectedBatch.batch_num, _vm.EndingCheckNum);
+                CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
                 _vm.RefreshBatchList();
                 _vm.IsBusy = false;
                 _vm.Status = new StatusInfo
                 {
                     StatusMessage = string.Format("batch - {0} last check number printed - {1}",
-                        _vm.SelectedBatch.batch_num, _vm.EndingCheckNum)
+                       printedBatchNum, _vm.EndingCheckNum)
                 };
             }
             catch (Exception ex)
