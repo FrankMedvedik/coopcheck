@@ -10,7 +10,7 @@ using DataClean.Repository.Mgr;
 
 namespace CoopCheck.Library
 {
-    public partial class VoucherEdit
+    public partial class VoucherEdit : IVoucherEdit
     {
         
         public string FullName

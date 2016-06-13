@@ -9,7 +9,10 @@ namespace CoopCheck.Library
     [Serializable]
     public class VoidCheckCommand : CommandBase<ClearCheckCommand>
     {
-        private int _tranId;  
+
+
+        
+private int _tranId;  
 
         #region Authorization
         public static bool CanExecuteCommand()

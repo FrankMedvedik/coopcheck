@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Properties;
 using CoopCheck.WPF.Wrappers;
+using DataClean.Interfaces;
 using DataClean.Models;
 using DataClean.Services;
 using Newtonsoft.Json;
@@ -27,24 +28,24 @@ namespace CoopCheck.WPF.Services
                     v.AddressLine2, v.EmailAddress, v.PhoneNumber, v.Last, v.First);
             }
 
-            var inputAddresses = vouchers.Select(VoucherImportWrapperConverter.ToInputStreetAddress).ToList();
+            List<IInputStreetAddress> inputAddresses = new List<IInputStreetAddress>(vouchers.Select(VoucherImportWrapperConverter.ToInputStreetAddress).ToList());
             var dataCleanEvents = await ValidateAddresses(inputAddresses);
 
             var ilist = new List<VoucherImportWrapper>();
             foreach (var e in dataCleanEvents)
             {
                 var i = DataCleanEventConverter.ToVoucherImportWrapper(e,
-                    vouchers.First(x => x.RecordID == e.RecordID));
+                    vouchers.First(x => x.RecordID == e.Input.RecordID);
                 // we want to join the row to get the data we did not send to the cleaner
                 ilist.Add(i);
             }
             return new ObservableCollection<VoucherImportWrapper>(ilist);
         }
 
-        public static async Task<List<DataCleanEvent>> ValidateAddresses(List<InputStreetAddress> newVouchers)
+        public static async Task<List<IDataCleanEvent>> ValidateAddresses(List<IInputStreetAddress> newVouchers)
         {
             HttpResponseMessage response;
-            List<DataCleanEvent> retVal = new List<DataCleanEvent>();
+            List<IDataCleanEvent> retVal = new List<IDataCleanEvent>();
 
 #if DEBUG
             var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
@@ -70,12 +71,12 @@ namespace CoopCheck.WPF.Services
                     // HTTP POST
                     response =
                         await
-                            client.PostAsJsonAsync<List<InputStreetAddress>>("api/DataCleanEvent/CleanAddresses",
+                            client.PostAsJsonAsync<List<IInputStreetAddress>>("api/DataCleanEvent/CleanAddresses",
                                 newVouchers);
                     if (response.IsSuccessStatusCode)
                     {
                         string jsonContent = response.Content.ReadAsStringAsync().Result;
-                        var dceList = JsonConvert.DeserializeObject<List<DataCleanEvent>>(jsonContent);
+                        var dceList = JsonConvert.DeserializeObject<List<IDataCleanEvent>>(jsonContent);
                         //foreach (DataCleanEvent e in dceList)
                         //    Console.WriteLine("\tID: " + e.ID + ", " + e.DataCleanDate + ", " + e.Output.OkComplete);
                         retVal = dceList;

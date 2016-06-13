@@ -1,7 +1,7 @@
 
 namespace CoopCheck.Library
 {
-    public partial class BatchEdit
+    public partial class BatchEdit : IBatchEdit
     {
 
         #region OnDeserialized actions

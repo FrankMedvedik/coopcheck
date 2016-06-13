@@ -15,7 +15,7 @@ namespace CoopCheck.Library
 #if WINFORMS
     public class PaymentInfoList : ReadOnlyBindingListBase<PaymentInfoList, PaymentInfo>
 #else
-    public class PaymentInfoList : ReadOnlyListBase<PaymentInfoList, PaymentInfo>
+    public class PaymentInfoList : ReadOnlyListBase<PaymentInfoList, PaymentInfo>, IPaymentInfoList
 #endif
     {
 #region Methods

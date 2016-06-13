@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace CoopCheck.WPF.Interfaces
+namespace CoopCheck.Library.Interfaces
 {
     public interface ICheckInfo
     {

@@ -2,16 +2,18 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Library;
+using CoopCheck.WPF.Interfaces;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Wrappers;
 using DataClean;
+using DataClean.Interfaces;
 using DataClean.Models;
 
 namespace CoopCheck.WPF.Converters
 {
     class DataCleanEventConverter 
     {
-        public static VoucherImportWrapper ToVoucherImportWrapper(DataCleanEvent e)
+        public static IVoucherImportWrapper ToVoucherImportWrapper(IDataCleanEvent e)
         {
             var n = new VoucherImport();
             n.AddressLine1 = e.Input.AddressLine1;
@@ -30,11 +32,11 @@ namespace CoopCheck.WPF.Converters
 
             var v = new VoucherImportWrapper(n);
             v.DataCleanDate = e.DataCleanDate;
-            v.AltAddress = e.Output;
+            v.AltAddress = (OutputStreetAddress) e.Output;
             return v;
         }
 
-        public static VoucherEdit ToVoucherEdit(VoucherImport v)
+        public static IVoucherEdit ToVoucherEdit(VoucherImport v)
         {
             var n = VoucherEdit.NewVoucherEdit();
             n.AddressLine1 = v.AddressLine1;
@@ -57,13 +59,13 @@ namespace CoopCheck.WPF.Converters
             return n;
         }
 
-        public static VoucherImportWrapper ToVoucherImportWrapper(DataCleanEvent e, VoucherImportWrapper src)
+        public static IVoucherImportWrapper ToVoucherImportWrapper(IDataCleanEvent e, IVoucherImportWrapper src)
         {
             VoucherImportWrapper tgt = null;
 
             try
             {
-                tgt = ToVoucherImportWrapper(e);
+                tgt = (VoucherImportWrapper) ToVoucherImportWrapper(e);
                 tgt.JobNumber = src.JobNumber;
                 tgt.Amount = src.Amount;
                 return tgt;

@@ -8,8 +8,8 @@ namespace DataClean.Interfaces
         int ID { get; }
         DateTime DataCleanDate { get; set; }
         bool HasBeenDataCleaned { get; }
-       InputStreetAddress Input { get; set; }
-       OutputStreetAddress Output { get; set; }
+       IInputStreetAddress Input { get; set; }
+       IOutputStreetAddress Output { get; set; }
         int GetHashCode();
     }
     }

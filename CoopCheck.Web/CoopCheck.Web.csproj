@@ -312,9 +312,9 @@
       <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
       <Name>CoopCheck.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoopCheck.Mocks\CoopCheck.Mocks.csproj">
+    <ProjectReference Include="..\CoopCheck.Mocks\CoopCheck.Dal.Mocks.csproj">
       <Project>{ae2010b3-02ec-4c55-af3a-49c98d1000f7}</Project>
-      <Name>CoopCheck.Mocks</Name>
+      <Name>CoopCheck.Dal.Mocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>

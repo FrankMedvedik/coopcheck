@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataClean.Models
 {
-    public class DataCleanCriteria 
+    public class DataCleanCriteria : IDataCleanCriteria
     {
         public bool AutoFixPostalCode { get; set; }
         public bool AutoFixState{ get; set; }

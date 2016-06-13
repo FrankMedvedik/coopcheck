@@ -85,10 +85,10 @@ namespace DataClean.Interfaces
         string PresenceOfChildren { get; set; }
         string PrivateMailBox { get; set; }
         string RecordExtras { get; set; }
-        List<ParseResult> Results { get; set; }
-        List<ParseResult> Errors { get; }
-        List<ParseResult> Warnings { get; }
-        List<ParseResult> Informational { get; }
+        List<IParseResult> Results { get; set; }
+        List<IParseResult> Errors { get; }
+        List<IParseResult> Warnings { get; }
+        List<IParseResult> Informational { get; }
         string Salutation { get; set; }
         string State { get; set; }
         string StateName { get; set; }

@@ -5,8 +5,8 @@ namespace DataClean.Interfaces
 {
     public interface IDataCleanRepository
     {
-        DataCleanEvent GetEvent(int id);
-        void SaveEvent(DataCleanEvent e);
-        List<ParseResult> GetMelissaReference();
+        IDataCleanEvent GetEvent(int id);
+        void SaveEvent(IDataCleanEvent e);
+        List<IParseResult> GetMelissaReference();
     }
 }

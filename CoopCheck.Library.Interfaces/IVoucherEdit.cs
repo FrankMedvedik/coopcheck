@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoopCheck.WPF.Interfaces
+namespace CoopCheck.Library.Interfaces
 {
     public interface IVoucherEdit
     {
@@ -15,7 +15,7 @@ namespace CoopCheck.WPF.Interfaces
         /// Gets or sets the Amount.
         /// </summary>
         /// <value>The Amount.</value>
-        [Display(Name = "Voucher Amount"), Range(-500, 500)]
+        [Display(Name = "Voucher Amount"), Range(-500, 5000)]
         Decimal? Amount { get; set; }
 
         /// <summary>

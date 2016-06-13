@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CoopCheck.WPF.Interfaces;
 using CoopCheck.WPF.Models;
 using DataClean.Models;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Wrappers
 {
-    public class VoucherImportWrapper : ModelWrappper<VoucherImport> 
+    public class VoucherImportWrapper : ModelWrappper<VoucherImport>, IVoucherImportWrapper
     {
         public VoucherImportWrapper(VoucherImport model) : base(model)
         {

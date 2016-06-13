@@ -1,8 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using CoopCheck.Library;
 
-namespace CoopCheck.WPF.Interfaces
+namespace CoopCheck.Library.Interfaces
 {
     public interface IBatchEdit
     {
@@ -81,6 +80,6 @@ namespace CoopCheck.WPF.Interfaces
         /// Gets the Vouchers ("parent load" child property).
         /// </summary>
         /// <value>The Vouchers.</value>
-        VoucherList Vouchers { get; }
+        IVoucherList Vouchers { get; }
     }
 }

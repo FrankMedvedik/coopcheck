@@ -9,7 +9,7 @@ using CoopCheck.DAL;
 namespace CoopCheck.Library
 {
     [Serializable]
-    public class PaymentInfo : ReadOnlyBase<PaymentInfo>
+    public class PaymentInfo : ReadOnlyBase<PaymentInfo>, IPaymentInfo
     {
 #region "Properties
 

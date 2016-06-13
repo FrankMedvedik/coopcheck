@@ -31,7 +31,7 @@
     <SuiteName>office support</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>130</ApplicationRevision>
+    <ApplicationRevision>133</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -485,6 +485,7 @@
     <Compile Include="Models\WorksheetImport.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Interfaces\IVoucherImportWrapper.cs" />
     <Compile Include="Wrappers\VoucherImportWrapper.cs" />
     <Page Include="Assets\appbar.add.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -761,10 +762,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="DesignData\BatchEditDesign.cs" />
-    <Compile Include="Interfaces\IAccount.cs" />
-    <Compile Include="Interfaces\IBatchEdit.cs" />
-    <Compile Include="Interfaces\ICheckInfo.cs" />
-    <Compile Include="Interfaces\IVoucherEdit.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -932,6 +929,10 @@
     <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Interfaces\DataClean.Interfaces.csproj">
+      <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
+      <Name>DataClean.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataCleaner\DataClean.csproj">
       <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>

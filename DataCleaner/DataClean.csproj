@@ -83,19 +83,13 @@
     <Compile Include="Converters\ResponseToOutputStreetAddressConverter.cs" />
     <Compile Include="DataCleaner\AutoFixer.cs" />
     <Compile Include="DataCleaner\DataCleanEventFactory.cs" />
-    <Compile Include="Interfaces\IDataCleanEventFactory.cs" />
     <Compile Include="Models\DataCleanCriteria.cs" />
+    <Compile Include="Models\IDataCleanCriteria.cs" />
     <Compile Include="Repository.Mgr\DataCleanRespository.cs" />
-    <Compile Include="Interfaces\IDataCleanRepository.cs" />
-    <Compile Include="Interfaces\IDataCleanEvent.cs" />
     <Compile Include="Models\DataCleanEvent.cs" />
     <Compile Include="Extensions\PersonatorExtentions.cs" />
     <Compile Include="Services\HashHelperSvc.cs" />
-    <Compile Include="Interfaces\IDataCleaner.cs" />
-    <Compile Include="Interfaces\IInputStreetAddress.cs" />
     <Compile Include="Models\InputStreetAddress.cs" />
-    <Compile Include="Interfaces\IOutputStreetAddress.cs" />
-    <Compile Include="Interfaces\IParseResult.cs" />
     <Compile Include="ParseResultDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -157,6 +151,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataClean.Interfaces\DataClean.Interfaces.csproj">
+      <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
+      <Name>DataClean.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataClean.Repository\DataClean.Repository.csproj">
       <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
       <Name>DataClean.Repository</Name>
