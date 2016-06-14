@@ -4,6 +4,7 @@ using Csla.Rules;
 using Csla.Rules.CommonRules;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using CoopCheck.Library.Contracts.Interfaces;
 #if SILVERLIGHT
 using Csla.Serialization;
 #else
@@ -22,7 +23,7 @@ namespace CoopCheck.Library
     /// - <see cref="Vouchers"/> of type <see cref="VoucherList"/> (1:M relation to <see cref="VoucherEdit"/>)
     /// </remarks>
     [Serializable]
-    public partial class BatchEdit : BusinessBase<BatchEdit>
+    public partial class BatchEdit : BusinessBase<BatchEdit>, IBatchEdit
     {
 
         #region Static Fields
@@ -200,9 +201,9 @@ namespace CoopCheck.Library
         /// Gets the Vouchers ("parent load" child property).
         /// </summary>
         /// <value>The Vouchers.</value>
-        public VoucherList Vouchers
+        public IVoucherList Vouchers
         {
-            get { return GetProperty(VouchersProperty); }
+            get { return (IVoucherList) GetProperty(VouchersProperty); }
             private set { LoadProperty(VouchersProperty, value); }
         }
 
@@ -216,7 +217,7 @@ namespace CoopCheck.Library
         /// Factory method. Creates a new <see cref="BatchEdit"/> object.
         /// </summary>
         /// <returns>A reference to the created <see cref="BatchEdit"/> object.</returns>
-        public static BatchEdit NewBatchEdit()
+        public static IBatchEdit NewBatchEdit()
         {
             return DataPortal.Create<BatchEdit>();
         }
@@ -228,7 +229,7 @@ namespace CoopCheck.Library
         /// </summary>
         /// <param name="batch_num">The Batch_num parameter of the BatchEdit to fetch.</param>
         /// <returns>A reference to the fetched <see cref="BatchEdit"/> object.</returns>
-        public static BatchEdit GetBatchEdit(int batch_num)
+        public static IBatchEdit GetBatchEdit(int batch_num)
         {
             return DataPortal.Fetch<BatchEdit>(batch_num);
         }

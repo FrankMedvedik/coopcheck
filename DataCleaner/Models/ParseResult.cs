@@ -1,5 +1,5 @@
 ﻿using System;
-using DataClean.Interfaces;
+using DataClean.Contracts.Interfaces;
 
 namespace DataClean.Models
 {

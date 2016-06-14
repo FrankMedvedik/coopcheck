@@ -1,11 +1,11 @@
 ﻿
-using CoopCheck.Repository.Services;
+using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Repository
 {
     using System;
 
-    public partial class vwBatchRpt
+    public partial class vwBatchRpt : IvwBatchRpt
     {
         public bool BadBatch
         {

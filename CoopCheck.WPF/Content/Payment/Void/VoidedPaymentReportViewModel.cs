@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -13,14 +12,14 @@ namespace CoopCheck.WPF.Content.Payment.Void
     /// <summary>
     public class VoidedPaymentReportViewModel : ViewModelBase
     {
-        private ObservableCollection<vwVoidedPayment> _payments = new ObservableCollection<vwVoidedPayment>();
+        private ObservableCollection<VoidedPaymnt> _payments = new ObservableCollection<VoidedPaymnt>();
 
         public VoidedPaymentReportViewModel()
         {
             ResetState();
         }
 
-        public ObservableCollection<vwVoidedPayment> Payments
+        public ObservableCollection<VoidedPaymnt> Payments
         {
             get { return _payments; }
             set
@@ -45,10 +44,10 @@ namespace CoopCheck.WPF.Content.Payment.Void
             };
             try
             {
-                Payments = await Task<ObservableCollection<vwVoidedPayment>>.Factory.StartNew(() =>
+                Payments = await Task<ObservableCollection<VoidedPaymnt>>.Factory.StartNew(() =>
                 {
                     var task = RptSvc.GetVoidedPayments(p);
-                    return new ObservableCollection<vwVoidedPayment>(task.Result);
+                    return new ObservableCollection<VoidedPaymnt>(task.Result);
                 });
             }
             catch (Exception e)
@@ -67,7 +66,7 @@ namespace CoopCheck.WPF.Content.Payment.Void
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<vwVoidedPayment>();
+            _payments = new ObservableCollection<VoidedPaymnt>();
             ShowGridData = false;
         }
 
@@ -98,9 +97,9 @@ namespace CoopCheck.WPF.Content.Payment.Void
 
         #region collection and selected
 
-        private vwVoidedPayment _selectedPayment;
+        private VoidedPaymnt _selectedPayment;
 
-        public vwVoidedPayment SelectedPayment
+        public VoidedPaymnt SelectedPayment
         {
             get { return _selectedPayment; }
             set

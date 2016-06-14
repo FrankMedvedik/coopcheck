@@ -3,14 +3,15 @@ using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Threading.Tasks;
-using CoopCheck.Repository;
+using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.WPF.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Services
 {
     public static class RptSvc
     {
-        public static async Task<List<vwJobRpt>> GetJobRpt(PaymentReportCriteria grc)
+        public static async Task<List<IvwJobRpt>> GetJobRpt(IPaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -19,29 +20,20 @@ namespace CoopCheck.WPF.Services
             }
         }
 
-        public static async Task<List<vwBatchRpt>> GetBatchRpt(PaymentReportCriteria grc)
+        public static async Task<List<IvwBatchRpt>> GetBatchRpt(IPaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
                 return await Task.Factory.StartNew(() =>
                     ctx.GetBatchPaymentReport(grc.Account.account_id, grc.StartDate, grc.EndDate).ToList());
-
-                //var x = await (
-                //    from l in ctx.vwBatchRpts
-                //    where ((l.batch_date >= grc.StartDate)
-                //        && (l.batch_date <= grc.EndDate)
-                //        && l.account_id == grc.Account.account_id)
-                //    orderby l.batch_num
-                //    select l).ToListAsync();
-                //return x;
             }
         }
 
 
-        public static async Task<List<vwPayment>> GetPayments(PaymentReportCriteria crc)
+        public static async Task<List<IvwPayment>> GetHonorariaPayments(PaymentReportCriteria crc)
         {
-            IQueryable<vwPayment> query;
-            List<vwPayment> v;
+            IQueryable<IvwPayment> query;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 if (!string.IsNullOrEmpty(crc.CheckNumber))
@@ -101,7 +93,7 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwBatchRpt>> GetJobBatchRpt(int jobNumber)
+        public static async Task<List<IvwBatchRpt>> GetJobBatchRpt(int jobNumber)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -115,9 +107,9 @@ namespace CoopCheck.WPF.Services
         }
 
 
-        public static async Task<List<vwPayment>> GetAllBatchPayments(int batchNum)
+        public static async Task<List<IvwPayment>> GetAllBatchHonorariaPayments(int batchNum)
         {
-            List<vwPayment> v;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwPayments
@@ -127,9 +119,9 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwJobRpt>> GetJob(int jobNumber)
+        public static async Task<List<IvwJobRpt>> GetJob(int jobNumber)
         {
-            List<vwJobRpt> v;
+            List<IvwJobRpt> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwJobRpts
@@ -140,9 +132,9 @@ namespace CoopCheck.WPF.Services
         }
 
 
-        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientId)
+        public static async Task<List<IvwJobRpt>> GetAllClientJobs(string clientId)
         {
-            List<vwJobRpt> v;
+            List<IvwJobRpt> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwJobRpts
@@ -152,9 +144,9 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwJobRpt>> GetAllClientJobs(string clientId, string jobYear)
+        public static async Task<List<IvwJobRpt>> GetAllClientJobs(string clientId, string jobYear)
         {
-            List<vwJobRpt> v;
+            List<IvwJobRpt> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwJobRpts
@@ -165,9 +157,9 @@ namespace CoopCheck.WPF.Services
         }
 
 
-        public static async Task<List<vwPayment>> GetJobPayments(int jobNumber)
+        public static async Task<List<IvwPayment>> GetJobHonorariaPayments(int jobNumber)
         {
-            List<vwPayment> v;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwPayments
@@ -177,9 +169,9 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwPayment>> GetBatchPayments(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetBatchHonorariaPayments(PaymentReportCriteria grc)
         {
-            List<vwPayment> v;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwPayments
@@ -192,9 +184,9 @@ namespace CoopCheck.WPF.Services
         }
 
 
-        public static async Task<List<vwPayment>> GetJobPayments(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetJobHonorariaPayments(PaymentReportCriteria grc)
         {
-            List<vwPayment> v;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 v = await (from b in ctx.vwPayments
@@ -206,7 +198,7 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwPositivePay>> GetPositivePayRpt(PaymentReportCriteria grc)
+        public static async Task<List<IvwPositivePay>> GetPositivePayRpt(PaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -221,7 +213,7 @@ namespace CoopCheck.WPF.Services
             }
         }
 
-        public static async Task<List<vwPayment>> GetPaymentReconcileReport(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetPaymentReconcileReport(PaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -234,7 +226,7 @@ namespace CoopCheck.WPF.Services
             }
         }
 
-        public static async Task<List<vwPayment>> GetUnclearedCheckReport(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetUnclearedCheckReport(PaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -247,10 +239,10 @@ namespace CoopCheck.WPF.Services
             }
         }
 
-        public static async Task<List<vwPayment>> GetOpenPayments(PaymentReportCriteria prc)
+        public static async Task<List<IvwPayment>> GetOpenPayments(PaymentReportCriteria prc)
         {
-            IQueryable<vwPayment> query;
-            List<vwPayment> v;
+            IQueryable<IvwPayment> query;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 query =
@@ -264,14 +256,14 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwVoidedPayment>> GetVoidedPayments(PaymentReportCriteria crc)
+        public static async Task<List<IvwVoidedPayment>> GetVoidedHonorariaPayments(PaymentReportCriteria crc)
         {
-            IQueryable<vwVoidedPayment> query;
-            List<vwVoidedPayment> v;
+            IQueryable<VoidedPaymnt> query;
+            List<VoidedPaymnt> v;
             using (var ctx = new CoopCheckEntities())
             {
                 query =
-                    ctx.vwVoidedPayments.Where(x => x.account_id == crc.Account.account_id)
+                    ctx.vwVoidedHonorariaPayments.Where(x => x.account_id == crc.Account.account_id)
                         .OrderBy(x => x.check_num)
                         .ThenBy(x => x.check_date);
                 ;
@@ -325,9 +317,9 @@ namespace CoopCheck.WPF.Services
             return v;
         }
 
-        public static async Task<List<vwPayment>> GetPayeePayments(string lastName, string firstName)
+        public static async Task<List<IvwPayment>> GetPayeeHonorariaPayments(string lastName, string firstName)
         {
-            List<vwPayment> v;
+            List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 var query = ctx.vwPayments.Where(x => x.last_name == lastName).Where(x=> x.first_name== firstName).OrderByDescending(x=>x.check_date) ;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -13,11 +12,11 @@ namespace CoopCheck.WPF.Content.Payment.Summary
     public class JobViewModel : ViewModelBase
     {
         private string _headingText;
-        private ObservableCollection<vwJobRpt> _jobs = new ObservableCollection<vwJobRpt>();
+        private ObservableCollection<JobRpt> _jobs = new ObservableCollection<JobRpt>();
 
 
         private
-            vwJobRpt _selectedJob = new vwJobRpt();
+            JobRpt _selectedJob = new JobRpt();
 
         private bool _showGridData;
         private StatusInfo _status;
@@ -44,14 +43,14 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
-        public vwJobRpt SelectedJob
+        public JobRpt SelectedJob
         {
             get { return _selectedJob; }
             set
             {
                 _selectedJob = value;
                 NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<vwJobRpt>(SelectedJob,
+                Messenger.Default.Send(new NotificationMessage<JobRpt>(SelectedJob,
                     Notifications.JobFinderSelectedJobChanged));
                 Status = new StatusInfo
                 {
@@ -75,7 +74,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             get { return Jobs.Sum(x => x.total_amount); }
         }
 
-        public ObservableCollection<vwJobRpt> Jobs
+        public ObservableCollection<JobRpt> Jobs
         {
             get { return _jobs; }
             set
@@ -125,7 +124,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         public async void GetJobs()
         {
             ShowGridData = false;
-            Jobs = new ObservableCollection<vwJobRpt>();
+            Jobs = new ObservableCollection<JobRpt>();
             try
             {
                 Status = new StatusInfo
@@ -136,19 +135,19 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 };
                 if (ClientReportCriteria.SearchType == ClientReportCriteria.ONEJOB)
                     Jobs =
-                        new ObservableCollection<vwJobRpt>(
+                        new ObservableCollection<JobRpt>(
                             await RptSvc.GetJob(int.Parse(ClientReportCriteria.SelectedJobNum)));
                 else
                 {
                     if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBS)
                         Jobs =
-                            new ObservableCollection<vwJobRpt>(
+                            new ObservableCollection<JobRpt>(
                                 await RptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID));
                 }
                 if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBSFORYEAR)
                 {
                     Jobs =
-                        new ObservableCollection<vwJobRpt>(
+                        new ObservableCollection<JobRpt>(
                             await
                                 RptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID,
                                     ClientReportCriteria.SelectedJobYear));

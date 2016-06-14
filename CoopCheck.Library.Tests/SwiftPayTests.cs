@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using CoopCheck.Library.Contracts.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CoopCheck.Library;
 
 
 namespace CoopCheck.Library.Tests
@@ -40,7 +36,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             var retVal = string.Empty;
             try
@@ -83,7 +79,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             var retVal = string.Empty;
             try
@@ -135,7 +131,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             var retVal = string.Empty;
             try

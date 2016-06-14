@@ -90,6 +90,10 @@
       <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
       <Name>CoopCheck.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Library.Contracts\CoopCheck.Library.Contracts.csproj">
+      <Project>{581fd483-3b12-4d40-b04f-2dbbb0153d21}</Project>
+      <Name>CoopCheck.Library.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
       <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
       <Name>CoopCheck.Library</Name>

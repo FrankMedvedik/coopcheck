@@ -12,7 +12,7 @@ namespace CoopCheck.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class vwUnclearedBatch
+    public partial class vwUnclearedBatch : IvwUnclearedBatch
     {
         public int batch_num { get; set; }
         public Nullable<int> job_num { get; set; }

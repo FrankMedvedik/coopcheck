@@ -7,12 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using CoopCheck.Repository.Contracts.Interfaces;
+
+
 namespace CoopCheck.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class CoopCheckClient
+    public partial class CoopCheckClient : ICoopCheckClient
     {
         public string ClientID { get; set; }
         public string ClientName { get; set; }

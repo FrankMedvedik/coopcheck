@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria" mc:Ignorable="d">
+             xmlns:criteria1="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
+             mc:Ignorable="d">
     <ScrollViewer>
         <Grid x:Name="LayoutRoot">
             <Grid.RowDefinitions>
@@ -14,7 +15,7 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <criteria:PaymentReportCriteriaView x:Name="prcv" />
+                        <criteria1:PaymentReportCriteriaView x:Name="prcv" />
                         <StackPanel Orientation="Horizontal">
                             <Button Content="Refresh" Margin="6,3,6,3" Width="100" HorizontalAlignment="Left"
                                     VerticalAlignment="Center" IsDefault="True" Click="Button_Click" />
@@ -26,12 +27,12 @@
                         <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" HorizontalAlignment="Left" Margin="6" />
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="6,3,6,3" Text="{Binding PaymentsCnt, StringFormat='0,0.'}"
+                                <TextBlock Margin="6,3,6,3" Text="{Binding HonorariaPaymentsCnt, StringFormat='0,0.'}"
                                            FontWeight="Bold" />
                                 <TextBlock Margin="6,3,6,3" HorizontalAlignment="Right">Count</TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="6,3,6,3" Text="{Binding PaymentsTotalDollars,  StringFormat=c}"
+                                <TextBlock Margin="6,3,6,3" Text="{Binding HonorariaPaymentsTotalDollars,  StringFormat=c}"
                                            FontWeight="Bold" />
                                 <TextBlock Margin="6,3,6,3" HorizontalAlignment="Right">Dollars</TextBlock>
                             </StackPanel>

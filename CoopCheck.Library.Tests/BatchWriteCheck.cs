@@ -1,4 +1,5 @@
 ﻿using System;
+using CoopCheck.Library.Contracts.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoopCheck.Library.Tests
@@ -33,7 +34,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             var nextCheckNum = NextCheckNumCommand.Execute(3);
 
@@ -86,7 +87,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             var nextCheckNum = NextCheckNumCommand.Execute(3);
 

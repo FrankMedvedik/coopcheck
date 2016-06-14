@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataClean.Interfaces;
+using DataClean.Contracts.Interfaces;
 using DataClean.Models;
 using DataClean.Repository.Mgr;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,7 +14,7 @@ namespace DataClean.Test
      
         private OutputStreetAddress _goodOutputStreetAddress = new OutputStreetAddress()
         {
-            Results = ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList()
+            Results = new List<IParseResult>(ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList())
         };
 
         [TestMethod]

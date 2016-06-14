@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataClean.Interfaces;
-using DataClean.Models;
-using DataClean.Personator;
+﻿using DataClean.Contracts.Interfaces;
+
 
 namespace DataClean.Personator
 {
     public partial class RequestRecord 
     {
-        
-
         public RequestRecord(IInputStreetAddress a)
         {
             RecordID = a.RecordID + "|" + a.ID;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -13,9 +12,9 @@ namespace CoopCheck.WPF.Content.Payment.Job
     public class JobReportViewModel : ViewModelBase
     {
         private string _headingText;
-        private ObservableCollection<vwJobRpt> _jobs = new ObservableCollection<vwJobRpt>();
+        private ObservableCollection<JobRpt> _jobs = new ObservableCollection<JobRpt>();
 
-        private vwJobRpt _selectedJob = new vwJobRpt();
+        private JobRpt _selectedJob = new JobRpt();
         private bool _showGridData;
         private StatusInfo _status;
 
@@ -34,14 +33,14 @@ namespace CoopCheck.WPF.Content.Payment.Job
             }
         }
 
-        public vwJobRpt SelectedJob
+        public JobRpt SelectedJob
         {
             get { return _selectedJob; }
             set
             {
                 _selectedJob = value;
                 NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<vwJobRpt>(SelectedJob, Notifications.SelectedJobChanged));
+                Messenger.Default.Send(new NotificationMessage<JobRpt>(SelectedJob, Notifications.SelectedJobChanged));
                 Status = new StatusInfo
                 {
                     ErrorMessage = "",
@@ -64,7 +63,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
             get { return Jobs.Sum(x => x.total_amount); }
         }
 
-        public ObservableCollection<vwJobRpt> Jobs
+        public ObservableCollection<JobRpt> Jobs
         {
             get { return _jobs; }
             set
@@ -115,10 +114,10 @@ namespace CoopCheck.WPF.Content.Payment.Job
         public async void GetJobs()
         {
             ShowGridData = false;
-            Jobs = new ObservableCollection<vwJobRpt>();
+            Jobs = new ObservableCollection<JobRpt>();
             try
             {
-                Jobs = new ObservableCollection<vwJobRpt>();
+                Jobs = new ObservableCollection<JobRpt>();
 
                 Status = new StatusInfo
                 {
@@ -126,7 +125,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
                     IsBusy = true,
                     StatusMessage = "refreshing job list..."
                 };
-                Jobs = new ObservableCollection<vwJobRpt>(await RptSvc.GetJobRpt(PaymentReportCriteria));
+                Jobs = new ObservableCollection<JobRpt>(await RptSvc.GetJobRpt(PaymentReportCriteria));
             }
             catch (Exception e)
             {

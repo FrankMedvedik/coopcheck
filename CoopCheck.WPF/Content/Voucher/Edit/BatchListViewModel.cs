@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -11,11 +11,11 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public class BatchListViewModel : ViewModelBase
     {
-        private ObservableCollection<vwOpenBatch> _batchList;
+        private ObservableCollection<OpenBatch> _batchList;
         private string _headingText;
         private bool _isBusy;
 
-        private vwOpenBatch _selectedBatch = new vwOpenBatch();
+        private OpenBatch _selectedBatch = new OpenBatch();
 
         public BatchListViewModel()
         {
@@ -58,7 +58,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             get { return BatchList?.Where(x => !x.IsSwiftBatch).Sum(x => x.total_amount).GetValueOrDefault(0); }
         }
 
-        public ObservableCollection<vwOpenBatch> BatchList
+        public ObservableCollection<OpenBatch> BatchList
         {
             get { return _batchList; }
             set
@@ -87,14 +87,14 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             }
         }
 
-        public vwOpenBatch SelectedBatch
+        public OpenBatch SelectedBatch
         {
             get { return _selectedBatch; }
             set
             {
                 _selectedBatch = value;
                 NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<vwOpenBatch>(SelectedBatch,
+                Messenger.Default.Send(new NotificationMessage<OpenBatch>(SelectedBatch,
                     Notifications.OpenBatchChanged));
             }
         }
@@ -102,9 +102,9 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         public async void ResetState()
         {
             IsBusy = true;
-            vwOpenBatch v = null;
+            OpenBatch v = null;
             if (SelectedBatch != null) v = SelectedBatch;
-            BatchList = new ObservableCollection<vwOpenBatch>(await OpenBatchSvc.GetOpenBatches());
+            BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc.GetOpenBatches());
             //if((v != null) && (BatchList.Contains(v)))
             if (v != null)
                 try

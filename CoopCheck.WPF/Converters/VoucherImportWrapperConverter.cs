@@ -1,6 +1,7 @@
-﻿using CoopCheck.WPF.Models;
+﻿using CoopCheck.WPF.Contracts.Interfaces;
+using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Wrappers;
-using DataClean.Models;
+using DataClean.Contracts.Interfaces;
 
 namespace CoopCheck.WPF.Converters
 {
@@ -54,7 +55,7 @@ namespace CoopCheck.WPF.Converters
             n.RecordID = v.RecordID;
             return n;
         }
-        public static InputStreetAddress ToInputStreetAddress(VoucherImportWrapper v)
+        public static IInputStreetAddress ToInputStreetAddress(IVoucherImportWrapper v)
         {
             var n = new InputStreetAddress();
             n.AddressLine1 = v.AddressLine1;

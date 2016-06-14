@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -41,7 +40,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
         {
             RefreshBatchListCommand = new RelayCommand(RefreshBatchList, CanRefreshBatchList);
             ResetState();
-            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, async message =>
+            Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, async message =>
             {
                 if (message.Content != null)
                 {

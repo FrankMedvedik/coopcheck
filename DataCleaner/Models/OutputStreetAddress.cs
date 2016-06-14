@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataClean.Interfaces;
+using DataClean.Contracts.Interfaces;
 
 namespace DataClean.Models
 {
@@ -86,7 +86,7 @@ namespace DataClean.Models
         public string PresenceOfChildren { get; set; }
         public string PrivateMailBox { get; set; }
         public string RecordExtras { get; set; }
-        public List<ParseResult> Results { get; set; }
+        public List<IParseResult> Results { get; set; }
 
         public string aaaResultsAsString
         {
@@ -164,22 +164,22 @@ namespace DataClean.Models
             get { return Results.ToString(); }
         }
 
-        public List<ParseResult> AutoFixes
+        public List<IParseResult> AutoFixes
         {
             get { return Results.Where(x => x.Type == ParseResult.AUTOFIX).ToList(); }
         }
 
-        public List<ParseResult> Errors
+        public List<IParseResult> Errors
         {
             get { return Results.Where(x => x.Type == ParseResult.ERROR).ToList(); }
         }
 
-        public List<ParseResult> Warnings
+        public List<IParseResult> Warnings
         {
             get { return Results.Where(x => x.Type == ParseResult.WARN).ToList(); }
         }
 
-        public List<ParseResult> Informational
+        public List<IParseResult> Informational
         {
             get { return Results.Where(x => x.Type == ParseResult.INFO).ToList(); }
         }

@@ -1,8 +1,9 @@
-﻿  using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
+using DataClean.Contracts.Interfaces;
 using DataClean.DataCleaner;
 using DataClean.Models;
 using DataClean.Repository.Mgr;
@@ -16,7 +17,7 @@ namespace CoopCheck.Web.Controllers
         private static readonly ILog log
             = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         
-        private readonly DataCleanEventFactory _dcef;
+        private readonly IDataCleanEventFactory _dcef;
 
         public DataCleanEventController()
         {
@@ -31,13 +32,13 @@ namespace CoopCheck.Web.Controllers
             };
             _dcef = new DataCleanEventFactory(new DataCleaner(c), new DataCleanRespository(), criteria);
         }
-        public DataCleanEvent Get(int id)
+        public IDataCleanEvent Get(int id)
         {
             return _dcef.GetExistingEvent(id);
         }
 
 
-        public IEnumerable<DataCleanEvent> CleanAddresses([FromBody]IEnumerable<InputStreetAddress> aList)
+        public IEnumerable<IDataCleanEvent> CleanAddresses([FromBody]IEnumerable<IInputStreetAddress> aList)
         {
             return  _dcef.ValidateAddresses(aList.ToList());
         }

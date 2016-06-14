@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using CoopCheck.Repository.Contracts.Interfaces;
+
 namespace CoopCheck.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class vwOpenBatch
+    public partial class vwOpenBatch : IvwOpenBatch
     {
         public int batch_num { get; set; }
         public Nullable<int> jobnum { get; set; }

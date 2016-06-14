@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using CoopCheck.Library;
-using CoopCheck.WPF.Interfaces;
+using CoopCheck.Library.Contracts.Interfaces;
+using CoopCheck.WPF.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Wrappers;
-using DataClean;
-using DataClean.Interfaces;
-using DataClean.Models;
+using DataClean.Contracts.Interfaces;
 
 namespace CoopCheck.WPF.Converters
 {
@@ -30,15 +27,15 @@ namespace CoopCheck.WPF.Converters
             n.RecordID = e.Input.RecordID;
             n.ID = e.Input.ID;
 
-            var v = new VoucherImportWrapper(n);
+            var v = new VoucherImportWrapper((IVoucherImport) n);
             v.DataCleanDate = e.DataCleanDate;
-            v.AltAddress = (OutputStreetAddress) e.Output;
+            v.AltAddress =  e.Output;
             return v;
         }
 
-        public static IVoucherEdit ToVoucherEdit(VoucherImport v)
+        public static IVoucherEdit ToVoucherEdit(IVoucherImport v)
         {
-            var n = VoucherEdit.NewVoucherEdit();
+            VoucherEdit n = VoucherEdit.NewVoucherEdit();
             n.AddressLine1 = v.AddressLine1;
             n.AddressLine2 = v.AddressLine2;
             n.Amount = v.Amount;
@@ -56,7 +53,7 @@ namespace CoopCheck.WPF.Converters
             n.Region = v.Region;
             n.Suffix = v.Suffix;
             n.Title = v.Title;
-            return n;
+            return (IVoucherEdit) n;
         }
 
         public static IVoucherImportWrapper ToVoucherImportWrapper(IDataCleanEvent e, IVoucherImportWrapper src)

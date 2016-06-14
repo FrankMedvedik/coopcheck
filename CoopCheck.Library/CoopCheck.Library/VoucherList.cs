@@ -1,11 +1,11 @@
 using System.Linq;
+using CoopCheck.Library.Contracts.Interfaces;
 using Csla;
 using Csla.Rules;
-using Csla.Rules.CommonRules;
 
 namespace CoopCheck.Library
 {
-    public partial class VoucherList : IVoucherList
+    public partial class VoucherList : IBusinessListBase<IVoucherEdit> , IVoucherList
     {
 
         #region OnDeserialized actions
@@ -68,7 +68,7 @@ namespace CoopCheck.Library
             
             Add(voc);
         }
-        public VoucherEdit Find(int Id)
+        public IVoucherEdit Find(int Id)
         {
             var retVal = VoucherEdit.NewVoucherEdit();
             foreach (VoucherEdit voc in this)
@@ -143,5 +143,8 @@ namespace CoopCheck.Library
         }
 
         #endregion
+
+
+
     }
 }

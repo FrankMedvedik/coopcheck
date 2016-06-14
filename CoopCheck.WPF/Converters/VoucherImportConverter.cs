@@ -1,14 +1,14 @@
 ﻿using System;
 using CoopCheck.Library;
+using CoopCheck.WPF.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
-using DataClean;
-using DataClean.Models;
+using DataClean.Contracts.Interfaces;
 
 namespace CoopCheck.WPF.Converters
 {
     class VoucherImportConverter 
     {
-        public static InputStreetAddress ToInputStreetAddress(VoucherImport v)
+        public static IInputStreetAddress ToInputStreetAddress(IVoucherImport v)
         {
             var n = new InputStreetAddress();
             n.AddressLine1 = v.AddressLine1;
@@ -50,5 +50,4 @@ namespace CoopCheck.WPF.Converters
             return n;
         }
     }
-    
 }

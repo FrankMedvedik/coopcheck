@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using DataClean.Interfaces;
+using DataClean.Contracts.Interfaces;
 using DataClean.Models;
+using DataClean.Repository.Contracts.Interfaces;
 using log4net;
 using Newtonsoft.Json;
 
@@ -18,7 +18,7 @@ namespace DataClean.Repository.Mgr
         {
             _ctx = new DataCleanEntities();
         }
-        public DataCleanEvent GetEvent(int id)
+        public IDataCleanEvent GetEvent(int id)
         {
 
             // get archive from database if exists if not return null
@@ -32,7 +32,7 @@ namespace DataClean.Repository.Mgr
         // save the results of the dataclean operation to the database 
         // convert the event and its related addresses and parse  results to json and store em 
         // if a datacleanevent exists the contents are updated 
-        public void SaveEvent(DataCleanEvent e)
+        public void SaveEvent(IDataCleanEvent e)
         {
             try
             {
@@ -71,10 +71,10 @@ namespace DataClean.Repository.Mgr
             
         }
 
-        public List<ParseResult> GetMelissaReference()
+        public List<IParseResult> GetMelissaReference()
         {
 
-            var r = new List<ParseResult>();
+            var r = new List<IParseResult>();
                 foreach (var p in _ctx.MelissaResultReferences)
                 {
                     r.Add(new ParseResult()
@@ -89,9 +89,9 @@ namespace DataClean.Repository.Mgr
             return r;
         }
 
-       public void SaveStats(DataCleanStat d)
+       public void SaveStats(IDataCleanStat d)
        {
-           _ctx.DataCleanStats.Add(d);
+           _ctx.DataCleanStats.Add((DataCleanStat) d);
            _ctx.SaveChanges();
        }
 

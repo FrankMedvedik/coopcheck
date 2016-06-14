@@ -1,4 +1,5 @@
 ﻿using System;
+using CoopCheck.Library.Contracts.Interfaces;
 using Csla;
 #if SILVERLIGHT
 using Csla.Serialization;

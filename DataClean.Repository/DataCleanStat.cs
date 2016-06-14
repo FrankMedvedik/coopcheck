@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using DataClean.Repository.Contracts.Interfaces;
+
 namespace DataClean.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DataCleanStat
+    public partial class DataCleanStat : IDataCleanStat
     {
         public int ID { get; set; }
         public Nullable<System.DateTime> CleanDate { get; set; }

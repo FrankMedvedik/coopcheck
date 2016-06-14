@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Content.Voucher.Pay;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Properties;
 using Microsoft.Office.Interop.Word;
-using Task = System.Threading.Tasks.Task;
 
 namespace CoopCheck.WPF.Services
 {
-    public static class PaymentSvc
+    public static class HonorariaPaymentSvc
     {
-        public static int MAX_PAYMENT_COUNT = 10000;
+        public static int MAX_HonorariaPayment_COUNT = 10000;
 
         public static async Task<StatusInfo> SwiftFulfillAsync(int batchNum)
         {
@@ -41,7 +37,7 @@ namespace CoopCheck.WPF.Services
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     // HTTP POST
-                    var response = await client.PostAsync(String.Format("api/swiftpayment/swiftpay?batchNum={0}", batchNum), null);
+                    var response = await client.PostAsync(String.Format("api/swiftHonorariaPayment/swiftpay?batchNum={0}", batchNum), null);
                     if (response.IsSuccessStatusCode)
                         i.StatusMessage = "Swiftpay processing started. An email will be sent to you when it completes";
                     i.IsBusy = false;
@@ -76,7 +72,7 @@ namespace CoopCheck.WPF.Services
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     // HTTP POST
-                    var response = await client.PostAsync(String.Format("api/swiftpayment/swiftvoid?batchNum={0}", batchNum), null);
+                    var response = await client.PostAsync(String.Format("api/swiftHonorariaPayment/swiftvoid?batchNum={0}", batchNum), null);
                     if (response.IsSuccessStatusCode)
                         i.StatusMessage = "Swiftpay processing started";
                     i.IsBusy = false;
@@ -145,7 +141,7 @@ namespace CoopCheck.WPF.Services
             var app = new Application();
             foreach (var c in b.Vouchers)
             {
-                var status = PaymentPrintSvc.PrintCheck(app, b, c, checkNum++);
+                var status = HonorariaPaymentPrintSvc.PrintCheck(app, b, c, checkNum++);
                 status.IsBusy = true;
                 ++currentCheckPct;
                 var z = currentCheckPct/b.Vouchers.Count*100;

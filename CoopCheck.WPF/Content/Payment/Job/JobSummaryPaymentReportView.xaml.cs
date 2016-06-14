@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Payment.Job
@@ -14,16 +14,16 @@ namespace CoopCheck.WPF.Content.Payment.Job
     public partial class JobSummaryPaymentReportView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         private readonly JobSummaryPaymentReportViewModel _vm;
 
@@ -35,7 +35,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
             prcv.PaymentReportCriteria.StartDate = DateTime.Today.AddDays(-1);
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;
             prcv.ShowAllAccountsOption = true;
-            Messenger.Default.Register<NotificationMessage<vwJobRpt>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<IvwJobRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.SelectedJobChanged)
                 {
@@ -45,28 +45,28 @@ namespace CoopCheck.WPF.Content.Payment.Job
         }
 
 
-        public ObservableCollection<vwPayment> AllPayments
+        public ObservableCollection<Paymnt> AllPayments
         {
             get { return _vm.AllPayments; }
         }
 
-        public ObservableCollection<vwPayment> OpenPayments
+        public ObservableCollection<Paymnt> OpenPayments
         {
             get { return _vm.OpenPayments; }
         }
 
-        public ObservableCollection<vwPayment> ClosedPayments
+        public ObservableCollection<Paymnt> ClosedPayments
         {
             get { return _vm.ClosedPayments; }
         }
 
-        private async Task RefreshChildren(vwJobRpt vwJobRpt)
+        private async Task RefreshChildren(IvwJobRpt JobRpt)
         {
-            if (vwJobRpt != null)
+            if (JobRpt != null)
             {
                 await Task.Factory.StartNew(() =>
                 {
-                    _vm.PaymentReportCriteria.JobNumber = vwJobRpt.job_num.ToString();
+                    _vm.PaymentReportCriteria.JobNumber = JobRpt.job_num.ToString();
                     _vm.RefreshAll();
                 });
             }

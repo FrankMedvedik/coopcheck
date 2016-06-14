@@ -1,7 +1,7 @@
 using System;
+using CoopCheck.Library.Contracts.Interfaces;
 using Csla;
 using Csla.Rules;
-using Csla.Rules.CommonRules;
 #if SILVERLIGHT
 using Csla.Serialization;
 #else
@@ -15,7 +15,7 @@ namespace CoopCheck.Library
 #if WINFORMS
     public class PaymentInfoList : ReadOnlyBindingListBase<PaymentInfoList, PaymentInfo>
 #else
-    public class PaymentInfoList : ReadOnlyListBase<PaymentInfoList, PaymentInfo>, IPaymentInfoList
+    public class PaymentInfoList : ReadOnlyListBase<PaymentInfoList, IPaymentInfo>, IPaymentInfoList
 #endif
     {
 #region Methods

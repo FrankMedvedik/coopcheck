@@ -1,9 +1,5 @@
-using Csla;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Configuration;
-using DataClean;
+using CoopCheck.Library.Contracts.Interfaces;
 using DataClean.DataCleaner;
 using DataClean.Models;
 using DataClean.Repository.Mgr;
@@ -211,7 +207,7 @@ namespace CoopCheck.Library
         
 
         #endregion
-        public static VoucherEdit NewVoucherEdit(decimal amount, string personId, string namePrefix, string firstName, string middleName, string lastName, string suffix, string title, 
+        public static IVoucherEdit NewVoucherEdit(decimal amount, string personId, string namePrefix, string firstName, string middleName, string lastName, string suffix, string title, 
                 string company, string address1, string address2, string municipality, string region, string postalCode, string country, string phone, string email)
         {
             var voc = VoucherEdit.NewVoucherEdit();

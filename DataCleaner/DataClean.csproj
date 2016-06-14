@@ -83,8 +83,8 @@
     <Compile Include="Converters\ResponseToOutputStreetAddressConverter.cs" />
     <Compile Include="DataCleaner\AutoFixer.cs" />
     <Compile Include="DataCleaner\DataCleanEventFactory.cs" />
+    <Compile Include="IParseResultDictionary.cs" />
     <Compile Include="Models\DataCleanCriteria.cs" />
-    <Compile Include="Models\IDataCleanCriteria.cs" />
     <Compile Include="Repository.Mgr\DataCleanRespository.cs" />
     <Compile Include="Models\DataCleanEvent.cs" />
     <Compile Include="Extensions\PersonatorExtentions.cs" />
@@ -151,12 +151,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataClean.Interfaces\DataClean.Interfaces.csproj">
+    <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
       <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
-      <Name>DataClean.Interfaces</Name>
+      <Name>DataClean.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Repository.Contracts\DataClean.Repository.Contracts.csproj">
+      <Project>{d57c0767-59ca-4d7a-ac3c-5966f03e9c53}</Project>
+      <Name>DataClean.Repository.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataClean.Repository\DataClean.Repository.csproj">
-      <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
+      <Project>{05984E8E-CF26-4200-A15B-F45E0EF4CE76}</Project>
       <Name>DataClean.Repository</Name>
     </ProjectReference>
   </ItemGroup>

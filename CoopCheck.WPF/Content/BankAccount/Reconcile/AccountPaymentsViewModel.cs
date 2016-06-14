@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.DAL;
-using CoopCheck.Repository;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using Reckner.WPF.ViewModel;
@@ -12,17 +12,17 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
     public class AccountPaymentsViewModel : ViewModelBase
     {
-        private List<vwPayment> _allPayments = new List<vwPayment>();
+        private List<Paymnt> _allPayments = new List<Paymnt>();
 
         private List<CheckInfoDto> _checksToClear = new List<CheckInfoDto>();
-        private List<vwPayment> _matchedPayments = new List<vwPayment>();
-        private List<vwPayment> _openPayments = new List<vwPayment>();
+        private List<Paymnt> _matchedPayments = new List<Paymnt>();
+        private List<Paymnt> _openPayments = new List<Paymnt>();
         private PaymentReportCriteria _paymentReportCriteria;
 
         private ObservableCollection<KeyValuePair<string, string>> _stats =
             new ObservableCollection<KeyValuePair<string, string>>();
 
-        public List<vwPayment> MatchedPayments
+        public List<Paymnt> MatchedPayments
         {
             get { return _matchedPayments; }
             set
@@ -32,7 +32,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
-        public List<vwPayment> OpenPayments
+        public List<Paymnt> OpenPayments
         {
             get { return _openPayments; }
             set
@@ -62,7 +62,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
-        public List<vwPayment> AllPayments
+        public List<IvwPayment> AllPayments
         {
             get { return _allPayments; }
             set

@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Properties;
 using CoopCheck.WPF.Wrappers;
-using DataClean.Interfaces;
-using DataClean.Models;
-using DataClean.Services;
+using DataClean.Contracts.Interfaces;
 using Newtonsoft.Json;
 
 namespace CoopCheck.WPF.Services
@@ -34,8 +32,8 @@ namespace CoopCheck.WPF.Services
             var ilist = new List<VoucherImportWrapper>();
             foreach (var e in dataCleanEvents)
             {
-                var i = DataCleanEventConverter.ToVoucherImportWrapper(e,
-                    vouchers.First(x => x.RecordID == e.Input.RecordID);
+                VoucherImportWrapper i = (VoucherImportWrapper) DataCleanEventConverter.ToVoucherImportWrapper(e,
+                    vouchers.First(x => x.RecordID == e.Input.RecordID));
                 // we want to join the row to get the data we did not send to the cleaner
                 ilist.Add(i);
             }

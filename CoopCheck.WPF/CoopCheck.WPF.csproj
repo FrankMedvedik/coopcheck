@@ -266,6 +266,10 @@
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\StatsType.cs" />
+    <Compile Include="Models\Reports\CoopCheckClient.cs" />
+    <Compile Include="Models\Reports\VoidedPaymnt.cs" />
+    <Compile Include="Models\Reports\JobRpt.cs" />
+    <Compile Include="Models\Reports\BatchRpt.cs" />
     <Compile Include="Content\Payment\Summary\JobView.xaml.cs">
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
@@ -278,8 +282,16 @@
     </Compile>
     <Compile Include="Content\Voucher\Clean\PaymentHistoryViewModel.cs" />
     <Compile Include="Content\Voucher\Pay\PrintCheckProgress.cs" />
+    <Compile Include="Models\Reports\BankAccount.cs" />
+    <Compile Include="Models\DataClean\InputStreetAddress.cs" />
+    <Compile Include="Models\DataClean\AddressCleanerFeedback.cs" />
+    <Compile Include="Models\DataClean\CleanedAddress.cs" />
+    <Compile Include="Models\Reports\JobLog.cs" />
+    <Compile Include="Models\Reports\OpenBatch.cs" />
+    <Compile Include="Models\Reports\Payment.cs" />
+    <Compile Include="Models\Reports\PositivePayItem.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
-    <Compile Include="Models\OutstandingBalanceStats.cs" />
+    <Compile Include="Models\WPF\OutstandingBalanceStats.cs" />
     <Compile Include="Services\ClientSvc.cs" />
     <Compile Include="Content\Payment\Summary\BatchView.xaml.cs">
       <DependentUpon>BatchView.xaml</DependentUpon>
@@ -310,10 +322,9 @@
       <DependentUpon>VouchersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
-    <Compile Include="Interfaces\IModernNavigationService.cs" />
     <Compile Include="Messages\ExcelVouchersMessage.cs" />
-    <Compile Include="Models\ClientReportCriteria.cs" />
-    <Compile Include="Models\VoucherExcelExport.cs" />
+    <Compile Include="Models\Reports\ClientReportCriteria.cs" />
+    <Compile Include="Models\WPF\VoucherExcelExport.cs" />
     <Compile Include="Messages\NavigationMessage.cs" />
     <Compile Include="Content\BankAccount\Reconcile\Grids\AllBankTransactionsGrid.xaml.cs">
       <DependentUpon>AllBankTransactionsGrid.xaml</DependentUpon>
@@ -327,14 +338,6 @@
       <DependentUpon>BankTransactionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\BankTransactionViewModel.cs" />
-    <Compile Include="Content\DataClean\DataCleanFeedbackViewModel.cs" />
-    <Compile Include="Content\DataClean\DataCleanFeedbackView.xaml.cs">
-      <DependentUpon>DataCleanFeedbackView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\DataClean\DataCleanCriteriaView.xaml.cs">
-      <DependentUpon>DataCleanCriteriaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\DataClean\DataCleanCriteriaViewModel.cs" />
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
@@ -404,10 +407,9 @@
     </Compile>
     <Compile Include="Converters\DataCleanEventConverter.cs" />
     <Compile Include="Converters\VoucherImportConverter.cs" />
-    <Compile Include="Models\BankClearTransaction.cs" />
-    <Compile Include="Models\ObjectCopier.cs" />
-    <Compile Include="Models\UserSecurityProfile.cs" />
-    <Compile Include="Models\ExcelVoucher.cs" />
+    <Compile Include="Models\WPF\BankClearTransaction.cs" />
+    <Compile Include="Services\ObjectCopier.cs" />
+    <Compile Include="Models\WPF\UserSecurityProfile.cs" />
     <Compile Include="Pages\AccountReconcilePage.xaml.cs">
       <DependentUpon>AccountReconcilePage.xaml</DependentUpon>
     </Compile>
@@ -430,16 +432,16 @@
     <Compile Include="Services\JobYearSvc.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />
     <Compile Include="Services\OutstandingBalancePrintSvc.cs" />
+    <Compile Include="Models\Reports\UnclearedBatch.cs" />
     <Compile Include="Services\UnclearedBatchSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />
     <Compile Include="Services\BatchSvc.cs" />
-    <Compile Include="Models\PaymentMethod.cs" />
-    <Compile Include="Services\BankAccountSvc.cs" />
+    <Compile Include="Models\WPF\PaymentMethod.cs" />
     <Compile Include="Services\OpenBatchSvc.cs" />
     <Compile Include="Content\Voucher\Pay\PayVouchersViewModel.cs" />
-    <Compile Include="Models\StatusInfo.cs" />
+    <Compile Include="Models\WPF\StatusInfo.cs" />
     <Compile Include="Messages\Notifications.cs" />
     <Compile Include="Content\BankAccount\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -461,7 +463,7 @@
     <Compile Include="Content\Voucher\Pay\PayVoucherView.xaml.cs">
       <DependentUpon>PayVoucherView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaymentReportCriteria.cs" />
+    <Compile Include="Models\Reports\PaymentReportCriteria.cs" />
     <Compile Include="Content\Payment\PaymentFinder\PaymentFinderView.xaml.cs">
       <DependentUpon>PaymentFinderView.xaml</DependentUpon>
     </Compile>
@@ -482,10 +484,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\PaymentSvc.cs" />
-    <Compile Include="Models\WorksheetImport.cs" />
+    <Compile Include="Models\WPF\WorksheetImport.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Interfaces\IVoucherImportWrapper.cs" />
     <Compile Include="Wrappers\VoucherImportWrapper.cs" />
     <Page Include="Assets\appbar.add.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -629,14 +630,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\DataClean\DataCleanFeedbackView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\DataClean\DataCleanCriteriaView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Content\NoAccessView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -761,7 +754,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="DesignData\BatchEditDesign.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -846,15 +838,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Models\BatchEditImport.cs" />
     <Compile Include="Pages\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Voucher\Edit\BatchEditView.xaml.cs">
       <DependentUpon>BatchEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\VoucherImport.cs" />
-    <Compile Include="Models\ColumnPropertyMap.cs" />
+    <Compile Include="Models\WPF\VoucherImport.cs" />
+    <Compile Include="Models\WPF\ColumnPropertyMap.cs" />
     <Compile Include="Content\Voucher\Edit\BatchEditViewModel.cs" />
     <Compile Include="Content\Voucher\Import\ImportWorksheetViewModel.cs" />
     <Compile Include="Content\Voucher\Import\ImportWorksheetView.xaml.cs">
@@ -926,13 +917,25 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
-      <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
-      <Name>CoopCheck.Repository</Name>
+    <ProjectReference Include="..\CoopCheck.Library.Contracts\CoopCheck.Library.Contracts.csproj">
+      <Project>{581FD483-3B12-4D40-B04F-2DBBB0153D21}</Project>
+      <Name>CoopCheck.Library.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataClean.Interfaces\DataClean.Interfaces.csproj">
-      <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
-      <Name>DataClean.Interfaces</Name>
+    <ProjectReference Include="..\CoopCheck.Reports.Contracts\CoopCheck.Reports.Contracts.csproj">
+      <Project>{A9A18E3C-C1A2-41BD-9841-3CE748A28DDA}</Project>
+      <Name>CoopCheck.Reports.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
+      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
+      <Name>CoopCheck.Repository.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.WPF.Contracts\CoopCheck.WPF.Contracts.csproj">
+      <Project>{424b8899-c923-431a-b3c7-b05e9e7370f2}</Project>
+      <Name>CoopCheck.WPF.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
+      <Project>{D4B3264F-C68A-451F-B512-E7C8E9565900}</Project>
+      <Name>DataClean.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataCleaner\DataClean.csproj">
       <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
@@ -995,7 +998,8 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Utilities\" />
+    <Folder Include="DesignData\" />
+    <Folder Include="Models\BusinessObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\CSLA-Core.4.6.400\analyzers\c#\Csla.Analyzers.dll" />

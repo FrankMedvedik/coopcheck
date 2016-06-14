@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+using System;
+using CoopCheck.Repository.Contracts.Interfaces;
+
 namespace CoopCheck.Repository
 {
-    using System;
-    using System.Collections.Generic;
     
-    public partial class vwPositivePay
+    public partial class vwPositivePay : IvwPositivePay
     {
         public string rpt { get; set; }
         public string account_number { get; set; }

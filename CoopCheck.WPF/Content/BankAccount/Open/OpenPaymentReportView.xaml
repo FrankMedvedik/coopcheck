@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ignore="http://www.ignore.com" xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
+             xmlns:ignore="http://www.ignore.com" 
+             xmlns:criteria1="clr-namespace:CoopCheck.WPF.Content.Payment.Criteria"
              mc:Ignorable="d ignore">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +15,7 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <criteria:PaymentReportCriteriaView x:Name="prcv" TabIndex="0" />
+                    <criteria1:PaymentReportCriteriaView x:Name="prcv" TabIndex="0" />
                     <StackPanel Orientation="Horizontal">
                         <Button Margin="6" HorizontalAlignment="Left" Click="Refresh_Click" TabIndex="1">refresh</Button>
                         <Button Margin="6" HorizontalAlignment="Left" Click="Print_Click" TabIndex="2">print</Button>
@@ -23,22 +24,22 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding HeadingText}" HorizontalAlignment="Left" Margin="6,6,12,6" />
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="6" Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                        <TextBlock Margin="6" Text="{Binding HonorariaPaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
                         <TextBlock Margin="6" HorizontalAlignment="Right">Checks</TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="6" Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                        <TextBlock Margin="6" Text="{Binding HonorariaPaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
                         <TextBlock Margin="6" HorizontalAlignment="Right">Dollars</TextBlock>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Payments, IsAsync=True}" AutoGenerateColumns="False" Width="Auto"
+        <DataGrid Grid.Row="2" ItemsSource="{Binding HonorariaPayments, IsAsync=True}" AutoGenerateColumns="False" Width="Auto"
                   SelectionMode="Extended" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                   x:Name="dgPayments"
                   Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" MaxHeight="600"
                   ClipboardCopyMode="IncludeHeader" VerticalAlignment="Top" EnableColumnVirtualization="True"
-                  IsReadOnly="True" EnableRowVirtualization="True" ToolTipService.ToolTip="payments" Margin="6"
+                  IsReadOnly="True" EnableRowVirtualization="True" ToolTipService.ToolTip="HonorariaPayments" Margin="6"
                   HorizontalAlignment="Left">
             <DataGrid.Columns>
                 <StaticResource ResourceKey="dgPJob" />

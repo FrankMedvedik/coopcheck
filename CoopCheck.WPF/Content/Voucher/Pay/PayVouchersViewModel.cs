@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -14,7 +13,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 {
     public class PayVouchersViewModel : ViewModelBase
     {
-        private ObservableCollection<bank_account> _accounts;
+        private ObservableCollection<Models.BankAccount> _accounts;
         private bool _canPrintChecks;
         private bool _canSwiftPay;
         private int _currentPrintCount;
@@ -23,9 +22,9 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
         private bool _isBusy;
         private decimal _percentComplete;
 
-        private bank_account _selectedAccount = new bank_account();
+        private Models.BankAccount _selectedAccount = new Models.BankAccount();
 
-        private vwOpenBatch _selectedBatch = new vwOpenBatch();
+        private OpenBatch _selectedBatch = new OpenBatch();
         private BatchEdit _selectedBatchEdit;
         private int _startingCheckNum;
 
@@ -34,7 +33,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         public PayVouchersViewModel()
         {
-            Messenger.Default.Register<NotificationMessage<vwOpenBatch>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, message =>
             {
                 //if (message.Content != null)
                 SelectedBatch = message.Content;
@@ -42,7 +41,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             ResetState();
         }
 
-        public vwOpenBatch SelectedBatch
+        public OpenBatch SelectedBatch
         {
             get { return _selectedBatch; }
             set
@@ -63,7 +62,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
         }
 
-        public ObservableCollection<bank_account> Accounts
+        public ObservableCollection<Models.BankAccount> Accounts
         {
             get { return _accounts; }
             set
@@ -73,7 +72,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
         }
 
-        public bank_account SelectedAccount
+        public Models.BankAccount SelectedAccount
         {
             get { return _selectedAccount; }
             set
@@ -217,7 +216,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         public async void ResetState()
         {
-            Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
+            Accounts = new ObservableCollection<Models.BankAccount>(await BankAccountSvc.GetAccounts());
             CurrentPrintCount = 0;
             PercentComplete = 0;
         }
@@ -248,7 +247,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 try
                 {
-                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
+                    var v = HonorariaPaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
                         StartingCheckNum, ctx, progress);
                     return v.Result;
                 }
@@ -285,7 +284,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 try
                 {
-                    var v = PaymentSvc.SwiftFulfillAsync(SelectedBatch.batch_num);
+                    var v = HonorariaPaymentSvc.SwiftFulfillAsync(SelectedBatch.batch_num);
                     return v.Result;
                 }
                 catch (Exception e)
@@ -294,7 +293,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                     {
                         ErrorMessage = e.Message,
                         IsBusy = true,
-                        StatusMessage = "swift payment failed"
+                        StatusMessage = "swift Payment failed"
                     };
                     return Status;
                 }

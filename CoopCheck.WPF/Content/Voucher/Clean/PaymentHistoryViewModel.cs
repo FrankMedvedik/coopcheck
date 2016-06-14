@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -12,7 +11,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public class PaymentHistoryViewModel : ViewModelBase
     {
-        private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
+        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
 
         public PaymentHistoryViewModel()
         {
@@ -59,7 +58,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             get { return Payments.Sum(x => x.tran_amount); }
         }
 
-        public ObservableCollection<vwPayment> Payments
+        public ObservableCollection<Paymnt> Payments
         {
             get { return _payments; }
             set
@@ -76,7 +75,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             try
             {
                 var pay = await RptSvc.GetPayeePayments(LastName, FirstName);
-                Payments = new ObservableCollection<vwPayment>(pay);
+                Payments = new ObservableCollection<Paymnt>(pay);
             }
             catch (Exception e)
             {
@@ -94,7 +93,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<vwPayment>();
+            _payments = new ObservableCollection<Paymnt>();
             ShowGridData = false;
         }
 
@@ -126,11 +125,11 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         #region collection and selected
 
-        private vwPayment _selectedPayment;
+        private Paymnt _selectedPayment;
         private string _lastName;
         private string _firstName;
 
-        public vwPayment SelectedPayment
+        public Paymnt SelectedPayment
         {
             get { return _selectedPayment; }
             set

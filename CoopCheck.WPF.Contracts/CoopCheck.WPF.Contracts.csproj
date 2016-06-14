@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{424B8899-C923-431A-B3C7-B05E9E7370F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoopCheck.WPF.Contracts</RootNamespace>
+    <AssemblyName>CoopCheck.WPF.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IBankClearTransaction.cs" />
+    <Compile Include="Interfaces\IColumnPropertyMap.cs" />
+    <Compile Include="Interfaces\IOutstandingBalanceStats.cs" />
+    <Compile Include="Interfaces\IPaymentMethod.cs" />
+    <Compile Include="Interfaces\IStatusInfo.cs" />
+    <Compile Include="Interfaces\IUserSecurityProfile.cs" />
+    <Compile Include="Interfaces\IVoucherExcelExport.cs" />
+    <Compile Include="Interfaces\IVoucherImport.cs" />
+    <Compile Include="Interfaces\IVoucherImportWrapper.cs" />
+    <Compile Include="Interfaces\IWorksheetImport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoopCheck.Library.Contracts\CoopCheck.Library.Contracts.csproj">
+      <Project>{581fd483-3b12-4d40-b04f-2dbbb0153d21}</Project>
+      <Name>CoopCheck.Library.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
+      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
+      <Name>CoopCheck.Repository.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
+      <Project>{D4B3264F-C68A-451F-B512-E7C8E9565900}</Project>
+      <Name>DataClean.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Repository.Contracts\DataClean.Repository.Contracts.csproj">
+      <Project>{d57c0767-59ca-4d7a-ac3c-5966f03e9c53}</Project>
+      <Name>DataClean.Repository.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

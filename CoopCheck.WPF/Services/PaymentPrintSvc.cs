@@ -7,7 +7,7 @@ using Reckner.WPF.Converters;
 
 namespace CoopCheck.WPF.Services
 {
-    public static class PaymentPrintSvc
+    public static class HonorariaPaymentPrintSvc
     {
         public static string Payee(string company, string fulllName)
         {

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CoopCheck.WPF.Interfaces;
+using CoopCheck.WPF.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
-using DataClean.Models;
+using DataClean.Contracts.Interfaces;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Wrappers
 {
-    public class VoucherImportWrapper : ModelWrappper<VoucherImport>, IVoucherImportWrapper
+    public class VoucherImportWrapper : ModelWrappper<IVoucherImport>, IVoucherImportWrapper
     {
-        public VoucherImportWrapper(VoucherImport model) : base(model)
+        public VoucherImportWrapper(IVoucherImport model) : base(model)
         {
         }
 
@@ -40,11 +40,11 @@ namespace CoopCheck.WPF.Wrappers
             get { return _altAddress.OkPhone; }
         }
 
-        private ParseResult emptyParse = new ParseResult();
+        private IParseResult emptyParse = new AddressCleanerFeedback();
 
-        private OutputStreetAddress _altAddress = new OutputStreetAddress()
+        private IOutputStreetAddress _altAddress = new CleanedAddress()
         {
-            Results = new List<ParseResult>()
+            Results = new List<IParseResult>()
         };
         private string _altAddressLine1;
         private string _altAddressLine2;
@@ -66,13 +66,13 @@ namespace CoopCheck.WPF.Wrappers
             }
         }
 
-        public OutputStreetAddress AltAddress
+        public IOutputStreetAddress AltAddress
         {
-            get { return _altAddress; }
+            get { return (IOutputStreetAddress) _altAddress; }
             set
             {
                 if (value == null) return;
-                _altAddress = value;
+                 _altAddress = value;
                 SetAlternateValues();
                 NotifyPropertyChanged();
                 NotifyPropertyChanged("AltAddressText");

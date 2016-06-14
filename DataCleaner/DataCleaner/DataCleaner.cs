@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using DataClean.Contracts.Interfaces;
 using DataClean.Converters;
-using DataClean.Interfaces;
 using DataClean.Models;
 using DataClean.Personator;
 using DataClean.Repository.Mgr;
@@ -36,7 +36,7 @@ namespace DataClean.DataCleaner
 
         public bool ForceValidation { get; set; }
 
-        public DataCleaner(NameValueCollection c, List<ParseResult> melissaCodes)
+        public DataCleaner(NameValueCollection c, List<IParseResult> melissaCodes)
         {
             Initialize(c);
             _msgDict = new ParseResultDictionary(melissaCodes);
@@ -80,43 +80,8 @@ namespace DataClean.DataCleaner
             
         }
 
-        //public bool VerifyAndCleanAddress(InputStreetAddress input, out DataCleanEvent e)
-        //{
-        //    e = _db.GetEvent(input.ID);
-        //    if (e != null && ! ForceValidation)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        var iList = new List<InputStreetAddress>();
-        //        var oList = new List<DataCleanEvent>();
-        //        iList.Add(input);
-        //        oList = VerifyAndCleanAddress(iList);
-        //        e = oList.First();
-        //        return (oList.First().Output.AddressOk);
-        //    }
-        //}
 
-        //public List<DataCleanEvent> VerifyAndCleanAddress(List<InputStreetAddress> inputAddresses)
-        //{
-        //    List<DataCleanEvent> dcel = new List<DataCleanEvent>();
-        //    var output = VerifyAndCleanAddress(inputAddresses.ToArray());
-
-        //    throw new NotImplementedException();
-        //    //    oreach (var i in inputAddresses)
-        //    //{
-        //    //    var dce = new DataCleanEvent()
-        //    //    {
-        //    //        Input = i
-        //    //    };
-
-        //    //    dcel.Add(dce);
-        //    //}
-
-        //}
-
-        public Boolean VerifyAndCleanAddress(InputStreetAddress inA, out OutputStreetAddress outA)
+        public Boolean VerifyAndCleanAddress(IInputStreetAddress inA, out IOutputStreetAddress outA)
         {
             /* use settings from config file and process 1 record */
             var iArray = new[] {inA};
@@ -125,9 +90,9 @@ namespace DataClean.DataCleaner
             return  oArray[0].OkComplete;
         }
 
-        public OutputStreetAddress[] VerifyAndCleanAddress(InputStreetAddress[] inputAddressArray)
+        public IOutputStreetAddress[] VerifyAndCleanAddress(IInputStreetAddress[] inputAddressArray)
         {
-            var o = new List<OutputStreetAddress>();
+            var o = new List<IOutputStreetAddress>();
             
             int i = 0;
             int arrayOffset = 0;
@@ -147,7 +112,7 @@ namespace DataClean.DataCleaner
             return o.ToArray();
         }
 
-        protected OutputStreetAddress[] VerifyAndCleanAddressBatch(InputStreetAddress[] inputAddressArray)
+        protected IOutputStreetAddress[] VerifyAndCleanAddressBatch(IInputStreetAddress[] inputAddressArray)
         {
             if (inputAddressArray.Length > MaxArraySize)
                 throw new Exception(String.Format("Too Many Items in Request maximum number is {0}", MaxArraySize));

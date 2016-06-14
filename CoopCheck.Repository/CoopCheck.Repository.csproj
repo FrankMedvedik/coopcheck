@@ -91,21 +91,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoopCheckModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CoopCheckModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CoopCheckModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CoopCheckModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="dal_GetOpenBatch_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dsa_GetCheckingAccounts_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
     <Compile Include="dsa_GetCheckList_Result.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
@@ -137,6 +126,8 @@
     <Compile Include="GetJobPaymentsReport_Result.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IvwUnclearedBatch.cs" />
+    <Compile Include="IvwVoidedPayment.cs" />
     <Compile Include="JobLog.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
@@ -202,6 +193,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
+      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
+      <Name>CoopCheck.Repository.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Repository.Contracts\DataClean.Repository.Contracts.csproj">
+      <Project>{d57c0767-59ca-4d7a-ac3c-5966f03e9c53}</Project>
+      <Name>DataClean.Repository.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

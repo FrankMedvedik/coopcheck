@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.Repository;
 
 namespace CoopCheck.WPF.Content.BankAccount
 {
@@ -10,8 +9,8 @@ namespace CoopCheck.WPF.Content.BankAccount
     public partial class AccountView : UserControl
     {
         public static readonly DependencyProperty SelectedAccountProperty =
-            DependencyProperty.Register("SelectedAccount", typeof (bank_account), typeof (AccountView),
-                new PropertyMetadata(new bank_account()));
+            DependencyProperty.Register("SelectedAccount", typeof (Models.BankAccount), typeof (AccountView),
+                new PropertyMetadata(new Models.BankAccount()));
 
         private readonly AccountViewModel _vm;
 
@@ -22,7 +21,7 @@ namespace CoopCheck.WPF.Content.BankAccount
             DataContext = _vm;
         }
 
-        public bank_account SelectedAccount
+        public Models.BankAccount SelectedAccount
         {
             get { return _vm.SelectedAccount; }
             set { _vm.SelectedAccount = value; }

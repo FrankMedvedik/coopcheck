@@ -16,22 +16,22 @@
                 <xctk:WizardPage x:Name="BankFilePage"
                                  Title="Select Bank File"
                                  Description="find and load the bank file to be reconciled."
-                                 NextPage="{Binding ElementName=AccountPaymentsPage}"
+                                 NextPage="{Binding ElementName=AccountHonorariaPaymentsPage}"
                                  CanSelectNextPage="{Binding HaveValidBankFile}">
                     <reconcile:BankFileView x:Name="bfv" />
                 </xctk:WizardPage>
-                <xctk:WizardPage x:Name="AccountPaymentsPage" PageType="Interior"
+                <xctk:WizardPage x:Name="AccountHonorariaPaymentsPage" PageType="Interior"
                                  Title="Select Account"
-                                 Description="choose the account to reconcile then click 'get payments' to match the bank file to the account."
+                                 Description="choose the account to reconcile then click 'get HonorariaPayments' to match the bank file to the account."
                                  PreviousPage="{Binding ElementName=BankFilePage}"
                                  CanSelectPreviousPage="{Binding CanFinish}"
                                  CanCancel="True" CanFinish="{Binding CanFinish}">
-                    <reconcile:AccountPaymentsView />
+                    <reconcile:AccountHonorariaPaymentsView />
                 </xctk:WizardPage>
                 <!--<xctk:WizardPage x:Name="ReconcileReportPage" PageType="Interior"
                                    Title="Unmatched"
                                    Description="bank tranactions where no matching check was found  "
-                                   PreviousPage="{Binding ElementName=AccountPaymentsPage}" 
+                                   PreviousPage="{Binding ElementName=AccountHonorariaPaymentsPage}" 
                                    CanCancel="False" CanFinish="True">
                     <reconcile:BankTransactionsView x:Name="vlv"/>
                 </xctk:WizardPage>-->

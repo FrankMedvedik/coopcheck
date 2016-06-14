@@ -4,9 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
-             xmlns:import="clr-namespace:CoopCheck.WPF.Content.Voucher.Import"
-             xmlns:dataClean="clr-namespace:CoopCheck.WPF.Content.DataClean"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" >
     <Grid >
         <Grid.RowDefinitions>

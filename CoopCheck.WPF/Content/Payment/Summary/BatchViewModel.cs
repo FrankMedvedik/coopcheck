@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -102,7 +101,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         public BatchViewModel()
         {
             ShowGridData = false;
-            Messenger.Default.Register<NotificationMessage<vwJobRpt>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<JobRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.JobFinderSelectedJobChanged)
                 {
@@ -111,8 +110,8 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }); 
         }
 
-        private vwBatchRpt _selectedBatch = new vwBatchRpt();
-        public vwBatchRpt SelectedBatch
+        private BatchRpt _selectedBatch = new BatchRpt();
+        public BatchRpt SelectedBatch
         {
             get { return _selectedBatch; }
             set
@@ -126,7 +125,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 {
                     _selectedBatch = value;
                     NewJobNum = _selectedBatch.job_num.GetValueOrDefault();
-                    Messenger.Default.Send(new NotificationMessage<vwBatchRpt>(SelectedBatch,
+                    Messenger.Default.Send(new NotificationMessage<BatchRpt>(SelectedBatch,
                         Notifications.JobFinderSelectedBatchChanged));
                     Status = new StatusInfo()
                     {
@@ -167,8 +166,8 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         {
             get { return Batches.Sum(x => x.total_amount); }
         }
-        private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
-        public ObservableCollection<vwBatchRpt> Batches
+        private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
+        public ObservableCollection<BatchRpt> Batches
         {
             get { return _batches; }
             set
@@ -201,10 +200,10 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         private string _headingText;
         private bool _showGridData;
         private StatusInfo _status;
-        private vwJobRpt _parentJob;
+        private JobRpt _parentJob;
         private bool _haveGoodNewJobNumber;
 
-        public vwJobRpt ParentJob 
+        public JobRpt ParentJob 
         {
             get { return _parentJob; }
             set
@@ -252,7 +251,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 };
                 var v = await RptSvc.GetJobBatchRpt(ParentJob.job_num);
                 BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
-                Batches = new ObservableCollection<vwBatchRpt>(v);
+                Batches = new ObservableCollection<BatchRpt>(v);
                 SelectedBatch = null;
             }
             catch (Exception e)

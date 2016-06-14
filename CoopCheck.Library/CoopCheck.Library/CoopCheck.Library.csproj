@@ -84,13 +84,6 @@
     <Compile Include="BatchEdit.designer.cs">
       <DependentUpon>BatchEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="IBatchEdit.cs" />
-    <Compile Include="ICheckInfo.cs" />
-    <Compile Include="ICheckInfoList.cs" />
-    <Compile Include="IPaymentInfo.cs" />
-    <Compile Include="IPaymentInfoList.cs" />
-    <Compile Include="IVoucherEdit.cs" />
-    <Compile Include="IVoucherList.cs" />
     <Compile Include="SvrBatchSwiftVoidCommand.cs" />
     <Compile Include="SvrBatchSwiftFulfillCommand.cs" />
     <Compile Include="VoidSwiftPromoCodeCommand.cs" />
@@ -146,6 +139,14 @@
     <ProjectReference Include="..\..\CoopCheck.DAL\CoopCheck.DAL.csproj">
       <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
       <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CoopCheck.Library.Contracts\CoopCheck.Library.Contracts.csproj">
+      <Project>{581fd483-3b12-4d40-b04f-2dbbb0153d21}</Project>
+      <Name>CoopCheck.Library.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataClean.Contracts\DataClean.Contracts.csproj">
+      <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
+      <Name>DataClean.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DataClean.Repository\DataClean.Repository.csproj">
       <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>

@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using CoopCheck.Repository.Contracts.Interfaces;
+using System;
 namespace CoopCheck.Repository
 {
-    using System;
-    using System.Collections.Generic;
+   
+   
     
-    public partial class vwJobRpt
+    public partial class vwJobRpt : IvwJobRpt
     {
         public int job_num { get; set; }
         public string clientid { get; set; }

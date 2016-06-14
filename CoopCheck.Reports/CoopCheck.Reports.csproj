@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F01DF42F-72BD-4CCA-BF55-8D09E9493927}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoopCheck.Reports</RootNamespace>
+    <AssemblyName>CoopCheck.Reports</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BatchRpt.cs" />
+    <Compile Include="Models\CoopCheckClient.cs" />
+    <Compile Include="Models\JobLog.cs" />
+    <Compile Include="Models\JobRpt.cs" />
+    <Compile Include="Models\OpenBatch.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PositivePayItem.cs" />
+    <Compile Include="Models\UnclearedBatch.cs" />
+    <Compile Include="Models\VoidedPaymnt.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BankAccountSvc.cs" />
+    <Compile Include="Services\ClientSvc.cs" />
+    <Compile Include="Services\JobLogSvc.cs" />
+    <Compile Include="Services\OpenBatchSvc.cs" />
+    <Compile Include="Services\RptSvc.cs" />
+    <Compile Include="Services\UnclearedBatchSvc.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoopCheck.Reports.Contracts\CoopCheck.Reports.Contracts.csproj">
+      <Project>{A9A18E3C-C1A2-41BD-9841-3CE748A28DDA}</Project>
+      <Name>CoopCheck.Reports.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
+      <Project>{1427eb95-e4b4-43ae-a7bc-9120e1c96ae0}</Project>
+      <Name>CoopCheck.Repository.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

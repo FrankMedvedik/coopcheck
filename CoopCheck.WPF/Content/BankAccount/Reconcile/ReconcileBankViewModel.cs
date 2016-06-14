@@ -221,7 +221,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                         (AccountPayments.AllPayments.Where(
                             s => BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();
 
-                    //ClosedPayments = new List<vwPayment>(v);
+                    //ClosedPayments = new List<Paymnt>(v);
 
                     AccountPayments.OpenPayments = (AccountPayments.AllPayments.Where(
                         s => !BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();

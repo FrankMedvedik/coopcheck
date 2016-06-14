@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
@@ -10,16 +9,16 @@ namespace CoopCheck.WPF.Content.BankAccount
 {
     public class AccountViewModel : ViewModelBase
     {
-        private ObservableCollection<bank_account> _accounts;
+        private ObservableCollection<Models.BankAccount> _accounts;
 
-        private bank_account _selectedAccount;
+        private Models.BankAccount _selectedAccount;
 
         public AccountViewModel()
         {
             ResetState();
         }
 
-        public ObservableCollection<bank_account> Accounts
+        public ObservableCollection<Models.BankAccount> Accounts
         {
             get { return _accounts; }
             set
@@ -30,7 +29,7 @@ namespace CoopCheck.WPF.Content.BankAccount
             }
         }
 
-        public bank_account SelectedAccount
+        public Models.BankAccount SelectedAccount
         {
             get { return _selectedAccount; }
             set
@@ -39,7 +38,7 @@ namespace CoopCheck.WPF.Content.BankAccount
                 NotifyPropertyChanged();
                 if (SelectedAccount != null)
                 {
-                    Messenger.Default.Send(new NotificationMessage<bank_account>(SelectedAccount,
+                    Messenger.Default.Send(new NotificationMessage<Ibank_account>(SelectedAccount,
                         Notifications.SelectedAccountChanged));
                     Properties.Settings.Default.SelectedAccountID = value.account_id.ToString();
                     Properties.Settings.Default.Save();
@@ -49,7 +48,7 @@ namespace CoopCheck.WPF.Content.BankAccount
 
         private async void ResetState()
         {
-            Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
+            Accounts = new ObservableCollection<Models.BankAccount>(await BankAccountSvc.GetAccounts());
             //SelectedAccount = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
             SelectedAccount =
                 (from l in Accounts

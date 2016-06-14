@@ -1,4 +1,6 @@
 
+using CoopCheck.Library.Contracts.Interfaces;
+
 namespace CoopCheck.Library
 {
     public partial class CheckInfo : ICheckInfo

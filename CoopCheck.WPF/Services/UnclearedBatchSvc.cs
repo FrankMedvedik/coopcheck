@@ -3,12 +3,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Repository;
+using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Services
 {
     public static class UnclearedBatchSvc
     {
-        public static async Task<List<vwUnclearedBatch>> GetUnclearedBatches()
+        public static async Task<List<UnclearedBatch>> GetUnclearedBatches()
         {
             using (var ctx = new CoopCheckEntities())
             {

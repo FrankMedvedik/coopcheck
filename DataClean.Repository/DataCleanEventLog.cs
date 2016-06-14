@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using DataClean.Repository.Contracts.Interfaces;
+
 namespace DataClean.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DataCleanEventLog
+    public partial class DataCleanEventLog : IDataCleanEventLog
     {
         public int ID { get; set; }
         public System.DateTime DataCleanDate { get; set; }

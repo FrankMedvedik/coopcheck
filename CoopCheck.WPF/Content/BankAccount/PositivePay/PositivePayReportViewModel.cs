@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -14,9 +13,9 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
     public class PositivePayReportViewModel : ViewModelBase
     {
         private string _headingText;
-        private ObservableCollection<vwPositivePay> _positivePays = new ObservableCollection<vwPositivePay>();
+        private ObservableCollection<PositivePayItem> _positivePays = new ObservableCollection<PositivePayItem>();
 
-        private vwPositivePay _selectedPositivePay = new vwPositivePay();
+        private PositivePayItem _selectedPositivePay = new PositivePayItem();
         private bool _showGridData;
         private StatusInfo _status;
 
@@ -35,7 +34,7 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
             }
         }
 
-        public vwPositivePay SelectedPositivePay
+        public PositivePayItem SelectedPositivePay
         {
             get { return _selectedPositivePay; }
             set
@@ -47,7 +46,7 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
 
         public PaymentReportCriteria PaymentReportCriteria { get; set; }
 
-        public ObservableCollection<vwPositivePay> PositivePays
+        public ObservableCollection<PositivePayItem> PositivePays
         {
             get { return _positivePays; }
             set
@@ -123,7 +122,7 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
                     StatusMessage = "refreshing Positive Pay report"
                 };
                 PositivePays =
-                    new ObservableCollection<vwPositivePay>(await RptSvc.GetPositivePayRpt(PaymentReportCriteria));
+                    new ObservableCollection<PositivePayItem>((IList<IvwPositivePay>) await RptSvc.GetPositivePayRpt(PaymentReportCriteria));
             }
             catch (Exception e)
             {

@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -73,7 +72,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             PaymentReportCriteria = new PaymentReportCriteria();
             PaymentReportCriteria.StartDate = new DateTime(DateTime.Now.Year, 1, 1);
             PaymentReportCriteria.EndDate = DateTime.Today.AddDays(1);
-            Accounts = new ObservableCollection<bank_account>(await BankAccountSvc.GetAccounts());
+            Accounts = new ObservableCollection<BankAccount>(await BankAccountSvc.GetAccounts());
             PaymentReportCriteria.Account =
                 (from l in Accounts where l.IsDefault.GetValueOrDefault(false) select l).First();
             ShowGridData = false;
@@ -128,11 +127,11 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
         }
 
 
-        private ObservableCollection<bank_account> _accounts;
+        private ObservableCollection<Models.BankAccount> _accounts;
         private bool _showAllAccountsOption;
 
 
-        public ObservableCollection<bank_account> Accounts
+        public ObservableCollection<Models.BankAccount> Accounts
         {
             get { return _accounts; }
             set

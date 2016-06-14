@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Payment.Summary
@@ -13,20 +13,20 @@ namespace CoopCheck.WPF.Content.Payment.Summary
     public partial class PaymentSummaryView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         private readonly ClientPaymentViewModel _vm;
 
-        private vwBatchRpt SelectedvwBatchRpt;
+        private BatchRpt SelectedvwBatchRpt;
 
         public PaymentSummaryView()
         {
@@ -34,7 +34,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             _vm = new ClientPaymentViewModel();
             DataContext = _vm;
 
-            Messenger.Default.Register<NotificationMessage<vwBatchRpt>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<BatchRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.JobFinderSelectedBatchChanged)
                 {
@@ -44,7 +44,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             });
 
 
-            Messenger.Default.Register<NotificationMessage<vwJobRpt>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<JobRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.JobFinderSelectedJobChanged)
                 {
@@ -55,32 +55,32 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         }
 
 
-        public ObservableCollection<vwPayment> AllPayments
+        public ObservableCollection<Paymnt> AllPayments
         {
             get { return _vm.AllPayments; }
         }
 
-        public ObservableCollection<vwPayment> OpenPayments
+        public ObservableCollection<Paymnt> OpenPayments
         {
             get { return _vm.OpenPayments; }
         }
 
-        public ObservableCollection<vwPayment> ClosedPayments
+        public ObservableCollection<Paymnt> ClosedPayments
         {
             get { return _vm.ClosedPayments; }
         }
 
-        private async Task RefreshChildren(vwBatchRpt vwBatchRpt)
+        private async Task RefreshChildren(BatchRpt BatchRpt)
         {
-            if (vwBatchRpt == null) return;
+            if (BatchRpt == null) return;
             if ((SelectedvwBatchRpt == null)
-                || (vwBatchRpt != SelectedvwBatchRpt))
+                || (BatchRpt != SelectedvwBatchRpt))
                 await Task.Factory.StartNew(() =>
                 {
-                    _vm.ClientReportCriteria.SelectedBatch.batch_num = vwBatchRpt.batch_num;
+                    _vm.ClientReportCriteria.SelectedBatch.batch_num = BatchRpt.batch_num;
                     _vm.RefreshAll();
                 });
-            SelectedvwBatchRpt = vwBatchRpt;
+            SelectedvwBatchRpt = BatchRpt;
             pgv.Visibility = Visibility;
         }
 

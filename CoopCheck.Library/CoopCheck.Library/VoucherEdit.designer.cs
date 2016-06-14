@@ -3,6 +3,7 @@ using Csla;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using CoopCheck.Library.Contracts.Interfaces;
 #if SILVERLIGHT
 using Csla.Serialization;
 #else
@@ -20,7 +21,7 @@ namespace CoopCheck.Library
     /// This class is an item of <see cref="VoucherList"/> collection.
     /// </remarks>
     [Serializable]
-    public partial class VoucherEdit : BusinessBase<VoucherEdit>
+    public partial class VoucherEdit : BusinessBase<VoucherEdit>, IVoucherEdit
     {
 
         #region Static Fields

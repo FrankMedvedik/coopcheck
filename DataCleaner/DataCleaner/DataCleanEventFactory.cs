@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataClean.Interfaces;
+using DataClean.Contracts.Interfaces;
 using DataClean.Models;
 using DataClean.Repository;
 
 namespace DataClean.DataCleaner
 {
-    public class DataCleanEventFactory
+    public class DataCleanEventFactory : IDataCleanEventFactory
     {
-        private DataCleaner _dataCleaner;
-        private Repository.Mgr.DataCleanRespository _dataCleanRepository;
-        private DataCleanCriteria _criteria;
+        private IDataCleaner _dataCleaner;
+        private IDataCleanRepository _dataCleanRepository;
+        private IDataCleanCriteria _criteria;
         
 
-        public DataCleanEventFactory(DataCleaner dataCleaner, Repository.Mgr.DataCleanRespository dataCleanRepository, DataCleanCriteria criteria)
+        public DataCleanEventFactory(IDataCleaner dataCleaner, IDataCleanRepository dataCleanRepository, IDataCleanCriteria criteria)
         {
             _dataCleaner = dataCleaner;
             _dataCleanRepository = dataCleanRepository;
@@ -34,11 +32,11 @@ namespace DataClean.DataCleaner
 
         }
 
-        public  DataCleanEvent ValidateAddress(InputStreetAddress input)
+        public  IDataCleanEvent ValidateAddress(IInputStreetAddress input)
         {
 
-            DataCleanEvent e;
-            OutputStreetAddress output;
+            IDataCleanEvent e;
+            IOutputStreetAddress output;
             if (_criteria.ForceValidation == false)
             {
                 e = _dataCleanRepository.GetEvent(input.ID);
@@ -51,14 +49,14 @@ namespace DataClean.DataCleaner
             return e;
         }
 
-        public DataCleanEvent GetExistingEvent(int id)
+        public IDataCleanEvent GetExistingEvent(int id)
         {
                 return _dataCleanRepository.GetEvent(id);
         }
-        public List<DataCleanEvent> ValidateAddresses(List<InputStreetAddress> inputAddressList)
+        public List<IDataCleanEvent> ValidateAddresses(List<IInputStreetAddress> inputAddressList)
         {
-            List<InputStreetAddress> toBeCleaned = new List<InputStreetAddress>();
-            List<DataCleanEvent> results = new List<DataCleanEvent>();
+            List<IInputStreetAddress> toBeCleaned = new List<IInputStreetAddress>();
+            List<IDataCleanEvent> results = new List<IDataCleanEvent>();
             foreach (var i in inputAddressList)
             {
                 if (_criteria.ForceValidation == false)
@@ -89,7 +87,7 @@ namespace DataClean.DataCleaner
             if (toBeCleaned.Any())
             {
                 var outArray = _dataCleaner.VerifyAndCleanAddress(toBeCleaned.ToArray());
-                List<DataCleanEvent> newEvents = CombineOutputsAndInputs(toBeCleaned, outArray);
+                List<IDataCleanEvent> newEvents = CombineOutputsAndInputs(toBeCleaned, outArray);
                 foreach (var e in newEvents)
                 {
                         _dataCleanRepository.SaveEvent(e);
@@ -99,7 +97,7 @@ namespace DataClean.DataCleaner
             return ApplyAutomaticFixes(results);
         }
 
-        private DataCleanEvent MergeInandOutReq(InputStreetAddress inAddress, DataCleanEvent outEvent)
+        private IDataCleanEvent MergeInandOutReq(IInputStreetAddress inAddress, IDataCleanEvent outEvent)
         {
             var e = new DataCleanEvent
             {
@@ -111,17 +109,17 @@ namespace DataClean.DataCleaner
             return e;
         }
 
-        private List<DataCleanEvent> ApplyAutomaticFixes(List<DataCleanEvent> results)
+        private List<IDataCleanEvent> ApplyAutomaticFixes(List<IDataCleanEvent> results)
         {
             AutoFixer A = new AutoFixer(_criteria) {DataCleanEvents = results};
             A.ApplyFixes();
             return A.DataCleanEvents;
         }
 
-        private List<DataCleanEvent> CombineOutputsAndInputs(List<InputStreetAddress> toBeCleaned,OutputStreetAddress[] outArray)
+        private List<IDataCleanEvent> CombineOutputsAndInputs(List<IInputStreetAddress> toBeCleaned,IOutputStreetAddress[] outArray)
         {
 
-            var convertedList = new List<DataCleanEvent>();
+            var convertedList = new List<IDataCleanEvent>();
 
             foreach (var i in toBeCleaned)
             {

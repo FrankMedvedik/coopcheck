@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using DataClean.DataCleaner;
-using DataClean.Interfaces;
 using DataClean.Models;
 using DataClean.Repository.Mgr;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -36,7 +35,7 @@ namespace DataClean.Test
 
         private OutputStreetAddress _goodOutputStreetAddress = new OutputStreetAddress()
         {
-            Results = ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList()
+            Results = new List<IParseResult>(ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList())
         };
 
         [TestMethod]
@@ -149,7 +148,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanListTest()
         {
-            List<InputStreetAddress> l = new List<InputStreetAddress>();
+            List<IInputStreetAddress> l = new List<IInputStreetAddress>();
             l.Add(TestData.BadEmailToClean);        
             l.Add(TestData.BadFirstNameToClean);
             l.Add(TestData.BadLastNameToClean);

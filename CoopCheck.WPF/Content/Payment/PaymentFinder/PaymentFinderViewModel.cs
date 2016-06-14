@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -15,7 +14,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
 {
     public class PaymentFinderViewModel : ViewModelBase
     {
-        private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
+        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
 
         public PaymentFinderViewModel()
         {
@@ -56,7 +55,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             get { return Payments.Sum(x => x.tran_amount); }
         }
 
-        public ObservableCollection<vwPayment> Payments
+        public ObservableCollection<Paymnt> Payments
         {
             get { return _payments; }
             set
@@ -170,10 +169,10 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             };
             try
             {
-                Payments = await Task<ObservableCollection<vwPayment>>.Factory.StartNew(() =>
+                Payments = await Task<ObservableCollection<Paymnt>>.Factory.StartNew(() =>
                 {
                     var task = RptSvc.GetPayments(PaymentReportCriteria);
-                    return new ObservableCollection<vwPayment>(task.Result);
+                    return new ObservableCollection<Paymnt>(task.Result);
                 });
             }
             catch (Exception e)
@@ -192,7 +191,7 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<vwPayment>();
+            _payments = new ObservableCollection<Paymnt>();
             ShowGridData = false;
         }
 
@@ -223,9 +222,9 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
 
         #region collection and selected
 
-        private vwPayment _selectedPayment;
+        private Paymnt _selectedPayment;
 
-        public vwPayment SelectedPayment
+        public Paymnt SelectedPayment
         {
             get { return _selectedPayment; }
             set

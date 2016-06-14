@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataClean.Interfaces;
+using DataClean.Contracts.Interfaces;
 using DataClean.Models;
 using log4net;
 using Newtonsoft.Json;
 
 namespace DataClean
 {
-    public class ParseResultDictionary : Dictionary<string, ParseResult>
+    public class ParseResultDictionary : Dictionary<string, IParseResult>, IParseResultDictionary
     {
 
         public const string AUTOFIX_CITY_CODE = "AC03";
@@ -33,7 +30,7 @@ namespace DataClean
             DictionaryFileName = "MelissaCodes.json";
             Initialize();
         }
-        public ParseResultDictionary(List<ParseResult> parseResultList)
+        public ParseResultDictionary(List<IParseResult> parseResultList)
         {
             try
             {
@@ -55,26 +52,26 @@ namespace DataClean
             Initialize();
         }
 
-        public ParseResult[] GetAllInfoMessages()
+        public IParseResult[] GetAllInfoMessages()
         {
             return (from a in this where a.Value.Type == ParseResult.INFO select a.Value).OrderBy(x => x.Code).ToArray();
         }
 
-        public ParseResult[] GetAllMessages()
+        public IParseResult[] GetAllMessages()
         {
             return (from a in this select a.Value).OrderBy(x => x.Code).ToArray();
         }
 
-        public ParseResult[] GetAllWarningMessages()
+        public IParseResult[] GetAllWarningMessages()
         {
             return (from a in this where a.Value.Type == ParseResult.WARN select a.Value).OrderBy(x => x.Code).ToArray();
         }
-        public ParseResult[] GetAllinfoMessages()
+        public IParseResult[] GetAllinfoMessages()
         {
             return (from a in this where a.Value.Type == ParseResult.INFO select a.Value).OrderBy(x => x.Code).ToArray();
         }
 
-        public ParseResult[] GetAllFatalErrors()
+        public IParseResult[] GetAllFatalErrors()
         {
             return (from a in this where a.Value.Type == ParseResult.ERROR select a.Value).OrderBy(x => x.Code).ToArray();
         }
@@ -108,9 +105,9 @@ namespace DataClean
             }
         }
 
-        public  ParseResult LookupCode(string resultcode)
+        public  IParseResult LookupCode(string resultcode)
         {
-            ParseResult msg;
+            IParseResult msg;
             if (!TryGetValue(resultcode, out msg))
                 msg = new ParseResult()
                 {
@@ -122,7 +119,7 @@ namespace DataClean
             return msg;
         }
 
-        public ParseResult[] LookupCodeList(IEnumerable<string> results)
+        public IParseResult[] LookupCodeList(IEnumerable<string> results)
         {
 
             var v= results.Where(x =>x.Trim() != "").Select(LookupCode).ToArray();

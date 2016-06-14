@@ -44,11 +44,6 @@ namespace CoopCheck.Repository
         public virtual DbSet<vwBatchRpt> vwBatchRpts { get; set; }
         public virtual DbSet<vwOpenBatch> vwOpenBatches { get; set; }
     
-        public virtual ObjectResult<dsa_GetCheckingAccounts_Result> dsa_GetCheckingAccounts()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<dsa_GetCheckingAccounts_Result>("dsa_GetCheckingAccounts");
-        }
-    
         public virtual ObjectResult<dsa_GetCheckList_Result> dsa_GetCheckList(string person_id)
         {
             var person_idParameter = person_id != null ?

@@ -91,6 +91,10 @@
     <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
+      <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
+      <Name>DataClean.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataClean.Repository\DataClean.Repository.csproj">
       <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
       <Name>DataClean.Repository</Name>

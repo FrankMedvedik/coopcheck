@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
+using CoopCheck.Library.Contracts.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CoopCheck.Library;
 
 namespace CoopCheck.Library.Tests
 {
@@ -57,7 +57,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
             
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
@@ -93,7 +93,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
@@ -108,7 +108,7 @@ namespace CoopCheck.Library.Tests
 
             obj.Vouchers.Add(voc);
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
@@ -172,13 +172,13 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
             obj.Vouchers[0].First = "Jim";
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
@@ -222,19 +222,19 @@ namespace CoopCheck.Library.Tests
 
             obj.Vouchers.Add(voc);
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
             obj.Vouchers[0].First = "Jim";
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
             obj.Vouchers.Remove(obj.Vouchers[0].Id);
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             obj = BatchEdit.GetBatchEdit(obj.Num);
 
@@ -278,7 +278,7 @@ namespace CoopCheck.Library.Tests
 
             obj.Vouchers.Add(voc);
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             // don't get why i need to get this 2x 
             // I assume the save is giving me the good version
@@ -286,7 +286,7 @@ namespace CoopCheck.Library.Tests
 
             obj.Vouchers.Remove(obj.Vouchers[0].Id);
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             //obj = BatchEdit.GetBatchEdit(obj.Num);
 
@@ -331,7 +331,7 @@ namespace CoopCheck.Library.Tests
 
             obj.Vouchers.Add(voc);
 
-            obj = obj.Save();
+            obj = (IBatchEdit) obj.Save();
 
             // don't get why i need to get this 2x 
             // I assume the save is giving me the good version

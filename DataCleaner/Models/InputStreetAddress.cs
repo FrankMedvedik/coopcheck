@@ -1,6 +1,4 @@
-﻿using System;
-using DataClean.Interfaces;
-using DataClean.Services;
+﻿using DataClean.Contracts.Interfaces;
 
 namespace DataClean.Models
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -12,7 +11,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
 {
     public class BatchReportViewModel : ViewModelBase
     {
-        private ObservableCollection<vwBatchRpt> _batches = new ObservableCollection<vwBatchRpt>();
+        private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
 
 
         private decimal _batchTotalDollars;
@@ -21,7 +20,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         private string _headingText;
         private PaymentReportCriteria _paymentReportCriteria;
 
-        private vwBatchRpt _selectedBatch = new vwBatchRpt();
+        private BatchRpt _selectedBatch = new BatchRpt();
 
 
         private bool _showGridData;
@@ -43,14 +42,14 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             }
         }
 
-        public vwBatchRpt SelectedBatch
+        public BatchRpt SelectedBatch
         {
             get { return _selectedBatch; }
             set
             {
                 _selectedBatch = value;
                 NotifyPropertyChanged();
-                Messenger.Default.Send(new NotificationMessage<vwBatchRpt>(SelectedBatch,
+                Messenger.Default.Send(new NotificationMessage<BatchRpt>(SelectedBatch,
                     Notifications.SelectedBatchChanged));
                 Status = new StatusInfo
                 {
@@ -102,7 +101,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             get { return Batches?.Where(x => x.total_amount > 0).Sum(x => x.total_amount); }
         }
 
-        public ObservableCollection<vwBatchRpt> Batches
+        public ObservableCollection<BatchRpt> Batches
         {
             get { return _batches; }
             set
@@ -178,7 +177,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 };
                 var v = await RptSvc.GetBatchRpt(PaymentReportCriteria);
                 BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
-                Batches = new ObservableCollection<vwBatchRpt>(v);
+                Batches = new ObservableCollection<BatchRpt>(v);
             }
             catch (Exception e)
             {

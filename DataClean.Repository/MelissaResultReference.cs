@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using DataClean.Repository.Contracts.Interfaces;
+
 namespace DataClean.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class MelissaResultReference
+    public partial class MelissaResultReference : IMelissaResultReference
     {
         public string Code { get; set; }
         public string Type { get; set; }

@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
-using CoopCheck.Repository;
 using CoopCheck.WPF.Content.Voucher;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -19,20 +17,20 @@ namespace CoopCheck.WPF.Content.Payment.Batch
     public partial class BatchSummaryPaymentReportView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<vwPayment>),
-                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<vwPayment>()));
+            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<Paymnt>),
+                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         private readonly BatchSummaryPaymentReportViewModel _vm;
 
-        private vwBatchRpt SelectedvwBatchRpt;
+        private BatchRpt SelectedvwBatchRpt;
 
         public BatchSummaryPaymentReportView()
         {
@@ -43,7 +41,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;
             prcv.ShowAllAccountsOption = true;
 
-            Messenger.Default.Register<NotificationMessage<vwBatchRpt>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<BatchRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.SelectedBatchChanged)
                 {
@@ -53,32 +51,32 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         }
 
 
-        public ObservableCollection<vwPayment> AllPayments
+        public ObservableCollection<Paymnt> AllPayments
         {
             get { return _vm.AllPayments; }
         }
 
-        public ObservableCollection<vwPayment> OpenPayments
+        public ObservableCollection<Paymnt> OpenPayments
         {
             get { return _vm.OpenPayments; }
         }
 
-        public ObservableCollection<vwPayment> ClosedPayments
+        public ObservableCollection<Paymnt> ClosedPayments
         {
             get { return _vm.ClosedPayments; }
         }
 
-        private async Task RefreshChildren(vwBatchRpt vwBatchRpt)
+        private async Task RefreshChildren(BatchRpt BatchRpt)
         {
-            if (vwBatchRpt == null) return;
+            if (BatchRpt == null) return;
             if ((SelectedvwBatchRpt == null)
-                || (vwBatchRpt != SelectedvwBatchRpt))
+                || (BatchRpt != SelectedvwBatchRpt))
                 await Task.Factory.StartNew(() =>
                 {
-                    _vm.PaymentReportCriteria.BatchNumber = vwBatchRpt.batch_num;
+                    _vm.PaymentReportCriteria.BatchNumber = BatchRpt.batch_num;
                     _vm.RefreshAll();
                 });
-            SelectedvwBatchRpt = vwBatchRpt;
+            SelectedvwBatchRpt = BatchRpt;
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)

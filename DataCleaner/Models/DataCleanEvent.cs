@@ -1,6 +1,5 @@
 ﻿using System;
-using DataClean.Interfaces;
-using DataClean.Services;
+using DataClean.Contracts.Interfaces;
 
 namespace DataClean.Models
 {
@@ -42,8 +41,8 @@ namespace DataClean.Models
             get { return DataCleanDate != DateTime.MinValue; }
         }
 
-        public InputStreetAddress Input { get; set; }
-        public OutputStreetAddress Output { get; set; }
+        public IInputStreetAddress Input { get; set; }
+        public IOutputStreetAddress Output { get; set; }
     
     }
 }

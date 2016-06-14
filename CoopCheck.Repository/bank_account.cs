@@ -7,12 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using CoopCheck.Repository.Contracts.Interfaces;
+
 namespace CoopCheck.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class bank_account 
+    public partial class bank_account : Ibank_account
     {
         public int account_id { get; set; }
         public string account_name { get; set; }
