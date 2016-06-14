@@ -12,7 +12,7 @@ namespace CoopCheck.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class vwVoidedPayment : IvwVoidedPayment
+    public partial class vwVoidedPayment
     {
         public int tran_id { get; set; }
         public int batch_num { get; set; }

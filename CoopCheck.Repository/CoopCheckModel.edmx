@@ -888,45 +888,13 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
         </EntityType>
         <EntityContainer Name="CoopCheckEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="batches" EntityType="Self.batch" />
-          <EntitySet Name="check_tran" EntityType="Self.check_tran" />
+          <EntitySet Name="check_trans" EntityType="Self.check_tran" />
           <EntitySet Name="vouchers" EntityType="Self.voucher" />
-          <FunctionImport Name="dsa_GetCheckingAccounts" ReturnType="Collection(CoopCheckModel.dsa_GetCheckingAccounts_Result)" />
-          <FunctionImport Name="dsa_GetCheckList" ReturnType="Collection(CoopCheckModel.dsa_GetCheckList_Result)">
-          <Parameter Name="person_id" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="dsa_GetChecks" ReturnType="Collection(CoopCheckModel.dsa_GetChecks_Result)">
-            <Parameter Name="account_id" Mode="In" Type="Int32" />
-            <Parameter Name="batch_num" Mode="In" Type="Int32" />
-            <Parameter Name="starting_check_num" Mode="In" Type="String" />
-            <Parameter Name="ending_check_num" Mode="In" Type="String" />
-            <Parameter Name="starting_check_date" Mode="In" Type="String" />
-            <Parameter Name="ending_check_date" Mode="In" Type="String" />
-            <Parameter Name="job_num" Mode="In" Type="Int32" />
-            <Parameter Name="last_name" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="dsa_GetOutstandingChecks" ReturnType="Collection(CoopCheckModel.dsa_GetOutstandingChecks_Result)">
-          <Parameter Name="account_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="dsa_GetReconcilationReport" ReturnType="Collection(CoopCheckModel.dsa_GetReconcilationReport_Result)">
-            <Parameter Name="account_id" Mode="In" Type="Int32" />
-            <Parameter Name="rec_date" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="dsa_GetSwiftBatch" ReturnType="Collection(CoopCheckModel.dsa_GetSwiftBatch_Result)">
-            <Parameter Name="batch_num" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="dsa_GetVoucher" ReturnType="Collection(CoopCheckModel.dsa_GetVoucher_Result)">
-          <Parameter Name="tran_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="getbatchRpt" ReturnType="Collection(CoopCheckModel.getbatchRpt_Result)">
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="vwCheck" EntityType="CoopCheckModel.vwCheck" />
+          <EntitySet Name="vwChecks" EntityType="CoopCheckModel.vwCheck" />
           <EntitySet Name="vwPositivePay1" EntityType="CoopCheckModel.vwPositivePay" />
-          <EntitySet Name="vwVoidedPayment" EntityType="CoopCheckModel.vwVoidedPayment" />
-          <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
-          <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
-          <FunctionImport Name="dal_GetOpenBatch" />
+          <EntitySet Name="vwVoidedPayments" EntityType="CoopCheckModel.vwVoidedPayment" />
+          <EntitySet Name="vwPayments1" EntityType="CoopCheckModel.vwPayment" />
+          <EntitySet Name="bank_accounts" EntityType="CoopCheckModel.bank_account" />
           <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpts" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
@@ -937,7 +905,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
             <Parameter Name="end_date" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="vwUnclearedBatch" EntityType="CoopCheckModel.vwUnclearedBatch" />
+          <EntitySet Name="vwUnclearedBatches" EntityType="CoopCheckModel.vwUnclearedBatch" />
           <EntitySet Name="CoopCheckClients" EntityType="CoopCheckModel.CoopCheckClient" />
           <EntitySet Name="CoopCheckJobLogs" EntityType="CoopCheckModel.CoopCheckJobLog" />
           <EntitySet Name="vwClientJobBatches" EntityType="CoopCheckModel.vwClientJobBatch" />
@@ -946,189 +914,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <EntitySet Name="vwBatchRpts" EntityType="CoopCheckModel.vwBatchRpt" />
           <EntitySet Name="vwOpenBatches" EntityType="CoopCheckModel.vwOpenBatch" />
         </EntityContainer>
-        <ComplexType Name="dsa_GetCheckingAccounts_Result">
-          <Property Type="Int32" Name="account_id" Nullable="false" />
-          <Property Type="String" Name="account_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetCheckList_Result">
-          <Property Type="Int32" Name="tran_id" Nullable="false" />
-          <Property Type="DateTime" Name="check_date" Nullable="true" Precision="16" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="Int32" Name="account_id" Nullable="true" />
-          <Property Type="String" Name="check_num" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="tran_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="DateTime" Name="cleared_date" Nullable="true" Precision="16" />
-          <Property Type="Boolean" Name="print_flag" Nullable="false" />
-          <Property Type="Boolean" Name="cleared_flag" Nullable="false" />
-          <Property Type="String" Name="person_id" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name_prefix" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="middle_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="last_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="name_suffix" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="title" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="company" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="address_1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="address_2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="municipality" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="region" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="postal_code" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="country" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="phone_number" Nullable="true" MaxLength="22" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
-          <Property Type="String" Name="study_topic" Nullable="true" MaxLength="150" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetChecks_Result">
-          <Property Type="Int32" Name="tran_id" Nullable="false" />
-          <Property Type="DateTime" Name="check_date" Nullable="true" Precision="16" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="Int32" Name="account_id" Nullable="true" />
-          <Property Type="String" Name="check_num" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="tran_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="DateTime" Name="cleared_date" Nullable="true" Precision="16" />
-          <Property Type="Boolean" Name="print_flag" Nullable="false" />
-          <Property Type="Boolean" Name="cleared_flag" Nullable="false" />
-          <Property Type="String" Name="person_id" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name_prefix" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="middle_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="last_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="name_suffix" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="title" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="company" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="address_1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="address_2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="municipality" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="region" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="postal_code" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="country" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="phone_number" Nullable="true" MaxLength="22" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
-          <Property Type="String" Name="usr" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetOpenBatch_Result">
-          <Property Type="Int32" Name="batch_num" Nullable="false" />
-          <Property Type="String" Name="batch_label" Nullable="true" MaxLength="266" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetOutstandingChecks_Result">
-          <Property Type="Int32" Name="tran_id" Nullable="false" />
-          <Property Type="DateTime" Name="check_date" Nullable="true" Precision="16" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="Int32" Name="account_id" Nullable="true" />
-          <Property Type="String" Name="check_num" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="tran_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="DateTime" Name="cleared_date" Nullable="true" Precision="16" />
-          <Property Type="Boolean" Name="print_flag" Nullable="false" />
-          <Property Type="Boolean" Name="cleared_flag" Nullable="false" />
-          <Property Type="String" Name="person_id" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name_prefix" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="middle_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="last_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="name_suffix" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="title" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="company" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="address_1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="address_2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="municipality" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="region" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="postal_code" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="country" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="phone_number" Nullable="true" MaxLength="22" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
-          <Property Type="String" Name="usr" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetReconcilationReport_Result">
-          <Property Type="Int32" Name="tran_id" Nullable="false" />
-          <Property Type="DateTime" Name="check_date" Nullable="true" Precision="16" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="Int32" Name="account_id" Nullable="true" />
-          <Property Type="String" Name="check_num" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="tran_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="DateTime" Name="cleared_date" Nullable="true" Precision="16" />
-          <Property Type="Boolean" Name="print_flag" Nullable="false" />
-          <Property Type="Boolean" Name="cleared_flag" Nullable="false" />
-          <Property Type="String" Name="person_id" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name_prefix" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="middle_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="last_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="name_suffix" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="title" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="company" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="address_1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="address_2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="municipality" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="region" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="postal_code" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="country" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="phone_number" Nullable="true" MaxLength="22" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
-          <Property Type="String" Name="usr" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetSwiftBatch_Result">
-          <Property Type="Int32" Name="batch_num" Nullable="false" />
-          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
-          <Property Type="Decimal" Name="batch_amount" Nullable="true" Precision="19" />
-          <Property Type="Int32" Name="job_num" Nullable="true" />
-          <Property Type="String" Name="batch_dscr" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
-          <Property Type="String" Name="thank_you_1" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="study_topic" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="thank_you_2" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="marketing_research_message" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="respondent_batch_id" Nullable="true" />
-          <Property Type="String" Name="usr" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="dsa_GetVoucher_Result">
-          <Property Type="Int32" Name="tran_id" Nullable="false" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="Decimal" Name="tran_amount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="person_id" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name_prefix" Nullable="true" MaxLength="5" />
-          <Property Type="String" Name="first_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="middle_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="last_name" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="name_suffix" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="title" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="company" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="address_1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="address_2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="municipality" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="region" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="postal_code" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="country" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="phone_number" Nullable="true" MaxLength="22" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="updated" Nullable="true" Precision="16" />
-        </ComplexType>
-        <ComplexType Name="getbatchRpt_Result">
-          <Property Type="String" Name="account_name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="job_num" Nullable="true" />
-          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
-          <Property Type="Decimal" Name="batch_amount" Nullable="true" Precision="19" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="String" Name="payment_type" Nullable="false" MaxLength="14" />
-          <Property Type="Int32" Name="total_cnt" Nullable="true" />
-          <Property Type="Int32" Name="open_cnt" Nullable="true" />
-          <Property Type="Int32" Name="cleared_cnt" Nullable="true" />
-          <Property Type="Decimal" Name="open_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="10" />
-        </ComplexType>
         <EntityType Name="vwCheck">
           <Key>
             <PropertyRef Name="batch_num" />
@@ -1270,51 +1055,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="IsDefault" Type="Boolean" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
-        <ComplexType Name="dal_GetOpenBatch_Result">
-          <Property Type="Int32" Name="job_num" Nullable="true" />
-          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="Int32" Name="voucher_cnt" Nullable="true" />
-          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
-        </ComplexType>
-        <ComplexType Name="GetJobPaymentsReport_Result">
-          <Property Type="Int32" Name="job_num" Nullable="false" />
-          <Property Type="Int32" Name="account_id" Nullable="true" />
-          <Property Type="Int32" Name="batch_cnt" Nullable="true" />
-          <Property Type="DateTime" Name="first_batch_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="last_batch_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="first_pay_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="last_pay_date" Nullable="true" Precision="16" />
-          <Property Type="Int32" Name="total_cnt" Nullable="true" />
-          <Property Type="Int32" Name="open_cnt" Nullable="true" />
-          <Property Type="Int32" Name="cleared_cnt" Nullable="true" />
-          <Property Type="Decimal" Name="open_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="first_check_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="last_check_date" Nullable="true" Precision="16" />
-        </ComplexType>
-        <ComplexType Name="GetBatchPaymentsReport_Result">
-          <Property Type="Int32" Name="account_id" Nullable="true" />
-          <Property Type="String" Name="account_name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="job_num" Nullable="true" />
-          <Property Type="DateTime" Name="batch_date" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="pay_date" Nullable="true" Precision="16" />
-          <Property Type="Decimal" Name="batch_amount" Nullable="true" Precision="19" />
-          <Property Type="Int32" Name="batch_num" Nullable="true" />
-          <Property Type="String" Name="payment_type" Nullable="false" MaxLength="14" />
-          <Property Type="Int32" Name="total_cnt" Nullable="true" />
-          <Property Type="Int32" Name="open_cnt" Nullable="true" />
-          <Property Type="Int32" Name="cleared_cnt" Nullable="true" />
-          <Property Type="Decimal" Name="open_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="cleared_amount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="total_amount" Nullable="true" Precision="19" />
-          <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <EntityType Name="vwUnclearedBatch">
           <Key>
             <PropertyRef Name="batch_num" />
@@ -1535,7 +1275,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="check_tran">
+          <EntitySetMapping Name="check_trans">
             <EntityTypeMapping TypeName="CoopCheckModel.check_tran">
               <MappingFragment StoreEntitySet="check_tran">
                 <ScalarProperty Name="usr" ColumnName="usr" />
@@ -1595,190 +1335,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetCheckList" FunctionName="CoopCheckModel.Store.dsa_GetCheckList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetCheckList_Result">
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetChecks" FunctionName="CoopCheckModel.Store.dsa_GetChecks">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetChecks_Result">
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="usr" ColumnName="usr" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetOutstandingChecks" FunctionName="CoopCheckModel.Store.dsa_GetOutstandingChecks">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetOutstandingChecks_Result">
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="usr" ColumnName="usr" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetReconcilationReport" FunctionName="CoopCheckModel.Store.dsa_GetReconcilationReport">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetReconcilationReport_Result">
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="check_date" ColumnName="check_date" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="account_id" ColumnName="account_id" />
-                <ScalarProperty Name="check_num" ColumnName="check_num" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
-                <ScalarProperty Name="print_flag" ColumnName="print_flag" />
-                <ScalarProperty Name="cleared_flag" ColumnName="cleared_flag" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-                <ScalarProperty Name="usr" ColumnName="usr" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="dsa_GetVoucher" FunctionName="CoopCheckModel.Store.dsa_GetVoucher">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.dsa_GetVoucher_Result">
-                <ScalarProperty Name="tran_id" ColumnName="tran_id" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="tran_amount" ColumnName="tran_amount" />
-                <ScalarProperty Name="person_id" ColumnName="person_id" />
-                <ScalarProperty Name="name_prefix" ColumnName="name_prefix" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="name_suffix" ColumnName="name_suffix" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="address_1" ColumnName="address_1" />
-                <ScalarProperty Name="address_2" ColumnName="address_2" />
-                <ScalarProperty Name="municipality" ColumnName="municipality" />
-                <ScalarProperty Name="region" ColumnName="region" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="updated" ColumnName="updated" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getbatchRpt" FunctionName="CoopCheckModel.Store.getbatchRpt">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CoopCheckModel.getbatchRpt_Result">
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_amount" ColumnName="batch_amount" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
-                <ScalarProperty Name="total_cnt" ColumnName="total_cnt" />
-                <ScalarProperty Name="open_cnt" ColumnName="open_cnt" />
-                <ScalarProperty Name="cleared_cnt" ColumnName="cleared_cnt" />
-                <ScalarProperty Name="open_amount" ColumnName="open_amount" />
-                <ScalarProperty Name="cleared_amount" ColumnName="cleared_amount" />
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="first_check_num" ColumnName="first_check_num" />
-                <ScalarProperty Name="last_check_num" ColumnName="last_check_num" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="vwCheck">
+          <EntitySetMapping Name="vwChecks">
             <EntityTypeMapping TypeName="CoopCheckModel.vwCheck">
               <MappingFragment StoreEntitySet="vwCheck">
                 <ScalarProperty Name="print_flag" ColumnName="print_flag" />
@@ -1821,7 +1378,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwVoidedPayment">
+          <EntitySetMapping Name="vwVoidedPayments">
             <EntityTypeMapping TypeName="CoopCheckModel.vwVoidedPayment">
               <MappingFragment StoreEntitySet="vwVoidedPayment">
                 <ScalarProperty Name="usr" ColumnName="usr" />
@@ -1861,7 +1418,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwPayment">
+          <EntitySetMapping Name="vwPayments1">
             <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
               <MappingFragment StoreEntitySet="vwPayment">
                 <ScalarProperty Name="usr" ColumnName="usr" />
@@ -1901,7 +1458,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bank_account">
+          <EntitySetMapping Name="bank_accounts">
             <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
               <MappingFragment StoreEntitySet="bank_account">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -1917,12 +1474,10 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="dal_GetOpenBatch" FunctionName="CoopCheckModel.Store.dal_GetOpenBatch">
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetJobPaymentsReport" FunctionName="CoopCheckModel.Store.GetJobPaymentsReport">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetBatchPaymentReport" FunctionName="CoopCheckModel.Store.GetBatchPaymentsReport" />
-          <EntitySetMapping Name="vwUnclearedBatch">
+          <EntitySetMapping Name="vwUnclearedBatches">
             <EntityTypeMapping TypeName="CoopCheckModel.vwUnclearedBatch">
               <MappingFragment StoreEntitySet="vwUnclearedBatch">
                 <ScalarProperty Name="total_amount" ColumnName="total_amount" />

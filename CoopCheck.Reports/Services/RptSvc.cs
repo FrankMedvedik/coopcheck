@@ -258,8 +258,8 @@ namespace CoopCheck.Reports.Services
 
         public static async Task<List<IvwVoidedPayment>> GetVoidedHonorariaPayments(IPaymentReportCriteria crc)
         {
-            IQueryable<VoidedPaymnt> query;
-            List<VoidedPaymnt> v;
+            IQueryable<IvwVoidedPayment> query;
+            List<IvwVoidedPayment> v;
             using (var ctx = new CoopCheckEntities())
             {
                 query =

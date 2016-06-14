@@ -7,14 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using CoopCheck.Repository.Contracts.Interfaces;
-
 namespace CoopCheck.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class vwPayment : IvwPayment
+    public partial class vwPayment
     {
         public int tran_id { get; set; }
         public int batch_num { get; set; }

@@ -91,43 +91,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoopCheckModel.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="CoopCheckModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CoopCheckModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CoopCheckModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="dsa_GetCheckList_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    <Compile Include="EntityInterfaceGenerator.IDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityInterfaceGenerator.IDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="dsa_GetChecks_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    <Compile Include="EntityInterfaceGenerator.IEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityInterfaceGenerator.IEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="dsa_GetOpenBatch_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    <Compile Include="EntityInterfaceGenerator.PartialContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityInterfaceGenerator.PartialContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="dsa_GetOutstandingChecks_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
+    <Compile Include="EntityInterfaceGenerator.PartialEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityInterfaceGenerator.PartialEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="dsa_GetReconcilationReport_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dsa_GetSwiftBatch_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dsa_GetVoucher_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GetBatchPaymentsReport_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="getbatchRpt_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GetJobPaymentsReport_Result.cs">
-      <DependentUpon>CoopCheckModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IvwUnclearedBatch.cs" />
-    <Compile Include="IvwVoidedPayment.cs" />
     <Compile Include="JobLog.cs">
       <DependentUpon>CoopCheckModel.tt</DependentUpon>
     </Compile>
@@ -203,6 +196,24 @@
       <Project>{d57c0767-59ca-4d7a-ac3c-5966f03e9c53}</Project>
       <Name>DataClean.Repository.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityInterfaceGenerator.IDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityInterfaceGenerator.IDbContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityInterfaceGenerator.IEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityInterfaceGenerator.IEntities.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityInterfaceGenerator.PartialContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityInterfaceGenerator.PartialContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityInterfaceGenerator.PartialEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityInterfaceGenerator.PartialEntities.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

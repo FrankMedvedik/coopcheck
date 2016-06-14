@@ -7,14 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using CoopCheck.Repository.Contracts.Interfaces;
-
 namespace CoopCheck.Repository
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class check_tran : Icheck_tran
+    public partial class check_tran
     {
         public int tran_id { get; set; }
         public Nullable<System.DateTime> check_date { get; set; }
