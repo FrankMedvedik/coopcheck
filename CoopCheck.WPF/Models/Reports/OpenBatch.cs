@@ -1,9 +1,10 @@
 ﻿using System;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Contracts.Interfaces;
 
 namespace CoopCheck.WPF.Models
 {
-    public class OpenBatch : IOpenBatch
+    public class OpenBatch : IvwOpenBatch
     {
         public bool BadBatch { get; }
         public DateTime? batch_date { get; set; }

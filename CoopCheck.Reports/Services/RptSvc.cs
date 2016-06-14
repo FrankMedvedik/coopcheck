@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Reports.Contracts.Interfaces;
@@ -28,7 +30,7 @@ namespace CoopCheck.Reports.Services
         }
 
 
-        public static async Task<List<IvwPayment>> GetHonorariaPayments(PaymentReportCriteria crc)
+        public static async Task<List<IvwPayment>> GetHonorariaPayments(IPaymentReportCriteria crc)
         {
             IQueryable<IvwPayment> query;
             List<IvwPayment> v;
@@ -167,7 +169,7 @@ namespace CoopCheck.Reports.Services
             return v;
         }
 
-        public static async Task<List<IvwPayment>> GetBatchHonorariaPayments(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetBatchHonorariaPayments(IPaymentReportCriteria grc)
         {
             List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
@@ -182,7 +184,7 @@ namespace CoopCheck.Reports.Services
         }
 
 
-        public static async Task<List<IvwPayment>> GetJobHonorariaPayments(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetJobHonorariaPayments(IPaymentReportCriteria grc)
         {
             List<IvwPayment> v;
             using (var ctx = new CoopCheckEntities())
@@ -196,7 +198,7 @@ namespace CoopCheck.Reports.Services
             return v;
         }
 
-        public static async Task<List<IvwPositivePay>> GetPositivePayRpt(PaymentReportCriteria grc)
+        public static async Task<List<IvwPositivePay>> GetPositivePayRpt(IPaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -211,7 +213,7 @@ namespace CoopCheck.Reports.Services
             }
         }
 
-        public static async Task<List<IvwPayment>> GetPaymentReconcileReport(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetPaymentReconcileReport(IPaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -224,7 +226,7 @@ namespace CoopCheck.Reports.Services
             }
         }
 
-        public static async Task<List<IvwPayment>> GetUnclearedCheckReport(PaymentReportCriteria grc)
+        public static async Task<List<IvwPayment>> GetUnclearedCheckReport(IPaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
@@ -237,7 +239,7 @@ namespace CoopCheck.Reports.Services
             }
         }
 
-        public static async Task<List<IvwPayment>> GetOpenPayments(PaymentReportCriteria prc)
+        public static async Task<List<IvwPayment>> GetOpenPayments(IPaymentReportCriteria prc)
         {
             IQueryable<IvwPayment> query;
             List<IvwPayment> v;
@@ -254,7 +256,7 @@ namespace CoopCheck.Reports.Services
             return v;
         }
 
-        public static async Task<List<IvwVoidedPayment>> GetVoidedHonorariaPayments(PaymentReportCriteria crc)
+        public static async Task<List<IvwVoidedPayment>> GetVoidedHonorariaPayments(IPaymentReportCriteria crc)
         {
             IQueryable<VoidedPaymnt> query;
             List<VoidedPaymnt> v;

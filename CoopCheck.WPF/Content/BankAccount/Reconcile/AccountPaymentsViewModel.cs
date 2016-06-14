@@ -62,7 +62,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             }
         }
 
-        public List<IvwPayment> AllPayments
+        public List<Paymnt> AllPayments
         {
             get { return _allPayments; }
             set

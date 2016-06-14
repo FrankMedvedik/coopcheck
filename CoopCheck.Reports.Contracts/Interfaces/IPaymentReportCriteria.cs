@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Interfaces
 {

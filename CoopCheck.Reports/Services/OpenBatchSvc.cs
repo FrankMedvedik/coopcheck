@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Services
 {
     public static class OpenBatchSvc
     {
-        public static async Task<List<OpenBatch>> GetOpenBatches()
+        public static async Task<List<IvwOpenBatch>> GetOpenBatches()
         {
             using (var ctx = new CoopCheckEntities())
             {

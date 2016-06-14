@@ -3,8 +3,8 @@ using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
-using CoopCheck.WPF.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Services

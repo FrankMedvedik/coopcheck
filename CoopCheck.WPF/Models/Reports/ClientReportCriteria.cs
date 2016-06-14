@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
-using CoopCheck.WPF.Contracts.Interfaces;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Models

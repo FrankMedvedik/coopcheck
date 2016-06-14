@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.DAL;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -217,7 +218,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
                     AccountPayments.ChecksToClear = query.ToList();
 
-                    AccountPayments.MatchedPayments =
+                    AccountPayments.MatchedPayments = 
                         (AccountPayments.AllPayments.Where(
                             s => BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();
 

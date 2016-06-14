@@ -14,7 +14,7 @@ namespace CoopCheck.WPF.Services
 {
     public static class HonorariaPaymentSvc
     {
-        public static int MAX_HonorariaPayment_COUNT = 10000;
+        public static int MAX_Payment_COUNT = 10000;
 
         public static async Task<StatusInfo> SwiftFulfillAsync(int batchNum)
         {
@@ -72,7 +72,7 @@ namespace CoopCheck.WPF.Services
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     // HTTP POST
-                    var response = await client.PostAsync(String.Format("api/swiftHonorariaPayment/swiftvoid?batchNum={0}", batchNum), null);
+                    var response = await client.PostAsync(String.Format("api/swiftPayment/swiftvoid?batchNum={0}", batchNum), null);
                     if (response.IsSuccessStatusCode)
                         i.StatusMessage = "Swiftpay processing started";
                     i.IsBusy = false;
@@ -141,7 +141,7 @@ namespace CoopCheck.WPF.Services
             var app = new Application();
             foreach (var c in b.Vouchers)
             {
-                var status = HonorariaPaymentPrintSvc.PrintCheck(app, b, c, checkNum++);
+                var status = PaymentPrintSvc.PrintCheck(app, b, c, checkNum++);
                 status.IsBusy = true;
                 ++currentCheckPct;
                 var z = currentCheckPct/b.Vouchers.Count*100;
