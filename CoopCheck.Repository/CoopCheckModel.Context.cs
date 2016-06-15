@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using CoopCheck.Repository.Contracts.Interfaces;
+
 namespace CoopCheck.Repository
 {
     using System;
@@ -15,7 +17,7 @@ namespace CoopCheck.Repository
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class CoopCheckEntities : DbContext
+    public partial class CoopCheckEntities : DbContext, ICoopCheckEntities
     {
         public CoopCheckEntities()
             : base("name=CoopCheckEntities")
@@ -27,24 +29,24 @@ namespace CoopCheck.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<batch> batches { get; set; }
-        public virtual DbSet<check_tran> check_trans { get; set; }
-        public virtual DbSet<voucher> vouchers { get; set; }
-        public virtual DbSet<vwCheck> vwChecks { get; set; }
-        public virtual DbSet<vwPositivePay> vwPositivePay1 { get; set; }
-        public virtual DbSet<vwVoidedPayment> vwVoidedPayments { get; set; }
-        public virtual DbSet<vwPayment> vwPayments1 { get; set; }
-        public virtual DbSet<bank_account> bank_accounts { get; set; }
-        public virtual DbSet<vwUnclearedBatch> vwUnclearedBatches { get; set; }
-        public virtual DbSet<CoopCheckClient> CoopCheckClients { get; set; }
-        public virtual DbSet<CoopCheckJobLog> CoopCheckJobLogs { get; set; }
-        public virtual DbSet<vwClientJobBatch> vwClientJobBatches { get; set; }
-        public virtual DbSet<vwJobRpt> vwJobRpts { get; set; }
-        public virtual DbSet<JobLog> JobLogs { get; set; }
-        public virtual DbSet<vwBatchRpt> vwBatchRpts { get; set; }
-        public virtual DbSet<vwOpenBatch> vwOpenBatches { get; set; }
+        public virtual IDbSet<Ibatch> batches { get; set; }
+        public virtual IDbSet<Icheck_tran> check_trans { get; set; }
+        public virtual IDbSet<Ivoucher> vouchers { get; set; }
+        public virtual IDbSet<IvwCheck> vwChecks { get; set; }
+        public virtual IDbSet<IvwPositivePay> vwPositivePays { get; set; }
+        public virtual IDbSet<IvwVoidedPayment> vwVoidedPayments { get; set; }
+        public IDbSet<IvwPayment> vwPayments { get; set; }
+        public virtual IDbSet<Ibank_account> bank_accounts { get; set; }
+        public virtual IDbSet<IvwUnclearedBatch> vwUnclearedBatches { get; set; }
+        public virtual IDbSet<ICoopCheckClient> CoopCheckClients { get; set; }
+        public virtual IDbSet<ICoopCheckJobLog> CoopCheckJobLogs { get; set; }
+        public virtual IDbSet<IvwClientJobBatch> vwClientJobBatches { get; set; }
+        public virtual IDbSet<IvwJobRpt> vwJobRpts { get; set; }
+        public virtual IDbSet<IJobLog> JobLogs { get; set; }
+        public virtual IDbSet<IvwBatchRpt> vwBatchRpts { get; set; }
+        public virtual IDbSet<IvwOpenBatch> vwOpenBatches { get; set; }
     
-        public virtual ObjectResult<vwJobRpt> GetJobPaymentsReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
+        public virtual ObjectResult<IvwJobRpt> GetJobPaymentsReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
         {
             var account_idParameter = account_id.HasValue ?
                 new ObjectParameter("account_id", account_id) :
@@ -58,10 +60,10 @@ namespace CoopCheck.Repository
                 new ObjectParameter("end_date", end_date) :
                 new ObjectParameter("end_date", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwJobRpt>("GetJobPaymentsReport", account_idParameter, start_dateParameter, end_dateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IvwJobRpt>("GetJobPaymentsReport", account_idParameter, start_dateParameter, end_dateParameter);
         }
     
-        public virtual ObjectResult<vwJobRpt> GetJobPaymentsReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date, MergeOption mergeOption)
+        public virtual ObjectResult<IvwJobRpt> GetJobPaymentsReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date, MergeOption mergeOption)
         {
             var account_idParameter = account_id.HasValue ?
                 new ObjectParameter("account_id", account_id) :
@@ -75,10 +77,10 @@ namespace CoopCheck.Repository
                 new ObjectParameter("end_date", end_date) :
                 new ObjectParameter("end_date", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwJobRpt>("GetJobPaymentsReport", mergeOption, account_idParameter, start_dateParameter, end_dateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IvwJobRpt>("GetJobPaymentsReport", mergeOption, account_idParameter, start_dateParameter, end_dateParameter);
         }
     
-        public virtual ObjectResult<vwBatchRpt> GetBatchPaymentReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
+        public virtual ObjectResult<IvwBatchRpt> GetBatchPaymentReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
         {
             var account_idParameter = account_id.HasValue ?
                 new ObjectParameter("account_id", account_id) :
@@ -92,10 +94,10 @@ namespace CoopCheck.Repository
                 new ObjectParameter("end_date", end_date) :
                 new ObjectParameter("end_date", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwBatchRpt>("GetBatchPaymentReport", account_idParameter, start_dateParameter, end_dateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IvwBatchRpt>("GetBatchPaymentReport", account_idParameter, start_dateParameter, end_dateParameter);
         }
     
-        public virtual ObjectResult<vwBatchRpt> GetBatchPaymentReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date, MergeOption mergeOption)
+        public virtual ObjectResult<IvwBatchRpt> GetBatchPaymentReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date, MergeOption mergeOption)
         {
             var account_idParameter = account_id.HasValue ?
                 new ObjectParameter("account_id", account_id) :
@@ -109,7 +111,7 @@ namespace CoopCheck.Repository
                 new ObjectParameter("end_date", end_date) :
                 new ObjectParameter("end_date", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<vwBatchRpt>("GetBatchPaymentReport", mergeOption, account_idParameter, start_dateParameter, end_dateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IvwBatchRpt>("GetBatchPaymentReport", mergeOption, account_idParameter, start_dateParameter, end_dateParameter);
         }
     }
 }

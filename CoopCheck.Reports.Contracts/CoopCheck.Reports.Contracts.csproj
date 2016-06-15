@@ -40,8 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBankAccountSvc.cs" />
     <Compile Include="Interfaces\IClientReportCriteria.cs" />
+    <Compile Include="Interfaces\IClientSvc.cs" />
+    <Compile Include="Interfaces\IJobLogSvc.cs" />
+    <Compile Include="Interfaces\IOpenBatchSvc.cs" />
     <Compile Include="Interfaces\IPaymentReportCriteria.cs" />
+    <Compile Include="Interfaces\IRptSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

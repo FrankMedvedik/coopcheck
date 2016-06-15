@@ -50,9 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoopCheckModel.Context.cs" />
     <Compile Include="Interfaces\EntityInterfaces.cs" />
-    <Compile Include="Interfaces\ICoopCheckDbContext.cs" />
+    <Compile Include="Interfaces\ICoopCheckEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

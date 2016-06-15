@@ -1,22 +1,30 @@
 using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Models;
+using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Services
 {
-    public static class JobLogSvc
+    public  class JobLogSvc : IJobLogSvc
     {
-        public static string BadJobName = "job number is not defined";
+        private readonly ICoopCheckEntities _coopCheckEntities = null;
 
-        public static async Task<JobLog> GetJobLog(int jobNum)
+        public JobLogSvc(ICoopCheckEntities coopCheckEntities)
         {
-            using (var ctx = new CoopCheckEntities())
-            {
-                var x = new JobLog();
+            _coopCheckEntities = coopCheckEntities;
+        }
+
+        public string BadJobName = "job number is not defined";
+
+        public async Task<IJobLog> GetJobLog(int jobNum)
+        {
+               var x = new JobLog();
                 if (jobNum != 0)
                 try
                 {
-                    x = ctx.JobLogs.First(j => j.JobNum == jobNum);
+                    return await _coopCheckEntities.JobLogs.FirstAsync(j => j.JobNum == jobNum);
                 }
                 catch (Exception e)
                 {
@@ -24,10 +32,10 @@ namespace CoopCheck.Reports.Services
                     Console.Out.Write(e + jobNum.ToString());
                 }
                 return x;
-            }
         }
+       
 
-        public static async Task<string> GetJobName(int jobNum)
+        public async Task<string> GetJobName(int jobNum)
         {
             var z = await GetJobLog(jobNum);
             return (z == null) ? BadJobName : z.JobName;

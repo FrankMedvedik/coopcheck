@@ -1,21 +1,27 @@
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Services
 {
-    public static class OpenBatchSvc
+    public  class OpenBatchSvc : IOpenBatchSvc
     {
-        public static async Task<List<IvwOpenBatch>> GetOpenBatches()
+        private readonly ICoopCheckEntities _coopCheckEntities = null;
+
+        public OpenBatchSvc(ICoopCheckEntities coopCheckEntities)
         {
-            using (var ctx = new CoopCheckEntities())
-            {
+            _coopCheckEntities = coopCheckEntities;
+        }
+        public async Task<List<IvwOpenBatch>> GetOpenBatches()
+        {
                 var x = await (
-                    from a in ctx.OpenBatches
+                    from a in _coopCheckEntities.vwOpenBatches
                     orderby a.batch_num
                     select a).ToListAsync();
                 return x;
             }
         }
     }
-}

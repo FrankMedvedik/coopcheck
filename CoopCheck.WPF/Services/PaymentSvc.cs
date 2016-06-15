@@ -12,7 +12,7 @@ using Microsoft.Office.Interop.Word;
 
 namespace CoopCheck.WPF.Services
 {
-    public static class HonorariaPaymentSvc
+    public static class PaymentSvc
     {
         public static int MAX_Payment_COUNT = 10000;
 
@@ -170,6 +170,10 @@ namespace CoopCheck.WPF.Services
                 CurrentCheckNum = --checkNum
             };
         }
-    
+
+        public static Task<int> NextCheckNum(int accountId)
+        {
+            return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Services;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -104,7 +105,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             IsBusy = true;
             OpenBatch v = null;
             if (SelectedBatch != null) v = SelectedBatch;
-            BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc.GetOpenBatches());
+            BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc(_coopCheckEntities).GetOpenBatches());
             //if((v != null) && (BatchList.Contains(v)))
             if (v != null)
                 try

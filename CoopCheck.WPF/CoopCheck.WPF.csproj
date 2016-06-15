@@ -292,7 +292,6 @@
     <Compile Include="Models\Reports\PositivePayItem.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\WPF\OutstandingBalanceStats.cs" />
-    <Compile Include="Services\ClientSvc.cs" />
     <Compile Include="Content\Payment\Summary\BatchView.xaml.cs">
       <DependentUpon>BatchView.xaml</DependentUpon>
     </Compile>
@@ -433,13 +432,10 @@
     <Compile Include="Services\ClearCheckSvc.cs" />
     <Compile Include="Services\OutstandingBalancePrintSvc.cs" />
     <Compile Include="Models\Reports\UnclearedBatch.cs" />
-    <Compile Include="Services\UnclearedBatchSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
-    <Compile Include="Services\RptSvc.cs" />
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Models\WPF\PaymentMethod.cs" />
-    <Compile Include="Services\OpenBatchSvc.cs" />
     <Compile Include="Content\Voucher\Pay\PayVouchersViewModel.cs" />
     <Compile Include="Models\WPF\StatusInfo.cs" />
     <Compile Include="Messages\Notifications.cs" />
@@ -924,6 +920,10 @@
     <ProjectReference Include="..\CoopCheck.Reports.Contracts\CoopCheck.Reports.Contracts.csproj">
       <Project>{A9A18E3C-C1A2-41BD-9841-3CE748A28DDA}</Project>
       <Name>CoopCheck.Reports.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Reports\CoopCheck.Reports.csproj">
+      <Project>{F01DF42F-72BD-4CCA-BF55-8D09E9493927}</Project>
+      <Name>CoopCheck.Reports</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
       <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>

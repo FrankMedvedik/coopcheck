@@ -398,5 +398,4 @@ namespace CoopCheck.Repository.Contracts.Interfaces
             string usr { get; set; }
         }
 
-    }
 }

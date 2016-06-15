@@ -7,6 +7,7 @@ using CoopCheck.Library;
 using CoopCheck.WPF.Content.Voucher;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 

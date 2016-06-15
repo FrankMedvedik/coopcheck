@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.DAL;
+using CoopCheck.Reports.Services;
 using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -84,7 +85,14 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         public async Task GetPayments()
         {
-            AllPayments = await RptSvc.GetPaymentReconcileReport(PaymentReportCriteria);
+            var payments = await RptSvc.GetPaymentReconcileReport(PaymentReportCriteria);
+            var allPayments = new List<Paymnt>();
+            foreach (var p in allPayments)
+            {
+                allPayments.Add(p);
+                
+            }
+            AllPayments = allPayments;
         }
 
 

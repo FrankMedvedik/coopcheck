@@ -5,6 +5,7 @@ namespace CoopCheck.Library.Contracts.Interfaces
 {
     public interface IVoucherEdit
     {
+        string FullName { get; }
         /// <summary>
         /// Gets the Id.
         /// </summary>

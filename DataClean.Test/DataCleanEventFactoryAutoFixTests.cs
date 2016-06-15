@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using DataClean.Contracts.Interfaces;
 using DataClean.DataCleaner;
 using DataClean.Models;
 using DataClean.Repository.Mgr;

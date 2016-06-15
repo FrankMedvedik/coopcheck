@@ -101,16 +101,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoopCheckModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityInterfaceGenerator.IDbContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityInterfaceGenerator.IDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityInterfaceGenerator.IEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityInterfaceGenerator.IEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityInterfaceGenerator.PartialContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,5 +1,6 @@
 ﻿using System;
 using CoopCheck.Library;
+using CoopCheck.Library.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Properties;
 using Microsoft.Office.Interop.Word;
@@ -15,7 +16,7 @@ namespace CoopCheck.WPF.Services
             return fulllName;
         }
 
-        public static StatusInfo PrintCheck(Application app, BatchEdit b, VoucherEdit c, int checkNum)
+        public static StatusInfo PrintCheck(Application app, IBatchEdit b, IVoucherEdit c, int checkNum)
         {
             var template = AppDomain.CurrentDomain.BaseDirectory + Settings.Default.CheckTemplate;
             try

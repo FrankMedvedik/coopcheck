@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.WPF.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -76,7 +77,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             }
         }
 
-        public List<VoucherImport> Vi
+        public List<IVoucherImport> Vi
         {
             get { return VoucherImports.Select(r => r.Model).ToList(); }
             set

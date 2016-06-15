@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
+using CoopCheck.Reports.Services;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -247,7 +248,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 try
                 {
-                    var v = HonorariaPaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
+                    var v = PaymentSvc.PrintChecksAsync(SelectedAccount.account_id, SelectedBatch.batch_num,
                         StartingCheckNum, ctx, progress);
                     return v.Result;
                 }
@@ -284,7 +285,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             {
                 try
                 {
-                    var v = HonorariaPaymentSvc.SwiftFulfillAsync(SelectedBatch.batch_num);
+                    var v = PaymentSvc.SwiftFulfillAsync(SelectedBatch.batch_num);
                     return v.Result;
                 }
                 catch (Exception e)

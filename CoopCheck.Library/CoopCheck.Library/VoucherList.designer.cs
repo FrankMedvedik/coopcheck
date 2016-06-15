@@ -23,7 +23,7 @@ namespace CoopCheck.Library
 #if WINFORMS
     public partial class VoucherList : BusinessBindingListBase<VoucherList, VoucherEdit>
 #else
-    public partial class VoucherList : BusinessListBase<VoucherList,VoucherEdit>, IVoucherList
+    public partial class VoucherList : BusinessListBase<VoucherList,VoucherEdit>, IVoucherList, IList<IVoucherEdit>
 #endif
     {
 
@@ -206,46 +206,7 @@ namespace CoopCheck.Library
 
         #endregion
 
-        public IEnumerator<IVoucherEdit> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(IVoucherEdit item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(IVoucherEdit item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(IVoucherEdit[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(IVoucherEdit item)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsReadOnly { get; }
-        public int IndexOf(IVoucherEdit item)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Insert(int index, IVoucherEdit item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IVoucherEdit this[int index]
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
     }
 }

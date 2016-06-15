@@ -10,6 +10,7 @@ using CoopCheck.WPF.Converters;
 using CoopCheck.WPF.Properties;
 using CoopCheck.WPF.Wrappers;
 using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Services;
 using Newtonsoft.Json;
 
 namespace CoopCheck.WPF.Services

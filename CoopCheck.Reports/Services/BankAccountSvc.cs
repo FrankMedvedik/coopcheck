@@ -1,12 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Models;
+using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Services
 {
-    public static class BankAccountSvc
+    public class BankAccountSvc : IBankAccountSvc
     {
-        public static BankAccount AllAccountsOption
+        private readonly ICoopCheckEntities _coopCheckEntities = null;
+
+        public BankAccountSvc(ICoopCheckEntities coopCheckEntities)
+        {
+            _coopCheckEntities = coopCheckEntities;
+        }
+
+        public Ibank_account AllAccountsOption
         {
             get
             {
@@ -18,19 +29,16 @@ namespace CoopCheck.Reports.Services
             }
         }
 
-        public static async Task<List<BankAccount>> GetAccounts()
+        public async Task<List<Ibank_account>> GetAccounts()
         {
-            using (var ctx = new CoopCheckEntities())
-            {
-                var x = await (
-                    ctx.bank_accounts.Where(a => (bool) a.IsActive).OrderBy(a => a.account_name)).ToListAsync();
-                return x;
-            }
+
+            var x =
+                await
+                    _coopCheckEntities.bank_accounts.Where(a => (bool) a.IsActive)
+                        .OrderBy(a => a.account_name)
+                        .ToListAsync();
+            return x;
         }
 
-        public static Task<int> NextCheckNum(int accountId)
-        {
-            return Task<int>.Factory.StartNew(() => NextCheckNumCommand.Execute(accountId));
-        }
     }
 }

@@ -1,18 +1,25 @@
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
-using CoopCheck.Reports.Models;
+using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Services
 {
-    public static class ClientSvc
+    public class ClientSvc : IClientSvc
     {
-        public static async Task<List<CoopCheckClient>> GetClients()
+        private readonly ICoopCheckEntities _coopCheckEntities = null;
+
+        public ClientSvc(ICoopCheckEntities coopCheckEntities)
         {
-            using (var ctx = new CoopCheckEntities())
-            {
-                var x = await (ctx.CoopCheckClients.OrderBy(a => a.ClientName).ToListAsync());
-                return x;
-            }
+            _coopCheckEntities = coopCheckEntities;
+        }
+
+        public async Task<List<ICoopCheckClient>> GetClients()
+        {
+            var x = await (_coopCheckEntities.CoopCheckClients.OrderBy(a => a.ClientName).ToListAsync());
+            return x;
         }
     }
 }

@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using CoopCheck.Repository.Contracts.Interfaces;
+using System.Runtime.Serialization;
+
 namespace CoopCheck.Repository
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
     [DataContract]
     public partial class bank_account : Ibank_account

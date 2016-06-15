@@ -177,7 +177,13 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 };
                 var v = await RptSvc.GetBatchRpt(PaymentReportCriteria);
                 BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
-                Batches = new ObservableCollection<BatchRpt>(v);
+                var batches =  new ObservableCollection<BatchRpt>();
+                foreach (var r in v)
+                {
+                    batches.Add((BatchRpt) r);
+                    
+                }
+                Batches = batches;
             }
             catch (Exception e)
             {
