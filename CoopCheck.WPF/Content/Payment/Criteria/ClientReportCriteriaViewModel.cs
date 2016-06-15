@@ -1,18 +1,23 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
+using Remotion.Reflection;
 
 namespace CoopCheck.WPF.Content.Payment.Criteria
 {
     public class ClientReportCriteriaViewModel : ViewModelBase
     {
-        private ClientReportCriteria _clientReportCriteria;
-
-        public ClientReportCriteriaViewModel()
+        private  IClientReportCriteria _clientReportCriteria;
+        private readonly IClientSvc _clientSvc;
+        public ClientReportCriteriaViewModel(IClientSvc clientSvc, IClientReportCriteria clientReportCriteria)
         {
+            _clientSvc = clientSvc;
+            _clientReportCriteria = clientReportCriteria;
             ResetState();
         }
 
@@ -29,7 +34,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 
         public ClientReportCriteria ClientReportCriteria
         {
-            get { return _clientReportCriteria; }
+            get { return (ClientReportCriteria) _clientReportCriteria; }
             set
             {
                 _clientReportCriteria = value;
@@ -71,7 +76,12 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             };
             ClientReportCriteria = new ClientReportCriteria();
             ClientReportCriteria.SearchType = ClientReportCriteria.ALLCLIENTJOBS;
-            Clients = new ObservableCollection<CoopCheckClient>(await ClientSvc.GetClients());
+            var cs = await _clientSvc.GetClients();
+            var clients = new List<CoopCheckClient>();
+            foreach(var c in cs)
+                clients.Add((CoopCheckClient) c);
+            Clients = new ObservableCollection<CoopCheckClient>(clients);
+
             JobYears = new ObservableCollection<string>(JobYearSvc.GetJobYears());
             ClientReportCriteria.SelectedJobYear = ClientReportCriteria.ALLJOBYEARS;
             Status = new StatusInfo

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.WPF.Contracts.Interfaces;
@@ -146,7 +145,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     NotifyPropertyChanged();
                     NotifyPropertyChanged("ShowSelectedVoucher");
                     Messenger.Default.Send(new NotificationMessage<PaymentReportCriteria>(new PaymentReportCriteria
-                    { LastName = SelectedVoucher.Last, FirstName = SelectedVoucher.First },
+                    {LastName = SelectedVoucher.Last, FirstName = SelectedVoucher.First},
                         Notifications.FindPayeePayments));
                 }
             }
@@ -219,7 +218,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                         .ToList());
             FilterVoucherImports();
             Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
-                new VoucherWrappersMessage { ExcelFileInfo = ExcelFileInfo, VoucherImports = VoucherImports },
+                new VoucherWrappersMessage {ExcelFileInfo = ExcelFileInfo, VoucherImports = VoucherImports},
                 Notifications.VouchersDataCleaned));
             CanPost = true;
             IsCleaning = false;
@@ -245,7 +244,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         private void FilterVoucherImports()
         {
-            FilteredVoucherImports = (FilterRows)
+            FilteredVoucherImports = FilterRows
                 ? new ObservableCollection<VoucherImportWrapper>(
                     VoucherImports.Where(x => x.HasErrors || !x.OkEmailAddress || !x.OkMailingAddress || !x.OkPhone))
                 : VoucherImports;
@@ -262,7 +261,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public bool ShowSelectedVoucher
         {
-            get { return (SelectedVoucher != null); }
+            get { return SelectedVoucher != null; }
         }
 
         public void CancelNewVoucher()

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -13,8 +14,9 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     {
         private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
 
-        public PaymentHistoryViewModel()
+        public PaymentHistoryViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ResetState();
 
             Messenger.Default.Register<NotificationMessage<PaymentReportCriteria>>(this, message =>
@@ -74,8 +76,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         {
             try
             {
-                var pay = await RptSvc.GetPayeePayments(LastName, FirstName);
-                Payments = new ObservableCollection<Paymnt>(pay);
+                var pay = await _rptSvc.GetPayeePayments(LastName, FirstName);
+                Payments = new ObservableCollection<Paymnt>(pay.Cast<Paymnt>().ToList());
             }
             catch (Exception e)
             {
@@ -128,6 +130,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         private Paymnt _selectedPayment;
         private string _lastName;
         private string _firstName;
+        private readonly IRptSvc _rptSvc;
 
         public Paymnt SelectedPayment
         {

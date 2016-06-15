@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
+using Csla.Core;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -20,9 +24,11 @@ namespace CoopCheck.WPF.Content.Payment.Summary
 
         private bool _showGridData;
         private StatusInfo _status;
+        private readonly IRptSvc _rptSvc;
 
-        public JobViewModel()
+        public JobViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ShowGridData = false;
             Messenger.Default.Register<NotificationMessage>(this, message =>
             {
@@ -133,25 +139,25 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                     IsBusy = true,
                     StatusMessage = "refreshing job list..."
                 };
+                var jobs = new List<JobRpt>();
+                var js = new List<IvwJobRpt>();
                 if (ClientReportCriteria.SearchType == ClientReportCriteria.ONEJOB)
-                    Jobs =
-                        new ObservableCollection<JobRpt>(
-                            await RptSvc.GetJob(int.Parse(ClientReportCriteria.SelectedJobNum)));
+                   js = await _rptSvc.GetJob(int.Parse(ClientReportCriteria.SelectedJobNum));
                 else
                 {
                     if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBS)
-                        Jobs =
-                            new ObservableCollection<JobRpt>(
-                                await RptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID));
+                        js = await _rptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID);
                 }
                 if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBSFORYEAR)
                 {
-                    Jobs =
-                        new ObservableCollection<JobRpt>(
-                            await
-                                RptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID,
-                                    ClientReportCriteria.SelectedJobYear));
+                    js =    await _rptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID,
+                                    ClientReportCriteria.SelectedJobYear);
                 }
+                foreach (var j in js)
+                {
+                    jobs.Add((JobRpt) j);
+                }
+                Jobs = new ObservableCollection<JobRpt>(jobs);
             }
             catch (Exception e)
             {

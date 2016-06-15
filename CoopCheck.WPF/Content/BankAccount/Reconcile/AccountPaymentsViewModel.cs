@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.DAL;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Services;
 using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
@@ -23,6 +24,12 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         private ObservableCollection<KeyValuePair<string, string>> _stats =
             new ObservableCollection<KeyValuePair<string, string>>();
 
+        private readonly IRptSvc _rptSvc;
+
+        public AccountPaymentsViewModel( IRptSvc rptSvc)
+        {
+            _rptSvc = rptSvc;
+        }
         public List<Paymnt> MatchedPayments
         {
             get { return _matchedPayments; }
@@ -85,7 +92,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         public async Task GetPayments()
         {
-            var payments = await RptSvc.GetPaymentReconcileReport(PaymentReportCriteria);
+            var payments = await _rptSvc.GetPaymentReconcileReport(PaymentReportCriteria);
             var allPayments = new List<Paymnt>();
             foreach (var p in allPayments)
             {

@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -13,9 +14,10 @@ namespace CoopCheck.WPF.Content.BankAccount
         private ObservableCollection<Models.BankAccount> _accounts;
 
         private Models.BankAccount _selectedAccount;
-
-        public AccountViewModel()
+        private readonly IBankAccountSvc _bankAccountSvc;
+        public AccountViewModel(IBankAccountSvc bankAccountSvc)
         {
+            _bankAccountSvc = bankAccountSvc;
             ResetState();
         }
 
@@ -49,8 +51,12 @@ namespace CoopCheck.WPF.Content.BankAccount
 
         private async void ResetState()
         {
-            Accounts = new ObservableCollection<Models.BankAccount>(await BankAccountSvc.GetAccounts());
-            //SelectedAccount = (from l in Accounts where l.IsDefault.GetValueOrDefault(false) == true select l).First();
+            var acnts = await _bankAccountSvc.GetAccounts();
+
+            var accounts = new List<Models.BankAccount>();
+            foreach (var a in acnts)
+                accounts.Add((Models.BankAccount) a);
+            Accounts = new ObservableCollection<Models.BankAccount>(accounts);
             SelectedAccount =
                 (from l in Accounts
                     where l.account_id == int.Parse(Properties.Settings.Default.SelectedAccountID)

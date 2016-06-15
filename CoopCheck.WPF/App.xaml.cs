@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using Ninject.Modules;
+
+using System.Windows;
 using System.Windows.Media;
+using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Services;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Threading;
 //using Hardcodet.Wpf.TaskbarNotification;
@@ -22,18 +26,13 @@ namespace CoopCheck.WPF
             get { return new SolidColorBrush(AppearanceManager.Current.AccentColor); } 
             
         }
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
+    }
 
-            //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
-            //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-        }
-
-        protected override void OnExit(ExitEventArgs e)
+public class Bindings : NinjectModule
+    {
+        public override void Load()
         {
-            //notifyIcon.Dispose(); //the icon would clean up automatically, but this is cleaner
-            base.OnExit(e);
+            Bind<IBankAccountSvc>().To<BankAccountSvc>();
         }
     }
 }

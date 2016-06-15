@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -20,9 +22,11 @@ namespace CoopCheck.WPF.Content.Payment.Job
         private bool _showGridData;
         private StatusInfo _status;
         private List<Paymnt> _workPayments;
+        private readonly IRptSvc _rptSvc;
 
-        public JobSummaryPaymentReportViewModel()
+        public JobSummaryPaymentReportViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ShowGridData = false;
         }
 
@@ -124,7 +128,18 @@ namespace CoopCheck.WPF.Content.Payment.Job
 
         public async void RefreshAll()
         {
-            WorkPayments = await RptSvc.GetJobPayments(PaymentReportCriteria);
+           await GetPayments();
+        }
+
+        public async Task GetPayments()
+        {
+            var wps = await _rptSvc.GetJobPayments(PaymentReportCriteria);
+            var workPayments = new List<Paymnt>();
+            foreach (var p in wps)
+            {
+             workPayments.Add((Paymnt) p);   
+            }
+            WorkPayments = workPayments;
         }
     }
 }

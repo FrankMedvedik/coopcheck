@@ -30,7 +30,7 @@ namespace CoopCheck.Reports.Services
         }
 
 
-        public async Task<List<IvwPayment>> GetHonorariaPayments(IPaymentReportCriteria crc)
+        public async Task<List<IvwPayment>> GetPayments(IPaymentReportCriteria crc)
         {
             IQueryable<IvwPayment> query;
             List<IvwPayment> v;
@@ -100,7 +100,7 @@ namespace CoopCheck.Reports.Services
                 return x;
             }
         
-        public async Task<List<IvwPayment>> GetAllBatchHonorariaPayments(int batchNum)
+        public async Task<List<IvwPayment>> GetAllBatchPayments(int batchNum)
         {
             List<IvwPayment> v;
                 v = await (from b in _coopCheckEntities.vwPayments
@@ -138,7 +138,7 @@ namespace CoopCheck.Reports.Services
         }
 
 
-        public async Task<List<IvwPayment>> GetJobHonorariaPayments(int jobNumber)
+        public async Task<List<IvwPayment>> GetJobPayments(int jobNumber)
         {
             List<IvwPayment> v;
                 v = await (from b in _coopCheckEntities.vwPayments
@@ -147,7 +147,7 @@ namespace CoopCheck.Reports.Services
             return v;
         }
 
-        public async Task<List<IvwPayment>> GetBatchHonorariaPayments(IPaymentReportCriteria grc)
+        public async Task<List<IvwPayment>> GetBatchPayments(IPaymentReportCriteria grc)
         {
             List<IvwPayment> v;
             v = await (from b in _coopCheckEntities.vwPayments
@@ -157,7 +157,7 @@ namespace CoopCheck.Reports.Services
                     select b).ToListAsync();
             return v;
         }
-        public async Task<List<IvwPayment>> GetJobHonorariaPayments(IPaymentReportCriteria grc)
+        public async Task<List<IvwPayment>> GetJobPayments(IPaymentReportCriteria grc)
         {
             List<IvwPayment> v;
                 v = await (from b in _coopCheckEntities.vwPayments
@@ -214,7 +214,7 @@ namespace CoopCheck.Reports.Services
             return v;
         }
 
-        public async Task<List<IvwVoidedPayment>> GetVoidedHonorariaPayments(IPaymentReportCriteria crc)
+        public async Task<List<IvwVoidedPayment>> GetVoidedPayments(IPaymentReportCriteria crc)
         {
             IQueryable<IvwVoidedPayment> query;
             List<IvwVoidedPayment> v;
@@ -271,7 +271,7 @@ namespace CoopCheck.Reports.Services
             return v;
         }
 
-        public async Task<List<IvwPayment>> GetPayeeHonorariaPayments(string lastName, string firstName)
+        public async Task<List<IvwPayment>> GetPayeePayments(string lastName, string firstName)
         {
             List<IvwPayment> v;
             var query = _coopCheckEntities.vwPayments.Where(x => x.last_name == lastName).Where(x=> x.first_name== firstName).OrderByDescending(x=>x.check_date) ;

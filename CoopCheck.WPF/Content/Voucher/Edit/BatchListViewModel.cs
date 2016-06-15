@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.Reports.Services;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -12,14 +11,16 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public class BatchListViewModel : ViewModelBase
     {
+        private readonly IOpenBatchSvc _openBatchSvc;
         private ObservableCollection<OpenBatch> _batchList;
         private string _headingText;
         private bool _isBusy;
-
         private OpenBatch _selectedBatch = new OpenBatch();
 
-        public BatchListViewModel()
+
+        public BatchListViewModel(IOpenBatchSvc openBatchSvc)
         {
+            _openBatchSvc = openBatchSvc;
             ResetState();
 
             Messenger.Default.Register<NotificationMessage>(this, message =>
@@ -66,7 +67,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             {
                 _batchList = value;
                 NotifyPropertyChanged();
-                HeadingText = string.Format("{0} batches", BatchList.Count );
+                HeadingText = string.Format("{0} batches", BatchList.Count);
                 //HeadingText = string.Format(
                 //    "{0} batches {1} checks totalling {2} and {3} swift payments totalling {4}", BatchList.Count,
                 //    SwiftPaymentsCnt, SwiftPaymentsTotalDollars, CheckPaymentsCnt, CheckPaymentsTotalDollars);
@@ -74,7 +75,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 NotifyPropertyChanged("SwiftPaymentsTotalDollars");
                 NotifyPropertyChanged("CheckPaymentsCnt");
                 NotifyPropertyChanged("CheckPaymentsTotalDollars");
-
             }
         }
 
@@ -105,8 +105,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             IsBusy = true;
             OpenBatch v = null;
             if (SelectedBatch != null) v = SelectedBatch;
-            BatchList = new ObservableCollection<OpenBatch>(await OpenBatchSvc(_coopCheckEntities).GetOpenBatches());
-            //if((v != null) && (BatchList.Contains(v)))
+            var bList = await _openBatchSvc.GetOpenBatches();
+            var batchList = new ObservableCollection<OpenBatch>();
+            foreach (var batch in bList)
+            {
+                batchList.Add((OpenBatch) batch);
+            }
+            BatchList = batchList;
             if (v != null)
                 try
                 {

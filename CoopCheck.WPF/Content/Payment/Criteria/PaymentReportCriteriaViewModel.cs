@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Services;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -20,13 +22,17 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
     /// </summary>
     public class PaymentReportCriteriaViewModel : ViewModelBase
     {
-        private PaymentReportCriteria _paymentReportCriteria = new PaymentReportCriteria();
+        private  IPaymentReportCriteria _paymentReportCriteria;
+        private readonly IBankAccountSvc _bankAccountSvc;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportViewModel class.
         /// </summary>
-        public PaymentReportCriteriaViewModel()
+        public PaymentReportCriteriaViewModel(IBankAccountSvc bankAccountSvc, IPaymentReportCriteria paymentReportCriteria)
         {
+            _bankAccountSvc = bankAccountSvc;
+            _paymentReportCriteria = paymentReportCriteria;
+
             ResetState();
             Messenger.Default.Register<NotificationMessage>(this, message =>
             {
@@ -73,7 +79,14 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             PaymentReportCriteria = new PaymentReportCriteria();
             PaymentReportCriteria.StartDate = new DateTime(DateTime.Now.Year, 1, 1);
             PaymentReportCriteria.EndDate = DateTime.Today.AddDays(1);
-            Accounts = new ObservableCollection<Models.BankAccount>(await BankAccountSvc.GetAccounts());
+            var accounts = await _bankAccountSvc.GetAccounts();
+            var ocAccounts = new ObservableCollection<Models.BankAccount>();
+            foreach (var a in accounts)
+            {
+                ocAccounts.Add((Models.BankAccount) a );
+            }
+            Accounts = ocAccounts;
+
             PaymentReportCriteria.Account =
                 (from l in Accounts where l.IsDefault.GetValueOrDefault(false) select l).First();
             ShowGridData = false;
@@ -130,6 +143,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 
         private ObservableCollection<Models.BankAccount> _accounts;
         private bool _showAllAccountsOption;
+        
 
 
         public ObservableCollection<Models.BankAccount> Accounts
@@ -141,7 +155,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
                 if (_accounts != null)
                     if (ShowAllAccountsOption)
                         /*&& !(Accounts.Any(a => a.account_id == BankAccountSvc.AllAccountsOption.account_id)))*/
-                        _accounts.Add(BankAccountSvc.AllAccountsOption);
+                        _accounts.Add((Models.BankAccount) _bankAccountSvc.AllAccountsOption);
                 NotifyPropertyChanged("");
             }
         }

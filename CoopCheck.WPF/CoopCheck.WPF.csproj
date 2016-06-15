@@ -177,6 +177,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel_x64.1.10.1\lib\Remotion.dll</HintPath>
       <Private>True</Private>
@@ -340,10 +344,10 @@
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\Batch\BatchReportView.xaml.cs">
+    <Compile Include="Assets\Batch\BatchReportView.xaml.cs">
       <DependentUpon>BatchReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\Batch\BatchReportViewModel.cs" />
+    <Compile Include="Assets\Batch\BatchReportViewModel.cs" />
     <Compile Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml.cs">
       <DependentUpon>ClosedPaymentsGrid.xaml</DependentUpon>
     </Compile>
@@ -356,11 +360,11 @@
     <Compile Include="Content\Payment\Job\JobSummaryPaymentReportView.xaml.cs">
       <DependentUpon>JobSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Payment\Batch\BatchSummaryPaymentReportView.xaml.cs">
+    <Compile Include="Assets\Batch\BatchSummaryPaymentReportView.xaml.cs">
       <DependentUpon>BatchSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\Job\JobSummaryPaymentReportViewModel.cs" />
-    <Compile Include="Content\Payment\Batch\BatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Assets\Batch\BatchSummaryPaymentReportViewModel.cs" />
     <Compile Include="Content\Payment\Job\JobReportView.xaml.cs">
       <DependentUpon>JobReportView.xaml</DependentUpon>
     </Compile>
@@ -630,7 +634,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\Batch\BatchReportView.xaml">
+    <Page Include="Assets\Batch\BatchReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -670,7 +674,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Content\Payment\Batch\BatchSummaryPaymentReportView.xaml">
+    <Page Include="Assets\Batch\BatchSummaryPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

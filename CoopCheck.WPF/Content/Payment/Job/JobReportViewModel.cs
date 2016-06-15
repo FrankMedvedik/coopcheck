@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -17,9 +18,11 @@ namespace CoopCheck.WPF.Content.Payment.Job
         private JobRpt _selectedJob = new JobRpt();
         private bool _showGridData;
         private StatusInfo _status;
+        private IRptSvc _rptSvc;
 
-        public JobReportViewModel()
+        public JobReportViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ShowGridData = false;
         }
 
@@ -125,7 +128,9 @@ namespace CoopCheck.WPF.Content.Payment.Job
                     IsBusy = true,
                     StatusMessage = "refreshing job list..."
                 };
-                Jobs = new ObservableCollection<JobRpt>(await RptSvc.GetJobRpt(PaymentReportCriteria));
+                var js = await _rptSvc.GetJobRpt(PaymentReportCriteria); 
+
+                Jobs = new ObservableCollection<JobRpt>();
             }
             catch (Exception e)
             {

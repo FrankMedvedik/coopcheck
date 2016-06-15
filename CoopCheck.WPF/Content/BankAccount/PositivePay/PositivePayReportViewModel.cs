@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -19,9 +20,10 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
         private PositivePayItem _selectedPositivePay = new PositivePayItem();
         private bool _showGridData;
         private StatusInfo _status;
-
-        public PositivePayReportViewModel()
+        private readonly IRptSvc _rptSvc;
+        public PositivePayReportViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ShowGridData = false;
         }
 
@@ -122,8 +124,13 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
                     IsBusy = true,
                     StatusMessage = "refreshing Positive Pay report"
                 };
-                PositivePays =
-                    new ObservableCollection<PositivePayItem>((IList<IvwPositivePay>) await RptSvc.GetPositivePayRpt(PaymentReportCriteria));
+                var pays = await _rptSvc.GetPositivePayRpt(PaymentReportCriteria);
+                var positivePays = new List<PositivePayItem>();
+                foreach (var p in pays)
+                {
+                    positivePays.Add((PositivePayItem) p);
+                }
+                PositivePays = new ObservableCollection<PositivePayItem>(positivePays);
             }
             catch (Exception e)
             {

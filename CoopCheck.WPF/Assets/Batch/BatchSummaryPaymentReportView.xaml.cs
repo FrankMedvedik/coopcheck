@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Content.Voucher;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;

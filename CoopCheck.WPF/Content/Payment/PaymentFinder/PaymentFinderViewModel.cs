@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -15,9 +17,10 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
     public class PaymentFinderViewModel : ViewModelBase
     {
         private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
-
-        public PaymentFinderViewModel()
+        private readonly IRptSvc _rptSvc;
+        public PaymentFinderViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ResetState();
             TheVoidCheckCommand = new RelayCommand(VoidCheck, CanVoidCheck);
             TheClearCheckCommand = new RelayCommand(ClearCheck, CanClearCheck);
@@ -169,11 +172,13 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
             };
             try
             {
-                Payments = await Task<ObservableCollection<Paymnt>>.Factory.StartNew(() =>
+                var ps = await _rptSvc.GetPayments(PaymentReportCriteria);
+                var payments = new List<Paymnt>();
+                foreach (var p in ps)
                 {
-                    var task = RptSvc.GetPayments(PaymentReportCriteria);
-                    return new ObservableCollection<Paymnt>(task.Result);
-                });
+                    payments.Add((Paymnt) p);
+                }
+                Payments = new ObservableCollection<Paymnt>(payments);
             }
             catch (Exception e)
             {

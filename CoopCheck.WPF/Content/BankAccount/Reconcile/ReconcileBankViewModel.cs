@@ -16,11 +16,12 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
     public class ReconcileBankViewModel : ViewModelBase
     {
-        private AccountPaymentsViewModel _accountPayments = new AccountPaymentsViewModel();
+        private AccountPaymentsViewModel _accountPayments;
         private BankFileViewModel _bankFile = new BankFileViewModel();
 
-        public ReconcileBankViewModel()
+        public ReconcileBankViewModel(AccountPaymentsViewModel accountPaymentsViewModel)
         {
+            _accountPayments = accountPaymentsViewModel;
             ClearMatchedChecksCommand = new RelayCommand(ClearMatchedChecks, CanClearChecksFunc);
             MatchCheckCommand = new RelayCommand(MatchCheck, CanMatchCheck);
             //SaveReconciliationToExcelCommand = new RelayCommand(SaveReconciliationRptToExcel, CanClearChecksFunc);

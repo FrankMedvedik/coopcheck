@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -25,12 +26,12 @@ namespace CoopCheck.WPF.Content.Payment.Batch
 
         private bool _showGridData;
         private StatusInfo _status;
-
-        public BatchReportViewModel()
+        private readonly IRptSvc _rptSvc;
+        public BatchReportViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ShowGridData = false;
         }
-
 
         public bool ShowGridData
         {
@@ -175,7 +176,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                     IsBusy = true,
                     StatusMessage = "refreshing Batch list..."
                 };
-                var v = await RptSvc.GetBatchRpt(PaymentReportCriteria);
+                var v = await _rptSvc.GetBatchRpt(PaymentReportCriteria);
                 BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
                 var batches =  new ObservableCollection<BatchRpt>();
                 foreach (var r in v)
