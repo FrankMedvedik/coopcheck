@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Reports.Contracts.Interfaces;
@@ -10,7 +9,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
-    public class PaymentHistoryViewModel : ViewModelBase
+    public class PaymentHistoryViewModel : ViewModelBase, IPaymentHistoryViewModel
     {
         private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
 

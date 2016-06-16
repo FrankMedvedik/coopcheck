@@ -9,12 +9,13 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount
 {
-    public class AccountViewModel : ViewModelBase
+    public class AccountViewModel : ViewModelBase, IAccountViewModel
     {
+        private readonly IBankAccountSvc _bankAccountSvc;
         private ObservableCollection<Models.BankAccount> _accounts;
 
         private Models.BankAccount _selectedAccount;
-        private readonly IBankAccountSvc _bankAccountSvc;
+
         public AccountViewModel(IBankAccountSvc bankAccountSvc)
         {
             _bankAccountSvc = bankAccountSvc;

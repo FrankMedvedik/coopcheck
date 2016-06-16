@@ -13,32 +13,32 @@ namespace CoopCheck.WPF.Content.Payment.Summary
     public partial class PaymentSummaryView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
-        private readonly ClientPaymentViewModel _vm;
+        private readonly IClientPaymentViewModel _vm;
 
         private BatchRpt SelectedvwBatchRpt;
 
-        public PaymentSummaryView()
+        public PaymentSummaryView(IClientPaymentViewModel vm)
         {
             InitializeComponent();
-            _vm = new ClientPaymentViewModel();
+            _vm = vm;
             DataContext = _vm;
 
             Messenger.Default.Register<NotificationMessage<BatchRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.JobFinderSelectedBatchChanged)
                 {
-                    _vm.ParentBatch = (message.Content);
+                    _vm.ParentBatch = message.Content;
                     pgv.Visibility = Visibility.Visible;
                 }
             });

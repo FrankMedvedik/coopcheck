@@ -5,7 +5,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    public class ReconcileWizardViewModel : ViewModelBase
+    public class ReconcileWizardViewModel : ViewModelBase, IReconcileWizardViewModel
     {
         private bool _canFinish;
         private bool _haveAutoReconciledAccount;

@@ -10,12 +10,12 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
     public partial class AccountPaymentsView : UserControl
     {
-        private readonly ReconcileBankViewModel _vm;
+        private readonly IReconcileBankViewModel _vm;
 
-        public AccountPaymentsView()
+        public AccountPaymentsView(IReconcileBankViewModel  vm)
         {
             InitializeComponent();
-            _vm = new ReconcileBankViewModel();
+            _vm = vm;
             DataContext = _vm;
             Messenger.Default.Register<NotificationMessage<BankFileViewModel>>(this,
                 message => { _vm.BankFile = message.Content; });

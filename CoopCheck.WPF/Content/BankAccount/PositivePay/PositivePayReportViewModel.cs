@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.PositivePay
 {
-    public class PositivePayReportViewModel : ViewModelBase
+    public class PositivePayReportViewModel : ViewModelBase, IPositivePayReportViewModel
     {
+        private readonly IRptSvc _rptSvc;
         private string _headingText;
         private ObservableCollection<PositivePayItem> _positivePays = new ObservableCollection<PositivePayItem>();
 
         private PositivePayItem _selectedPositivePay = new PositivePayItem();
         private bool _showGridData;
         private StatusInfo _status;
-        private readonly IRptSvc _rptSvc;
+
         public PositivePayReportViewModel(IRptSvc rptSvc)
         {
             _rptSvc = rptSvc;

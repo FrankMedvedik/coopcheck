@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Library;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Services;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -12,7 +14,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Pay
 {
-    public class PayVouchersViewModel : ViewModelBase
+    public class PayVouchersViewModel : ViewModelBase, IPayVouchersViewModel
     {
         private ObservableCollection<Models.BankAccount> _accounts;
         private bool _canPrintChecks;
@@ -31,9 +33,11 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
 
         private StatusInfo _status;
+        private readonly IBankAccountSvc _bankAccountSvc;
 
-        public PayVouchersViewModel()
+        public PayVouchersViewModel(IBankAccountSvc bankAccountSvc )
         {
+            _bankAccountSvc = bankAccountSvc;
             Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, message =>
             {
                 //if (message.Content != null)
@@ -217,9 +221,21 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         public async void ResetState()
         {
-            Accounts = new ObservableCollection<Models.BankAccount>(await BankAccountSvc.GetAccounts());
-            CurrentPrintCount = 0;
+            await GetAccounts();
             PercentComplete = 0;
+        }
+
+        private async Task GetAccounts()
+        {
+            var accnts = await _bankAccountSvc.GetAccounts();
+            var accounts = new List<Models.BankAccount>();
+            foreach (var a in accnts)
+            {
+                accounts.Add((Models.BankAccount)a);
+            }
+
+            Accounts = new ObservableCollection<Models.BankAccount>(accounts);
+            CurrentPrintCount = 0;
         }
 
         public async Task<PrintCheckProgress> PrintChecks(CancellationToken ctx)

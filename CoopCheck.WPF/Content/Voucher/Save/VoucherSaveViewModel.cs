@@ -19,7 +19,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
     {
     }
 
-    public class VoucherSaveViewModel : ViewModelBase
+    public class VoucherSaveViewModel : ViewModelBase, IVoucherSaveViewModel
     {
         private readonly BackgroundWorker _batchCreator;
         private bool _canExport;
@@ -249,7 +249,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                 BadVouchers.Count,
                 BadVouchers.Select(x => x.Amount).Sum());
 
-            CanSave = (GoodVouchers.Any());
+            CanSave = GoodVouchers.Any();
         }
 
         #region BackgroundWorker Events
@@ -285,7 +285,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         {
             SaveBatchInfoMessage = string.Format("Batch {0} created for {1} - {2}",
                 e.Result,
-                (Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart()),
+                Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart(),
                 ExcelFileInfo.SelectedWorksheet.TrimEnd().TrimStart());
             StartEnabled = !_batchCreator.IsBusy;
             Messenger.Default.Send(new NotificationMessage(Notifications.HaveCommittedVouchers));

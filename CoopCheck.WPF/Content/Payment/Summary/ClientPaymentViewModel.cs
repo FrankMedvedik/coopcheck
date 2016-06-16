@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Summary
 {
-    public class ClientPaymentViewModel : ViewModelBase
+    public class ClientPaymentViewModel : ViewModelBase, IClientPaymentViewModel
     {
+        private readonly IRptSvc _rptSvc;
         private ObservableCollection<Paymnt> _allPayments = new ObservableCollection<Paymnt>();
         private ClientReportCriteria _clientReportCriteria;
         private ObservableCollection<Paymnt> _closedPayments = new ObservableCollection<Paymnt>();
@@ -24,7 +24,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         private bool _showGridData;
         private StatusInfo _status;
         private List<Paymnt> _workPayments;
-        private readonly IRptSvc _rptSvc;
 
         public ClientPaymentViewModel(IRptSvc rptSvc)
         {

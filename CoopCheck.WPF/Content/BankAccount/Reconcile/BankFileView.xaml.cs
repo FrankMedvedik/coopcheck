@@ -8,7 +8,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
     public partial class BankFileView : UserControl
     {
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register("ViewModel", typeof (BankFileViewModel), typeof (BankFileView),
+            DependencyProperty.Register("ViewModel", typeof(BankFileViewModel), typeof(BankFileView),
                 new PropertyMetadata(new BankFileViewModel()));
 
 

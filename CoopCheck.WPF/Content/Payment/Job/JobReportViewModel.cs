@@ -4,21 +4,20 @@ using System.Linq;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Job
 {
-    public class JobReportViewModel : ViewModelBase
+    public class JobReportViewModel : ViewModelBase, IJobReportViewModel
     {
         private string _headingText;
         private ObservableCollection<JobRpt> _jobs = new ObservableCollection<JobRpt>();
+        private readonly IRptSvc _rptSvc;
 
         private JobRpt _selectedJob = new JobRpt();
         private bool _showGridData;
         private StatusInfo _status;
-        private IRptSvc _rptSvc;
 
         public JobReportViewModel(IRptSvc rptSvc)
         {
@@ -128,7 +127,7 @@ namespace CoopCheck.WPF.Content.Payment.Job
                     IsBusy = true,
                     StatusMessage = "refreshing job list..."
                 };
-                var js = await _rptSvc.GetJobRpt(PaymentReportCriteria); 
+                var js = await _rptSvc.GetJobRpt(PaymentReportCriteria);
 
                 Jobs = new ObservableCollection<JobRpt>();
             }

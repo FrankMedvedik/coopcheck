@@ -7,13 +7,13 @@ namespace CoopCheck.WPF.Content.Payment.Batch
     /// </summary>
     public partial class BatchReportView : UserControl
     {
-        private readonly BatchReportViewModel _vm;
+        private readonly IBatchReportViewModel _vm;
 
 
-        public BatchReportView()
+        public BatchReportView(IBatchReportViewModel vm)
         {
             InitializeComponent();
-            _vm = new BatchReportViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
 

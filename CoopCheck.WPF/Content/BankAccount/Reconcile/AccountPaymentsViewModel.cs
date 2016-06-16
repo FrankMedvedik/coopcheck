@@ -4,16 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.DAL;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Reports.Services;
-using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    public class AccountPaymentsViewModel : ViewModelBase
+    public class AccountPaymentsViewModel : ViewModelBase, IAccountPaymentsViewModel
     {
+        private readonly IRptSvc _rptSvc;
         private List<Paymnt> _allPayments = new List<Paymnt>();
 
         private List<CheckInfoDto> _checksToClear = new List<CheckInfoDto>();
@@ -24,12 +22,11 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
         private ObservableCollection<KeyValuePair<string, string>> _stats =
             new ObservableCollection<KeyValuePair<string, string>>();
 
-        private readonly IRptSvc _rptSvc;
-
-        public AccountPaymentsViewModel( IRptSvc rptSvc)
+        public AccountPaymentsViewModel(IRptSvc rptSvc)
         {
             _rptSvc = rptSvc;
         }
+
         public List<Paymnt> MatchedPayments
         {
             get { return _matchedPayments; }
@@ -97,7 +94,6 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
             foreach (var p in allPayments)
             {
                 allPayments.Add(p);
-                
             }
             AllPayments = allPayments;
         }

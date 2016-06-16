@@ -8,15 +8,15 @@ namespace CoopCheck.WPF.Content.Payment.Void
 {
     public partial class VoidedPaymentReportView : UserControl
     {
-        private readonly VoidedPaymentReportViewModel _vm;
+        private readonly IVoidedPaymentReportViewModel _vm;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
-        public VoidedPaymentReportView()
+        public VoidedPaymentReportView(IVoidedPaymentReportViewModel vm)
         {
             InitializeComponent();
-            _vm = new VoidedPaymentReportViewModel();
+            _vm = vm;
             DataContext = _vm;
             prcv.DetailedCriteria.Visibility = Visibility.Visible;
             prcv.CheckNumSP.Visibility = Visibility.Visible;

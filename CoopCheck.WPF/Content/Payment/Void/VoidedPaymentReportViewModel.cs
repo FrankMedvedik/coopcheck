@@ -1,21 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Services;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Void
 {
     /// <summary>
-    public class VoidedPaymentReportViewModel : ViewModelBase
+    public class VoidedPaymentReportViewModel : ViewModelBase, IVoidedPaymentReportViewModel
     {
         private ObservableCollection<VoidedPaymnt> _payments = new ObservableCollection<VoidedPaymnt>();
 
-        public VoidedPaymentReportViewModel()
+        public VoidedPaymentReportViewModel(IRptSvc rptSvc)
         {
+            _rptSvc = rptSvc;
             ResetState();
         }
 
@@ -44,11 +47,15 @@ namespace CoopCheck.WPF.Content.Payment.Void
             };
             try
             {
-                Payments = await Task<ObservableCollection<VoidedPaymnt>>.Factory.StartNew(() =>
+
+                var vs = await _rptSvc.GetVoidedPayments(p);
+                var payments = new List<VoidedPaymnt>();
+                foreach (var v in vs)
                 {
-                    var task = RptSvc.GetVoidedPayments(p);
-                    return new ObservableCollection<VoidedPaymnt>(task.Result);
-                });
+                    payments.Add((VoidedPaymnt) v);
+                }
+               Payments = new ObservableCollection<VoidedPaymnt>(payments);
+
             }
             catch (Exception e)
             {
@@ -98,6 +105,7 @@ namespace CoopCheck.WPF.Content.Payment.Void
         #region collection and selected
 
         private VoidedPaymnt _selectedPayment;
+        private IRptSvc _rptSvc;
 
         public VoidedPaymnt SelectedPayment
         {

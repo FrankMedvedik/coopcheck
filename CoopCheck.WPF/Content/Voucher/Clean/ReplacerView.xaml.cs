@@ -14,15 +14,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     public partial class ReplacerView : UserControl
     {
         public static DependencyProperty AccentColorProperty =
-            DependencyProperty.Register("AccentColor", typeof (SolidColorBrush), typeof (ReplacerView),
+            DependencyProperty.Register("AccentColor", typeof(SolidColorBrush), typeof(ReplacerView),
                 new PropertyMetadata(new SolidColorBrush()));
 
         public static DependencyProperty AlternateValueProperty =
-            DependencyProperty.Register("AlternateValue", typeof (string), typeof (ReplacerView),
+            DependencyProperty.Register("AlternateValue", typeof(string), typeof(ReplacerView),
                 new PropertyMetadata(string.Empty));
 
         public static DependencyProperty SourceValueProperty =
-            DependencyProperty.Register("SourceValue", typeof (string), typeof (ReplacerView),
+            DependencyProperty.Register("SourceValue", typeof(string), typeof(ReplacerView),
                 new PropertyMetadata(string.Empty));
 
         private StatusInfo _status;
@@ -84,7 +84,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             }
 
             if ((AlternateValue.Trim().Length > 0) &&
-                (!SourceValue.Equals(AlternateValue, StringComparison.OrdinalIgnoreCase)))
+                !SourceValue.Equals(AlternateValue, StringComparison.OrdinalIgnoreCase))
             {
                 Replacer.Visibility = Visibility.Visible;
             }

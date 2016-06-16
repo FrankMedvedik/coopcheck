@@ -9,7 +9,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
-    public class BatchListViewModel : ViewModelBase
+    public class BatchListViewModel : ViewModelBase, IBatchListViewModel
     {
         private readonly IOpenBatchSvc _openBatchSvc;
         private ObservableCollection<OpenBatch> _batchList;

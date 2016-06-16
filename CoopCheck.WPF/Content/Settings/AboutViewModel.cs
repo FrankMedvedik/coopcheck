@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Deployment.Application;
 using Reckner.WPF.ViewModel;
@@ -9,7 +8,7 @@ namespace CoopCheck.WPF.Content.Settings
     /// <summary>
     ///     A simple view model for configuring theme, font and accent colors.
     /// </summary>
-    public class AboutViewModel : ViewModelBase
+    public class AboutViewModel : ViewModelBase, IAboutViewModel
     {
         private string _userName;
 

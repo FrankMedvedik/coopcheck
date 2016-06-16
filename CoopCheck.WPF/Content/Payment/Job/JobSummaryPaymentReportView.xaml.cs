@@ -15,23 +15,23 @@ namespace CoopCheck.WPF.Content.Payment.Job
     public partial class JobSummaryPaymentReportView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
-        private readonly JobSummaryPaymentReportViewModel _vm;
+        private readonly IJobSummaryPaymentReportViewModel _vm;
 
-        public JobSummaryPaymentReportView()
+        public JobSummaryPaymentReportView(IJobSummaryPaymentReportViewModel vm)
         {
             InitializeComponent();
-            _vm = new JobSummaryPaymentReportViewModel();
+            _vm = vm;
             DataContext = _vm;
             prcv.PaymentReportCriteria.StartDate = DateTime.Today.AddDays(-1);
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;

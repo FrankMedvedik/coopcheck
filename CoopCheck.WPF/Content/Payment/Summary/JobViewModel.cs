@@ -6,15 +6,14 @@ using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
-using Csla.Core;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Summary
 {
-    public class JobViewModel : ViewModelBase
+    public class JobViewModel : ViewModelBase, IJobViewModel
     {
+        private readonly IRptSvc _rptSvc;
         private string _headingText;
         private ObservableCollection<JobRpt> _jobs = new ObservableCollection<JobRpt>();
 
@@ -24,7 +23,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
 
         private bool _showGridData;
         private StatusInfo _status;
-        private readonly IRptSvc _rptSvc;
 
         public JobViewModel(IRptSvc rptSvc)
         {
@@ -142,7 +140,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 var jobs = new List<JobRpt>();
                 var js = new List<IvwJobRpt>();
                 if (ClientReportCriteria.SearchType == ClientReportCriteria.ONEJOB)
-                   js = await _rptSvc.GetJob(int.Parse(ClientReportCriteria.SelectedJobNum));
+                    js = await _rptSvc.GetJob(int.Parse(ClientReportCriteria.SelectedJobNum));
                 else
                 {
                     if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBS)
@@ -150,8 +148,8 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 }
                 if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBSFORYEAR)
                 {
-                    js =    await _rptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID,
-                                    ClientReportCriteria.SelectedJobYear);
+                    js = await _rptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID,
+                        ClientReportCriteria.SelectedJobYear);
                 }
                 foreach (var j in js)
                 {

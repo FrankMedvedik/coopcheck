@@ -9,7 +9,7 @@ namespace CoopCheck.WPF.Content.Settings
     ///     A simple view model for configuring theme, font and accent colors.
     /// </summary>
     public class AppearanceViewModel
-        : NotifyPropertyChanged
+        : NotifyPropertyChanged, IAppearanceViewModel
     {
         public const string FontSmall = "small";
         public const string FontLarge = "large";

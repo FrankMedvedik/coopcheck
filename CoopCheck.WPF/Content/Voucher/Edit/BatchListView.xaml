@@ -21,19 +21,23 @@
             <TextBlock Text=" with " />
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding CheckHonorariaPaymentsCnt, StringFormat='0,0.', Mode=OneWay}" FontWeight="Bold" />
+                    <TextBlock Text="{Binding CheckHonorariaPaymentsCnt, StringFormat='0,0.', Mode=OneWay}"
+                               FontWeight="Bold" />
                     <TextBlock>Check Vouchers</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding CheckHonorariaPaymentsTotalDollars,  StringFormat=c,Mode=OneWay }" FontWeight="Bold" />
+                    <TextBlock Text="{Binding CheckHonorariaPaymentsTotalDollars,  StringFormat=c,Mode=OneWay }"
+                               FontWeight="Bold" />
                     <TextBlock>Check Dollars</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding SwiftHonorariaPaymentsCnt, StringFormat='0,0.', Mode=OneWay}" FontWeight="Bold" />
+                    <TextBlock Text="{Binding SwiftHonorariaPaymentsCnt, StringFormat='0,0.', Mode=OneWay}"
+                               FontWeight="Bold" />
                     <TextBlock>Swift Vouchers</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding SwiftHonorariaPaymentsTotalDollars,  StringFormat=c, Mode=OneWay}" FontWeight="Bold" />
+                    <TextBlock Text="{Binding SwiftHonorariaPaymentsTotalDollars,  StringFormat=c, Mode=OneWay}"
+                               FontWeight="Bold" />
                     <TextBlock>Swift Dollars</TextBlock>
                 </StackPanel>
             </StackPanel>

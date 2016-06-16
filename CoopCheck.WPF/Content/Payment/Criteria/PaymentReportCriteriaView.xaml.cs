@@ -7,18 +7,18 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
     public partial class PaymentReportCriteriaView : UserControl
     {
         public static readonly DependencyProperty ShowAllAccountsOptionProperty =
-            DependencyProperty.Register("ShowAllAccountsOption", typeof (bool), typeof (PaymentReportCriteriaView),
+            DependencyProperty.Register("ShowAllAccountsOption", typeof(bool), typeof(PaymentReportCriteriaView),
                 new PropertyMetadata(false));
 
-        private readonly PaymentReportCriteriaViewModel _vm;
+        private readonly IPaymentReportCriteriaViewModel _vm;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
-        public PaymentReportCriteriaView()
+        public PaymentReportCriteriaView(IPaymentReportCriteriaViewModel vm)
         {
             InitializeComponent();
-            _vm = new PaymentReportCriteriaViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
 

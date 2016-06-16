@@ -13,7 +13,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
-    public class VoucherListViewModel : ViewModelBase
+    public class VoucherListViewModel : ViewModelBase, IVoucherListViewModel
     {
         private bool _canPost;
         private DataCleanCriteria _dataCleanCriteria;

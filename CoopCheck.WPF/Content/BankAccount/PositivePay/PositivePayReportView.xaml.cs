@@ -8,12 +8,12 @@ namespace CoopCheck.WPF.Content.BankAccount.PositivePay
 {
     public partial class PositivePayReportView : UserControl
     {
-        private readonly PositivePayReportViewModel _vm;
+        private readonly IPositivePayReportViewModel _vm;
 
-        public PositivePayReportView()
+        public PositivePayReportView(IPositivePayReportViewModel positivePayReportViewModel)
         {
             InitializeComponent();
-            _vm = new PositivePayReportViewModel();
+            _vm = positivePayReportViewModel;
             DataContext = _vm;
             prcv.PaymentReportCriteria.StartDate = DateTime.Today;
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;

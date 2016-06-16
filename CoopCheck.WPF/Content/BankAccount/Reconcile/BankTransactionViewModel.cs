@@ -6,7 +6,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    public class BankTransactionViewModel : ViewModelBase
+    public class BankTransactionViewModel : ViewModelBase, IBankTransactionViewModel
     {
         private ObservableCollection<BankClearTransaction> _bankClearTransaction =
             new ObservableCollection<BankClearTransaction>();

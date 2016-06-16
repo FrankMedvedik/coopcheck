@@ -12,7 +12,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    public class BankFileViewModel : ViewModelBase, IDataErrorInfo
+    public class BankFileViewModel : ViewModelBase, IDataErrorInfo, IBankFileViewModel
     {
         private readonly string DefaultFilePath = "Select a bank file";
 

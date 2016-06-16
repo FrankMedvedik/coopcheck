@@ -6,15 +6,15 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 {
     public partial class ClientReportCriteriaView : UserControl
     {
-        private readonly ClientReportCriteriaViewModel _vm;
+        private readonly IClientReportCriteriaViewModel _vm;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
-        public ClientReportCriteriaView()
+        public ClientReportCriteriaView(IClientReportCriteriaViewModel vm)
         {
             InitializeComponent();
-            _vm = new ClientReportCriteriaViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
 

@@ -1,93 +1,88 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.Library;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Summary
 {
-    public class BatchViewModel : ViewModelBase
+    public class BatchViewModel : ViewModelBase, IBatchViewModel
     {
-        private int _newJobNum = 0; 
+        private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
+
+
+        private decimal _batchTotalDollars;
+
+        private bool _canRefresh = true;
+        private bool _haveGoodNewJobNumber;
+
+
+        private string _headingText;
+        private int _newJobNum;
+
+        private string _newJobNumError;
+        private JobRpt _parentJob;
+
+        private BatchRpt _selectedBatch = new BatchRpt();
+        private bool _showGridData;
+        private StatusInfo _status;
+        private readonly IRptSvc _rptSvc;
+
+        public BatchViewModel(IRptSvc rptSvc)
+        {
+            _rptSvc = rptSvc;
+            ShowGridData = false;
+            Messenger.Default.Register<NotificationMessage<JobRpt>>(this, message =>
+            {
+                if (message.Notification == Notifications.JobFinderSelectedJobChanged)
+                {
+                    ParentJob = message.Content;
+                }
+            });
+        }
+
         public int NewJobNum
         {
             get { return _newJobNum; }
             set
             {
-                _newJobNum = value; NotifyPropertyChanged();
+                _newJobNum = value;
+                NotifyPropertyChanged();
                 //ValidateJobNumber();
             }
         }
 
-        private string _newJobNumError;
         public string NewJobNumError
         {
             get { return _newJobNumError; }
-            set { _newJobNumError = value; NotifyPropertyChanged(); }
-        }
-
-        public void  ValidateJobNumber(string JobNum)
-        {
-            bool retVal = false;
-            NewJobNumError = "";
-            if ((JobNum.Length != 8))
-                NewJobNumError = "Supplied Job Number Invalid";
-            else
+            set
             {
-                 retVal = true;
+                _newJobNumError = value;
+                NotifyPropertyChanged();
             }
-            HaveGoodNewJobNumber = retVal;
         }
 
         public bool HaveGoodNewJobNumber
         {
             get { return _haveGoodNewJobNumber; }
-            set { _haveGoodNewJobNumber = value; NotifyPropertyChanged(); }
-        }
-
-        public async void UpdateBatchJob(int batchNum, int jobNum)
-        {
-            Status = new StatusInfo()
+            set
             {
-                StatusMessage = String.Format("updating job associated with batch {0} to job number {1}", batchNum, jobNum),
-                IsBusy = true
-            };
-            await Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    var sb = BatchEdit.GetBatchEdit(batchNum);
-                    sb.JobNum = jobNum;
-                    sb = sb.Save();
-                }
-                catch (Exception ex)
-                {
-                    Status = new StatusInfo()
-                    {
-                        StatusMessage = String.Format("failed to update job number for batch {0}", batchNum),
-                        ErrorMessage = ex.Message
-                    };
-                }
-            });
-            Status = new StatusInfo()
-            {
-                StatusMessage = String.Format("Batch {0} updated to JobNum {1} ", batchNum, jobNum)
-            };
+                _haveGoodNewJobNumber = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public bool CanUpdateBatchJob
         {
-            get
-            {
-                return SelectedBatch != null;
-
-            }
+            get { return SelectedBatch != null; }
         }
+
         public bool ShowGridData
         {
             get { return _showGridData; }
@@ -98,19 +93,6 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
-        public BatchViewModel()
-        {
-            ShowGridData = false;
-            Messenger.Default.Register<NotificationMessage<JobRpt>>(this, message =>
-            {
-                if (message.Notification == Notifications.JobFinderSelectedJobChanged)
-                {
-                    ParentJob = message.Content;
-                }
-            }); 
-        }
-
-        private BatchRpt _selectedBatch = new BatchRpt();
         public BatchRpt SelectedBatch
         {
             get { return _selectedBatch; }
@@ -127,7 +109,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                     NewJobNum = _selectedBatch.job_num.GetValueOrDefault();
                     Messenger.Default.Send(new NotificationMessage<BatchRpt>(SelectedBatch,
                         Notifications.JobFinderSelectedBatchChanged));
-                    Status = new StatusInfo()
+                    Status = new StatusInfo
                     {
                         ErrorMessage = "",
                         StatusMessage =
@@ -135,28 +117,29 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                                 SelectedBatch.total_cnt, SelectedBatch.total_amount)
                     };
                 }
-
-
             }
         }
 
-        private bool _canRefresh = true;
-        public Boolean CanRefresh
+        public bool CanRefresh
         {
             get { return _canRefresh; }
-            set { _canRefresh = value; NotifyPropertyChanged(); }
+            set
+            {
+                _canRefresh = value;
+                NotifyPropertyChanged();
+            }
         }
 
-
-        private decimal _batchTotalDollars = 0;
         public decimal BatchTotalDollars
         {
             get { return _batchTotalDollars; }
             set
             {
-                _batchTotalDollars = value; NotifyPropertyChanged();
+                _batchTotalDollars = value;
+                NotifyPropertyChanged();
             }
         }
+
         public int PaymentsCnt
         {
             get { return Batches.ToList().Sum(x => x.total_cnt.GetValueOrDefault(0)); }
@@ -166,7 +149,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
         {
             get { return Batches.Sum(x => x.total_amount); }
         }
-        private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
+
         public ObservableCollection<BatchRpt> Batches
         {
             get { return _batches; }
@@ -179,11 +162,11 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 //HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}  Total = {3:c}",
                 //                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate, BatchTotalDollars);
 
-                HeadingText = String.Format("{0} batches paid between",Batches.Count);
+                HeadingText = string.Format("{0} batches paid between", Batches.Count);
                 NotifyPropertyChanged("PaymentsTotalDollars");
                 NotifyPropertyChanged("PaymentsCnt");
 
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
                     ErrorMessage = "",
                     StatusMessage = "select a batch to show the related payments"
@@ -191,24 +174,11 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
-        public void RefreshAll()
-        {
-            GetBatches();
-        }
-
-
-        private string _headingText;
-        private bool _showGridData;
-        private StatusInfo _status;
-        private JobRpt _parentJob;
-        private bool _haveGoodNewJobNumber;
-
-        public JobRpt ParentJob 
+        public JobRpt ParentJob
         {
             get { return _parentJob; }
             set
             {
-
                 if (value != null)
                 {
                     _parentJob = value;
@@ -227,6 +197,7 @@ namespace CoopCheck.WPF.Content.Payment.Summary
                 NotifyPropertyChanged();
             }
         }
+
         public StatusInfo Status
         {
             get { return _status; }
@@ -238,32 +209,84 @@ namespace CoopCheck.WPF.Content.Payment.Summary
             }
         }
 
+        public void ValidateJobNumber(string JobNum)
+        {
+            var retVal = false;
+            NewJobNumError = "";
+            if (JobNum.Length != 8)
+                NewJobNumError = "Supplied Job Number Invalid";
+            else
+            {
+                retVal = true;
+            }
+            HaveGoodNewJobNumber = retVal;
+        }
+
+        public async void UpdateBatchJob(int batchNum, int jobNum)
+        {
+            Status = new StatusInfo
+            {
+                StatusMessage =
+                    string.Format("updating job associated with batch {0} to job number {1}", batchNum, jobNum),
+                IsBusy = true
+            };
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var sb = BatchEdit.GetBatchEdit(batchNum);
+                    sb.JobNum = jobNum;
+                    sb = sb.Save();
+                }
+                catch (Exception ex)
+                {
+                    Status = new StatusInfo
+                    {
+                        StatusMessage = string.Format("failed to update job number for batch {0}", batchNum),
+                        ErrorMessage = ex.Message
+                    };
+                }
+            });
+            Status = new StatusInfo
+            {
+                StatusMessage = string.Format("Batch {0} updated to JobNum {1} ", batchNum, jobNum)
+            };
+        }
+
+        public void RefreshAll()
+        {
+            GetBatches();
+        }
+
         public async void GetBatches()
         {
             ShowGridData = false;
             try
             {
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
                     ErrorMessage = "",
                     IsBusy = true,
                     StatusMessage = "refreshing Batch list..."
                 };
-                var v = await RptSvc.GetJobBatchRpt(ParentJob.job_num);
-                BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
-                Batches = new ObservableCollection<BatchRpt>(v);
+                var bs = await _rptSvc.GetJobBatchRpt(ParentJob.job_num);
+                BatchTotalDollars = bs.Sum(x => x.total_amount).GetValueOrDefault(0);
+                var batches = new List<BatchRpt>();
+                foreach (var b in bs)
+                {
+                    batches.Add((BatchRpt) b);
+                }
+                Batches = new ObservableCollection<BatchRpt>(batches);
                 SelectedBatch = null;
             }
             catch (Exception e)
             {
-                Status = new StatusInfo()
+                Status = new StatusInfo
                 {
                     StatusMessage = "Error loading Batch list",
                     ErrorMessage = e.Message
                 };
-
             }
         }
-
     }
 }

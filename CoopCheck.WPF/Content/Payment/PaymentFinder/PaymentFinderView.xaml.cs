@@ -8,15 +8,15 @@ namespace CoopCheck.WPF.Content.Payment.PaymentFinder
 {
     public partial class PaymentFinderView : UserControl
     {
-        private readonly PaymentFinderViewModel _vm;
+        private readonly IPaymentFinderViewModel _vm;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
-        public PaymentFinderView()
+        public PaymentFinderView(IPaymentFinderViewModel vm)
         {
             InitializeComponent();
-            _vm = new PaymentFinderViewModel();
+            _vm = vm;
             DataContext = _vm;
             prcv.DetailedCriteria.Visibility = Visibility.Visible;
             prcv.CheckNumSP.Visibility = Visibility.Visible;

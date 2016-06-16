@@ -3,11 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Reports.Services;
-using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -20,15 +17,16 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
     ///         See http://www.galasoft.ch/mvvm
     ///     </para>
     /// </summary>
-    public class PaymentReportCriteriaViewModel : ViewModelBase
+    public class PaymentReportCriteriaViewModel : ViewModelBase, IPaymentReportCriteriaViewModel
     {
-        private  IPaymentReportCriteria _paymentReportCriteria;
         private readonly IBankAccountSvc _bankAccountSvc;
+        private IPaymentReportCriteria _paymentReportCriteria;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportViewModel class.
         /// </summary>
-        public PaymentReportCriteriaViewModel(IBankAccountSvc bankAccountSvc, IPaymentReportCriteria paymentReportCriteria)
+        public PaymentReportCriteriaViewModel(IBankAccountSvc bankAccountSvc,
+            IPaymentReportCriteria paymentReportCriteria)
         {
             _bankAccountSvc = bankAccountSvc;
             _paymentReportCriteria = paymentReportCriteria;
@@ -50,7 +48,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 
         public PaymentReportCriteria PaymentReportCriteria
         {
-            get { return _paymentReportCriteria; }
+            get { return (PaymentReportCriteria) _paymentReportCriteria; }
             set
             {
                 _paymentReportCriteria = value;
@@ -83,7 +81,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             var ocAccounts = new ObservableCollection<Models.BankAccount>();
             foreach (var a in accounts)
             {
-                ocAccounts.Add((Models.BankAccount) a );
+                ocAccounts.Add((Models.BankAccount) a);
             }
             Accounts = ocAccounts;
 
@@ -143,7 +141,6 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
 
         private ObservableCollection<Models.BankAccount> _accounts;
         private bool _showAllAccountsOption;
-        
 
 
         public ObservableCollection<Models.BankAccount> Accounts

@@ -14,10 +14,11 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.PaymentFinder
 {
-    public class PaymentFinderViewModel : ViewModelBase
+    public class PaymentFinderViewModel : ViewModelBase, IPaymentFinderViewModel
     {
-        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
         private readonly IRptSvc _rptSvc;
+        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
+
         public PaymentFinderViewModel(IRptSvc rptSvc)
         {
             _rptSvc = rptSvc;

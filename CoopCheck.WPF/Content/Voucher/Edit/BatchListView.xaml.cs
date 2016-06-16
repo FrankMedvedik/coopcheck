@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
@@ -8,14 +7,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
     /// </summary>
     public partial class BatchListView : UserControl
     {
-        private BatchListViewModel _vm;
+        private readonly IBatchListViewModel _vm;
 
-        public BatchListView()
+        public BatchListView(IBatchListViewModel vm)
         {
             InitializeComponent();
-            _vm = new BatchListViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
-
     }
 }

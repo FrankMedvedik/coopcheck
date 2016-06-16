@@ -4,29 +4,23 @@ using System.Linq;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Batch
 {
-    public class BatchReportViewModel : ViewModelBase
+    public class BatchReportViewModel : ViewModelBase, IBatchReportViewModel
     {
+        private readonly IRptSvc _rptSvc;
         private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
-
-
         private decimal _batchTotalDollars;
-
         private bool _canRefresh = true;
         private string _headingText;
         private PaymentReportCriteria _paymentReportCriteria;
-
         private BatchRpt _selectedBatch = new BatchRpt();
-
-
         private bool _showGridData;
         private StatusInfo _status;
-        private readonly IRptSvc _rptSvc;
+
         public BatchReportViewModel(IRptSvc rptSvc)
         {
             _rptSvc = rptSvc;
@@ -178,11 +172,10 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 };
                 var v = await _rptSvc.GetBatchRpt(PaymentReportCriteria);
                 BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
-                var batches =  new ObservableCollection<BatchRpt>();
+                var batches = new ObservableCollection<BatchRpt>();
                 foreach (var r in v)
                 {
                     batches.Add((BatchRpt) r);
-                    
                 }
                 Batches = batches;
             }

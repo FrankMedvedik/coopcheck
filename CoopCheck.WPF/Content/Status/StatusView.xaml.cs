@@ -15,7 +15,7 @@ namespace CoopCheck.WPF.Content.Status
     {
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("StatusInfoProperty", typeof (StatusInfo), typeof (StatusView),
+            DependencyProperty.Register("StatusInfoProperty", typeof(StatusInfo), typeof(StatusView),
                 new PropertyMetadata(new StatusInfo()));
 
         private readonly StatusViewModel _vm;

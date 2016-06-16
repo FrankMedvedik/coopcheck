@@ -15,8 +15,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
     {
         // Using a DependencyProperty as the backing store for NotificationMessage.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BankClearTransactionsProperty =
-            DependencyProperty.Register("BankClearTransactions", typeof (List<BankClearTransaction>),
-                typeof (BankTransactionsView),
+            DependencyProperty.Register("BankClearTransactions", typeof(List<BankClearTransaction>),
+                typeof(BankTransactionsView),
                 new PropertyMetadata(new List<BankClearTransaction>()));
 
         private readonly BankTransactionViewModel _vm;

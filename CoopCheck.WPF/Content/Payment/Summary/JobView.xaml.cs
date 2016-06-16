@@ -11,12 +11,12 @@ namespace CoopCheck.WPF.Content.Payment.Summary
     /// </summary>
     public partial class JobView : UserControl
     {
-        private readonly JobViewModel _vm;
+        private readonly IJobViewModel _vm;
 
-        public JobView()
+        public JobView(IJobViewModel vm)
         {
             InitializeComponent();
-            _vm = new JobViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
 

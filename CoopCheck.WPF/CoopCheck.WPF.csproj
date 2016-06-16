@@ -258,10 +258,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\BankAccount\IAccountViewModel.cs" />
+    <Compile Include="Content\BankAccount\Open\IOpenPaymentReportViewModel.cs" />
+    <Compile Include="Content\BankAccount\PositivePay\IPositivePayReportViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\AccountPaymentsView.xaml.cs">
       <DependentUpon>AccountPaymentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\AccountPaymentsViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\IAccountPaymentsViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\IBankFileViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\IBankTransactionViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\IReconcileBankViewModel.cs" />
+    <Compile Include="Content\BankAccount\Reconcile\IReconcileWizardViewModel.cs" />
     <Compile Include="Content\BankAccount\Reconcile\ReconcileWizardView.xaml.cs">
       <DependentUpon>ReconcileWizardView.xaml</DependentUpon>
     </Compile>
@@ -270,6 +278,29 @@
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\BankAccount\Reconcile\StatsType.cs" />
+    <Compile Include="Content\Payment\Batch\IBatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\Batch\IBatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\Criteria\IClientReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Payment\Criteria\IPaymentReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Payment\Job\IJobReportViewModel.cs" />
+    <Compile Include="Content\Payment\Job\IJobSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\PaymentFinder\IPaymentFinderViewModel.cs" />
+    <Compile Include="Content\Payment\Summary\IBatchViewModel.cs" />
+    <Compile Include="Content\Payment\Summary\IClientPaymentViewModel.cs" />
+    <Compile Include="Content\Payment\Summary\IJobViewModel.cs" />
+    <Compile Include="Content\Payment\Void\IVoidedPaymentReportViewModel.cs" />
+    <Compile Include="Content\Settings\IAboutViewModel.cs" />
+    <Compile Include="Content\Settings\IAppearanceViewModel.cs" />
+    <Compile Include="Content\Settings\ISettingsAppearanceViewModel.cs" />
+    <Compile Include="Content\Status\IStatusViewModel.cs" />
+    <Compile Include="Content\Voucher\Clean\IPaymentHistoryViewModel.cs" />
+    <Compile Include="Content\Voucher\Clean\IVoucherListViewModel.cs" />
+    <Compile Include="Content\Voucher\Edit\IBatchEditViewModel.cs" />
+    <Compile Include="Content\Voucher\Edit\IBatchListViewModel.cs" />
+    <Compile Include="Content\Voucher\Import\IImportWorksheetViewModel.cs" />
+    <Compile Include="Content\Voucher\IVoucherImportWizardViewModel.cs" />
+    <Compile Include="Content\Voucher\Pay\IPayVouchersViewModel.cs" />
+    <Compile Include="Content\Voucher\Save\IVoucherSaveViewModel.cs" />
     <Compile Include="Models\Reports\CoopCheckClient.cs" />
     <Compile Include="Models\Reports\VoidedPaymnt.cs" />
     <Compile Include="Models\Reports\JobRpt.cs" />
@@ -344,10 +375,10 @@
     <Compile Include="Content\NoAccessView.xaml.cs">
       <DependentUpon>NoAccessView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\Batch\BatchReportView.xaml.cs">
+    <Compile Include="Content\Payment\Batch\BatchReportView.xaml.cs">
       <DependentUpon>BatchReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\Batch\BatchReportViewModel.cs" />
+    <Compile Include="Content\Payment\Batch\BatchReportViewModel.cs" />
     <Compile Include="Content\Payment\Grids\ClosedPaymentsGrid.xaml.cs">
       <DependentUpon>ClosedPaymentsGrid.xaml</DependentUpon>
     </Compile>
@@ -360,11 +391,11 @@
     <Compile Include="Content\Payment\Job\JobSummaryPaymentReportView.xaml.cs">
       <DependentUpon>JobSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\Batch\BatchSummaryPaymentReportView.xaml.cs">
+    <Compile Include="Content\Payment\Batch\BatchSummaryPaymentReportView.xaml.cs">
       <DependentUpon>BatchSummaryPaymentReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Payment\Job\JobSummaryPaymentReportViewModel.cs" />
-    <Compile Include="Assets\Batch\BatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Payment\Batch\BatchSummaryPaymentReportViewModel.cs" />
     <Compile Include="Content\Payment\Job\JobReportView.xaml.cs">
       <DependentUpon>JobReportView.xaml</DependentUpon>
     </Compile>
@@ -634,7 +665,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Batch\BatchReportView.xaml">
+    <Page Include="Content\Payment\Batch\BatchReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -674,7 +705,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Batch\BatchSummaryPaymentReportView.xaml">
+    <Page Include="Content\Payment\Batch\BatchSummaryPaymentReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

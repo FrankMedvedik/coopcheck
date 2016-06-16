@@ -5,7 +5,7 @@ using Csla.Rules;
 
 namespace CoopCheck.Library
 {
-    public partial class VoucherList : IBusinessListBase<IVoucherEdit> , IVoucherList
+    public partial class VoucherList 
     {
 
         #region OnDeserialized actions

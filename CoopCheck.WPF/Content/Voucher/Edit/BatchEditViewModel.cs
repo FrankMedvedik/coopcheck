@@ -15,7 +15,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
-    public class BatchEditViewModel : ViewModelBase, IDataErrorInfo
+    public class BatchEditViewModel : ViewModelBase, IDataErrorInfo, IBatchEditViewModel
     {
         private bool _canPayBatch;
 
@@ -312,7 +312,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public async void AutoSaveSelectedBatch()
         {
-            if ((SelectedBatch.IsSavable) && UserCanWrite)
+            if (SelectedBatch.IsSavable && UserCanWrite)
             {
                 Status = new StatusInfo
                 {
@@ -450,7 +450,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 {
                     JobName = JobLogSvc.BadJobName;
                 }
-                CanPayBatch = (JobName != JobLogSvc.BadJobName);
+                CanPayBatch = JobName != JobLogSvc.BadJobName;
             }
             catch (Exception)
             {

@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Library;
-using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Content.Voucher;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
@@ -19,25 +18,25 @@ namespace CoopCheck.WPF.Content.Payment.Batch
     public partial class BatchSummaryPaymentReportView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof (ObservableCollection<Paymnt>),
-                typeof (BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Paymnt>),
+                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
 
-        private readonly BatchSummaryPaymentReportViewModel _vm;
+        private readonly IBatchSummaryPaymentReportViewModel _vm;
 
         private BatchRpt SelectedvwBatchRpt;
 
-        public BatchSummaryPaymentReportView()
+        public BatchSummaryPaymentReportView(IBatchSummaryPaymentReportViewModel vm)
         {
             InitializeComponent();
-            _vm = new BatchSummaryPaymentReportViewModel();
+            _vm = vm;
             DataContext = _vm;
             prcv.PaymentReportCriteria.StartDate = DateTime.Today.AddDays(-1);
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;

@@ -8,15 +8,15 @@ namespace CoopCheck.WPF.Content.BankAccount.Open
 {
     public partial class OpenPaymentReportView : UserControl
     {
-        private readonly OpenPaymentReportViewModel _vm;
+        private readonly IOpenPaymentReportViewModel _vm;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
-        public OpenPaymentReportView()
+        public OpenPaymentReportView(IOpenPaymentReportViewModel openPaymentReportViewModel)
         {
             InitializeComponent();
-            _vm = new OpenPaymentReportViewModel();
+            _vm = openPaymentReportViewModel;
             DataContext = _vm;
             prcv.StartDate.Visibility = Visibility.Collapsed;
         }

@@ -6,14 +6,14 @@ using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
-using Remotion.Reflection;
 
 namespace CoopCheck.WPF.Content.Payment.Criteria
 {
-    public class ClientReportCriteriaViewModel : ViewModelBase
+    public class ClientReportCriteriaViewModel : ViewModelBase, IClientReportCriteriaViewModel
     {
-        private  IClientReportCriteria _clientReportCriteria;
         private readonly IClientSvc _clientSvc;
+        private IClientReportCriteria _clientReportCriteria;
+
         public ClientReportCriteriaViewModel(IClientSvc clientSvc, IClientReportCriteria clientReportCriteria)
         {
             _clientSvc = clientSvc;
@@ -58,7 +58,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             var retVal = false;
             if (string.IsNullOrWhiteSpace(JobNum))
                 JobNumError = "New Job Number Required";
-            else if ((JobNum.Length != 8))
+            else if (JobNum.Length != 8)
                 JobNumError = "Supplied Job number invalid";
             else
                 retVal = true;
@@ -78,7 +78,7 @@ namespace CoopCheck.WPF.Content.Payment.Criteria
             ClientReportCriteria.SearchType = ClientReportCriteria.ALLCLIENTJOBS;
             var cs = await _clientSvc.GetClients();
             var clients = new List<CoopCheckClient>();
-            foreach(var c in cs)
+            foreach (var c in cs)
                 clients.Add((CoopCheckClient) c);
             Clients = new ObservableCollection<CoopCheckClient>(clients);
 

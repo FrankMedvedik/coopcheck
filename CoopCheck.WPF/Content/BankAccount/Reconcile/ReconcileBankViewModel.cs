@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoopCheck.DAL;
-using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -14,7 +13,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 {
-    public class ReconcileBankViewModel : ViewModelBase
+    public class ReconcileBankViewModel : ViewModelBase, IReconcileBankViewModel
     {
         private AccountPaymentsViewModel _accountPayments;
         private BankFileViewModel _bankFile = new BankFileViewModel();
@@ -97,7 +96,7 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
         private bool CanMatchCheck()
         {
-            return (BankFile.SelectedUnmatchedBankClearTransaction != null);
+            return BankFile.SelectedUnmatchedBankClearTransaction != null;
         }
 
         public async void ClearMatchedChecks()
@@ -143,8 +142,8 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
                 try
                 {
                     var match =
-                        (AccountPayments.OpenPayments.First(
-                            s => s.check_num == BankFile.SelectedUnmatchedBankClearTransaction.SerialNumber));
+                        AccountPayments.OpenPayments.First(
+                            s => s.check_num == BankFile.SelectedUnmatchedBankClearTransaction.SerialNumber);
 
                     AccountPayments.MatchedPayments.Add(match);
                     AccountPayments.OpenPayments.Remove(match);
@@ -219,18 +218,18 @@ namespace CoopCheck.WPF.Content.BankAccount.Reconcile
 
                     AccountPayments.ChecksToClear = query.ToList();
 
-                    AccountPayments.MatchedPayments = 
-                        (AccountPayments.AllPayments.Where(
-                            s => BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();
+                    AccountPayments.MatchedPayments =
+                        AccountPayments.AllPayments.Where(
+                            s => BankFile.BankClearTransactions.Any(t => t.SerialNumber == s.check_num)).ToList();
 
                     //ClosedPayments = new List<Paymnt>(v);
 
-                    AccountPayments.OpenPayments = (AccountPayments.AllPayments.Where(
-                        s => !BankFile.BankClearTransactions.Any(t => (t.SerialNumber == s.check_num)))).ToList();
+                    AccountPayments.OpenPayments = AccountPayments.AllPayments.Where(
+                        s => !BankFile.BankClearTransactions.Any(t => t.SerialNumber == s.check_num)).ToList();
 
                     BankFile.UnmatchedBankClearTransactions = new ObservableCollection<BankClearTransaction>(
-                        (BankFile.BankClearTransactions.Where(s => !AccountPayments.ChecksToClear.Any(
-                            t => (s.SerialNumber == t.CheckNum)))).ToList());
+                        BankFile.BankClearTransactions.Where(s => !AccountPayments.ChecksToClear.Any(
+                            t => s.SerialNumber == t.CheckNum)).ToList());
 
                     CalculateMatchStats();
 

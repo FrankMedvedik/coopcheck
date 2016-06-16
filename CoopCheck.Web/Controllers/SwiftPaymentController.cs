@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Routing;
 using CoopCheck.Repository;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.Web.Services;
 using Hangfire;
 using log4net;
@@ -21,9 +22,14 @@ namespace CoopCheck.Web.Controllers
         private static readonly ILog log
             = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly CoopCheckEntities _ctx = new CoopCheckEntities();
+        private readonly ICoopCheckEntities _ctx;
 
-        public IEnumerable<vwPayment> Get(int batchNum)
+        public SwiftPaymentController(ICoopCheckEntities ctx)
+        {
+            _ctx = ctx;
+        }
+
+        public List<IvwPayment> Get(int batchNum)
         {
             log.Info(string.Format("get SwiftPayments batchNum {0}", batchNum));
             return _ctx.vwPayments.Where(x => x.batch_num == batchNum).ToList();

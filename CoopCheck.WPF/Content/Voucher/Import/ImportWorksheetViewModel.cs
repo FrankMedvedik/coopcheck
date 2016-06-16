@@ -12,7 +12,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
 {
-    public class ImportWorksheetViewModel : ViewModelBase, IDataErrorInfo
+    public class ImportWorksheetViewModel : ViewModelBase, IDataErrorInfo, IImportWorksheetViewModel
     {
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
 

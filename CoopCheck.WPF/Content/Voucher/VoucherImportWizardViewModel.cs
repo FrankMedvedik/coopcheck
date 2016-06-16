@@ -5,7 +5,7 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher
 {
-    public class VoucherImportWizardViewModel : ViewModelBase
+    public class VoucherImportWizardViewModel : ViewModelBase, IVoucherImportWizardViewModel
     {
         private bool _haveCleanedVouchers;
 

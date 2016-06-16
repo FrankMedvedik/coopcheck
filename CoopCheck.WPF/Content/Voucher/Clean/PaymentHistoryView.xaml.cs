@@ -4,15 +4,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public partial class PaymentHistoryView : UserControl
     {
-        private readonly PaymentHistoryViewModel _vm;
+        private readonly IPaymentHistoryViewModel _vm;
 
         /// <summary>
         ///     Initializes a new instance of the CheckReportCriteriaView class.
         /// </summary>
-        public PaymentHistoryView()
+        public PaymentHistoryView(IPaymentHistoryViewModel vm)
         {
             InitializeComponent();
-            _vm = new PaymentHistoryViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
     }

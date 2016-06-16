@@ -1,36 +1,40 @@
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Reports.Models;
 using CoopCheck.Repository;
 using CoopCheck.Repository.Contracts;
+using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Services
 {
-    public static class JobLogSvc
+    public class JobLogSvc
     {
         public static string BadJobName = "job number is not defined";
+        private readonly ICoopCheckEntities _ctx;
 
-        public static async Task<JobLog> GetJobLog(int jobNum)
+        public JobLogSvc(ICoopCheckEntities ctx)
         {
-            using (var ctx = new CoopCheckEntities())
-            {
-                var x = new JobLog();
+            _ctx = ctx;
+        }
+        public  async Task<IJobLog> GetJobLog(int jobNum)
+        {
                 if (jobNum != 0)
                 try
                 {
-                    x = ctx.JobLogs.First(j => j.JobNum == jobNum);
+                    return await _ctx.JobLogs.FirstAsync(j => j.JobNum == jobNum);
                 }
                 catch (Exception e)
                 {
-                    x = new JobLog();
+                    
                     Console.Out.Write(e + jobNum.ToString());
                 }
-                return x;
-            }
-        }
-
-        public static async Task<string> GetJobName(int jobNum)
+                return new Models.JobLog();
+         }
+        
+        public async Task<string> GetJobName(int jobNum)
         {
             var z = await GetJobLog(jobNum);
             return (z == null) ? BadJobName : z.JobName;

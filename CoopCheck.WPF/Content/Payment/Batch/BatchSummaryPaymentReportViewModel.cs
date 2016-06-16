@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Repository.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
@@ -11,8 +10,9 @@ using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Payment.Batch
 {
-    public class BatchSummaryPaymentReportViewModel : ViewModelBase
+    public class BatchSummaryPaymentReportViewModel : ViewModelBase, IBatchSummaryPaymentReportViewModel
     {
+        private readonly IRptSvc _rptSvc;
         private ObservableCollection<Paymnt> _allPayments = new ObservableCollection<Paymnt>();
         private bool _canUnprint;
         private bool _canVoid;
@@ -25,7 +25,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
         private int _startingCheckNum;
         private StatusInfo _status;
         private List<Paymnt> _workPayments;
-        private readonly IRptSvc _rptSvc;
+
         public BatchSummaryPaymentReportViewModel(IRptSvc rptSvc)
         {
             _rptSvc = rptSvc;
@@ -162,9 +162,9 @@ namespace CoopCheck.WPF.Content.Payment.Batch
 
         public async void RefreshAll()
         {
-            var pmts =  await _rptSvc.GetBatchPayments(PaymentReportCriteria);
+            var pmts = await _rptSvc.GetBatchPayments(PaymentReportCriteria);
             var workPayments = new List<Paymnt>();
-            foreach(var p in pmts)
+            foreach (var p in pmts)
                 workPayments.Add((Paymnt) p);
             WorkPayments = workPayments;
         }

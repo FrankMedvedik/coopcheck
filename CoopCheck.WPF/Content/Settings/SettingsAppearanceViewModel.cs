@@ -10,7 +10,7 @@ namespace CoopCheck.WPF.Content.Settings
     ///     A simple view model for configuring theme, font and accent colors.
     /// </summary>
     public class SettingsAppearanceViewModel
-        : NotifyPropertyChanged
+        : NotifyPropertyChanged, ISettingsAppearanceViewModel
     {
         private const string FontSmall = "small";
         private const string FontLarge = "large";
@@ -31,12 +31,6 @@ namespace CoopCheck.WPF.Content.Settings
             Color.FromRgb(0xff, 0x00, 0x97), // magenta
             Color.FromRgb(0xa2, 0x00, 0xff) // purple            
         };
-
-        private Color selectedAccentColor;
-        private string selectedFontSize;
-
-        private string selectedPalette = PaletteWP;
-        private Link selectedTheme;
 
         // 20 accent colors from Windows Phone 8
         private readonly Color[] wpAccentColors =
@@ -62,6 +56,12 @@ namespace CoopCheck.WPF.Content.Settings
             Color.FromRgb(0x76, 0x60, 0x8a), // mauve
             Color.FromRgb(0x87, 0x79, 0x4e) // taupe
         };
+
+        private Color selectedAccentColor;
+        private string selectedFontSize;
+
+        private string selectedPalette = PaletteWP;
+        private Link selectedTheme;
 
         public SettingsAppearanceViewModel()
         {

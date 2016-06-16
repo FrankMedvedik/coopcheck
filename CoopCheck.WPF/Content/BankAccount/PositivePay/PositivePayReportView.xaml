@@ -32,7 +32,8 @@
                                 <TextBlock Margin="6,3,6,3" HorizontalAlignment="Right">Count</TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="6,3,6,3" Text="{Binding HonorariaPaymentsTotalDollars,  StringFormat=c}"
+                                <TextBlock Margin="6,3,6,3"
+                                           Text="{Binding HonorariaPaymentsTotalDollars,  StringFormat=c}"
                                            FontWeight="Bold" />
                                 <TextBlock Margin="6,3,6,3" HorizontalAlignment="Right">Dollars</TextBlock>
                             </StackPanel>

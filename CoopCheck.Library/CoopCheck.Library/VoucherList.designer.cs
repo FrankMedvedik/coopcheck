@@ -23,7 +23,7 @@ namespace CoopCheck.Library
 #if WINFORMS
     public partial class VoucherList : BusinessBindingListBase<VoucherList, VoucherEdit>
 #else
-    public partial class VoucherList : BusinessListBase<VoucherList,VoucherEdit>, IVoucherList, IList<IVoucherEdit>
+    public partial class VoucherList : BusinessListBase<VoucherList,VoucherEdit>
 #endif
     {
 

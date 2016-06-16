@@ -9,15 +9,15 @@ namespace CoopCheck.WPF.Content.BankAccount
     public partial class AccountView : UserControl
     {
         public static readonly DependencyProperty SelectedAccountProperty =
-            DependencyProperty.Register("SelectedAccount", typeof (Models.BankAccount), typeof (AccountView),
+            DependencyProperty.Register("SelectedAccount", typeof(Models.BankAccount), typeof(AccountView),
                 new PropertyMetadata(new Models.BankAccount()));
 
-        private readonly AccountViewModel _vm;
+        private readonly IAccountViewModel _vm;
 
-        public AccountView()
+        public AccountView(IAccountViewModel accountViewModel)
         {
             InitializeComponent();
-            _vm = new AccountViewModel();
+            _vm = accountViewModel;
             DataContext = _vm;
         }
 
