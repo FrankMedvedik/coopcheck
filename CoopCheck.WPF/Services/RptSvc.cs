@@ -211,7 +211,7 @@ namespace CoopCheck.WPF.Services
             using (var ctx = new CoopCheckEntities())
             {
                 var x = await (
-                    from l in ctx.vwPositivePay
+                    from l in ctx.vwPositivePays
                     where ((l.check_date >= grc.StartDate)
                            && (l.check_date <= grc.EndDate)
                            && l.account_number == grc.Account.account_number)

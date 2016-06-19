@@ -430,7 +430,6 @@
     <Compile Include="Services\JobYearSvc.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />
     <Compile Include="Services\OutstandingBalancePrintSvc.cs" />
-    <Compile Include="Services\UnclearedBatchSvc.cs" />
     <Compile Include="Services\PaymentPrintSvc.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Services\RptSvc.cs" />

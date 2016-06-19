@@ -30,12 +30,11 @@ namespace CoopCheck.Repository
         public virtual DbSet<batch> batches { get; set; }
         public virtual DbSet<check_tran> check_tran { get; set; }
         public virtual DbSet<voucher> vouchers { get; set; }
-        public virtual DbSet<vwCheck> vwChecks { get; set; }
-        public virtual DbSet<vwPositivePay> vwPositivePay { get; set; }
+        public virtual DbSet<vwCheck> vwCheck { get; set; }
+        public virtual DbSet<vwPositivePay> vwPositivePays { get; set; }
         public virtual DbSet<vwVoidedPayment> vwVoidedPayments { get; set; }
         public virtual DbSet<vwPayment> vwPayments { get; set; }
         public virtual DbSet<bank_account> bank_accounts { get; set; }
-        public virtual DbSet<vwUnclearedBatch> vwUnclearedBatches { get; set; }
         public virtual DbSet<CoopCheckClient> CoopCheckClients { get; set; }
         public virtual DbSet<CoopCheckJobLog> CoopCheckJobLogs { get; set; }
         public virtual DbSet<vwClientJobBatch> vwClientJobBatches { get; set; }

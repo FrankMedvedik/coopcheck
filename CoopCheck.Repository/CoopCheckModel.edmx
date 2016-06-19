@@ -388,17 +388,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwUnclearedBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vwUnclearedBatch">
-          <Key>
-            <PropertyRef Name="batch_num" />
-          </Key>
-          <Property Name="batch_num" Type="int" Nullable="false" />
-          <Property Name="job_num" Type="int" />
-          <Property Name="batch_date" Type="smalldatetime" />
-          <Property Name="pay_date" Type="smalldatetime" />
-          <Property Name="voucher_cnt" Type="int" />
-          <Property Name="total_amount" Type="money" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwVoidedPayment">
@@ -757,16 +746,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     [vwPositivePay].[payee] AS [payee]
     FROM [dbo].[vwPositivePay] AS [vwPositivePay]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwUnclearedBatch" EntityType="Self.vwUnclearedBatch" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwUnclearedBatch].[batch_num] AS [batch_num], 
-    [vwUnclearedBatch].[job_num] AS [job_num], 
-    [vwUnclearedBatch].[batch_date] AS [batch_date], 
-    [vwUnclearedBatch].[pay_date] AS [pay_date], 
-    [vwUnclearedBatch].[voucher_cnt] AS [voucher_cnt], 
-    [vwUnclearedBatch].[total_amount] AS [total_amount]
-    FROM [dbo].[vwUnclearedBatch] AS [vwUnclearedBatch]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vwVoidedPayment" EntityType="Self.vwVoidedPayment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwVoidedPayment].[tran_id] AS [tran_id], 
@@ -922,10 +901,10 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="vwCheck" EntityType="CoopCheckModel.vwCheck" />
-          <EntitySet Name="vwPositivePay1" EntityType="CoopCheckModel.vwPositivePay" />
-          <EntitySet Name="vwVoidedPayment" EntityType="CoopCheckModel.vwVoidedPayment" />
-          <EntitySet Name="vwPayment" EntityType="CoopCheckModel.vwPayment" />
-          <EntitySet Name="bank_account" EntityType="CoopCheckModel.bank_account" />
+          <EntitySet Name="vwPositivePays" EntityType="CoopCheckModel.vwPositivePay" />
+          <EntitySet Name="vwVoidedPayments" EntityType="CoopCheckModel.vwVoidedPayment" />
+          <EntitySet Name="vwPayments" EntityType="CoopCheckModel.vwPayment" />
+          <EntitySet Name="bank_accounts" EntityType="CoopCheckModel.bank_account" />
           <FunctionImport Name="dal_GetOpenBatch" />
           <FunctionImport Name="GetJobPaymentsReport" EntitySet="vwJobRpts" ReturnType="Collection(CoopCheckModel.vwJobRpt)">
             <Parameter Name="account_id" Mode="In" Type="Int32" />
@@ -937,7 +916,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
             <Parameter Name="start_date" Mode="In" Type="DateTime" />
             <Parameter Name="end_date" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="vwUnclearedBatch" EntityType="CoopCheckModel.vwUnclearedBatch" />
           <EntitySet Name="CoopCheckClients" EntityType="CoopCheckModel.CoopCheckClient" />
           <EntitySet Name="CoopCheckJobLogs" EntityType="CoopCheckModel.CoopCheckJobLog" />
           <EntitySet Name="vwClientJobBatches" EntityType="CoopCheckModel.vwClientJobBatch" />
@@ -1315,17 +1293,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Type="String" Name="first_check_num" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="last_check_num" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="vwUnclearedBatch">
-          <Key>
-            <PropertyRef Name="batch_num" />
-          </Key>
-          <Property Name="batch_num" Type="Int32" Nullable="false" />
-          <Property Name="job_num" Type="Int32" />
-          <Property Name="batch_date" Type="DateTime" Precision="0" />
-          <Property Name="pay_date" Type="DateTime" Precision="0" />
-          <Property Name="voucher_cnt" Type="Int32" />
-          <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
         <EntityType Name="CoopCheckClient">
           <Key>
             <PropertyRef Name="ClientID" />
@@ -1809,7 +1776,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwPositivePay1">
+          <EntitySetMapping Name="vwPositivePays">
             <EntityTypeMapping TypeName="CoopCheckModel.vwPositivePay">
               <MappingFragment StoreEntitySet="vwPositivePay">
                 <ScalarProperty Name="payee" ColumnName="payee" />
@@ -1821,7 +1788,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwVoidedPayment">
+          <EntitySetMapping Name="vwVoidedPayments">
             <EntityTypeMapping TypeName="CoopCheckModel.vwVoidedPayment">
               <MappingFragment StoreEntitySet="vwVoidedPayment">
                 <ScalarProperty Name="usr" ColumnName="usr" />
@@ -1861,7 +1828,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwPayment">
+          <EntitySetMapping Name="vwPayments">
             <EntityTypeMapping TypeName="CoopCheckModel.vwPayment">
               <MappingFragment StoreEntitySet="vwPayment">
                 <ScalarProperty Name="usr" ColumnName="usr" />
@@ -1901,7 +1868,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bank_account">
+          <EntitySetMapping Name="bank_accounts">
             <EntityTypeMapping TypeName="CoopCheckModel.bank_account">
               <MappingFragment StoreEntitySet="bank_account">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -1922,18 +1889,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <FunctionImportMapping FunctionImportName="GetJobPaymentsReport" FunctionName="CoopCheckModel.Store.GetJobPaymentsReport">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetBatchPaymentReport" FunctionName="CoopCheckModel.Store.GetBatchPaymentsReport" />
-          <EntitySetMapping Name="vwUnclearedBatch">
-            <EntityTypeMapping TypeName="CoopCheckModel.vwUnclearedBatch">
-              <MappingFragment StoreEntitySet="vwUnclearedBatch">
-                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
-                <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
-                <ScalarProperty Name="pay_date" ColumnName="pay_date" />
-                <ScalarProperty Name="batch_date" ColumnName="batch_date" />
-                <ScalarProperty Name="job_num" ColumnName="job_num" />
-                <ScalarProperty Name="batch_num" ColumnName="batch_num" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CoopCheckClients">
             <EntityTypeMapping TypeName="CoopCheckModel.CoopCheckClient">
               <MappingFragment StoreEntitySet="CoopCheckClients">

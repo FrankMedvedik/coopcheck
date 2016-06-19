@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="CoopCheckModel.vwVoidedPayment" Width="1.5" PointX="13.5" PointY="9.5" />
         <EntityTypeShape EntityType="CoopCheckModel.vwPayment" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="CoopCheckModel.bank_account" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CoopCheckModel.vwUnclearedBatch" Width="1.5" PointX="13.375" PointY="5.75" />
         <EntityTypeShape EntityType="CoopCheckModel.CoopCheckClient" Width="1.5" PointX="7.75" PointY="7.75" />
         <EntityTypeShape EntityType="CoopCheckModel.CoopCheckJobLog" Width="1.5" PointX="9.75" PointY="9.75" />
         <EntityTypeShape EntityType="CoopCheckModel.vwClientJobBatch" Width="1.5" PointX="15.75" PointY="0.75" />

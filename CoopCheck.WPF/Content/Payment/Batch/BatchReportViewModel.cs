@@ -52,6 +52,7 @@ namespace CoopCheck.WPF.Content.Payment.Batch
                 NotifyPropertyChanged();
                 Messenger.Default.Send(new NotificationMessage<vwBatchRpt>(SelectedBatch,
                     Notifications.SelectedBatchChanged));
+                if(SelectedBatch != null)
                 Status = new StatusInfo
                 {
                     ErrorMessage = "",
