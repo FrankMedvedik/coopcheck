@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
-             xmlns:batch="clr-namespace:CoopCheck.WPF.Content.Payment.Batch"
+             xmlns:batch="clr-namespace:CoopCheck.WPF.Content.PaymentReports.Batch"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid>

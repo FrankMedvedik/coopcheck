@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="CoopCheck.WPF.Content.PaymentReports.Job.JobReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d">
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="6" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="{Binding HeadingText}" FontWeight="Bold" Margin="6" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="{Binding PaymentsCnt, StringFormat='0,0.'}" FontWeight="Bold" />
+                    <TextBlock>Payments</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="{Binding PaymentsTotalDollars,  StringFormat=c}" FontWeight="Bold" />
+                    <TextBlock>Dollars</TextBlock>
+                </StackPanel>
+                <!--<Button Width="150" Height="30" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Left" IsDefault="True" Click="Excel_Click">Excel</Button>-->
+            </StackPanel>
+        </StackPanel>
+        <DataGrid x:Name="dgJobs" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1"
+                  Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto"
+                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True"
+                  ItemsSource="{Binding Path=Jobs, Mode=TwoWay}" VerticalAlignment="Top"
+                  ClipboardCopyMode="IncludeHeader" SelectedItem="{Binding Path=SelectedJob, Mode=TwoWay}"
+                  MaxHeight="300"
+                  ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left"
+                  SelectionMode="Extended">
+            <DataGrid.Columns>
+                <mui:DataGridTextColumn Binding="{Binding job_num}" Header="job num" />
+                <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
+                <mui:DataGridTextColumn Binding="{Binding clientname}" Header="client" />
+                <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
+                <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $"
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $"
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding open_amount, StringFormat='0,0.'}" Header="outstanding $"
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding total_cnt}" Header="check count"
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding open_cnt }" Header="outstanding"
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared "
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding first_pay_date ,StringFormat=d}" Header="first payment date"
+                                        ElementStyle="{StaticResource RightCell}" />
+                <mui:DataGridTextColumn Binding="{Binding last_pay_date,StringFormat=d}" Header="last payment  date"
+                                        ElementStyle="{StaticResource RightCell}" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</UserControl>

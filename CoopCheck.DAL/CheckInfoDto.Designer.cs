@@ -8,7 +8,7 @@ namespace CoopCheck.DAL
     /// </summary>
     /// 
     [Serializable]
-    public partial class CheckInfoDto
+    public partial class CheckInfoDto : ICheckInfoDto
     {
         /// <summary>
         /// Gets or sets the Id.

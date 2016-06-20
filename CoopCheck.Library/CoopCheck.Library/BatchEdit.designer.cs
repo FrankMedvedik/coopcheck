@@ -23,7 +23,7 @@ namespace CoopCheck.Library
     /// - <see cref="Vouchers"/> of type <see cref="VoucherList"/> (1:M relation to <see cref="VoucherEdit"/>)
     /// </remarks>
     [Serializable]
-    public partial class BatchEdit : BusinessBase<BatchEdit>, IBatchEdit
+    public partial class BatchEdit : BusinessBase<BatchEdit>
     {
 
         #region Static Fields
@@ -201,9 +201,9 @@ namespace CoopCheck.Library
         /// Gets the Vouchers ("parent load" child property).
         /// </summary>
         /// <value>The Vouchers.</value>
-        public IVoucherList Vouchers
+        public VoucherList Vouchers
         {
-            get { return (IVoucherList) GetProperty(VouchersProperty); }
+            get { return (VoucherList) GetProperty(VouchersProperty); }
             private set { LoadProperty(VouchersProperty, value); }
         }
 
@@ -217,7 +217,7 @@ namespace CoopCheck.Library
         /// Factory method. Creates a new <see cref="BatchEdit"/> object.
         /// </summary>
         /// <returns>A reference to the created <see cref="BatchEdit"/> object.</returns>
-        public static IBatchEdit NewBatchEdit()
+        public static BatchEdit NewBatchEdit()
         {
             return DataPortal.Create<BatchEdit>();
         }
@@ -229,7 +229,7 @@ namespace CoopCheck.Library
         /// </summary>
         /// <param name="batch_num">The Batch_num parameter of the BatchEdit to fetch.</param>
         /// <returns>A reference to the fetched <see cref="BatchEdit"/> object.</returns>
-        public static IBatchEdit GetBatchEdit(int batch_num)
+        public static BatchEdit GetBatchEdit(int batch_num)
         {
             return DataPortal.Fetch<BatchEdit>(batch_num);
         }

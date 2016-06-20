@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using CoopCheck.WPF.Models;
+using CoopCheck.Domain.Models;
 
 namespace CoopCheck.WPF.Content.Status
 {

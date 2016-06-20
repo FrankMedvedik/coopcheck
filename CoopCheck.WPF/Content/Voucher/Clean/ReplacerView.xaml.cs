@@ -4,8 +4,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Models;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
 

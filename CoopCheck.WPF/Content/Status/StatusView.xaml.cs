@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Models;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 

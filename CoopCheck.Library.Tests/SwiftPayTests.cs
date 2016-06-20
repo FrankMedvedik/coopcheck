@@ -36,7 +36,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = (IBatchEdit) obj.Save();
+            obj = (BatchEdit) obj.Save();
 
             var retVal = string.Empty;
             try
@@ -79,7 +79,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = (IBatchEdit) obj.Save();
+            obj = (BatchEdit) obj.Save();
 
             var retVal = string.Empty;
             try
@@ -131,7 +131,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = (IBatchEdit) obj.Save();
+            obj = (BatchEdit) obj.Save();
 
             var retVal = string.Empty;
             try

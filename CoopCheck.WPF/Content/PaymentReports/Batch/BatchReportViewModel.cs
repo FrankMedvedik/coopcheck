@@ -1,0 +1,190 @@
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using CoopCheck.Reports.Contracts.Interfaces;
+using GalaSoft.MvvmLight.Messaging;
+using Reckner.WPF.ViewModel;
+
+namespace CoopCheck.WPF.Content.PaymentReports.Batch
+{
+    public class BatchReportViewModel : ViewModelBase, IBatchReportViewModel
+    {
+        private readonly IRptSvc _rptSvc;
+        private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
+        private decimal _batchTotalDollars;
+        private bool _canRefresh = true;
+        private string _headingText;
+        private PaymentReportCriteria _paymentReportCriteria;
+        private BatchRpt _selectedBatch = new BatchRpt();
+        private bool _showGridData;
+        private StatusInfo _status;
+
+        public BatchReportViewModel(IRptSvc rptSvc)
+        {
+            _rptSvc = rptSvc;
+            ShowGridData = false;
+        }
+
+        public bool ShowGridData
+        {
+            get { return _showGridData; }
+            set
+            {
+                _showGridData = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public BatchRpt SelectedBatch
+        {
+            get { return _selectedBatch; }
+            set
+            {
+                _selectedBatch = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<BatchRpt>(SelectedBatch,
+                    Notifications.SelectedBatchChanged));
+                Status = new StatusInfo
+                {
+                    ErrorMessage = "",
+                    StatusMessage =
+                        string.Format("batch {0} contains {1} payments total {2:C}", SelectedBatch.batch_num,
+                            SelectedBatch.total_cnt, SelectedBatch.total_amount)
+                };
+            }
+        }
+
+        public bool CanRefresh
+        {
+            get { return _canRefresh; }
+            set
+            {
+                _canRefresh = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public decimal BatchTotalDollars
+        {
+            get { return _batchTotalDollars; }
+            set
+            {
+                _batchTotalDollars = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int? PaymentsCnt
+        {
+            get { return Batches?.Where(x => x.total_amount > 0).Sum(x => x.total_cnt.GetValueOrDefault(0)); }
+        }
+
+        public decimal? VoidsTotalDollars
+        {
+            get { return Batches?.Where(x => x.total_amount < 0).Sum(x => x.total_amount); }
+        }
+
+        public int? VoidsCnt
+        {
+            get { return Batches?.Where(x => x.total_amount < 0).Sum(x => x.total_cnt.GetValueOrDefault(0)); }
+        }
+
+        public decimal? PaymentsTotalDollars
+        {
+            get { return Batches?.Where(x => x.total_amount > 0).Sum(x => x.total_amount); }
+        }
+
+        public ObservableCollection<BatchRpt> Batches
+        {
+            get { return _batches; }
+            set
+            {
+                _batches = value;
+                NotifyPropertyChanged();
+                ShowGridData = true;
+
+                //HeadingText = String.Format("{0} Batchs paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}  Total = {3:c}",
+                //                        Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate, BatchTotalDollars);
+
+                HeadingText = string.Format("{0} batches paid between {1:ddd, MMM d, yyyy} and {2:ddd, MMM d, yyyy}",
+                    Batches.Count, PaymentReportCriteria.StartDate, PaymentReportCriteria.EndDate);
+                NotifyPropertyChanged("PaymentsTotalDollars");
+                NotifyPropertyChanged("PaymentsCnt");
+                NotifyPropertyChanged("VoidsTotalDollars");
+                NotifyPropertyChanged("VoidsCnt");
+                Status = new StatusInfo
+                {
+                    ErrorMessage = "",
+                    StatusMessage = "select a batch to show the related payments"
+                };
+            }
+        }
+
+
+        public string HeadingText
+        {
+            get { return _headingText; }
+            set
+            {
+                _headingText = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public StatusInfo Status
+        {
+            get { return _status; }
+            set
+            {
+                _status = value;
+                NotifyPropertyChanged();
+                Messenger.Default.Send(new NotificationMessage<StatusInfo>(_status, Notifications.StatusInfoChanged));
+            }
+        }
+
+        public PaymentReportCriteria PaymentReportCriteria
+        {
+            get { return _paymentReportCriteria; }
+            set
+            {
+                _paymentReportCriteria = value;
+                GetBatches();
+            }
+        }
+
+        public void RefreshAll()
+        {
+            GetBatches();
+        }
+
+        public async void GetBatches()
+        {
+            ShowGridData = false;
+            try
+            {
+                Status = new StatusInfo
+                {
+                    ErrorMessage = "",
+                    IsBusy = true,
+                    StatusMessage = "refreshing Batch list..."
+                };
+                var v = await _rptSvc.GetBatchRpt(PaymentReportCriteria);
+                BatchTotalDollars = v.Sum(x => x.total_amount).GetValueOrDefault(0);
+                var batches = new ObservableCollection<BatchRpt>();
+                foreach (var r in v)
+                {
+                    batches.Add((BatchRpt) r);
+                }
+                Batches = batches;
+            }
+            catch (Exception e)
+            {
+                Status = new StatusInfo
+                {
+                    StatusMessage = "Error loading Batch list",
+                    ErrorMessage = e.Message
+                };
+            }
+        }
+    }
+}

@@ -56,7 +56,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoopCheck.Library.Contracts\CoopCheck.Library.Contracts.csproj">
       <Project>{581fd483-3b12-4d40-b04f-2dbbb0153d21}</Project>
-      <Name>CoopCheck.Library.Interfaces</Name>
+      <Name>CoopCheck.Library.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
       <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>

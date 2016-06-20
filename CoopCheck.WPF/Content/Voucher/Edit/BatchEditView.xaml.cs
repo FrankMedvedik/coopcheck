@@ -9,12 +9,12 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
     /// </summary>
     public partial class BatchEditView : UserControl
     {
-        private readonly BatchEditViewModel _vm;
+        private readonly IBatchEditViewModel _vm;
 
-        public BatchEditView()
+        public BatchEditView(IBatchEditViewModel vm)
         {
             InitializeComponent();
-            _vm = new BatchEditViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
 
@@ -93,10 +93,5 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             _vm.AutoSaveSelectedBatch();
         }
 
-        //private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    _vm.AutoSaveSelectedBatch();
-
-        //}
     }
 }

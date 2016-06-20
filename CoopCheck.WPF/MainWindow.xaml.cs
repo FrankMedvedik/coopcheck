@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
-using CoopCheck.WPF.Content;
 using CoopCheck.WPF.Content.Settings;
-using CoopCheck.WPF.Messages;
 using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;

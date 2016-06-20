@@ -1,5 +1,5 @@
-﻿using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
+﻿using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 

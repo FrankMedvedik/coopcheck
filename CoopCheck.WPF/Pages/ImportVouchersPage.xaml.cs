@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.WPF.Content;
 using CoopCheck.WPF.Content.Voucher;
-using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 namespace CoopCheck.WPF.Pages
 {

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,6 +48,16 @@
     <Compile Include="Interfaces\IOpenBatchSvc.cs" />
     <Compile Include="Interfaces\IPaymentReportCriteria.cs" />
     <Compile Include="Interfaces\IRptSvc.cs" />
+    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BatchRpt.cs" />
+    <Compile Include="Models\CoopCheckClient.cs" />
+    <Compile Include="Models\JobLog.cs" />
+    <Compile Include="Models\JobRpt.cs" />
+    <Compile Include="Models\OpenBatch.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PositivePayItem.cs" />
+    <Compile Include="Models\UnclearedBatch.cs" />
+    <Compile Include="Models\VoidedPaymnt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

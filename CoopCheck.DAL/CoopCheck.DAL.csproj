@@ -98,6 +98,7 @@
     <Compile Include="IBatchEditDal.designer.cs">
       <DependentUpon>IBatchEditDal.cs</DependentUpon>
     </Compile>
+    <Compile Include="ICheckInfoDto.cs" />
     <Compile Include="ICheckInfoListDal.cs" />
     <Compile Include="ICheckInfoListDal.designer.cs">
       <DependentUpon>ICheckInfoListDal.cs</DependentUpon>

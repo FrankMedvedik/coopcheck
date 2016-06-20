@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CoopCheck.WPF.Contracts.Interfaces;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Wrappers;
+using CoopCheck.Domain.Contracts.Interfaces;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Contracts.Wrappers;
+
 using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean

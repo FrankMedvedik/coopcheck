@@ -4,7 +4,7 @@ using CoopCheck.Library.Contracts.Interfaces;
 
 namespace CoopCheck.Library
 {
-    public partial class BatchEdit : IBatchEdit
+    public partial class BatchEdit 
     {
 
         #region OnDeserialized actions

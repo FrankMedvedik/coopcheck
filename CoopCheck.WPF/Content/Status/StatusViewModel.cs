@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using CoopCheck.WPF.Models;
+using CoopCheck.Domain.Models;
+using CoopCheck.Domain.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 

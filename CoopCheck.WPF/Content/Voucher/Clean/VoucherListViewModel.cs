@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CoopCheck.WPF.Contracts.Interfaces;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
-using CoopCheck.WPF.Wrappers;
-using DataClean.Models;
+using CoopCheck.Domain.Contracts.Interfaces;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Contracts.Models.Reports;
+using CoopCheck.Domain.Contracts.Wrappers;
+using CoopCheck.Domain.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -16,7 +16,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     public class VoucherListViewModel : ViewModelBase, IVoucherListViewModel
     {
         private bool _canPost;
-        private DataCleanCriteria _dataCleanCriteria;
 
         private ObservableCollection<VoucherImportWrapper> _filteredVoucherImports;
 
@@ -53,13 +52,13 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 }
             });
 
-            Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
-            {
-                if (message.Notification == Notifications.DataCleanCriteriaUpdated)
-                {
-                    _dataCleanCriteria = message.Content;
-                }
-            });
+            //Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
+            //{
+            //    if (message.Notification == Notifications.DataCleanCriteriaUpdated)
+            //    {
+            //        _dataCleanCriteria = message.Content;
+            //    }
+            //});
             CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
         }
 

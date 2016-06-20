@@ -4,11 +4,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Models;
+using CoopCheck.Domain.Models.Reports;
+using CoopCheck.Domain.Services;
 using CoopCheck.Library;
-using CoopCheck.WPF.Converters;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
+using CoopCheck.Reports.Contracts.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -35,9 +36,11 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         private ObservableCollection<VoucherEdit> _vouchersWithErrors = new ObservableCollection<VoucherEdit>();
         private VoucherImport _workVoucherImport;
+        private readonly IJobLogSvc _jobLogSvc;
 
-        public BatchEditViewModel()
+        public BatchEditViewModel(IJobLogSvc jobLogSvc)
         {
+            _jobLogSvc = jobLogSvc;
             RefreshBatchListCommand = new RelayCommand(RefreshBatchList, CanRefreshBatchList);
             ResetState();
             Messenger.Default.Register<NotificationMessage<OpenBatch>>(this, async message =>
@@ -444,7 +447,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 if (SelectedBatch?.JobNum.GetValueOrDefault(0).ToString().Length == 8)
                 {
                     var b = SelectedBatch.JobNum.GetValueOrDefault(0);
-                    JobName = await JobLogSvc.GetJobName(b);
+                    JobName = await _jobLogSvc.GetJobName(b);
                 }
                 else
                 {

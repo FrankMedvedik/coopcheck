@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Models.Reports;
 using CoopCheck.Library;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Reports.Services;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -16,7 +13,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 {
     public class PayVouchersViewModel : ViewModelBase, IPayVouchersViewModel
     {
-        private ObservableCollection<Models.BankAccount> _accounts;
+        private ObservableCollection<BankAccount> _accounts;
         private bool _canPrintChecks;
         private bool _canSwiftPay;
         private int _currentPrintCount;

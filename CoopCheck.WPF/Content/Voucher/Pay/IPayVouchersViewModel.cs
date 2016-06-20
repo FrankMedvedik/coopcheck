@@ -1,21 +1,22 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Contracts.Models.Reports;
 using CoopCheck.Library;
-using CoopCheck.WPF.Models;
 
 namespace CoopCheck.WPF.Content.Voucher.Pay
 {
     public interface IPayVouchersViewModel
     {
-        ObservableCollection<Models.BankAccount> Accounts { get; set; }
+        ObservableCollection<BankAccount> Accounts { get; set; }
         bool CanPrintChecks { get; set; }
         bool CanSwiftPay { get; set; }
         int CurrentPrintCount { get; set; }
         int EndingCheckNum { get; set; }
         bool IsBusy { get; set; }
         decimal PercentComplete { get; set; }
-        Models.BankAccount SelectedAccount { get; set; }
+        BankAccount SelectedAccount { get; set; }
         OpenBatch SelectedBatch { get; set; }
         BatchEdit SelectedBatchEdit { get; set; }
         int StartingCheckNum { get; set; }

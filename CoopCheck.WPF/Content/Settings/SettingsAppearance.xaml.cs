@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.WPF.Messages;
+using CoopCheck.Domain.Contracts.Messages;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.Settings

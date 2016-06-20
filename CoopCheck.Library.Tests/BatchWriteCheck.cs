@@ -34,7 +34,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = (IBatchEdit) obj.Save();
+            obj = (BatchEdit) obj.Save();
 
             var nextCheckNum = NextCheckNumCommand.Execute(3);
 
@@ -87,7 +87,7 @@ namespace CoopCheck.Library.Tests
             obj.Vouchers.Add(voc);
 
 
-            obj = (IBatchEdit) obj.Save();
+            obj = (BatchEdit) obj.Save();
 
             var nextCheckNum = NextCheckNumCommand.Execute(3);
 

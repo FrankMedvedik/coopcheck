@@ -6,7 +6,7 @@
              xmlns:status="clr-namespace:CoopCheck.WPF.Content.Status"
              xmlns:content="clr-namespace:CoopCheck.WPF.Content"
              xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
-             xmlns:job="clr-namespace:CoopCheck.WPF.Content.Payment.Job"
+             xmlns:job="clr-namespace:CoopCheck.WPF.Content.PaymentReports.Job"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid>

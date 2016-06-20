@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.WPF.Content;
-using CoopCheck.WPF.Content.BankAccount.Reconcile;
-using CoopCheck.WPF.Messages;
+using CoopCheck.WPF.Content.AccountManagement.Reconcile;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Pages

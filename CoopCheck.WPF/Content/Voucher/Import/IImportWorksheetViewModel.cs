@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CoopCheck.WPF.Models;
+using CoopCheck.Domain.Models;
 using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Import
@@ -27,7 +27,6 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         ObservableCollection<VoucherImport> VoucherImports { get; set; }
         decimal VoucherTotalDollars { get; set; }
         ObservableCollection<string> WorkSheets { get; set; }
-
         bool CanImportWorkSheet();
         bool CanPostVouchers();
         void ColumnNameValidator();

@@ -15,13 +15,13 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
     /// </summary>
     public partial class PayVoucherView : UserControl
     {
-        private readonly PayVouchersViewModel _vm;
-        private CancellationTokenSource cts;
+        private readonly IPayVouchersViewModel _vm;
+        private CancellationTokenSource _cts;
 
-        public PayVoucherView()
+        public PayVoucherView(IPayVouchersViewModel vm)
         {
             InitializeComponent();
-            _vm = new PayVouchersViewModel();
+            _vm = vm;
             DataContext = _vm;
         }
 
@@ -34,7 +34,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         private async void PrintChecks(object sender, RoutedEventArgs e)
         {
-            cts = new CancellationTokenSource();
+            _cts = new CancellationTokenSource();
 
             var printedBatchNum = _vm.SelectedBatch.batch_num;
 
@@ -51,7 +51,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 try
                 {
                     _vm.IsBusy = true;
-                    var c = await _vm.PrintChecks(cts.Token);
+                    var c = await _vm.PrintChecks(_cts.Token);
                     _vm.Status = c.Status;
                     _vm.EndingCheckNum = c.CurrentCheckNum;
                     _vm.PercentComplete = c.ProgressPercentage;
@@ -73,9 +73,30 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                     };
                 }
 
-                cts = null;
+                _cts = null;
 
                 var cw = new ConfirmLastCheckPrintedDialog {DataContext = _vm};
+
+                // fix exception iussue on save  
+                //var cw = new ConfirmLastCheckPrintedDialog { DataContext = _vm };
+
+                //var result = cw.ShowDialog();
+                //while (result != null && result == false)
+                //{
+                //    try
+                //    {
+                //        //                        CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
+                //        throw new Exception("broke!");
+                //    }
+                //    catch (Exception ex)
+                //    {
+
+                //        result = cw.ShowDialog();
+                //    }
+                //}
+
+
+
                 var result = cw.ShowDialog();
                 CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
                 _vm.RefreshBatchList();
@@ -98,9 +119,9 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (cts != null)
+            if (_cts != null)
             {
-                cts.Cancel();
+                _cts.Cancel();
             }
         }
     }

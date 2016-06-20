@@ -17,6 +17,7 @@ namespace CoopCheck.WPF
     {
         static App()
         {
+
             DispatcherHelper.Initialize();
 
         }

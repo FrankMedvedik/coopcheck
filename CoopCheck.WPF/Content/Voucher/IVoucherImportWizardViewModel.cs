@@ -1,4 +1,4 @@
-﻿using CoopCheck.WPF.Models;
+﻿using CoopCheck.Domain.Models;
 
 namespace CoopCheck.WPF.Content.Voucher
 {

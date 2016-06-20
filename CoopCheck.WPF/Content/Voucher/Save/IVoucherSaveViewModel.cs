@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
-using CoopCheck.WPF.Wrappers;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Wrappers;
+using CoopCheck.Domain.Models;
 using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Save

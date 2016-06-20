@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Models;
 using CoopCheck.Library;
-using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit

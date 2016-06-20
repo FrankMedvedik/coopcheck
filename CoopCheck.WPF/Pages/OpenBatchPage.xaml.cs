@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.WPF.Content;
-using CoopCheck.WPF.Messages;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 using GalaSoft.MvvmLight.Messaging;

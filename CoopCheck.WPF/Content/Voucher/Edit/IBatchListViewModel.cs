@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CoopCheck.WPF.Models;
+using CoopCheck.Domain.Models.Reports;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
