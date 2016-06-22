@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 
 namespace CoopCheck.Domain.Contracts.Interfaces
 {
@@ -12,7 +12,7 @@ namespace CoopCheck.Domain.Contracts.Interfaces
         Boolean OkEmailAddress { get; }
         Boolean OkPhone { get; }
         string RecordID { get; set; }
-        IOutputStreetAddress AltAddress { get; set; }
+        OutputStreetAddress AltAddress { get; set; }
         string AltAddressText { get; }
         bool AddressOk { get; set; }
         decimal? Amount { get; set; }

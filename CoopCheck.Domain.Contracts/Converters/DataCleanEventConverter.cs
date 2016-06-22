@@ -5,6 +5,7 @@ using CoopCheck.Domain.Contracts.Wrappers;
 using CoopCheck.Library;
 using CoopCheck.Library.Contracts.Interfaces;
 using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 
 namespace CoopCheck.Domain.Contracts.Converters
 {
@@ -29,7 +30,7 @@ namespace CoopCheck.Domain.Contracts.Converters
 
             var v = new VoucherImportWrapper((IVoucherImport) n);
             v.DataCleanDate = e.DataCleanDate;
-            v.AltAddress =  e.Output;
+            v.AltAddress =  (OutputStreetAddress) e.Output;
             return v;
         }
 

@@ -30,6 +30,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
       <HintPath>..\packages\CSLA-Core.4.6.400\lib\net46\Csla.dll</HintPath>
@@ -70,11 +88,16 @@
     <Compile Include="Converters\VoucherImportConverter.cs" />
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
     <Compile Include="Interfaces\IBankClearTransaction.cs" />
+    <Compile Include="Interfaces\ICheckInfoDto.cs" />
     <Compile Include="Interfaces\IColumnPropertyMap.cs" />
     <Compile Include="Interfaces\IOutstandingBalanceStats.cs" />
     <Compile Include="Interfaces\IPaymentMethod.cs" />
     <Compile Include="Interfaces\IPrintCheckProgress.cs" />
+    <Compile Include="Interfaces\ISendMailSvc.cs" />
     <Compile Include="Interfaces\IStatusInfo.cs" />
+    <Compile Include="Interfaces\ISvrBatchSwiftFulfillCommand.cs" />
+    <Compile Include="Interfaces\ISvrBatchSwiftVoidCommand.cs" />
+    <Compile Include="Interfaces\ISwiftPaySvc.cs" />
     <Compile Include="Interfaces\IUserAuthSvc.cs" />
     <Compile Include="Interfaces\IUserSecurityProfile.cs" />
     <Compile Include="Interfaces\IVoucherExcelExport.cs" />
@@ -85,25 +108,11 @@
     <Compile Include="Messages\NavigationMessage.cs" />
     <Compile Include="Messages\Notifications.cs" />
     <Compile Include="Models\BankClearTransaction.cs" />
+    <Compile Include="Models\CheckInfoDto.cs" />
     <Compile Include="Models\ColumnPropertyMap.cs" />
-    <Compile Include="Models\DataClean\AddressCleanerFeedback.cs" />
-    <Compile Include="Models\DataClean\CleanedAddress.cs" />
-    <Compile Include="Models\DataClean\InputStreetAddress.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\PrintCheckProgress.cs" />
-    <Compile Include="Models\Reports\BankAccount.cs" />
-    <Compile Include="Models\Reports\BatchRpt.cs" />
-    <Compile Include="Models\Reports\ClientReportCriteria.cs" />
-    <Compile Include="Models\Reports\CoopCheckClient.cs" />
-    <Compile Include="Models\Reports\JobLog.cs" />
-    <Compile Include="Models\Reports\JobRpt.cs" />
-    <Compile Include="Models\Reports\OpenBatch.cs" />
-    <Compile Include="Models\Reports\Payment.cs" />
-    <Compile Include="Models\Reports\PaymentReportCriteria.cs" />
-    <Compile Include="Models\Reports\PositivePayItem.cs" />
-    <Compile Include="Models\Reports\UnclearedBatch.cs" />
-    <Compile Include="Models\Reports\VoidedPaymnt.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Models\UserSecurityProfile.cs" />
     <Compile Include="Models\VoucherExcelExport.cs" />
@@ -125,13 +134,13 @@
       <Project>{A9A18E3C-C1A2-41BD-9841-3CE748A28DDA}</Project>
       <Name>CoopCheck.Reports.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
-      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
-      <Name>CoopCheck.Repository.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
       <Project>{D4B3264F-C68A-451F-B512-E7C8E9565900}</Project>
       <Name>DataClean.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataCleaner\DataClean.csproj">
+      <Project>{0E725976-76C4-4C29-AA8A-28D020C0F2BF}</Project>
+      <Name>DataClean</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reckner.WPF\Reckner.WPF.csproj">
       <Project>{205893F2-F604-4451-B2E0-C4BE475FA592}</Project>

@@ -1,7 +1,7 @@
 using System.Configuration;
 using CoopCheck.Library.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 using DataClean.DataCleaner;
-using DataClean.Models;
 using DataClean.Repository.Mgr;
 
 namespace CoopCheck.Library

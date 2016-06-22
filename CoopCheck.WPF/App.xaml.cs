@@ -1,12 +1,7 @@
-﻿using Ninject.Modules;
-
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
-using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Reports.Services;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Threading;
-//using Hardcodet.Wpf.TaskbarNotification;
 
 namespace CoopCheck.WPF
 {
@@ -26,14 +21,6 @@ namespace CoopCheck.WPF
         {
             get { return new SolidColorBrush(AppearanceManager.Current.AccentColor); } 
             
-        }
-    }
-
-public class Bindings : NinjectModule
-    {
-        public override void Load()
-        {
-            Bind<IBankAccountSvc>().To<BankAccountSvc>();
         }
     }
 }

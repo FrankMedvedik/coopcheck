@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Reports.Contracts.Models;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Criteria
 {

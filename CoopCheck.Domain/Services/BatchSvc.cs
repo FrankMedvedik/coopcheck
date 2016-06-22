@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Converters;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Library;
 

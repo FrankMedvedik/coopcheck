@@ -2,22 +2,27 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Reports.Models;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.Repository;
+
 
 namespace CoopCheck.Reports.Services
 {
     public class BankAccountSvc : IBankAccountSvc
     {
-        private readonly ICoopCheckEntities _coopCheckEntities = null;
-
-        public BankAccountSvc(ICoopCheckEntities coopCheckEntities)
+        private ICoopCheckEntities _coopCheckEntities ;
+        
+        
+        public ICoopCheckEntities CoopCheckEntities
         {
-            _coopCheckEntities = coopCheckEntities;
+            get { return _coopCheckEntities ?? (_coopCheckEntities = new CoopCheckEntities()); }
+            set { _coopCheckEntities = value; }
         }
 
-        public Ibank_account AllAccountsOption
+
+        public BankAccount AllAccountsOption
         {
             get
             {
@@ -29,16 +34,21 @@ namespace CoopCheck.Reports.Services
             }
         }
 
-        public async Task<List<Ibank_account>> GetAccounts()
+        public async Task<List<BankAccount>> GetAccounts()
         {
-
-            var x =
+            var accounts = 
                 await
                     _coopCheckEntities.bank_accounts.Where(a => (bool) a.IsActive)
                         .OrderBy(a => a.account_name)
                         .ToListAsync();
-            return x;
-        }
 
+
+            var y = new List<BankAccount>();
+            foreach (var a in accounts)
+            {
+                y.Add(Mapper.Map<bank_account, BankAccount>(a)); 
+            }
+            return y;
+        }
     }
 }

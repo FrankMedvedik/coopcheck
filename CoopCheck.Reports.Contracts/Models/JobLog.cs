@@ -1,9 +1,8 @@
 ﻿using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class JobLog : IJobLog
+    public class JobLog 
     {
         public bool ACTIVE { get; set; }
         public string ClientID { get; set; }

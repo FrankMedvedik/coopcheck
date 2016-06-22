@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DataClean.Contracts.Interfaces;
-using DataClean.Models;
+using DataClean.Contracts.Models;
 using Newtonsoft.Json;
 
 namespace DataClean.DataCleaner

@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+
+
 
 namespace CoopCheck.Reports.Contracts.Interfaces
 {
     public interface IOpenBatchSvc
     {
-        Task<List<IvwOpenBatch>> GetOpenBatches();
+        Task<List<OpenBatch>> GetOpenBatches();
     }
 }

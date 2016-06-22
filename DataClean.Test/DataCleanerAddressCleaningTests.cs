@@ -1,6 +1,6 @@
-﻿using DataClean.Models;
-using System.Configuration;
+﻿using System.Configuration;
 using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DataClean.Test

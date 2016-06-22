@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoopCheck.Domain.Contracts.Interfaces;
-using CoopCheck.Domain.Contracts.Models.DataClean;
 using DataClean.Contracts.Interfaces;
 using Reckner.WPF.ViewModel;
 using System.ComponentModel.DataAnnotations;
+using DataClean.Contracts.Models;
 
 namespace CoopCheck.Domain.Contracts.Wrappers
 {
@@ -40,7 +40,7 @@ namespace CoopCheck.Domain.Contracts.Wrappers
             get { return _altAddress.OkPhone; }
         }
 
-        private IOutputStreetAddress _altAddress = new CleanedAddress()
+        private OutputStreetAddress _altAddress = new OutputStreetAddress()
         {
             Results = new List<IParseResult>()
         };
@@ -64,9 +64,9 @@ namespace CoopCheck.Domain.Contracts.Wrappers
             }
         }
 
-        public IOutputStreetAddress AltAddress
+        public OutputStreetAddress AltAddress
         {
-            get { return (IOutputStreetAddress) _altAddress; }
+            get { return _altAddress; }
             set
             {
                 if (value == null) return;

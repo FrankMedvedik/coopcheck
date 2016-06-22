@@ -2,24 +2,32 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Repository;
 
 namespace CoopCheck.Reports.Services
 {
     public class ClientSvc : IClientSvc
     {
-        private readonly ICoopCheckEntities _coopCheckEntities = null;
+        private ICoopCheckEntities _coopCheckEntities;
 
-        public ClientSvc(ICoopCheckEntities coopCheckEntities)
+
+        public ICoopCheckEntities CoopCheckEntities
         {
-            _coopCheckEntities = coopCheckEntities;
+            get { return _coopCheckEntities ?? (_coopCheckEntities = new CoopCheckEntities()); }
+            set { _coopCheckEntities = value; }
         }
-
-        public async Task<List<ICoopCheckClient>> GetClients()
+        public async Task<List<Contracts.Models.CoopCheckClient>> GetClients()
         {
             var x = await (_coopCheckEntities.CoopCheckClients.OrderBy(a => a.ClientName).ToListAsync());
-            return x;
+            var cs = new List<Contracts.Models.CoopCheckClient>();
+            foreach (var z in x)
+            {
+                cs.Add(Mapper.Map<Repository.CoopCheckClient,Contracts.Models.CoopCheckClient>(z));
+            }
+
+            return cs;
         }
     }
 }

@@ -1,9 +1,8 @@
 using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class UnclearedBatch :IvwUnclearedBatch
+    public class UnclearedBatch 
     {
         public DateTime? batch_date { get; set; }
         public int batch_num { get; set; }

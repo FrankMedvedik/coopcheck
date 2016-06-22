@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+
 
 namespace CoopCheck.Reports.Contracts.Interfaces
 {
     public interface IJobLogSvc
     {
-        Task<IJobLog> GetJobLog(int jobNum);
+        Task<JobLog> GetJobLog(int jobNum);
         Task<string> GetJobName(int jobNum);
     }
 }

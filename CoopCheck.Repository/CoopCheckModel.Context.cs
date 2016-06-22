@@ -6,9 +6,6 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using CoopCheck.Repository.Contracts.Interfaces;
-
 namespace CoopCheck.Repository
 {
     using System;
@@ -29,22 +26,22 @@ namespace CoopCheck.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual IDbSet<Ibatch> batches { get; set; }
-        public virtual IDbSet<Icheck_tran> check_trans { get; set; }
-        public virtual IDbSet<Ivoucher> vouchers { get; set; }
-        public virtual IDbSet<IvwCheck> vwChecks { get; set; }
-        public virtual IDbSet<IvwPositivePay> vwPositivePays { get; set; }
-        public virtual IDbSet<IvwVoidedPayment> vwVoidedPayments { get; set; }
-        public IDbSet<IvwPayment> vwPayments { get; set; }
-        public virtual IDbSet<Ibank_account> bank_accounts { get; set; }
-        public virtual IDbSet<IvwUnclearedBatch> vwUnclearedBatches { get; set; }
-        public virtual IDbSet<ICoopCheckClient> CoopCheckClients { get; set; }
-        public virtual IDbSet<ICoopCheckJobLog> CoopCheckJobLogs { get; set; }
-        public virtual IDbSet<IvwClientJobBatch> vwClientJobBatches { get; set; }
-        public virtual IDbSet<IvwJobRpt> vwJobRpts { get; set; }
-        public virtual IDbSet<IJobLog> JobLogs { get; set; }
-        public virtual IDbSet<IvwBatchRpt> vwBatchRpts { get; set; }
-        public virtual IDbSet<IvwOpenBatch> vwOpenBatches { get; set; }
+        public virtual IDbSet<batch> batches { get; set; }
+        public virtual IDbSet<check_tran> check_trans { get; set; }
+        public virtual IDbSet<voucher> vouchers { get; set; }
+        public virtual IDbSet<vwCheck> vwChecks { get; set; }
+        public virtual IDbSet<vwPositivePay> vwPositivePays { get; set; }
+        public virtual IDbSet<vwVoidedPayment> vwVoidedPayments { get; set; }
+        public IDbSet<vwPayment> vwPayments { get; set; }
+        public virtual IDbSet<bank_account> bank_accounts { get; set; }
+        public virtual IDbSet<vwUnclearedBatch> vwUnclearedBatches { get; set; }
+        public virtual IDbSet<CoopCheckClient> CoopCheckClients { get; set; }
+        public virtual IDbSet<CoopCheckJobLog> CoopCheckJobLogs { get; set; }
+        public virtual IDbSet<vwClientJobBatch> vwClientJobBatches { get; set; }
+        public virtual IDbSet<vwJobRpt> vwJobRpts { get; set; }
+        public virtual IDbSet<JobLog> JobLogs { get; set; }
+        public virtual IDbSet<vwBatchRpt> vwBatchRpts { get; set; }
+        public virtual IDbSet<vwOpenBatch> vwOpenBatches { get; set; }
     
         public virtual ObjectResult<IvwJobRpt> GetJobPaymentsReport(Nullable<int> account_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date)
         {

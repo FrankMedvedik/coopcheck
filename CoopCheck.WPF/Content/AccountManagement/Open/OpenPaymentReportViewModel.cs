@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Contracts.Models.Reports;
+using CoopCheck.Domain.Services;
 using CoopCheck.Reports.Contracts.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -12,7 +16,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
     {
         private readonly IRptSvc _rptSvc;
         private string _headingText;
-        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
+        private ObservableCollection<Payment> _payments = new ObservableCollection<Payment>();
 
         public OpenPaymentReportViewModel(IRptSvc rptSvc)
         {
@@ -41,7 +45,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
             get { return Payments.Sum(x => x.tran_amount); }
         }
 
-        public ObservableCollection<Paymnt> Payments
+        public ObservableCollection<Payment> Payments
         {
             get { return _payments; }
             set
@@ -70,15 +74,15 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
             {
                 ShowGridData = false;
                 var payments = await _rptSvc.GetOpenPayments(p);
-                var v = new List<Paymnt>();
+                var v = new List<Payment>();
                 foreach (var paymnt  in payments)
                 {
-                    v.Add((Paymnt) paymnt);
+                    v.Add((Payment) paymnt);
                 }
                 HeadingText = string.Format("{0} Account Open Payment Report for Payments as of {1:ddd, MMM d, yyyy}",
                     p.Account.account_name, p.EndDate);
 
-                Payments = new ObservableCollection<Paymnt>(v);
+                Payments = new ObservableCollection<Payment>(v);
             }
             catch (Exception e)
             {

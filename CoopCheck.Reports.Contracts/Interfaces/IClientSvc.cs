@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
 
 namespace CoopCheck.Reports.Contracts.Interfaces
 {
     public interface IClientSvc
     {
-        Task<List<ICoopCheckClient>> GetClients();
+        Task<List<CoopCheckClient>> GetClients();
     }
 }

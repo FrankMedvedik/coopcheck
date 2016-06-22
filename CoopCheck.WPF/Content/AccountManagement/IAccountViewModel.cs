@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CoopCheck.Domain.Contracts.Models.Reports;
+using CoopCheck.Reports.Contracts.Models;
 
 namespace CoopCheck.WPF.Content.AccountManagement
 {

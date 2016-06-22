@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Routing;
-using CoopCheck.Repository;
+using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
-using CoopCheck.Web.Services;
 using Hangfire;
 using log4net;
 
@@ -23,10 +20,16 @@ namespace CoopCheck.Web.Controllers
             = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly ICoopCheckEntities _ctx;
+        private IUserAuthSvc _userAuthSvc;
+        private ISwiftPaySvc _swiftPaySvc;
+        private ISendMailSvc _sendMailSvc;
 
-        public SwiftPaymentController(ICoopCheckEntities ctx)
+        public SwiftPaymentController(ICoopCheckEntities ctx, ISwiftPaySvc swiftPaySvc, IUserAuthSvc userAuthSvc, ISendMailSvc sendMailSvc)
         {
             _ctx = ctx;
+            _swiftPaySvc = swiftPaySvc;
+            _userAuthSvc = userAuthSvc;
+            _sendMailSvc = sendMailSvc;
         }
 
         public List<IvwPayment> Get(int batchNum)
@@ -43,14 +46,14 @@ namespace CoopCheck.Web.Controllers
             try
             {
                 var user = RequestContext.Principal as WindowsPrincipal;
-                if (user != null && UserAuthSvc.CanWrite(user.Identity.Name))
+                if (user != null && _userAuthSvc.CanWrite(user.Identity.Name))
                 {
-                    emailAddress = SendMailSvc.uEmail(user.Identity.Name.Replace(@"reckner\", ""));
+                    emailAddress = _sendMailSvc.uEmail(user.Identity.Name.Replace(@"reckner\", ""));
 
                     log.Info(string.Format("Email address {0}", emailAddress));
                     log.Info(string.Format("SwiftPay called user {0}  batch {1} email {2}",
                         user.Identity.Name, batchNum, emailAddress));
-                    BackgroundJob.Enqueue(() => SwiftPaySvc.PayBatch(batchNum, emailAddress));
+                    BackgroundJob.Enqueue(() => _swiftPaySvc.PayBatch(batchNum, emailAddress));
                     return Ok();
                 }
                 return Unauthorized();
@@ -69,14 +72,14 @@ namespace CoopCheck.Web.Controllers
             try
             {
                 var user = RequestContext.Principal as WindowsPrincipal;
-                if (user != null && UserAuthSvc.CanWrite(user.Identity.Name))
+                if (user != null && _userAuthSvc.CanWrite(user.Identity.Name))
                 {
-                    emailAddress = SendMailSvc.uEmail(user.Identity.Name.Replace(@"reckner\", ""));
+                    emailAddress = _sendMailSvc.uEmail(user.Identity.Name.Replace(@"reckner\", ""));
 
                     log.Info(string.Format("Email address {0}", emailAddress));
                     log.Info(string.Format("SwiftVoid called user {0}  batch {1} email {2}",
                         user.Identity.Name,batchNum, emailAddress));
-                    BackgroundJob.Enqueue(() => SwiftPaySvc.VoidBatch(batchNum, emailAddress));
+                    BackgroundJob.Enqueue(() => _swiftPaySvc.VoidBatch(batchNum, emailAddress));
                     return Ok();
                 }
                 return Unauthorized();

@@ -1,7 +1,4 @@
-﻿
-using CoopCheck.Repository.Contracts.Interfaces;
-
-namespace CoopCheck.Repository
+﻿namespace CoopCheck.Repository
 {
     using System;
 

@@ -1,9 +1,8 @@
 using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public  class JobRpt : IvwJobRpt
+    public  class JobRpt 
     {
         public int? batch_cnt { get; set; }
         public decimal? cleared_amount { get; set; }

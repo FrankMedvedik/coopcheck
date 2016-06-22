@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
@@ -9,12 +12,12 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
     public class AccountPaymentsViewModel : ViewModelBase, IAccountPaymentsViewModel
     {
         private readonly IRptSvc _rptSvc;
-        private List<Paymnt> _allPayments = new List<Paymnt>();
+        private List<Payment> _allPayments = new List<Payment>();
 
         private List<CheckInfoDto> _checksToClear = new List<CheckInfoDto>();
-        private List<Paymnt> _matchedPayments = new List<Paymnt>();
-        private List<Paymnt> _openPayments = new List<Paymnt>();
-        private PaymentReportCriteria _paymentReportCriteria;
+        private List<Payment> _matchedPayments = new List<Payment>();
+        private List<Payment> _openPayments = new List<Payment>();
+        private PaymentReportCriteriaDto _paymentReportCriteria;
 
         private ObservableCollection<KeyValuePair<string, string>> _stats =
             new ObservableCollection<KeyValuePair<string, string>>();
@@ -24,7 +27,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
             _rptSvc = rptSvc;
         }
 
-        public List<Paymnt> MatchedPayments
+        public List<Payment> MatchedPayments
         {
             get { return _matchedPayments; }
             set
@@ -34,7 +37,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
             }
         }
 
-        public List<Paymnt> OpenPayments
+        public List<Payment> OpenPayments
         {
             get { return _openPayments; }
             set
@@ -64,7 +67,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
             }
         }
 
-        public List<Paymnt> AllPayments
+        public List<Payment> AllPayments
         {
             get { return _allPayments; }
             set
@@ -74,7 +77,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
             }
         }
 
-        public PaymentReportCriteria PaymentReportCriteria
+        public PaymentReportCriteriaDto PaymentReportCriteria
         {
             get { return _paymentReportCriteria; }
             set
@@ -87,7 +90,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
         public async Task GetPayments()
         {
             var payments = await _rptSvc.GetPaymentReconcileReport(PaymentReportCriteria);
-            var allPayments = new List<Paymnt>();
+            var allPayments = new List<Payment>();
             foreach (var p in allPayments)
             {
                 allPayments.Add(p);

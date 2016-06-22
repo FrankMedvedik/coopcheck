@@ -1,8 +1,8 @@
 ﻿using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.DataClean;
 using CoopCheck.Domain.Contracts.Wrappers;
 using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 
 namespace CoopCheck.Domain.Contracts.Converters
 {

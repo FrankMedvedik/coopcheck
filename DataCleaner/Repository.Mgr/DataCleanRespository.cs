@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataClean.Contracts.Interfaces;
-using DataClean.Models;
+using DataClean.Contracts.Models;
 using DataClean.Repository.Contracts.Interfaces;
 using log4net;
 using Newtonsoft.Json;

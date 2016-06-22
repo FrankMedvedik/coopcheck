@@ -1,9 +1,8 @@
 ﻿using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class PositivePayItem : IvwPositivePay
+    public class PositivePayItem 
     {
         public string account_number { get; set; }
         public DateTime? check_date { get; set; }

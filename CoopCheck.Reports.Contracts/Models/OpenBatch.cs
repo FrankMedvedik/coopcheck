@@ -1,9 +1,8 @@
 ﻿using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class OpenBatch : IvwOpenBatch
+    public class OpenBatch 
     {
         public bool BadBatch { get; }
         public DateTime? batch_date { get; set; }

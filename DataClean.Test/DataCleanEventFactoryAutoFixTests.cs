@@ -2,8 +2,8 @@
 using System.Configuration;
 using System.Linq;
 using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 using DataClean.DataCleaner;
-using DataClean.Models;
 using DataClean.Repository.Mgr;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

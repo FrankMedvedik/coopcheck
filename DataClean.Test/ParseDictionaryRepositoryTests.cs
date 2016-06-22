@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataClean.Contracts.Models;
 using DataClean.Repository.Mgr;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

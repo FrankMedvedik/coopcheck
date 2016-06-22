@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using CoopCheck.Domain.Contracts.Models;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
 {

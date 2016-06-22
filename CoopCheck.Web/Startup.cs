@@ -16,6 +16,7 @@ namespace CoopCheck.Web
 
             app.UseHangfireDashboard();
             app.UseHangfireServer();
+        
         }
     }
 }

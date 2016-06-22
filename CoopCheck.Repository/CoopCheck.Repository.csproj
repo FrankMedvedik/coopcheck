@@ -101,6 +101,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoopCheckModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EntityInterfaceGenerator.IDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityInterfaceGenerator.IDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityInterfaceGenerator.IEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityInterfaceGenerator.IEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityInterfaceGenerator.PartialContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,10 +188,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
-      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
-      <Name>CoopCheck.Repository.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataClean.Repository.Contracts\DataClean.Repository.Contracts.csproj">
       <Project>{d57c0767-59ca-4d7a-ac3c-5966f03e9c53}</Project>
       <Name>DataClean.Repository.Contracts</Name>

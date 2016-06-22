@@ -1,9 +1,7 @@
 ﻿
-using CoopCheck.Repository.Contracts.Interfaces;
-
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class CoopCheckClient : ICoopCheckClient
+    public class CoopCheckClient 
     {
         public string Address { get; set; }
         public string Attention { get; set; }

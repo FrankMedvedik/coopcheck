@@ -1,9 +1,8 @@
 ﻿using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class BatchRpt : IvwBatchRpt
+    public class BatchRpt 
     {
         public int? account_id { get; set; }
         public string account_name { get; set; }

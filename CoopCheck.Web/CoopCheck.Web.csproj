@@ -181,7 +181,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\DataCleanEventController.cs" />
-    <Compile Include="Services\UserAuthSvc.cs" />
+    <Compile Include="IOC\IocKernel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -224,8 +224,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\SendMailSvc.cs" />
-    <Compile Include="Services\SwiftPaySvc.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -311,6 +309,14 @@
       <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
       <Name>CoopCheck.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Domain.Contracts\CoopCheck.Domain.Contracts.csproj">
+      <Project>{d74c9136-5fe3-4ee8-98df-d81ec92f7463}</Project>
+      <Name>CoopCheck.Domain.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Domain\CoopCheck.Domain.csproj">
+      <Project>{b23d3c99-fdee-47fc-b122-eb4b08d0a551}</Project>
+      <Name>CoopCheck.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Library\CoopCheck.Library\CoopCheck.Library.csproj">
       <Project>{823874a2-d57c-4bb2-b71e-7076d9309589}</Project>
       <Name>CoopCheck.Library</Name>
@@ -319,12 +325,8 @@
       <Project>{ae2010b3-02ec-4c55-af3a-49c98d1000f7}</Project>
       <Name>CoopCheck.Dal.Mocks</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
-      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
-      <Name>CoopCheck.Repository.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
-      <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
+      <Project>{4C9A0AEF-3FF4-4822-8094-51A9AE68DB7B}</Project>
       <Name>CoopCheck.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
@@ -334,14 +336,6 @@
     <ProjectReference Include="..\DataClean.Repository.Contracts\DataClean.Repository.Contracts.csproj">
       <Project>{d57c0767-59ca-4d7a-ac3c-5966f03e9c53}</Project>
       <Name>DataClean.Repository.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataClean.Repository\DataClean.Repository.csproj">
-      <Project>{05984e8e-cf26-4200-a15b-f45e0ef4ce76}</Project>
-      <Name>DataClean.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataCleaner\DataClean.csproj">
-      <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>
-      <Name>DataClean</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,8 @@
 ﻿using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class Paymnt : IvwPayment
+    public class Payment 
     {
         public int? account_id { get; set; }
         public string address_1 { get; set; }

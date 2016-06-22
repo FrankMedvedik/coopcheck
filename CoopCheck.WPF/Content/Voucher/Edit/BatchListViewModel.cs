@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.WPF.Messages;
-using CoopCheck.WPF.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 

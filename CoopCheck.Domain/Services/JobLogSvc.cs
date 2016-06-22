@@ -2,11 +2,12 @@ using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using CoopCheck.Domain.Contracts.Models.Reports;
+using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Domain.Services
 {
-    public class JobLogSvc
+    public class JobLogSvc : IJobLogSvc
     {
         public static string BadJobName = "job number is not defined";
         private readonly ICoopCheckEntities _ctx;

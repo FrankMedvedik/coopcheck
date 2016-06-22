@@ -280,8 +280,10 @@
     <Compile Include="Content\AccountManagement\Reconcile\StatsType.cs" />
     <Compile Include="Content\PaymentReports\Batch\IBatchReportViewModel.cs" />
     <Compile Include="Content\PaymentReports\Batch\IBatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\PaymentReports\Criteria\ClientReportCriteria.cs" />
     <Compile Include="Content\PaymentReports\Criteria\IClientReportCriteriaViewModel.cs" />
     <Compile Include="Content\PaymentReports\Criteria\IPaymentReportCriteriaViewModel.cs" />
+    <Compile Include="Content\PaymentReports\Criteria\PaymentReportCriteria.cs" />
     <Compile Include="Content\PaymentReports\Job\IJobReportViewModel.cs" />
     <Compile Include="Content\PaymentReports\Job\IJobSummaryPaymentReportViewModel.cs" />
     <Compile Include="Content\PaymentReports\PaymentFinder\IPaymentFinderViewModel.cs" />
@@ -926,10 +928,6 @@
     <ProjectReference Include="..\CoopCheck.Reports.Contracts\CoopCheck.Reports.Contracts.csproj">
       <Project>{A9A18E3C-C1A2-41BD-9841-3CE748A28DDA}</Project>
       <Name>CoopCheck.Reports.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CoopCheck.Repository.Contracts\CoopCheck.Repository.Contracts.csproj">
-      <Project>{1427EB95-E4B4-43AE-A7BC-9120E1C96AE0}</Project>
-      <Name>CoopCheck.Repository.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reckner.WPF\Reckner.WPF.csproj">
       <Project>{205893f2-f604-4451-b2e0-c4be475fa592}</Project>

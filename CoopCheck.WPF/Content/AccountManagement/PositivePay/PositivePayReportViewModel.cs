@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Contracts.Models.Reports;
 using CoopCheck.Reports.Contracts.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
+using PositivePayItem = CoopCheck.Reports.Contracts.Models.PositivePayItem;
 
 namespace CoopCheck.WPF.Content.AccountManagement.PositivePay
 {

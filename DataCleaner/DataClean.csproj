@@ -84,26 +84,20 @@
     <Compile Include="DataCleaner\AutoFixer.cs" />
     <Compile Include="DataCleaner\DataCleanEventFactory.cs" />
     <Compile Include="IParseResultDictionary.cs" />
-    <Compile Include="Models\DataCleanCriteria.cs" />
     <Compile Include="Repository.Mgr\DataCleanRespository.cs" />
-    <Compile Include="Models\DataCleanEvent.cs" />
     <Compile Include="Extensions\PersonatorExtentions.cs" />
     <Compile Include="Services\HashHelperSvc.cs" />
-    <Compile Include="Models\InputStreetAddress.cs" />
-    <Compile Include="ParseResultDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Models\ParseResult.cs" />
     <Compile Include="Service References\Personator\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Models\OutputStreetAddress.cs" />
     <Compile Include="DataCleaner\DataCleaner.cs" />
   </ItemGroup>
   <ItemGroup>

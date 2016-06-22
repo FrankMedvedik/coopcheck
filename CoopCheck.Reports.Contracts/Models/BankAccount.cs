@@ -1,9 +1,8 @@
 ﻿using System;
-using CoopCheck.Repository.Contracts.Interfaces;
 
 namespace CoopCheck.Reports.Contracts.Models
 {
-    public class BankAccount : Ibank_account
+    public class BankAccount
     {
         public string account_dscr { get; set; }
         public int account_id { get; set; }

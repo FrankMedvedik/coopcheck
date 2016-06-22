@@ -2,9 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Domain.Contracts.Messages;
-using CoopCheck.Domain.Models.Reports;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -43,7 +42,7 @@ namespace CoopCheck.WPF.Content.AccountManagement
                 NotifyPropertyChanged();
                 if (SelectedAccount != null)
                 {
-                    Messenger.Default.Send(new NotificationMessage<Ibank_account>(SelectedAccount,
+                    Messenger.Default.Send(new NotificationMessage<BankAccount>(SelectedAccount,
                         Notifications.SelectedAccountChanged));
                     Properties.Settings.Default.SelectedAccountID = value.account_id.ToString();
                     Properties.Settings.Default.Save();

@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
-using CoopCheck.Repository.Contracts.Interfaces;
+﻿
+using CoopCheck.Reports.Contracts.Models;
 
 namespace CoopCheck.Reports.Contracts.Interfaces
 {
     public interface IClientReportCriteria
     {
-        ICoopCheckJobLog SelectedJob { get; set; }
+        CoopCheckJobLog SelectedJob { get; set; }
         string SelectedJobNum { get; set; }
-        Ibatch SelectedBatch { get; set; }
-        ICoopCheckClient SelectedClient { get; set; }
+        BatchRpt SelectedBatch { get; set; }
+        CoopCheckClient SelectedClient { get; set; }
         string SelectedClientID { get; }
         string SelectedJobYear { get; set; }
         string ALLJOBYEARS { get; }
@@ -17,6 +17,6 @@ namespace CoopCheck.Reports.Contracts.Interfaces
         string ALLCLIENTJOBS { get; }
         string ALLCLIENTJOBSFORYEAR { get; }
         string ToFormattedString(char token);
-        event PropertyChangedEventHandler PropertyChanged;
+
     }
 }
