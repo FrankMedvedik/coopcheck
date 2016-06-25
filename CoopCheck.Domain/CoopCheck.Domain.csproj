@@ -110,11 +110,11 @@
     <Compile Include="Converters\DataCleanEventConverter.cs" />
     <Compile Include="Converters\VoucherImportConverter.cs" />
     <Compile Include="Converters\VoucherImportWrapperConverter.cs" />
+    <Compile Include="DomainConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />
     <Compile Include="Services\DataCleanVoucherImportSvc.cs" />
-    <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Services\JobYearSvc.cs" />
     <Compile Include="Services\ObjectCopier.cs" />
     <Compile Include="Services\ObjectDataReader.cs" />
@@ -149,6 +149,10 @@
     <ProjectReference Include="..\CoopCheck.Repository\CoopCheck.Repository.csproj">
       <Project>{4c9a0aef-3ff4-4822-8094-51a9ae68db7b}</Project>
       <Name>CoopCheck.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClean.Contracts\DataClean.Contracts.csproj">
+      <Project>{d4b3264f-c68a-451f-b512-e7c8e9565900}</Project>
+      <Name>DataClean.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataCleaner\DataClean.csproj">
       <Project>{0e725976-76c4-4c29-aa8a-28d020c0f2bf}</Project>

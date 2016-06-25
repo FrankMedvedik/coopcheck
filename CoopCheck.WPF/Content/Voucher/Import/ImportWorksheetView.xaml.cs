@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using CoopCheck.Domain.Contracts.Models;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.Voucher.Import

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.Domain.Contracts.Messages;
-using CoopCheck.Domain.Models;
+using CoopCheck.Domain.Contracts.Models;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 

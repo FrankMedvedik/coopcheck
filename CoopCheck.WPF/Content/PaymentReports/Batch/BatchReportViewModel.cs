@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.Reports.Services;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -9,7 +15,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Batch
 {
     public class BatchReportViewModel : ViewModelBase, IBatchReportViewModel
     {
-        private readonly IRptSvc _rptSvc;
+        private IRptSvc _rptSvc;
         private ObservableCollection<BatchRpt> _batches = new ObservableCollection<BatchRpt>();
         private decimal _batchTotalDollars;
         private bool _canRefresh = true;
@@ -19,10 +25,19 @@ namespace CoopCheck.WPF.Content.PaymentReports.Batch
         private bool _showGridData;
         private StatusInfo _status;
 
-        public BatchReportViewModel(IRptSvc rptSvc)
+        public BatchReportViewModel()
         {
-            _rptSvc = rptSvc;
             ShowGridData = false;
+        }
+
+        public IRptSvc MyProperty
+        {
+            get
+            {
+                if (_rptSvc == null) _rptSvc = new RptSvc();
+                return _rptSvc;
+            }
+            set { _rptSvc = value; }
         }
 
         public bool ShowGridData

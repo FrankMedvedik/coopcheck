@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.WPF.Messages;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -104,13 +106,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
             IsBusy = true;
             OpenBatch v = null;
             if (SelectedBatch != null) v = SelectedBatch;
-            var bList = await _openBatchSvc.GetOpenBatches();
-            var batchList = new ObservableCollection<OpenBatch>();
-            foreach (var batch in bList)
-            {
-                batchList.Add((OpenBatch) batch);
-            }
-            BatchList = batchList;
+            BatchList = new ObservableCollection<OpenBatch>(await _openBatchSvc.GetOpenBatches());
             if (v != null)
                 try
                 {

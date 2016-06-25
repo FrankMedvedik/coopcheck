@@ -1,4 +1,5 @@
-﻿using Reckner.WPF.ViewModel;
+﻿using CoopCheck.Domain.Contracts.Models;
+using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content
 {

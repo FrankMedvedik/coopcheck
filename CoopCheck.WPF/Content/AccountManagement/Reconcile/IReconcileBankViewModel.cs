@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
+using GalaSoft.MvvmLight.Command;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
 {

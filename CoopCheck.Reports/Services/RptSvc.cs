@@ -13,11 +13,12 @@ namespace CoopCheck.Reports.Services
 {
     public class RptSvc : IRptSvc
     {
-        private readonly ICoopCheckEntities _coopCheckEntities = null;
+        private ICoopCheckEntities _coopCheckEntities;
 
-        private  RptSvc(ICoopCheckEntities coopCheckEntities)
+        public ICoopCheckEntities CoopCheckEntities
         {
-            _coopCheckEntities = coopCheckEntities;
+            get { return _coopCheckEntities ?? (_coopCheckEntities = new CoopCheckEntities()); }
+            set { _coopCheckEntities = value; }
         }
 
         public async Task<List<JobRpt>> GetJobRpt(IPaymentReportCriteria grc)

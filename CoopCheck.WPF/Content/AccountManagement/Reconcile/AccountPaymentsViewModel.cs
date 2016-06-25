@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
@@ -17,7 +18,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
         private List<CheckInfoDto> _checksToClear = new List<CheckInfoDto>();
         private List<Payment> _matchedPayments = new List<Payment>();
         private List<Payment> _openPayments = new List<Payment>();
-        private PaymentReportCriteriaDto _paymentReportCriteria;
+        private PaymentReportCriteria _paymentReportCriteria;
 
         private ObservableCollection<KeyValuePair<string, string>> _stats =
             new ObservableCollection<KeyValuePair<string, string>>();
@@ -77,7 +78,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
             }
         }
 
-        public PaymentReportCriteriaDto PaymentReportCriteria
+        public PaymentReportCriteria PaymentReportCriteria
         {
             get { return _paymentReportCriteria; }
             set

@@ -11,6 +11,8 @@ using CoopCheck.Domain.Contracts.Wrappers;
 using DataClean.Contracts.Interfaces;
 using DataClean.Contracts.Services;
 using Newtonsoft.Json;
+using DataCleanEventConverter = CoopCheck.Domain.Converters.DataCleanEventConverter;
+using VoucherImportWrapperConverter = CoopCheck.Domain.Converters.VoucherImportWrapperConverter;
 
 namespace CoopCheck.Domain.Services
 {

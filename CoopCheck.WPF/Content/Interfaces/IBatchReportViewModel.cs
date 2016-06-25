@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 
-namespace CoopCheck.WPF.Content.PaymentReports.Batch
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IBatchReportViewModel
     {

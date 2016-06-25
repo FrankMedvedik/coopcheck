@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.Reports;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Open
 {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Domain.Contracts.Wrappers;
-using CoopCheck.Domain.Models;
 using GalaSoft.MvvmLight.Command;
 
-namespace CoopCheck.WPF.Content.Voucher.Save
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IVoucherSaveViewModel
     {

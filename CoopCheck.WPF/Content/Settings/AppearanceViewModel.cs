@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
+using CoopCheck.WPF.Content.Interfaces;
 using FirstFloor.ModernUI.Presentation;
 
 namespace CoopCheck.WPF.Content.Settings

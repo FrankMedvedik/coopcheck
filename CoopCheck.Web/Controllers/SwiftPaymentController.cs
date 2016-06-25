@@ -6,7 +6,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CoopCheck.Domain.Contracts.Interfaces;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Repository;
 using Hangfire;
 using log4net;
 
@@ -32,7 +32,7 @@ namespace CoopCheck.Web.Controllers
             _sendMailSvc = sendMailSvc;
         }
 
-        public List<IvwPayment> Get(int batchNum)
+        public List<vwPayment> Get(int batchNum)
         {
             log.Info(string.Format("get SwiftPayments batchNum {0}", batchNum));
             return _ctx.vwPayments.Where(x => x.batch_num == batchNum).ToList();

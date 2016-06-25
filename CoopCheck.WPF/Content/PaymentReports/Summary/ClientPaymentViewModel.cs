@@ -2,7 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -11,17 +16,17 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
     public class ClientPaymentViewModel : ViewModelBase, IClientPaymentViewModel
     {
         private readonly IRptSvc _rptSvc;
-        private ObservableCollection<Paymnt> _allPayments = new ObservableCollection<Paymnt>();
+        private ObservableCollection<Payment> _allPayments = new ObservableCollection<Payment>();
         private ClientReportCriteria _clientReportCriteria;
-        private ObservableCollection<Paymnt> _closedPayments = new ObservableCollection<Paymnt>();
+        private ObservableCollection<Payment> _closedPayments = new ObservableCollection<Payment>();
 
         private int _jobNum;
-        private ObservableCollection<Paymnt> _openPayments = new ObservableCollection<Paymnt>();
+        private ObservableCollection<Payment> _openPayments = new ObservableCollection<Payment>();
 
         private BatchRpt _parentBatch;
         private bool _showGridData;
         private StatusInfo _status;
-        private List<Paymnt> _workPayments;
+        private List<Payment> _workPayments;
 
         public ClientPaymentViewModel(IRptSvc rptSvc)
         {
@@ -63,19 +68,19 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
             }
         }
 
-        public List<Paymnt> WorkPayments
+        public List<Payment> WorkPayments
         {
             get { return _workPayments; }
             set
             {
                 _workPayments = value;
-                AllPayments = new ObservableCollection<Paymnt>(WorkPayments);
-                ClosedPayments = new ObservableCollection<Paymnt>((
+                AllPayments = new ObservableCollection<Payment>(WorkPayments);
+                ClosedPayments = new ObservableCollection<Payment>((
                     from l in _workPayments
                     where l.cleared_flag
                     orderby l.check_date
                     select l).ToList());
-                OpenPayments = new ObservableCollection<Paymnt>((
+                OpenPayments = new ObservableCollection<Payment>((
                     from l in _workPayments
                     where !l.cleared_flag
                     orderby l.check_date
@@ -99,7 +104,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
             }
         }
 
-        public ObservableCollection<Paymnt> AllPayments
+        public ObservableCollection<Payment> AllPayments
         {
             get { return _allPayments; }
             set
@@ -110,7 +115,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
             }
         }
 
-        public ObservableCollection<Paymnt> ClosedPayments
+        public ObservableCollection<Payment> ClosedPayments
         {
             get { return _closedPayments; }
             set
@@ -130,7 +135,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
             }
         }
 
-        public ObservableCollection<Paymnt> OpenPayments
+        public ObservableCollection<Payment> OpenPayments
         {
             get { return _openPayments; }
             set
@@ -148,10 +153,10 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
         private async Task GetPayments()
         {
             var wps = await _rptSvc.GetAllBatchPayments(ParentBatch.batch_num);
-            var workPayments = new List<Paymnt>();
+            var workPayments = new List<Payment>();
             foreach (var p in wps)
             {
-                workPayments.Add((Paymnt) p);
+                workPayments.Add((Payment) p);
             }
             WorkPayments = workPayments;
         }

@@ -8,7 +8,7 @@ using Reckner.WPF.Converters;
 
 namespace CoopCheck.Domain.Services
 {
-    public class PaymentPrintSvc
+    public class PaymentPrintSvc  
     {
         private IDictionary<string, string> _settings;
 

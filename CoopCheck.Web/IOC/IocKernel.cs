@@ -1,7 +1,7 @@
 ﻿using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Services;
+using CoopCheck.Library;
 using CoopCheck.Repository;
-using CoopCheck.Repository.Contracts.Interfaces;
 using Ninject;
 using Ninject.Modules;
 

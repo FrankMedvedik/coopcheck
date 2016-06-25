@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
 {
@@ -12,7 +13,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
         List<CheckInfoDto> ChecksToClear { get; set; }
         List<Payment> MatchedPayments { get; set; }
         List<Payment> OpenPayments { get; set; }
-        PaymentReportCriteriaDto PaymentReportCriteria { get; set; }
+        PaymentReportCriteria PaymentReportCriteria { get; set; }
         ObservableCollection<KeyValuePair<string, string>> Stats { get; set; }
 
         Task GetPayments();

@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Services;
+using CoopCheck.Library;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -13,7 +20,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
     public class PaymentFinderViewModel : ViewModelBase, IPaymentFinderViewModel
     {
         private readonly IRptSvc _rptSvc;
-        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
+        private ObservableCollection<Payment> _payments = new ObservableCollection<Payment>();
 
         public PaymentFinderViewModel(IRptSvc rptSvc)
         {
@@ -55,7 +62,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
             get { return Payments.Sum(x => x.tran_amount); }
         }
 
-        public ObservableCollection<Paymnt> Payments
+        public ObservableCollection<Payment> Payments
         {
             get { return _payments; }
             set
@@ -63,12 +70,11 @@ namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
                 _payments = value;
                 NotifyPropertyChanged();
                 string em = null;
-
-                if (Payments.Count == PaymentSvc.MAX_PAYMENT_COUNT)
-                    em =
-                        string.Format(
-                            "Showing only the first {0} payments add additional criteria to limit your search",
-                            PaymentSvc.MAX_PAYMENT_COUNT);
+                //if (Payments.Count == PaymentSvc.MAX_PAYMENT_COUNT)
+                //    em =
+                //        string.Format(
+                //            "Showing only the first {0} payments add additional criteria to limit your search",
+                //            PaymentSvc.MAX_PAYMENT_COUNT);
                 Status = new StatusInfo
                 {
                     ErrorMessage = em,
@@ -169,13 +175,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
             };
             try
             {
-                var ps = await _rptSvc.GetPayments(PaymentReportCriteria);
-                var payments = new List<Paymnt>();
-                foreach (var p in ps)
-                {
-                    payments.Add((Paymnt) p);
-                }
-                Payments = new ObservableCollection<Paymnt>(payments);
+                Payments = new ObservableCollection<Payment>(await _rptSvc.GetPayments(PaymentReportCriteria));
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<Paymnt>();
+            _payments = new ObservableCollection<Payment>();
             ShowGridData = false;
         }
 
@@ -224,9 +224,9 @@ namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
 
         #region collection and selected
 
-        private Paymnt _selectedPayment;
+        private Payment _selectedPayment;
 
-        public Paymnt SelectedPayment
+        public Payment SelectedPayment
         {
             get { return _selectedPayment; }
             set

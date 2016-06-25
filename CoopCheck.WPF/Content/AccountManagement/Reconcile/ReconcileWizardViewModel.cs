@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.AccountManagement.Reconcile

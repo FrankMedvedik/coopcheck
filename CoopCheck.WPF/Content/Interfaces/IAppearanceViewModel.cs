@@ -1,7 +1,7 @@
 ﻿using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
 
-namespace CoopCheck.WPF.Content.Settings
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IAppearanceViewModel
     {

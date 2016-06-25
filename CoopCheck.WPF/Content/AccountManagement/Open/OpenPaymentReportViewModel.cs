@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.Reports;
 using CoopCheck.Domain.Services;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -17,10 +18,11 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
         private readonly IRptSvc _rptSvc;
         private string _headingText;
         private ObservableCollection<Payment> _payments = new ObservableCollection<Payment>();
-
-        public OpenPaymentReportViewModel(IRptSvc rptSvc)
+        private OutstandingBalancePrintSvc _outstandingBalancePrintSvc;
+        public OpenPaymentReportViewModel(IRptSvc rptSvc, OutstandingBalancePrintSvc outstandingBalancePrintSvc)
         {
             _rptSvc = rptSvc;
+            _outstandingBalancePrintSvc = outstandingBalancePrintSvc;
 
             ResetState();
         }
@@ -75,9 +77,9 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
                 ShowGridData = false;
                 var payments = await _rptSvc.GetOpenPayments(p);
                 var v = new List<Payment>();
-                foreach (var paymnt  in payments)
+                foreach (var Payment  in payments)
                 {
-                    v.Add((Payment) paymnt);
+                    v.Add((Payment) Payment);
                 }
                 HeadingText = string.Format("{0} Account Open Payment Report for Payments as of {1:ddd, MMM d, yyyy}",
                     p.Account.account_name, p.EndDate);
@@ -106,7 +108,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
                 PreparedBy = UserAuth.Instance.UserName
             };
 
-            await OutstandingBalancePrintSvc.PrintOutstandingBalanceReportAsync(s);
+            await _outstandingBalancePrintSvc.PrintOutstandingBalanceReportAsync(s);
         }
 
         #region DisplayState
@@ -115,7 +117,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<Paymnt>();
+            _payments = new ObservableCollection<Payment>();
             ShowGridData = false;
         }
 
@@ -146,9 +148,9 @@ namespace CoopCheck.WPF.Content.AccountManagement.Open
 
         #region collection and selected
 
-        private Paymnt _selectedPayment;
+        private Payment _selectedPayment;
 
-        public Paymnt SelectedPayment
+        public Payment SelectedPayment
         {
             get { return _selectedPayment; }
             set

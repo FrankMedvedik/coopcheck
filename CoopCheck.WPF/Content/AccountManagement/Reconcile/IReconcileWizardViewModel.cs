@@ -1,4 +1,6 @@
-﻿namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
+﻿using CoopCheck.Domain.Contracts.Models;
+
+namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
 {
     public interface IReconcileWizardViewModel
     {

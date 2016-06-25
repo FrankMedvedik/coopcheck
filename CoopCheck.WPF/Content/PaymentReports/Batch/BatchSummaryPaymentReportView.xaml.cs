@@ -3,6 +3,12 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Services;
+using CoopCheck.Library;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using CoopCheck.WPF.Content.Voucher;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
@@ -14,16 +20,16 @@ namespace CoopCheck.WPF.Content.PaymentReports.Batch
     public partial class BatchSummaryPaymentReportView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Payment>),
+                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Payment>),
+                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Payment>),
+                typeof(BatchSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         private readonly IBatchSummaryPaymentReportViewModel _vm;
 
@@ -48,17 +54,17 @@ namespace CoopCheck.WPF.Content.PaymentReports.Batch
         }
 
 
-        public ObservableCollection<Paymnt> AllPayments
+        public ObservableCollection<Payment> AllPayments
         {
             get { return _vm.AllPayments; }
         }
 
-        public ObservableCollection<Paymnt> OpenPayments
+        public ObservableCollection<Payment> OpenPayments
         {
             get { return _vm.OpenPayments; }
         }
 
-        public ObservableCollection<Paymnt> ClosedPayments
+        public ObservableCollection<Payment> ClosedPayments
         {
             get { return _vm.ClosedPayments; }
         }

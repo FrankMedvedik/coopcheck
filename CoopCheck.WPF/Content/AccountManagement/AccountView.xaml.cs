@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.Domain.Contracts.Models.Reports;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
 
 namespace CoopCheck.WPF.Content.AccountManagement
 {

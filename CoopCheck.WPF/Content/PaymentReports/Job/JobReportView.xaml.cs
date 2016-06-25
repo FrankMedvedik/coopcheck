@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using Microsoft.Win32;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Job

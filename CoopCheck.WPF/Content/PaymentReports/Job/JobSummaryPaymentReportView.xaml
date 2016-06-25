@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.PaymentReports.Criteria"
              xmlns:job="clr-namespace:CoopCheck.WPF.Content.PaymentReports.Job"

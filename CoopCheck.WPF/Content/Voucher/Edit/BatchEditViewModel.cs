@@ -9,8 +9,10 @@ using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Domain.Services;
 using CoopCheck.Library;
+using CoopCheck.Reports.Contracts;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -452,13 +454,13 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 }
                 else
                 {
-                    JobName = JobLogSvc.BadJobName;
+                    JobName = ReportConstants.BadJobName;
                 }
-                CanPayBatch = JobName != JobLogSvc.BadJobName;
+                CanPayBatch = JobName != ReportConstants.BadJobName;
             }
             catch (Exception)
             {
-                JobName = JobLogSvc.BadJobName;
+                JobName = ReportConstants.BadJobName;
                 CanPayBatch = false;
             }
         }

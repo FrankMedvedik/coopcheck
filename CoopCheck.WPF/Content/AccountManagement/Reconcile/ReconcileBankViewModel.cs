@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Domain.Services;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -218,7 +222,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
                         AccountPayments.AllPayments.Where(
                             s => BankFile.BankClearTransactions.Any(t => t.SerialNumber == s.check_num)).ToList();
 
-                    //ClosedPayments = new List<Paymnt>(v);
+                    //ClosedPayments = new List<Payment>(v);
 
                     AccountPayments.OpenPayments = AccountPayments.AllPayments.Where(
                         s => !BankFile.BankClearTransactions.Any(t => t.SerialNumber == s.check_num)).ToList();

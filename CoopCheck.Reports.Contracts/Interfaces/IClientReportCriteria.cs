@@ -11,11 +11,7 @@ namespace CoopCheck.Reports.Contracts.Interfaces
         CoopCheckClient SelectedClient { get; set; }
         string SelectedClientID { get; }
         string SelectedJobYear { get; set; }
-        string ALLJOBYEARS { get; }
         string SearchType { get; set; }
-        string ONEJOB { get; }
-        string ALLCLIENTJOBS { get; }
-        string ALLCLIENTJOBSFORYEAR { get; }
         string ToFormattedString(char token);
 
     }

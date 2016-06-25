@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CoopCheck.Reports.Contracts;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Criteria
@@ -30,8 +32,8 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
             }
         }
 
-        private batch _selectedBatch;
-        public batch SelectedBatch
+        private BatchRpt _selectedBatch;
+        public BatchRpt SelectedBatch
         {
             get { return _selectedBatch; }
             set
@@ -76,20 +78,16 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
         private void SetSearchType()
         {
             if (SelectedJobNum != null && SelectedJobNum.Length == 8)
-                SearchType = ONEJOB;
-            else if (SelectedJobYear == ALLJOBYEARS && SelectedClient != null)
-                SearchType = ALLCLIENTJOBS;
+                SearchType = ReportConstants.OneJob;
+            else if (SelectedJobYear == ReportConstants.AllJobYears && SelectedClient != null)
+                SearchType = ReportConstants.AllClientJobs;
             else if (SelectedJobYear != null && SelectedClient != null)
-                SearchType = ALLCLIENTJOBSFORYEAR;
+                SearchType = ReportConstants.AllClientJobsForOneYear;
             else
                 SearchType = "INVALID";
 
         }
 
-        public string ALLJOBYEARS
-        {
-            get { return "All"; }
-        }
 
         public string SearchType
         {
@@ -101,21 +99,6 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
             }
         }
 
-        public string ONEJOB
-        {
-            get { return "ONEJOB"; }
-        }
-
-
-        public string ALLCLIENTJOBS
-        {
-            get { return "ALLCLIENTJOBS "; }
-        }
-
-        public string ALLCLIENTJOBSFORYEAR
-        {
-            get { return "ALLCLIENTJOBSFORYEAR"; }
-        }
 
         public string ToFormattedString(char token)
         {

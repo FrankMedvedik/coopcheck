@@ -6,9 +6,10 @@ using System.IO;
 using System.Linq;
 using CoopCheck.Domain.Contracts.Converters;
 using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Domain.Contracts.Wrappers;
-using CoopCheck.Domain.Models;
 using CoopCheck.Domain.Services;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -27,59 +28,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
 
         private string _errorBatchInfoMessage;
 
-        //public async void  ExportVouchers()
-        //{
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "exporting vouchers to Excel",
-        //        IsBusy = true
-        //    };
-
-        //    await Task.Factory.StartNew(() =>
-        //    {
-        //        string dtFmt = String.Format("{0:g}", DateTime.Now).Replace('/', '.');
-        //        dtFmt = dtFmt.Replace(':', '.');
-        //        dtFmt = dtFmt.Replace(' ', '.');
-
-        //        try
-        //        {
-        //            if (BadVoucherExports.Count > 0)
-        //            {
-        //                ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>
-        //                {
-        //                    ExcelSourceWorkbook = ExcelFileInfo.ExcelFilePath,
-        //                    ExcelWorksheetName = String.Format("Errors.{0}", dtFmt),
-        //                    dataToPrint = BadVoucherExports
-        //                };
-        //                s.GenerateReport();
-
-        //                if (GoodVoucherExports.Count > 0)
-        //                {
-        //                    s.ExcelWorksheetName = String.Format("Processed.{0}", dtFmt);
-        //                    s.dataToPrint = GoodVoucherExports;
-        //                    s.GenerateReport();
-        //                    CanExport = false;
-        //                }
-        //                ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}",
-        //                    Path.GetFileName(ExcelFileInfo.ExcelFilePath));
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Status = new StatusInfo()
-        //            {
-        //                StatusMessage = "export to excel failed",
-        //                ErrorMessage = e.Message //,ShowMessageBox = true
-        //            };
-        //        }
-        //    });
-
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "export complete",
-        //    };
-        //}
-
+      
         private ExcelFileInfoMessage _excelVoucherInfo;
 
         private string _saveBatchInfoMessage;
@@ -97,8 +46,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
             CanExport = false;
 
             SaveVouchersCommand = new RelayCommand(CreateBatchEditAndImportVouchers, CanSaveVouchers);
-            //ExportVouchersCommand = new RelayCommand(ExportVouchers, CanSaveVouchers);
-
+      
             _batchCreator = new BackgroundWorker
             {
                 WorkerReportsProgress = false,

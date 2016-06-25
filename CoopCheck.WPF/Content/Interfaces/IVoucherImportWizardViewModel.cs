@@ -1,6 +1,6 @@
-﻿using CoopCheck.Domain.Models;
+﻿using CoopCheck.Domain.Contracts.Models;
 
-namespace CoopCheck.WPF.Content.Voucher
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IVoucherImportWizardViewModel
     {

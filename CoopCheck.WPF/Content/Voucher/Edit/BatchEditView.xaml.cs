@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.WPF.Content.Interfaces;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit

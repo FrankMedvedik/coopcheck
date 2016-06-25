@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ignore="http://www.ignore.com"
-             xmlns:payment="clr-namespace:CoopCheck.WPF.Content.Payment"
              xmlns:criteria="clr-namespace:CoopCheck.WPF.Content.PaymentReports.Criteria"
              mc:Ignorable="d ignore">
     <ScrollViewer>

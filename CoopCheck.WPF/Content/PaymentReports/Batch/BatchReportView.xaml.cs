@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Batch
 {

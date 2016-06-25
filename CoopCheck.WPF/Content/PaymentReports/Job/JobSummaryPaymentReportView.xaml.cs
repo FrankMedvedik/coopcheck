@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Job
@@ -13,16 +15,16 @@ namespace CoopCheck.WPF.Content.PaymentReports.Job
     public partial class JobSummaryPaymentReportView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Payment>),
+                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Payment>),
+                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Payment>),
+                typeof(JobSummaryPaymentReportView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         private readonly IJobSummaryPaymentReportViewModel _vm;
 
@@ -34,7 +36,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Job
             prcv.PaymentReportCriteria.StartDate = DateTime.Today.AddDays(-1);
             prcv.PaymentReportCriteria.EndDate = DateTime.Today;
             prcv.ShowAllAccountsOption = true;
-            Messenger.Default.Register<NotificationMessage<IvwJobRpt>>(this, message =>
+            Messenger.Default.Register<NotificationMessage<JobRpt>>(this, message =>
             {
                 if (message.Notification == Notifications.SelectedJobChanged)
                 {
@@ -44,28 +46,28 @@ namespace CoopCheck.WPF.Content.PaymentReports.Job
         }
 
 
-        public ObservableCollection<Paymnt> AllPayments
+        public ObservableCollection<Payment> AllPayments
         {
             get { return _vm.AllPayments; }
         }
 
-        public ObservableCollection<Paymnt> OpenPayments
+        public ObservableCollection<Payment> OpenPayments
         {
             get { return _vm.OpenPayments; }
         }
 
-        public ObservableCollection<Paymnt> ClosedPayments
+        public ObservableCollection<Payment> ClosedPayments
         {
             get { return _vm.ClosedPayments; }
         }
 
-        private async Task RefreshChildren(IvwJobRpt JobRpt)
+        private async Task RefreshChildren(JobRpt jobRpt)
         {
-            if (JobRpt != null)
+            if (jobRpt != null)
             {
                 await Task.Factory.StartNew(() =>
                 {
-                    _vm.PaymentReportCriteria.JobNumber = JobRpt.job_num.ToString();
+                    _vm.PaymentReportCriteria.JobNumber = jobRpt.job_num.ToString();
                     _vm.RefreshAll();
                 });
             }

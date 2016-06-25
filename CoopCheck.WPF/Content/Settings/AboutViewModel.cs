@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Deployment.Application;
+using CoopCheck.WPF.Content.Interfaces;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Settings

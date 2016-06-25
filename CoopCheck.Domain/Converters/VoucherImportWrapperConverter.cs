@@ -1,10 +1,10 @@
 ﻿using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.DataClean;
 using CoopCheck.Domain.Contracts.Wrappers;
 using DataClean.Contracts.Interfaces;
+using DataClean.Contracts.Models;
 
-namespace CoopCheck.Domain.Contracts.Converters
+namespace CoopCheck.Domain.Converters
 {
     public class VoucherImportWrapperConverter 
     {
@@ -56,7 +56,7 @@ namespace CoopCheck.Domain.Contracts.Converters
             n.RecordID = v.RecordID;
             return n;
         }
-        public static IInputStreetAddress ToInputStreetAddress(IVoucherImportWrapper v)
+        public static InputStreetAddress ToInputStreetAddress(IVoucherImportWrapper v)
         {
             var n = new InputStreetAddress();
             n.AddressLine1 = v.AddressLine1;
@@ -72,7 +72,7 @@ namespace CoopCheck.Domain.Contracts.Converters
             n.State = v.Region;
             n.ID = v.ID;
             n.RecordID = v.RecordID;
-            return (IInputStreetAddress) n;
+            return n;
         }
 
 

@@ -1,9 +1,9 @@
 ﻿using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.DataClean;
 using CoopCheck.Library;
+using DataClean.Contracts.Models;
 
-namespace CoopCheck.Domain.Contracts.Converters
+namespace CoopCheck.Domain.Converters
 {
     public static class VoucherImportConverter 
     {

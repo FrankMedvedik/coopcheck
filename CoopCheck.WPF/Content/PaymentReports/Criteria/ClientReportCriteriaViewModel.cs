@@ -3,8 +3,10 @@ using System.Collections.ObjectModel;
 using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Domain.Services;
+using CoopCheck.Reports.Contracts;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -76,7 +78,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
                 StatusMessage = "please wait. loading clients..."
             };
             ClientReportCriteria = new ClientReportCriteria();
-            ClientReportCriteria.SearchType = ClientReportCriteria.ALLCLIENTJOBS;
+            ClientReportCriteria.SearchType = ReportConstants.AllClientJobs;
             var cs = await _clientSvc.GetClients();
             var clients = new List<CoopCheckClient>();
             foreach (var c in cs)
@@ -84,7 +86,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
             Clients = new ObservableCollection<CoopCheckClient>(clients);
 
             JobYears = new ObservableCollection<string>(JobYearSvc.GetJobYears());
-            ClientReportCriteria.SelectedJobYear = ClientReportCriteria.ALLJOBYEARS;
+            ClientReportCriteria.SelectedJobYear = ReportConstants.AllJobYears;
             Status = new StatusInfo
             {
                 StatusMessage = "pick a client or enter a specific job number"

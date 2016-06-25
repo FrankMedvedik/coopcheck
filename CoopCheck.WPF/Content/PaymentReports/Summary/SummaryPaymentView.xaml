@@ -25,13 +25,13 @@
             </StackPanel>
             <summary:JobView x:Name="jfrv" Margin="10" Grid.Row="1" />
             <summary:BatchView x:Name="brv" Margin="10" Grid.Row="2" Visibility="Collapsed" />
-            <mui:ModernTab Grid.Row="3" SelectedSource="/Content/Payment/Grids/AllPaymentsGrid.xaml" x:Name="pgv"
+            <mui:ModernTab Grid.Row="3" SelectedSource="/Content/PaymentReports/Grids/AllPaymentsGrid.xaml" x:Name="pgv"
                            Visibility="Collapsed"
                            Margin="10" Layout="Tab">
                 <mui:ModernTab.Links>
-                    <mui:Link DisplayName="all" Source="/Content/Payment/Grids/AllPaymentsGrid.xaml" />
-                    <mui:Link DisplayName="cleared" Source="/Content/Payment/Grids/ClosedPaymentsGrid.xaml" />
-                    <mui:Link DisplayName="outstanding" Source="/Content/Payment/Grids/OpenPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="all" Source="/Content/PaymentReports/Grids/AllPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="cleared" Source="/Content/PaymentReports/Grids/ClosedPaymentsGrid.xaml" />
+                    <mui:Link DisplayName="outstanding" Source="/Content/PaymentReports/Grids/OpenPaymentsGrid.xaml" />
                 </mui:ModernTab.Links>
             </mui:ModernTab>
         </Grid>

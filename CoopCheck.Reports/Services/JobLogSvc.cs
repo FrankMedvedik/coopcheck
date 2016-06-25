@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using AutoMapper;
+using CoopCheck.Reports.Contracts;
 using CoopCheck.Reports.Contracts.Interfaces;
 using CoopCheck.Repository;
 
@@ -19,7 +20,7 @@ namespace CoopCheck.Reports.Services
             set { _coopCheckEntities = value; }
         }
 
-        public string BadJobName = "job number is not defined";
+       
 
         public async Task<Contracts.Models.JobLog> GetJobLog(int jobNum)
         {
@@ -43,7 +44,7 @@ namespace CoopCheck.Reports.Services
         public async Task<string> GetJobName(int jobNum)
         {
             var z = await GetJobLog(jobNum);
-            return (z == null) ? BadJobName : z.JobName;
+            return (z == null) ? ReportConstants.BadJobName : z.JobName;
         }
     }
 }

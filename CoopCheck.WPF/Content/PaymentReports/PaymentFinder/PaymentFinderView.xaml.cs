@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 
 namespace CoopCheck.WPF.Content.PaymentReports.PaymentFinder
 {

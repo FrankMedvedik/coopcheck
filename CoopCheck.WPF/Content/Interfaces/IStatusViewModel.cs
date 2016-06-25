@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using CoopCheck.Domain.Models;
+using CoopCheck.Domain.Contracts.Models;
 
-namespace CoopCheck.WPF.Content.Status
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IStatusViewModel
     {

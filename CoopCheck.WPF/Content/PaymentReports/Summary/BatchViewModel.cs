@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Library;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -29,8 +34,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
         private BatchRpt _selectedBatch = new BatchRpt();
         private bool _showGridData;
         private StatusInfo _status;
-        private readonly IRptSvc _rptSvc;
-
+        private IRptSvc _rptSvc;
         public BatchViewModel(IRptSvc rptSvc)
         {
             _rptSvc = rptSvc;

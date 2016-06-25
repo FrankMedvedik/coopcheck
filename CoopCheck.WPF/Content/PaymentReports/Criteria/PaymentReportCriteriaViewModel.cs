@@ -2,7 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
+using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -75,14 +78,8 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
             PaymentReportCriteria = new PaymentReportCriteria();
             PaymentReportCriteria.StartDate = new DateTime(DateTime.Now.Year, 1, 1);
             PaymentReportCriteria.EndDate = DateTime.Today.AddDays(1);
-            var accounts = await _bankAccountSvc.GetAccounts();
-            var ocAccounts = new ObservableCollection<Models.BankAccount>();
-            foreach (var a in accounts)
-            {
-                ocAccounts.Add((Models.BankAccount) a);
-            }
-            Accounts = ocAccounts;
-
+            Accounts = new ObservableCollection<BankAccount>(await _bankAccountSvc.GetAccounts());
+            
             PaymentReportCriteria.Account =
                 (from l in Accounts where l.IsDefault.GetValueOrDefault(false) select l).First();
             ShowGridData = false;
@@ -137,11 +134,11 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
         }
 
 
-        private ObservableCollection<Models.BankAccount> _accounts;
+        private ObservableCollection<BankAccount> _accounts;
         private bool _showAllAccountsOption;
 
 
-        public ObservableCollection<Models.BankAccount> Accounts
+        public ObservableCollection<BankAccount> Accounts
         {
             get { return _accounts; }
             set
@@ -150,8 +147,8 @@ namespace CoopCheck.WPF.Content.PaymentReports.Criteria
                 if (_accounts != null)
                     if (ShowAllAccountsOption)
                         /*&& !(Accounts.Any(a => a.account_id == BankAccountSvc.AllAccountsOption.account_id)))*/
-                        _accounts.Add((Models.BankAccount) _bankAccountSvc.AllAccountsOption);
-                NotifyPropertyChanged("");
+                        _accounts.Add(_bankAccountSvc.AllAccountsOption);
+                NotifyPropertyChanged();
             }
         }
 

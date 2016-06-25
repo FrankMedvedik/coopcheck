@@ -8,21 +8,20 @@ namespace CoopCheck.Domain.Services
 {
     public class SwiftPaySvc : ISwiftPaySvc
     {
+        //public SwiftPaySvc(ISvrBatchSwiftFulfillCommand svrBatchSwiftFulfillCommand,
+        //                 ISendMailSvc sendMailSvc,
+        //                 ISvrBatchSwiftVoidCommand svrBatchSwiftVoidCommand)
 
-        public SwiftPaySvc(ISvrBatchSwiftFulfillCommand svrBatchSwiftFulfillCommand,
-                         ISendMailSvc sendMailSvc,
-                         ISvrBatchSwiftVoidCommand svrBatchSwiftVoidCommand)
+        public SwiftPaySvc(ISendMailSvc sendMailSvc)
         {
-            _svrBatchSwiftFulfillCommand = svrBatchSwiftFulfillCommand;
             _sendMailSvc = sendMailSvc;
-            _svrBatchSwiftVoidCommand = svrBatchSwiftVoidCommand;
 
         }
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static ISvrBatchSwiftFulfillCommand _svrBatchSwiftFulfillCommand;
+        //private static ISvrBatchSwiftFulfillCommand _svrBatchSwiftFulfillCommand;
         private static ISendMailSvc _sendMailSvc;
-        private static ISvrBatchSwiftVoidCommand _svrBatchSwiftVoidCommand;
+        //private static ISvrBatchSwiftVoidCommand _svrBatchSwiftVoidCommand;
 
         public void PayBatch(int batchNum, string email)
         {
@@ -30,7 +29,7 @@ namespace CoopCheck.Domain.Services
             try
             {
 
-                _svrBatchSwiftFulfillCommand.Execute(batchNum, email);
+                SvrBatchSwiftFulfillCommand.Execute(batchNum, email);
 
 
                 _sendMailSvc.SendEmail(email,string.Format("Swiftpay complete for batch {0}", batchNum), "processing complete");
@@ -49,7 +48,7 @@ namespace CoopCheck.Domain.Services
             try
             {
                 //CoopCheck.Mocks.BatchSwiftFulfillCommand.BatchSwiftFulfill(batchNum, true);
-                _svrBatchSwiftVoidCommand.Execute(batchNum, email);
+                SvrBatchSwiftVoidCommand.Execute(batchNum, email);
 
 
                 _sendMailSvc.SendEmail(email,

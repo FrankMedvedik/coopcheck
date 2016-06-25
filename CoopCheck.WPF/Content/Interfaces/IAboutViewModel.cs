@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace CoopCheck.WPF.Content.Settings
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IAboutViewModel
     {

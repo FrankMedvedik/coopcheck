@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using CoopCheck.WPF.Content.Interfaces;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {

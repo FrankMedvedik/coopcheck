@@ -15,11 +15,7 @@ namespace CoopCheck.Reports.Contracts.Models
         public CoopCheckClient SelectedClient { get; set; }
         public string SelectedClientID { get; }
         public string SelectedJobYear { get; set; }
-        public string ALLJOBYEARS { get; }
         public string SearchType { get; set; }
-        public string ONEJOB { get; }
-        public string ALLCLIENTJOBS { get; }
-        public string ALLCLIENTJOBSFORYEAR { get; }
         public string ToFormattedString(char token)
         {
             throw new NotImplementedException();

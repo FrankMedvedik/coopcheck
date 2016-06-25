@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Reports.Contracts;
 using CoopCheck.Reports.Contracts.Interfaces;
-using CoopCheck.Repository.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -136,24 +141,20 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
                     StatusMessage = "refreshing job list..."
                 };
                 var jobs = new List<JobRpt>();
-                var js = new List<IvwJobRpt>();
-                if (ClientReportCriteria.SearchType == ClientReportCriteria.ONEJOB)
+                var js = new List<JobRpt>();
+                if (ClientReportCriteria.SearchType == ReportConstants.OneJob)
                     js = await _rptSvc.GetJob(int.Parse(ClientReportCriteria.SelectedJobNum));
                 else
                 {
-                    if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBS)
+                    if (ClientReportCriteria.SearchType == ReportConstants.AllClientJobs)
                         js = await _rptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID);
                 }
-                if (ClientReportCriteria.SearchType == ClientReportCriteria.ALLCLIENTJOBSFORYEAR)
+                if (ClientReportCriteria.SearchType == ReportConstants.AllClientJobsForOneYear)
                 {
                     js = await _rptSvc.GetAllClientJobs(ClientReportCriteria.SelectedClientID,
                         ClientReportCriteria.SelectedJobYear);
                 }
-                foreach (var j in js)
-                {
-                    jobs.Add((JobRpt) j);
-                }
-                Jobs = new ObservableCollection<JobRpt>(jobs);
+                Jobs = new ObservableCollection<JobRpt>(js);
             }
             catch (Exception e)
             {

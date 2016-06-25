@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 

@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Summary

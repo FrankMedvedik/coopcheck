@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -10,7 +15,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Void
     /// <summary>
     public class VoidedPaymentReportViewModel : ViewModelBase, IVoidedPaymentReportViewModel
     {
-        private ObservableCollection<VoidedPaymnt> _payments = new ObservableCollection<VoidedPaymnt>();
+        private ObservableCollection<VoidedPayment> _payments = new ObservableCollection<VoidedPayment>();
 
         public VoidedPaymentReportViewModel(IRptSvc rptSvc)
         {
@@ -18,7 +23,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Void
             ResetState();
         }
 
-        public ObservableCollection<VoidedPaymnt> Payments
+        public ObservableCollection<VoidedPayment> Payments
         {
             get { return _payments; }
             set
@@ -45,12 +50,12 @@ namespace CoopCheck.WPF.Content.PaymentReports.Void
             {
 
                 var vs = await _rptSvc.GetVoidedPayments(p);
-                var payments = new List<VoidedPaymnt>();
+                var payments = new List<VoidedPayment>();
                 foreach (var v in vs)
                 {
-                    payments.Add((VoidedPaymnt) v);
+                    payments.Add((VoidedPayment) v);
                 }
-               Payments = new ObservableCollection<VoidedPaymnt>(payments);
+               Payments = new ObservableCollection<VoidedPayment>(payments);
 
             }
             catch (Exception e)
@@ -69,7 +74,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Void
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<VoidedPaymnt>();
+            _payments = new ObservableCollection<VoidedPayment>();
             ShowGridData = false;
         }
 
@@ -100,10 +105,10 @@ namespace CoopCheck.WPF.Content.PaymentReports.Void
 
         #region collection and selected
 
-        private VoidedPaymnt _selectedPayment;
+        private VoidedPayment _selectedPayment;
         private IRptSvc _rptSvc;
 
-        public VoidedPaymnt SelectedPayment
+        public VoidedPayment SelectedPayment
         {
             get { return _selectedPayment; }
             set

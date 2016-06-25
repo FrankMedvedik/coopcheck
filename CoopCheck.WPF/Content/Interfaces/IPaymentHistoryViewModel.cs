@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using CoopCheck.Domain.Models;
-using CoopCheck.Domain.Models.Reports;
+using CoopCheck.Domain.Contracts.Models;
+using CoopCheck.Reports.Contracts.Models;
 
-namespace CoopCheck.WPF.Content.Voucher.Clean
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IPaymentHistoryViewModel
     {

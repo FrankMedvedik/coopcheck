@@ -4,10 +4,9 @@ using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Domain.Contracts.Wrappers;
-
 using GalaSoft.MvvmLight.Command;
 
-namespace CoopCheck.WPF.Content.Voucher.Clean
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IVoucherListViewModel
     {

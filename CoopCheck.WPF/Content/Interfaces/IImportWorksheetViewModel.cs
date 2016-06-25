@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using CoopCheck.Domain.Models;
+using CoopCheck.Domain.Contracts.Models;
 using GalaSoft.MvvmLight.Command;
 
-namespace CoopCheck.WPF.Content.Voucher.Import
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IImportWorksheetViewModel
     {

@@ -4,9 +4,10 @@ using System.Linq;
 using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.Reports;
 using CoopCheck.Domain.Contracts.Wrappers;
 using CoopCheck.Domain.Services;
+using CoopCheck.WPF.Content.Interfaces;
+using CoopCheck.WPF.Content.PaymentReports.Criteria;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
@@ -31,8 +32,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             new ObservableCollection<VoucherImportWrapper>();
 
         private VoucherImportWrapper _workVoucherImport;
-
-        public VoucherListViewModel()
+        private DataCleanVoucherImportSvc _dataCleanVoucherImportSvc;
+        public VoucherListViewModel(DataCleanVoucherImportSvc dataCleanVoucherImportSvc)
         {
             // called when the vouchers come out of the excel import process
             Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
@@ -208,7 +209,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             };
             IsCleaning = true;
             CanPost = false;
-            var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
+            var results = await _dataCleanVoucherImportSvc.CleanVouchers(vouchers);
             VoucherImports =
                 new ObservableCollection<VoucherImportWrapper>(
                     results.OrderBy(x => x.OkMailingAddress)

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Reports.Contracts.Interfaces;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using CoopCheck.WPF.Content.PaymentReports.Criteria;
-using CoopCheck.WPF.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -11,7 +14,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public class PaymentHistoryViewModel : ViewModelBase, IPaymentHistoryViewModel
     {
-        private ObservableCollection<Paymnt> _payments = new ObservableCollection<Paymnt>();
+        private ObservableCollection<Payment> _payments = new ObservableCollection<Payment>();
 
         public PaymentHistoryViewModel(IRptSvc rptSvc)
         {
@@ -59,7 +62,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             get { return Payments.Sum(x => x.tran_amount); }
         }
 
-        public ObservableCollection<Paymnt> Payments
+        public ObservableCollection<Payment> Payments
         {
             get { return _payments; }
             set
@@ -75,8 +78,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         {
             try
             {
-                var pay = await _rptSvc.GetPayeePayments(LastName, FirstName);
-                Payments = new ObservableCollection<Paymnt>(pay.Cast<Paymnt>().ToList());
+                Payments = new ObservableCollection<Payment>(await _rptSvc.GetPayeePayments(LastName, FirstName));
             }
             catch (Exception e)
             {
@@ -94,7 +96,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public void ResetState()
         {
-            _payments = new ObservableCollection<Paymnt>();
+            _payments = new ObservableCollection<Payment>();
             ShowGridData = false;
         }
 
@@ -126,12 +128,12 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         #region collection and selected
 
-        private Paymnt _selectedPayment;
+        private Payment _selectedPayment;
         private string _lastName;
         private string _firstName;
         private readonly IRptSvc _rptSvc;
 
-        public Paymnt SelectedPayment
+        public Payment SelectedPayment
         {
             get { return _selectedPayment; }
             set

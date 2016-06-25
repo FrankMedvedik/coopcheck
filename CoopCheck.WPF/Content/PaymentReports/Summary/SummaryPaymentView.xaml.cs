@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CoopCheck.Domain.Contracts.Messages;
+using CoopCheck.Reports.Contracts.Models;
+using CoopCheck.WPF.Content.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CoopCheck.WPF.Content.PaymentReports.Summary
@@ -11,16 +14,16 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
     public partial class PaymentSummaryView : UserControl
     {
         public static readonly DependencyProperty AllPaymentsProperty =
-            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("AllPayments", typeof(ObservableCollection<Payment>),
+                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         public static readonly DependencyProperty OpenPaymentsProperty =
-            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("OpenPayments", typeof(ObservableCollection<Payment>),
+                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         public static readonly DependencyProperty ClosedPaymentsProperty =
-            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Paymnt>),
-                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Paymnt>()));
+            DependencyProperty.Register("ClosedPayments", typeof(ObservableCollection<Payment>),
+                typeof(PaymentSummaryView), new PropertyMetadata(new ObservableCollection<Payment>()));
 
         private readonly IClientPaymentViewModel _vm;
 
@@ -53,17 +56,17 @@ namespace CoopCheck.WPF.Content.PaymentReports.Summary
         }
 
 
-        public ObservableCollection<Paymnt> AllPayments
+        public ObservableCollection<Payment> AllPayments
         {
             get { return _vm.AllPayments; }
         }
 
-        public ObservableCollection<Paymnt> OpenPayments
+        public ObservableCollection<Payment> OpenPayments
         {
             get { return _vm.OpenPayments; }
         }
 
-        public ObservableCollection<Paymnt> ClosedPayments
+        public ObservableCollection<Payment> ClosedPayments
         {
             get { return _vm.ClosedPayments; }
         }

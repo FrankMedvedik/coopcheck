@@ -278,31 +278,31 @@
       <DependentUpon>ReconcileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\AccountManagement\Reconcile\StatsType.cs" />
-    <Compile Include="Content\PaymentReports\Batch\IBatchReportViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Batch\IBatchSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Interfaces\IBatchReportViewModel.cs" />
+    <Compile Include="Content\Interfaces\IBatchSummaryPaymentReportViewModel.cs" />
     <Compile Include="Content\PaymentReports\Criteria\ClientReportCriteria.cs" />
-    <Compile Include="Content\PaymentReports\Criteria\IClientReportCriteriaViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Criteria\IPaymentReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Interfaces\IClientReportCriteriaViewModel.cs" />
+    <Compile Include="Content\Interfaces\IPaymentReportCriteriaViewModel.cs" />
     <Compile Include="Content\PaymentReports\Criteria\PaymentReportCriteria.cs" />
-    <Compile Include="Content\PaymentReports\Job\IJobReportViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Job\IJobSummaryPaymentReportViewModel.cs" />
-    <Compile Include="Content\PaymentReports\PaymentFinder\IPaymentFinderViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Summary\IBatchViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Summary\IClientPaymentViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Summary\IJobViewModel.cs" />
-    <Compile Include="Content\PaymentReports\Void\IVoidedPaymentReportViewModel.cs" />
-    <Compile Include="Content\Settings\IAboutViewModel.cs" />
-    <Compile Include="Content\Settings\IAppearanceViewModel.cs" />
+    <Compile Include="Content\Interfaces\IJobReportViewModel.cs" />
+    <Compile Include="Content\Interfaces\IJobSummaryPaymentReportViewModel.cs" />
+    <Compile Include="Content\Interfaces\IPaymentFinderViewModel.cs" />
+    <Compile Include="Content\Interfaces\IBatchViewModel.cs" />
+    <Compile Include="Content\Interfaces\IClientPaymentViewModel.cs" />
+    <Compile Include="Content\Interfaces\IJobViewModel.cs" />
+    <Compile Include="Content\Interfaces\IVoidedPaymentReportViewModel.cs" />
+    <Compile Include="Content\Interfaces\IAboutViewModel.cs" />
+    <Compile Include="Content\Interfaces\IAppearanceViewModel.cs" />
     <Compile Include="Content\Settings\ISettingsAppearanceViewModel.cs" />
-    <Compile Include="Content\Status\IStatusViewModel.cs" />
-    <Compile Include="Content\Voucher\Clean\IPaymentHistoryViewModel.cs" />
-    <Compile Include="Content\Voucher\Clean\IVoucherListViewModel.cs" />
-    <Compile Include="Content\Voucher\Edit\IBatchEditViewModel.cs" />
-    <Compile Include="Content\Voucher\Edit\IBatchListViewModel.cs" />
-    <Compile Include="Content\Voucher\Import\IImportWorksheetViewModel.cs" />
-    <Compile Include="Content\Voucher\IVoucherImportWizardViewModel.cs" />
-    <Compile Include="Content\Voucher\Pay\IPayVouchersViewModel.cs" />
-    <Compile Include="Content\Voucher\Save\IVoucherSaveViewModel.cs" />
+    <Compile Include="Content\Interfaces\IStatusViewModel.cs" />
+    <Compile Include="Content\Interfaces\IPaymentHistoryViewModel.cs" />
+    <Compile Include="Content\Interfaces\IVoucherListViewModel.cs" />
+    <Compile Include="Content\Interfaces\IBatchEditViewModel.cs" />
+    <Compile Include="Content\Interfaces\IBatchListViewModel.cs" />
+    <Compile Include="Content\Interfaces\IImportWorksheetViewModel.cs" />
+    <Compile Include="Content\Interfaces\IVoucherImportWizardViewModel.cs" />
+    <Compile Include="Content\Interfaces\IPayVouchersViewModel.cs" />
+    <Compile Include="Content\Interfaces\IVoucherSaveViewModel.cs" />
     <Compile Include="IOC\IocKernel.cs" />
     <Compile Include="Content\PaymentReports\Summary\JobView.xaml.cs">
       <DependentUpon>JobView.xaml</DependentUpon>
@@ -928,6 +928,10 @@
     <ProjectReference Include="..\CoopCheck.Reports.Contracts\CoopCheck.Reports.Contracts.csproj">
       <Project>{A9A18E3C-C1A2-41BD-9841-3CE748A28DDA}</Project>
       <Name>CoopCheck.Reports.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.Reports\CoopCheck.Reports.csproj">
+      <Project>{F01DF42F-72BD-4CCA-BF55-8D09E9493927}</Project>
+      <Name>CoopCheck.Reports</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reckner.WPF\Reckner.WPF.csproj">
       <Project>{205893f2-f604-4451-b2e0-c4be475fa592}</Project>

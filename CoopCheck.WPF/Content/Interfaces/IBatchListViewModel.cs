@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using CoopCheck.Domain.Models.Reports;
+using CoopCheck.Reports.Contracts.Models;
 
-namespace CoopCheck.WPF.Content.Voucher.Edit
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IBatchListViewModel
     {

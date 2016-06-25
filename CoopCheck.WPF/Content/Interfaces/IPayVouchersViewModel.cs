@@ -2,10 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CoopCheck.Domain.Contracts.Models;
-using CoopCheck.Domain.Contracts.Models.Reports;
 using CoopCheck.Library;
+using CoopCheck.Reports.Contracts.Models;
 
-namespace CoopCheck.WPF.Content.Voucher.Pay
+namespace CoopCheck.WPF.Content.Interfaces
 {
     public interface IPayVouchersViewModel
     {
