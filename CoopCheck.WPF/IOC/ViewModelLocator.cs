@@ -72,6 +72,7 @@ namespace CoopCheck.WPF.IOC
                 Bind<IPayVouchersViewModel>().To<PayVouchersViewModel>();
                 Bind<IVoucherSaveViewModel>().To<VoucherSaveViewModel>();
 
+
             // services
 
             //Bind<IBatchSvc>().To<BatchSvc>();

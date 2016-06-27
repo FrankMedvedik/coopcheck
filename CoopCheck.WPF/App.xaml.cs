@@ -11,12 +11,12 @@ namespace CoopCheck.WPF
     /// </summary>
     public partial class App : Application
     {
-        public ViewModelLocator viewModelLocator;
+        public ViewModelLocator ViewModelLocator;
         static App()
         {
 
             DispatcherHelper.Initialize();
-            viewModelLocator = new ViewModelLocator();
+            
         }
         //   private TaskbarIcon notifyIcon;
         public SolidColorBrush AccentBrush

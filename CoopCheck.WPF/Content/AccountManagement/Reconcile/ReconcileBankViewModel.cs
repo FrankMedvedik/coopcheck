@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CoopCheck.Domain.Contracts.Interfaces;
 using CoopCheck.Domain.Contracts.Messages;
 using CoopCheck.Domain.Contracts.Models;
 using CoopCheck.Domain.Services;
@@ -111,7 +112,7 @@ namespace CoopCheck.WPF.Content.AccountManagement.Reconcile
             {
                 try
                 {
-                    ClearCheckSvc.ClearChecks(_accountPayments.ChecksToClear);
+                 //   ClearCheckSvc.ClearChecks((ICheckInfoDto) _accountPayments.ChecksToClear);
                     Status = new StatusInfo
                     {
                         StatusMessage =

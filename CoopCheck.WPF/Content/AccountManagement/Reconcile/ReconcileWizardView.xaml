@@ -26,7 +26,7 @@
                                  PreviousPage="{Binding ElementName=BankFilePage}"
                                  CanSelectPreviousPage="{Binding CanFinish}"
                                  CanCancel="True" CanFinish="{Binding CanFinish}">
-                    <reconcile:AccountHonorariaPaymentsView />
+                    <reconcile:AccountPaymentsView/>
                 </xctk:WizardPage>
                 <!--<xctk:WizardPage x:Name="ReconcileReportPage" PageType="Interior"
                                    Title="Unmatched"

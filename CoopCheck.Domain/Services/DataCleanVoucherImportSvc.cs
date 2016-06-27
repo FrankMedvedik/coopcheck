@@ -16,7 +16,7 @@ using VoucherImportWrapperConverter = CoopCheck.Domain.Converters.VoucherImportW
 
 namespace CoopCheck.Domain.Services
 {
-    public class DataCleanVoucherImportSvc
+    public class DataCleanVoucherImportSvc : IDataCleanVoucherImportSvc
     {
         private Dictionary<string, string> _settings;
         private NetworkCredential _credential;

@@ -33,8 +33,10 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         private VoucherImportWrapper _workVoucherImport;
         private DataCleanVoucherImportSvc _dataCleanVoucherImportSvc;
-        public VoucherListViewModel(DataCleanVoucherImportSvc dataCleanVoucherImportSvc)
+        public VoucherListViewModel()
         {
+            //DataCleanVoucherImportSvc dataCleanVoucherImportSvc
+            //_dataCleanVoucherImportSvc = dataCleanVoucherImportSvc;
             // called when the vouchers come out of the excel import process
             Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
             {

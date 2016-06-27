@@ -128,7 +128,7 @@ namespace CoopCheck.WPF.Content.PaymentReports.Batch
                         "Coop Check", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
-                    await PaymentSvc.SwiftVoidAsync(SelectedvwBatchRpt.batch_num);
+                 //   await PaymentSvc.SwiftVoidAsync(SelectedvwBatchRpt.batch_num);
                     _vm.Status = new StatusInfo
                     {
                         StatusMessage =

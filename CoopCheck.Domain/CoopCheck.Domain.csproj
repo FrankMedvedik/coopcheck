@@ -115,6 +115,7 @@
     <Compile Include="Services\BatchSvc.cs" />
     <Compile Include="Services\ClearCheckSvc.cs" />
     <Compile Include="Services\DataCleanVoucherImportSvc.cs" />
+    <Compile Include="Services\IDataCleanVoucherImportSvc.cs" />
     <Compile Include="Services\JobYearSvc.cs" />
     <Compile Include="Services\ObjectCopier.cs" />
     <Compile Include="Services\ObjectDataReader.cs" />
@@ -167,7 +168,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

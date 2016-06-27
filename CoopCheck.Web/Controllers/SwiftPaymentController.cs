@@ -40,7 +40,7 @@ namespace CoopCheck.Web.Controllers
 
         // POST api/SwiftPayment/SwiftPay?accountId&batchNum=1
         [System.Web.Http.Route("SwiftPay")]
-        public  IHttpActionResult SwiftPay(int batchNum)
+        public IHttpActionResult SwiftPay(int batchNum)
         {
             string emailAddress;
             try
@@ -78,7 +78,7 @@ namespace CoopCheck.Web.Controllers
 
                     log.Info(string.Format("Email address {0}", emailAddress));
                     log.Info(string.Format("SwiftVoid called user {0}  batch {1} email {2}",
-                        user.Identity.Name,batchNum, emailAddress));
+                        user.Identity.Name, batchNum, emailAddress));
                     BackgroundJob.Enqueue(() => _swiftPaySvc.VoidBatch(batchNum, emailAddress));
                     return Ok();
                 }

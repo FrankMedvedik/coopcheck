@@ -1,4 +1,4 @@
-﻿@using CoopCheck.Web.Services
+﻿@using CoopCheck.Domain.Services
 <div class="jumbotron">
     <h1>Coop Check</h1>
 </div>
@@ -8,7 +8,7 @@
             
         <h2>Your Access Level</h2>
         <p>@HttpContext.Current.User.Identity.Name;</p>
-        @if (UserAuthSvc.CanRead(HttpContext.Current.User.Identity.Name))
+        @*@if (UserAuthSvc.CanRead(HttpContext.Current.User.Identity.Name))
         {
             <p>CoopCheckread</p>
             if (UserAuthSvc.CanWrite(HttpContext.Current.User.Identity.Name))
@@ -19,6 +19,6 @@
         else
         {
             <p>No Access to coopcheck</p>
-        }
+        }*@
     </div>
 </div>

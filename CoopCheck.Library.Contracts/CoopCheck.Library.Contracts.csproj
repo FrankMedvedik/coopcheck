@@ -51,7 +51,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Csla, Version=4.6.400.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-Core.4.6.400\lib\net45\Csla.dll</HintPath>
+      <HintPath>..\packages\CSLA-Core.4.6.400\lib\net46\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -74,6 +74,16 @@
     <Compile Include="Interfaces\IVoucherEdit.cs" />
     <Compile Include="Interfaces\IVoucherList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoopCheck.DalADO\CoopCheck.DalADO.csproj">
+      <Project>{60d9a8b9-bad1-49a3-9d86-ee9fd782565e}</Project>
+      <Name>CoopCheck.DalADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoopCheck.DAL\CoopCheck.DAL.csproj">
+      <Project>{3537f5fc-d9f5-4fd4-9bf2-30738877dcbf}</Project>
+      <Name>CoopCheck.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
