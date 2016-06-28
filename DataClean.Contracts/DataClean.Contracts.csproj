@@ -80,6 +80,7 @@
     <Compile Include="Interfaces\IParseResultDictionary.cs" />
     <Compile Include="Models\DataCleanCriteria.cs" />
     <Compile Include="Models\DataCleanEvent.cs" />
+    <Compile Include="Models\DataCleanStatDto.cs" />
     <Compile Include="Models\InputStreetAddress.cs" />
     <Compile Include="Models\OutputStreetAddress.cs" />
     <Compile Include="Models\ParseResult.cs" />

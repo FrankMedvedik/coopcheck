@@ -18,7 +18,7 @@ namespace DataClean.Repository.Mgr
         {
             _ctx = new DataCleanEntities();
         }
-        public IDataCleanEvent GetEvent(int id)
+        public DataCleanEvent GetEvent(int id)
         {
 
             // get archive from database if exists if not return null
@@ -32,7 +32,7 @@ namespace DataClean.Repository.Mgr
         // save the results of the dataclean operation to the database 
         // convert the event and its related addresses and parse  results to json and store em 
         // if a datacleanevent exists the contents are updated 
-        public void SaveEvent(IDataCleanEvent e)
+        public void SaveEvent(DataCleanEvent e)
         {
             try
             {
@@ -71,10 +71,10 @@ namespace DataClean.Repository.Mgr
             
         }
 
-        public List<IParseResult> GetMelissaReference()
+        public List<ParseResult> GetMelissaReference()
         {
 
-            var r = new List<IParseResult>();
+            var r = new List<ParseResult>();
                 foreach (var p in _ctx.MelissaResultReferences)
                 {
                     r.Add(new ParseResult()
@@ -89,7 +89,8 @@ namespace DataClean.Repository.Mgr
             return r;
         }
 
-       public void SaveStats(IDataCleanStat d)
+
+       public void SaveStats(IDataCleanStat  d)
        {
            _ctx.DataCleanStats.Add((DataCleanStat) d);
            _ctx.SaveChanges();

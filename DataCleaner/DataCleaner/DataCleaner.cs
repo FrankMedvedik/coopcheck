@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using DataClean.Contracts.Interfaces;
 using DataClean.Contracts.Models;
@@ -26,9 +27,9 @@ namespace DataClean.DataCleaner
 
 
 
-        public DataCleaner(NameValueCollection c)
+        public DataCleaner()
         {
-            Initialize(c);
+            Initialize();
             ForceValidation = false;
             _db = new DataCleanRespository(); 
             _msgDict = new ParseResultDictionary(_db.GetMelissaReference());
@@ -36,15 +37,16 @@ namespace DataClean.DataCleaner
 
         public bool ForceValidation { get; set; }
 
-        public DataCleaner(NameValueCollection c, List<IParseResult> melissaCodes)
+        public DataCleaner(List<ParseResult> melissaCodes)
         {
-            Initialize(c);
+            Initialize();
             _msgDict = new ParseResultDictionary(melissaCodes);
         }
 
 
-        private void Initialize(NameValueCollection c)
+        private void Initialize()
         {
+            var c = ConfigurationManager.AppSettings;
             //String ClientID =c["PersonatorClientID"];
 
             String ClientID = "98867798";
@@ -81,18 +83,18 @@ namespace DataClean.DataCleaner
         }
 
 
-        public Boolean VerifyAndCleanAddress(IInputStreetAddress inA, out IOutputStreetAddress outA)
+        public Boolean VerifyAndCleanAddress(InputStreetAddress inA, out OutputStreetAddress outA)
         {
             /* use settings from config file and process 1 record */
             var iArray = new[] {inA};
-            var oArray = VerifyAndCleanAddress(iArray);
-            outA = oArray[0];
-            return  oArray[0].OkComplete;
+            var outs = VerifyAndCleanAddress(iArray);
+            outA = outs.First();
+            return outA.OkComplete;
         }
 
-        public IOutputStreetAddress[] VerifyAndCleanAddress(IInputStreetAddress[] inputAddressArray)
+        public IEnumerable<OutputStreetAddress> VerifyAndCleanAddress(InputStreetAddress[] inputAddressArray)
         {
-            var o = new List<IOutputStreetAddress>();
+            var o = new List<OutputStreetAddress>();
             
             int i = 0;
             int arrayOffset = 0;
@@ -112,7 +114,7 @@ namespace DataClean.DataCleaner
             return o.ToArray();
         }
 
-        protected IOutputStreetAddress[] VerifyAndCleanAddressBatch(IInputStreetAddress[] inputAddressArray)
+        protected OutputStreetAddress[] VerifyAndCleanAddressBatch(InputStreetAddress[] inputAddressArray)
         {
             if (inputAddressArray.Length > MaxArraySize)
                 throw new Exception(String.Format("Too Many Items in Request maximum number is {0}", MaxArraySize));
@@ -154,7 +156,7 @@ namespace DataClean.DataCleaner
         }
 
       
-        private IParseResult[] GetTransmissionErrors()
+        private IEnumerable<ParseResult> GetTransmissionErrors()
         {
             return _msgDict.LookupCodeList(_resp.TransmissionResults.Split(','));
         }

@@ -20,8 +20,8 @@ namespace DataClean.Test
 
         public DataCleanEventFactoryAutoFixTests()
         {
-            _dataCleanEventFactory = new DataCleanEventFactory( new DataCleaner.DataCleaner(ConfigurationManager.AppSettings)
-                , new DataCleanRespository(),_criteria = new DataCleanCriteria()
+            _dataCleanEventFactory = new DataCleanEventFactory( new DataCleaner.DataCleaner(), 
+                new DataCleanRespository(),_criteria = new DataCleanCriteria()
                                                                         {
                                                                             AutoFixAddressLine1 = false,
                                                                             AutoFixCity = false,

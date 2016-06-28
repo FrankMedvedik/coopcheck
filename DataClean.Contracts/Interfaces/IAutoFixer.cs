@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using DataClean.Contracts.Models;
 
 namespace DataClean.Contracts.Interfaces
 {
     public  interface IAutoFixer
     {
-        List<IDataCleanEvent> DataCleanEvents { get; set; }
+        List<DataCleanEvent> DataCleanEvents { get; set; }
         void ApplyFixes();
     }
 }

@@ -41,8 +41,8 @@ namespace DataClean.Contracts.Models
             get { return DataCleanDate != DateTime.MinValue; }
         }
 
-        public IInputStreetAddress Input { get; set; }
-        public IOutputStreetAddress Output { get; set; }
+        public InputStreetAddress Input { get; set; }
+        public OutputStreetAddress Output { get; set; }
     
     }
 }

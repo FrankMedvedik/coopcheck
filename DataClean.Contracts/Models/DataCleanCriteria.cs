@@ -5,6 +5,11 @@ namespace DataClean.Contracts.Models
 {
     public class DataCleanCriteria : IDataCleanCriteria
     {
+        public DataCleanCriteria()
+        {
+            AutoFixPostalCode = true;
+        }
+
         public bool AutoFixPostalCode { get; set; }
         public bool AutoFixState{ get; set; }
         public bool AutoFixAddressLine1 { get; set; }

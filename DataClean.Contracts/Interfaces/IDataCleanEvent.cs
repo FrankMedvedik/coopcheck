@@ -1,4 +1,5 @@
 ﻿using System;
+using DataClean.Contracts.Models;
 
 namespace DataClean.Contracts.Interfaces
 {
@@ -7,8 +8,8 @@ namespace DataClean.Contracts.Interfaces
         int ID { get; }
         DateTime DataCleanDate { get; set; }
         bool HasBeenDataCleaned { get; }
-       IInputStreetAddress Input { get; set; }
-       IOutputStreetAddress Output { get; set; }
+       InputStreetAddress Input { get; set; }
+       OutputStreetAddress Output { get; set; }
         int GetHashCode();
     }
     }

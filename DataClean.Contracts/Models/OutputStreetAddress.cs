@@ -86,7 +86,7 @@ namespace DataClean.Contracts.Models
         public string PresenceOfChildren { get; set; }
         public string PrivateMailBox { get; set; }
         public string RecordExtras { get; set; }
-        public List<IParseResult> Results { get; set; }
+        public List<ParseResult> Results { get; set; }
 
         public string aaaResultsAsString
         {
@@ -164,22 +164,22 @@ namespace DataClean.Contracts.Models
             get { return Results.ToString(); }
         }
 
-        public List<IParseResult> AutoFixes
+        public List<ParseResult> AutoFixes
         {
             get { return Results.Where(x => x.Type == ParseResult.AUTOFIX).ToList(); }
         }
 
-        public List<IParseResult> Errors
+        public List<ParseResult> Errors
         {
             get { return Results.Where(x => x.Type == ParseResult.ERROR).ToList(); }
         }
 
-        public List<IParseResult> Warnings
+        public List<ParseResult> Warnings
         {
             get { return Results.Where(x => x.Type == ParseResult.WARN).ToList(); }
         }
 
-        public List<IParseResult> Informational
+        public List<ParseResult> Informational
         {
             get { return Results.Where(x => x.Type == ParseResult.INFO).ToList(); }
         }

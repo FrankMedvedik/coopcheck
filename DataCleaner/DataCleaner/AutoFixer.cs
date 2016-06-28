@@ -7,10 +7,10 @@ namespace DataClean.DataCleaner
 {
     class AutoFixer : IAutoFixer
     {
-        public static IParseResult UpdatedAddressLine1ParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_STREET_ADDRESS_CODE, LongDescription = "Address Line 1 replaced: Old Value = ", ShortDescription = "Address 1 replaced", Type = ParseResult.AUTOFIX };
-        public static IParseResult UpdatedCityParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_CITY_CODE, LongDescription = "City replaced: Old Value = ", ShortDescription = "City replaced", Type = ParseResult.AUTOFIX };
-        public static IParseResult UpdatedStateParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_STATE_CODE, LongDescription = "State replaced: Old Value =  ", ShortDescription = "state replaced", Type = ParseResult.AUTOFIX };
-        public static IParseResult UpdatedPostalCodeParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_POSTAL_CODE, LongDescription = "Postal Code replaced: Old Value = ", ShortDescription = "Postal code replaced", Type = ParseResult.AUTOFIX };
+        public static ParseResult UpdatedAddressLine1ParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_STREET_ADDRESS_CODE, LongDescription = "Address Line 1 replaced: Old Value = ", ShortDescription = "Address 1 replaced", Type = ParseResult.AUTOFIX };
+        public static ParseResult UpdatedCityParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_CITY_CODE, LongDescription = "City replaced: Old Value = ", ShortDescription = "City replaced", Type = ParseResult.AUTOFIX };
+        public static ParseResult UpdatedStateParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_STATE_CODE, LongDescription = "State replaced: Old Value =  ", ShortDescription = "state replaced", Type = ParseResult.AUTOFIX };
+        public static ParseResult UpdatedPostalCodeParseResult = new ParseResult() { AlternateAddressExists = true, Code = ParseResultDictionary.AUTOFIX_POSTAL_CODE, LongDescription = "Postal Code replaced: Old Value = ", ShortDescription = "Postal code replaced", Type = ParseResult.AUTOFIX };
 
         public static T Clone<T>(T source)
         {
@@ -23,7 +23,7 @@ namespace DataClean.DataCleaner
         }
 
         private IDataCleanCriteria _criteria;
-        public List<IDataCleanEvent> DataCleanEvents { get; set; }
+        public List<DataCleanEvent> DataCleanEvents { get; set; }
 
         private void FixDataCleanEvent(int idx)
         {
@@ -57,9 +57,9 @@ namespace DataClean.DataCleaner
             }
         }
 
-        private IParseResult AddOldValue(IParseResult parseResultTemplate, string oldValue)
+        private ParseResult AddOldValue(ParseResult parseResultTemplate, string oldValue)
         {
-            var workParseResult = Clone<IParseResult>(parseResultTemplate);
+            var workParseResult = Clone<ParseResult>(parseResultTemplate);
             workParseResult.LongDescription = parseResultTemplate.LongDescription + oldValue;
             return workParseResult;
         }

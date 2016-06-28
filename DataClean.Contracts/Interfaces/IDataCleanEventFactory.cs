@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using DataClean.Contracts.Models;
 
 namespace DataClean.Contracts.Interfaces
 {
 
         public interface IDataCleanEventFactory
         {
-            IDataCleanEvent ValidateAddress(IInputStreetAddress input);
-            IDataCleanEvent GetExistingEvent(int id);
-            List<IDataCleanEvent> ValidateAddresses(List<IInputStreetAddress> inputAddressList);
+            DataCleanEvent ValidateAddress(InputStreetAddress input);
+            DataCleanEvent GetExistingEvent(int id);
+            List<DataCleanEvent> ValidateAddresses(List<InputStreetAddress> inputAddressList);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataClean.Contracts.Models;
 
 namespace DataClean.Contracts.Interfaces
 {
@@ -25,7 +26,7 @@ namespace DataClean.Contracts.Interfaces
         string AddressSuiteNumber { get; set; }
         string AddressTypeCode { get; set; }
         string AreaCode { get; set; }
-        List<IParseResult> AutoFixes { get; }
+        List<ParseResult> AutoFixes { get; }
         string CarrierRoute { get; set; }
         string CBSACode { get; set; }
         string CBSADivisionCode { get; set; }
@@ -53,7 +54,7 @@ namespace DataClean.Contracts.Interfaces
         string DomainName { get; set; }
         string EmailAddress { get; set; }
         string Error { get; }
-        List<IParseResult> Errors { get; }
+        List<ParseResult> Errors { get; }
         string Gender { get; set; }
         string Gender2 { get; set; }
         bool HasAutoFixes { get; }
@@ -63,7 +64,7 @@ namespace DataClean.Contracts.Interfaces
         bool HasNewStreetAddressLine1 { get; }
         string HouseholdIncome { get; set; }
         int ID { get; set; }
-        List<IParseResult> Informational { get; }
+        List<ParseResult> Informational { get; }
         string Latitude { get; set; }
         string LengthOfResidence { get; set; }
         string Longitude { get; set; }
@@ -100,7 +101,7 @@ namespace DataClean.Contracts.Interfaces
         string PrivateMailBox { get; set; }
         string RecordExtras { get; set; }
         string RecordID { get; set; }
-        List<IParseResult> Results { get; set; }
+        List<ParseResult> Results { get; set; }
         string Salutation { get; set; }
         string State { get; set; }
         string StateName { get; set; }
@@ -109,7 +110,7 @@ namespace DataClean.Contracts.Interfaces
         string UrbanizationName { get; set; }
         string UTC { get; set; }
         string Warning { get; }
-        List<IParseResult> Warnings { get; }
+        List<ParseResult> Warnings { get; }
 
         string SuggestedAddress();
     }

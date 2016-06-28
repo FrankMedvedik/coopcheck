@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataClean.Contracts.Models;
 
 namespace DataClean.Contracts.Interfaces
 {
@@ -6,12 +7,12 @@ namespace DataClean.Contracts.Interfaces
     {
         string DictionaryFileName { get; set; }
 
-        IParseResult[] GetAllFatalErrors();
-        IParseResult[] GetAllInfoMessages();
-        IParseResult[] GetAllinfoMessages();
-        IParseResult[] GetAllMessages();
-        IParseResult[] GetAllWarningMessages();
-        IParseResult LookupCode(string resultcode);
-        IParseResult[] LookupCodeList(IEnumerable<string> results);
+        ParseResult[] GetAllFatalErrors();
+        ParseResult[] GetAllInfoMessages();
+        ParseResult[] GetAllinfoMessages();
+        ParseResult[] GetAllMessages();
+        ParseResult[] GetAllWarningMessages();
+        ParseResult LookupCode(string resultcode);
+        ParseResult[] LookupCodeList(IEnumerable<string> results);
     }
 }
