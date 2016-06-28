@@ -1,9 +1,7 @@
-﻿using System.Reflection;
-using System.Web.Http;
+﻿using System.Web.Http;
 using CoopCheck.Web;
 using Hangfire;
 using Microsoft.Owin;
-using Ninject;
 using Owin;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
@@ -19,18 +17,14 @@ namespace CoopCheck.Web
         {
             GlobalConfiguration.Configuration
                 .UseSqlServerStorage("CoopCheck");
-            var webApiConfiguration = new HttpConfiguration();
+            var config = new HttpConfiguration();
+            WebApiConfig.Register(config);
+            app.UseNinjectMiddleware(() => NinjectConfig.CreateKernel.Value);
+            app.UseNinjectWebApi(config);
             app.UseHangfireDashboard();
             app.UseHangfireServer();
-            app.UseNinjectMiddleware(CreateKernel);
-            app.UseNinjectWebApi(webApiConfiguration);
 
         }
-        private static StandardKernel CreateKernel()
-        {
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-            return kernel;
-        }
+        
     }
 }

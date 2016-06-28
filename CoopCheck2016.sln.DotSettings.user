@@ -10,4 +10,8 @@
   &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Core.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\Source\Repos\coopcheck\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\Source\Repos\coopcheck\packages\Ninject.Web.WebApi.OwinHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.OwinHost.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\Source\Repos\coopcheck\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Web.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\Source\Repos\coopcheck\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

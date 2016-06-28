@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
-using System.Web.Http;
+﻿using System.Web.Http;
 using DataClean.Contracts.Interfaces;
 using DataClean.Contracts.Models;
-using DataClean.DataCleaner;
-using DataClean.Repository.Mgr;
-using log4net;
+using DataClean.Repository;
 
-namespace CoopCheck.Web.Controllers
+namespace WEb.API2.Owin.NinJect.Controllers
 {
     [System.Web.Http.RoutePrefix("api/DataCleanEvent")]
     public class DataCleanEventController : ApiController
@@ -29,9 +23,11 @@ namespace CoopCheck.Web.Controllers
         //{
         //    _dataCleanEventFactory = dataCleanEventFactory;
         //}
-        public IDataCleanEvent Get(int id)
+        public DataCleanEventLog Get(int id)
         {
-            return  new DataCleanEvent();// _dataCleanEventFactory.GetExistingEvent(id);
+             DataCleanEntities ctx = new DataCleanEntities();
+            return ctx.DataCleanEventLogs.Find(id);
+                
         }
         //public IEnumerable<IDataCleanEvent> CleanAddresses([FromBody]IEnumerable<IInputStreetAddress> aList)
         //{
