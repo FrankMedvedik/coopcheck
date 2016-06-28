@@ -157,10 +157,9 @@ namespace CoopCheck.Library
                 
                 {
                         //if a complete address then verify against web service
-                        var config = ConfigurationManager.AppSettings;
                     var dataCleanEventFactory =
                         new DataCleanEventFactory(
-                            new DataCleaner(config),
+                            new DataCleaner(),
                             new DataCleanRespository(), 
                             new DataCleanCriteria()
                             {

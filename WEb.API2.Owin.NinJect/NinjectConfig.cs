@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using CoopCheck.Domain.Contracts.Interfaces;
+using CoopCheck.Domain.Services;
+using CoopCheck.Repository;
 using DataClean.Contracts.Interfaces;
 using DataClean.Contracts.Models;
 using DataClean.DataCleaner;
@@ -32,6 +35,12 @@ namespace WEb.API2.Owin.NinJect
             kernel.Bind<IDataCleaner>().To<DataCleaner>();
             kernel.Bind<IDataCleanRepository>().To<DataCleanRespository>();
             kernel.Bind<IDataCleanCriteria>().To<DataCleanCriteria>();
+
+
+            kernel.Bind<ISendMailSvc>().To<SendMailSvc>();
+            kernel.Bind<ISwiftPaySvc>().To<SwiftPaySvc>();
+            kernel.Bind<IUserAuthSvc>().To<UserAuthSvc>();
+            kernel.Bind<ICoopCheckEntities>().To<CoopCheckEntities>();
         }
     }
 

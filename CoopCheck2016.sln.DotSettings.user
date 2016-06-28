@@ -14,4 +14,5 @@
   &lt;Assembly Path="D:\Source\Repos\coopcheck\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Web.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\Source\Repos\coopcheck\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.DirectoryServices.AccountManagement.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

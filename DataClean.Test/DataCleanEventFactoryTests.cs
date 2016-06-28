@@ -21,7 +21,7 @@ namespace DataClean.Test
 
         public DataCleanEventFactoryTests()
         {
-            _dataCleanEventFactory = new DataCleanEventFactory( new DataCleaner.DataCleaner(ConfigurationManager.AppSettings)
+            _dataCleanEventFactory = new DataCleanEventFactory( new DataCleaner.DataCleaner()
                 , new DataCleanRespository(),_criteria = new DataCleanCriteria()
                                                                         {
                                                                             AutoFixAddressLine1 = false,
@@ -36,7 +36,7 @@ namespace DataClean.Test
 
         private OutputStreetAddress _goodOutputStreetAddress = new OutputStreetAddress()
         {
-            Results = new List<IParseResult>(ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList())
+            Results = new List<ParseResult>(ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList())
         };
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanListTest()
         {
-            List<IInputStreetAddress> l = new List<IInputStreetAddress>();
+            List<InputStreetAddress> l = new List<InputStreetAddress>();
             l.Add(TestData.BadEmailToClean);        
             l.Add(TestData.BadFirstNameToClean);
             l.Add(TestData.BadLastNameToClean);

@@ -12,7 +12,7 @@ namespace DataClean.Test
 
         public DataCleanerAddressCleaningTests()
         {
-            _dataCleaner = new DataCleaner.DataCleaner(ConfigurationManager.AppSettings);
+            _dataCleaner = new DataCleaner.DataCleaner();
         }
 
 
@@ -21,7 +21,7 @@ namespace DataClean.Test
         public void CleanGoodAddressTest()
         {
             // clean an address and make sure the dataclean data is now
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.GoodAddresstoClean, out results);
             Assert.IsTrue(b);
             Assert.IsTrue(results.OkMailingAddress);
@@ -33,7 +33,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadPostalCodeAddressTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadPostalCodetoClean, out results);
             Assert.IsTrue(results.OkMailingAddress);
             Assert.IsTrue(results.HasNewPostalCode);
@@ -45,7 +45,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadStreetAddressTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadStreetAddressToClean, out results);
             Assert.IsFalse(b);
             Assert.IsFalse(results.OkMailingAddress);
@@ -57,7 +57,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadStateAddressTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.MissingStateToClean, out results);
             Assert.IsTrue(b);
             Assert.IsTrue(results.OkPhone);
@@ -69,7 +69,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanCityAndPostalCodeAddressTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadCityAndPostalCodetoClean, out results);
             Assert.IsFalse(b);
             Assert.IsTrue(results.OkPhone);
@@ -81,7 +81,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadPhoneAddressTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadPhoneToClean, out results);
             Assert.IsFalse(b);
             Assert.IsFalse(results.OkPhone);
@@ -90,7 +90,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadEmailAddressTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadEmailToClean, out results);
             Assert.IsFalse(b);
             Assert.IsFalse(results.OkEmailAddress);
@@ -100,7 +100,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadFirstNameTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadFirstNameToClean, out results);
             Assert.IsTrue(b);
         }
@@ -109,7 +109,7 @@ namespace DataClean.Test
         [TestMethod]
         public void CleanBadLastNameTest()
         {
-            IOutputStreetAddress results = new OutputStreetAddress();
+            OutputStreetAddress results = new OutputStreetAddress();
             var b = _dataCleaner.VerifyAndCleanAddress(TestData.BadLastNameToClean, out results);
             Assert.IsTrue(b);
         }

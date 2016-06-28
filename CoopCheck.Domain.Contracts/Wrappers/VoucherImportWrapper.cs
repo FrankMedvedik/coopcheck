@@ -42,7 +42,7 @@ namespace CoopCheck.Domain.Contracts.Wrappers
 
         private OutputStreetAddress _altAddress = new OutputStreetAddress()
         {
-            Results = new List<IParseResult>()
+            Results = new List<ParseResult>()
         };
         private string _altAddressLine1;
         private string _altAddressLine2;

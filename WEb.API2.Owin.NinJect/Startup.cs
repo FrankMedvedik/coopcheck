@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using log4net;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
@@ -11,6 +13,9 @@ namespace WEb.API2.Owin.NinJect
 {
     public class Startup
     {
+        private static readonly ILog log =
+            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
@@ -18,7 +23,7 @@ namespace WEb.API2.Owin.NinJect
 
             app.UseNinjectMiddleware(() => NinjectConfig.CreateKernel.Value);
             app.UseNinjectWebApi(config);
-            
+            log.Info("Coopcheck.Web Started");
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using CoopCheck.Domain.Contracts.Interfaces;
@@ -9,19 +11,25 @@ namespace CoopCheck.Domain.Services
     public class UserAuthSvc : IUserAuthSvc
 
     {
-        private static IDictionary<String, String> _settings;
+        private static NameValueCollection _settings;
         private static PrincipalContext _principalContext;
 
-        public UserAuthSvc(IDictionary<String,String> setting, PrincipalContext principalContext)
+        public UserAuthSvc()
         {
-            _principalContext = principalContext;
-            _settings = setting;
+            _settings = ConfigurationManager.AppSettings;
         }
         public  bool CanRead(string userName)
         {
             return IsGroupMember(userName, _settings["ReadAuth"]);
             //return true;
 
+        }
+
+
+        public PrincipalContext PrincipalContext
+        {
+            get { return _principalContext ?? (_principalContext = new PrincipalContext(ContextType.Domain)); }
+            set { _principalContext = value; }
         }
 
         public bool CanWrite(string userName)

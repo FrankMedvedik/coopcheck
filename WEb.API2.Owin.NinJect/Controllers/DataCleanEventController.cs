@@ -8,7 +8,7 @@ using DataClean.Repository;
 namespace WEb.API2.Owin.NinJect.Controllers
 {
     [System.Web.Http.RoutePrefix("api/DataCleanEvent")]
-    public class DataCleanEventController : ApiController
+    public class DataCleanEventController : ApiController, IDataCleanEventController
     {
         private readonly IDataCleanEventFactory _dataCleanEventFactory;
         //public DataCleanEventController()

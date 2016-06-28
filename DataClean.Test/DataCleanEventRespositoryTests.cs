@@ -14,7 +14,7 @@ namespace DataClean.Test
      
         private OutputStreetAddress _goodOutputStreetAddress = new OutputStreetAddress()
         {
-            Results = new List<IParseResult>(ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList())
+            Results = new List<ParseResult>(ParseResultDictionary.VALID_ADDRESS_RESULTS_LIST.ToList())
         };
 
         [TestMethod]
