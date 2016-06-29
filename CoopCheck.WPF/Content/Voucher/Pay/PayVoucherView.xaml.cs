@@ -3,10 +3,11 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using FirstFloor.ModernUI.Windows.Controls;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace CoopCheck.WPF.Content.Voucher.Pay
 {
@@ -16,7 +17,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
     public partial class PayVoucherView : UserControl
     {
         private readonly PayVouchersViewModel _vm;
-        private CancellationTokenSource cts;
+        private CancellationTokenSource _cts;
 
         public PayVoucherView()
         {
@@ -34,7 +35,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         private async void PrintChecks(object sender, RoutedEventArgs e)
         {
-            cts = new CancellationTokenSource();
+            _cts = new CancellationTokenSource();
 
             int printedBatchNum = _vm.SelectedBatch.batch_num;
 
@@ -51,7 +52,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 try
                 {
                     _vm.IsBusy = true;
-                    var c = await _vm.PrintChecks(cts.Token);
+                    var c = await _vm.PrintChecks(_cts.Token);
                     _vm.Status = c.Status;
                     _vm.EndingCheckNum = c.CurrentCheckNum;
                     _vm.PercentComplete = c.ProgressPercentage;
@@ -73,11 +74,11 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                     };
                 }
 
-                cts = null;
+                _cts = null;
 
                 var cw = new ConfirmLastCheckPrintedDialog {DataContext = _vm};
-                var result = cw.ShowDialog();
-                CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
+                 CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
+
                 _vm.RefreshBatchList();
                 _vm.IsBusy = false;
                 _vm.Status = new StatusInfo
@@ -98,9 +99,9 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (cts != null)
+            if (_cts != null)
             {
-                cts.Cancel();
+                _cts.Cancel();
             }
         }
     }

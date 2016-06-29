@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
@@ -10,6 +11,7 @@ using DataClean.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
+using Remotion.Mixins;
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
@@ -46,6 +48,13 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 }
             });
 
+            Messenger.Default.Register<NotificationMessage<vwPayment>>(this, message =>
+            {
+                if (message.Notification == Notifications.HistoryPaymentSent)
+                {
+                    PopulateSelectedVoucherFromOldPayment(message.Content);
+                }
+            });
             Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
             {
                 if (message.Notification == Notifications.VouchersDataCleaned)
@@ -61,6 +70,23 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 }
             });
             CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
+        }
+
+        private void PopulateSelectedVoucherFromOldPayment(vwPayment oldPayment)
+        {
+            SelectedVoucher.AddressLine1 = oldPayment.address_1;
+            SelectedVoucher.AddressLine2 = oldPayment.address_2;
+            SelectedVoucher.EmailAddress = oldPayment.email;
+            SelectedVoucher.PhoneNumber= oldPayment.phone_number;
+            SelectedVoucher.First = oldPayment.first_name;
+            SelectedVoucher.Last = oldPayment.last_name;
+            SelectedVoucher.Company = oldPayment.company;
+            SelectedVoucher.Municipality = oldPayment.municipality;
+            SelectedVoucher.Region = oldPayment.region;
+            SelectedVoucher.Country = oldPayment.country;
+            SelectedVoucher.PostalCode = oldPayment.postal_code;
+            SelectedVoucher.Middle = oldPayment.middle_name;
+
         }
 
         public RelayCommand CleanAndPostVouchersCommand { get; }
@@ -267,7 +293,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         public void CancelNewVoucher()
         {
             WorkVoucherImport = null;
-            ;
+            
         }
 
         #endregion

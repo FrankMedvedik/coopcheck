@@ -37,6 +37,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                        <MenuItem Header="Use this address" Command="{Binding Path=SendPaymentCommand}" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

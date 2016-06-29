@@ -5,6 +5,7 @@ using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Reckner.WPF.ViewModel;
 
@@ -13,11 +14,11 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
     public class PaymentHistoryViewModel : ViewModelBase
     {
         private ObservableCollection<vwPayment> _payments = new ObservableCollection<vwPayment>();
-
+        
         public PaymentHistoryViewModel()
         {
             ResetState();
-
+            SendPaymentCommand = new RelayCommand(SendPayment, CanSendPayment);
             Messenger.Default.Register<NotificationMessage<PaymentReportCriteria>>(this, message =>
             {
                 if (message.Notification == Notifications.FindPayeePayments)
@@ -28,6 +29,19 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 }
             });
         }
+
+        private bool CanSendPayment()
+        {
+            return true;
+        }
+
+        private void SendPayment()
+        {
+            Messenger.Default.Send(new NotificationMessage<vwPayment>(SelectedPayment,
+            Notifications.HistoryPaymentSent));
+        }
+
+        public RelayCommand SendPaymentCommand { get; set; }
 
         public string LastName
         {

@@ -96,7 +96,11 @@
                         Delete
                     </Button>
                 </StackPanel>
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" VerticalAlignment="Top" Margin="6" ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="300" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" VerticalScrollBarVisibility="Auto" SelectionMode="Single">
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" 
+                          VerticalAlignment="Top" Margin="6" ItemsSource="{Binding FilteredVoucherImports}" 
+                          HorizontalScrollBarVisibility="Auto" MaxHeight="300" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" 
+                          SelectionChanged="dgVouchers_SelectionChanged" ClipboardCopyMode="IncludeHeader" 
+                          EnableColumnVirtualization="True" EnableRowVirtualization="True" VerticalScrollBarVisibility="Auto" SelectionMode="Single">
                     <DataGrid.Columns>
                         <!--<mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
                     <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />

@@ -31,5 +31,6 @@ namespace CoopCheck.WPF.Messages
         public static string HaveUncommittedVouchers => "HaveUncommittedVouchers";
         public static string RefreshPaymentSummaryJobs => "RefreshPaymentSummaryJobs";
         public static string FindPayeePayments => "FindPayeePayments";
+        public static string HistoryPaymentSent => "HistoryPaymentSent";
     }
 }

@@ -48,6 +48,7 @@ namespace CoopCheck.WPF.Services
 
 #if DEBUG
             var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
+            //var credentials = new NetworkCredential("fmedv", "candycup22");
             using (
                 var client =
                     new System.Net.Http.HttpClient(new System.Net.Http.HttpClientHandler { Credentials = credentials }))
@@ -61,7 +62,7 @@ namespace CoopCheck.WPF.Services
 #endif        
 
             {
-                //client.BaseAddress = new Uri("http://localhost:37432/");
+                //client.BaseAddress = new Uri("http://localhost:22253/");
                 client.BaseAddress = new Uri(Settings.Default.SwiftPaySite);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
