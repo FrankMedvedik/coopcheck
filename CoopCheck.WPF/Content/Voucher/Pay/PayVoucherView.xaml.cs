@@ -77,7 +77,8 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 _cts = null;
 
                 var cw = new ConfirmLastCheckPrintedDialog {DataContext = _vm};
-                 CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
+                var result = cw.ShowDialog();
+                CommitCheckCommand.Execute(printedBatchNum, _vm.EndingCheckNum);
 
                 _vm.RefreshBatchList();
                 _vm.IsBusy = false;

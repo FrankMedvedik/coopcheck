@@ -1,4 +1,5 @@
 using System;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -44,14 +45,15 @@ namespace CoopCheck.DalADO
                     cmd.Parameters.AddWithValue("@country", voucherEdit.Country).DbType = DbType.StringFixedLength;
                     cmd.Parameters.AddWithValue("@phone_number", voucherEdit.PhoneNumber).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@email", voucherEdit.EmailAddress).DbType = DbType.String;
-                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
+                    cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
+                        DbType.String;
                     cmd.Parameters.Add("@updated", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     cmd.ExecuteNonQuery();
-                    voucherEdit.Id = (int)cmd.Parameters["@tran_id"].Value;
-                    voucherEdit.Updated = (DateTime)cmd.Parameters["@updated"].Value;
+                    voucherEdit.Id = (int) cmd.Parameters["@tran_id"].Value;
+                    voucherEdit.Updated = (DateTime) cmd.Parameters["@updated"].Value;
                 }
+                return voucherEdit;
             }
-            return voucherEdit;
         }
 
         /// <summary>
