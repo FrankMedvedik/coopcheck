@@ -84,7 +84,7 @@ namespace CoopCheck.WPF.Services
                 }
                 catch (Exception e)
                 {
-
+                     
                     Console.WriteLine(e.Message);
                 }
                 return retVal;

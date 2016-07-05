@@ -20,13 +20,13 @@ namespace CoopCheck.WPF.Content.Voucher
         public VoucherImportWizardViewModel()
         {
             ResetAll();
-            Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
-            {
-                if (message.Notification == Notifications.ImportWorksheetReady)
-                {
-                    HaveValidWorkbook = true;
-                }
-            });
+            //Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
+            //{
+            //    if (message.Notification == Notifications.ImportWorksheetReady)
+            //    {
+            //        HaveValidWorkbook = true;
+            //    }
+            //});
 
             Messenger.Default.Register<NotificationMessage<VoucherWrappersMessage>>(this, message =>
             {
@@ -44,6 +44,10 @@ namespace CoopCheck.WPF.Content.Voucher
 
             Messenger.Default.Register<NotificationMessage>(this, message =>
             {
+                if (message.Notification == Notifications.ImportWorksheetReady)
+                {
+                    HaveValidWorkbook = true;
+                }
                 if (message.Notification == Notifications.HaveCommittedVouchers)
                 {
                     HaveCommittedVouchers = true;

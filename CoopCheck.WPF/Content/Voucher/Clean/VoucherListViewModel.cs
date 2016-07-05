@@ -37,16 +37,21 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public VoucherListViewModel()
         {
+            CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
+
             // called when the vouchers come out of the excel import process
-            Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
-            {
-                if (message.Notification == Notifications.ImportWorksheetReady && message.Content.VoucherImports.Any())
-                {
-                    ExcelFileInfo = message.Content.ExcelFileInfo;
-                    var a = message.Content.VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
-                    CleanVouchers(a);
-                }
-            });
+            //Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
+            //{
+            //    if (message.Notification == Notifications.ImportWorksheetReady && message.Content.VoucherImports.Any())
+            //    {
+            //        if (!IsCleaning)
+            //        {
+            //            ExcelFileInfo = message.Content.ExcelFileInfo;
+            //            var a = message.Content.VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
+            //            CleanVouchers(a);
+            //        }
+            //    }
+            //});
 
             Messenger.Default.Register<NotificationMessage<vwPayment>>(this, message =>
             {
@@ -59,8 +64,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             {
                 if (message.Notification == Notifications.VouchersDataCleaned)
                 {
-                }
-            });
+                    VoucherImports =
+                        new ObservableCollection<VoucherImportWrapper>(
+                            message.Content.VoucherImports.OrderBy(x => x.OkMailingAddress)
+                                .ThenBy(x => x.OkPhone)
+                                .ThenBy(x => x.OkEmailAddress)
+                               .ToList());
+                           FilterVoucherImports();
+                                    }
+                });
 
             Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
             {
@@ -69,7 +81,15 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                     _dataCleanCriteria = message.Content;
                 }
             });
-            CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
+            
+        }
+
+        public void Dispose()
+        {
+            Messenger.Default.Unregister < NotificationMessage<ExcelVouchersMessage>>(this);
+            Messenger.Default.Unregister <NotificationMessage<vwPayment >>(this);
+            Messenger.Default.Unregister<NotificationMessage<VoucherWrappersMessage>>(this);
+            Messenger.Default.Unregister<NotificationMessage<DataCleanCriteria>>(this);
         }
 
         private void PopulateSelectedVoucherFromOldPayment(vwPayment oldPayment)
@@ -236,13 +256,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             IsCleaning = true;
             CanPost = false;
             var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
-            VoucherImports =
-                new ObservableCollection<VoucherImportWrapper>(
-                    results.OrderBy(x => x.OkMailingAddress)
-                        .ThenBy(x => x.OkPhone)
-                        .ThenBy(x => x.OkEmailAddress)
-                        .ToList());
-            FilterVoucherImports();
             Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
                 new VoucherWrappersMessage { ExcelFileInfo = ExcelFileInfo, VoucherImports = VoucherImports },
                 Notifications.VouchersDataCleaned));

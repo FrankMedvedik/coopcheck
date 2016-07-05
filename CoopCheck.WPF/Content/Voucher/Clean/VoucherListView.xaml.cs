@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using CoopCheck.WPF.Content.Voucher.Edit;
@@ -15,8 +16,23 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             _vm = new VoucherListViewModel();
             DataContext = _vm;
             InitializeComponent();
+            Loaded += (s, e) =>
+            {
+                // only at this point the control is ready
+                Window.GetWindow(this) // get the parent window
+                    .Closing += (s1, e1) => ClosingControl();
+            };
         }
 
+        private void ClosingControl()
+        {
+            var disposable = DataContext as IDisposable;
+            if (!ReferenceEquals(null, disposable))
+            {
+                disposable.Dispose();
+            }
+        }
+    
         private void DeleteVoucher_Click(object sender, RoutedEventArgs e)
         {
             // set the status of the callback to closed

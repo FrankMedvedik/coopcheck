@@ -10,457 +10,457 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Api.cshtml">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ApiGroup.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/CollectionModelDescription.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ComplexTypeModelDescription.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/DictionaryModelDescription.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/EnumTypeModelDescription.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/HelpPageApiModel.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ImageSample.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/InvalidSample.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/KeyValuePairModelDescription.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ModelDescriptionLink.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Parameters.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Samples.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/SimpleTypeModelDescription.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/TextSample.cshtml">
-      <publishTime>05/05/2016 11:01:35</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Index.cshtml">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/ResourceModel.cshtml">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Shared/_Layout.cshtml">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Web.config">
-      <publishTime>04/25/2016 11:22:46</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
-      <publishTime>04/25/2016 11:22:16</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>05/05/2016 08:27:44</publishTime>
+      <publishTime>06/15/2016 09:08:28</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>05/05/2016 08:27:44</publishTime>
     </File>
     <File Include="bin/ar/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/bs/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/ca-ES/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/CoopCheck.DAL.dll">
-      <publishTime>05/12/2016 13:59:25</publishTime>
+      <publishTime>07/05/2016 14:23:39</publishTime>
     </File>
     <File Include="bin/CoopCheck.DAL.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/CoopCheck.DalADO.dll">
-      <publishTime>05/12/2016 13:59:26</publishTime>
+      <publishTime>07/05/2016 14:23:40</publishTime>
     </File>
     <File Include="bin/CoopCheck.DalADO.pdb">
       <publishTime>05/07/2016 15:37:47</publishTime>
     </File>
     <File Include="bin/CoopCheck.Library.dll">
-      <publishTime>05/23/2016 10:14:42</publishTime>
+      <publishTime>07/05/2016 14:48:44</publishTime>
     </File>
     <File Include="bin/CoopCheck.Library.pdb">
       <publishTime>05/07/2016 15:37:50</publishTime>
     </File>
     <File Include="bin/CoopCheck.Mocks.dll">
-      <publishTime>05/12/2016 13:59:25</publishTime>
+      <publishTime>07/05/2016 14:23:39</publishTime>
     </File>
     <File Include="bin/CoopCheck.Mocks.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/CoopCheck.Repository.dll">
-      <publishTime>05/12/2016 13:59:25</publishTime>
+      <publishTime>07/05/2016 14:23:39</publishTime>
     </File>
     <File Include="bin/CoopCheck.Repository.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/CoopCheck.Web.dll">
-      <publishTime>05/23/2016 12:52:25</publishTime>
+      <publishTime>07/05/2016 14:48:49</publishTime>
     </File>
     <File Include="bin/CoopCheck.Web.pdb">
       <publishTime>05/07/2016 15:38:04</publishTime>
     </File>
     <File Include="bin/Csla.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/Csla.Web.dll">
-      <publishTime>05/05/2016 08:27:44</publishTime>
+      <publishTime>06/15/2016 09:08:28</publishTime>
     </File>
     <File Include="bin/Csla.Web.Mvc5.dll">
-      <publishTime>05/05/2016 08:27:45</publishTime>
+      <publishTime>06/15/2016 09:08:28</publishTime>
     </File>
     <File Include="bin/da/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/DataClean.dll">
-      <publishTime>05/12/2016 13:59:26</publishTime>
+      <publishTime>07/05/2016 14:48:43</publishTime>
     </File>
     <File Include="bin/DataClean.pdb">
       <publishTime>05/07/2016 15:37:46</publishTime>
     </File>
     <File Include="bin/DataClean.Repository.dll">
-      <publishTime>05/12/2016 13:59:24</publishTime>
+      <publishTime>07/05/2016 14:23:39</publishTime>
     </File>
     <File Include="bin/DataClean.Repository.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/de/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/el/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/es-ES/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/es/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/fr/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/Hangfire.Core.dll">
-      <publishTime>05/05/2016 08:27:44</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/Hangfire.SqlServer.dll">
-      <publishTime>05/05/2016 08:27:44</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/he-IL/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/hr/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/hu/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/it/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/km-KH/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/log4net.dll">
-      <publishTime>05/05/2016 08:27:45</publishTime>
+      <publishTime>06/15/2016 09:08:34</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>05/12/2016 21:54:25</publishTime>
+      <publishTime>06/15/2016 09:08:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>05/12/2016 21:54:32</publishTime>
+      <publishTime>06/15/2016 09:08:32</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:32</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>05/05/2016 08:27:44</publishTime>
+      <publishTime>06/15/2016 09:08:33</publishTime>
     </File>
     <File Include="bin/nl/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/no/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>05/05/2016 08:27:49</publishTime>
+      <publishTime>06/15/2016 09:08:33</publishTime>
     </File>
     <File Include="bin/pt-br/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/pt/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/ro/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>05/05/2016 08:27:50</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>05/05/2016 08:27:50</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>05/05/2016 08:27:50</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>05/05/2016 08:27:50</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>05/05/2016 08:27:50</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>05/05/2016 08:27:50</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>05/05/2016 08:27:51</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/ru/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/sr/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/sv/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>05/05/2016 08:27:44</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>05/05/2016 08:27:45</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:30</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:31</publishTime>
     </File>
     <File Include="bin/tr/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/uk-ua/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/vi/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>05/05/2016 08:27:48</publishTime>
+      <publishTime>06/15/2016 09:08:33</publishTime>
     </File>
     <File Include="bin/zh-Hans/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/zh-TW/Csla.resources.dll">
-      <publishTime>05/05/2016 08:27:47</publishTime>
+      <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>04/25/2016 14:32:28</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css.map">
-      <publishTime>04/25/2016 14:32:28</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>04/25/2016 14:32:28</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css.map">
-      <publishTime>04/25/2016 14:32:28</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>04/25/2016 14:32:28</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>04/25/2016 11:22:16</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>04/25/2016 14:32:27</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>04/25/2016 14:32:26</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/12/2016 21:54:37</publishTime>
+      <publishTime>06/15/2016 09:08:27</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>04/25/2016 14:32:26</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>04/25/2016 14:32:26</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/jquery-2.2.3.js">
-      <publishTime>04/25/2016 14:32:20</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/jquery-2.2.3.min.js">
-      <publishTime>04/25/2016 14:32:20</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/jquery-2.2.3.min.map">
-      <publishTime>04/25/2016 14:32:20</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
-      <publishTime>04/25/2016 14:32:33</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>04/25/2016 14:32:42</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/respond.matchmedia.addListener.js">
-      <publishTime>04/25/2016 14:32:42</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/respond.matchmedia.addListener.min.js">
-      <publishTime>04/25/2016 14:32:42</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>04/25/2016 14:32:42</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/05/2016 15:47:33</publishTime>
+      <publishTime>07/05/2016 14:25:02</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/05/2016 15:06:43</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>05/05/2016 11:01:34</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>05/05/2016 11:01:36</publishTime>
+      <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/23/2016 12:52:30</publishTime>
+      <publishTime>07/05/2016 14:25:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

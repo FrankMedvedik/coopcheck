@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
+using CoopCheck.WPF.Services;
+using CoopCheck.WPF.Wrappers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using LinqToExcel;
@@ -93,20 +96,39 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 
         public void PostVouchers()
         {
-            Messenger.Default.Send(new NotificationMessage<ExcelVouchersMessage>(
-                new ExcelVouchersMessage
+            var a = VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
+            CleanVouchers(a);
+
+            CanProceed = true;
+
+            //CanProceed = false;
+        }
+
+        public async void CleanVouchers(List<VoucherImportWrapper> vouchers)
+        {
+            Messenger.Default.Send(new NotificationMessage(Notifications.HaveUncommittedVouchers));
+            Messenger.Default.Send(new NotificationMessage(Notifications.HaveDirtyVouchers));
+            Messenger.Default.Send(new NotificationMessage(Notifications.ImportWorksheetReady));
+            Status = new StatusInfo
+            {
+                StatusMessage =
+                    "please wait  - checking the street addresses, email and phone numbers of the vouchers...",
+                IsBusy = true
+            };
+            var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
+           
+            Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
+                new VoucherWrappersMessage
                 {
-                    VoucherImports = VoucherImports.ToList(),
                     ExcelFileInfo = new ExcelFileInfoMessage
                     {
                         ExcelFilePath = ExcelFilePath,
                         SelectedWorksheet = SelectedWorksheet
-                    }
-                }, Notifications.ImportWorksheetReady));
-
-            CanProceed = false;
+                    },
+                    VoucherImports = results
+                },
+                Notifications.VouchersDataCleaned));
         }
-
         public bool CanPostVouchers()
         {
             return true;
@@ -535,6 +557,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             StartEnabled = !_voucherImporter.IsBusy;
             Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+            Messenger.Default.Send(new NotificationMessage(Notifications.ImportWorksheetReady));
             Status = new StatusInfo
             {
                 StatusMessage = "vouchers loaded - select next to continue",

@@ -1,4 +1,5 @@
-﻿  using System.Collections.Generic;
+﻿  using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
@@ -7,14 +8,15 @@ using DataClean.DataCleaner;
 using DataClean.Models;
 using DataClean.Repository.Mgr;
 using log4net;
+  using log4net.Repository.Hierarchy;
+
 
 namespace CoopCheck.Web.Controllers
 {
     [System.Web.Http.RoutePrefix("api/DataCleanEvent")]
     public class DataCleanEventController : ApiController
     {
-        private static readonly ILog log
-            = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         
         private readonly DataCleanEventFactory _dcef;
 
@@ -39,6 +41,7 @@ namespace CoopCheck.Web.Controllers
 
         public IEnumerable<DataCleanEvent> CleanAddresses([FromBody]IEnumerable<InputStreetAddress> aList)
         {
+            logger.Info(String.Format("Clean Addressses controller callled with {0} vouchers to clean ", aList.Count()));
             return  _dcef.ValidateAddresses(aList.ToList());
         }
     }

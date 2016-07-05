@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DataClean.Interfaces;
 using DataClean.Models;
 using DataClean.Repository;
+using log4net;
+using log4net.Repository.Hierarchy;
 
 namespace DataClean.DataCleaner
 {
@@ -14,8 +16,8 @@ namespace DataClean.DataCleaner
         private DataCleaner _dataCleaner;
         private Repository.Mgr.DataCleanRespository _dataCleanRepository;
         private DataCleanCriteria _criteria;
-        
 
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(DataCleanEventFactory));
         public DataCleanEventFactory(DataCleaner dataCleaner, Repository.Mgr.DataCleanRespository dataCleanRepository, DataCleanCriteria criteria)
         {
             _dataCleaner = dataCleaner;
@@ -82,8 +84,8 @@ namespace DataClean.DataCleaner
 
             _dataCleanRepository.SaveStats(d);
 
-            Console.WriteLine("Number of vouchers to clean " + toBeCleaned.Count);
-            Console.WriteLine("Number of vouchers pulled from repository " + results.Count);
+            Logger.Info("Number of vouchers to clean " + toBeCleaned.Count);
+            Logger.Info("Number of vouchers pulled from repository " + results.Count);
 
 
             if (toBeCleaned.Any())
