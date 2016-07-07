@@ -26,60 +26,6 @@ namespace CoopCheck.WPF.Content.Voucher.Save
         private bool _canSave;
 
         private string _errorBatchInfoMessage;
-
-        //public async void  ExportVouchers()
-        //{
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "exporting vouchers to Excel",
-        //        IsBusy = true
-        //    };
-
-        //    await Task.Factory.StartNew(() =>
-        //    {
-        //        string dtFmt = String.Format("{0:g}", DateTime.Now).Replace('/', '.');
-        //        dtFmt = dtFmt.Replace(':', '.');
-        //        dtFmt = dtFmt.Replace(' ', '.');
-
-        //        try
-        //        {
-        //            if (BadVoucherExports.Count > 0)
-        //            {
-        //                ExportToExcel<VoucherExcelExport, Vouchers> s = new ExportToExcel<VoucherExcelExport, Vouchers>
-        //                {
-        //                    ExcelSourceWorkbook = ExcelFileInfo.ExcelFilePath,
-        //                    ExcelWorksheetName = String.Format("Errors.{0}", dtFmt),
-        //                    dataToPrint = BadVoucherExports
-        //                };
-        //                s.GenerateReport();
-
-        //                if (GoodVoucherExports.Count > 0)
-        //                {
-        //                    s.ExcelWorksheetName = String.Format("Processed.{0}", dtFmt);
-        //                    s.dataToPrint = GoodVoucherExports;
-        //                    s.GenerateReport();
-        //                    CanExport = false;
-        //                }
-        //                ErrorBatchInfoMessage = String.Format("Vouchers Exported to {0}",
-        //                    Path.GetFileName(ExcelFileInfo.ExcelFilePath));
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Status = new StatusInfo()
-        //            {
-        //                StatusMessage = "export to excel failed",
-        //                ErrorMessage = e.Message //,ShowMessageBox = true
-        //            };
-        //        }
-        //    });
-
-        //    Status = new StatusInfo()
-        //    {
-        //        StatusMessage = "export complete",
-        //    };
-        //}
-
         private ExcelFileInfoMessage _excelVoucherInfo;
 
         private string _saveBatchInfoMessage;

@@ -71,7 +71,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                                 .ThenBy(x => x.OkEmailAddress)
                                .ToList());
                            FilterVoucherImports();
-                                    }
+                    ExcelFileInfo = message.Content.ExcelFileInfo;
+                }
                 });
 
             Messenger.Default.Register<NotificationMessage<DataCleanCriteria>>(this, message =>
@@ -266,7 +267,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public bool CanRunBackgroundCleaner()
         {
-            return CanPost;
+            return true;
         }
 
 

@@ -43,15 +43,15 @@ namespace CoopCheck.Library.Tests
             obj = obj.Save();
 
             var retVal = string.Empty;
-            try
-            {
-                BatchSwiftFulfillCommand.Execute(obj.Num);
-            }
-            catch (Csla.DataPortalException e)
-            {
-                retVal = e.BusinessException.Message;
-            }
-            Assert.IsTrue(retVal == string.Empty);
+            //try
+            //{
+            //    SvcBatchSwiftFulfillCommand..Execute(obj.Num,);
+            //}
+            //catch (Csla.DataPortalException e)
+            //{
+            //    retVal = e.BusinessException.Message;
+            //}
+            //Assert.IsTrue(retVal == string.Empty);
         }
 
         
@@ -86,14 +86,14 @@ namespace CoopCheck.Library.Tests
             obj = obj.Save();
 
             var retVal = string.Empty;
-            try
-            {
-                BatchSwiftFulfillCommand.Execute(obj.Num);
-            }
-            catch (Csla.DataPortalException e)
-            {
-                retVal = e.BusinessException.Message;
-            }
+            //try
+            //{
+            //    BatchSwiftFulfillCommand.Execute(obj.Num);
+            //}
+            //catch (Csla.DataPortalException e)
+            //{
+            //    retVal = e.BusinessException.Message;
+            //}
 
             try
             {
@@ -138,14 +138,14 @@ namespace CoopCheck.Library.Tests
             obj = obj.Save();
 
             var retVal = string.Empty;
-            try
-            {
-                BatchSwiftFulfillCommand.Execute(obj.Num);
-            }
-            catch (Csla.DataPortalException e)
-            {
-                retVal = e.BusinessException.Message;
-            }
+            //try
+            //{
+            //    BatchSwiftFulfillCommand.Execute(obj.Num);
+            //}
+            //catch (Csla.DataPortalException e)
+            //{
+            //    retVal = e.BusinessException.Message;
+            //}
 
             try
             {

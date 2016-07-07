@@ -90,7 +90,8 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <CheckBox Margin="6" x:Name="chkFilterRows" VerticalAlignment="Center" IsChecked="True" Checked="chkFilterRows_Checked" Unchecked="chkFilterRows_Unchecked" />
                     <TextBlock Margin="2,5,5,5" VerticalAlignment="Center" FontWeight="Bold">Show Only Errors?</TextBlock>
-                    <Button Content="Revalidate Vouchers" Width="150" Height="30" Margin="6,6,50,6" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding CleanAndPostVouchersCommand}" IsEnabled="True" />
+                    <Button Content="Revalidate Vouchers" Width="150" Height="30" Margin="6,6,50,6" 
+                            HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding CleanAndPostVouchersCommand}" IsEnabled="True" />
                     <Button Content="Add" Margin="6" Width="100" Click="AddVoucher_Click" />
                     <Button Margin="6" x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" IsEnabled="{Binding ShowSelectedVoucher}">
                         Delete

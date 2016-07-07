@@ -11,9 +11,9 @@ using CoopCheck.DalADO.PromoCodeService;
 namespace CoopCheck.DalADO
 {
     
-    public class PaymentInfoListDal :   IPaymentInfoListDal
+    public class PaymentInfoListDal : IPaymentInfoListDal
     {
-        public static string _defaultEmail = "EmailNOtSupplied";
+        public static string _defaultEmail = "EmailNotSupplied";
 
         private static readonly log4net.ILog log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -97,6 +97,12 @@ namespace CoopCheck.DalADO
             var b = FetchBatch(batch_num);
             ClientJobDto jraClient = GetClientForJob(b.First().JobNum);
 
+            string JobNumFormatted;
+            JobNumFormatted = b.First().JobNum.ToString();
+            //if (JobNumFormatted.Length == 8)
+            //    JobNumFormatted = JobNumFormatted.Substring(0, 4) + "-" + JobNumFormatted.Substring(5);
+            
+
             foreach (var p in b)
             {
                 if (!p.Completed && !string.IsNullOrEmpty(p.Email))
@@ -139,8 +145,8 @@ namespace CoopCheck.DalADO
                     c.UserName = p.Email;
 
                     request.Customer = c;
-                    request.RedemptionMessage = p.StudyTopic;
-                    request.EmailMessage = p.StudyTopic;
+                    request.RedemptionMessage = JobNumFormatted + " : " + p.StudyTopic;
+                    request.EmailMessage = JobNumFormatted + " : " + p.StudyTopic;
 
                     PromoCodeService.GetPromocodeResponse response = srv.GetPromocode(request);
 
@@ -180,99 +186,99 @@ namespace CoopCheck.DalADO
             }
             ClearPromoCodeBatch(batch_num, "useremail");
         }
-        public void FulfillSwift(int batch_num)
-        {
-            var b = FetchBatch(batch_num);
-            log.Info(String.Format("FulfillSwift called batchNum {0}", batch_num));
-            var userId = ConfigurationManager.AppSettings["SwiftUserId"];
-            var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
-            var progId = ConfigurationManager.AppSettings["SwiftProgramId"];
-            var issuanceId = ConfigurationManager.AppSettings["SwiftIssuanceProductId"];
-            var locId = ConfigurationManager.AppSettings["SwiftLocationId"];
-            var srv = new PromoCodeService.PCService_DefClient();
-            ClientJobDto jraClient = GetClientForJob(b.First().JobNum);
+        //public void FulfillSwift(int batch_num)
+        //{
+        //    var batch = FetchBatch(batch_num);
+        //    log.Info(String.Format("FulfillSwift called batchNum {0}", batch_num));
+        //    var userId = ConfigurationManager.AppSettings["SwiftUserId"];
+        //    var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
+        //    var progId = ConfigurationManager.AppSettings["SwiftProgramId"];
+        //    var issuanceId = ConfigurationManager.AppSettings["SwiftIssuanceProductId"];
+        //    var locId = ConfigurationManager.AppSettings["SwiftLocationId"];
+        //    var srv = new PromoCodeService.PCService_DefClient();
+        //    ClientJobDto jraClient = GetClientForJob(batch.First().JobNum);
 
-            foreach (var p in b )
-            {
-                if (!p.Completed && !string.IsNullOrEmpty(p.Email))
-                {
-                    var request = new PromoCodeService.GetPromocodeRequest();
-                    request.UserId = userId;
-                    request.Password = pwd;
-                    request.ClientId = userId;
-                    request.PromocodeProgramId = progId;
-                    request.LocationId = locId;
-                    request.PaymentReferenceId = p.Id.ToString();
-                    request.IssuanceProductId = issuanceId;
-                    request.Amount = p.Amount.ToString();
+        //    foreach (var p in batch )
+        //    {
+        //        if (!p.Completed && !string.IsNullOrEmpty(p.Email))
+        //        {
+        //            var request = new PromoCodeService.GetPromocodeRequest();
+        //            request.UserId = userId;
+        //            request.Password = pwd;
+        //            request.ClientId = userId;
+        //            request.PromocodeProgramId = progId;
+        //            request.LocationId = locId;
+        //            request.PaymentReferenceId = p.Id.ToString();
+        //            request.IssuanceProductId = issuanceId;
+        //            request.Amount = p.Amount.ToString();
 
-                    /* ClientData as follow 
-                    1   Client
-                    2   Job
-                    3   Topic
-                    4   Batch
-                    5   Payor
-                    */
-                 //   WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
-                    request.ClientData1 = String.Format("{0} - {1}", jraClient.ClientID, jraClient.JobName);
-                    request.ClientData2 = p.JobNum.ToString();
-                    request.ClientData3 = p.StudyTopic;
-                    request.ClientData4 = p.BatchNum.ToString();
-                    request.ClientData5 = Csla.ApplicationContext.User.Identity.Name;
+        //            /* ClientData as follow 
+        //            1   Client
+        //            2   Job
+        //            3   Topic
+        //            4   Batch
+        //            5   Payor
+        //            */
+        //         //   WindowsPrincipal user = RequestContext.Principal as WindowsPrincipal;
+        //            request.ClientData1 = String.Format("{0} - {1}", jraClient.ClientID, jraClient.JobName);
+        //            request.ClientData2 = p.JobNum.ToString();
+        //            request.ClientData3 = p.StudyTopic;
+        //            request.ClientData4 = p.BatchNum.ToString();
+        //            request.ClientData5 = Csla.ApplicationContext.User.Identity.Name;
                     
-                    var c = new PromoCodeService.Customer();
-                    c.Address1 = p.Address1;
-                    c.Address2 = p.Address2;
-                    c.City = p.Municipality;
-                    c.CountryCode = "USA";
-                    c.EmailAddress = p.Email;
-                    c.FirstName = p.FirstName;
-                    c.LastName = p.LastName;
-                    c.PhoneNumber = p.PhoneNumber;
-                    c.PostalCode = p.PostalCode;
-                    c.State = p.Region;
-                    c.UserName = p.Email;
+        //            var c = new PromoCodeService.Customer();
+        //            c.Address1 = p.Address1;
+        //            c.Address2 = p.Address2;
+        //            c.City = p.Municipality;
+        //            c.CountryCode = "USA";
+        //            c.EmailAddress = p.Email;
+        //            c.FirstName = p.FirstName;
+        //            c.LastName = p.LastName;
+        //            c.PhoneNumber = p.PhoneNumber;
+        //            c.PostalCode = p.PostalCode;
+        //            c.State = p.Region;
+        //            c.UserName = p.Email;
 
-                    request.Customer = c;
-                    request.RedemptionMessage = p.StudyTopic;
-                    request.EmailMessage = p.StudyTopic;
+        //            request.Customer = c;
+        //            request.RedemptionMessage = String.Format("{0} : {1} ", p.JobNum,  p.StudyTopic);
+        //            request.EmailMessage = String.Format("{0} : {1} ", p.JobNum, p.StudyTopic);
 
-                    PromoCodeService.GetPromocodeResponse response = srv.GetPromocode(request);
+        //            PromoCodeService.GetPromocodeResponse response = srv.GetPromocode(request);
 
-                    if (response.Status == "Valid")
-                    {
-                        log.Info(String.Format("FulfillSwift succeeded email {0} tran_id {1}", c.EmailAddress, request.PaymentReferenceId));
-                        using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
-                        {
-                            using (var cmd = new SqlCommand("dbo.dal_WritePromoCode", ctx.Connection))
-                            {
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@tran_id", request.PaymentReferenceId).DbType =
-                                    DbType.Int32;
-                                cmd.Parameters.AddWithValue("@promo_code", response.Promocode).DbType = DbType.String;
-                                cmd.Parameters.AddWithValue("@paid_amount", response.Amount).DbType = DbType.Decimal;
-                                cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
-                                    DbType.String;
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
+        //            if (response.Status == "Valid")
+        //            {
+        //                log.Info(String.Format("FulfillSwift succeeded email {0} tran_id {1}", c.EmailAddress, request.PaymentReferenceId));
+        //                using (var ctx = ConnectionManager<SqlConnection>.GetManager("CoopCheck"))
+        //                {
+        //                    using (var cmd = new SqlCommand("dbo.dal_WritePromoCode", ctx.Connection))
+        //                    {
+        //                        cmd.CommandType = CommandType.StoredProcedure;
+        //                        cmd.Parameters.AddWithValue("@tran_id", request.PaymentReferenceId).DbType =
+        //                            DbType.Int32;
+        //                        cmd.Parameters.AddWithValue("@promo_code", response.Promocode).DbType = DbType.String;
+        //                        cmd.Parameters.AddWithValue("@paid_amount", response.Amount).DbType = DbType.Decimal;
+        //                        cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType =
+        //                            DbType.String;
+        //                        cmd.ExecuteNonQuery();
+        //                    }
+        //                }
 
-                    }
-                    else
-                    {
-                        var err = new Csla.WcfPortal.WcfErrorInfo();
-                        err.ExceptionTypeName = "PromoCodeError";
-                        err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId,
-                            response.ResponseCode, response.ResponseMessage);
-                        log.Info(String.Format("FulfillSwift FAILED: email {0} tran_id {1} reason {2} ", c.EmailAddress, request.PaymentReferenceId, response.ResponseMessage));
-                        throw new Csla.DataPortalException(err);
-                    }
+        //            }
+        //            else
+        //            {
+        //                var err = new Csla.WcfPortal.WcfErrorInfo();
+        //                err.ExceptionTypeName = "PromoCodeError";
+        //                err.Message = String.Format("tran_id {0} - {1} - {2}", request.PaymentReferenceId,
+        //                    response.ResponseCode, response.ResponseMessage);
+        //                log.Info(String.Format("FulfillSwift FAILED: email {0} tran_id {1} reason {2} ", c.EmailAddress, request.PaymentReferenceId, response.ResponseMessage));
+        //                throw new Csla.DataPortalException(err);
+        //            }
 
 
-                }
-            }
-            ClearPromoCodeBatch(batch_num,"heloo");
-        }
+        //        }
+        //    }
+        //    ClearPromoCodeBatch(batch_num,"heloo");
+        //}
 
         class ClientJobDto
         {

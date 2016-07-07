@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DataClean.Interfaces;
 using DataClean.Models;
 using log4net;
@@ -64,11 +63,10 @@ namespace DataClean.Repository.Mgr
             }
             catch (Exception ex)
             {
+                Logger.Error(e.Input?.EmailAddress);
                 Logger.Error(ex.Message);
-                throw;
+                Logger.Error(ex.InnerException.Message);
             }
-
-            
         }
 
         public List<ParseResult> GetMelissaReference()

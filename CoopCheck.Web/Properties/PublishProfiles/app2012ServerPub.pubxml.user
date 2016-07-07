@@ -88,37 +88,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/CoopCheck.DAL.dll">
-      <publishTime>07/05/2016 14:23:39</publishTime>
+      <publishTime>07/07/2016 06:33:52</publishTime>
     </File>
     <File Include="bin/CoopCheck.DAL.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/CoopCheck.DalADO.dll">
-      <publishTime>07/05/2016 14:23:40</publishTime>
+      <publishTime>07/07/2016 06:40:44</publishTime>
     </File>
     <File Include="bin/CoopCheck.DalADO.pdb">
       <publishTime>05/07/2016 15:37:47</publishTime>
     </File>
     <File Include="bin/CoopCheck.Library.dll">
-      <publishTime>07/05/2016 14:48:44</publishTime>
+      <publishTime>07/07/2016 06:40:45</publishTime>
     </File>
     <File Include="bin/CoopCheck.Library.pdb">
       <publishTime>05/07/2016 15:37:50</publishTime>
     </File>
     <File Include="bin/CoopCheck.Mocks.dll">
-      <publishTime>07/05/2016 14:23:39</publishTime>
+      <publishTime>07/07/2016 06:33:54</publishTime>
     </File>
     <File Include="bin/CoopCheck.Mocks.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/CoopCheck.Repository.dll">
-      <publishTime>07/05/2016 14:23:39</publishTime>
+      <publishTime>07/07/2016 06:33:53</publishTime>
     </File>
     <File Include="bin/CoopCheck.Repository.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
     </File>
     <File Include="bin/CoopCheck.Web.dll">
-      <publishTime>07/05/2016 14:48:49</publishTime>
+      <publishTime>07/07/2016 06:40:48</publishTime>
     </File>
     <File Include="bin/CoopCheck.Web.pdb">
       <publishTime>05/07/2016 15:38:04</publishTime>
@@ -136,13 +136,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2016 09:08:29</publishTime>
     </File>
     <File Include="bin/DataClean.dll">
-      <publishTime>07/05/2016 14:48:43</publishTime>
+      <publishTime>07/07/2016 06:33:54</publishTime>
     </File>
     <File Include="bin/DataClean.pdb">
       <publishTime>05/07/2016 15:37:46</publishTime>
     </File>
     <File Include="bin/DataClean.Repository.dll">
-      <publishTime>07/05/2016 14:23:39</publishTime>
+      <publishTime>07/07/2016 06:33:53</publishTime>
     </File>
     <File Include="bin/DataClean.Repository.pdb">
       <publishTime>05/07/2016 15:37:00</publishTime>
@@ -445,7 +445,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/05/2016 14:25:02</publishTime>
+      <publishTime>07/06/2016 15:59:18</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>06/15/2016 09:08:26</publishTime>
@@ -460,7 +460,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2016 09:08:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/05/2016 14:25:08</publishTime>
+      <publishTime>07/07/2016 06:53:04</publishTime>
     </File>
   </ItemGroup>
 </Project>
