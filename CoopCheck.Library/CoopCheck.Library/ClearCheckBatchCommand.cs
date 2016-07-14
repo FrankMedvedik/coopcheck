@@ -18,9 +18,9 @@ namespace CoopCheck.Library
         #region Authorization
         public static bool CanExecuteCommand()
         {
-#if !DEBUG
-            return Csla.ApplicationContext.User.IsInRole("RECKNER\\CoopCheckAdmin");
-#endif
+//#if !DEBUG
+//            return Csla.ApplicationContext.User.IsInRole("RECKNER\\CoopCheckAdmin");
+//#endif
             return true;
         }
         #endregion
