@@ -178,6 +178,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\DataCleanEventController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Services\UserAuthSvc.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

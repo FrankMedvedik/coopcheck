@@ -16,7 +16,7 @@ namespace CoopCheck.Web.Services
             try
             {
                 var from = "fmedvedik@reckner.com";
-                var _ms = "email.reckner.com";
+                var _ms = "exch1.reckner.com";
                 var msg = new MailMessage(from, to, subject, body);
                 var sc = new SmtpClient(_ms);
                 sc.Send(msg);
