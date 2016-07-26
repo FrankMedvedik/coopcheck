@@ -34,7 +34,7 @@ namespace CoopCheck.Web.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("email.reckner.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("exch1.reckner.com")]
         public string EmailServer {
             get {
                 return ((string)(this["EmailServer"]));
