@@ -17,7 +17,7 @@ namespace CoopCheck.Library.Tests
         {
 
             var obj = BatchEdit.NewBatchEdit();
-            obj.Amount = 100;
+            obj.Amount = 1;
             obj.Date = DateTime.Now.ToShortDateString();
             obj.Description = "Please delete me!";
             obj.JobNum = 99999999;
@@ -43,15 +43,15 @@ namespace CoopCheck.Library.Tests
             obj = obj.Save();
 
             var retVal = string.Empty;
-            //try
-            //{
-            //    SvcBatchSwiftFulfillCommand..Execute(obj.Num,);
-            //}
-            //catch (Csla.DataPortalException e)
-            //{
-            //    retVal = e.BusinessException.Message;
-            //}
-            //Assert.IsTrue(retVal == string.Empty);
+            try
+            {
+                SvrBatchSwiftFulfillCommand.Execute(obj.Num,"fmedvedik@reckner.com");
+            }
+            catch (Csla.DataPortalException e)
+            {
+                retVal = e.BusinessException.Message;
+            }
+            Assert.IsTrue(retVal == string.Empty);
         }
 
         

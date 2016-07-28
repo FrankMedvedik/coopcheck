@@ -6,6 +6,7 @@ using Csla.Data;
 using CoopCheck.DAL;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using CoopCheck.DalADO.PromoCodeService;
 
 namespace CoopCheck.DalADO
@@ -86,6 +87,8 @@ namespace CoopCheck.DalADO
         }
         public void SvrFulfillSwift(int batch_num, string email = "EmailNOtSupplied")
         {
+         //   ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             log.Info(String.Format("FulfillSwift called batchNum {0} by {1}", batch_num, email));
             var userId = ConfigurationManager.AppSettings["SwiftUserId"];
             var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
@@ -411,6 +414,7 @@ namespace CoopCheck.DalADO
 
         public void VoidSwiftPromoCode(int tran_id )
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var userId = ConfigurationManager.AppSettings["SwiftUserId"];
             var pwd = ConfigurationManager.AppSettings["SwiftPassword"];
             var progId = ConfigurationManager.AppSettings["SwiftProgramId"];
