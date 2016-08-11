@@ -278,6 +278,10 @@
     </Compile>
     <Compile Include="Content\Voucher\Clean\PaymentHistoryViewModel.cs" />
     <Compile Include="Content\Voucher\Pay\PrintCheckProgress.cs" />
+    <Compile Include="Content\Voucher\Util\FixPrintProblemsView.xaml.cs">
+      <DependentUpon>FixPrintProblemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Voucher\Util\FixPrintProblemsViewModel.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
     <Compile Include="Services\ClientSvc.cs" />
@@ -740,6 +744,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Voucher\ConfirmLastCheckPrintedDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Voucher\Util\FixPrintProblemsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

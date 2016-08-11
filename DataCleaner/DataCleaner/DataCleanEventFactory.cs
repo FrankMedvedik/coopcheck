@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataClean.Interfaces;
 using DataClean.Models;
 using DataClean.Repository;
 using log4net;
-using log4net.Repository.Hierarchy;
 
 namespace DataClean.DataCleaner
 {

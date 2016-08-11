@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="CoopCheck.WPF.Content.Voucher.Util.FixPrintProblemsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="700">
+     <StackPanel x:Name="VoucherImportEditView" Orientation="Vertical" Margin="10,10,10,10">
+        <StackPanel.Resources>
+            <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="0" />
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={RelativeSource Self},
+                                    Path=(Validation.Errors)[0].ErrorContent}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="6" />
+            </Style>
+            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </Style>
+        </StackPanel.Resources>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Account" Width="150" FontWeight="Bold" HorizontalAlignment="Right"  Margin="6" />
+                <ComboBox Height="30" HorizontalAlignment="Left" Margin="6" SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" TabIndex="1" Name="cbAccounts" Width="200" ItemsSource="{Binding Path=Accounts, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontWeight="Bold" Text="{Binding account_name}" Margin="0,0,5,0" />
+                                <TextBlock FontWeight="Bold" Text="{Binding account_type}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" Margin="6" Width="150">Batch Number</TextBlock>
+                <TextBox FontWeight="Bold" Margin="6" Text="{Binding BatchNum, Mode=TwoWay}" Width="150" />
+                <Button FontWeight="Bold" Margin="6" Width="150">Find</Button>
+            </StackPanel>
+            <Grid>
+                <DataGrid x:Name="dgBatches" AutoGenerateColumns="False" Visibility="{Binding ShowGridData, Converter={StaticResource BoolToVisConverter}}" Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Batches}" VerticalAlignment="Top" CanUserAddRows="false" ClipboardCopyMode="IncludeHeader" EnableColumnVirtualization="True" EnableRowVirtualization="True" SelectedItem="{Binding SelectedBatch}" MaxHeight="300" ToolTipService.ToolTip="Payment Batches" Margin="6" HorizontalAlignment="Left" SelectionMode="Extended">
+                    <DataGrid.Columns>
+                        <mui:DataGridTextColumn Binding="{Binding batch_num}" Header="batch" />
+                        <DataGridTextColumn Binding="{Binding job_num}" Header="job num" />
+                        <DataGridTextColumn Binding="{Binding batch_dscr}" Header="desc">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding BadBatch}" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                            <Setter Property="Background" Value="{Binding Path=AccentBrush, Source={x:Static Application.Current}}" />
+                                            <Setter Property="ToolTip" Value="Job number and source file name do not match" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <mui:DataGridTextColumn Binding="{Binding jobname}" Header="job" />
+                        <mui:DataGridTextColumn Binding="{Binding projmgr}" Header="project mgr" />
+                        <mui:DataGridTextColumn Binding="{Binding batch_date ,StringFormat=d}" Header="created" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding pay_date, StringFormat=d}" Header="paid" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding total_amount, StringFormat='0,0.'}" Header="total $" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding cleared_amount, StringFormat='0,0.'}" Header="cleared $" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding open_amount, StringFormat='0,0.'}" Header="outstanding $" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding total_cnt}" Header="check count" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding open_cnt }" Header="outstanding" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding cleared_cnt}" Header="cleared " ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding first_check_num}" Header="first check" ElementStyle="{StaticResource RightCell}" />
+                        <mui:DataGridTextColumn Binding="{Binding last_check_num}" Header="last check " ElementStyle="{StaticResource RightCell}" />
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="{x:Static ApplicationCommands.Copy}" Header="Copy" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" Margin="6" Width="150">Starting Check #</TextBlock>
+                <TextBox FontWeight="Bold" Margin="6" Text="{Binding StartingCheckNum, Mode=TwoWay}" Width="150" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" Margin="6" Width="151">Ending Check #</TextBlock>
+                <TextBox FontWeight="Bold" Margin="6" Text="{Binding EndingCheckNum, Mode=TwoWay}" Width="150"
+                         TabIndex="0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Margin="6">Enter 0 if no checks printed</TextBlock>
+            </StackPanel>
+            <Button FontWeight="Bold" Margin="6" Width="150">Fix</Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
+             

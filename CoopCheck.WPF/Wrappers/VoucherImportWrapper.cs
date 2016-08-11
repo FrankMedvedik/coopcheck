@@ -164,6 +164,8 @@ namespace CoopCheck.WPF.Wrappers
 
         [Display(Name = "Name", Description = "First Name")]
         [Required(ErrorMessage = "First Name is required.")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage =
+            "First name must be between 2 and 20 characters long.")]
         public string First
         {
             get { return Model.First; }
@@ -188,8 +190,8 @@ namespace CoopCheck.WPF.Wrappers
 
         [Display(Name = "Name", Description = "Last Name")]
         [Required(ErrorMessage = "Last Name is required.")]
-        [StringLength(25, MinimumLength = 2, ErrorMessage =
-            "Last name must be between 2 and 25 characters long.")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage =
+            "Last name must be between 2 and 20 characters long.")]
         public string Last
         {
             get { return Model.Last; }

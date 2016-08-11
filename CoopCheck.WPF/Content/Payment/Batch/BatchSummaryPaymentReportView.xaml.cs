@@ -11,6 +11,7 @@ using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
+using ConfirmLastCheckPrintedDialog = CoopCheck.WPF.Content.Voucher.ConfirmLastCheckPrintedDialog;
 
 namespace CoopCheck.WPF.Content.Payment.Batch
 {

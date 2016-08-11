@@ -87,7 +87,7 @@ namespace CoopCheck.DalADO
         }
         public void SvrFulfillSwift(int batch_num, string email = "EmailNOtSupplied")
         {
-         //   ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             log.Info(String.Format("FulfillSwift called batchNum {0} by {1}", batch_num, email));
             var userId = ConfigurationManager.AppSettings["SwiftUserId"];
@@ -558,7 +558,7 @@ namespace CoopCheck.DalADO
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@batch_num", batchNum).DbType = DbType.Int32;
-                    cmd.Parameters.AddWithValue("@account_id", accountId).DbType = DbType.Int32;
+                    cmd.Parameters.AddWithValue("@account_id", accountId).DbType = DbType.Int32;  
                     cmd.Parameters.AddWithValue("@next_check_num", firstCheckNum).DbType = DbType.String;
                     cmd.Parameters.AddWithValue("@usr", Csla.ApplicationContext.User.Identity.Name).DbType = DbType.String;
                     var dr = cmd.ExecuteReader();
