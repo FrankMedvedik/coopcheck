@@ -1,7 +1,16 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
+using CoopCheck.WPF.Properties;
 using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Threading;
+using log4net;
+using Reckner.WPF.Services;
+
 //using Hardcodet.Wpf.TaskbarNotification;
 
 namespace CoopCheck.WPF
@@ -11,11 +20,29 @@ namespace CoopCheck.WPF
     /// </summary>
     public partial class App : Application
     {
-        static App()
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public App() : base()
         {
+            log.Info("CoopCheck Started");
             DispatcherHelper.Initialize();
+            this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
+        }
+
+        void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            log.Error(e.Exception.StackTrace);
+            log.Error(e.Exception.Message);
+            List<string> RecipientList = new List<string>() { Settings.Default.TechSupport};
+            EmailSvc.CreateOutlookEmail(RecipientList,"coopcheck crash report",e.Exception.Message, @"c:\Logs\coopcheck.log"  );
+            string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.Message);
+            ModernDialog.ShowMessage(errorMessage,"CoopCheck Shutdown", MessageBoxButton.OK);
+            e.Handled = true;
+            this.Shutdown();
 
         }
+
+
         //   private TaskbarIcon notifyIcon;
         public SolidColorBrush AccentBrush
         {
@@ -24,6 +51,7 @@ namespace CoopCheck.WPF
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+            log4net.Config.XmlConfigurator.Configure();
             base.OnStartup(e);
 
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml

@@ -35,17 +35,20 @@
     <Setting Name="OutstandingBalanceReportTemplate" Type="System.String" Scope="Application">
       <Value Profile="(Default)">RecknerOutstandingBalanceReport.dotx</Value>
     </Setting>
-    <Setting Name="SwiftPaySite" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://app2012.reckner.com/CoopCheck/</Value>
-    </Setting>
-    <Setting Name="SwiftPaySiteLocal" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://localhost:37342/</Value>
-    </Setting>
     <Setting Name="ReadAuth" Type="System.String" Scope="Application">
       <Value Profile="(Default)">CoopCheckread</Value>
     </Setting>
     <Setting Name="WriteAuth" Type="System.String" Scope="Application">
       <Value Profile="(Default)">CoopCheckAdmin</Value>
+    </Setting>
+    <Setting Name="SwiftPaySite" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://app2012.reckner.com/Coopcheck/</Value>
+    </Setting>
+    <Setting Name="SwiftPaySiteLocal" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:37432/</Value>
+    </Setting>
+    <Setting Name="TechSupport" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">fmedvedik@reckner.com</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -31,7 +31,7 @@
     <SuiteName>office support</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>140</ApplicationRevision>
+    <ApplicationRevision>144</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -167,6 +167,9 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -282,6 +285,7 @@
       <DependentUpon>FixPrintProblemsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Voucher\Util\FixPrintProblemsViewModel.cs" />
+    <Compile Include="Services\EmailSvc.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
     <Compile Include="Services\ClientSvc.cs" />

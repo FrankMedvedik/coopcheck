@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using CoopCheck.Library;
@@ -12,12 +13,14 @@ using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using log4net;
 using Reckner.WPF.ViewModel;
 
 namespace CoopCheck.WPF.Content.Voucher.Edit
 {
     public class BatchEditViewModel : ViewModelBase, IDataErrorInfo
     {
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private bool _canPayBatch;
 
 
@@ -326,6 +329,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 }
                 catch (Exception ex)
                 {
+                    log.Error(string.Format("batch save failed  {0}", ex.Message));
                     Status = new StatusInfo
                     {
                         StatusMessage = "error saving",
@@ -351,6 +355,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 }
                 catch (Exception ex)
                 {
+                    log.Error(string.Format("batch save failed  {0}", ex.Message));
                     Status = new StatusInfo {StatusMessage = "error during save", ErrorMessage = ex.Message};
                 }
             }

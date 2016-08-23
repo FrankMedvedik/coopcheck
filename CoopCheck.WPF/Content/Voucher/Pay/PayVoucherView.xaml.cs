@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -7,6 +8,7 @@ using System.Windows.Forms;
 using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using FirstFloor.ModernUI.Windows.Controls;
+using log4net;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace CoopCheck.WPF.Content.Voucher.Pay
@@ -16,6 +18,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
     /// </summary>
     public partial class PayVoucherView : UserControl
     {
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly PayVouchersViewModel _vm;
         private CancellationTokenSource _cts;
 
@@ -67,6 +70,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
                 }
                 catch (Exception ex)
                 {
+                    log.Error(string.Format("printing failed  {0}", ex.Message));
                     _vm.Status = new StatusInfo
                     {
                         StatusMessage = "printing failed",
@@ -90,6 +94,7 @@ namespace CoopCheck.WPF.Content.Voucher.Pay
             }
             catch (Exception ex)
             {
+                log.Error(string.Format("printing failed  {0}", ex.Message));
                 _vm.Status = new StatusInfo
                 {
                     StatusMessage = "error printing batch ",

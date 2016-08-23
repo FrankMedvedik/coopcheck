@@ -139,24 +139,6 @@ namespace CoopCheck.WPF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://app2012.reckner.com/CoopCheck/")]
-        public string SwiftPaySite {
-            get {
-                return ((string)(this["SwiftPaySite"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:37342/")]
-        public string SwiftPaySiteLocal {
-            get {
-                return ((string)(this["SwiftPaySiteLocal"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("CoopCheckread")]
         public string ReadAuth {
             get {
@@ -170,6 +152,33 @@ namespace CoopCheck.WPF.Properties {
         public string WriteAuth {
             get {
                 return ((string)(this["WriteAuth"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://app2012.reckner.com/Coopcheck/")]
+        public string SwiftPaySite {
+            get {
+                return ((string)(this["SwiftPaySite"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:37432/")]
+        public string SwiftPaySiteLocal {
+            get {
+                return ((string)(this["SwiftPaySiteLocal"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("fmedvedik@reckner.com")]
+        public string TechSupport {
+            get {
+                return ((string)(this["TechSupport"]));
             }
         }
     }
