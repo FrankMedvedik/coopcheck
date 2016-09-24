@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.Wrappers;
 using DataClean.Models;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using log4net;
 using Reckner.WPF.ViewModel;
 using Remotion.Mixins;
 
@@ -17,6 +21,9 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public class VoucherListViewModel : ViewModelBase
     {
+        private static readonly ILog log
+            = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private bool _canPost;
         private DataCleanCriteria _dataCleanCriteria;
 
@@ -38,20 +45,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         public VoucherListViewModel()
         {
             CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
-
-            // called when the vouchers come out of the excel import process
-            //Messenger.Default.Register<NotificationMessage<ExcelVouchersMessage>>(this, message =>
-            //{
-            //    if (message.Notification == Notifications.ImportWorksheetReady && message.Content.VoucherImports.Any())
-            //    {
-            //        if (!IsCleaning)
-            //        {
-            //            ExcelFileInfo = message.Content.ExcelFileInfo;
-            //            var a = message.Content.VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
-            //            CleanVouchers(a);
-            //        }
-            //    }
-            //});
 
             Messenger.Default.Register<NotificationMessage<vwPayment>>(this, message =>
             {
@@ -87,7 +80,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public void Dispose()
         {
-            Messenger.Default.Unregister < NotificationMessage<ExcelVouchersMessage>>(this);
+            Messenger.Default.Unregister< NotificationMessage<ExcelVouchersMessage>>(this);
             Messenger.Default.Unregister <NotificationMessage<vwPayment >>(this);
             Messenger.Default.Unregister<NotificationMessage<VoucherWrappersMessage>>(this);
             Messenger.Default.Unregister<NotificationMessage<DataCleanCriteria>>(this);
@@ -145,11 +138,6 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             {
                 _filteredVoucherImports = value;
                 NotifyPropertyChanged();
-                //var s = new StatusInfo()
-                //{
-                //    StatusMessage = string.Format("{0} Vouchers Loaded", FilteredVoucherImports.Count)
-                //};
-                //Status = s;
                 Status = new StatusInfo
                 {
                     StatusMessage = "voucher checking is complete",
@@ -256,12 +244,27 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
             };
             IsCleaning = true;
             CanPost = false;
-            var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
-            Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
-                new VoucherWrappersMessage { ExcelFileInfo = ExcelFileInfo, VoucherImports = VoucherImports },
-                Notifications.VouchersDataCleaned));
-            CanPost = true;
-            IsCleaning = false;
+            try
+            {
+                var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
+                Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
+                    new VoucherWrappersMessage { ExcelFileInfo = ExcelFileInfo, VoucherImports = results },
+                    Notifications.VouchersDataCleaned));
+                CanPost = true;
+                IsCleaning = false;
+            }
+            catch (Exception e)
+            {
+                log.Error(string.Format("clean vouchers failed {0} {1}", e.Message, e.InnerException?.Message ));
+                CanPost = false;
+                IsCleaning = false;
+
+                log.Error(string.Format("cleaning the vouchers failed - {0} - {1} ", e.Message,
+                                     e.InnerException?.Message));
+                string errorMessage = string.Format("error cleaning vouchers: {0}", e.Message);
+                ModernDialog.ShowMessage(errorMessage, "Cleaning vouchers failed", MessageBoxButton.OK);
+            }
+
         }
 
 

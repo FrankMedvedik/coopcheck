@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -33,8 +34,17 @@ namespace CoopCheck.WPF
         {
             log.Error(e.Exception.StackTrace);
             log.Error(e.Exception.Message);
+            if(e.Exception.InnerException != null) log.Error(e.Exception.InnerException.Message);
             List<string> RecipientList = new List<string>() { Settings.Default.TechSupport};
-            EmailSvc.CreateOutlookEmail(RecipientList,"coopcheck crash report",e.Exception.Message, @"c:\Logs\coopcheck.log"  );
+            try
+            {
+                EmailSvc.CreateOutlookEmail(RecipientList, "coopcheck crash report", e.Exception.Message, @"c:\Logs\coopcheck.log");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.StackTrace);
+                log.Error(ex.Message);
+            }
             string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.Message);
             ModernDialog.ShowMessage(errorMessage,"CoopCheck Shutdown", MessageBoxButton.OK);
             e.Handled = true;

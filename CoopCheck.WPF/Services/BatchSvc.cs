@@ -54,7 +54,7 @@ namespace CoopCheck.WPF.Services
                 sb = sb.Save();
                 //using (var ctx = new CoopCheckEntities())
                 //{
-                    Console.WriteLine(DateTime.Now.ToLongTimeString() + " before records added");
+                log.Info(DateTime.Now.ToLongTimeString() + " before records added");
     
             foreach (var v in vouchers)
             {

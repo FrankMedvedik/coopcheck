@@ -4,12 +4,16 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
 using CoopCheck.WPF.Messages;
 using CoopCheck.WPF.Models;
 using CoopCheck.WPF.Services;
 using CoopCheck.WPF.Wrappers;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using log4net;
 using LinqToExcel;
 using Reckner.WPF.ViewModel;
 
@@ -17,6 +21,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
 {
     public class ImportWorksheetViewModel : ViewModelBase, IDataErrorInfo
     {
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private ObservableCollection<VoucherImport> _voucherImports = new ObservableCollection<VoucherImport>();
 
         public ImportWorksheetViewModel()
@@ -86,22 +91,24 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             StartEnabled = !_voucherImporter.IsBusy;
         }
 
-        //private string _headerText;
-
-        //public string HeaderText
-        //{
-        //    get { return _headerText; }
-        //    set { _headerText = value; }
-        //}
-
+     
         public void PostVouchers()
         {
-            var a = VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
-            CleanVouchers(a);
+            try
+            {
+                var a = VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
+                CleanVouchers(a);
+                CanProceed = true;
+            }
+            catch (Exception e)
+            {
 
-            CanProceed = true;
+                log.Error(string.Format("cleaning the vouchers failed - {0} - {1} ", e.Message,
+                                     e.InnerException?.Message));
+                string errorMessage = string.Format("error cleaning vouchers: {0}", e.Message);
+                ModernDialog.ShowMessage(errorMessage, "Cleaning vouchers failed", MessageBoxButton.OK);
 
-            //CanProceed = false;
+            }
         }
 
         public async void CleanVouchers(List<VoucherImportWrapper> vouchers)
@@ -224,6 +231,8 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                 }
             else
                 s.ErrorMessage = string.Format("File Not Found {0}", ExcelFilePath);
+
+            Status = s;
         }
 
         private ObservableCollection<string> _workSheets = new ObservableCollection<string>();
