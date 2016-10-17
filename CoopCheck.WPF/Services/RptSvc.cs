@@ -1,21 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using CoopCheck.Repository;
 using CoopCheck.WPF.Models;
+using log4net;
 
 namespace CoopCheck.WPF.Services
 {
     public static class RptSvc
     {
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static async Task<List<vwJobRpt>> GetJobRpt(PaymentReportCriteria grc)
         {
             using (var ctx = new CoopCheckEntities())
             {
                 return await Task.Factory.StartNew(() =>
                     ctx.GetJobPaymentsReport(grc.Account.account_id, grc.StartDate, grc.EndDate).ToList());
+            }
+        }
+
+        public static bool CheckConnection()
+        {
+            using (var db = new CoopCheckEntities())
+            {
+                try
+                {
+                    db.Database.Connection.Open();
+                    db.Database.Connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message + ex.StackTrace + ex.InnerException?.Message);
+                    return false;
+
+                }
+                return true;
             }
         }
 

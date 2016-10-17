@@ -54,6 +54,25 @@ namespace CoopCheck.WPF.Services
             return new ObservableCollection<VoucherImportWrapper>(ilist);
         }
 
+
+        public static bool CheckConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (var stream = client.OpenRead(Settings.Default.SwiftPaySite))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static async Task<List<DataCleanEvent>> ValidateAddresses(List<InputStreetAddress> newVouchers)
         {
             HttpResponseMessage response;

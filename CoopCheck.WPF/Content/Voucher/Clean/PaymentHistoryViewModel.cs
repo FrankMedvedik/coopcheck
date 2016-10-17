@@ -25,7 +25,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 {
                     LastName = message.Content.LastName;
                     FirstName = message.Content.FirstName;
-                    GetPayments();
+                    GetPayments(); 
                 }
             });
         }

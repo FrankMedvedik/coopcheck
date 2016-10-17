@@ -18,6 +18,22 @@ namespace CoopCheck.WPF.Services
             return Task<BatchEdit>.Factory.StartNew(() => BatchEdit.GetBatchEdit(batchNum));
         }
 
+        public static bool CheckConnection()
+        {
+            try
+            {
+                var b = BatchEdit.NewBatchEdit();
+                b = b.Save();
+                b.Delete();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message + ex.StackTrace + ex.InnerException?.Message);
+                return false;
+            }
+            return true;
+        }
+
         public static Task<BatchEdit> GetNewBatchEditAsync()
         {
             return Task<BatchEdit>.Factory.StartNew(() => BatchEdit.NewBatchEdit());

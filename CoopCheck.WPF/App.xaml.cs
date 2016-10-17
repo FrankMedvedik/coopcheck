@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
 using CoopCheck.WPF.Properties;
+using CoopCheck.WPF.Services;
 using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.Threading;
@@ -28,6 +27,7 @@ namespace CoopCheck.WPF
             log.Info("CoopCheck Started");
             DispatcherHelper.Initialize();
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
+
         }
 
         void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -49,11 +49,8 @@ namespace CoopCheck.WPF
             ModernDialog.ShowMessage(errorMessage,"CoopCheck Shutdown", MessageBoxButton.OK);
             e.Handled = true;
             this.Shutdown();
-
         }
 
-
-        //   private TaskbarIcon notifyIcon;
         public SolidColorBrush AccentBrush
         {
             get { return new SolidColorBrush(AppearanceManager.Current.AccentColor); } 
@@ -63,15 +60,7 @@ namespace CoopCheck.WPF
         {
             log4net.Config.XmlConfigurator.Configure();
             base.OnStartup(e);
-
-            //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
-            //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            //notifyIcon.Dispose(); //the icon would clean up automatically, but this is cleaner
-            base.OnExit(e);
+            ConnTest.ValidateAllServices();
         }
     }
 }

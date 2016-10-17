@@ -14,8 +14,23 @@ namespace CoopCheck.WPF.Services
             //return true;
             
         }
+        public static bool CheckConnection()
+        {
+            try
+            {
+                using (PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "reckner.com"))
+                {
+                    var stream = ctx.UserName;
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-        public static bool CanWrite(string userName)
+          public static bool CanWrite(string userName)
         {
             return IsGroupMember(userName, Settings.Default.WriteAuth);
             //return true;

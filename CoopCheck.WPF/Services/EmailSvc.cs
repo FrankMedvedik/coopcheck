@@ -6,6 +6,12 @@ namespace Reckner.WPF.Services
 {
     public static class EmailSvc
     {
+        public static bool CheckConnection()
+        {
+
+            return false;
+        }
+
         public static void SendEMailThroughOutlook(List<string> toList, string subject, string msg, string attachementFileName = null  )
         {
                 // Create the Outlook application.

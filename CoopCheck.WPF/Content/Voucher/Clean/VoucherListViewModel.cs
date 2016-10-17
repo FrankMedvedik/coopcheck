@@ -80,7 +80,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
 
         public void Dispose()
         {
-            Messenger.Default.Unregister< NotificationMessage<ExcelVouchersMessage>>(this);
+            Messenger.Default.Unregister<NotificationMessage<ExcelVouchersMessage>>(this);
             Messenger.Default.Unregister <NotificationMessage<vwPayment >>(this);
             Messenger.Default.Unregister<NotificationMessage<VoucherWrappersMessage>>(this);
             Messenger.Default.Unregister<NotificationMessage<DataCleanCriteria>>(this);

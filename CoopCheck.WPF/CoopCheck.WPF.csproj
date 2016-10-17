@@ -285,6 +285,7 @@
       <DependentUpon>FixPrintProblemsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Voucher\Util\FixPrintProblemsViewModel.cs" />
+    <Compile Include="Services\ConnTest.cs" />
     <Compile Include="Services\EmailSvc.cs" />
     <Compile Include="Services\JobLogSvc.cs" />
     <Compile Include="Models\OutstandingBalanceStats.cs" />
