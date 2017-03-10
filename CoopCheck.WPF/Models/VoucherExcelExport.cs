@@ -20,7 +20,7 @@ namespace CoopCheck.WPF.Models
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
-        public string JobNumber { get; set; }
+        public string JobNumber { get; set; }  
         public decimal Amount { get; set; }
         public Boolean OkComplete { get; set; }
         public Boolean OkMailingAddress { get; set; }
