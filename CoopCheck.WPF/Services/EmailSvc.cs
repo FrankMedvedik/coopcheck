@@ -9,7 +9,7 @@ namespace Reckner.WPF.Services
         public static bool CheckConnection()
         {
 
-            return false;
+            return true;
         }
 
         public static void SendEMailThroughOutlook(List<string> toList, string subject, string msg, string attachementFileName = null  )

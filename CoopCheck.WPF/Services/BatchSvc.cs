@@ -75,11 +75,11 @@ namespace CoopCheck.WPF.Services
             foreach (var v in vouchers)
             {
                 sb.Vouchers.Add(VoucherImportConverter.ToVoucherEdit(v));
-                    //    if (!sb.Vouchers.IsValid)
-                    //    {
-                    //        sb.Vouchers.
-                    //    }
-                    //            thow new ApplicationException()
+                        if (!sb.Vouchers.IsValid)
+                        {
+                        log.Info(sb.Vouchers.Where(x => !x.IsValid));
+                        }
+                    
                 }
                 sb = sb.Save();
                 log.Info(string.Format("{0} - batch saved", sb.Num));

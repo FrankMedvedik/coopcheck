@@ -27,8 +27,8 @@
                     </xctk:WizardPage>
                     <xctk:WizardPage x:Name="ListVouchers"
                                      PageType="Interior" Title="Edit Vouchers"
-                                     NextPage="{Binding ElementName=SaveVouchers}"
-                                     PreviousPage="{Binding ElementName=DataClean}"
+                                     NextPage="{Binding ElementName=SaveVouchers}" 
+                                     PreviousPage="{Binding ElementName=LoadVouchers}"
                                      CanSelectNextPage="{Binding HaveReviewedVouchers}">
                         <clean:VoucherListView x:Name="vlv" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     </xctk:WizardPage>

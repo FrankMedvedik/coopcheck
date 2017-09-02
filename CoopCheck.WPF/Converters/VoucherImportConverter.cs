@@ -3,9 +3,12 @@ using CoopCheck.Library;
 using CoopCheck.WPF.Models;
 using DataClean;
 using DataClean.Models;
+using Reckner.WPF.Extensions;
 
 namespace CoopCheck.WPF.Converters
 {
+
+
     class VoucherImportConverter 
     {
         public static InputStreetAddress ToInputStreetAddress(VoucherImport v)
@@ -27,26 +30,27 @@ namespace CoopCheck.WPF.Converters
             return n;
         }
 
+
         public static VoucherEdit ToVoucherEdit(VoucherImport v)
         {
             var n = VoucherEdit.NewVoucherEdit();
-            n.AddressLine1 = !string.IsNullOrEmpty(v.AddressLine1) ? v.AddressLine1.ToUpper():v.AddressLine1;
-            n.AddressLine2 = !string.IsNullOrEmpty(v.AddressLine2) ? v.AddressLine2.ToUpper() : v.AddressLine2;
+            n.AddressLine1 = v.AddressLine1?.ToUpper().Truncate(49);
+            n.AddressLine2 = v.AddressLine2?.ToUpper().Truncate(49);
             n.Amount = v.Amount;
-            n.Company = !string.IsNullOrEmpty(v.Company) ? v.Company.ToUpper(): v.Company;
+            n.Company = v.Company?.ToUpper().Truncate(34);
             //n.Country = Country;
-            n.EmailAddress = v.EmailAddress;
-            n.First = !string.IsNullOrEmpty(v.First) ?  v.First.ToUpper(): v.First;
-            n.Last = !string.IsNullOrEmpty(v.Last) ? v.Last.ToUpper() : v.Last;
-            n.Middle = !string.IsNullOrEmpty(v.Middle) ? v.Middle.ToUpper(): v.Middle;
-            n.Municipality = !string.IsNullOrEmpty(v.Municipality) ? v.Municipality.ToUpper(): v.Municipality;
-            n.NamePrefix = !string.IsNullOrEmpty(v.NamePrefix) ? v.NamePrefix.ToUpper(): v.NamePrefix;
+            n.EmailAddress = v.EmailAddress?.Truncate(45);
+            n.First = v.First?.ToUpper().Truncate(19);
+            n.Last = v.Last?.ToUpper().Truncate( 19);
+            n.Middle = v.Middle?.ToUpper().Truncate(19);
+            n.Municipality = v.Municipality?.ToUpper().Truncate(33);
+            n.NamePrefix = v?.NamePrefix?.ToUpper().Truncate(4);
             n.PersonId = v.PersonId;
             n.PhoneNumber = v.PhoneNumber;
             n.PostalCode = v.PostalCode;
-            n.Region = !string.IsNullOrEmpty(v.Region) ? v.Region.ToUpper() : v.Region;
-            n.Suffix = !string.IsNullOrEmpty(v.Suffix)? v.Suffix.ToUpper(): v.Suffix;
-            n.Title = !string.IsNullOrEmpty(v.Title) ? v.Title.ToUpper() : v.Title;
+            n.Region = v.Region?.ToUpper().Truncate(34);
+            n.Suffix = v.Suffix?.ToUpper().Truncate(14);
+            n.Title = v.Title?.ToUpper().Truncate(34);
             return n;
         }
     }

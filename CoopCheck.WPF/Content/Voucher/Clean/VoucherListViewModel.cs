@@ -16,11 +16,53 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Reckner.WPF.ViewModel;
 using Remotion.Mixins;
+using CoopCheck.WPF.Converters;
+
 
 namespace CoopCheck.WPF.Content.Voucher.Clean
 {
     public class VoucherListViewModel : ViewModelBase
     {
+
+        private bool _showEmailColumns;
+
+        public bool ShowEmailColumns
+        {
+            get { return _showEmailColumns; }
+            set
+            {
+                _showEmailColumns = value;
+                NotifyPropertyChanged();
+            } 
+        }
+
+
+
+        private System.Windows.Input.ICommand _cmdSelectVoucherType;
+        public System.Windows.Input.ICommand CmdSelectVoucherType
+        {
+            get
+            {
+                return _cmdSelectVoucherType;
+            }
+            set
+            {
+                _cmdSelectVoucherType = value;
+            }
+        }
+
+
+        private void SelectVoucherType(Object parameter)
+        {
+            var selectedVoucherType = (string)parameter;
+            if(selectedVoucherType == "SwiftPay")
+            { ShowEmailColumns = true; }
+            else
+            { ShowEmailColumns = false; }
+        }
+
+
+
         private static readonly ILog log
             = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -45,7 +87,8 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         public VoucherListViewModel()
         {
             CleanAndPostVouchersCommand = new RelayCommand(CleanVouchersStub, CanRunBackgroundCleaner);
-
+            CmdSelectVoucherType = new RelayCommand<object>(SelectVoucherType, CanChangeVoucherType);
+            ShowEmailColumns = true;
             Messenger.Default.Register<NotificationMessage<vwPayment>>(this, message =>
             {
                 if (message.Notification == Notifications.HistoryPaymentSent)
@@ -76,6 +119,13 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
                 }
             });
             
+        }
+
+   
+
+        private bool CanChangeVoucherType(object c)
+        {
+            return true;
         }
 
         public void Dispose()

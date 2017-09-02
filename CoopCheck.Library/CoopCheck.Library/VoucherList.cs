@@ -92,12 +92,12 @@ namespace CoopCheck.Library
 #endif
         {
 #if !DEBUG            
-            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
-            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
-            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
-            BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
+            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.CreateObject, "RECKNER\\CoopCheckAdmin"));
+            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.GetObject, "RECKNER\\CoopCheckReader"));
+            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.EditObject, "RECKNER\\CoopCheckAdmin"));
+            //BusinessRules.AddRule(typeof(Account), new IsInRole(AuthorizationActions.DeleteObject, "RECKNER\\CoopCheckAdmin"));
 
-            AddObjectAuthorizationRulesExtend();
+            //AddObjectAuthorizationRulesExtend();
 #endif
         }
 
@@ -131,6 +131,7 @@ namespace CoopCheck.Library
         public static bool CanEditObject()
         {
             return BusinessRules.HasPermission(Csla.Rules.AuthorizationActions.EditObject, typeof(Account));
+           
         }
 
         /// <summary>

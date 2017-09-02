@@ -70,7 +70,7 @@ namespace CoopCheck.WPF.Content.Voucher.Clean
         {
             if (_vm.SelectedVoucher != null)
             {
-                ve.RefreshLookups();
+                //_vm.RefreshLookups();
                 btnDelete.IsEnabled = true;
             }
             else

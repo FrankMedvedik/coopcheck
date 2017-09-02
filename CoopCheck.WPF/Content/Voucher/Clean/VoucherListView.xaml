@@ -71,66 +71,68 @@
         </Style>
     </Control.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <!--<mui:ModernProgressRing IsActive="true" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" Grid.Row="0" />
-        <Grid Grid.Row="0" Visibility="Collapsed">-->
-        <StackPanel Orientation="Vertical" Visibility="{Binding IsCleaning, Converter={StaticResource BoolToVisConverter}}" Grid.Row="0">
-            <TextBlock Margin="5,5,5,5" VerticalAlignment="Center" FontWeight="Bold">Voucher Analysis in Progress</TextBlock>
-            <mui:ModernProgressRing IsActive="{Binding IsCleaning}" Width="80" Height="80" Style="{StaticResource ChasingDotsProgressRingStyle}" />
-        </StackPanel>
-        <Grid Grid.Row="1" Visibility="{Binding IsCleaning, Converter={StaticResource NotBoolToVisConverter}}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Vertical">
+        <Grid Grid.Row="1" >
+        <Grid.ColumnDefinitions   >
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <CheckBox Margin="6" x:Name="chkFilterRows" VerticalAlignment="Center" IsChecked="True" Checked="chkFilterRows_Checked" Unchecked="chkFilterRows_Unchecked" />
-                    <TextBlock Margin="2,5,5,5" VerticalAlignment="Center" FontWeight="Bold">Show Only Errors?</TextBlock>
-                    <Button Content="Revalidate Vouchers" Width="150" Height="30" Margin="6,6,50,6" 
-                            HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding CleanAndPostVouchersCommand}" IsEnabled="True" />
                     <Button Content="Add" Margin="6" Width="100" Click="AddVoucher_Click" />
-                    <Button Margin="6" x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" IsEnabled="{Binding ShowSelectedVoucher}">
-                        Delete
-                    </Button>
+                    <Button Margin="6" x:Name="btnDelete" Click="DeleteVoucher_Click" Width="100" IsEnabled="{Binding ShowSelectedVoucher}" Content="Delete" />
+                    <Grid>
+                        <RadioButton Content="SwiftPay" Command="{Binding Path=CmdSelectVoucherType}" Name="cbSwiftPay" CommandParameter="{Binding ElementName=cbSwiftPay, Path=Content}" IsChecked="True" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" GroupName="VoucherType" />
+                        <RadioButton Content="Check" Command="{Binding CmdSelectVoucherType}" IsChecked="False" Name="cbCheck" CommandParameter="{Binding ElementName=cbCheck, Path=Content}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" GroupName="VoucherType" />
+                    </Grid>
                 </StackPanel>
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgVouchers" 
-                          VerticalAlignment="Top" Margin="6" ItemsSource="{Binding FilteredVoucherImports}" 
-                          HorizontalScrollBarVisibility="Auto" MaxHeight="300" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" 
-                          SelectionChanged="dgVouchers_SelectionChanged" ClipboardCopyMode="IncludeHeader" 
-                          EnableColumnVirtualization="True" EnableRowVirtualization="True" VerticalScrollBarVisibility="Auto" SelectionMode="Single">
+                <StackPanel Visibility="{Binding ShowEmailColumns, Converter={StaticResource BoolToVisConverter}}" Orientation="Horizontal" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <DataGrid Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" 
+                              Name="dgEmailVouchers" VerticalAlignment="Top" Margin="6" ItemsSource="{Binding FilteredVoucherImports}" 
+                              HorizontalScrollBarVisibility="Auto" MaxHeight="500" SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" 
+                              SelectionChanged="dgVouchers_SelectionChanged" ClipboardCopyMode="IncludeHeader" 
+                              EnableColumnVirtualization="True" EnableRowVirtualization="True" VerticalScrollBarVisibility="Auto" SelectionMode="Single" >
                     <DataGrid.Columns>
-                        <!--<mui:DataGridTextColumn Binding="{Binding DataCleanDate, Mode=OneWay}" Header="Cleaned" />
-                    <mui:DataGridTextColumn Binding="{Binding ID, Mode=OneWay}" Header="ID" />
-                    <mui:DataGridCheckBoxColumn Binding="{Binding HasBeenDataCleaned, Mode=OneWay}" Header="Clean" />-->
-                        <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
-                        <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}" />
-                        <DataGridCheckBoxColumn Binding="{Binding OkMailingAddress, Mode=OneTime}" Header="Mail" ElementStyle="{StaticResource CircleCheckbox}" />
-                        <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}" />
-                        <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}" />
-                        <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}" />
-                        <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="State" EditingElementStyle="{StaticResource CellEditStyle}" />
-                        <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" />
-                        <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}" ElementStyle="{StaticResource RightCell}" />
-                        <DataGridCheckBoxColumn Binding="{Binding OkEmailAddress, Mode=OneTime}" Header="Email" ElementStyle="{StaticResource CircleCheckbox}" />
-                        <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}" />
-                        <DataGridCheckBoxColumn Binding="{Binding OkPhone, Mode=OneTime}" Header="Phone" ElementStyle="{StaticResource CircleCheckbox}" IsReadOnly="False" />
-                        <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}" />
+                        <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="first" EditingElementStyle="{StaticResource CellEditStyle}" />
+                        <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="last" />
+                        <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="email" EditingElementStyle="{StaticResource CellEditStyle}" />
+                        <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="amount" EditingElementStyle="{StaticResource CellEditStyle}" ElementStyle="{StaticResource RightCell}" />
                     </DataGrid.Columns>
                 </DataGrid>
+                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="6">
+                    <TextBlock Text="History" />
+                    <clean:PaymentHistoryView />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="6">
-                <TabControl>
-                    <TabItem Header="Details">
-                        <clean:VoucherImportEditView x:Name="ve" />
-                    </TabItem>
-                    <TabItem Header="History">
+
+            <StackPanel Visibility="{Binding ShowEmailColumns, Converter={StaticResource NotBoolToVisConverter}}">
+                    <DataGrid AutoGenerateColumns="False" IsReadOnly="False" HorizontalAlignment="Left" Name="dgCheckVouchers" VerticalAlignment="Top" 
+                              Margin="6" ItemsSource="{Binding FilteredVoucherImports}" HorizontalScrollBarVisibility="Auto" MaxHeight="300" 
+                              SelectedItem="{Binding SelectedVoucher, Mode=TwoWay}" SelectionChanged="dgVouchers_SelectionChanged" ClipboardCopyMode="IncludeHeader" 
+                              EnableColumnVirtualization="True" EnableRowVirtualization="True" VerticalScrollBarVisibility="Auto" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Binding="{Binding Last, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Header="Last" />
+                            <mui:DataGridTextColumn Binding="{Binding First, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="First" EditingElementStyle="{StaticResource CellEditStyle}" />
+                            <mui:DataGridTextColumn Binding="{Binding AddressLine1, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 1" EditingElementStyle="{StaticResource CellEditStyle}" />
+                            <mui:DataGridTextColumn Binding="{Binding AddressLine2, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Address 2" EditingElementStyle="{StaticResource CellEditStyle}" />
+                            <mui:DataGridTextColumn Binding="{Binding Municipality, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="City" EditingElementStyle="{StaticResource CellEditStyle}" />
+                            <mui:DataGridTextColumn Binding="{Binding Region, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="State" EditingElementStyle="{StaticResource CellEditStyle}" />
+                            <mui:DataGridTextColumn Binding="{Binding PostalCode, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Zip" />
+                            <mui:DataGridTextColumn Binding="{Binding Amount, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Amount" EditingElementStyle="{StaticResource CellEditStyle}" ElementStyle="{StaticResource RightCell}" />
+                            <mui:DataGridTextColumn Binding="{Binding EmailAddress, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Email" EditingElementStyle="{StaticResource CellEditStyle}" />
+                            <mui:DataGridTextColumn Binding="{Binding PhoneNumber, ValidatesOnDataErrors=True,  ValidatesOnExceptions=True}" Header="Phone" EditingElementStyle="{StaticResource CellEditStyle}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Margin="6">
+                        <TextBlock Text="History" />
                         <clean:PaymentHistoryView />
-                    </TabItem>
-                </TabControl>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

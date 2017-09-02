@@ -24,12 +24,12 @@ namespace CoopCheck.WPF.Services
             {
                 if (!BatchSvc.CheckConnection() || !RptSvc.CheckConnection())
                     msg = "Cannot reach database.";
-                if(!EmailSvc.CheckConnection())
-                    msg += "\nCannot connect to email server.";
-                if (UserAuthSvc.CheckConnection())
-                    msg += "\nCannot validate your access.";
-                if (DataCleanVoucherImportSvc.CheckConnection())
-                    msg += "\nCannot obtain online payment and address validator services)";
+                //if(!EmailSvc.CheckConnection())
+                //    msg += "\nCannot connect to email server.";
+                //if (UserAuthSvc.CheckConnection())
+                //    msg += "\nCannot validate your access.";
+                //if (DataCleanVoucherImportSvc.CheckConnection())
+                //    msg += "\nCannot obtain online payment and address validator services)";
                 else
                 {
                     msg = ConnTest.AllServicesOk;

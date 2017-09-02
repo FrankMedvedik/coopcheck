@@ -112,7 +112,7 @@ namespace CoopCheck.Library
             // TODO: add business rules
             BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = FirstProperty, AffectedProperties= {LastProperty, CountryProperty}, Priority = 1 });
             BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = LastProperty, AffectedProperties = { FirstProperty, CountryProperty }, Priority = 1 });
-            BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = CountryProperty, AffectedProperties = { FirstProperty, LastProperty }, Priority = 1 });
+            //BusinessRules.AddRule(new ValidAddressRule() { PrimaryProperty = CountryProperty, AffectedProperties = { FirstProperty, LastProperty }, Priority = 1 });
 
             // BusinessRules.AddRule(new VerifyAddressRule() { PrimaryProperty = PostalCodeProperty, AffectedProperties = { AddressLine1Property, MunicipalityProperty } });
         }

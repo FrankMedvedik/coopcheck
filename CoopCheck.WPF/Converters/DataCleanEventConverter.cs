@@ -9,6 +9,25 @@ using DataClean.Models;
 
 namespace CoopCheck.WPF.Converters
 {
+
+    public enum VoucherTypes
+    {
+        SwiftPay,
+        Check
+    }
+    
+    public class VoucherTypeConverter : System.Windows.Data.IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return ((string)parameter == (string)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return (bool)value ? parameter : null;
+        }
+    }
     class DataCleanEventConverter 
     {
         public static VoucherImportWrapper ToVoucherImportWrapper(DataCleanEvent e)

@@ -96,8 +96,19 @@ namespace CoopCheck.WPF.Content.Voucher.Import
         {
             try
             {
-                var a = VoucherImports.Select(v => new VoucherImportWrapper(v)).ToList();
-                CleanVouchers(a);
+                  Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
+                    new VoucherWrappersMessage
+                    {
+                        ExcelFileInfo = new ExcelFileInfoMessage
+                        {
+                            ExcelFilePath = ExcelFilePath,
+                            SelectedWorksheet = SelectedWorksheet
+                        },
+                        VoucherImports = new ObservableCollection<VoucherImportWrapper>(VoucherImports.Select(v => new VoucherImportWrapper(v)))
+            },
+                    Notifications.VouchersDataCleaned));
+                Messenger.Default.Send(new NotificationMessage(Notifications.RefreshOpenBatchList));
+                Messenger.Default.Send(new NotificationMessage(Notifications.ImportWorksheetReady));
                 CanProceed = true;
             }
             catch (Exception e)
@@ -111,31 +122,31 @@ namespace CoopCheck.WPF.Content.Voucher.Import
             }
         }
 
-        public async void CleanVouchers(List<VoucherImportWrapper> vouchers)
-        {
-            Messenger.Default.Send(new NotificationMessage(Notifications.HaveUncommittedVouchers));
-            Messenger.Default.Send(new NotificationMessage(Notifications.HaveDirtyVouchers));
-            Messenger.Default.Send(new NotificationMessage(Notifications.ImportWorksheetReady));
-            Status = new StatusInfo
-            {
-                StatusMessage =
-                    "please wait  - checking the street addresses, email and phone numbers of the vouchers...",
-                IsBusy = true
-            };
-            var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
+        //public async void CleanVouchers(List<VoucherImportWrapper> vouchers)
+        //{
+        //    Messenger.Default.Send(new NotificationMessage(Notifications.HaveUncommittedVouchers));
+        //    Messenger.Default.Send(new NotificationMessage(Notifications.HaveDirtyVouchers));
+        //    Messenger.Default.Send(new NotificationMessage(Notifications.ImportWorksheetReady));
+        //    Status = new StatusInfo
+        //    {
+        //        StatusMessage =
+        //            "please wait  - checking the street addresses, email and phone numbers of the vouchers...",
+        //        IsBusy = true
+        //    };
+        //    var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
            
-            Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
-                new VoucherWrappersMessage
-                {
-                    ExcelFileInfo = new ExcelFileInfoMessage
-                    {
-                        ExcelFilePath = ExcelFilePath,
-                        SelectedWorksheet = SelectedWorksheet
-                    },
-                    VoucherImports = results
-                },
-                Notifications.VouchersDataCleaned));
-        }
+        //    Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
+        //        new VoucherWrappersMessage
+        //        {
+        //            ExcelFileInfo = new ExcelFileInfoMessage
+        //            {
+        //                ExcelFilePath = ExcelFilePath,
+        //                SelectedWorksheet = SelectedWorksheet
+        //            },
+        //            VoucherImports = results
+        //        },
+        //        Notifications.VouchersDataCleaned));
+        //}
         public bool CanPostVouchers()
         {
             return true;
