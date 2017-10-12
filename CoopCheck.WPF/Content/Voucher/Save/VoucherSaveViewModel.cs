@@ -214,6 +214,7 @@ namespace CoopCheck.WPF.Content.Voucher.Save
                     Path.GetFileName(ExcelFileInfo.ExcelFilePath).TrimEnd().TrimStart(),
                     ExcelFileInfo.SelectedWorksheet.TrimEnd().TrimStart());
                 b.PayDate = null;
+                b.StudyTopic = JobLogSvc.GetJobName(b.JobNum.GetValueOrDefault(0)).Result;
                 var batch = b.Save();
             }
             catch (Exception ex)

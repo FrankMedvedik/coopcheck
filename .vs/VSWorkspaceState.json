@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CoopCheck.Library\\CoopCheck.Library",
+    "\\CoopCheck.Repository",
+    "\\CoopCheck.WPF",
+    "\\CoopCheck.WPF\\Content",
+    "\\CoopCheck.WPF\\Content\\Payment\\Batch",
+    "\\CoopCheck.WPF\\Content\\Voucher",
+    "\\CoopCheck.WPF\\Content\\Voucher\\Edit",
+    "\\CoopCheck.WPF\\Content\\Voucher\\Save",
+    "\\DTAR_08E86330_4835_4B5C_9E5A_61F37AE1A077_DTAR"
+  ],
+  "SelectedNode": "\\CoopCheck.WPF\\Content\\Voucher\\Edit\\BatchListViewModel.cs",
+  "PreviewInSolutionExplorer": false
+}

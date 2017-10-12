@@ -326,6 +326,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwOpenBatch' does not have a primary
           <Property Name="created" Type="smalldatetime" />
           <Property Name="jobname" Type="nvarchar" MaxLength="50" />
           <Property Name="projmgr" Type="varchar" MaxLength="50" />
+          <Property Name="study_topic" Type="varchar" MaxLength="150" />
           <Property Name="voucher_cnt" Type="int" />
           <Property Name="total_amount" Type="money" />
         </EntityType>
@@ -386,8 +387,6 @@ warning 6002: The table/view 'CoopCheck.dbo.vwPositivePay' does not have a prima
           <Property Name="check_date" Type="smalldatetime" />
           <Property Name="payee" Type="nvarchar" MaxLength="38" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CoopCheck.dbo.vwUnclearedBatch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwVoidedPayment">
@@ -694,6 +693,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
     [vwOpenBatch].[created] AS [created], 
     [vwOpenBatch].[jobname] AS [jobname], 
     [vwOpenBatch].[projmgr] AS [projmgr], 
+    [vwOpenBatch].[study_topic] AS [study_topic], 
     [vwOpenBatch].[voucher_cnt] AS [voucher_cnt], 
     [vwOpenBatch].[total_amount] AS [total_amount]
     FROM [dbo].[vwOpenBatch] AS [vwOpenBatch]</DefiningQuery>
@@ -1474,6 +1474,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
           <Property Name="created" Type="DateTime" Precision="0" />
           <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="projmgr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="study_topic" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="voucher_cnt" Type="Int32" />
           <Property Name="total_amount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
@@ -2059,6 +2060,7 @@ warning 6002: The table/view 'CoopCheck.dbo.vwVoidedPayment' does not have a pri
               <MappingFragment StoreEntitySet="vwOpenBatch">
                 <ScalarProperty Name="total_amount" ColumnName="total_amount" />
                 <ScalarProperty Name="voucher_cnt" ColumnName="voucher_cnt" />
+                <ScalarProperty Name="study_topic" ColumnName="study_topic" />
                 <ScalarProperty Name="projmgr" ColumnName="projmgr" />
                 <ScalarProperty Name="jobname" ColumnName="jobname" />
                 <ScalarProperty Name="created" ColumnName="created" />

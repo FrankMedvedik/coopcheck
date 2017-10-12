@@ -63,7 +63,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding jobname}" Header="job name" />
+                <DataGridTextColumn Binding="{Binding study_topic}" Header="Study Topic" />
                 <DataGridTextColumn Binding="{Binding batch_date, StringFormat=d}" Header="created"
                                     ElementStyle="{StaticResource RightCell}" />
                 <DataGridTextColumn Binding="{Binding voucher_cnt}" Header="count"

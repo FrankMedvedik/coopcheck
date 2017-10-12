@@ -25,6 +25,7 @@ namespace CoopCheck.Repository
         public Nullable<System.DateTime> created { get; set; }
         public string jobname { get; set; }
         public string projmgr { get; set; }
+        public string study_topic { get; set; }
         public Nullable<int> voucher_cnt { get; set; }
         public Nullable<decimal> total_amount { get; set; }
     }

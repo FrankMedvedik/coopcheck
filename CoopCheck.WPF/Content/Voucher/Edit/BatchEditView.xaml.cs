@@ -20,7 +20,7 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
 
         public int BatchNum
         {
-            get { return _vm.SelectedBatch.Num; }
+            get { return _vm.SelectedBatch.batch_num; }
         }
 
         public bool IsDirty
@@ -87,15 +87,6 @@ namespace CoopCheck.WPF.Content.Voucher.Edit
                 _vm.CancelNewVoucher();
         }
 
-
-        private void VoucherGrid_LostFocus(object sender, RoutedEventArgs e)
-        {
-            _vm.AutoSaveSelectedBatch();
-        }
-
-        //}
-        //    _vm.AutoSaveSelectedBatch();
-        //{
-        //private void BatchDetails_LostFocus(object sender, RoutedEventArgs e)
+        
     }
 }
