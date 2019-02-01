@@ -29,7 +29,7 @@ namespace CoopCheck.WPF.Services
                 //System.Threading.Thread.Sleep(5000);
 #if DEBUG
 
-                var credentials = new NetworkCredential("fmedvedik@reckner.com", "(manos)3k");
+                var credentials = new NetworkCredential("dreckner@reckner.com", "dlr3109");
                 using (var client = new HttpClient(new HttpClientHandler { Credentials = credentials }))
                 {
 #else

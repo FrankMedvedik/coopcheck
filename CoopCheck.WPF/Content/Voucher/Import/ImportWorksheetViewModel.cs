@@ -122,7 +122,7 @@ namespace CoopCheck.WPF.Content.Voucher.Import
                     "please wait  - checking the street addresses, email and phone numbers of the vouchers...",
                 IsBusy = true
             };
-            var results = await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
+            var results = new ObservableCollection<VoucherImportWrapper>(vouchers); //await DataCleanVoucherImportSvc.CleanVouchers(vouchers);
            
             Messenger.Default.Send(new NotificationMessage<VoucherWrappersMessage>(
                 new VoucherWrappersMessage

@@ -11,6 +11,7 @@
     <UseIISExpress>true</UseIISExpress>
     <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <LastActiveSolutionConfig>Debug|x64</LastActiveSolutionConfig>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
